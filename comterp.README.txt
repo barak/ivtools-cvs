@@ -166,6 +166,8 @@ affine=invert(a00,a01,a10,a11,a20,a21) -- invert affine transform
 
 matrix=xpose(matrix) -- transpose an arbitrary matrix
 
+matrix=matrix*matrix -- matrix multiplication
+
 STATISTICAL/RANDOM COMMANDS: 
 
 val=sum(val1[,val2[,...,valn]]) -- return sum of values
