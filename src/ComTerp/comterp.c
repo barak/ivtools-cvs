@@ -970,6 +970,7 @@ void ComTerp::add_defaults() {
     add_command("repeat", new RepeatFunc(this));
     add_command("iterate", new IterateFunc(this));
     add_command("next", new NextFunc(this));
+    add_command("each", new EachFunc(this));
 
     add_command("dot", new DotFunc(this));
     add_command("attrname", new DotNameFunc(this));

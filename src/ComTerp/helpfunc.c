@@ -181,7 +181,7 @@ void HelpFunc::execute() {
 	  printed = true;
 	}
       }
-      if (!printed && command_ids[i]>=0 && comfuncs[i]) {
+      if (!printed && command_ids[i]>=0) {
 	/* if symid is smaller than the highest operator it must be one */
 	if (command_ids[i]>=0 && command_ids[i]<=opr_tbl_topstr()) {
 	  int op_ids[OPTYPE_NUM];

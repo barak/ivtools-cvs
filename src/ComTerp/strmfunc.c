@@ -422,3 +422,33 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 }
 
 
+/*****************************************************************************/
+
+EachFunc::EachFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void EachFunc::execute() {
+  ComValue strmv(stack_arg_post_eval(0));
+  reset_stack();
+
+  if (strmv.is_stream()) {
+      
+    int cnt = 0;
+    /* traverse stream */
+    boolean done = false;
+    while (!done) {
+      NextFunc::execute_impl(comterp(), strmv);
+      if (comterp()->pop_stack().is_unknown())
+	done = true;
+      else
+	cnt++;
+    }
+
+    ComValue retval(cnt, ComValue::IntType);
+    push_stack(retval);
+
+  } else 
+    push_stack(ComValue::nullval());
+    
+}
+

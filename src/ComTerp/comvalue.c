@@ -51,12 +51,15 @@ const ComTerp* ComValue::_comterp = nil;
 
 ComValue::ComValue(ComValue& sv) {
     *this = sv;
-    ref_as_needed();
+}
+
+ComValue::ComValue(ComValue* sv) {
+    *this = *sv;
+    dup_as_needed();
 }
 
 ComValue::ComValue(AttributeValue& sv) {
     *(AttributeValue*)this = sv;
-    ref_as_needed();
     zero_vals();
 }
 
@@ -127,6 +130,7 @@ ComValue& ComValue::operator= (const ComValue& sv) {
     _nids = sv._nids;
     _pedepth = sv._pedepth;
     _bquote = sv._bquote;
+    ref_as_needed();
     return *this;
 }
     

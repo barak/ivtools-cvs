@@ -76,6 +76,7 @@ OPERATOR TABLE
     ---------     ------------         --------    -----       ----
     .             dot                  130         L-to-R      binary
     `             bquote               125         R-to-L      unary-prefix
+    $             stream               125         R-to-L      unary-prefix
     !             negate               110         R-to-L      unary-prefix
     ~             bit_not              110         R-to-L      unary-prefix
     ++            incr                 110         R-to-L      unary-prefix
@@ -185,6 +186,8 @@ STREAM COMMANDS:
 val=next(strm) -- return next value from stream
 
 strm=stream(ostrm|list) -- copy stream or convert list
+
+cnt=each(strm) -- traverse the stream returning its length
 
 CONTROL COMMANDS (using post evaluation):
 

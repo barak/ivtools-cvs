@@ -52,7 +52,11 @@ AttributeValue::AttributeValue(ValueType valtype, attr_value value) {
 
 AttributeValue::AttributeValue(AttributeValue& sv) {
     *this = sv;
-    ref_as_needed();
+}
+
+AttributeValue::AttributeValue(AttributeValue* sv) {
+    *this = *sv;
+    dup_as_needed();
 }
 
 AttributeValue::AttributeValue() {
@@ -987,6 +991,20 @@ void AttributeValue::ref_as_needed() {
       Resource::ref(_v.arrayval.ptr);
     else if (_type == AttributeValue::StreamType)
       Resource::ref(_v.streamval.listptr);
+}
+
+void AttributeValue::dup_as_needed() {
+  if (_type == AttributeValue::ArrayType) {
+    AttributeValueList* avl = _v.arrayval.ptr;
+    _v.arrayval.ptr = new AttributeValueList(avl);
+    Resource::ref(_v.arrayval.ptr);
+    Resource::unref(avl);
+  } else if (_type == AttributeValue::StreamType) {
+    AttributeValueList* avl = _v.streamval.listptr;
+    _v.streamval.listptr = new AttributeValueList(avl);
+    Resource::ref(_v.streamval.listptr);
+    Resource::unref(avl);
+  }
 }
 
 void AttributeValue::unref_as_needed() {

@@ -130,4 +130,16 @@ public:
 
 };
 
+//: traverse stream command for ComTerp.
+// cnt=each(strm) -- traverse list returning its length
+class EachFunc : public ComFunc {
+public:
+    EachFunc(ComTerp*);
+
+    virtual void execute();
+    virtual boolean post_eval() { return true; }
+    virtual const char* docstring() { 
+      return "cnt=%s(strm) -- traverse list returning its length"; }
+};
+
 #endif /* !defined(_strmfunc_h) */
