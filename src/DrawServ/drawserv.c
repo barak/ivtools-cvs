@@ -53,6 +53,9 @@
 implementTable(GraphicIdTable,int,void*)
 implementTable(SessionIdTable,int,void*)
 
+unsigned int DrawServ::GraphicIdMask = 0x000fffff;
+unsigned int DrawServ::SessionIdMask = 0xfff00000;
+
 /*****************************************************************************/
 
 DrawServ::DrawServ (Catalog* c, int& argc, char** argv, 
@@ -72,8 +75,9 @@ void DrawServ::Init() {
   _gridtable = new GraphicIdTable(1024);
   _sessionidtable = new SessionIdTable(256);
 
-  _sessionid = -1;
-  _trialid = GraphicId::candidate_sessionid();
+  _sessionid = candidate_sessionid();
+  _trialid = _sessionid;
+  _sessionidtable->insert(_sessionid, nil); // nil pointer refers to local session id
 }
 
 DrawServ::~DrawServ () 
@@ -273,8 +277,9 @@ void DrawServ::SendCmdString(DrawLink* link, const char* cmdstring) {
   }
 }
 
-// generate request to reserve unique session id
-void DrawServ::sessionid_request_new() {
+// generate request to check unique session id
+void DrawServ::sessionid_request_chk() {
+
   Iterator it;
   _linklist->First(it);
   char buf[BUFSIZ];
@@ -287,15 +292,15 @@ void DrawServ::sessionid_request_new() {
   }
 }
 
-// handle request to reserve unique session id
+// handle request to check unique session id
 // can be answered locally, because others are required to
 // propogate their request completely before adopting new id.
-void DrawServ::sessionid_handle_new(int new_id, int remote_linkid) {
+void DrawServ::sessionid_handle_chk(int new_id, int remote_linkid) {
   DrawLink* link = linkget(-1, remote_linkid);
   if (link) {
     if (_linklist->Number()==1) {
       int okflag = false;
-      if (okflag = GraphicId::unique_sessionid(new_id)) {
+      if (okflag = DrawServ::unique_sessionid(new_id)) {
 	SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
 	table->insert(new_id, link);
       }
@@ -309,9 +314,9 @@ void DrawServ::sessionid_handle_new(int new_id, int remote_linkid) {
     fprintf(stderr, "no link with remote id of %d found\n", remote_linkid);
 }
 
-// process callbacks on request to reserve unique session id
-void DrawServ::sessionid_callback_new(int new_id, int remote_linkid, int ok_flag) {
-  fprintf(stderr, "sessionid_callback_new: new_id %d,  remote_linkid %d, ok_flag %d\n",
+// process callbacks on request to check unique session id
+void DrawServ::sessionid_callback_chk(int new_id, int remote_linkid, int ok_flag) {
+  fprintf(stderr, "sessionid_callback_chk: new_id %d,  remote_linkid %d, ok_flag %d\n",
 	  new_id, remote_linkid, ok_flag);
   if (new_id != _trialid) {
     ok_flag = false;
@@ -334,3 +339,54 @@ void DrawServ::sessionid_handle_chg(int new_id, int old_id) {
 int DrawServ::online() {
   return _sessionid==_trialid && _sessionid!=-1;
 }
+
+int DrawServ::candidate_grid() {
+  static int seed=0;
+  if (!seed) {
+    seed = time(nil) & (time(nil) << 16);
+    srand(seed);
+  }
+  int retval;
+  do {
+    static int flip=0;
+    while ((retval=rand()&GraphicIdMask)==0);
+
+  } while (!unique_grid(retval));
+  return retval;
+}
+
+int DrawServ::unique_grid(unsigned int id) {
+  GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
+  void* ptr = nil;
+  table->find(ptr, id);
+  if (ptr) 
+    return 0;
+  else
+    return 1;
+}
+
+int DrawServ::candidate_sessionid() {
+  static int seed=0;
+  if (!seed) {
+    seed = time(nil) & (time(nil) << 16);
+    srand(seed);
+  }
+  int retval;
+  do {
+    static int flip=0;
+    while ((retval=rand()&SessionIdMask)==0);
+
+  } while (!unique_sessionid(retval));
+  return retval;
+}
+
+int DrawServ::unique_sessionid(unsigned int id) {
+  SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
+  void* ptr = nil;
+  table->find(ptr, id);
+  if (ptr) 
+    return 0;
+  else
+    return 1;
+}
+

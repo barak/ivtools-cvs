@@ -47,18 +47,6 @@ public:
   virtual GraphicIdList* sublist() { return nil; }
   // returns pointer to sublist of GraphicId's, if any
 
-  static int candidate_grid();
-  // generate candidate graphic id.
-  static int unique_grid(unsigned int id);
-  // test candidate graphic id for local uniqueness
-  static int candidate_sessionid();
-  // generate candidate session id.
-  static int unique_sessionid(unsigned int id);
-  // test candidate session id for local uniqueness
-  
-  static unsigned int GraphicIdMask;
-  static unsigned int SessionIdMask;
-  
 protected:
   unsigned int _id;
 

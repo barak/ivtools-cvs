@@ -133,8 +133,8 @@ void SessionIdFunc::execute() {
   push_stack(ComValue::nullval());
 
 #else
-  static int new_sym = symbol_add("new");
-  ComValue newv(stack_key(new_sym));
+  static int chk_sym = symbol_add("chk");
+  ComValue chkv(stack_key(chk_sym));
 
   static int trial_sym = symbol_add("trial");
   ComValue trialv(stack_key(trial_sym));
@@ -158,8 +158,8 @@ void SessionIdFunc::execute() {
   unsigned int returnid = 0;
 
   /* request a new session id */
-  if (newv.is_true()) {    
-    ((DrawServ*)unidraw)->sessionid_request_new();
+  if (chkv.is_true()) {    
+    ((DrawServ*)unidraw)->sessionid_request_chk();
     returnid = ((DrawServ*)unidraw)->sessionid(true);
   }
 
@@ -173,11 +173,11 @@ void SessionIdFunc::execute() {
 
     /* handle new session id request */
     if (!okv.is_known()) 
-      ((DrawServ*)unidraw)->sessionid_handle_new(returnid, ridv.int_val());
+      ((DrawServ*)unidraw)->sessionid_handle_chk(returnid, ridv.int_val());
     
     /* handle callback */ 
     else
-    ((DrawServ*)unidraw)->sessionid_callback_new(returnid, ridv.int_val(), okv.is_true());
+    ((DrawServ*)unidraw)->sessionid_callback_chk(returnid, ridv.int_val(), okv.is_true());
   }
 
   else if (idv.is_known() && okv.is_known() && ridv.is_known()) {

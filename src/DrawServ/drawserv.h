@@ -46,72 +46,84 @@ class GraphicIdList;
 
 class DrawServ : public OverlayUnidraw {
 public:
-    DrawServ(
-        Catalog*, int& argc, char** argv, 
-        OptionDesc* = nil, PropertyData* = nil
-    );
-    DrawServ(Catalog*, World*);
-    virtual ~DrawServ();
-
-    void Init();
-
-    int online();
-    // return true if session id initialized, otherwise false.
-
-    DrawLink* linkup(const char* hostname, int portnum, 
-		     int state, int local_id=-1, int remote_id=-1,
-		     ComTerp* comterp=nil);
-    // Create new link to remote drawserv, return -1 if error
-    // state: 0==new_link, 1==one_way, 2==two_way.
-    // Let DrawLink assign local_id by passing -1 for local_id.
-    // The local_id argument is for verification purposes once
-    // two-way link is established.
-
-    int linkdown(DrawLink* link);
-    // shut down existing link to remote drawserv
-
-    DrawLink* linkget(int local_id, int remote_id=-1);
-    // return pointer to existing DrawLink
-
-    void linkdump(FILE*);
-    // dump text table of DrawLink's
-
-    virtual void ExecuteCmd(Command*);
-    // execute Command's locally, and on remote linked DrawServ's.
-
-    virtual void DistributeCmdString(const char* cmdstring);
-    // execute command string remote DrawServ's
-
-    virtual void SendCmdString(DrawLink* link, const char* cmdstring);
-    // execute command string on one remote DrawServ
-
-    DrawLinkList* linklist() { return _linklist; }
-    // return pointer to list of DrawLink's
-
-    GraphicIdTable* gridtable() { return _gridtable; }
-    // return pointer to table of GraphicId's.
-
-    SessionIdTable* sessionidtable() { return _sessionidtable; }
-    // return pointer to table of DrawLink's as a function of session id's.
-
-    void sessionid_request_new();
-    // generate request to reserve unique session id
-
-    void sessionid_handle_new(int new_id, int remote_linkid);
-    // handle request to reserve unique session id
-
-    void sessionid_callback_new(int new_id, int remote_linkid, int ok_flag);
-    // process callbacks on request to reserve unique session id
-
-    void sessionid_request_chg();
-    // generate request to change/set unique session id
-
-    void sessionid_handle_chg(int new_id, int old_id);
-    // handle request to change unique session id
-
-    int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
-    // current unique session id.
-
+  DrawServ(
+	   Catalog*, int& argc, char** argv, 
+	   OptionDesc* = nil, PropertyData* = nil
+	   );
+  DrawServ(Catalog*, World*);
+  virtual ~DrawServ();
+  
+  void Init();
+  
+  int online();
+  // return true if session id initialized, otherwise false.
+  
+  DrawLink* linkup(const char* hostname, int portnum, 
+		   int state, int local_id=-1, int remote_id=-1,
+		   ComTerp* comterp=nil);
+  // Create new link to remote drawserv, return -1 if error
+  // state: 0==new_link, 1==one_way, 2==two_way.
+  // Let DrawLink assign local_id by passing -1 for local_id.
+  // The local_id argument is for verification purposes once
+  // two-way link is established.
+  
+  int linkdown(DrawLink* link);
+  // shut down existing link to remote drawserv
+  
+  DrawLink* linkget(int local_id, int remote_id=-1);
+  // return pointer to existing DrawLink
+  
+  void linkdump(FILE*);
+  // dump text table of DrawLink's
+  
+  virtual void ExecuteCmd(Command*);
+  // execute Command's locally, and on remote linked DrawServ's.
+  
+  virtual void DistributeCmdString(const char* cmdstring);
+  // execute command string remote DrawServ's
+  
+  virtual void SendCmdString(DrawLink* link, const char* cmdstring);
+  // execute command string on one remote DrawServ
+  
+  DrawLinkList* linklist() { return _linklist; }
+  // return pointer to list of DrawLink's
+  
+  GraphicIdTable* gridtable() { return _gridtable; }
+  // return pointer to table of GraphicId's.
+  
+  SessionIdTable* sessionidtable() { return _sessionidtable; }
+  // return pointer to table of DrawLink's as a function of session id's.
+  
+  void sessionid_request_chk();
+  // generate next request to check unique session id
+  
+  void sessionid_handle_chk(int chk_id, int remote_linkid);
+  // handle request to check unique session id
+  
+  void sessionid_callback_chk(int chk_id, int remote_linkid, int ok_flag);
+  // process callbacks on request to check unique session id
+  
+  void sessionid_request_chg();
+  // generate request to change/set unique session id
+  
+  void sessionid_handle_chg(int new_id, int old_id);
+  // handle request to change unique session id
+  
+  int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
+  // current unique session id.
+  
+  static int candidate_grid();
+  // generate candidate graphic id.
+  static int unique_grid(unsigned int id);
+  // test candidate graphic id for local uniqueness
+  static int candidate_sessionid();
+  // generate candidate session id.
+  static int unique_sessionid(unsigned int id);
+  // test candidate session id for local uniqueness
+  
+  static unsigned int GraphicIdMask;
+  static unsigned int SessionIdMask;
+  
 protected:
     DrawLinkList* _linklist;
     // DrawLink list

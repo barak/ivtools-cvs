@@ -38,13 +38,13 @@ public:
 };
 
 //: command to reserve unique session id
-// sessionid(:new) -- command to manage session id's
+// sessionid(:chk :trial :rid num :ok bool) -- command to manage session id's
 class SessionIdFunc : public UnidrawFunc {
 public:
     SessionIdFunc(ComTerp*,DrawEditor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(:new) -- command to manage session id's"; }
+	return "%s(:chk :trial :rid num :ok bool) -- command to manage session id's"; }
 };
 
 //: command to reserve graphics for selection in remote editors

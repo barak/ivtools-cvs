@@ -36,14 +36,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int GraphicId::GraphicIdMask = 0x000fffff;
-unsigned int GraphicId::SessionIdMask = 0xfff00000;
-
 /*****************************************************************************/
 
 GraphicId::GraphicId () 
 {
-  _id = candidate_grid();
+  _id = DrawServ::candidate_grid();
   GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
   table->insert(_id, this);
 }
@@ -52,56 +49,6 @@ GraphicId::~GraphicId ()
 {
   GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
   table->remove(_id);
-}
-
-int GraphicId::candidate_grid() {
-  static int seed=0;
-  if (!seed) {
-    seed = time(nil) & (time(nil) << 16);
-    srand(seed);
-  }
-  int retval;
-  do {
-    static int flip=0;
-    while ((retval=rand()&GraphicIdMask)==0);
-
-  } while (!unique_grid(retval));
-  return retval;
-}
-
-int GraphicId::unique_grid(unsigned int id) {
-  GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
-  void* ptr = nil;
-  table->find(ptr, id);
-  if (ptr) 
-    return 0;
-  else
-    return 1;
-}
-
-int GraphicId::candidate_sessionid() {
-  static int seed=0;
-  if (!seed) {
-    seed = time(nil) & (time(nil) << 16);
-    srand(seed);
-  }
-  int retval;
-  do {
-    static int flip=0;
-    while ((retval=rand()&SessionIdMask)==0);
-
-  } while (!unique_sessionid(retval));
-  return retval;
-}
-
-int GraphicId::unique_sessionid(unsigned int id) {
-  SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
-  void* ptr = nil;
-  table->find(ptr, id);
-  if (ptr) 
-    return 0;
-  else
-    return 1;
 }
 
 /*****************************************************************************/
