@@ -33,7 +33,7 @@
 class ComTerp;
 
 //: symbol id command for ComTerp.
-// symid(symbol [symbol...]) -- return id(s) associated with symbol(s)
+// int|lst=symid(symbol [symbol ...]) -- return id(s) associated with symbol(s)
 class SymIdFunc : public ComFunc {
 public:
     SymIdFunc(ComTerp*);
@@ -41,34 +41,34 @@ public:
 
     virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "%s(symbol [symbol...]) -- return id(s) associated with symbol(s)"; }
+      return "int|lst=%s(symbol [symbol ...]) -- return id(s) associated with symbol(s)"; }
 };
 
 
 //: symbol command for ComTerp.
-// symbol(symid [symid ...]) -- return symbol(s) associated with integer id(s)
+// sym|lst=symbol(symid [symid ...]) -- return symbol(s) associated with integer id(s)
 class SymbolFunc : public ComFunc {
 public:
     SymbolFunc(ComTerp*);
     virtual void execute();
 
     virtual const char* docstring() { 
-      return "%s(symid [symid...]) -- return symbol(s) associated with integer id(s)"; }
+      return "sym|lst=%s(symid [symid ...]) -- return symbol(s) associated with integer id(s)"; }
 };
 
 //: lookup symbol value command for ComTerp.
-// symval(symbol_var [symbol_var ...]) -- return value(s) associated with symbol variable(s)
+// val|lst=symval(symbol_var [symbol_var ...]) -- return value(s) associated with symbol variable(s)
 class SymValFunc : public ComFunc {
 public:
     SymValFunc(ComTerp*);
     virtual void execute();
 
     virtual const char* docstring() { 
-      return "%s(symbol_var [symbol_var...]) -- return value(s) associated with symbol variables(s)"; }
+      return "val|lst=%s(symbol_var [symbol_var ...]) -- return value(s) associated with symbol variables(s)"; }
 };
 
 //: create symbol command for ComTerp.
-// symadd(symbol [symbol...]) -- create symbol(s) and return without lookup
+// sym|lst=symadd(symbol [symbol ...]) -- create symbol(s) and return without lookup
 class SymAddFunc : public ComFunc {
 public:
     SymAddFunc(ComTerp*);
@@ -76,7 +76,7 @@ public:
 
     virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "%s(symbol [symbol...]) -- create symbol(s) and return without lookup"; }
+      return "sym|lst=%s(symbol [symbol ...]) -- create symbol(s) and return without lookup"; }
 };
 
 //: command to split a symbol or string into a list of character objects

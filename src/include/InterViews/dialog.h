@@ -67,6 +67,7 @@ public:
 private:
     boolean done_;
     boolean accepted_;
+    boolean unmap_for_dismiss_;
     TransientWindow* t_;
 };
 

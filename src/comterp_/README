@@ -178,13 +178,13 @@ help(cmdname [cmdname ...]) -- help for commands
 [str]=print(fmtstr val :string|:str :err) -- print value with format string
 [str]=print(val :string|:str :err) -- print value with format string
 
-symid(symbol [symbol...]) -- return integer id(s) associated with symbol(s)
+int|lst=symid(symbol [symbol ...]) -- return integer id(s) associated with symbol(s)
 
-symbol(symid [symid...]) -- return symbol(s) associated with integer id(s)
+sym|lst=symbol(symid [symid ...]) -- return symbol(s) associated with integer id(s)
 
-symval(symbol [symbol...]) -- return value(s) associated with symbol variables(s)
+val|lst=symval(symbol [symbol ...]) -- return value(s) associated with symbol variables(s)
 
-symadd(symbol [symbol ...]) -- create symbol(s) and return without lookup.
+sym|lst=symadd(symbol [symbol ...]) -- create symbol(s) and return without lookup.
 
 lst=split(symbol|string) -- split symbol or string into list of characters.
 
@@ -208,7 +208,7 @@ val=run(filename) -- run commands from file
 val=remote(hoststr portnum cmdstr :nowait) -- remotely evaluate command string then 
 locally evaluate result string
 
-val=eval(cmdstr [cmdstr ...] :symret ) -- evaluate string as commands, 
+val|lst=eval(cmdstr [cmdstr ...] :symret ) -- evaluate string as commands, 
 optionally return symbol instead of nil
 
 val=shell(cmdstr) -- evaluate command in shell

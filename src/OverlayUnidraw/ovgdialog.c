@@ -25,6 +25,7 @@
 #include <OverlayUnidraw/ovcomps.h>
 #include <OverlayUnidraw/ovgdialog.h>
 #include <Unidraw/unidraw.h>
+#include <Unidraw/statevars.h>
 
 #include <AttrGlyph/attredit.h>
 #include <IVGlyph/textedit.h>
@@ -203,6 +204,7 @@ void AttributeDialogImpl::init(OverlayComp* oc, AttributeDialog* p, Style* s) {
   style_ = s;
   comp_ = oc;
   copylist_ = new AttributeList(comp_->GetAttributeList());
+  Resource::ref(copylist_);
   build(copylist_);
 }
 
@@ -250,12 +252,15 @@ void AttributeDialogImpl::build(AttributeList* al) {
 
 void AttributeDialogImpl::accept() {
     editor_->add();    
+    // should set modified flag here if something happenns
+    // ((ModifStatusVar*)<Editor>->GetState("ModifStatusVar"))->SetModifStatus(true);	
     comp_->SetAttributeList(copylist_);
+    Unref(copylist_);
     dialog_->dismiss(true);
     unidraw->Update();
 }
 
 void AttributeDialogImpl::cancel() {
-    delete copylist_;
+    Unref(copylist_);
     dialog_->dismiss(false);
 }

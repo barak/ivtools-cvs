@@ -186,13 +186,13 @@ Run contents of file then exit.
  [str]=print(fmtstr val :string|:str :err) -- print value with format string
  [str]=print(val :string|:str :err) -- print value
 
- symid(symbol [symbol...]) -- return integer id(s) associated with symbol(s)
+ int|lst=symid(symbol [symbol ...]) -- return integer id(s) associated with symbol(s)
 
- symbol(symid [symid...]) -- return symbol(s) associated with integer id(s)
+ sym|lst=symbol(symid [symid ...]) -- return symbol(s) associated with integer id(s)
 
- symval(symbol [symbol...]) -- return value(s) associated with symbol variables(s)
+ val|lst=symval(symbol [symbol ...]) -- return value(s) associated with symbol variables(s)
 
- symadd(symbol [symbol ...]) -- create symbol(s) and return without lookup.
+ sym|lst=symadd(symbol [symbol ...]) -- create symbol(s) and return without lookup.
 
  lst=split(symbol|string) -- split symbol or string into list of characters.
 
