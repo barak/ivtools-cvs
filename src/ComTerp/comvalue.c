@@ -276,7 +276,7 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	    }
 	    if (!first) out << "}";
 	  } else {
-	    out << "array of length " << svp->array_len();
+	    out << "list of length " << svp->array_len();
 	    ALIterator i;
 	    AttributeValueList* avl = svp->array_val();
 	    avl->First(i);

@@ -165,7 +165,6 @@ AttributeValue::~AttributeValue() {
 }
 
 void AttributeValue::clear() {
-    unref_as_needed();
     unsigned char* buf = (unsigned char*)(void*)&_v;
     for (int i=0; i<sizeof(double); i++) buf[i] = '\0';
 }
@@ -208,6 +207,8 @@ void*& AttributeValue::obj_ref() { return _v.objval.ptr; }
 unsigned int& AttributeValue::obj_type_ref() { return _v.objval.type; }
 AttributeValueList*& AttributeValue::array_ref() { return _v.arrayval.ptr; }
 unsigned int& AttributeValue::array_type_ref() { return _v.arrayval.type; }
+AttributeValueList*& AttributeValue::list_ref() { return _v.arrayval.ptr; }
+unsigned int& AttributeValue::list_type_ref() { return _v.arrayval.type; }
 unsigned int& AttributeValue::keyid_ref() { return _v.keyval.keyid; }
 unsigned int& AttributeValue::keynarg_ref() { return _v.keyval.keynarg; }
 
@@ -589,6 +590,14 @@ unsigned int AttributeValue::array_type_val() {
     return _v.arrayval.type; 
 }
 
+AttributeValueList* AttributeValue::list_val() { 
+	return list_ref();
+}
+
+unsigned int AttributeValue::list_type_val() { 
+    return _v.arrayval.type; 
+}
+
 unsigned int AttributeValue::keyid_val() { 
     return _v.keyval.keyid; 
 }
@@ -606,6 +615,13 @@ const char* AttributeValue::symbol_ptr() {
 }
 
 int AttributeValue::array_len() {
+    if (is_type(AttributeValue::ArrayType))
+        return array_val()->Number();
+    else
+        return 0;
+}
+
+int AttributeValue::list_len() {
     if (is_type(AttributeValue::ArrayType))
         return array_val()->Number();
     else
@@ -689,7 +705,7 @@ ostream& operator<< (ostream& out, const AttributeValue& sv) {
 	    
 	case AttributeValue::ArrayType:
 	  {
-	    out << "array of length " << svp->array_len();
+	    out << "list of length " << svp->array_len();
 	    ALIterator i;
 	    AttributeValueList* avl = svp->array_val();
 	    avl->First(i);
@@ -943,7 +959,7 @@ int AttributeValue::type_symid() const {
     _type_syms[i++] = symbol_add("DoubleType");
     _type_syms[i++] = symbol_add("StringType");
     _type_syms[i++] = symbol_add("SymbolType");
-    _type_syms[i++] = symbol_add("ArrayType");
+    _type_syms[i++] = symbol_add("ListType");
     _type_syms[i++] = symbol_add("StreamType");
     _type_syms[i++] = symbol_add("CommandType");
     _type_syms[i++] = symbol_add("KeywordType");
