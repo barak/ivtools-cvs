@@ -41,7 +41,7 @@
 
 ComterpHandler::ComterpHandler (void)
 {
-    comterp_ = new ComTerpServ(BUFSIZ*BUFSIZ);
+    comterp_ = new ComTerpServ(/*BUFSIZ*BUFSIZ*/);
     comterp_->handler(this);
     comterp_->add_defaults();
     _timeoutscriptid = -1;
@@ -122,7 +122,7 @@ static const unit = 15;
 int
 ComterpHandler::handle_input (ACE_HANDLE fd)
 {
-#if 1
+#if 0
     const int bufsiz = BUFSIZ; //*BUFSIZ;
     char inbuf[bufsiz];
     inbuf[0] = '\0';
@@ -134,7 +134,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     char ch;
     filebuf ibuf(fd);
     istream istr(&ibuf);
-    while(istr.good() && istr.get(ch),ch!='\n') 
+    while(istr.good() && istr.get(ch),ch!='\n'&&ch!='\0') 
       inv.push_back(ch);
     inv.push_back('\0');
     char* inbuf = &inv[0];

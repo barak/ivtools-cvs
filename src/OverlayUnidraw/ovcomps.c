@@ -194,6 +194,7 @@ void OverlayComp::GrowParamList(ParamList* pl) {
 }
 
 OverlayView* OverlayComp::FindView (Viewer* viewer) {
+    if (!_views) return nil;
     for (UList* u = _views->First(); u != _views->End(); u = u->Next()) {
 	ComponentView* compview = View(u);
 	if (compview->IsA(OVERLAY_VIEW) && 

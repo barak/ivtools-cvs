@@ -768,7 +768,7 @@ ostream& operator<< (ostream& out, const AttributeValue& sv) {
 	  break;
 
 	default:
-	  out << "Unknown type";
+	  out << "nil";
 	  break;
 	}
 #endif
