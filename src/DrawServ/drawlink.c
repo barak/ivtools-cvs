@@ -30,7 +30,7 @@
 #include <fstream.h>
 #include <unistd.h>
 
-static int DrawLink::_linkcnt = 0;
+int DrawLink::_linkcnt = 0;
 
 /*****************************************************************************/
 
@@ -61,7 +61,8 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
     gethostname(buffer, HOST_NAME_MAX);
     out << buffer << "\"";
     out << " :state " << state+1;
-    out << " :id " << _local_linkid;
+    out << " :rid " << _local_linkid;
+    out << " :lid " << _remote_linkid;
     out << ")\n";
     out.flush();
     _ok = true;
