@@ -163,7 +163,7 @@ static PropertyData properties[] = {
     { "*zoomer_off",    "false"  },
     { "*opaque_off",    "false"  },
     { "*stripped",      "false"  },
-    { "*comdraw_off",   "false"  },
+    { "*stdin_off",   "false"  },
 #ifdef HAVE_ACE
     { "*import",        "20001" },
     { "*comdraw",       "20002" },
@@ -208,7 +208,7 @@ static OptionDesc options[] = {
     { "-opaque_off", "*opaque_off", OptionValueImplicit, "true" },
     { "-opoff", "*opaque_off", OptionValueImplicit, "true" },
     { "-stripped", "*stripped", OptionValueImplicit, "true" },
-    { "-comdraw_off", "*comdraw_off", OptionValueImplicit, "true" },
+    { "-stdin_off", "*stdin_off", OptionValueImplicit, "true" },
 #ifdef HAVE_ACE
     { "-import", "*import", OptionValueNext },
     { "-comdraw", "*comdraw", OptionValueNext },
@@ -224,22 +224,22 @@ static OptionDesc options[] = {
 
 #ifdef HAVE_ACE
 static char* usage =
-"Usage: comdraw [any idraw parameter] [-comdraw port] [-comdraw_off] [-color5] \n\
- [-color6] [-import portnum] [-gray5] [-gray6] [-gray7] [-opaque_off|-opoff] \n\
-[-pagecols|-ncols n] [-pagerows|-nrows n] [-panner_off|-poff] \n\
-[-panner_align|-pal tl|tc|tr|cl|c|cr|cl|bl|br|l|r|t|b|hc|vc] \n\
-[-rampsize n ] [-scribble_pointer|-scrpt ] [-slider_off|-soff] [-stripped]\n\
-[-toolbarloc|-tbl r|l ] [-theight|-th n] [-tile] [-twidth|-tw n] \n\
+"Usage: comdraw [any idraw parameter] [-comdraw port] [-color5]\n\
+ [-color6] [-import portnum] [-gray5] [-gray6] [-gray7] [-opaque_off|-opoff]\n\
+[-pagecols|-ncols n] [-pagerows|-nrows n] [-panner_off|-poff]\n\
+[-panner_align|-pal tl|tc|tr|cl|c|cr|cl|bl|br|l|r|t|b|hc|vc]\n\
+[-rampsize n ] [-scribble_pointer|-scrpt ] [-slider_off|-soff] [-stdin_off]\n\
+[-stripped] [-toolbarloc|-tbl r|l ] [-theight|-th n] [-tile] [-twidth|-tw n]\n\
 [-wbhost host] [-wbmaster] [-wbslave] [-wbport port] [-zoomer_off|-zoff] [file]";
 #else
 static char* usage =
 "Usage: comdraw [any idraw parameter] [-color5] [-color6] \n\
-[-comdraw_off] [-gray5] [-gray6] [-gray7] [-opaque_off|-opoff] \n\
+[-gray5] [-gray6] [-gray7] [-opaque_off|-opoff] \n\
 [-pagecols|-ncols n] [-pagerows|-nrows n] [-panner_off|-poff] \n\
 [-panner_align|-pal tl|tc|tr|cl|c|cr|cl|bl|br|l|r|t|b|hc|vc] \n\
-[-rampsize n ] [-scribble_pointer|-scrpt ] [-slider_off|-soff] [-stripped]\n\
-[-toolbarloc|-tbl r|l ] [-theight|-th n] [-tile] [-twidth|-tw n] \n\
-[-zoomer_off|-zoff] [file]";
+[-rampsize n ] [-scribble_pointer|-scrpt ] [-slider_off|-soff] [-stdin_off]\n\
+[-stripped] [-toolbarloc|-tbl r|l ] [-theight|-th n] [-tile]\n\
+[-twidth|-tw n] [-zoomer_off|-zoff] [file]";
 #endif
 
 /*****************************************************************************/
@@ -315,8 +315,8 @@ int main (int argc, char** argv) {
 #ifdef HAVE_ACE
 	
 	/*  Start up one on stdin */
-	const char* comdraw_off_str = unidraw->GetCatalog()->GetAttribute("comdraw_off");
-	if (!comdraw_off_str || strcmp(comdraw_off_str, "false")==0) {
+	const char* stdin_off_str = unidraw->GetCatalog()->GetAttribute("stdin_off");
+	if (!stdin_off_str || strcmp(stdin_off_str, "false")==0) {
 	  UnidrawComterpHandler* stdin_handler = new UnidrawComterpHandler();
 #if 0
 	  if (ACE::register_stdin_handler(stdin_handler, COMTERP_REACTOR::instance(), nil) == -1)

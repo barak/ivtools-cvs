@@ -175,6 +175,7 @@ static PropertyData properties[] = {
     { "*twidth",        "512" },
     { "*theight",       "512" },
     { "*opaque_off",    "false"  },
+    { "*stdin_off",   "false"  },
 #ifdef HAVE_ACE
     { "*import",        "20001" },
     { "*comdraw",          "20002" },
@@ -194,6 +195,7 @@ static OptionDesc options[] = {
     { "-theight", "*theight", OptionValueNext },
     { "-opaque_off", "*opaque_off", OptionValueImplicit, "true" },
     { "-opoff", "*opaque_off", OptionValueImplicit, "true" },
+    { "-stdin_off", "*stdin_off", OptionValueImplicit, "true" },
 #ifdef HAVE_ACE
     { "-import", "*import", OptionValueNext },
     { "-comdraw", "*comdraw", OptionValueNext },

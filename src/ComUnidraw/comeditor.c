@@ -108,10 +108,10 @@ void ComEditor::Init (OverlayComp* comp, const char* name) {
 void ComEditor::InitCommands() {
     if (!_terp) 
       _terp = new ComTerpServ();
-      const char* comdraw_off_str = unidraw->GetCatalog()->GetAttribute("comdraw_off");
+      const char* stdin_off_str = unidraw->GetCatalog()->GetAttribute("stdin_off");
 #ifndef HAVE_ACE
     if ((!comterplist() || comterplist()->Number()==1) &&
-	(comdraw_off_str ? strcmp(comdraw_off_str, "false")==0 : true))
+	(stdin_off_str ? strcmp(stdin_off_str, "false")==0 : true))
       _terp_iohandler = new ComTerpIOHandler(_terp, stdin);
     else
 #endif
