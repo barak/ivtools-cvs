@@ -143,6 +143,8 @@ public:
     // returns reference to IntType ComValue with value of 1.
     static ComValue& zeroval();
     // returns reference to IntType ComValue with value of 0.
+    static ComValue& minusoneval();
+    // returns reference to IntType ComValue with value of -1.
 protected:
     void zero_vals() { _narg = _nkey = _nids = _pedepth = 0; }
 
@@ -159,6 +161,7 @@ protected:
     static ComValue _unkval;
     static ComValue _oneval;
     static ComValue _zeroval;
+    static ComValue _minusoneval;
 };
 
 #endif /* !defined(_comvalue_h) */

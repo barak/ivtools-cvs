@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 1994-2000 Vectaport Inc.
+ * Copyright (c) 2000 Vectaport Inc, IET Inc.
+ * Copyright (c) 1994-1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -27,6 +28,7 @@
 #include <OverlayUnidraw/ovcomps.h>
 #include <OverlayUnidraw/ovimport.h>
 #include <OverlayUnidraw/ovselection.h>
+#include <OverlayUnidraw/ovviews.h>
 #include <Unidraw/clipboard.h>
 #include <Unidraw/creator.h>
 #include <Unidraw/globals.h>
@@ -261,5 +263,25 @@ void SetAttrFunc::execute() {
       delete al;
     }
     push_stack(viewval);
+}
+
+/*****************************************************************************/
+
+FrameFunc::FrameFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void FrameFunc::execute() {
+    ComValue indexv(stack_arg(0, false, ComValue::minusoneval()));
+    reset_stack();
+    OverlayEditor* ed = (OverlayEditor*)GetEditor();
+
+    OverlaysView* frameview = ed->GetFrame(indexv.int_val());
+    if (frameview && frameview->GetSubject()) {
+      OverlayComp* comp = (OverlayComp*)frameview->GetSubject();
+      ComValue retval(comp->classid(), new ComponentView(comp));
+      retval.object_compview(true);
+      push_stack(retval);
+    } else
+      push_stack(ComValue::nullval());
 }
 

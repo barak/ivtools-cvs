@@ -1,6 +1,5 @@
 /*
  * Copyright (c) 2000 IET Inc.
- * Copyright (c) 1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -22,49 +21,39 @@
  * 
  */
 
-/*
- * collection of list manipulation functions
+/* 
+ * at func for componentviews
  */
 
-#if !defined(_listfunc_h)
-#define _listfunc_h
+#if !defined(_grlistfunc_h)
+#define _grlistfunc_h
 
-#include <ComTerp/comfunc.h>
+#include <ComTerp/listfunc.h>
 
-class ComTerp;
-class ComValue;
-
-//: create list command for ComTerp.
-// lst=list([olst]) -- create an empty list or copy existing one.
-class ListFunc : public ComFunc {
+//: list member command for ComUnidraw
+// val=at(list|attrlist|compview n) -- return the nth item in a list.
+class GrListAtFunc : public ComFunc {
 public:
-    ListFunc(ComTerp*);
+    GrListAtFunc(ComTerp*);
 
     virtual void execute();
     virtual const char* docstring() { 
-      return "lst=%s([olst]) -- create an empty list or copy existing one"; }
+      return "val=at(list|attrlist|compview n) -- return the nth item in a list"; }
 };
 
-//: list member command for ComTerp.
-// val=at(list|attrlist n) -- return the nth item in a list.
-class ListAtFunc : public ComFunc {
+//: list size command for Unidraw
+// num=size(list|attrlist|compview) -- return size of a list.
+class GrListSizeFunc : public ComFunc {
 public:
-    ListAtFunc(ComTerp*);
+    GrListSizeFunc(ComTerp*);
 
     virtual void execute();
     virtual const char* docstring() { 
-      return "val=at(list|attrlist n) -- return the nth item in a list"; }
+      return "val=size(list|attrlist|compview) -- return the size of the list"; }
 };
 
-//: list size command for ComTerp.
-// num=size(list|attrlist) -- return size of a list.
-class ListSizeFunc : public ComFunc {
-public:
-    ListSizeFunc(ComTerp*);
+#endif /* !defined(_grlistfunc_h) */
 
-    virtual void execute();
-    virtual const char* docstring() { 
-      return "val=size(list|attrlist) -- return the size of the list"; }
-};
 
-#endif /* !defined(_listfunc_h) */
+
+

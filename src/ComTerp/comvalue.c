@@ -43,6 +43,7 @@ ComValue ComValue::_blankval(ComValue::BlankType);
 ComValue ComValue::_unkval(ComValue::UnknownType);
 ComValue ComValue::_oneval(1, ComValue::IntType);
 ComValue ComValue::_zeroval(0, ComValue::IntType);
+ComValue ComValue::_minusoneval(-1, ComValue::IntType);
 
 /*****************************************************************************/
 
@@ -93,6 +94,7 @@ ComValue::~ComValue() {
 }
 
 ComValue::ComValue(postfix_token* token) {
+    clear();
     void* v1 = &_v;
     void* v2 = &token->v;
     memcpy(v1, v2, sizeof(double));
@@ -106,7 +108,7 @@ ComValue::ComValue(postfix_token* token) {
     case TOK_FLOAT:   type(FloatType); break;
     case TOK_DOUBLE:  type(DoubleType); break;
     case TOK_EOF:     type(EofType); break;
-    case TOK_COMMAND: type(SymbolType); break;
+    case TOK_COMMAND: type(SymbolType); _v.symval.globalflag=0; break;
     case TOK_KEYWORD: type(KeywordType); break;
     case TOK_BLANK:   type(BlankType); break;
     default:          type(UnknownType); break;
@@ -348,6 +350,11 @@ ComValue& ComValue::oneval() {
 ComValue& ComValue::zeroval() { 
   *&_zeroval = ComValue(0, ComValue::IntType);
   return _zeroval;
+}
+
+ComValue& ComValue::minusoneval() { 
+  *&_minusoneval = ComValue(-1, ComValue::IntType);
+  return _minusoneval;
 }
 
 boolean ComValue::is_comfunc(int func_classid) {

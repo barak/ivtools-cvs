@@ -216,7 +216,7 @@ public:
     boolean command_alias();
     // returns true if command is an alias, not the first name.
 
-    boolean object_compview() { return _object_compview; }
+    boolean object_compview() { return is_object() && _object_compview; }
     // true if object is wrapped with a ComponentView
     void object_compview(boolean flag) { _object_compview = flag; }
     // true if object is wrapped with a ComponentView

@@ -58,7 +58,7 @@ void CenterFunc::execute() {
     boolean return_an_array = xy_flag || yx_flag;
 
     Viewer* viewer = _ed->GetViewer();
-    ComValue& obj = stack_arg(0);
+    ComValue obj(stack_arg(0));
     reset_stack();
     if (obj.object_compview()) {
       ComponentView* compview = (ComponentView*)obj.obj_val();

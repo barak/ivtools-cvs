@@ -84,10 +84,12 @@ public:
 
     static boolean use_unidraw() { return _use_unidraw; }
     static void use_unidraw(boolean flag) { _use_unidraw = flag; }
+
+    UList* ViewList() { return _views; }
+    ComponentView* View(UList*);
 protected:
     Component();
 
-    ComponentView* View(UList*);
     virtual void SetParent(Component* child, Component* parent);
 protected:
     UList* _views;

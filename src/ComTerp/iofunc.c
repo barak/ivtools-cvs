@@ -150,7 +150,7 @@ void PrintFunc::execute() {
   }
 
 
-  if (stringflag.is_true()) {
+  if (stringflag.is_true() || strflag.is_true()) {
     out << '\0';
     ComValue retval(((strstreambuf*)strmbuf)->str());
     push_stack(retval);

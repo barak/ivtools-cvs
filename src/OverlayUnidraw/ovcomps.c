@@ -122,9 +122,10 @@ AttributeList* OverlayComp::GetAttributeList() {
 #endif
 
 void OverlayComp::SetAttributeList(AttributeList* al) {
+  if (_attrlist) 
     Unref(_attrlist);
-    _attrlist = al;
-    Resource::ref(_attrlist);
+  _attrlist = al;
+  Resource::ref(_attrlist);
 
 #if 0 // experimentation with attribute changing
     if (al) {

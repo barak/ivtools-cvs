@@ -24,6 +24,7 @@
 
 #include <ComUnidraw/grdotfunc.h>
 #include <ComUnidraw/grfunc.h>
+#include <ComUnidraw/grlistfunc.h>
 #include <ComUnidraw/grstatfunc.h>
 #include <ComUnidraw/highlightfunc.h>
 #include <ComUnidraw/comeditor.h>
@@ -180,11 +181,14 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("dot", new GrDotFunc(comterp));
     comterp->add_command("attrlist", new GrAttrListFunc(comterp));
+    comterp->add_command("at", new GrListAtFunc(comterp));
+    comterp->add_command("size", new GrListSizeFunc(comterp));
 
     comterp->add_command("acknowledgebox", new AcknowledgeBoxFunc(comterp, this));
     comterp->add_command("confirmbox", new ConfirmBoxFunc(comterp, this));
 
     comterp->add_command("highlight", new HighlightFunc(comterp, this));
+    comterp->add_command("frame", new FrameFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {

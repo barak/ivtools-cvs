@@ -601,27 +601,39 @@ ComValue& ComTerp::pop_stack(boolean lookupsym) {
 ComValue& ComTerp::lookup_symval(ComValue& comval) {
     if (comval.type() == ComValue::SymbolType) {
         void* vptr = nil;
-	if (localtable()->find(vptr, comval.symbol_val())) {
-	    comval.assignval(*(ComValue*)vptr);
-	    return comval;
-	} else {
-	    if (_alist) {
-     	        int id = comval.symbol_val();
-	        AttributeValue* aval = _alist->find(id);  
-	        if (aval) {
-		    ComValue newval(*aval);
-		    *&comval = newval;
-		}
-		return comval;
-	    } else 
-	        return ComValue::nullval();
-	}
+
+	if (!comval.global_flag() && localtable()->find(vptr, comval.symbol_val()) ) {
+	  comval.assignval(*(ComValue*)vptr);
+	  return comval;
+	} else  if (_alist) {
+	  int id = comval.symbol_val();
+	  AttributeValue* aval = _alist->find(id);  
+	  if (aval) {
+	    ComValue newval(*aval);
+	    *&comval = newval;
+	  }
+	  return comval;
+	} else if (globaltable()->find(vptr, comval.symbol_val())) {
+	  comval.assignval(*(ComValue*)vptr);
+	  return comval;
+	} else
+	  return ComValue::nullval();
+
     } else if (comval.is_object(Attribute::class_symid())) {
 
       comval.assignval(*((Attribute*)comval.obj_val())->Value());
 
     }       
     return comval;
+}
+
+ComValue& ComTerp::lookup_symval(int symid) {
+  void* vptr = nil;
+  if (localtable()->find(vptr, symid)) {
+    ComValue* valptr = (ComValue*)vptr;
+    return *valptr;
+  } else 
+    return ComValue::nullval();
 }
 
 ComValue& ComTerp::stack_top(int n) {

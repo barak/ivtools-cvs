@@ -63,10 +63,13 @@ move(dx dy) -- move current selection
 scale(xflt yflt) -- scale current selection
 rotate(degflt) -- rotate current selection
 
-ATTRIBUTE COMMANDS
+COMPONENT AND ATTRIBUTE COMMANDS
 
 compview=setattr(compview [:keyword value [:keyword value [...]]]) -- set attributes of a graphic component
 attrlist(compview) -- return attribute list of component
+compview=frame([index]) -- return composite component for a frame, defaults to current
+val=at(list|attrlist|compview n) -- return the nth item in a list.
+num=size(list|attrlist|compview) -- return size of a list.
 
 VIEWER COMMANDS
 

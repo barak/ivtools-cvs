@@ -19,6 +19,7 @@ MakeLibrary($(LIB),$(VERSION))
 
 Obj26(grdotfunc)
 Obj26(grfunc)
+Obj26(grlistfunc)
 Obj26(grstatfunc)
 Obj26(highlightfunc)
 Obj26(comeditor)

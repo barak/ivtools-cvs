@@ -41,7 +41,7 @@
 
 ComterpHandler::ComterpHandler (void)
 {
-    comterp_ = new ComTerpServ(/*BUFSIZ*BUFSIZ*/);
+    comterp_ = new ComTerpServ(BUFSIZ*BUFSIZ);
     comterp_->handler(this);
     comterp_->add_defaults();
     _timeoutscriptid = -1;
@@ -134,6 +134,8 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     char ch;
     filebuf ibuf(fd);
     istream istr(&ibuf);
+
+    // problem handling new-lines embedded in character strings
     while(istr.good() && istr.get(ch),ch!='\n'&&ch!='\0') 
       inv.push_back(ch);
     inv.push_back('\0');
