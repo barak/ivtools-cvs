@@ -233,10 +233,11 @@ void ComTerp::eval_expr_internals(int pedepth) {
     /* create a StreamType ComValue to hold all its */
     /* arguments, along with a pointer to the func. */
     boolean has_streams = false;
-    for(int i=0; i<sv.narg()+sv.nkey(); i++) {
-      has_streams = stack_top(-i).is_stream();
-      if (has_streams) break;
-    }
+    if (!((ComFunc*)sv.obj_val())->post_eval())
+      for(int i=0; i<sv.narg()+sv.nkey(); i++) {
+	has_streams = stack_top(-i).is_stream();
+	if (has_streams) break;
+      }
     if (has_streams) {
       AttributeValueList* avl = new AttributeValueList();
       for(int i=0; i<sv.narg()+sv.nkey(); i++)

@@ -85,7 +85,6 @@ OPERATOR TABLE
     --            decr_after           110         R-to-L      unary-postfix
     **            repeat               90          L-to-R      binary
     ..            iterate              80          L-to-R      binary
-    ,,            concat               75          L-to-R      binary
     %             mod                  70          L-to-R      binary
     *             mpy                  70          L-to-R      binary
     /             div                  70          L-to-R      binary
@@ -105,6 +104,7 @@ OPERATOR TABLE
     &&            and                  41          L-to-R      binary
     ||            or                   40          L-to-R      binary
     ,             tuple                35          L-to-R      binary
+    ,,            concat               33          L-to-R      binary
     %=            mod_assign           30          R-to-L      binary
     *=            mpy_assign           30          R-to-L      binary
     +=            add_assign           30          R-to-L      binary

@@ -41,6 +41,8 @@ ListFunc::ListFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void ListFunc::execute() {
   ComValue listv(stack_arg_post_eval(0));
+  static int strmlst_symid = symbol_add("strmlst"); // hidden debug keyword
+  ComValue strmlstv(stack_key_post_eval(strmlst_symid));
   reset_stack();
 
   AttributeValueList* avl;
@@ -50,20 +52,34 @@ void ListFunc::execute() {
   else {
     avl = new AttributeValueList();
     if (listv.is_stream()) {
-      NextFunc nextfunc(comterp());
-      boolean done = false;
-      while (!done) {
-	push_stack(listv);
-	push_funcstate(1,0);
-	nextfunc.execute();
-	pop_funcstate();
-	AttributeValue* newval = new AttributeValue(comterp()->pop_stack());
-	if (newval->is_unknown()) {
-	  done = true;
-	  delete newval;
-	} else
-	  avl->Append(newval);
+      if (strmlstv.is_false()) {
+
+	/* stream to list conversion */
+	NextFunc nextfunc(comterp());
+	boolean done = false;
+	while (!done) {
+	  push_stack(listv);
+	  push_funcstate(1,0);
+	  nextfunc.execute();
+	  pop_funcstate();
+	  AttributeValue* newval = new AttributeValue(comterp()->pop_stack());
+	  if (newval->is_unknown()) {
+	    done = true;
+	    delete newval;
+	  } else
+	    avl->Append(newval);
+	}
+
+      } else {
+	/* simply return stream's internal list for debug purposes */
+	if (listv.stream_list()) {
+	  ComValue retval(listv.stream_list());
+	  push_stack(retval);
+	} else	  
+	  push_stack(ComValue::nullval());
+	return;
       }
+
     }
   }
   Resource::ref(avl);
