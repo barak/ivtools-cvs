@@ -27,6 +27,8 @@
 #ifndef drawlink_h
 #define drawlink_h
 
+#include <InterViews/observe.h>
+
 class DrawServ;
 class DrawServHandler;
 
@@ -43,12 +45,12 @@ class ACE_SOCK_Stream;
 #endif
 
 //: object to encapsulate 2-way link with remote drawserv
-class DrawLink {
+class DrawLink : public Observable {
 public:
     DrawLink(const char* hostname, int portnum, int state);
     virtual ~DrawLink();
 
-    enum { new_link=0, one_way, two_way };
+    enum { new_link=0, one_way, two_way, redundant };
 
     const char* hostname() { return _host; }
     // return name of remote host
@@ -99,7 +101,7 @@ public:
     IncomingSidTable* incomingsidtable() { return _incomingsidtable; }
     // return pointer to table mapping incoming sessionid's to locally unique sessionid's
 
-    void state(int val) { _state = val; }
+    void state(int val) { _state = val; notify(); }
     // set state of DrawLink
 
     int state() { return _state; }

@@ -93,6 +93,7 @@ void DrawServ::Init() {
   int hostid = gethostid();
   SessionId* sid = new SessionId(_sessionid, _sessionid, pid, username, hostbuf, hostid);
   _sessionidtable->insert(_sessionid, sid);
+
   _comdraw_port = atoi(unidraw->GetCatalog()->GetAttribute("comdraw"));
 }
 
@@ -189,17 +190,32 @@ DrawLink* DrawServ::linkget(int local_id, int remote_id) {
   return link;
 }
 
+DrawLink* DrawServ::linkget(const char* hostname, int portnum) {
+  DrawLink* link = nil;
+  if (_linklist) {
+    Iterator(i);
+    _linklist->First(i);
+    while (!_linklist->Done(i) && !link) {
+      DrawLink* l = _linklist->GetDrawLink(i);
+      if (strcmp(l->hostname(),hostname)==0 && l->portnum()==portnum)
+	link = l;
+      _linklist->Next(i);
+    }
+  }
+  return link;
+}
+
 void DrawServ::linkdump(FILE* fptr) {
-  fprintf(fptr, "Host                            Alt.                            Port    LID  RID\n");
-  fprintf(fptr, "------------------------------  ------------------------------  ------  ---  ---\n");
+  fprintf(fptr, "Host                            Alt.                            Port    LID  RID  State\n");
+  fprintf(fptr, "------------------------------  ------------------------------  ------  ---  ---  -----\n");
   if (_linklist) {
     Iterator i;
     _linklist->First(i);
     while(!_linklist->Done(i)) {
       DrawLink* link = _linklist->GetDrawLink(i);
-      fprintf(fptr, "%-30.30s  %-30.30s  %-6d  %-3d  %-3d\n", 
+      fprintf(fptr, "%-30.30s  %-30.30s  %-6d  %-3d  %-3d  %-3d\n", 
 	      link->hostname(), link->althostname(), link->portnum(),
-	      link->local_linkid(), link->remote_linkid());
+	      link->local_linkid(), link->remote_linkid(), link->state());
       _linklist->Next(i);
     }
   }
@@ -411,10 +427,10 @@ unsigned int DrawServ::unique_grid() {
     seed = time(nil) & (time(nil) << 16);
     srand(seed);
   }
-  int retval;
+  unsigned int retval;
   do {
     static int flip=0;
-    while ((retval=rand()&GraphicIdMask)==0);
+    while ((retval=rand()&GraphicIdMask)<=1);
 
   } while (!test_grid(retval));
   return retval;
@@ -554,3 +570,23 @@ void DrawServ::print_sidtable() {
     it.next();
   }
 }
+
+boolean DrawServ::cycletest(unsigned int sid, const char* host,
+			    const char* user, int pid) 
+{
+  boolean found = false;
+  SessionIdTable* table = sessionidtable();
+  SessionIdTable_Iterator it(*table);
+  while(it.more() && !found) {
+    SessionId* sessionid = (SessionId*)it.cur_value();
+    if (sessionid->osid()==sid) {
+      if (strcmp(host, sessionid->hostname())==0 && 
+	  strcmp(user, sessionid->username())==0 &&
+	  pid==sessionid->pid())
+	found = true;
+    }
+    it.next();
+  }
+  return found;
+}
+

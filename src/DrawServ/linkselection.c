@@ -65,13 +65,17 @@ LinkSelection::LinkSelection (DrawEditor* editor, Selection* s) : OverlaySelecti
 }
 
 void LinkSelection::Update(Viewer* viewer) {
+#if 0
   fprintf(stderr, "LinkSelection::Update\n");
+#endif
   Reserve();
   OverlaySelection::Update(viewer);
 }
 
 void LinkSelection::Clear(Viewer* viewer) {
+#if 0
   fprintf(stderr, "LinkSelection::Clear\n");
+#endif
 #if 0
   CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
   Iterator it;
@@ -98,7 +102,9 @@ void LinkSelection::Clear(Viewer* viewer) {
 }
 
 void LinkSelection::Reserve() {
+#if 0
   fprintf(stderr, "LinkSelection::Reserve\n");
+#endif
   CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
 
   /* clear anything that was in the previous selection, but not in this one */

@@ -72,6 +72,9 @@ public:
   
   DrawLink* linkget(int local_id, int remote_id=-1);
   // return pointer to existing DrawLink
+
+  DrawLink* linkget(const char* hostname, int portnum);
+  // return pointer to existing DrawLink
   
   void linkdump(FILE*);
   // dump text table of DrawLink's
@@ -92,7 +95,7 @@ public:
   // return pointer to table of GraphicId's.
   
   SessionIdTable* sessionidtable() { return _sessionidtable; }
-  // return pointer to table of SessionId's
+  // return pointer to table of session id's that map to SessionId's
   
   CompIdTable* compidtable() { return _compidtable; }
   // return pointer to table that map from GraphicComp* to GraphicId*
@@ -149,6 +152,8 @@ public:
   int comdraw_port() { return _comdraw_port; }
   // return port used for comdraw command interpreter
 
+  boolean cycletest(unsigned int sid, const char* host, const char* user, int pid);
+
 protected:
     DrawLinkList* _linklist;
     // DrawLink list
@@ -157,7 +162,7 @@ protected:
     // maps from id to GraphicId*
     SessionIdTable* _sessionidtable;
     // table of all session id's.
-    // maps from id to SessionId*
+    // maps from session id to SessionId*
     CompIdTable* _compidtable;
     // table of all GraphicComp's associated with a GraphicId.
     // maps from GraphicComp* to GraphicId*

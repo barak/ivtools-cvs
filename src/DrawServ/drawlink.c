@@ -28,6 +28,7 @@
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawserv.h>
 #include <DrawServ/drawserv-handler.h>
+#include <DrawServ/sid.h>
 #include <Unidraw/globals.h>
 #include <fstream.h>
 #include <unistd.h>
@@ -85,11 +86,20 @@ int DrawLink::open() {
     out << "drawlink(\"";
     char buffer[HOST_NAME_MAX];
     gethostname(buffer, HOST_NAME_MAX);
+    unsigned int sid = ((DrawServ*)unidraw)->sessionid();
+    void* ptr = nil;
+    ((DrawServ*)unidraw)->sessionidtable()->find(ptr, sid);
+    SessionId* sessionid = (SessionId*)ptr;
     out << buffer << "\"";
     out << " :port " << ((DrawServ*)unidraw)->comdraw_port();
     out << " :state " << _state+1;
     out << " :rid " << _local_linkid;
     out << " :lid " << _remote_linkid;
+    out << " :sid " << sid;
+    if (sessionid) {
+      out << " :pid " << sessionid->pid();
+      out << " :user \"" << sessionid->username() << "\"";
+    }
     out << ")\n";
     out.flush();
     _ok = true;
@@ -115,12 +125,14 @@ void DrawLink::hostname(const char* host) {
   delete _host;
   _host = nil;
   if (host) _host = strnew(host);
+  notify();
 }
 
 void DrawLink::althostname(const char* althost) {
   delete _althost;
   _althost = nil;
   if (althost) _althost = strnew(althost);
+  notify();
 }
 
 int DrawLink::handle() {

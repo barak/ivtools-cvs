@@ -73,33 +73,46 @@ UList* DrawLinkList::Elem (Iterator i) { return (UList*) i.GetValue(); }
 void DrawLinkList::Append (DrawLink* v) {
     _ulist->Append(new UList(v));
     ++_count;
+    v->attach(this);
+    notify();
 }
 
 void DrawLinkList::Prepend (DrawLink* v) {
     _ulist->Prepend(new UList(v));
     ++_count;
+    v->attach(this);
+    notify();
 }
 
 void DrawLinkList::InsertAfter (Iterator i, DrawLink* v) {
     Elem(i)->Prepend(new UList(v));
     ++_count;
+    v->attach(this);
+    notify();
 }
 
 void DrawLinkList::InsertBefore (Iterator i, DrawLink* v) {
     Elem(i)->Append(new UList(v));
     ++_count;
+    v->attach(this);
+    notify();
 }
 
 void DrawLinkList::Remove (Iterator& i) {
+    GetDrawLink(i)->detach(this);
+
     UList* doomed = Elem(i);
 
     Next(i);
     _ulist->Remove(doomed);
     delete doomed;
     --_count;
+    notify();
 }	
     
 void DrawLinkList::Remove (DrawLink* p) {
+    p->detach(this);
+
     UList* temp;
 
     if ((temp = _ulist->Find(p)) != nil) {
@@ -107,6 +120,7 @@ void DrawLinkList::Remove (DrawLink* p) {
         delete temp;
 	--_count;
     }
+    notify();
 }
 
 DrawLink* DrawLinkList::GetDrawLink (Iterator i) { return Link(Elem(i)); }

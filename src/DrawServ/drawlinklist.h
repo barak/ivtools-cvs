@@ -31,13 +31,14 @@
 //: UList based list of DrawLink's
 
 #include <Unidraw/globals.h>
+#include <InterViews/observe.h>
 
 class DrawLink;
 class GraphicId;
 class Iterator;
 class UList;
 
-class DrawLinkList {
+class DrawLinkList : public Observable, Observer {
 public:
     DrawLinkList();
     virtual ~DrawLinkList();
@@ -88,6 +89,8 @@ public:
     DrawLink* Link(UList*);
     // return DrawLink pointed to by UList (UList).
 
+    virtual void update(Observable* obs) { notify(); }
+    // invoked when DrawLink is updated
 protected:
     void Remove(Iterator&);
     // remove DrawLink pointed to by iterator from the list, 

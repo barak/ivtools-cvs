@@ -55,6 +55,22 @@ protected:
   StrEditDialog* _dialog;
 };
 
+#include <InterViews/dialog.h>
+
+class ConnectionsDialogImpl;
+class DrawLinkList;
+class Style;
+class WidgetKit;
+
+//: dialog for editing list of current connections
+class ConnectionsDialog : public Dialog {
+public:
+    ConnectionsDialog(DrawLinkList*, WidgetKit*, Style*);
+    virtual ~ConnectionsDialog();
+protected:
+    ConnectionsDialogImpl* impl_;
+};
+
 #include <InterViews/_leave.h>
 
 #endif

@@ -209,6 +209,11 @@ static OptionDesc options[] = {
 
 /*****************************************************************************/
 
+void handle_badpipe(int i) {
+  fprintf(stderr, "broken pipe detected %d\n", i);
+  return;
+}
+
 int main (int argc, char** argv) {
 
     /* ignore broken pipe, so socket writes that are in error return EPIPE */
@@ -222,7 +227,7 @@ int main (int argc, char** argv) {
     fprintf(stderr, "sigaction status %d  errno %d\n", status, errno);
 #else
     void (*func)(int) = nil;
-    func = signal(SIGPIPE, SIG_IGN);
+    func = signal(SIGPIPE, &handle_badpipe);
     if (func==SIG_ERR) 
       fprintf(stderr, "SIG_ERR returned from signal, errno = %d\n", errno);
 #endif

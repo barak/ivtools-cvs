@@ -28,6 +28,7 @@
 
 #include <InterViews/_enter.h>
 
+class Action;
 class StrEditDialogImpl;
 class WidgetKit;
 
