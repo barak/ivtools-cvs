@@ -1019,6 +1019,9 @@ void ComTerp::add_defaults() {
     add_command("sin", new SinFunc(this));
     add_command("tan", new TanFunc(this));
     add_command("sqrt", new SqrtFunc(this));
+    add_command("pi", new PiFunc(this));
+    add_command("radtodeg", new RadToDegFunc(this));
+    add_command("degtorad", new DegToRadFunc(this));
 
     add_command("floor", new FloorFunc(this));
     add_command("ceil", new CeilFunc(this));
