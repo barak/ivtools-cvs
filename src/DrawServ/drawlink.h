@@ -28,6 +28,7 @@
 #define drawlink_h
 
 class DrawServ;
+class DrawServHandler;
 
 #ifdef HAVE_ACE
 #include <ComTerp/comhandler.h>
@@ -83,6 +84,12 @@ public:
     void remote_linkid(int id) { _remote_linkid = id; }
     // get remote DrawLink id
 
+    void handler(DrawServHandler* handler) { _handler = handler; }
+    // set DrawServHandler associated with incoming connection
+
+    DrawServHandler* handler() { return _handler; }
+    // get DrawServHandler associated with incoming connection
+
 protected:
     const char* _host;
     const char* _althost;
@@ -98,6 +105,8 @@ protected:
     ACE_SOCK_Connector* _conn;
     ACE_SOCK_Stream* _socket;
 #endif
+
+    DrawServHandler* _handler;
 };
 
 #endif

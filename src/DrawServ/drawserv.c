@@ -61,8 +61,10 @@ int DrawServ::linkup(const char* hostname, int portnum,
   if (state == DrawLink::new_link || state == DrawLink::one_way) {
     DrawLink* link = new DrawLink(hostname, portnum, state);
     link->remote_linkid(remote_id);
-    if (state==DrawLink::one_way && comterp && comterp->handler()) 
+    if (state==DrawLink::one_way && comterp && comterp->handler()) {
       ((DrawServHandler*)comterp->handler())->drawlink(link);
+      link->handler((DrawServHandler*)comterp->handler());
+    }
     link->open();
     if (link && link->ok()) {
       _list->add_drawlink(link);
@@ -84,8 +86,10 @@ int DrawServ::linkup(const char* hostname, int portnum,
       DrawLink* curlink = _list->GetDrawLink(i);
       curlink->remote_linkid(remote_id);
       curlink->althostname(hostname);
-      if (comterp && comterp->handler()) 
+      if (comterp && comterp->handler()) {
 	((DrawServHandler*)comterp->handler())->drawlink(curlink);
+	curlink->handler((DrawServHandler*)comterp->handler());
+      }
       fprintf(stderr, "link up with %s(%s) via port %d\n", 
 	      curlink->hostname(), curlink->althostname(), portnum);
       fprintf(stderr, "local id %d, remote id %d\n", curlink->local_linkid(), 
