@@ -149,7 +149,9 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	    
 	case ComValue::SymbolType:
 	  if (brief) 
+	    if (svp->global_flag()) out << "global(";
 	    out << symbol_pntr( svp->symbol_ref());
+	    if (svp->global_flag()) out << ")";
 	  else {
 	    title = "symbol( ";
 	    symbol = symbol_pntr( svp->symbol_ref() );

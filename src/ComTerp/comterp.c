@@ -103,9 +103,11 @@ void ComTerp::init() {
 
     /* Create ComValue symbol table */
     _localtable = new ComValueTable(100);
-    if (_globaltable) {
+#if 0
+    if (!_globaltable) {
       _globaltable = new ComValueTable(100);
     }
+#endif
 
     _errbuf = new char[BUFSIZ];
 
@@ -822,6 +824,7 @@ void ComTerp::add_defaults() {
     add_command("symval", new SymValFunc(this));
     add_command("symbol", new SymbolFunc(this));
     add_command("symadd", new SymAddFunc(this));
+    add_command("global", new GlobalSymbolFunc(this));
     add_command("split", new SplitStrFunc(this));
     add_command("join", new JoinStrFunc(this));
 

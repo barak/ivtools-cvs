@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1998,1999,2000 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -226,6 +227,47 @@ void JoinStrFunc::execute() {
     }
   }
   push_stack(ComValue::nullval());
+}
+
+
+GlobalSymbolFunc::GlobalSymbolFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void GlobalSymbolFunc::execute() {
+  // return symbol(s) with global flag set
+  boolean noargs = !nargs() && !nkeys();
+  int numargs = nargs();
+  if (!numargs) {
+    reset_stack();
+    return;
+  }
+  int symbol_ids[numargs];
+  for (int i=0; i<numargs; i++) {
+    ComValue& val = stack_arg(i, true);
+    if (val.is_symbol())
+      symbol_ids[i] = val.symbol_val();
+    else 
+      symbol_ids[i] = -1;
+  }
+  reset_stack();
+
+  if (numargs>1) {
+    AttributeValueList* avl = new AttributeValueList();
+    ComValue retval(avl);
+    for (int i=0; i<numargs; i++) {
+      AttributeValue* av = 
+	new AttributeValue(symbol_ids[i], AttributeValue::SymbolType);
+      av->global_flag(true);
+      avl->Append(av);
+    }
+    push_stack(retval);
+  } else {
+    
+    ComValue retval (symbol_ids[0], AttributeValue::SymbolType);
+    retval.global_flag(true);
+    push_stack(retval);
+  }
+
 }
 
 

@@ -161,7 +161,8 @@ public:
 
     ComValueTable* localtable() const { return _localtable; }
     // local symbol table associated with an individual ComTerp.
-    ComValueTable* globaltable() const { return _globaltable; }
+    ComValueTable* globaltable() const 
+      { if (!_globaltable) _globaltable = new ComValueTable(100); return _globaltable; }
     // global symbol table associated with every ComTerp.
     ComValue* localvalue(int symid);
     // value associated with a symbol id in the local symbol table.

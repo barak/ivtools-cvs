@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1998,1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -99,6 +100,18 @@ public:
 
     virtual const char* docstring() { 
       return "str=%s(clist) -- join list of characters into string"; }
+};
+
+
+//: command to make assign a global variable
+// val=global(symbol)|global(symbol)=val -- make symbol global
+class GlobalSymbolFunc : public ComFunc {
+public:
+    GlobalSymbolFunc(ComTerp*);
+    virtual void execute();
+
+    virtual const char* docstring() { 
+      return "sym=%s(symbol)|global(symbol)=val -- make symbol global"; }
 };
 
 
