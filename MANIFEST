@@ -1,3 +1,7 @@
+ivtools-1.0/src/include/ivstd/malloc.h
+ivtools-1.0/config/site.def.DARWIN
+ivtools-1.0/config/darwin-gcc.mk
+ivtools-1.0/config/InterViews/iv-darwin.cf
 ivtools-1.0/CHANGES
 ivtools-1.0/CHANGES-0.4
 ivtools-1.0/CHANGES-0.5
