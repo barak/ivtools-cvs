@@ -44,7 +44,7 @@ extern "C" {
 #define SOMAXCONN 5
 #endif
 
-#if defined(__sun) || !defined(__svr4__)
+#if defined(__sun) && !defined(__svr4__)
 extern "C" {
     int accept();
     int bind();
