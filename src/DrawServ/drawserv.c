@@ -88,11 +88,10 @@ void DrawServ::Init() {
   _sessionid = unique_sessionid();
   char hostbuf[HOST_NAME_MAX];
   gethostname(hostbuf, HOST_NAME_MAX);
-  char userbuf[BUFSIZ];
-  getlogin_r(userbuf, BUFSIZ);
+  char* username = getlogin();
   int pid = getpid();
   int hostid = gethostid();
-  SessionId* sid = new SessionId(_sessionid, _sessionid, pid, userbuf, hostbuf, hostid);
+  SessionId* sid = new SessionId(_sessionid, _sessionid, pid, username, hostbuf, hostid);
   _sessionidtable->insert(_sessionid, sid);
   _comdraw_port = atoi(unidraw->GetCatalog()->GetAttribute("comdraw"));
 }
