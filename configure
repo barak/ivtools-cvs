@@ -1777,18 +1777,19 @@ else
 #line 1807 "configure"
 #include "confdefs.h"
 #include <sys/types.h>
-int main() {
 #include <sys/socket.h>
+int main() {
+socklen_t len = 42; return len;
 ; return 0; }
 EOF
-if { (eval echo configure:1814: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
+if { (eval echo configure:1815: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
   rm -rf conftest*
-  socklen_t len = 42; return len;
+  ac_cv_type_socklen_t=YES
 else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  ac_cv_type_socklen_t=YES
+  ac_cv_type_socklen_t=NO
 fi
 rm -f conftest*
 
