@@ -41,7 +41,7 @@
 
 #undef depvar
 #if HasDynamicSharedLibraries
-#if 0
+#if !defined(DarwinArchitecture)
 #ifndef UseInstalled
 #define depvar(ULIBNAME, PCKGSRC, llibname, liblibname, libver) \
   ULIBNAME = $(PCKGSRC)/llibname/$(CPU)/liblibname.SO.libver
