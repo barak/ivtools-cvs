@@ -135,6 +135,8 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     comterp->add_command("arrowspline", new CreateOpenSplineFunc(comterp, this));
     comterp->add_command("polygon", new CreatePolygonFunc(comterp, this));
     comterp->add_command("closedspline", new CreateClosedSplineFunc(comterp, this));
+    comterp->add_command("raster", new CreateRasterFunc(comterp, this));
+    comterp->add_command("pixmap", new CreateRasterFunc(comterp, this));
 
     comterp->add_command("center", new CenterFunc(comterp, this));
     comterp->add_command("mbr", new MbrFunc(comterp, this));

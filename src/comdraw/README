@@ -38,6 +38,7 @@ compview=openspline(x0,y0[,x1,y1,...]) -- create an open spline
 compview=arrowspline(x0,y0[,x1,y1,...]) -- create an open spline with arrows
 compview=polygon(x0,y0[,x1,y1,...]) -- create a polygon
 compview=closedspline(x0,y0[,x1,y1,...]) -- create a closed spline
+compview=raster(x0,x1,y0,y1) -- create an empty raster
 
 GRAPHIC STATS COMMANDS
 
