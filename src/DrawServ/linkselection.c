@@ -77,7 +77,7 @@ void LinkSelection::Clear(Viewer* viewer) {
     void* ptr = nil;
     table->find(ptr, (void*)comp);
     if (ptr) {
-      GraphicId* grid = (GraphicId*)grid;
+      GraphicId* grid = (GraphicId*)ptr;
       if (grid->selected()==LocallySelected)
 	grid->selected(PreviouslySelected);
       else if (grid->selected()==WaitingToBeSelected)
