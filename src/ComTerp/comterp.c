@@ -103,7 +103,7 @@ void ComTerp::init() {
 
     /* Create ComValue symbol table */
     _localtable = new ComValueTable(100);
-#if 0
+#if 0  /* deferred until first use */
     if (!_globaltable) {
       _globaltable = new ComValueTable(100);
     }
@@ -693,7 +693,7 @@ void ComTerp::quitflag(boolean flag) {
     _quitflag = flag;
 }
 
-int ComTerp::run(boolean one_expr) {
+int ComTerp::run(boolean one_expr, boolean nested) {
   int status = 1;
   _errbuf[0] = '\0';
   char errbuf_save[BUFSIZ];
@@ -713,7 +713,7 @@ int ComTerp::run(boolean one_expr) {
     if (read_expr()) {
       status = 0;
       int top_before = _stack_top;
-      eval_expr();
+      eval_expr(nested);
       if (top_before == _stack_top)
 	status = 2;
       err_str( _errbuf, BUFSIZ, "comterp" );
@@ -741,10 +741,12 @@ int ComTerp::run(boolean one_expr) {
         if (errbuf_save[0]) strcpy(_errbuf, errbuf_save);
       }
     }
-    _stack_top = -1;
+    if (!nested) 
+      _stack_top = -1;
     if (one_expr) break;
   }
   if (status==1 && _pfnum==0) status=2;
+  if (nested && status!=2) _stack_top--;
   return status;
 }
 

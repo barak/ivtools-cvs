@@ -127,5 +127,16 @@ public:
 
 };
 
+//: command to pause script execution until C/R
+// pause -- pause script execution until C/R
+class UnidrawPauseFunc : public UnidrawFunc {
+public:
+    UnidrawPauseFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "pause -- pause script execution until C/R"; }
+
+};
+
 #endif /* !defined(_unifunc_h) */
 

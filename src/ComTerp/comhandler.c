@@ -160,7 +160,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     comterp_->_fd = fd;
     comterp_->_outfunc = (outfuncptr)&ComTerpServ::fd_fputs;
 
-    int  status = comterp_->ComTerp::run(false /* !once */);
+    int  status = comterp_->ComTerp::run(false /* !once */, false /* !nested */);
     return (istr.good() ? 0 : -1) && status;
 }
 

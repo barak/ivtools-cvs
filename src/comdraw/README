@@ -121,6 +121,7 @@ confirmbox(msgstr) -- popup a confirmation dialog box, and return 1, 0, or -1 if
 run(filename) -- run commands from file
 quit() -- quit this interpreter
 exit() -- exit entire application
+pause([msgstr]) -- pause script execution until C/R
 
 OPTIONS
 

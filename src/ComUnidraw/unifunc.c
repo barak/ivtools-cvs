@@ -29,6 +29,8 @@
 #include <OverlayUnidraw/ovimport.h>
 #include <OverlayUnidraw/ovselection.h>
 #include <OverlayUnidraw/ovviews.h>
+#include <ComGlyph/comtextedit.h>
+#include <ComGlyph/comtextview.h>
 #include <Unidraw/clipboard.h>
 #include <Unidraw/creator.h>
 #include <Unidraw/globals.h>
@@ -40,10 +42,11 @@
 #include <Unidraw/Graphic/graphic.h>
 #include <InterViews/transformer.h>
 #include <InterViews/window.h>
-#include <ComTerp/comterp.h>
+#include <ComTerp/comterpserv.h>
 #include <ComTerp/comvalue.h>
 #include <Attribute/attrlist.h>
 #include <stdio.h>
+#include <strstream.h>
 #include <unistd.h>
 
 #define TITLE "UnidrawFunc"
@@ -255,10 +258,10 @@ void SetAttrFunc::execute() {
     ComponentView* view = (ComponentView*)viewval.obj_val();
     OverlayComp* comp = (OverlayComp*)view->GetSubject();
 
-    AttributeList* comp_al = comp->attrlist();
-    if (!comp_al)
+    AttributeList* comp_al = comp ? comp->attrlist() : nil;
+    if (!comp_al && comp)
       comp->SetAttributeList(al);
-    else {
+    else if (comp_al) {
       comp_al->merge(al);
       delete al;
     }
@@ -283,5 +286,41 @@ void FrameFunc::execute() {
       push_stack(retval);
     } else
       push_stack(ComValue::nullval());
+}
+
+/*****************************************************************************/
+
+UnidrawPauseFunc::UnidrawPauseFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void UnidrawPauseFunc::execute() {
+  ComValue msgstrv(stack_arg(0));
+  reset_stack();
+  comterpserv()->npause()++;
+
+  ComTextEditor* te = (ComTextEditor*) 
+    ((OverlayEditor*)GetEditor())->TextEditor();
+  if (te) {
+    ComTE_View* tv = te->comtextview();
+    if (tv) {
+      if (msgstrv.is_string()) {
+	tv->insert_string((char*)msgstrv.string_ptr(), strlen(msgstrv.string_ptr()));
+	tv->insert_char('\n');
+      }
+      ostrstream sbuf_s;
+      sbuf_s << "pause(" << comterpserv()->npause() << "): enter command or press C/R to continue\n";
+      sbuf_s.put('\0');
+      tv->insert_string(sbuf_s.str(), strlen(sbuf_s.str()));
+      comterpserv()->push_servstate();
+      unidraw->Run();
+      comterpserv()->pop_servstate();
+      ostrstream sbuf_e;
+      sbuf_e << "end of pause(" << comterpserv()->npause()+1 << ")\n";
+      sbuf_e.put('\0');
+      tv->insert_string(sbuf_e.str(), strlen(sbuf_e.str()));
+    }
+  } else {
+    cerr << "this version of pause command only works with ComTextEditor\n";
+  }
 }
 

@@ -40,6 +40,7 @@
 
 #include <OverlayUnidraw/ovclasses.h>
 #include <OverlayUnidraw/ovcomps.h>
+#include <OverlayUnidraw/ovunidraw.h>
 #include <OverlayUnidraw/scriptview.h>
 
 #include <Unidraw/catalog.h>
@@ -94,6 +95,7 @@ ComEditor::ComEditor(boolean initflag, OverlayKit* kit)
 void ComEditor::Init (OverlayComp* comp, const char* name) {
     if (!comp) comp = new OverlayIdrawComp;
     _terp = new ComTerpServ();
+    ((OverlayUnidraw*)unidraw)->comterp(_terp);
     AddCommands(_terp);
     char buffer[BUFSIZ];
     sprintf(buffer, "Comdraw%d", ncomterp());
@@ -105,7 +107,7 @@ void ComEditor::Init (OverlayComp* comp, const char* name) {
 void ComEditor::InitCommands() {
     if (!_terp) 
       _terp = new ComTerpServ();
-    const char* comdraw_off_str = unidraw->GetCatalog()->GetAttribute("comdraw_off");
+      const char* comdraw_off_str = unidraw->GetCatalog()->GetAttribute("comdraw_off");
     if ((!comterplist() || comterplist()->Number()==1) &&
 	(comdraw_off_str ? strcmp(comdraw_off_str, "false")==0 : true))
       _terp_iohandler = new ComTerpIOHandler(_terp, stdin);
@@ -194,6 +196,8 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("growgroup", new GrowGroupFunc(comterp, this));
     comterp->add_command("trimgroup", new TrimGroupFunc(comterp, this));
+
+    comterp->add_command("pause", new UnidrawPauseFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
