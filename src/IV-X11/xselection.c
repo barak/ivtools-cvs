@@ -33,7 +33,6 @@
 #include <OS/string.h>
 #include <OS/table.h>
 #include <X11/Xatom.h>
-#include <stdio.h>
 
 /*
  * SelectionManager -- inter client communications mechanism
@@ -70,16 +69,11 @@ void SelectionManager::own(
 
 void SelectionManager::put_value(const void* data, int length, int format) {
     SelectionManagerRep& s = *rep();
-    if (!s.x_req_.property) {
-      fprintf(stderr, "property value of zero received from XSelectionRequestEvent\n");
-      fprintf(stderr, "restart window manager and/or server to correct\n");
-      fprintf(stderr, "selection mechanism effectively disabled\n");
-      return;
-    }
     XChangeProperty(
         s.xdisplay_, s.x_req_.requestor, s.x_req_.property,
 	/* type */ XA_STRING, format, PropModeReplace,
-	(const unsigned char*)data, length
+	(const unsigned char*)data - (length<0 ? length : 0), 
+	Math::abs(length)
     );
     XEvent xe;
     XSelectionEvent& xs = xe.xselection;

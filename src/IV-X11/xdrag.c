@@ -135,7 +135,9 @@ static void setDragProperty(
 
 	XChangeProperty(
 	    display, destination, property, XA_STRING, 8,
-	    PropModePrepend, (unsigned char*)value, length
+	    PropModePrepend, 
+	    (unsigned char*)value + (length<0 ? length : 0), 
+	    Math::abs(length)
 	);
     }
 
