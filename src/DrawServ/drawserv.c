@@ -468,3 +468,7 @@ void DrawServ::print_gridtable() {
     it.next();
   }
 }
+
+void DrawServ::print_sidtable() {
+  printf("not implemented yet\n");
+}
