@@ -33,6 +33,7 @@
 #include <OS/table.h>
 declareTable(GraphicIdTable,int,void*)
 declareTable(SessionIdTable,int,void*)
+declareTable(CompIdTable,void*, void*);
      
 
 //: Unidraw specialized for DrawServ
@@ -99,6 +100,9 @@ public:
   SessionIdTable* sessionidtable() { return _sessionidtable; }
   // return pointer to table of DrawLink's as a function of session id's.
   
+  CompIdTable* compidtable() { return _compidtable; }
+  // return pointer to table that map from GraphicComp* to GraphicId*
+  
   void sessionid_request_chk();
   // generate next request to check unique session id
   
@@ -144,6 +148,9 @@ protected:
     SessionIdTable* _sessionidtable;
     // table of all session id's.
     // maps from id to DrawLink*
+    CompIdTable* _compidtable;
+    // table of all GraphicComp's associated with a GraphicId.
+    // maps from GraphicComp* to GraphicId*
 
     int _sessionid;
     // unique session id.

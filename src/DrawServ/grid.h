@@ -58,7 +58,7 @@ public:
   virtual GraphicIdList* sublist() { return nil; }
   // returns pointer to sublist of GraphicId's, if any
 
-  void grcomp(GraphicComp* comp) { _comp = comp; }
+  void grcomp(GraphicComp* comp);
   // set pointer to associated GraphicComp
 
   GraphicComp* grcomp() { return _comp; }

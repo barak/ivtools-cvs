@@ -90,3 +90,14 @@ GraphicIds::~GraphicIds ()
   Unref(_sublist);
   _sublist = nil;
 }
+
+void GraphicId::grcomp(GraphicComp* comp) {
+  if (comp==_comp) return;
+  CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
+  if (_comp) {
+    void* ptr = nil;
+    table->find_and_remove(ptr, comp);
+  } 
+  _comp = comp;
+  table->insert((void*)comp, (void*)this);
+}

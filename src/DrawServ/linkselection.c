@@ -68,34 +68,40 @@ void LinkSelection::Update(Viewer* viewer) {
 
 void LinkSelection::Clear(Viewer* viewer) {
   fprintf(stderr, "LinkSelection::Clear\n");
+  CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
+  Iterator it;
+  First(it);
+  while(!Done(it)) {
+    OverlayView* view = GetView(it);
+    OverlayComp* comp = view ? view->GetOverlayComp() : nil;
+    void* ptr = nil;
+    table->find(ptr, (void*)comp);
+    if (ptr) {
+      GraphicId* grid = (GraphicId*)grid;
+      if (grid->selected()==LocallySelected)
+	grid->selected(PreviouslySelected);
+      else if (grid->selected()==WaitingToBeSelected)
+	grid->selected(NotSelected);
+    }
+    Next(it);
+  }
   OverlaySelection::Clear(viewer);
+  
 }
 
 void LinkSelection::Reserve() {
   fprintf(stderr, "LinkSelection::Reserve\n");
   static int id_sym = symbol_add("id");
-
-  /* remove everything from the selected and waiting lists */
-  Iterator it;
-  _locally_selected->First(it);
-  while (!_locally_selected->Done(it)) {
-    GraphicId* grid = _locally_selected->GetGraphicId(it);
-    _locally_selected->Remove(it);
-    grid->selected(NotSelected);
-  }
-  _waiting_to_be_selected->First(it);
-  while (!_waiting_to_be_selected->Done(it)) {
-    GraphicId* grid = _waiting_to_be_selected->GetGraphicId(it);
-    _waiting_to_be_selected->Remove(it);
-    grid->selected(NotSelected);
-  }
+  CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
 
   /* remove anything from selection that has a remote selector */
+  Iterator it;
   First(it);
   while (!Done(it)) {
     int removed = false;
     OverlayView* view = GetView(it);
     OverlayComp* comp = view ? view->GetOverlayComp() : nil;
+#if 0
     AttributeList* al = comp ? comp->attrlist() : nil;
     AttributeValue* av = al ? al->find(id_sym) : nil;
     if (av) {
@@ -111,18 +117,32 @@ void LinkSelection::Reserve() {
 	  Remove(it);
 	  removed = true;
 
-	  /* add to list of graphics waiting to be selected */
 	  grid->selected(WaitingToBeSelected);
-	  _waiting_to_be_selected->Append(grid);
 	} else {
-
-	  /* add to list of graphics currently selected */
 	  grid->selected(LocallySelected);
-	  grid->selector(((DrawServ*)unidraw)->sessionid());
-	  _waiting_to_be_selected->Append(grid);
 	}
       }
     }
+#else
+    void* ptr = nil;
+    table->find(ptr, (void*)comp);
+    if (ptr) {
+      GraphicId* grid = (GraphicId*)ptr;
+      if (grid->selector() && ((DrawServ*)unidraw)->sessionid()!=grid->selector()) {
+	
+	/* make a request to select this in the future */
+	((DrawServ*)unidraw)->ReserveSelection(grid);
+	
+	Remove(it);
+	removed = true;
+	
+	grid->selected(WaitingToBeSelected);
+      } else {
+	grid->selected(LocallySelected);
+      }
+      
+    }
+#endif
     if (!removed) 
       Next(it);
   }

@@ -58,6 +58,7 @@
 
 implementTable(GraphicIdTable,int,void*)
 implementTable(SessionIdTable,int,void*)
+implementTable(CompIdTable,void*,void*)
 
 unsigned int DrawServ::GraphicIdMask = 0x000fffff;
 unsigned int DrawServ::SessionIdMask = 0xfff00000;
@@ -80,6 +81,7 @@ void DrawServ::Init() {
 
   _gridtable = new GraphicIdTable(1024);
   _sessionidtable = new SessionIdTable(256);
+  _compidtable = new CompIdTable(1024);
 
   _sessionid = candidate_sessionid();
   _trialid = _sessionid;
@@ -526,7 +528,7 @@ void DrawServ::print_gridtable() {
   printf("----------  ----------  ----------  ----------  --------\n");
   while(it.more()) {
     GraphicId* grid = (GraphicId*)it.cur_value();
-    printf("0x%08x  0x%08x  0x%08x  0x%08x  0x%08x  %s\n", 
+    printf("0x%08x  0x%08x  0x%08x  0x%08x  %s\n", 
 	   (unsigned int)it.cur_key(), grid, grid->grcomp(),
 	   grid->selector(), LinkSelection::selected_string(grid->selected()));
     it.next();
