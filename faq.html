@@ -205,15 +205,12 @@ not open in idraw.
 <li><a href=#make-no-shell>Our version of make doesn't understand the $(shell pwd) construct.  What do we do?</a></li>
 <li><a href=#gcc281-prob>With gcc-2.8.* I get internal compiler errors with optimization enabled (-O) on InterViews/alloctbl.c, IV-X11/xfont.c, and IV-X11/xwindow.c.</a></li>
 <li><a href=#imakecppprob>"make World XCONFIGDIR=..." doesn't work because cpp can't find a file included from site.def.$CPU.</a></li>
-<li><a href=#gcc280-prob>I get everything built with gcc-2.8.0, but drawtool segfaults (at line 244 of strchooser.c).</a></li>
 <li><a href=#libstdc++2811needed>I just installed gcc-2.8.1, and when I rebuild ivtools I see this: <br><code>/usr/include/g++/streambuf.h:392: warning: invalid type `void *' for default argument to `ios *'</code>
 </a></li>
 <li><a href=#optimizeneeded>I just installed gcc-2.8.1, and when I rebuild ivtools I see this: <br><code>/tmp/cca09221.s: Assembler messages:<br>
 /tmp/cca09221.s:193: Error: invalid character (0x8) before first operand
 </code>
 </a></li>
-<li><a href=#installnonrelativeprob>I supplied a --prefix argument to configure, but "make install" does not use this prefix consistently?</a></li>
-<li><a href=#installUnidrawprob>"make install" does not install the Unidraw include files.</a></li>
 
 </menu>
 
@@ -401,10 +398,6 @@ afflicted files (the top-level Makefile, config/config-hpux-gcc.mk,
 etc..) to <a href=mailto:ivtools-info@vectaport.com>ivtools-info@vectaport.com</a>, as well as complete logs of the
 build process, and we'll do our best to help you resolve this problem.
 
-<p><a name=gcc280-prob><b>I get everything built with gcc-2.8.0, but drawtool segfaults (at line 244 of strchooser.c).</b><p>
-
-Upgrade to gcc-2.8.1.  Be sure to do a "make clean".<p>
-
 <p><a name=libstdc++2811needed><b>I just installed gcc-2.8.1, and when I rebuild ivtools I see this: <br><code>/usr/include/g++/streambuf.h:392: warning: invalid type `void *' for default argument to `ios *'</code>
 </b><p>
 
@@ -440,15 +433,6 @@ Add these lines to ivtools-1.0/config/local.def:
 </code>
 <p>
 And <code>"make Makefiles;make clean;make"</code>.  This will be included by default in ivtools-0.7.4.
-
-<p><a name=installnonrelativeprob><b>I supplied a --prefix argument to configure, but "make install" does not use this prefix consistently?</b><p>
-
-This was fixed in ivtools-0.7.4.
-
-<p><a name=installUnidrawprob><b>"make install" doesn't install the Unidraw include files.</b><p>
-
-This was fixed in ivtools-0.7.4.
-
 
 <p>
 <hr>
@@ -541,7 +525,7 @@ wouldn't have five or six textbooks and numerous technical papers
 published to date on the subject.  Here's the book that started it
 all, by the notorious <a
 href=http://www.c2.com/cgi-bin/wiki?GangOfFour>Gang of Four</a>, <a
-href=http://st-www.cs.uiuc.edu/users/patterns/DPBook/DPBook.html>Design
+href=http://www.c2.com/cgi-bin/wiki?DesignPatternsBook>Design
 Patterns, Elements of Reusable Object-Oriented Software</a>.<p>
 
 However, reading documentation alone will never make you a capable
