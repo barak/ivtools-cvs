@@ -42,7 +42,7 @@ public:
     CLASS_SYMID("DotFunc");
 };
 
-//: dname returns name field of a dotted pair
+//: name returns name field of a dotted pair
 class DotNameFunc : public ComFunc {
 public:
     DotNameFunc(ComTerp*);
@@ -52,7 +52,7 @@ public:
       return "%s(attribute) returns name field of a dotted pair"; }
 };
 
-//: dval returns value field of a dotted pair
+//: value returns value field of a dotted pair
 class DotValFunc : public ComFunc {
 public:
     DotValFunc(ComTerp*);

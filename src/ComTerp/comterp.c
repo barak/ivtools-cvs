@@ -771,7 +771,9 @@ void ComTerp::add_defaults() {
     add_command("iterate", new IterateFunc(this));
 
     add_command("dot", new DotFunc(this));
+    add_command("name", new DotNameFunc(this));
 
+    add_command("list", new ListFunc(this));
     add_command("at", new ListAtFunc(this));
     add_command("size", new ListSizeFunc(this));
 

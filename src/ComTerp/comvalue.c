@@ -341,13 +341,6 @@ ComValue& ComValue::zeroval() {
   return _zeroval;
 }
 
-void* ComValue::geta(int id) {
-    if (is_object(id)) 
-        return obj_val();
-    else
-        return nil;
-}
-
 boolean ComValue::is_comfunc(int func_classid) {
   return is_type(CommandType) && 
     func_classid==((ComFunc*)obj_val())->classid(); 

@@ -116,10 +116,6 @@ public:
     boolean is_comfunc(int func_classid);
     // returns true if CommandType with ComFunc
 
-
-    void* geta(int id); 
-    // get the class symbol id associated with an ObjectType.
-
     friend ostream& operator << (ostream& s, const ComValue&);
     // print contents to ostream, brief or not depending on
     // associated ComTerp brief flag.

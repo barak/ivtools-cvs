@@ -162,6 +162,8 @@ Run contents of file then exit.
  srand(seedval) -- seed random number generator
 
 .SH LIST COMMANDS:
+ 
+ lst=list() -- create an empty list
 
  val=at(list n) -- return nth item in a list
 
@@ -182,6 +184,7 @@ Run contents of file then exit.
  help(cmdname [cmdname ...]) -- help for commands
 
  [str]=print(fmtstr val :string|:str :err) -- print value with format string
+ [str]=print(val :string|:str :err) -- print value
 
  symid(symbol [symbol...]) -- return integer id(s) associated with symbol(s)
 

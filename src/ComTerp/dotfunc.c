@@ -47,7 +47,7 @@ void DotFunc::execute() {
       return;
     }
     if (!after_part.is_symbol()) {
-      cerr << "expression after \".\" needs to be a symbol\n";
+      cerr << "expression after \".\" needs to be a symbol or evaluate to a syymbol\n";
       return;
     }
 
@@ -61,7 +61,8 @@ void DotFunc::execute() {
 	al = (AttributeList*) ((ComValue*) vptr)->obj_val();
       } else {
 	al = new AttributeList();
-	ComValue* comval = new ComValue(AttributeList::class_symid(), al);
+	Resource::ref(al);
+	ComValue* comval = new ComValue(AttributeList::class_symid(), (void*)al);
 	comterp()->localtable()->insert(before_symid, comval);
       }
     } else
@@ -83,7 +84,7 @@ DotNameFunc::DotNameFunc(ComTerp* comterp) : ComFunc(comterp) {
 }
 
 void DotNameFunc::execute() {
-    ComValue dotted_pair(stack_arg(0));
+    ComValue dotted_pair(stack_arg(0, true));
     reset_stack();
     if (dotted_pair.class_symid() != Attribute::class_symid()) return;
     Attribute *attr = (Attribute*)dotted_pair.obj_val();

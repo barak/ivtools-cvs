@@ -866,3 +866,10 @@ boolean AttributeValue::is_attribute() {
   return is_object() && class_symid() == Attribute::class_symid();
 }
 
+void* AttributeValue::geta(int id) {
+    if (is_object(id)) 
+        return obj_val();
+    else
+        return nil;
+}
+
