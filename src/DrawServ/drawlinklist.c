@@ -29,6 +29,7 @@
 #include <DrawServ/drawlinklist.h>
 #include <DrawServ/drawserv.h>
 #include <DrawServ/grid.h>
+#include <DrawServ/sid.h>
 
 #include <Unidraw/iterator.h>
 #include <Unidraw/ulist.h>
@@ -61,7 +62,8 @@ void DrawLinkList::add_drawlink(DrawLink* new_link) {
 DrawLink* DrawLinkList::find_drawlink(GraphicId* grid) {
   void* ptr = nil;
   ((DrawServ*)unidraw)->sessionidtable()->find(ptr, grid->selector());
-  return (DrawLink*)ptr;
+  SessionId* sessionid = (SessionId*)ptr;
+  return (DrawLink*) (sessionid ? sessionid->drawlink() : nil);
 }
 
 DrawLink* DrawLinkList::Link (UList* r) {

@@ -896,6 +896,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
 #endif
   ostream out(&fbuf);
   boolean eolflag = false;
+  boolean errorflag = false;
 
   while (!eof() && !quitflag() && !eolflag) {
     
@@ -922,6 +923,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
     } else {
       err_str( _errbuf, BUFSIZ, "comterp" );
       if (strlen(_errbuf)>0) {
+	errorflag = true;
 	out << _errbuf << "\n"; out.flush();
 	strcpy(errbuf_save, _errbuf);
 	_errbuf[0] = '\0';
@@ -935,6 +937,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
     if (one_expr) break;
   }
   if (status==1 && _pfnum==0) status=2;
+  if (status==1 && !errorflag) status=3;
   if (nested && status!=2) _stack_top--;
   return status;
 }

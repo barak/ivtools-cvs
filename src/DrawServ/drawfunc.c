@@ -62,11 +62,11 @@ void DrawLinkFunc::execute() {
   static int close_sym = symbol_add("close");
   ComValue closev(stack_key(close_sym));
   static int pid_sym = symbol_add("pid");
-  ComValue pidv(stack_key(close_sym));
+  ComValue pidv(stack_key(pid_sym));
   static int sid_sym = symbol_add("sid");
-  ComValue sidv(stack_key(close_sym));
+  ComValue sidv(stack_key(sid_sym));
   static int user_sym = symbol_add("user");
-  ComValue userv(stack_key(close_sym));
+  ComValue userv(stack_key(user_sym));
   reset_stack();
 
 #if __GNUC__==3&&__GNUC_MINOR__<1
@@ -84,7 +84,11 @@ void DrawLinkFunc::execute() {
     if (statev.int_val()==DrawLink::one_way && 
 	((DrawServ*)unidraw)->cycletest
 	(sidv.uint_val(), hostv.string_ptr(), userv.string_ptr(), pidv.int_val())) {
+#if 1
       comterp()->quit();
+#else
+      comterp()->handler()->destroy();
+#endif
       return;
     }
     

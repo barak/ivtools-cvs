@@ -81,6 +81,7 @@ int DrawLink::open() {
     ACE_ERROR ((LM_ERROR, "%p\n", "open"));
     return -1;
   } else {
+    _socket->enable(ACE_NONBLOCK);
     fileptr_filebuf obuf(_socket->get_handle(), ios_base::out, false, static_cast<size_t>(BUFSIZ));
     ostream out(&obuf);
     out << "drawlink(\"";
