@@ -82,7 +82,7 @@ VIEWER COMMANDS
 
 update() -- update viewer
 
-import(pathstr) -- import graphic file from pathname or URL
+import(pathstr :popen) -- import graphic file from pathname or URL, or from a command if :popen
 
 ncols() -- onscreen horizontal extent in pixels
 nrows() -- onscreen vertical extent in pixels

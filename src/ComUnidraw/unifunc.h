@@ -93,15 +93,15 @@ public:
 };
 
 //: command to import a graphic file
-// import(pathname) -- import graphic file from pathname or URL.
+// import(pathname :popen) -- import graphic file from pathname or URL, or from a command if :popen.
 class ImportFunc : public UnidrawFunc {
 public:
     ImportFunc(ComTerp*,Editor*);
-    OvImportCmd* import(const char* path);
+    OvImportCmd* import(const char* path, boolean popen=false);
     // helper method to import from path
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(pathname) -- import graphic file from pathname or URL"; }
+	return "%s(pathname :popen) -- import graphic file from pathname or URL, or from a command if :popen"; }
 
 };
 

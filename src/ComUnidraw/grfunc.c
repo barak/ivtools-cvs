@@ -1029,54 +1029,5 @@ void TileFileFunc::execute() {
     }
 }
 
-/*****************************************************************************/
-
-ReorderFunc::ReorderFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
-}
-
-void ReorderFunc::execute() {
-    ComValue destval(stack_arg(0));
-    ComValue srcval(stack_arg(1));
-
-    reset_stack();
-#if 0
-    if (!destval.object_compview() && !srcval.object_compview()) return;
-
-    OverlayViewer* viewer = (OverlayViewer*)GetEditor()->GetViewer();
-
-    ComponentView* destview = (ComponentView*)destval.obj_val();
-    OverlayComp* destcomp = destview ? (OverlayComp*)destview->GetSubject() : nil;
-    OverlayView* destview2 = destcomp ? destcomp->FindView(viewer) : nil;
- 
-    ComponentView* srcview = (ComponentView*)srcval.obj_val();
-    OverlayComp* srccomp = srcview ? (OverlayComp*)srcview->GetSubject() : nil;
-    OverlayView* srcview2 = srccomp ? srccomp->FindView(viewer) : nil;
-
-    OverlaysView* topview = ((OverlayEditor*)GetEditor())->GetFrame();
-    if (topview && destview2 && srcview2) {
-
-      GraphicView* saveview = nil;
-      Iterator i;
-      for(topview->First(i); !topview->Done(i); topview->Next(i)) {
-	if (topview->GetView(i)==srcview2) {
-	  saveview = topview->Remove(i);
-	  break;
-	}
-      }
-
-      if (saveview) {
-	for(topview->First(i); !topview->Done(i); topview->Next(i)) {
-	  if (topview->GetView(i)==dstview2) {
-	    topview->InsertBefore(i, saveview);
-	    break;
-	  }
-	}
-      }
-
-    }
-#endif    
-}
-
-
 
 
