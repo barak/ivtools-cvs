@@ -464,7 +464,7 @@ MenuItem * DrawKit::MakeViewersMenu() {
     mbi->menu(kit.pulldown());
 
     MenuItem* menu_item = kit.menu_item(kit.label("Connect"));
-    menu_item->action(new RemoteConnectAction(GetEditor()));
+    menu_item->action(new RemoteConnectPopupAction(GetEditor()));
     mbi->menu()->append_item(menu_item);
 
     return mbi;

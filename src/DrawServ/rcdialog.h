@@ -35,13 +35,24 @@
 class Editor;
 class RemoteConnectDialog;
 
-//: action to establish a connection with a remote DrawServ
-class RemoteConnectAction : public Action {
+//: action to establish a dialog box for connecting with a remote DrawServ
+class RemoteConnectPopupAction : public Action {
 public:
-  RemoteConnectAction(Editor*);
+  RemoteConnectPopupAction(Editor*);
   virtual void execute();
 protected:
   Editor* _editor;
+};
+
+class StrEditDialog;
+
+//: action for connecting with a remote DrawServ
+class RemoteConnectAction : public Action {
+public:
+  RemoteConnectAction(StrEditDialog*);
+  virtual void execute();
+protected:
+  StrEditDialog* _dialog;
 };
 
 #include <InterViews/_leave.h>

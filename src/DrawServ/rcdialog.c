@@ -40,15 +40,31 @@
 
 /*****************************************************************************/
 
-RemoteConnectAction::RemoteConnectAction(Editor* editor) : Action() {
+RemoteConnectPopupAction::RemoteConnectPopupAction(Editor* editor) : Action() {
   _editor = editor;
 }
 
-void RemoteConnectAction::execute() {
-  char* hostname =
-    StrEditDialog::post
+void RemoteConnectPopupAction::execute() {
+  StrEditDialog::accept_custom("Connect");
+  StrEditDialog::cancel_custom("Close");
+  StrEditDialog* dialog =
+    StrEditDialog::map
     (_editor->GetWindow(), 
-     "Enter host name to connect:                  ", "localhost");
-  if (hostname) ((DrawServ*)unidraw)->linkup(hostname, 20002, 0);
+     "Enter host name to connect:                  ", "localhost", nil, nil, true);
+
+  StrEditDialog::action_custom(new RemoteConnectAction(dialog), nil);
+}
+
+/*****************************************************************************/
+
+RemoteConnectAction::RemoteConnectAction(StrEditDialog* dialog) : Action() {
+  _dialog = dialog;
+}
+
+void RemoteConnectAction::execute() {
+
+  if (_dialog && _dialog->text()) 
+    ((DrawServ*)unidraw)->linkup(_dialog->text(), 20002, 0);
+
 }
 
