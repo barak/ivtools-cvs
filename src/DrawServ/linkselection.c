@@ -57,6 +57,7 @@ int LinkSelection::Update(Viewer* viewer) {
   Iterator it;
   First(it);
   while (!Done(it)) {
+    int removed = false;
     OverlayView* view = GetView(it);
     OverlayComp* comp = view ? view->GetOverlayComp() : nil;
     AttributeList* al = comp ? comp->attrlist() : nil;
@@ -66,11 +67,14 @@ int LinkSelection::Update(Viewer* viewer) {
       ((DrawServ*)unidraw)->gridtable()->find(ptr, av->uint_val());
       if (ptr) {
 	GraphicId* grid = (GraphicId*)ptr;
-	if (grid->selector() && ((DrawServ*)unidraw)->sessionid()!=grid->selector())
+	if (grid->selector() && ((DrawServ*)unidraw)->sessionid()!=grid->selector()) {
 	  Remove(it);
+	  removed = true;
+	}
       }
     }
-    Next(it);
+    if (!removed) 
+      Next(it);
   }
   return OverlaySelection::Update(viewer);
 }
