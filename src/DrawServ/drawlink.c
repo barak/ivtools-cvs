@@ -99,7 +99,7 @@ int DrawLink::close() {
   fprintf(stderr, "Closing link to %s (%s) port # %d (lid=%d, rid=%d)\n", 
 	  hostname(), althostname(), portnum(), local_linkid(), remote_linkid());
   if (_socket) {
-    if (_socket.close () == -1)
+    if (_socket->close () == -1)
       ACE_ERROR ((LM_ERROR, "%p\n", "close"));
   }
 }
