@@ -50,15 +50,29 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
 
 }
 
+DrawLink::~DrawLink () 
+{
+#ifdef HAVE_ACE
+    if (_socket->close () == -1)
+        ACE_ERROR ((LM_ERROR, "%p\n", "close"));
+    delete _conn;
+    delete _socket;
+    delete _addr;
+    delete _host;
+    delete _althost;
+#endif
+}
+
 int DrawLink::open() {
 
 #if defined(HAVE_ACE) && (__GNUC__>3 || __GNUC__==3 && __GNUC_MINOR__>0)
   _addr = new ACE_INET_Addr(_port, _host);
   _socket = new ACE_SOCK_Stream;
   _conn = new ACE_SOCK_Connector;
-  if (_conn->connect (*_socket, *_addr) == -1)
+  if (_conn->connect (*_socket, *_addr) == -1) {
     ACE_ERROR ((LM_ERROR, "%p\n", "open"));
-  else {
+    return -1;
+  } else {
     fileptr_filebuf obuf(_socket->get_handle(), ios_base::out, false, static_cast<size_t>(BUFSIZ));
     ostream out(&obuf);
     out << "drawlink(\"";
@@ -71,23 +85,17 @@ int DrawLink::open() {
     out << ")\n";
     out.flush();
     _ok = true;
+    return 0;
   }
 #else
   fprintf(stderr, "drawserv requires ACE and >= gcc-3.1 for full functionality\n");
+  return -1;
 #endif
 }
 
-DrawLink::~DrawLink () 
-{
-#ifdef HAVE_ACE
-    if (_socket->close () == -1)
-        ACE_ERROR ((LM_ERROR, "%p\n", "close"));
-    delete _conn;
-    delete _socket;
-    delete _addr;
-    delete _host;
-    delete _althost;
-#endif
+int DrawLink::close() {
+  fprintf(stderr, "Closing link to %s (%s) port # %d (lid=%d, rid=%d)\n", 
+	  hostname(), althostname(), portnum(), local_linkid(), remote_linkid());
 }
 
 void DrawLink::hostname(const char* host) {

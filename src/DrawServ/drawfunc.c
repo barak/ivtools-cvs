@@ -69,7 +69,8 @@ void DrawLinkFunc::execute() {
     int lidnum = lidv.is_known() ? lidv.int_val() : -1;
     int ridnum = ridv.is_known() ? ridv.int_val() : -1;
 
-    if (((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum, lidnum, ridnum))
+    if (((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum, 
+				     lidnum, ridnum, this->comterp()))
       push_stack(ComValue::minusoneval());
     else
       push_stack(ComValue::zeroval());

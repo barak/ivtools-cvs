@@ -28,7 +28,7 @@
  */
 
 #ifdef HAVE_ACE
-#include <ComUnidraw/comterp-acehandler.h>
+#include <DrawServ/drawserv-handler.h>
 #include <OverlayUnidraw/aceimport.h>
 #include <AceDispatch/ace_dispatcher.h>
 #include <Comterp/comhandler.h>
@@ -237,7 +237,7 @@ int main (int argc, char** argv) {
 
 
     // Acceptor factory.
-    UnidrawComterpAcceptor* peer_acceptor = new UnidrawComterpAcceptor();
+    DrawServAcceptor* peer_acceptor = new DrawServAcceptor();
 
     const char* portstr = catalog->GetAttribute("comdraw");
     int portnum = atoi(portstr);
@@ -284,7 +284,7 @@ int main (int argc, char** argv) {
 
 #ifdef HAVE_ACE
 	/*  Start up one on stdin */
-	UnidrawComterpHandler* stdin_handler = new UnidrawComterpHandler();
+	DrawServHandler* stdin_handler = new DrawServHandler();
 #if 0
 	if (ACE::register_stdin_handler(stdin_handler, ComterpHandler::reactor_singleton(), nil) == -1)
 #else

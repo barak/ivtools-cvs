@@ -293,6 +293,8 @@ ivtools-1.1/src/DrawServ/drawlinklist.c
 ivtools-1.1/src/DrawServ/drawlinklist.h
 ivtools-1.1/src/DrawServ/drawserv.c
 ivtools-1.1/src/DrawServ/drawserv.h
+ivtools-1.1/src/DrawServ/drawserv-handler.c
+ivtools-1.1/src/DrawServ/drawserv-handler.h
 ivtools-1.1/src/DrawServ/drawviews.c
 ivtools-1.1/src/DrawServ/drawviews.h
 ivtools-1.1/src/FrameUnidraw/Imakefile

@@ -46,8 +46,6 @@ public:
 
     enum { new_link=0, one_way, two_way };
 
-    
-
     const char* hostname() { return _host; }
     // return name of remote host
 
@@ -65,6 +63,9 @@ public:
 
     int open();
     // open link to remote DrawServ
+
+    int close();
+    // close link to remote DrawServ
 
     int up() { return 0; }
     // return 1 if link up, 0 if down

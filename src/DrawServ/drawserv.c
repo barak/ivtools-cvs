@@ -28,9 +28,12 @@
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawlinklist.h>
 #include <DrawServ/drawserv.h>
+#include <DrawServ/drawserv-handler.h>
 
 #include <Unidraw/iterator.h>
 #include <Unidraw/ulist.h>
+
+#include <ComTerp/comterp.h>
 /*****************************************************************************/
 
 DrawServ::DrawServ (Catalog* c, int& argc, char** argv, 
@@ -53,10 +56,13 @@ DrawServ::~DrawServ ()
 }
 
 int DrawServ::linkup(const char* hostname, int portnum, 
-		     int state, int local_id, int remote_id) {
+		     int state, int local_id, int remote_id,
+		     ComTerp* comterp) {
   if (state == DrawLink::new_link || state == DrawLink::one_way) {
     DrawLink* link = new DrawLink(hostname, portnum, state);
     link->remote_linkid(remote_id);
+    if (state==DrawLink::one_way && comterp && comterp->handler()) 
+      ((DrawServHandler*)comterp->handler())->drawlink(link);
     link->open();
     if (link && link->ok()) {
       _list->add_drawlink(link);
@@ -66,15 +72,20 @@ int DrawServ::linkup(const char* hostname, int portnum,
       return -1;
     }
   } else {
+
     // search for existing link with matching local_id
     Iterator i;
     _list->First(i);
     while(!_list->Done(i) && _list->GetDrawLink(i)->local_linkid()!=local_id)
       _list->Next(i);
+
+    /* if found, finalize linkup */
     if (!_list->Done(i)) {
       DrawLink* curlink = _list->GetDrawLink(i);
       curlink->remote_linkid(remote_id);
       curlink->althostname(hostname);
+      if (comterp && comterp->handler()) 
+	((DrawServHandler*)comterp->handler())->drawlink(curlink);
       fprintf(stderr, "link up with %s(%s) via port %d\n", 
 	      curlink->hostname(), curlink->althostname(), portnum);
       fprintf(stderr, "local id %d, remote id %d\n", curlink->local_linkid(), 
@@ -82,6 +93,12 @@ int DrawServ::linkup(const char* hostname, int portnum,
     } else
       fprintf(stderr, "unable to complete two-way link\n");
   }
+}
+
+int DrawServ::linkdown(DrawLink* link) {
+  _list->Remove(link);
+  link->close();
+  delete link;
 }
 
   
