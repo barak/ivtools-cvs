@@ -369,6 +369,7 @@ AttributeValue* OverlayComp::FindValue
 /*****************************************************************************/
 
 ParamList* OverlaysComp::_overlay_comps_params = nil;
+int OverlaysComp::_symid = -1;
 
 OverlaysComp::OverlaysComp (OverlayComp* parent) : OverlayComp(new Picture, parent) { 
     _comps = new UList;
@@ -1154,6 +1155,7 @@ AttributeValue* OverlaysComp::FindValue
 /*****************************************************************************/
 
 ParamList* OverlayIdrawComp::_overlay_idraw_params = nil;
+int OverlayIdrawComp::_symid = -1;
 
 OverlayIdrawComp::OverlayIdrawComp (const char* pathname, OverlayComp* parent)
 : OverlaysComp(parent) {

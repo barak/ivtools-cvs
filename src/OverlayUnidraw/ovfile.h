@@ -67,6 +67,8 @@ protected:
     void GrowParamList(ParamList*);
     static ParamList* _overlay_file_params;
     char * _pathname;
+
+    CLASS_SYMID("OverlayFileComp");
 };
 
 //: graphical view of OverlayFileComp.

@@ -91,7 +91,7 @@ void DotNameFunc::execute() {
     reset_stack();
     if (dotted_pair.class_symid() != Attribute::class_symid()) return;
     Attribute *attr = (Attribute*)dotted_pair.obj_val();
-    ComValue retval(attr->SymbolId(), ComValue::SymbolType);
+    ComValue retval(attr->SymbolId(), ComValue::StringType);
     push_stack(retval);
 }
 

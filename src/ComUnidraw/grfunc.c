@@ -679,19 +679,19 @@ void SelectFunc::execute() {
       for (gv->First(i); !gv->Done(i); gv->Next(i)) {
 	GraphicView* subgv = gv->GetView(i);
 	newSel->Append(subgv);
-	GraphicComp* comp = subgv->GetGraphicComp();
-	ComValue* compval = new ComValue(symbol_add("Component"), new ComponentView(comp));
+	OverlayComp* comp = (OverlayComp*)subgv->GetGraphicComp();
+	ComValue* compval = new ComValue(comp->classid(), new ComponentView(comp));
 	compval->object_compview(true);
 	avl->Append(compval);
       }
 
-    } if (nargs()==0) {
+    } else if (nargs()==0) {
       Iterator i;
       int count=0;
       for (sel->First(i); !sel->Done(i); sel->Next(i)) {
 	GraphicView* grview = sel->GetView(i);
-	Component* comp = grview ? grview->GetSubject() : nil;
-	ComValue* compval = comp ? new ComValue(symbol_add("Component"), new ComponentView(comp)) : nil;
+	OverlayComp* comp = grview ? (OverlayComp*)grview->GetSubject() : nil;
+	ComValue* compval = comp ? new ComValue(comp->classid(), new ComponentView(comp)) : nil;
 
 	if (compval) {
 	  compval->object_compview(true);
@@ -705,12 +705,12 @@ void SelectFunc::execute() {
 
       for (int i=0; i<nargsfixed(); i++) {
         ComValue& obj = stack_arg(i);
-	if (obj.obj_type_val() == _compview_id) {
+	if (obj.object_compview()) {
 	  ComponentView* comview = (ComponentView*)obj.obj_val();
 	  OverlayComp* comp = (OverlayComp*)comview->GetSubject();
 	  if (comp) {
 	    newSel->Append(comp->FindView(viewer));
-	    ComValue* compval = new ComValue(symbol_add("Component"), new ComponentView(comp));
+	    ComValue* compval = new ComValue(comp->classid(), new ComponentView(comp));
 	    compval->object_compview(true);
 	    avl->Append(compval);
 	  }

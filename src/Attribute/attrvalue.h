@@ -27,7 +27,7 @@
 
 #include <stdlib.h>
 #include <OS/enter-scope.h>
-#include <Attribute/_comutil.h>
+#include <Attribute/classid.h>
 
 extern "C" {
     int symbol_add(char*);

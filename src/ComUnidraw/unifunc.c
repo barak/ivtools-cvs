@@ -48,12 +48,8 @@
 
 /*****************************************************************************/
 
-int UnidrawFunc::_compview_id = -1;
-
 UnidrawFunc::UnidrawFunc(ComTerp* comterp, Editor* ed) : ComFunc(comterp) {
     _ed = ed;
-    if (_compview_id<0)
-        _compview_id = symbol_add("ComponentView");
 }
 
 void UnidrawFunc::execute_log(Command* cmd) {
@@ -207,7 +203,7 @@ void ImportFunc::execute() {
     if (!pathnamev.is_array()) {
       if (nargs()==1) {
 	if (cmd = import(pathnamev.string_ptr())) {
-	  ComValue compval(symbol_add("Component"),
+	  ComValue compval(((OverlayComp*)cmd->component())->classid(),
 			   new ComponentView(cmd->component()));
 	  compval.object_compview(true);
 	  push_stack(compval);
@@ -216,7 +212,7 @@ void ImportFunc::execute() {
       } else {
 	for (int i=0; i<nargs(); i++) 
 	  if (cmd = import(stack_arg(i).string_ptr())) {
-	    ComValue compval(symbol_add("Component"),
+	    ComValue compval(((OverlayComp*)cmd->component())->classid(),
 			     new ComponentView(cmd->component()));
 	    compval.object_compview(true);
 	    push_stack(compval);
@@ -231,7 +227,7 @@ void ImportFunc::execute() {
       inlist->First(it);
       while(!inlist->Done(it)) {
 	cmd = import(inlist->GetAttrVal(it)->string_ptr());
-	ComValue* val = new ComValue(symbol_add("Component"), 
+	ComValue* val = new ComValue(((OverlayComp*)cmd->component())->classid(),
 				     new ComponentView(cmd->component()));
 	val->object_compview(true);
 	outlist->Append(val);

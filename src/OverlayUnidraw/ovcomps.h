@@ -31,7 +31,7 @@
 
 #include <UniIdraw/idcomp.h>
 #include <InterViews/observe.h>
-#include <Attribute/_comutil.h>
+#include <Attribute/classid.h>
 
 class AttributeList;
 class AttributeValue;
@@ -298,6 +298,8 @@ protected:
     UList* _comps;
 
 friend OverlaysScript;
+
+    CLASS_SYMID("OverlayComp"); 
 };
 
 #include <OverlayUnidraw/indexmixins.h>
@@ -362,6 +364,8 @@ protected:
     char* _basedir;
 
 friend OverlayCatalog;
+
+    CLASS_SYMID("OverlayIdrawComp"); 
 };
 
 inline boolean OverlayComp::valid() { return _valid; }

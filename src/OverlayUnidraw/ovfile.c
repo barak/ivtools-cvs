@@ -41,6 +41,7 @@
 /*****************************************************************************/
 
 ParamList* OverlayFileComp::_overlay_file_params = nil;
+int OverlayFileComp::_symid = -1;
 
 OverlayFileComp::OverlayFileComp(OverlayComp* parent) : OverlaysComp(parent) {
     _pathname = nil;
