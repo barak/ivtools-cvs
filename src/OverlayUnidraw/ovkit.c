@@ -64,6 +64,7 @@
 #include <OverlayUnidraw/ovtext.h>
 #include <OverlayUnidraw/ovunidraw.h>
 #include <OverlayUnidraw/ovviewer.h>
+#include <OverlayUnidraw/rastercmds.h>
 #include <OverlayUnidraw/setattrbyexpr.h>
 #include <OverlayUnidraw/slctbyattr.h>
 
@@ -1012,17 +1013,20 @@ MenuItem* OverlayKit::MakeEditMenu() {
 	     "Precise Rotate   ");
     mbi->menu()->append_item(kit.menu_item_separator());
 
-    MenuItem* graymenu = kit.menu_item(kit.label("Graylevel Processing   "));
-    graymenu->menu(kit.pullright());
-    mbi->menu()->append_item(graymenu);
+    MenuItem* imagemenu = kit.menu_item(kit.label("Image Processing   "));
+    imagemenu->menu(kit.pullright());
+    mbi->menu()->append_item(imagemenu);
     
-    MakeMenu(graymenu, new ScaleGrayCmd(new ControlInfo("Scale GrayImage",
+    MakeMenu(imagemenu, new AlphaTransparentRasterCmd(new ControlInfo("Alpha Transparency",
+					     "", "")),
+	     "Alpha Transparency ");
+    MakeMenu(imagemenu, new ScaleGrayCmd(new ControlInfo("Scale GrayImage",
 					     "", "")),
 	     "Scale Gray Image   ");
-    MakeMenu(graymenu, new LogScaleCmd(new ControlInfo("LogScale GrayImage",
+    MakeMenu(imagemenu, new LogScaleCmd(new ControlInfo("LogScale GrayImage",
 					     "", "")),
 	     "Logscale Gray Image   ");
-    MakeMenu(graymenu, new PseudocolorCmd(new ControlInfo("PseudoColor GrayImage",
+    MakeMenu(imagemenu, new PseudocolorCmd(new ControlInfo("PseudoColor GrayImage",
 					     "", "")),
 	     "Pseudocolor Gray Image   ");
 #ifdef CLIPPOLY

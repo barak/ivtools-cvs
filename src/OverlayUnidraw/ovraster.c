@@ -1389,6 +1389,7 @@ void OverlayRaster::graypeek(unsigned long x, unsigned long y, AttributeValue& v
   float rval, gval, bval, aval;
   peek(x, y, rval, gval, bval, aval);
   val.double_ref() = (double) (gval*(float)0xff); 
+  val.type(AttributeValue::DoubleType);
 }
 
 void OverlayRaster::graypoke(unsigned long x, unsigned long y, unsigned int i)

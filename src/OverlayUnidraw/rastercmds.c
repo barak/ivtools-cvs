@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2002 Scott E. Johnston
  * Copyright (c) 1997 Vectaport Inc. and R.B. Kissh & Associates
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -24,11 +25,16 @@
 #include <OverlayUnidraw/ovclasses.h>
 #include <OverlayUnidraw/oved.h>
 #include <OverlayUnidraw/ovraster.h>
+#include <OverlayUnidraw/ovselection.h>
 #include <OverlayUnidraw/ovviewer.h>
 #include <OverlayUnidraw/rastercmds.h>
 
 #include <Unidraw/unidraw.h>
 #include <Unidraw/iterator.h>
+
+#include <IVGlyph/stredit.h>
+
+#include <InterViews/window.h>
 
 // -----------------------------------------------------------------------
 
@@ -154,6 +160,56 @@ void UnhighlightRasterCmd::Execute() {
 	OverlayRaster* raster = rastview->GetOverlayRaster();
 	if (raster) {
 	  raster->unhighlight();
+	}
+      }
+    }
+  }
+}
+
+/*-----------------------------------------------------------------*/
+
+AlphaTransparentRasterCmd::AlphaTransparentRasterCmd(ControlInfo* ci) : Command(ci) {
+}
+
+Command* AlphaTransparentRasterCmd::Copy() {
+    Command* copy = new AlphaTransparentRasterCmd(GetControlInfo());
+    InitCopy(copy);
+    ((AlphaTransparentRasterCmd*)copy)->_alpha = _alpha;
+    return copy;
+}
+
+ClassId AlphaTransparentRasterCmd::GetClassId () { return ALPHATRANSPARENT_CMD; }
+
+boolean AlphaTransparentRasterCmd::IsA (ClassId id) {
+    return ALPHATRANSPARENT_CMD == id || Command::IsA(id);
+}
+
+boolean AlphaTransparentRasterCmd::Reversible() {
+    return true;
+}
+
+void AlphaTransparentRasterCmd::Execute() {
+  // find the rasters in the current comp and unhighlight
+
+  char* newalpha = StrEditDialog::post
+    (GetEditor()->GetWindow(), 
+     "Enter alpha value", "0.5");
+  if (newalpha)
+    _alpha = atof(newalpha);
+  else
+    _alpha = 1.0;
+
+  OverlayEditor* ed = (OverlayEditor*)GetEditor();
+  OverlaySelection* sel = (OverlaySelection*) ed->GetSelection();
+  Iterator i;
+  for (sel->First(i); !sel->Done(i); sel->Next(i)) {
+    GraphicView* view = sel->GetView(i);
+    if (view->IsA(OVRASTER_VIEW)) {
+      RasterOvView* rastview = (RasterOvView*)view;
+      if (rastview) {
+	OverlayRasterRect* rr = rastview->GetOverlayRasterRect();
+	if (rr) {
+	  rr->alphaval(_alpha);
 	}
       }
     }
