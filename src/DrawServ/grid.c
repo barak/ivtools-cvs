@@ -42,7 +42,7 @@ GraphicId::GraphicId (unsigned int sessionid)
 {
   _comp = nil;
   if (sessionid != 0) {
-    _id = DrawServ::candidate_grid();
+    _id = DrawServ::unique_grid();
     _sid = sessionid&DrawServ::SessionIdMask;
     GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
     table->insert(_id|_sid, this);

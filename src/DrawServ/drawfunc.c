@@ -26,7 +26,9 @@
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawlinkcomp.h>
 #include <DrawServ/drawserv.h>
+#include <DrawServ/drawserv-handler.h>
 
+#include <ComTerp/comterp.h>
 #include <Attribute/attrlist.h>
 #include <Attribute/attrvalue.h>
 
@@ -100,6 +102,13 @@ void DrawLinkFunc::execute() {
     
   }
 
+  /* set state to complete linkup */
+  else if (statev.int_val()==DrawLink::two_way) {
+    DrawServHandler* handler = comterp() ? (DrawServHandler*)comterp()->handler() : nil;
+    DrawLink* link = handler ? (DrawLink*)handler->drawlink() : nil;
+    link->state(DrawLink::two_way);
+  }
+
   /* dump DrawLink table to stderr */
   else 
     ((DrawServ*)unidraw)->linkdump(stderr);
@@ -133,19 +142,11 @@ void SessionIdFunc::execute() {
   push_stack(ComValue::nullval());
 
 #else
-  static int chk_sym = symbol_add("chk");
-  ComValue chkv(stack_key(chk_sym));
+  static int all_sym = symbol_add("all");
+  ComValue allv(stack_key(all_sym));
 
-  static int trial_sym = symbol_add("trial");
-  ComValue trialv(stack_key(trial_sym));
-
-  static int rid_sym = symbol_add("rid");
-  ComValue ridv(stack_key(rid_sym));
-
-  static int ok_sym = symbol_add("ok");
-  ComValue okv(stack_key(ok_sym));
-
-  ComValue idv(stack_arg(0));
+  ComValue sidv(stack_arg(0));
+  ComValue osidv(stack_arg(1));
 
   reset_stack();
 
@@ -154,48 +155,22 @@ void SessionIdFunc::execute() {
   push_stack(ComValue::nullval());
   return;
 #endif
-
-  unsigned int returnid = 0;
-
-  /* request a new session id */
-  if (chkv.is_true()) {    
-    ((DrawServ*)unidraw)->sessionid_request_chk();
-    returnid = ((DrawServ*)unidraw)->sessionid(true);
+  DrawServHandler* handler = comterp() ? (DrawServHandler*)comterp()->handler() : nil;
+  DrawLink* link = handler ? (DrawLink*)handler->drawlink() : nil;
+  
+  if (allv.is_true()) {
+    ((DrawServ*)unidraw)->sessionid_register(link);
+    return;
   }
 
-  /* return the trial id */
-  else if (trialv.is_true()) {    
-    returnid = ((DrawServ*)unidraw)->sessionid(true);
-  }
-
-  else if (idv.is_known() && ridv.is_known()) {
-    returnid = idv.uint_val();
-
-    /* handle new session id request */
-    if (!okv.is_known()) 
-      ((DrawServ*)unidraw)->sessionid_handle_chk(returnid, ridv.int_val());
+  if (sidv.is_known() && osidv.is_known()) {
+    ((DrawServ*)unidraw)->sessionid_register_handle
+      (link, sidv.uint_val(), osidv.uint_val());
     
-    /* handle callback */ 
-    else
-    ((DrawServ*)unidraw)->sessionid_callback_chk(returnid, ridv.int_val(), okv.is_true());
+  } else {
+    ((DrawServ*)unidraw)->print_sidtable();
   }
-
-  else if (idv.is_known() && okv.is_known() && ridv.is_known()) {
-    returnid = idv.uint_val();
-  }
-
-  /* return current session id */
-  else if (nargs()==0 && nkeys()==0) 
-    returnid = ((DrawServ*)unidraw)->sessionid();
-
-  ComValue retval(returnid, ComValue::UIntType);
-
-  retval.state(AttributeValue::HexState);
-  push_stack(retval);
-  return;
-
 #endif
-
 }
 
 
@@ -205,22 +180,15 @@ GraphicIdFunc::GraphicIdFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp
 }
 
 void GraphicIdFunc::execute() {
-  static int chg_sym = symbol_add("chg");
-  ComValue chgv(stack_key(chg_sym));
-
   ComValue idv(stack_arg(0));
   ComValue selectorv(stack_arg(1));
+  ComValue selectedv(stack_arg(2));
 
   reset_stack();
 
-  if (idv.is_known() && selectorv.is_known()) {
-    if (chgv.is_false()) {
-      ((DrawServ*)unidraw)->reserve_handle
-	(idv.uint_val(), selectorv.uint_val());
-    } else {
-      ((DrawServ*)unidraw)->reserve_change
-	(idv.uint_val(), selectorv.uint_val(), chgv.is_true());
-    }
+  if (idv.is_known() && selectorv.is_known() && selectedv.is_known()) {
+    ((DrawServ*)unidraw)->grid_message_handle
+      (idv.uint_val(), selectorv.uint_val(), selectedv.int_val());
   } else if (idv.is_unknown()) {
     ((DrawServ*)unidraw)->print_gridtable();
   }

@@ -28,7 +28,7 @@
 #include <ComUnidraw/unifunc.h>
 
 //: command to connect to another drawserv
-// drawlink(hoststr :port portnum) -- connect to remote drawserv
+// drawlink(hoststr :port portnum :state num :lid nu :rid num :close) -- connect to remote drawserv
 class DrawLinkFunc : public UnidrawFunc {
 public:
     DrawLinkFunc(ComTerp*,DrawEditor*);
@@ -38,23 +38,23 @@ public:
 };
 
 //: command to reserve unique session id
-// sessionid(:chk :trial :rid num :ok bool) -- command to manage session id's
+// sessionid([sid osid] :all) -- command to manage session id's
 class SessionIdFunc : public UnidrawFunc {
 public:
     SessionIdFunc(ComTerp*,DrawEditor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(:chk :trial :rid num :ok bool) -- command to manage session id's"; }
+	return "%s([sid osid] :all) -- command to manage session id's"; }
 };
 
-//: command to reserve graphics for selection in remote editors
-// grid(id selector :chg) -- reserve graphic for remote selection
+//: command to send message between remote selections
+// grid(id selector selected) -- command to send message between remote selections
 class GraphicIdFunc : public UnidrawFunc {
 public:
     GraphicIdFunc(ComTerp*,Editor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(id selector :chg) -- reserve graphic for remote selection"; }
+	return "%s(id selector selected) -- command to send message between remote selections"; }
 };
 
 #endif /* !defined(_drawfunc_h) */

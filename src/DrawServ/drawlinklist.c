@@ -27,6 +27,7 @@
 
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawlinklist.h>
+#include <DrawServ/drawserv.h>
 #include <DrawServ/grid.h>
 
 #include <Unidraw/iterator.h>
@@ -58,14 +59,9 @@ void DrawLinkList::add_drawlink(DrawLink* new_link) {
 }
 
 DrawLink* DrawLinkList::find_drawlink(GraphicId* grid) {
-  Iterator i;
-  First(i);
-  while(!Done(i) && GetDrawLink(i)->sessionid() != grid->selector()) 
-    Next(i);
-  if (!Done(i)) 
-    return GetDrawLink(i);
-  else
-    return nil;
+  void* ptr = nil;
+  ((DrawServ*)unidraw)->sessionidtable()->find(ptr, grid->sessionid());
+  return (DrawLink*)ptr;
 }
 
 DrawLink* DrawLinkList::Link (UList* r) {

@@ -32,6 +32,8 @@
 
 int DrawLink::_linkcnt = 0;
 
+implementTable(IncomingSidTable,unsigned int,unsigned int)
+
 /*****************************************************************************/
 
 DrawLink::DrawLink (const char* hostname, int portnum, int state)
@@ -49,8 +51,7 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
   _conn = nil;
 
   _handler = nil;
-
-  _sessionid_state = SessionIdNada;
+  _incomingsidtable = new IncomingSidTable(32);
 }
 
 DrawLink::~DrawLink () 
@@ -64,6 +65,7 @@ DrawLink::~DrawLink ()
     delete _host;
     delete _althost;
 #endif
+    delete _incomingsidtable;
 }
 
 int DrawLink::open() {

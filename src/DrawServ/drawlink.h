@@ -30,6 +30,9 @@
 class DrawServ;
 class DrawServHandler;
 
+#include <OS/table.h>
+declareTable(IncomingSidTable,unsigned int,unsigned int)
+
 #ifdef HAVE_ACE
 #include <ComTerp/comhandler.h>
 #include <ace/SOCK_Connector.h>
@@ -68,7 +71,7 @@ public:
     int close();
     // close link to remote DrawServ
 
-    int up() { return 0; }
+    int up() { state() == two_way; }
     // return 1 if link up, 0 if down
 
     int ok() { return _ok; }
@@ -93,20 +96,14 @@ public:
     DrawServHandler* handler() { return _handler; }
     // get DrawServHandler associated with incoming connection
 
-    int sessionid_state() { return _sessionid_state; }
-    // get state of session id negotiation
-    // -1 = no id, 0 = request made, 1 = request approved, 2 = request denied.
+    IncomingSidTable* incomingsidtable() { return _incomingsidtable; }
+    // return pointer to table mapping incoming sessionid's to locally unique sessionid's
 
-    void sessionid_state(int state) { _sessionid_state = state; }
-    // set state of session id negotiation
-    // -1 = no id, 0 = request made, 1 = request approved, 2 = request denied.
+    void state(int val) { _state = val; }
+    // set state of DrawLink
 
-    enum {SessionIdNada=-1, SessionIdRequested=0, SessionIdApproved=1, SessionIdDenied=2};
-
-    unsigned int sessionid() { return _sessionid; }
-    // get unique session id of other side
-    void sessionid(unsigned int id) { _sessionid = id; }
-    // get unique session id of other side
+    int state() { return _state; }
+    // get state of DrawLink
 
 protected:
     const char* _host;
@@ -117,8 +114,7 @@ protected:
     int _local_linkid;
     int _remote_linkid;
     int _state;
-    int _sessionid_state;
-    unsigned int _sessionid;
+    IncomingSidTable* _incomingsidtable;
 
 #ifdef HAVE_ACE
     ACE_INET_Addr* _addr;

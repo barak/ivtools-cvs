@@ -33,7 +33,8 @@
 #include <OS/table.h>
 declareTable(GraphicIdTable,int,void*)
 declareTable(SessionIdTable,int,void*)
-declareTable(CompIdTable,void*, void*);
+declareTable(CompIdTable,void*,void*);
+declareTable(OriginalSidTable,unsigned int,unsigned int);
      
 
 //: Unidraw specialized for DrawServ
@@ -57,9 +58,6 @@ public:
   virtual ~DrawServ();
   
   void Init();
-  
-  int online();
-  // return true if session id initialized, otherwise false.
   
   DrawLink* linkup(const char* hostname, int portnum, 
 		   int state, int local_id=-1, int remote_id=-1,
@@ -103,34 +101,39 @@ public:
   CompIdTable* compidtable() { return _compidtable; }
   // return pointer to table that map from GraphicComp* to GraphicId*
   
-  void sessionid_request_chk();
-  // generate next request to check unique session id
+  OriginalSidTable* originalsidtable() { return _originalsidtable; }
+  // return pointer to table that maps from unique local session ids 
+  // to original session ids.
   
-  void sessionid_handle_chk(int chk_id, int remote_linkid);
-  // handle request to check unique session id
+  void sessionid_register(DrawLink* link);
+  // register all sessionid's used by this DrawServ with remote DrawServ
   
-  void sessionid_callback_chk(int chk_id, int remote_linkid, int ok_flag);
-  // process callbacks on request to check unique session id
+  void sessionid_register_handle(DrawLink* link, unsigned int sid, 
+				 unsigned int osid);
+  // handle request to register unique session id
   
-  unsigned int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
+  void sessionid_register_propagate(unsigned int sid, unsigned int osid);
+  // propagate a newly registered session id to all other DrawLink's
+  
+  unsigned int sessionid() { return _sessionid; }
   // current unique session id.
 
-  void reserve_handle(unsigned int id, unsigned int selector);
-  // handle reserve request from remote DrawLink.
+  void grid_message(unsigned int id, unsigned int selector, int selected);
+  // generate graphic id selection message
 
-  void reserve_change(unsigned int id, unsigned int selector, boolean ok); 
-  // callback for reserve request that goes to every DrawLink.
+  void grid_message_handle(unsigned int id, unsigned int selector, int selected);
+  // handle graphic id selection message
 
-  boolean reserve_if_not_selected(GraphicId* grid, unsigned int selector);
-  // check if graphic is selected, and allow it to be borrowed if not.
-  
-  static unsigned int candidate_grid();
-  // generate candidate graphic id.
-  static int unique_grid(unsigned int id);
+  void grid_message_propagate(unsigned int id, unsigned int selector, int selected);
+  // propagate graphic id selection message
+
+  static unsigned int unique_grid();
+  // generate unique graphic id.
+  static int test_grid(unsigned int id);
   // test candidate graphic id for local uniqueness
-  static unsigned int candidate_sessionid();
-  // generate candidate session id.
-  static int unique_sessionid(unsigned int id);
+  static unsigned int unique_sessionid();
+  // generate unique session id.
+  static int test_sessionid(unsigned int id);
   // test candidate session id for local uniqueness
   
   static unsigned int GraphicIdMask;
@@ -138,6 +141,9 @@ public:
 
   void print_gridtable();
   // print contents of table of GraphicId's
+  
+  void print_sidtable();
+  // print contents of table of SessionId's
   
 protected:
     DrawLinkList* _linklist;
@@ -151,11 +157,12 @@ protected:
     CompIdTable* _compidtable;
     // table of all GraphicComp's associated with a GraphicId.
     // maps from GraphicComp* to GraphicId*
+    OriginalSidTable* _originalsidtable;
+    // table of that maps locally unique session ids to original
+    // session ids.
 
     int _sessionid;
     // unique session id.
-    int _trialid;
-    // session id undergoing reservation
 
 };
 

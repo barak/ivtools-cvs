@@ -59,6 +59,7 @@
 implementTable(GraphicIdTable,int,void*)
 implementTable(SessionIdTable,int,void*)
 implementTable(CompIdTable,void*,void*)
+implementTable(OriginalSidTable,unsigned int,unsigned int)
 
 unsigned int DrawServ::GraphicIdMask = 0x000fffff;
 unsigned int DrawServ::SessionIdMask = 0xfff00000;
@@ -82,9 +83,9 @@ void DrawServ::Init() {
   _gridtable = new GraphicIdTable(1024);
   _sessionidtable = new SessionIdTable(256);
   _compidtable = new CompIdTable(1024);
+  _originalsidtable = new OriginalSidTable(32);
 
-  _sessionid = candidate_sessionid();
-  _trialid = _sessionid;
+  _sessionid = unique_sessionid();
   _sessionidtable->insert(_sessionid, nil); // nil pointer refers to local session id
 }
 
@@ -92,6 +93,9 @@ DrawServ::~DrawServ ()
 {
   delete _linklist;
   delete _gridtable;
+  delete _sessionidtable;
+  delete _compidtable;
+  delete _originalsidtable;
 }
 
 DrawLink* DrawServ::linkup(const char* hostname, int portnum, 
@@ -125,6 +129,7 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
       DrawLink* curlink = _linklist->GetDrawLink(i);
       curlink->remote_linkid(remote_id);
       curlink->althostname(hostname);
+      curlink->state(DrawLink::two_way);
       if (comterp && comterp->handler()) {
 	((DrawServHandler*)comterp->handler())->drawlink(curlink);
 	curlink->handler((DrawServHandler*)comterp->handler());
@@ -133,6 +138,12 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
 	      curlink->hostname(), curlink->althostname(), portnum);
       fprintf(stderr, "local id %d, remote id %d\n", curlink->local_linkid(), 
 	      curlink->remote_linkid());
+
+      /* register all sessionid's with other DrawServ */
+      sessionid_register(curlink);
+      SendCmdString(curlink, "sessionid(:all)");
+      SendCmdString(curlink, "drawlink(:state 2)");
+
       return curlink;
     } else {
       fprintf(stderr, "unable to complete two-way link\n");
@@ -327,62 +338,42 @@ void DrawServ::SendCmdString(DrawLink* link, const char* cmdstring) {
 }
 
 // generate request to check unique session id
-void DrawServ::sessionid_request_chk() {
-
-  Iterator it;
-  _linklist->First(it);
+void DrawServ::sessionid_register(DrawLink* link) {
   char buf[BUFSIZ];
-  while(!_linklist->Done(it)) {
-    DrawLink* link = _linklist->GetDrawLink(it);
-    link->sessionid_state(DrawLink::SessionIdRequested);
-    snprintf(buf, BUFSIZ, "sessionid(0x%08x :rid %d)%c", _trialid, link->local_linkid(), '\0');
-    SendCmdString(link, buf);
-    _linklist->Next(it);
-  }
-}
-
-// handle request to check unique session id
-// can be answered locally, because others are required to
-// propogate their request completely before adopting new id.
-void DrawServ::sessionid_handle_chk(int new_id, int remote_linkid) {
-  DrawLink* link = linkget(-1, remote_linkid);
-  if (link) {
-    if (_linklist->Number()==1) {
-      int okflag = false;
-      if (okflag = DrawServ::unique_sessionid(new_id)) {
-	SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
-	table->insert(new_id, link);
-      }
-      char buf[BUFSIZ];
-      snprintf(buf, BUFSIZ, "sessionid(0x%08x :ok %d :rid %d )%c", new_id, okflag, link->local_linkid(), '\0');
+  snprintf(buf, BUFSIZ, "sessionid(0x%08x 0x%08x)%c", sessionid(), sessionid(), '\0');
+  SendCmdString(link, buf);
+  SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
+  SessionIdTable_Iterator it(*table);
+  while(it.more()) {
+    if(it.cur_value()) {
+      DrawLink* link = (DrawLink*)it.cur_value();
+      unsigned int sid, osid;
+      sid = (unsigned int)it.cur_key();
+      originalsidtable()->find(osid, sid);
+      snprintf(buf, BUFSIZ, "sessionid(0x%08x 0x%08x)%c", sid, osid, '\0');
       SendCmdString(link, buf);
-      link->sessionid(new_id);
-    } else {
-      fprintf(stderr, "code for passing selection id request on to other DrawLink's not implemented\n");
     }
-  } else
-    fprintf(stderr, "no link with remote id of %d found\n", remote_linkid);
-}
-
-// process callbacks on request to check unique session id
-void DrawServ::sessionid_callback_chk(int new_id, int remote_linkid, int ok_flag) {
-  fprintf(stderr, "sessionid_callback_chk: new_id %d,  remote_linkid %d, ok_flag %d\n",
-	  new_id, remote_linkid, ok_flag);
-  if (new_id != _trialid) {
-    ok_flag = false;
-    fprintf(stderr, "new_id (%d) does not match _trialid (%d)\n", new_id, _trialid);
-  }
-  if (ok_flag) {
-    _sessionid = _trialid;
-  } else {
+    it.next();
   }
 }
 
-int DrawServ::online() {
-  return _sessionid==_trialid && _sessionid!=-1;
-}
+// handle request to register session id
+void DrawServ::sessionid_register_handle(DrawLink* link, unsigned int sid, unsigned osid) {
+  if (link) {
+    SessionIdTable* sidtable = ((DrawServ*)unidraw)->sessionidtable();
+    unsigned int alt_id = sid;
+    if (!DrawServ::test_sessionid(sid)) 
+      alt_id = DrawServ::unique_sessionid();
+    sidtable->insert(alt_id, link);
+    link->incomingsidtable()->insert(sid, alt_id);
+    ((DrawServ*)unidraw)->originalsidtable()->insert(alt_id, osid);
 
-unsigned int DrawServ::candidate_grid() {
+    /* propagate */
+ }
+
+ }
+
+unsigned int DrawServ::unique_grid() {
   static int seed=0;
   if (!seed) {
     seed = time(nil) & (time(nil) << 16);
@@ -393,11 +384,11 @@ unsigned int DrawServ::candidate_grid() {
     static int flip=0;
     while ((retval=rand()&GraphicIdMask)==0);
 
-  } while (!unique_grid(retval));
+  } while (!test_grid(retval));
   return retval;
 }
 
-int DrawServ::unique_grid(unsigned int id) {
+int DrawServ::test_grid(unsigned int id) {
   GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
   void* ptr = nil;
   table->find(ptr, id);
@@ -407,7 +398,7 @@ int DrawServ::unique_grid(unsigned int id) {
     return 1;
 }
 
-unsigned int DrawServ::candidate_sessionid() {
+unsigned int DrawServ::unique_sessionid() {
   static int seed=0;
   if (!seed) {
     seed = time(nil) & (time(nil) << 16);
@@ -418,11 +409,11 @@ unsigned int DrawServ::candidate_sessionid() {
     static int flip=0;
     while ((retval=rand()&SessionIdMask)==0);
 
-  } while (!unique_sessionid(retval));
+  } while (!test_sessionid(retval));
   return retval;
 }
 
-int DrawServ::unique_sessionid(unsigned int id) {
+int DrawServ::test_sessionid(unsigned int id) {
   SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
   void* ptr = nil;
   table->find(ptr, id);
@@ -445,81 +436,23 @@ void DrawServ::ReserveSelection(GraphicId* grid) {
 }
 
 // handle reserve request from remote DrawLink.
-void DrawServ::reserve_handle(unsigned int id, unsigned int selector)
+void DrawServ::grid_message_handle(unsigned int id, unsigned int selector, int selected)
 {
   void* ptr = nil;
   gridtable()->find(ptr, id);
   if (ptr) {
     GraphicId* grid = (GraphicId*)ptr;
-    
-    /* check if selected */
-    if( reserve_if_not_selected(grid, selector) ) {
-      
-      /* if available, broadcast to everyone */
-      char buf[BUFSIZ];
-      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :chg)%c", id, selector, '\0');
-      DistributeCmdString(buf);
-    }
-    
-  } else
-    fprintf(stderr, "grid 0x%08x not found for selector 0x%08x\n", id, selector);
+  }
 }
 
-// callback for reserve request that goes to every DrawLink
-void DrawServ::reserve_change(unsigned int id, unsigned int selector, 
-			      boolean ok)
+// handle reserve request from remote DrawLink.
+void DrawServ::grid_message_propagate(unsigned int id, unsigned int selector, int selected)
 {
-  if (ok) {
-    void* ptr = nil;
-    gridtable()->find(ptr, id);
-    if (ptr) {
-      GraphicId* grid = (GraphicId*)ptr;
-      grid->selector(selector);
-      grid->selected(LinkSelection::RemotelySelected);
-    } else
-      fprintf(stderr, "reserve change received for unknown id 0x%08x\n", id);
-  } else
-    fprintf(stderr, "reserve request for 0x%08x denied\n", id);
-}
-
-boolean DrawServ::reserve_if_not_selected(GraphicId* grid, unsigned int selector) {
-  
-#if 0
-  /* check if graphic is still locally selected */
-  GraphicComp* comp = grid->grcomp();
-  boolean selected = false;
-  Iterator i;
-  First(i);
-  while (!Done(i) && !selected) {
-    Viewer* viewer = GetEditor(i)->GetViewer();
-    Selection* sel = viewer->GetSelection();
-    Iterator j;
-    sel->First(j);
-    while (!sel->Done(j) && !selected) {
-      if (sel->GetView(j)->GetGraphicComp()==comp) selected = true;
-      sel->Next(j);
-    }
-    Next(i);
+  void* ptr = nil;
+  gridtable()->find(ptr, id);
+  if (ptr) {
+    GraphicId* grid = (GraphicId*)ptr;
   }
-
-  if (selected)
-    return false;
-  else {
-    grid->selector(selector);
-    grid->selected(false);
-    return true;
-  }
-#else
-  if (grid->selected() == LinkSelection::NotSelected ||
-      grid->selected() == LinkSelection::PreviouslySelected) {
-    grid->selector(selector);
-    return true;
-  } else if (grid->selected() == LinkSelection::RemotelySelected ||
-	     grid->selected() == LinkSelection::WaitingToBeSelected) 
-    fprintf(stderr, "selection request made it to wrong selector\n");
-  else
-    return false;
-#endif
 }
 
 void DrawServ::print_gridtable() {
