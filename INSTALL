@@ -31,6 +31,10 @@ libstdc++.  libstdc++ comes bundled with gcc-3.0.  Before that the
 libstdc++ version numbers stay roughly in synch with the gcc version
 numbers.  If you have gcc-2.8.1 you'd want libstdc++-2.8.1, etc..
 
+** NOTE ** Do not use gcc-2.96.  See
+http://www.ivtools.org/ivtools/faq.html#gcc-2.96-problem for more
+details.
+
 Be aware that sometimes the include files for libstdc++ are in
 /usr/local/include/g++-2, a place that cannot be auto-determined by
 the configure script.  Establishing a symbolic link to
