@@ -431,10 +431,12 @@ void DrawServ::grid_message(GraphicId* grid) {
 
   if (link) {
     char buf[BUFSIZ];
-    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d :request 0x%08x)%c", grid->id(), grid->selector(), 
-	     grid->selected()==LinkSelection::LocallySelected ? 
-	     LinkSelection::RemotelySelected : LinkSelection::WaitingToBeSelected,
-	     sessionid(), '\0');
+    if (grid->selected()==LinkSelection::LocallySelected) 
+      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d )%c", grid->id(), grid->selector(), 
+	       LinkSelection::RemotelySelected, '\0');
+    else
+      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d :request 0x%08x)%c", grid->id(), 
+	       grid->selector(), LinkSelection::WaitingToBeSelected, sessionid(), '\0');
     SendCmdString(link, buf);
   }
 }
@@ -450,7 +452,6 @@ void DrawServ::grid_message_handle(DrawLink* link, unsigned int id, unsigned int
     if (selector==sessionid() && newselector) {
       if (grid->selector()==sessionid() && grid->selected()==LinkSelection::NotSelected) {
 	grid->selector(newselector);
-	grid->selected(LinkSelection::RemotelySelected);
 	char buf[BUFSIZ];
 	snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :grant 0x%08x)%c",
 		 grid->id(), newselector, sessionid(), '\0');
