@@ -83,6 +83,7 @@ void LinkSelection::Reserve() {
     _locally_selected->Remove(it);
     grid->selected(NotSelected);
   }
+  _waiting_to_be_selected->First(it);
   while (!_waiting_to_be_selected->Done(it)) {
     GraphicId* grid = _waiting_to_be_selected->GetGraphicId(it);
     _waiting_to_be_selected->Remove(it);
