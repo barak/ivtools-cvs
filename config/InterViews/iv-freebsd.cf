@@ -5,6 +5,7 @@
 
 #define OptimizeCCFlags -O6
 #define TIFFOptimizeCFlags -O
+#define TIFFStdCDefines -DHAVE_IEEEFP
 
 #ifndef ExtraCCLdFlags
 #define ExtraCCLdFlags /**/
