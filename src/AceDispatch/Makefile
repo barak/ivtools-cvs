@@ -12,14 +12,14 @@
 # -------------------------------------------------------------------------
 # from <local.def>:
 
-     GPLUSPLUS_INCLUDE_DIR = /usr/include/g++/
+     GPLUSPLUS_INCLUDE_DIR = /usr/local/include/g++-v3/backward/
           TOOL_INCLUDE_DIR = /usr/local/include
 
     NORM_CCINCLUDES = -I$(CURRENT_DIR)/.. -I$(CURRENT_DIR)/../..  -I$(IVTOOLSSRC) $(BACKWARD_CCINCLUDES) -I$(IVTOOLSSRC)/include -I$(IVTOOLSSRC)/include/ivstd $(X_CCINCLUDES)
 
     APP_CCINCLUDES = $(NORM_CCINCLUDES)
 
-             IVTOOLSSRC = /proj/ivtools-0.8/src
+             IVTOOLSSRC = /home/scott/src/ivtools-0.9/src
 
 LIBUNIDRAWCOMMON = -Wl,-rpath,$(IVTOOLSSRC)/Unidraw-common/$(CPU) -L$(IVTOOLSSRC)/Unidraw-common/$(CPU) -lUnidraw-common
 LIBIVCOMMON = -Wl,-rpath,$(IVTOOLSSRC)/IV-common/$(CPU) -L$(IVTOOLSSRC)/IV-common/$(CPU) -lIV-common
@@ -67,9 +67,9 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
 
    PROJECTDIR = /proj
 
-   RELEASE = ivtools-0.8
+   RELEASE = ivtools-0.9.6
 
-   VERSION = 0.8.4
+   VERSION = 0.9.6
 
    REPOSITORY_FILES = *.c *.cc *.cxx *.C *.h Imakefile *.def template README INSTALL VERSION MANIFEST COPYRIGHT ANNOUNCE README.ivmkcm *.patch *.bugfix.? *.script *.sed comutil.arg comterp.err comutil.ci comterp.arg comterp.ci site.def.SUN4 site.def.LINUX site.def.SGI site.def.HP800 site.def.ALPHA site.def.CYGWIN site.def.NETBSD site.def.FREEBSD WishList *.defaults *.cf HOWTO Copyright *.sh CHANGES CHANGES-0.? *.cpp ivmkmf *.bash *.1  *.3 config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp *.mk config.mk.in *.tmpl *.flt *.m4 config.defs.in
 
@@ -82,7 +82,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
 	$(SPECIAL_IMAKEFLAGS)
  SPECIAL_IMAKEFLAGS =
              DEPEND = makedepend
-     DEPEND_CCFLAGS = -DMAKEDEPEND $(CCDEFINES) $(CCINCLUDES) -I$(GPLUSPLUS_INCLUDE_DIR) -I$(TOOL_INCLUDE_DIR) -UHAVE_ACE
+     DEPEND_CCFLAGS = -w -DMAKEDEPEND $(CCDEFINES) $(CCINCLUDES) -I$(GPLUSPLUS_INCLUDE_DIR) -I$(TOOL_INCLUDE_DIR) -UHAVE_ACE
                MAKE = make
            PASSARCH = ARCH="$(ARCH)" SPECIAL_IMAKEFLAGS="$(SPECIAL_IMAKEFLAGS)" CMFLAGS="$(CMFLAGS)" CMMSG="$(CMMSG)"
           ARCHORCPU = $(CPU)
@@ -93,7 +93,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
            CCSUFFIX = c
             CDRIVER = gcc
             CSUFFIX = c
-                SRC = /proj/ivtools-0.8/src/AceDispatch/.
+                SRC = /src/AceDispatch/.
               SLASH = /
                SRCS = $(SRC)$(SLASH)*.$(CCSUFFIX)
                OBJS = *.o
@@ -107,18 +107,18 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
 	$(CCDEFINES)\
 	$(CCINCLUDES)
       DEBUG_CCFLAGS = -g
-   OPTIMIZE_CCFLAGS = -O6
+   OPTIMIZE_CCFLAGS = -O2
      SHARED_CCFLAGS =
       EXTRA_CCFLAGS =
 
           CCDEFINES = $(APP_CCDEFINES) $(IV_CCDEFINES) $(OTHER_CCDEFINES) $(EXTRA_CCDEFINES)
        IV_CCDEFINES = $(LANGUAGE_CCDEFINES) $(BACKWARD_CCDEFINES)
- LANGUAGE_CCDEFINES = -Dcplusplus_2_1
+ LANGUAGE_CCDEFINES = -Dcplusplus_2_1 -Wno-deprecated
  BACKWARD_CCDEFINES =
     EXTRA_CCDEFINES =
 
  CLIPPOLY_CCDEFINES =
-      ACE_CCDEFINES = -DHAVE_ACE
+      ACE_CCDEFINES = -DHAVE_ACE -DACE_MT_SAFE=0
       IUE_CCDEFINES =
 
          CCINCLUDES = $(APP_CCINCLUDES) $(OTHER_CCINCLUDES) $(EXTRA_CCINCLUDES)
@@ -132,7 +132,9 @@ CLIPPOLY_CCINCLUDES =
      ACE_CCINCLUDES = -I$(ACEDIR)
      IUE_CCINCLUDES =
 
-             ACEDIR = /proj/ACE_wrappers/
+             ACEDIR = /home/scott/src/ACE_wrappers
+
+          ACELIBDIR = /home/scott/src/ACE_wrappers/ace
 
              CFLAGS = $(APP_CCFLAGS) $(IV_CCFLAGS) $(OTHER_CCFLAGS) $(EXTRA_CCFLAGS)
 
@@ -171,8 +173,8 @@ NONSHARED_CCLDFLAGS =
   CLIPPOLY_CCLDLIBS =
      CLIPPOLYLIBDIR =
     CLIPPOLYLIBBASE = libclippoly.so
-       ACE_CCLDLIBS = -L$(ACEDIR)/ace -lACE
-          ACELIBDIR = /proj/ACE_wrappers//ace
+       ACE_CCLDLIBS = -L$(ACELIBDIR) -lACE
+          ACELIBDIR = /home/scott/src/ACE_wrappers/ace
          ACELIBBASE = libACE.so
        IUE_CCLDLIBS =
           IUELIBDIR =
@@ -204,11 +206,11 @@ NONSHARED_CCLDFLAGS =
              RM_CMD = $(RM) ,* .emacs_* *..c *.BAK *.CKP *.a *.bak *.ln *.o a.out core errs make.log make.out tags TAGS
               TROFF = groff
 
-                TOP = /proj/ivtools-0.8
+                TOP =
              RELTOP = ../../.
-        CURRENT_DIR = /proj/ivtools-0.8/src/AceDispatch
+        CURRENT_DIR = /src/AceDispatch
 
-              IVSRC = /proj/ivtools-0.8/src
+              IVSRC = /home/scott/src/ivtools-0.9/src
              BINSRC = $(IVSRC)/bin
           CONFIGSRC = $(RELTOP)/config
              INCSRC = $(IVSRC)/include
@@ -232,6 +234,8 @@ NONSHARED_CCLDFLAGS =
             XINCDIR = /usr/X11R6/include
             XLIBDIR = /usr/X11R6/lib
           PSFONTDIR = /usr/lib/ps
+
+  SOCKLEN_T_DEFINED = 1
 
 include $(RELTOP)/config/config.mk
 
@@ -399,6 +403,7 @@ cmchkin::
 	(cd $(TOP); cminstall); fi; fi
 	-@if [ $(NO_IVMKCM) ]; then exit 0; else \
 	csh -c '(setenv REPOSITORY_FILES "$(REPOSITORY_FILES)"; \
+\
 	cmchkin $(PACKAGE) $(TOP)/cm $(TOP) $(CURRENT_DIR))'; fi
 
 cmtag::
@@ -438,6 +443,6 @@ cmcommit::
 	else cmcommit $(CMFLAGS) -m "$(CMMSG)"; fi; fi
 
 install::
-	-@if [ -L $(TOP)/include ]; then exit 0; else \
+	-@if [ -h $(TOP)/include ]; then exit 0; else \
  (cd $(TOP) && $(LN) src/include include); fi
 

@@ -193,3 +193,15 @@ void WhileFunc::execute() {
     push_stack(ComValue::nullval());
 }
 
+/*****************************************************************************/
+
+SeqFunc::SeqFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void SeqFunc::execute() {
+    ComValue arg1(stack_arg_post_eval(0));
+    ComValue arg2(stack_arg_post_eval(1));
+    reset_stack();
+    push_stack(arg2);
+}
+

@@ -93,4 +93,16 @@ public:
       return "val=%s([testexpr [bodyexpr]] :nilchk :until :body expr ) -- while loop"; }
 };
 
+//: ; (sequence) operator.
+class SeqFunc : public ComFunc {
+public:
+    SeqFunc(ComTerp*);
+
+    virtual void execute();
+    virtual boolean post_eval() { return true; }
+    virtual const char* docstring() { 
+      return "; is the sequencing operator"; }
+
+};
+
 #endif /* !defined(_postfunc_h) */
