@@ -808,7 +808,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
 #if __GNUG__<3
   filebuf fbuf;
   if (handler()) {
-    int fd = max(1, handler()->get_handle());
+    int fd = Math::max(1, handler()->get_handle());
     fbuf.attach(fd);
   } else
     fbuf.attach(fileno(stdout));
