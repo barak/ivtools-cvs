@@ -245,8 +245,8 @@ protected:
     ComterpHandler* _handler;
     // I/O handler for this ComTerp.
 
-    ComFunc* _func_for_next_sym;
-    // ComFunc to run on next symbol
+    ComFunc* _func_for_next_expr;
+    // ComFunc to run on next expression
 
 
     friend class ComFunc;

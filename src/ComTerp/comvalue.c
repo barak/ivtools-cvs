@@ -289,7 +289,7 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 
 	case ComValue::ObjectType:
 	  if (svp->class_symid() == Attribute::class_symid())
-	    out << "<" << *((Attribute*)svp->obj_val())->Value() << ">";
+	    out << *((Attribute*)svp->obj_val())->Value();
 	  else
 	    out << "<" << symbol_pntr(svp->class_symid()) << ">";
 	  break;
@@ -346,3 +346,7 @@ void* ComValue::geta(int id) {
         return nil;
 }
 
+boolean ComValue::is_comfunc(int func_classid) {
+  return is_type(CommandType) && 
+    func_classid==((ComFunc*)obj_val())->classid(); 
+}

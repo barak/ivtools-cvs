@@ -31,6 +31,8 @@
 
 /*****************************************************************************/
 
+int DotFunc::_symid = -1;
+
 DotFunc::DotFunc(ComTerp* comterp) : ComFunc(comterp) {
 }
 

@@ -183,7 +183,7 @@ public:
     unsigned int symbol_val();	      // symbol id by value.                        
     void* obj_val();		      // void* pointer to object by value.          
     unsigned int obj_type_val();      // classid of object by value.                
-    unsigned int class_symid();       // classid of object by value.                
+    unsigned int& class_symid();       // classid of object by value.                
     AttributeValueList* array_val();  // values in list by value.                   
     unsigned int array_type_val();    // type of values in list by value            
     unsigned int keyid_val();	      // symbol id of keyword by value.             

@@ -541,7 +541,7 @@ unsigned int AttributeValue::obj_type_val() {
     return _v.objval.type; 
 }
 
-unsigned int AttributeValue::class_symid() {
+unsigned int& AttributeValue::class_symid() {
     return _v.objval.type; 
 }
 

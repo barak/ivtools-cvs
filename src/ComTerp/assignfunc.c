@@ -54,7 +54,7 @@ void AssignFunc::execute() {
 	    Unref(attrlist);
 	} else 
 	    comterp()->localtable()->insert(operand1.symbol_val(), operand2);
-    } else if (operand1.type() == ComValue::ObjectType && operand1.class_symid() == Attribute::class_symid()) {
+    } else if (operand1.is_object(Attribute::class_symid())) {
       Attribute* attr = (Attribute*)operand1.obj_val();
       attr->Value(operand2);
     } else {

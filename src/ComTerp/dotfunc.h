@@ -38,6 +38,8 @@ public:
     virtual void execute();
     virtual const char* docstring() { 
       return ". makes compound variables"; }
+
+    CLASS_SYMID("DotFunc");
 };
 
 //: dname returns name field of a dotted pair

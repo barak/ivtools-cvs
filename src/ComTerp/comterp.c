@@ -229,7 +229,7 @@ void ComTerp::eval_expr_internals(int pedepth) {
 	push_stack(lookup_symval(sv));
     }
     
-  } else if (sv.type() == ComValue::ObjectType && sv.class_symid() == Attribute::class_symid()) {
+  } else if (sv.is_object(Attribute::class_symid())) {
     
     push_stack(*((Attribute*)sv.obj_val())->Value());
     

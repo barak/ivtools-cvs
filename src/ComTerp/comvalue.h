@@ -110,6 +110,9 @@ public:
     // return true if UnknownType.
     boolean null() { return unknown(); }
     // return true if UnknownType.
+    boolean is_comfunc(int func_classid);
+    // returns true if CommandType with ComFunc
+
 
     void* geta(int id); 
     // get the class symbol id associated with an ObjectType.
