@@ -375,8 +375,11 @@ void AddToolButtonFunc::execute() {
     reset_stack();
     OverlayEditor* ed = (OverlayEditor*)GetEditor();
     OverlayComp* comp = ed->overlay_kit()->add_tool_button(pathnamev.symbol_ptr());
-    ComValue retval(comp->classid(), new ComponentView(comp));
-    retval.object_compview(true);
-    push_stack(retval);
+    if (comp) {
+      ComValue retval(comp->classid(), new ComponentView(comp));
+      retval.object_compview(true);
+      push_stack(retval);
+    } else
+      push_stack(ComValue::nullval());
 }
 
