@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1996 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -27,6 +28,7 @@
 #include <ComTerp/comterpserv.h>
 
 #include <iostream.h>
+#include <vector.h>
 
 #if BUFSIZ>1024
 #undef BUFSIZ
@@ -117,81 +119,44 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 // Perform the logging record receive. 
 static const unit = 15;
 
-// #define INPUT_BY_READ
-
 int
 ComterpHandler::handle_input (ACE_HANDLE fd)
 {
-#if 1
+#if 0
     const int bufsiz = BUFSIZ*BUFSIZ;
     char inbuf[bufsiz];
-    char outbuf[bufsiz];
     inbuf[0] = '\0';
-#if !defined(INPUT_BY_READ)
     filebuf ibuf(fd);
     istream istr(&ibuf);
     istr.getline(inbuf, bufsiz);
+#else
+    vector<char> inv;
+    char ch;
+    filebuf ibuf(fd);
+    istream istr(&ibuf);
+    while(istr.good() && istr.get(ch),ch!='\n') 
+      inv.push_back(ch);
+    inv.push_back('\0');
+    char* inbuf = &inv[0];
+#endif
+
     if (!comterp_ || !istr.good())
       return -1; 
-    else if (!*inbuf) {
+    else if (!inbuf || !*inbuf) {
       filebuf obuf(fd ? fd : 1);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
       return 0;
     }
-#else
-    int len = 0;
-    while (len<bufsiz-2) {
-      int nread = read(fd, inbuf+len, 1);
-      if (nread!=1) {
-	cerr << "zero bytes read, connection closed\n";
-	return -1;
-      }
-      if (inbuf[len] == '\n') break;
-      len++;
-    }
-    inbuf[len] = '\0';
-#endif
     comterp_->load_string(inbuf);
     if (fd>0) 
       cerr << "command via ACE -- " << inbuf << "\n";
-#else
-    comterp_->_infunc = (infuncptr)&ComTerpServ::fd_fgets;
-#endif
     comterp_->_fd = fd;
     comterp_->_outfunc = (outfuncptr)&ComTerpServ::fd_fputs;
 
-#if 1
     int  status = comterp_->ComTerp::run(false /* !once */);
-#else
-    if (comterp_->read_expr()) {
-        if (comterp_->eval_expr()) {
-	    err_print( stderr, "comterp" );
-	    filebuf obuf(fd ? fd : 1);
-	    ostream ostr(&obuf);
-	    ostr << "err\n";
-	    ostr.flush();
-        } else if (comterp_->quitflag()) {
-	    return -1;
-	} else {
-	    filebuf obuf(fd ? fd : 1);
-	    ostream ostr(&obuf);
-	    comterp_->print_stack_top(ostr);
-	    ostr << "\n";
-	    ostr.flush();
-	}
-    }
-#endif
-#if 1
-#if !defined(INPUT_BY_READ)
     return (istr.good() ? 0 : -1) && status;
-#else
-    return status;
-#endif
-#else
-    return comterp_->_instat ? 0 : -1;
-#endif
 }
 
 int
