@@ -25,6 +25,8 @@
 #include <ComTerp/numfunc.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
+#include <Unidraw/iterator.h>
+#include <Attribute/attrlist.h>
 #include <math.h>
 
 #define TITLE "NumFunc"
@@ -228,9 +230,40 @@ void AddFunc::execute() {
 	  result.string_ref()  = symbol_add(buffer);
 	}
 	break;
+    case ComValue::ArrayType: 
+        {
+	  if (operand2.is_array()) {
+	    Resource::unref(result.array_val());
+	    result.array_ref() = 
+	      AddFunc::matrix_add(operand1.array_val(), operand2.array_val());
+	    Resource::ref(result.array_val());
+	  }
+	  else 
+	    result.type(ComValue::UnknownType); // nil
+        }
+        break;
+
     }
     reset_stack();
     push_stack(result);
+}
+
+
+AttributeValueList* AddFunc::matrix_add(AttributeValueList* list1,
+					AttributeValueList* list2) {
+  AttributeValueList* sum = new AttributeValueList();
+  Iterator it1, it2;
+  list1->First(it1);
+  list2->First(it2);
+  while (!list1->Done(it1) && !list2->Done(it2)) {
+    push_stack(*list1->GetAttrVal(it1));
+    push_stack(*list2->GetAttrVal(it2));
+    exec(2, 0);
+    sum->Append(new AttributeValue(comterp()->pop_stack()));
+    list1->Next(it1);
+    list2->Next(it2);
+  }
+  return sum;
 }
 
 SubFunc::SubFunc(ComTerp* comterp) : NumFunc(comterp) {
