@@ -28,7 +28,10 @@
 #include <ComTerp/comterpserv.h>
 
 #include <iostream.h>
+#if __GNUC__==2 && __GNUC_MINOR__<=7
+#else
 #include <vector.h>
+#endif
 
 #if BUFSIZ>1024
 #undef BUFSIZ
@@ -141,7 +144,12 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 int
 ComterpHandler::handle_input (ACE_HANDLE fd)
 {
+#if __GNUC__==2 && __GNUC_MINOR__<=7
+    char inv[BUFSIZ];
+    int inv_cnt = 0;
+#else
     vector<char> inv;
+#endif
     char ch;
 
 #if __GNUG__<3
@@ -149,10 +157,15 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     istream istr(&ibuf);
 
     // problem handling new-lines embedded in character strings
+#if __GNUC__==2 && __GNUC_MINOR__<=7
+    while(istr.good() && istr.get(ch),ch!='\n'&&ch!='\0' && inv_cnt<BUFSIZ-1) 
+      inv[inv_cnt++] = ch;
+    inv[inv_cnt++] = '\0';
+#else
     while(istr.good() && istr.get(ch),ch!='\n'&&ch!='\0') 
       inv.push_back(ch);
     inv.push_back('\0');
-    char* inbuf = &inv[0];
+#endif
 
     boolean input_good = istr.good();
 #else
