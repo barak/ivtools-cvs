@@ -92,6 +92,9 @@ public:
     ComValue& operator= (const ComValue&);
     // assignment operator.
 
+    void* geta(int type); 
+    // return a pointer if ObjectType matches
+
     int narg() const;
     // number of arguments associated with this command or keyword.
     int nkey() const;

@@ -870,12 +870,9 @@ boolean AttributeValue::is_attribute() {
 }
 
 void* AttributeValue::geta(int id) {
-  if (is_object(id)) {
-    if (object_compview())
-      return nil;
-    else
-      return obj_val();
-  } else
+  if (is_object(id))
+    return obj_val();
+  else
     return nil;
 }
 

@@ -22,6 +22,7 @@
  * 
  */
 
+#include <Unidraw/Components/compview.h>
 #include <ComTerp/comfunc.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
@@ -351,3 +352,14 @@ boolean ComValue::is_comfunc(int func_classid) {
   return is_type(CommandType) && 
     func_classid==((ComFunc*)obj_val())->classid(); 
 }
+
+void* ComValue::geta(int id) {
+  if (is_object(id)) {
+    if (object_compview())
+      return ((ComponentView*)obj_val())->GetSubject();
+    else
+      return obj_val();
+  } else
+    return nil;
+}
+

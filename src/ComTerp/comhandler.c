@@ -122,8 +122,8 @@ static const unit = 15;
 int
 ComterpHandler::handle_input (ACE_HANDLE fd)
 {
-#if 0
-    const int bufsiz = BUFSIZ*BUFSIZ;
+#if 1
+    const int bufsiz = BUFSIZ; //*BUFSIZ;
     char inbuf[bufsiz];
     inbuf[0] = '\0';
     filebuf ibuf(fd);

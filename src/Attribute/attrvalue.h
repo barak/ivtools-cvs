@@ -292,8 +292,8 @@ public:
     boolean is_attribute();
     // returns true if ObjectType with an Attribute object.
 
-    void* geta(int id); 
-    // get the class symbol id associated with an ObjectType.
+    void* geta(int type); 
+    // return a pointer if ObjectType matches
 
     friend ostream& operator << (ostream& s, const AttributeValue&);
     // output AttributeValue to ostream.

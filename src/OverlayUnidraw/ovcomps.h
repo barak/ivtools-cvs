@@ -299,7 +299,7 @@ protected:
 
 friend OverlaysScript;
 
-    CLASS_SYMID("OverlayComp"); 
+    CLASS_SYMID("OverlaysComp"); 
 };
 
 #include <OverlayUnidraw/indexmixins.h>
