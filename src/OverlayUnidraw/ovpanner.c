@@ -430,8 +430,10 @@ void OverlaySlider::Update () {
     SizeKnob();
     if (p->width != oldwidth || p->height != oldheight) {
 	h = Math::round(aspect * float(shape->width));
+#if 0
 	printf("pw=%d, ph=%d, ow=%d, oh=%d, sw=%d, sh=%d, aspect=%f, h=%d\n",
 		p->width, p->height, oldwidth, oldheight, shape->width, shape->height, aspect, h);
+#endif
 	if (h == shape->height || h+1 == shape->height || h-1==shape->height) {
 	    Draw();
 	} else {

@@ -33,9 +33,9 @@ class Transformer;
 //: base class for graphic construction func's
 class CreateGraphicFunc : public UnidrawFunc {
 public:
-    CreateRectFunc(ComTerp*,Editor*);
+    CreateGraphicFunc(ComTerp*,Editor*);
     Transformer* get_transformer(AttributeList*);
-}
+};
 
 //: rectangle drawing command for comdraw.
 // compview=rect(x0,y0,x1,y1) -- create a rectangle <br>
