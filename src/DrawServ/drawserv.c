@@ -52,10 +52,12 @@ DrawServ::~DrawServ ()
 {
 }
 
-int DrawServ::linkup(const char* hostname, int portnum, int state) {
-  if (state == DrawLink::new_link || state == DrawLink::half_duplex) {
+int DrawServ::linkup(const char* hostname, int portnum, 
+		     int state, int local_id, int remote_id) {
+  if (state == DrawLink::new_link || state == DrawLink::one_way) {
     DrawLink* link = new DrawLink(hostname, portnum, state);
-    if (link && link->up()) {
+    if (link && link->ok()) {
+      link->remote_linkid(remote_id);
       _list->add_drawlink(link);
       return 0;
     } else {
@@ -63,6 +65,19 @@ int DrawServ::linkup(const char* hostname, int portnum, int state) {
       return -1;
     }
   } else {
-    fprintf(stderr, "link up\n");
+    // search for existing link with matching local_id
+    Iterator i;
+    _list->First(i);
+    while(!_list->Done(i) && _list->GetDrawLink(i)->local_linkid()!=local_id);
+    if (!_list->Done(i)) {
+      DrawLink* curlink = _list->GetDrawLink(i);
+      curlink->remote_linkid(remote_id);
+      fprintf(stderr, "link up with %s via port %d\n", hostname, portnum);
+      fprintf(stderr, "local id %d, remote id %d\n", curlink->local_linkid(), 
+	      curlink->remote_linkid());
+    } else
+      fprintf(stderr, "unable to complete two-way link\n");
   }
 }
+
+  

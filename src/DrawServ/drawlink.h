@@ -44,21 +44,47 @@ public:
     DrawLink(const char* hostname, int portnum, int state);
     virtual ~DrawLink();
 
-    enum { new_link=0, half_duplex, full_duplex };
+    enum { new_link=0, one_way, two_way };
 
     const char* hostname() { return _host; }
     // return name of remote host
 
+    void hostname(const char* host);
+    // set name of remote host
+
+    const char* althostname() { return _althost; }
+    // return alternate name of remote host
+
+    void althostname(const char* althost);
+    // set alternate name of remote host
+
     int portnum() { return _port; }
     // return port on remote host
 
-    int up() { return _up; }
+    int up() { return 0; }
     // return 1 if link up, 0 if down
+
+    int ok() { return _ok; }
+    // return 1 if link ok (but not necessarily two-way yet), 0 if not
+
+    int local_linkid() { return _local_linkid; }
+    // get local DrawLink id
+    int remote_linkid() { return _remote_linkid; }
+    // get remote DrawLink id
+
+    void local_linkid(int id) { _local_linkid = id; }
+    // get local DrawLink id
+    void remote_linkid(int id) { _remote_linkid = id; }
+    // get remote DrawLink id
 
 protected:
     const char* _host;
+    const char* _althost;
     int _port;
-    int _up;
+    int _ok;
+    static int _linkcnt;
+    int _local_linkid;
+    int _remote_linkid;
 
 #ifdef HAVE_ACE
     ACE_INET_Addr* _addr;

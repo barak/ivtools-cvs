@@ -30,13 +30,18 @@
 #include <fstream.h>
 #include <unistd.h>
 
+static int DrawLink::_linkcnt = 0;
+
 /*****************************************************************************/
 
 DrawLink::DrawLink (const char* hostname, int portnum, int state)
 {
   _host = strnew(hostname);
+  _althost = nil;
   _port = portnum;
-  _up = false;
+  _ok = false;
+  _local_linkid = _linkcnt++;
+  _remote_linkid = -1;
 
   _addr = nil;
   _socket = nil;
@@ -56,9 +61,10 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
     gethostname(buffer, HOST_NAME_MAX);
     out << buffer << "\"";
     out << " :state " << state+1;
+    out << " :id " << _local_linkid;
     out << ")\n";
     out.flush();
-    _up = true;
+    _ok = true;
   }
 #else
   fprintf(stderr, "drawserv requires ACE and >= gcc-3.1 for full functionality\n");
@@ -74,5 +80,19 @@ DrawLink::~DrawLink ()
     delete _socket;
     delete _addr;
     delete _host;
+    delete _althost;
 #endif
 }
+
+void DrawLink::hostname(const char* host) {
+  delete _host;
+  _host = nil;
+  if (host) _host = strnew(host);
+}
+
+void DrawLink::althostname(const char* althost) {
+  delete _althost;
+  _althost = nil;
+  if (althost) _althost = strnew(althost);
+}
+

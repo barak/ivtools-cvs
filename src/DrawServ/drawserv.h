@@ -46,9 +46,13 @@ public:
 
     void Init();
 
-    int linkup(const char* hostname, int portnum, int state);
-    // create new link to remote drawserv, return -1 if error
-    // state: 0==new link, 1==half-duplex, 2==full-duplex
+    int linkup(const char* hostname, int portnum, 
+	       int state, int local_id=-1, int remote_id=-1);
+    // Create new link to remote drawserv, return -1 if error
+    // state: 0==new_link, 1==one_way, 2==two_way.
+    // Let DrawLink assign local_id by passing -1 for local_id.
+    // The local_id argument is for verification purposes once
+    // two-way link is established.
 
 protected:
     DrawLinkList* _list;

@@ -21,11 +21,6 @@
  * 
  */
 
-#ifdef HAVE_ACE
-#include <ComTerp/comhandler.h>
-#include <ace/SOCK_Connector.h>
-#endif
-
 #include <DrawServ/draweditor.h>
 #include <DrawServ/drawfunc.h>
 #include <DrawServ/drawserv.h>
@@ -53,6 +48,10 @@ void DrawLinkFunc::execute() {
   static int state_sym = symbol_add("state");
   ComValue default_state(0);
   ComValue statev(stack_key(state_sym, false, default_state, true));
+  static int lid_sym = symbol_add("lid");
+  ComValue lidv(stack_key(lid_sym));
+  static int rid_sym = symbol_add("rid");
+  ComValue ridv(stack_key(rid_sym));
   reset_stack();
 
 #if __GNUC__==3&&__GNUC_MINOR__<1
@@ -66,10 +65,11 @@ void DrawLinkFunc::execute() {
     const char* hoststr = hostv.string_ptr();
     const char* portstr = portv.is_string() ? portv.string_ptr() : nil;
     u_short portnum = portstr ? atoi(portstr) : portv.ushort_val();
-    const char* statestr = statev.is_string() ? statev.string_ptr() : nil;
-    u_short statenum = statestr ? atoi(statestr) : statev.ushort_val();
+    u_short statenum = statev.ushort_val();
+    int lidnum = lidv.is_known() ? lidv.int_val() : -1;
+    int ridnum = ridv.is_known() ? ridv.int_val() : -1;
 
-    if (((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum))
+    if (((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum, lidnum, ridnum))
       push_stack(ComValue::minusoneval());
     else
       push_stack(ComValue::zeroval());
