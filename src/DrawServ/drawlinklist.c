@@ -60,7 +60,7 @@ void DrawLinkList::add_drawlink(DrawLink* new_link) {
 DrawLink* DrawLinkList::find_drawlink(GraphicId* grid) {
   Iterator i;
   First(i);
-  while(!Done(i) && GetDrawLink(i)->sessionid() != grid->sessionid()) 
+  while(!Done(i) && GetDrawLink(i)->sessionid() != grid->selector()) 
     Next(i);
   if (!Done(i)) 
     return GetDrawLink(i);
