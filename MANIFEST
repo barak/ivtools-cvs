@@ -184,6 +184,8 @@ ivtools-0.8/src/ComTerp/strmfunc.c
 ivtools-0.8/src/ComTerp/strmfunc.h
 ivtools-0.8/src/ComTerp/symbolfunc.c
 ivtools-0.8/src/ComTerp/symbolfunc.h
+ivtools-0.8/src/ComTerp/typefunc.c
+ivtools-0.8/src/ComTerp/typefunc.h
 ivtools-0.8/src/ComTerp/xformfunc.c
 ivtools-0.8/src/ComTerp/xformfunc.h
 ivtools-0.8/src/ComUnidraw/Imakefile

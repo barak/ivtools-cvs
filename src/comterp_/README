@@ -201,6 +201,8 @@ str=join(clist :sym) -- join list of characters into string
 
 bool=eq(str1 str2 :n len) -- partial string comparison
 
+bool=eq(sym1 sym2 :sym) -- symbol comparison
+
 postfix(arg1 [arg2 [arg3 ... [argn]]]) -- echo unevaluated postfix arguments
 (with [narg|nkey] after defined commands, {narg|nkey} after undefined commands,
 (narg) after keys, and a * following post-evaluation commands)
@@ -237,6 +239,10 @@ l=long(num) -- convert any numeric to a long
 f=float(num) -- convert any numeric to a float
 
 d=double(num) -- convert any numeric to a double
+
+sym|lst=type(val [val ...]) -- return type symbol(s) for value(s)
+
+sym|lst=class(val [val ...]) -- return class symbol(s) for value(s) of object type
 
 ONLY IN SERVER MODE
 

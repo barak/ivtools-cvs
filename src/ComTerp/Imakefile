@@ -38,6 +38,7 @@ Obj(scanner)
 Obj(statfunc)
 Obj(strmfunc)
 Obj(symbolfunc)
+Obj(typefunc)
 Obj(xformfunc)
 
 #ifdef AceDir

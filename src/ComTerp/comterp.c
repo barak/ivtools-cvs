@@ -44,6 +44,7 @@
 #include <ComTerp/statfunc.h>
 #include <ComTerp/strmfunc.h>
 #include <ComTerp/symbolfunc.h>
+#include <ComTerp/typefunc.h>
 #include <ComTerp/xformfunc.h>
 #include <Attribute/attrlist.h>
 #include <Attribute/attribute.h>
@@ -312,7 +313,7 @@ void ComTerp::load_sub_expr() {
 	ComFunc* func = (ComFunc*)sv->obj_val();
 	if (func && func->post_eval()) {
 	  int newoffset = offset;
-	  skip_func(_pfcomvals+_pfnum-1, newoffset);
+	  skip_func(_pfcomvals+_pfnum-1, newoffset, -_pfnum);
 	  int start = i-1;
 	  int stop = _pfnum+newoffset;
 	  for (int j=start; j>=stop; j--) 
@@ -417,6 +418,7 @@ int ComTerp::post_eval_expr(int tokcnt, int offtop, int pedepth) {
 	if (stack_top().is_type(ComValue::CommandType) 
 	    && stack_top().pedepth() == pedepth) break;
       }
+      // if (!stack_top().is_symbol())
       eval_expr_internals(pedepth);
       
     }
@@ -424,34 +426,42 @@ int ComTerp::post_eval_expr(int tokcnt, int offtop, int pedepth) {
   return FUNCOK;
 }
 
-boolean ComTerp::skip_func(ComValue* topval, int& offset) {
+boolean ComTerp::skip_func(ComValue* topval, int& offset, int offlimit) {
   ComValue* sv = topval + offset;
   int nargs = sv->narg();
   int nkeys = sv->nkey();
+  if (offlimit == offset) {
+    cerr << "offlimit hit by ComTerp::skip_func\n";
+    return false;
+  }
   offset--;
   while(nargs>0 || nkeys>0) {
     ComValue* nv = topval + offset;
     int tokcnt;
     if (nv->is_type(ComValue::KeywordType)) {
-      skip_key(topval, offset, tokcnt);
+      skip_key(topval, offset, offlimit, tokcnt);
       nkeys--;
       nargs -= tokcnt ? 1 : 0;
     } else {
-      skip_arg(topval, offset, tokcnt);
+      skip_arg(topval, offset, offlimit, tokcnt);
       nargs--;
     }
   }
   return true;
 }
 
-boolean ComTerp::skip_key(ComValue* topval, int& offset, int& tokcnt) {
+boolean ComTerp::skip_key(ComValue* topval, int& offset, int offlimit, int& tokcnt) {
   ComValue& curr = *(topval+offset);
   tokcnt = 0;
   if (curr.is_type(ComValue::KeywordType)) {
+    if (offlimit == offset) {
+      cerr << "offlimit hit by ComTerp::skip_key\n";
+      return false;
+    }
     offset--;
     if (curr.keynarg_val()) {
       int subtokcnt;
-      skip_arg(topval, offset, subtokcnt);
+      skip_arg(topval, offset, offlimit, subtokcnt);
       tokcnt += subtokcnt;
     }
 
@@ -460,7 +470,7 @@ boolean ComTerp::skip_key(ComValue* topval, int& offset, int& tokcnt) {
   return false;
 }
 
-boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
+boolean ComTerp::skip_arg(ComValue* topval, int& offset, int offlimit, int& tokcnt) {
   tokcnt = 0;
   ComValue& curr = *(topval+offset);
   if (curr.is_type(ComValue::KeywordType)) {
@@ -470,11 +480,19 @@ boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
     cerr << "unexpected unknown found by ComTerp::skip_arg\n";
     return false;
   } else if (curr.is_type(ComValue::BlankType)) {
+    if (offlimit == offset) {
+      cerr << "offlimit hit by ComTerp::skip_arg\n";
+      return false;
+    }
     offset--;
-    boolean val = skip_arg(topval, offset, tokcnt);
+    boolean val = skip_arg(topval, offset, offlimit, tokcnt);
     tokcnt++;
     return val;
   } else {
+    if (offlimit == offset) {
+      cerr << "offlimit hit by ComTerp::skip_arg\n";
+      return false;
+    }
     offset--;
     tokcnt++;
 
@@ -484,18 +502,26 @@ boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
 	ComValue& next = *(topval+offset);
 	int subtokcnt = 0;
 	if (next.is_type(ComValue::KeywordType)) {
-	  skip_key(topval, offset, subtokcnt);
+	  skip_key(topval, offset, offlimit, subtokcnt);
 	  tokcnt += subtokcnt + 1;
 	  if (subtokcnt) count++;
 	} else if (next.is_type(ComValue::CommandType) ||
 		   next.is_type(ComValue::SymbolType)) {
-	  skip_arg(topval, offset, subtokcnt);
+	  skip_arg(topval, offset, offlimit, subtokcnt);
 	  tokcnt += subtokcnt;
 	} else if (next.is_type(ComValue::BlankType)) {
+	  if (offlimit == offset) {
+	    cerr << "offlimit hit by ComTerp::skip_arg\n";
+	    return false;
+	  }
 	  offset--;
-	  skip_arg(topval, offset, subtokcnt);
+	  skip_arg(topval, offset, offlimit, subtokcnt);
 	  tokcnt += subtokcnt+1;
 	} else {
+	  if (offlimit == offset) {
+	    cerr << "offlimit hit by ComTerp::skip_arg\n";
+	    return false;
+	  }
 	  offset--;
 	  tokcnt++;
 	}
@@ -621,18 +647,21 @@ void ComTerp::incr_stack(int n) {
 }
 
 void ComTerp::decr_stack(int n) {
-    for (int i=0; i<n; i++) {
+    for (int i=0; i<n && _stack_top>=0; i++) {
         ComValue& stacktop = _stack[_stack_top--];
 	stacktop.AttributeValue::~AttributeValue();
     }
 }
 
 ComValue& ComTerp::pop_stack(boolean lookupsym) {
+  if (!stack_empty()) {
     ComValue& stacktop = _stack[_stack_top--];
     if (lookupsym)
       return lookup_symval(stacktop);
     else 
       return stacktop;
+  } else
+    return ComValue::nullval();
 }
 
 ComValue& ComTerp::lookup_symval(ComValue& comval) {
@@ -879,6 +908,9 @@ void ComTerp::add_defaults() {
     add_command("global", new GlobalSymbolFunc(this));
     add_command("split", new SplitStrFunc(this));
     add_command("join", new JoinStrFunc(this));
+
+    add_command("type", new TypeSymbolFunc(this));
+    add_command("class", new ClassSymbolFunc(this));
 
     add_command("postfix", new PostFixFunc(this));
     add_command("posteval", new PostEvalFunc(this));
@@ -1209,7 +1241,7 @@ void ComTerp::push_servstate() {
   _buffer = new char[_bufsiz];
   _bufptr = 0;
   _linenum = 0;
-  _just_reset = false;
+  // _just_reset = false;
   _pfcomvals = nil;
 
   if (_ctsstack_top+1 == _ctsstack_siz) {

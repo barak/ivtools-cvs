@@ -237,9 +237,9 @@ protected:
     void incr_stack(int n);
     void decr_stack(int n=1);
 
-    boolean skip_func(ComValue* topval, int& offset);
-    boolean skip_key(ComValue* topval, int& offset, int& argcnt);
-    boolean skip_arg(ComValue* topval, int& offset, int& argcnt);
+    boolean skip_func(ComValue* topval, int& offset, int offlimit);
+    boolean skip_key(ComValue* topval, int& offset, int offlimit, int& argcnt);
+    boolean skip_arg(ComValue* topval, int& offset, int offlimit, int& argcnt);
 
     void push_stack(postfix_token*);
     void token_to_comvalue(postfix_token*, ComValue*);
@@ -255,15 +255,15 @@ protected:
     virtual void pop_funcstate();
     // pop ComFuncState off stack
 
-    ComValue* _stack;
-    int _stack_top;
-    unsigned int _stack_siz;
-    boolean _quitflag;
-    char* _errbuf;
-    char* _errbuf2;
-    int _pfoff;
+    ComValue* _stack;  // stack of multi-value objects, central to the interpreter
+    int _stack_top; // current top of stack, -1 indicates empty
+    unsigned int _stack_siz; // current maximum stack size
+    boolean _quitflag; // flag that can be set to terminate interpreter
+    char* _errbuf; // buffer used for rendering error messages
+    char* _errbuf2; // ancillary buffer for rendering error messages
+    int _pfoff; // current offset in _pfbuf
     boolean _brief; // when used to produce ComValue output
-    boolean _just_reset;
+    boolean _just_reset; // flag that gets set after call to ::reset_stack()
     boolean _defaults_added; // flag for base set of commands added 
 
     ComValueTable* _localtable; // per interpreter symbol table

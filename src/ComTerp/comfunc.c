@@ -201,21 +201,23 @@ ComValue& ComFunc::stack_key_post
 }
 
 boolean ComFunc::skip_key_on_stack(int& stackptr, int& argcnt) {
-  return comterp()->skip_key(&comterp()->stack_top(), stackptr, argcnt);
+  return comterp()->skip_key(&comterp()->stack_top(), stackptr, 
+			     -comterp()->stack_height(), argcnt);
 }
 
 boolean ComFunc::skip_arg_on_stack(int& stackptr, int& argcnt) {
-  return comterp()->skip_arg(&comterp()->stack_top(), stackptr, argcnt);
+  return comterp()->skip_arg(&comterp()->stack_top(), stackptr, 
+			     -comterp()->stack_height(), argcnt);
 }
 
 boolean ComFunc::skip_key_in_expr(int& offtop, int& argcnt) {
   return comterp()->skip_key(&comterp()->_pfcomvals[comterp()->_pfnum-1], 
-			     offtop, argcnt);
+			     offtop, -comterp()->_pfnum, argcnt);
 }
 
 boolean ComFunc::skip_arg_in_expr(int& offtop, int& argcnt) {
   return comterp()->skip_arg(&comterp()->_pfcomvals[comterp()->_pfnum-1], 
-			     offtop, argcnt);
+			     offtop, -comterp()->_pfnum, argcnt);
 }
 
 ComValue& ComFunc::pop_stack() {

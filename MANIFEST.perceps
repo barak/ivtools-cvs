@@ -43,6 +43,7 @@ ComTerp/scanner.h
 ComTerp/statfunc.h
 ComTerp/strmfunc.h
 ComTerp/symbolfunc.h
+ComTerp/typefunc.h
 ComTerp/xformfunc.h
 ComUnidraw/comeditor.h
 ComUnidraw/comterp-acehandler.h
