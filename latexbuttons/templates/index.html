@@ -28,9 +28,32 @@ my final copy of the Krebs cycle:
 <h1>
 <img align=middle src="./krebs-fin.jpeg" >
 </h1>
-The use of these templates to create complex diagrams, chemical structures, etc., is
+<p>
+Here is an example of using the 16-gon template to build the main-ring of tuberactinomycin:
+<h1>
+<img align=middle src="./mainring.jpeg" >
+</h1>
+
+As you can see, the use of these templates to create complex diagrams, chemical structures, etc., is
 limited only by the imagination of the user. As covered in the Chemical and Electrical
 pages, these diagrams can then be included into your technical document by using
 the <b>psfig</b> macro in your LaTeX header.
+<p>
+<b>Tips on designing templates:</b>
+<p>
+When building a large template (n=12, 16, 20, ... 4n sides) take advantage of <b>symmetry!</b>. This
+will be difficult at first, when designing the first piece. But will result in a template
+figure, that is far easier to assemble, maintain, permute, etc. First step is to stick the
+two quarters together, as shown below:
+<h1>
+<img align=middle src="./symmetry.jpeg" >
+</h1>
+<p>
+Then you do Struct::Group to get the first half. Duplicate it (just hit "d"), then flip the
+2nd half over and connect it to top half. Last, drag to Struct::Ungroup several times and then
+drag to Struct::Group to regroup the final figure.
+<p>
+The first quarter was created using the following command (entered in the command box):
+<code> compview=multiline(100,0 , 0,0 , 92.4,38.3 , 0,0 , 70.7,70.7 , 0,0 , 38.3,92.4 , 0,0 , 0,100) </code>
 <p>
 <a href = ../index.html>up to LaTeX toolbutton page</a>
