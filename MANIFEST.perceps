@@ -28,6 +28,7 @@ ComTerp/comterpserv.h
 ComTerp/comvalue.h
 ComTerp/condfunc.h
 ComTerp/ctrlfunc.h
+ComTerp/debugfunc.h
 ComTerp/dotfunc.h
 ComTerp/helpfunc.h
 ComTerp/iofunc.h

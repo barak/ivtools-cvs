@@ -155,6 +155,8 @@ ivtools-0.8/src/ComTerp/condfunc.c
 ivtools-0.8/src/ComTerp/condfunc.h
 ivtools-0.8/src/ComTerp/ctrlfunc.c
 ivtools-0.8/src/ComTerp/ctrlfunc.h
+ivtools-0.8/src/ComTerp/debugfunc.c
+ivtools-0.8/src/ComTerp/debugfunc.h
 ivtools-0.8/src/ComTerp/dotfunc.c
 ivtools-0.8/src/ComTerp/dotfunc.h
 ivtools-0.8/src/ComTerp/helpfunc.c

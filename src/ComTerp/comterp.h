@@ -226,6 +226,12 @@ public:
     void pop_servstate();
     // pop ComTerpServ state that was saved earlier
 
+    void trace_mode(int mode) { _trace_mode = mode; }
+    // set trace mode
+
+    int trace_mode() { return _trace_mode; }
+    // return trace mode
+
 protected:
     void incr_stack();
     void incr_stack(int n);
@@ -249,7 +255,6 @@ protected:
     virtual void pop_funcstate();
     // pop ComFuncState off stack
 
-protected:
     ComValue* _stack;
     int _stack_top;
     unsigned int _stack_siz;
@@ -288,6 +293,8 @@ protected:
     ComValue* _val_for_next_func;
     // ComValue to pass to next command
 
+    int _trace_mode;
+    // trace mode
 
     friend class ComFunc;
     friend class ComterpHandler;

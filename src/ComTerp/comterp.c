@@ -32,6 +32,7 @@
 #include <ComTerp/comvalue.h>
 #include <ComTerp/condfunc.h>
 #include <ComTerp/ctrlfunc.h>
+#include <ComTerp/debugfunc.h>
 #include <ComTerp/dotfunc.h>
 #include <ComTerp/helpfunc.h>
 #include <ComTerp/iofunc.h>
@@ -124,6 +125,7 @@ void ComTerp::init() {
     _handler = nil;
     _val_for_next_func = nil;
     _func_for_next_expr = nil;
+    _trace_mode = 0;
 }
 
 
@@ -219,6 +221,11 @@ void ComTerp::eval_expr_internals(int pedepth) {
       func = (ComFunc*)sv.obj_val();
       func->push_funcstate(sv.narg(), sv.nkey(), 
 			   pedepth, sv.command_symid());
+    }
+    if (this->trace_mode()) {
+      for(int i=0; i<pedepth; i++) cerr << "    ";
+      cerr << symbol_pntr(sv.command_symid()) << ": nargs=" << sv.narg() <<
+	" nkeys=" << sv.nkey() << "\n";
     }
     func->execute();
     func->pop_funcstate();
@@ -848,6 +855,7 @@ void ComTerp::add_defaults() {
     add_command("run", new RunFunc(this));
 
     add_command("help", new HelpFunc(this));
+    add_command("trace", new TraceFunc(this));
     add_command("symid", new SymIdFunc(this));
     add_command("symval", new SymValFunc(this));
     add_command("symbol", new SymbolFunc(this));
