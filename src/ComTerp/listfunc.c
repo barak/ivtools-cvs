@@ -57,7 +57,7 @@ void ListFunc::execute() {
 	push_funcstate(1,0);
 	nextfunc.execute();
 	pop_funcstate();
-	AttributeValue* newval = new AttributeValue(pop_stack());
+	AttributeValue* newval = new AttributeValue(comterp()->pop_stack());
 	if (newval->is_unknown()) {
 	  done = true;
 	  delete newval;
