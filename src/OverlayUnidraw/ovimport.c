@@ -744,7 +744,8 @@ FILE* OvImportCmd::CheckCompression(
         compressed = true;
 
     } else {
-        rewind (file);
+        fclose (file);
+        file = fopen(pathname, "r");
         compressed = false;
     }
 
