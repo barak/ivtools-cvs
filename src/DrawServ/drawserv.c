@@ -437,8 +437,8 @@ void DrawServ::grid_message(GraphicId* grid) {
     DrawLink* link = _linklist->find_drawlink(grid);
     
     if (link) {
-      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :state %d :request 0x%08x)%c", grid->id(), 
-	       grid->selector(), LinkSelection::WaitingToBeSelected, sessionid(), '\0');
+      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :request 0x%08x)%c", grid->id(), 
+	       grid->selector(), sessionid(), '\0');
       SendCmdString(link, buf);
     }
   }
