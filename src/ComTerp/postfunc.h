@@ -82,7 +82,7 @@ public:
 };
 
 //: while-loop command for ComTerp.
-// val=while([testexpr [bodyexpr]] :notnil :until :body expr ) -- while loop.
+// val=while([testexpr [bodyexpr]] :nilchk :until :body expr ) -- while loop.
 class WhileFunc : public ComFunc {
 public:
     WhileFunc(ComTerp*);
@@ -90,7 +90,7 @@ public:
 
     virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "val=%s([testexpr [bodyexpr]] :notnil :until :body expr ) -- while loop"; }
+      return "val=%s([testexpr [bodyexpr]] :nilchk :until :body expr ) -- while loop"; }
 };
 
 #endif /* !defined(_postfunc_h) */

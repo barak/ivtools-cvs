@@ -165,14 +165,14 @@ WhileFunc::WhileFunc(ComTerp* comterp) : ComFunc(comterp) {
 void WhileFunc::execute() {
   static int body_symid = symbol_add("body");
   static int until_symid = symbol_add("until");
-  static int notnil_symid = symbol_add("notnil");
+  static int nilchk_symid = symbol_add("nilchk");
   ComValue untilflag(stack_key_post_eval(until_symid));
-  ComValue notnilflag(stack_key_post_eval(notnil_symid));
+  ComValue nilchkflag(stack_key_post_eval(nilchk_symid));
   ComValue* bodyexpr = nil;
   while (1) {
     if (untilflag.is_false()) {
       ComValue doneexpr(stack_arg_post_eval(0));
-      if (notnilflag.is_false() ? doneexpr.is_false() : doneexpr.is_unknown()) break;
+      if (nilchkflag.is_false() ? doneexpr.is_false() : doneexpr.is_unknown()) break;
     }
     delete bodyexpr;
     ComValue keybody(stack_key_post_eval(body_symid, false, ComValue::unkval(), true));
@@ -182,7 +182,7 @@ void WhileFunc::execute() {
       bodyexpr = new ComValue(keybody);
     if (untilflag.is_true()) {
       ComValue doneexpr(stack_arg_post_eval(0));
-      if (notnilflag.is_false() ? doneexpr.is_true() : doneexpr.is_unknown()) break;
+      if (nilchkflag.is_false() ? doneexpr.is_true() : doneexpr.is_unknown()) break;
     }
   }
   reset_stack();
