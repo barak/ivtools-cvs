@@ -41,16 +41,43 @@ public:
 
 };
 
-//: , (stream) operator.
+//: stream command
 class StreamFunc : public StrmFunc {
 public:
     StreamFunc(ComTerp*);
 
     virtual void execute();
     virtual const char* docstring() { 
-      return ",, is the stream operator"; }
+      return "strm=%s(list) -- convert list to stream"; }
 
     CLASS_SYMID("StreamFunc");
+
+};
+
+//: ,, (concat) operator.
+class ConcatFunc : public StrmFunc {
+public:
+    ConcatFunc(ComTerp*);
+
+    virtual void execute();
+    virtual boolean post_eval() { return true; }
+    virtual const char* docstring() { 
+      return ",, is the concat operator"; }
+
+    CLASS_SYMID("ConcatFunc");
+
+};
+
+//: hidden func used by next command for ,, (concat) operator.
+class ConcatNextFunc : public StrmFunc {
+public:
+    ConcatNextFunc(ComTerp*);
+
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "hidden func used by next command for ,, (concat) operator."; }
+
+    CLASS_SYMID("ConcatNextFunc");
 
 };
 
