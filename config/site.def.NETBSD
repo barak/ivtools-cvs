@@ -56,7 +56,7 @@ uninstall::								@@\
 
 #ifndef ImakeFlags
 #define ImakeFlags \							@@\
-		      -T IMAKE_TEMPLATE -Ui386 \			@@\
+		      -T IMAKE_TEMPLATE -U$(MACHINE_ARCH) \		@@\
 		      ImakeIncludes\					@@\
 		      $(SPECIAL_IMAKEFLAGS)
 #endif
