@@ -32,6 +32,7 @@
 #include <ComUnidraw/comterp-iohandler.h>
 #include <ComUnidraw/dialogfunc.h>
 #include <ComUnidraw/nfunc.h>
+#include <ComUnidraw/pixelfunc.h>
 #include <ComUnidraw/plotfunc.h>
 
 #include <ComTerp/ctrlfunc.h>
@@ -207,6 +208,10 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("dtos", new DrawingToScreenFunc(comterp, this));
     comterp->add_command("stod", new ScreenToDrawingFunc(comterp, this));
+
+    comterp->add_command("poke", new PixelPokeFunc(comterp, this));
+    comterp->add_command("pcols", new PixelColsFunc(comterp, this));
+    comterp->add_command("prows", new PixelRowsFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
