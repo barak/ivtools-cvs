@@ -80,13 +80,16 @@ public:
 };
 
 //: * (multiply) operator.
+// multiplies numerics and matrices
 class MpyFunc : public NumFunc {
 public:
     MpyFunc(ComTerp*);
 
     virtual void execute();
     virtual const char* docstring() { 
-      return "* is the multiply operator"; }
+      return "* is the multiply operator for numerics and matrices"; }
+
+    AttributeValueList* matrix_mpy(AttributeValueList*, AttributeValueList*);
 
 };
 

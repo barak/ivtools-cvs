@@ -76,7 +76,7 @@ void ListFunc::execute() {
 	return;
       }
 
-    } else
+    } else if (nargs())
       avl->Append(new AttributeValue(listv));
   }
   Resource::ref(avl);
