@@ -68,7 +68,7 @@ void PostFixFunc::execute() {
       out << "{" << val.narg() << "|" << val.nkey() << "}";
     else if (val.is_type(AttributeValue::KeywordType))
       out << "(" << val.keynarg_val() << ")";
-    out << " ";
+    out << ((i+1>topptr) ? "\n" : " ");
   }
   comterp()->brief(oldbrief);
   reset_stack();

@@ -243,7 +243,7 @@ void ComTerp::load_sub_expr() {
 	push_stack(argoffval);
       }
     }
-    if (!_pfcomvals[_pfoff].is_null())
+    if (!_pfcomvals[_pfoff].is_blank())
       push_stack(_pfcomvals[_pfoff]);
     _pfoff++;
     if (stack_top().type() == ComValue::CommandType && 
@@ -376,7 +376,13 @@ boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
     return false;
   } else {
     offset--;
+    if (curr.is_type(ComValue::BlankType)) {
+      boolean status = skip_arg(topval, offset, tokcnt);
+      tokcnt++;
+      return status;
+    }
     tokcnt++;
+
     if (curr.narg() || curr.nkey()) {
       int count = 0;
       while (count<(curr.narg() + curr.nkey())) {
