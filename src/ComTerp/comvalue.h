@@ -75,7 +75,7 @@ public:
     // FloatType constructor.
     ComValue(double val);
     // DoubleType constructor.
-    ComValue(int class_symid val, void* ptr);
+    ComValue(int class_symid, void* ptr);
     // ObjectType constructor.
     ComValue(AttributeValueList* listptr);
     // ArrayType constructor.
