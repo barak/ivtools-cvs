@@ -186,7 +186,7 @@ boolean Raster::init_shared_memory() {
     XDisplay* dpy = dr->display_;
 
     int i;
-    shared_memory = XShmQueryVersion(dpy, &i, &i, &i) ? true : false; 
+    shared_memory = XShmQueryExtension(dpy) ? true : false; 
 
     if (shared_memory) {
         image = XShmCreateImage(
