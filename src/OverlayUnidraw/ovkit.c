@@ -892,6 +892,12 @@ MenuItem* OverlayKit::MakeStructureMenu() {
     MakeMenu(mbi, new BackCmd(new ControlInfo("Send to Back",
 				      KLBL_BACK, CODE_BACK)),
 	     "Send to Back   ");
+    MakeMenu(mbi, new PullCmd(new ControlInfo("Pull Up One"
+                                     )),
+           "Pull Up One   ");
+    MakeMenu(mbi, new PushCmd(new ControlInfo("Push Down One"
+                                    )),
+           "Push Down One   ");
 
     return mbi;
 }
