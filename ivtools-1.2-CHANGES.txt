@@ -1,0 +1,45 @@
+June 3rd, 2004  ivtools-1.2
+
+ivtools-1.2 sets a new direction for the package, toward peer-to-peer
+drawing chat.  ivtools' drawserv, the editor that incorporates every ivtool
+mechanism to date (multi-frame, graph-editing, integrated scripting
+language) has been extended to support a unique kind of
+small-granularity shared whiteboard.  
+
+This work was based on the pre-existing networked scripting capability
+of ivtools' comdraw.  Then the pasting of any graphic was intercepted,
+and the graphic serialized into a command that could be communicated
+to other drawing editors to keep them in sync.
+
+Then a connection management system was established, that supported
+two-way peer-to-peer links between drawing editors.  In addition the
+return path on each socket was used for detecting timeout, which
+causes the connection to be dropped.
+
+Finally, a distributed mutually-exclusive graphic selection mechanism
+was created, where every drawing editor is aware of who currently has
+a graphic selected or who had it selected last if it is not currently
+selected.  When one drawing editor tries to select a graphic, it first
+requests that permission from the last selector (after determining it
+is unselected).
+
+Now you can link to other drawing editors, draw graphics and see them
+appear remotely (although only in black and white), and exercise the
+distributed selection mechanism.  Four pieces remain to be developed:
+1) support for full-up graphic state transmittal (it is sent, but not
+interpreted on the remote end);, 2) support for transmission of the
+complete set of drawing editor commands; 3) extending the distributed
+mutual-exclusion mechanism to select pseudo-graphics to acquire global
+permission for connection, pasting, moving front-to-back, and
+grouping; and 4) a two-tier mechanism for invoking select(), that will
+allow the bypass of selection requests while engaged in lengthy direct
+manipulations.
+
+If all this interests you, and you'd like to help, build this version
+of ivtools with ACE support, subscribe to the ivtools-dev mailing, and
+help me do some testing, programming, thinking, whatever.  Or visit
+http://www.ivtools.org to make a donation to support this work.  Thanks.
+
+Scott Johnston
+
+
