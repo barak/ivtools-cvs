@@ -87,6 +87,10 @@
 <p>
 <a name=Allotment href=Allotment.html>Allotment</a>:<br>
 <p>
+<a name=AlphaTransFunc href=AlphaTransFunc.html>AlphaTransFunc</a>:<br>
+<p>
+<a name=AlphaTransparentRasterCmd href=AlphaTransparentRasterCmd.html>AlphaTransparentRasterCmd</a>:<br>
+<p>
 <a name=AndFunc href=AndFunc.html>AndFunc</a>:<br>
 <p>
 <a name=AnnotateDialog href=AnnotateDialog.html>AnnotateDialog</a>:<br>
@@ -428,9 +432,11 @@
 <li> <a href=CharFunc.html>CharFunc</a></li>
 <li> <a href=ClassSymbolFunc.html>ClassSymbolFunc</a></li>
 <li> <a href=ComterpPauseFunc.html>ComterpPauseFunc</a></li>
+<li> <a href=ComterpStackHeightFunc.html>ComterpStackHeightFunc</a></li>
 <li> <a href=ComterpTraceFunc.html>ComterpTraceFunc</a></li>
 <li> <a href=CondFunc.html>CondFunc</a></li>
 <li> <a href=CosFunc.html>CosFunc</a></li>
+<li> <a href=DegToRadFunc.html>DegToRadFunc</a></li>
 <li> <a href=DotFunc.html>DotFunc</a></li>
 <li> <a href=DotNameFunc.html>DotNameFunc</a></li>
 <li> <a href=DotValFunc.html>DotValFunc</a></li>
@@ -459,11 +465,13 @@
 <li> <a href=LongFunc.html>LongFunc</a></li>
 <li> <a href=NilFunc.html>NilFunc</a></li>
 <li> <a href=NumFunc.html>NumFunc</a></li>
+<li> <a href=PiFunc.html>PiFunc</a></li>
 <li> <a href=PostEvalFunc.html>PostEvalFunc</a></li>
 <li> <a href=PostFixFunc.html>PostFixFunc</a></li>
 <li> <a href=PowFunc.html>PowFunc</a></li>
 <li> <a href=PrintFunc.html>PrintFunc</a></li>
 <li> <a href=QuitFunc.html>QuitFunc</a></li>
+<li> <a href=RadToDegFunc.html>RadToDegFunc</a></li>
 <li> <a href=RandFunc.html>RandFunc</a></li>
 <li> <a href=RasterFunc.html>RasterFunc</a></li>
 <li> <a href=RemoteFunc.html>RemoteFunc</a></li>
@@ -489,6 +497,7 @@
 <li> <a href=VarFunc.html>VarFunc</a></li>
 <li> <a href=WhileFunc.html>WhileFunc</a></li>
 <li> <a href=XformFunc.html>XformFunc</a></li>
+<li> <a href=XposeFunc.html>XposeFunc</a></li>
 <p>
 <a name=ComFuncState href=ComFuncState.html>ComFuncState</a>:<br>
 <p>
@@ -516,6 +525,7 @@
 <li> <a href=AboutCmd.html>AboutCmd</a></li>
 <li> <a href=AlignCmd.html>AlignCmd</a></li>
 <li> <a href=AlignToGridCmd.html>AlignToGridCmd</a></li>
+<li> <a href=AlphaTransparentRasterCmd.html>AlphaTransparentRasterCmd</a></li>
 <li> <a href=ArrowCmd.html>ArrowCmd</a></li>
 <li> <a href=BackCmd.html>BackCmd</a></li>
 <li> <a href=BrushCmd.html>BrushCmd</a></li>
@@ -633,6 +643,8 @@
 <a name=ComterpPauseFunc href=ComterpPauseFunc.html>ComterpPauseFunc</a>:<br>
 <li> <a href=ComterpStepFunc.html>ComterpStepFunc</a></li>
 <p>
+<a name=ComterpStackHeightFunc href=ComterpStackHeightFunc.html>ComterpStackHeightFunc</a>:<br>
+<p>
 <a name=ComterpStepFunc href=ComterpStepFunc.html>ComterpStepFunc</a>:<br>
 <p>
 <a name=ComterpTraceFunc href=ComterpTraceFunc.html>ComterpTraceFunc</a>:<br>
@@ -706,6 +718,8 @@
 <p>
 <a name=CreatePolygonFunc href=CreatePolygonFunc.html>CreatePolygonFunc</a>:<br>
 <p>
+<a name=CreateRasterFunc href=CreateRasterFunc.html>CreateRasterFunc</a>:<br>
+<p>
 <a name=CreateRectFunc href=CreateRectFunc.html>CreateRectFunc</a>:<br>
 <p>
 <a name=CreateTextFunc href=CreateTextFunc.html>CreateTextFunc</a>:<br>
@@ -757,6 +771,8 @@
 <a name=DecrAfterFunc href=DecrAfterFunc.html>DecrAfterFunc</a>:<br>
 <p>
 <a name=DecrFunc href=DecrFunc.html>DecrFunc</a>:<br>
+<p>
+<a name=DegToRadFunc href=DegToRadFunc.html>DegToRadFunc</a>:<br>
 <p>
 <a name=DeleteCmd href=DeleteCmd.html>DeleteCmd</a>:<br>
 <li> <a href=GraphDeleteCmd.html>GraphDeleteCmd</a></li>
@@ -848,6 +864,8 @@
 <a name=DrawIdrawView href=DrawIdrawView.html>DrawIdrawView</a>:<br>
 <p>
 <a name=DrawKit href=DrawKit.html>DrawKit</a>:<br>
+<p>
+<a name=DrawingToGraphicFunc href=DrawingToGraphicFunc.html>DrawingToGraphicFunc</a>:<br>
 <p>
 <a name=DrawingToScreenFunc href=DrawingToScreenFunc.html>DrawingToScreenFunc</a>:<br>
 <p>
@@ -1013,6 +1031,7 @@
 <p>
 <a name=Font href=Font.html>Font</a>:<br>
 <li> <a href=PSFont.html>PSFont</a></li>
+<li> <a href=PSFont31.html>PSFont31</a></li>
 <p>
 <a name=FontBoundingBox href=FontBoundingBox.html>FontBoundingBox</a>:<br>
 <p>
@@ -1270,6 +1289,8 @@
 <li> <a href=IdrawComp.html>IdrawComp</a></li>
 <p>
 <a name=GraphicMaster href=GraphicMaster.html>GraphicMaster</a>:<br>
+<p>
+<a name=GraphicToDrawingFunc href=GraphicToDrawingFunc.html>GraphicToDrawingFunc</a>:<br>
 <p>
 <a name=GraphicView href=GraphicView.html>GraphicView</a>:<br>
 <li> <a href=ConnectorView.html>ConnectorView</a></li>
@@ -2203,6 +2224,8 @@
 <p>
 <a name=PSFont href=PSFont.html>PSFont</a>:<br>
 <p>
+<a name=PSFont31 href=PSFont31.html>PSFont31</a>:<br>
+<p>
 <a name=PSIdraw href=PSIdraw.html>PSIdraw</a>:<br>
 <p>
 <a name=PSLine href=PSLine.html>PSLine</a>:<br>
@@ -2337,6 +2360,8 @@
 <p>
 <a name=Perspective href=Perspective.html>Perspective</a>:<br>
 <p>
+<a name=PiFunc href=PiFunc.html>PiFunc</a>:<br>
+<p>
 <a name=Picture href=Picture.html>Picture</a>:<br>
 <p>
 <a name=PicturePS href=PicturePS.html>PicturePS</a>:<br>
@@ -2346,6 +2371,18 @@
 <a name=PinGraphic href=PinGraphic.html>PinGraphic</a>:<br>
 <p>
 <a name=PinView href=PinView.html>PinView</a>:<br>
+<p>
+<a name=PixelClipFunc href=PixelClipFunc.html>PixelClipFunc</a>:<br>
+<p>
+<a name=PixelColsFunc href=PixelColsFunc.html>PixelColsFunc</a>:<br>
+<p>
+<a name=PixelFlushFunc href=PixelFlushFunc.html>PixelFlushFunc</a>:<br>
+<p>
+<a name=PixelPeekFunc href=PixelPeekFunc.html>PixelPeekFunc</a>:<br>
+<p>
+<a name=PixelPokeFunc href=PixelPokeFunc.html>PixelPokeFunc</a>:<br>
+<p>
+<a name=PixelRowsFunc href=PixelRowsFunc.html>PixelRowsFunc</a>:<br>
 <p>
 <a name=Placement href=Placement.html>Placement</a>:<br>
 <p>
@@ -2488,6 +2525,8 @@
 <li> <a href=OvQuitCmd.html>OvQuitCmd</a></li>
 <p>
 <a name=QuitFunc href=QuitFunc.html>QuitFunc</a>:<br>
+<p>
+<a name=RadToDegFunc href=RadToDegFunc.html>RadToDegFunc</a>:<br>
 <p>
 <a name=RadioButton href=RadioButton.html>RadioButton</a>:<br>
 <p>
@@ -3284,6 +3323,7 @@
 <a name=UnidrawFunc href=UnidrawFunc.html>UnidrawFunc</a>:<br>
 <li> <a href=AcknowledgeBoxFunc.html>AcknowledgeBoxFunc</a></li>
 <li> <a href=AddToolButtonFunc.html>AddToolButtonFunc</a></li>
+<li> <a href=AlphaTransFunc.html>AlphaTransFunc</a></li>
 <li> <a href=AutoNewFrameFunc.html>AutoNewFrameFunc</a></li>
 <li> <a href=BarPlotFunc.html>BarPlotFunc</a></li>
 <li> <a href=BrushFunc.html>BrushFunc</a></li>
@@ -3297,13 +3337,16 @@
 <li> <a href=CreateMultiLineFunc.html>CreateMultiLineFunc</a></li>
 <li> <a href=CreateOpenSplineFunc.html>CreateOpenSplineFunc</a></li>
 <li> <a href=CreatePolygonFunc.html>CreatePolygonFunc</a></li>
+<li> <a href=CreateRasterFunc.html>CreateRasterFunc</a></li>
 <li> <a href=CreateRectFunc.html>CreateRectFunc</a></li>
 <li> <a href=CreateTextFunc.html>CreateTextFunc</a></li>
 <li> <a href=DeleteFunc.html>DeleteFunc</a></li>
+<li> <a href=DrawingToGraphicFunc.html>DrawingToGraphicFunc</a></li>
 <li> <a href=DrawingToScreenFunc.html>DrawingToScreenFunc</a></li>
 <li> <a href=ExportFunc.html>ExportFunc</a></li>
 <li> <a href=FontFunc.html>FontFunc</a></li>
 <li> <a href=FrameFunc.html>FrameFunc</a></li>
+<li> <a href=GraphicToDrawingFunc.html>GraphicToDrawingFunc</a></li>
 <li> <a href=GrowGroupFunc.html>GrowGroupFunc</a></li>
 <li> <a href=HandlesFunc.html>HandlesFunc</a></li>
 <li> <a href=HighlightFunc.html>HighlightFunc</a></li>
@@ -3330,6 +3373,12 @@
 <li> <a href=PasteFunc.html>PasteFunc</a></li>
 <li> <a href=PasteModeFunc.html>PasteModeFunc</a></li>
 <li> <a href=PatternFunc.html>PatternFunc</a></li>
+<li> <a href=PixelClipFunc.html>PixelClipFunc</a></li>
+<li> <a href=PixelColsFunc.html>PixelColsFunc</a></li>
+<li> <a href=PixelFlushFunc.html>PixelFlushFunc</a></li>
+<li> <a href=PixelPeekFunc.html>PixelPeekFunc</a></li>
+<li> <a href=PixelPokeFunc.html>PixelPokeFunc</a></li>
+<li> <a href=PixelRowsFunc.html>PixelRowsFunc</a></li>
 <li> <a href=PointsFunc.html>PointsFunc</a></li>
 <li> <a href=ReadOnlyFunc.html>ReadOnlyFunc</a></li>
 <li> <a href=RotateFunc.html>RotateFunc</a></li>
@@ -3475,6 +3524,8 @@
 <a name=XYSlider href=XYSlider.html>XYSlider</a>:<br>
 <p>
 <a name=XformFunc href=XformFunc.html>XformFunc</a>:<br>
+<p>
+<a name=XposeFunc href=XposeFunc.html>XposeFunc</a>:<br>
 <p>
 <a name=XtSession href=XtSession.html>XtSession</a>:<br>
 <li> <a href=XtUdSession.html>XtUdSession</a></li>

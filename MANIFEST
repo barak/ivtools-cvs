@@ -71,6 +71,8 @@ ivtools/doc/classes/Allocation.html
 ivtools/doc/classes/AllocationInfo.html
 ivtools/doc/classes/AllocationTable.html
 ivtools/doc/classes/Allotment.html
+ivtools/doc/classes/AlphaTransFunc.html
+ivtools/doc/classes/AlphaTransparentRasterCmd.html
 ivtools/doc/classes/AndFunc.html
 ivtools/doc/classes/AnnotateDialog.html
 ivtools/doc/classes/AnnotateTool.html
@@ -225,8 +227,11 @@ ivtools/doc/classes/Compositor.html
 ivtools/doc/classes/ComterpHandler.html
 ivtools/doc/classes/ComterpHandler__2.html
 ivtools/doc/classes/ComterpPauseFunc.html
+ivtools/doc/classes/ComterpStackHeightFunc.html
 ivtools/doc/classes/ComterpStepFunc.html
 ivtools/doc/classes/ComterpTraceFunc.html
+ivtools/doc/classes/ConcatFunc.html
+ivtools/doc/classes/ConcatNextFunc.html
 ivtools/doc/classes/CondFunc.html
 ivtools/doc/classes/ConfirmBoxFunc.html
 ivtools/doc/classes/ConfirmDialog.html
@@ -254,6 +259,7 @@ ivtools/doc/classes/CreateMoveFrameCmd.html
 ivtools/doc/classes/CreateMultiLineFunc.html
 ivtools/doc/classes/CreateOpenSplineFunc.html
 ivtools/doc/classes/CreatePolygonFunc.html
+ivtools/doc/classes/CreateRasterFunc.html
 ivtools/doc/classes/CreateRectFunc.html
 ivtools/doc/classes/CreateTextFunc.html
 ivtools/doc/classes/Creator.html
@@ -273,6 +279,7 @@ ivtools/doc/classes/Deck.html
 ivtools/doc/classes/Deck__2.html
 ivtools/doc/classes/DecrAfterFunc.html
 ivtools/doc/classes/DecrFunc.html
+ivtools/doc/classes/DegToRadFunc.html
 ivtools/doc/classes/DeleteCmd.html
 ivtools/doc/classes/DeleteFrameCmd.html
 ivtools/doc/classes/DeleteFrameData.html
@@ -307,6 +314,8 @@ ivtools/doc/classes/DrawIdrawComp.html
 ivtools/doc/classes/DrawIdrawScript.html
 ivtools/doc/classes/DrawIdrawView.html
 ivtools/doc/classes/DrawKit.html
+ivtools/doc/classes/DrawingToGraphicFunc.html
+ivtools/doc/classes/DrawingToScreenFunc.html
 ivtools/doc/classes/DupCmd.html
 ivtools/doc/classes/EachFunc.html
 ivtools/doc/classes/EdgeComp.html
@@ -340,6 +349,7 @@ ivtools/doc/classes/ExpFunc.html
 ivtools/doc/classes/ExportChooser.html
 ivtools/doc/classes/ExportChooserImpl.html
 ivtools/doc/classes/ExportEnumEditor.html
+ivtools/doc/classes/ExportFunc.html
 ivtools/doc/classes/Extension.html
 ivtools/doc/classes/Extent.html
 ivtools/doc/classes/ExternView.html
@@ -458,6 +468,7 @@ ivtools/doc/classes/GraphicComp.html
 ivtools/doc/classes/GraphicCompTool.html
 ivtools/doc/classes/GraphicComps.html
 ivtools/doc/classes/GraphicMaster.html
+ivtools/doc/classes/GraphicToDrawingFunc.html
 ivtools/doc/classes/GraphicView.html
 ivtools/doc/classes/GraphicViews.html
 ivtools/doc/classes/GravityCmd.html
@@ -756,6 +767,7 @@ ivtools/doc/classes/PSClosedSpline.html
 ivtools/doc/classes/PSColor.html
 ivtools/doc/classes/PSEllipse.html
 ivtools/doc/classes/PSFont.html
+ivtools/doc/classes/PSFont31.html
 ivtools/doc/classes/PSFont__2.html
 ivtools/doc/classes/PSIdraw.html
 ivtools/doc/classes/PSLine.html
@@ -813,11 +825,18 @@ ivtools/doc/classes/PatternRep.html
 ivtools/doc/classes/PatternVar.html
 ivtools/doc/classes/PatternVarView.html
 ivtools/doc/classes/Perspective.html
+ivtools/doc/classes/PiFunc.html
 ivtools/doc/classes/Picture.html
 ivtools/doc/classes/PicturePS.html
 ivtools/doc/classes/PinComp.html
 ivtools/doc/classes/PinGraphic.html
 ivtools/doc/classes/PinView.html
+ivtools/doc/classes/PixelClipFunc.html
+ivtools/doc/classes/PixelColsFunc.html
+ivtools/doc/classes/PixelFlushFunc.html
+ivtools/doc/classes/PixelPeekFunc.html
+ivtools/doc/classes/PixelPokeFunc.html
+ivtools/doc/classes/PixelRowsFunc.html
 ivtools/doc/classes/Placement.html
 ivtools/doc/classes/Point.html
 ivtools/doc/classes/PointObj.html
@@ -868,6 +887,7 @@ ivtools/doc/classes/PushButton.html
 ivtools/doc/classes/PushCmd.html
 ivtools/doc/classes/QuitCmd.html
 ivtools/doc/classes/QuitFunc.html
+ivtools/doc/classes/RadToDegFunc.html
 ivtools/doc/classes/RadioButton.html
 ivtools/doc/classes/RadioEnumEditor.html
 ivtools/doc/classes/RandFunc.html
@@ -959,6 +979,7 @@ ivtools/doc/classes/SaveAsChooser.html
 ivtools/doc/classes/SaveAsChooserImpl.html
 ivtools/doc/classes/SaveCompAsCmd.html
 ivtools/doc/classes/SaveCompCmd.html
+ivtools/doc/classes/SaveFileFunc.html
 ivtools/doc/classes/ScaleCmd.html
 ivtools/doc/classes/ScaleDialog.html
 ivtools/doc/classes/ScaleFunc.html
@@ -970,6 +991,7 @@ ivtools/doc/classes/ScalingLineList.html
 ivtools/doc/classes/ScalingRect.html
 ivtools/doc/classes/Scanner.html
 ivtools/doc/classes/Scene.html
+ivtools/doc/classes/ScreenToDrawingFunc.html
 ivtools/doc/classes/ScribblePointerCmd.html
 ivtools/doc/classes/ScribbleVertexManip.html
 ivtools/doc/classes/ScrollBar.html
@@ -1191,6 +1213,7 @@ ivtools/doc/classes/XSlider.html
 ivtools/doc/classes/XYMarker.html
 ivtools/doc/classes/XYSlider.html
 ivtools/doc/classes/XformFunc.html
+ivtools/doc/classes/XposeFunc.html
 ivtools/doc/classes/YSlider.html
 ivtools/doc/classes/ZoomCmd.html
 ivtools/doc/classes/ZoomDialog.html
@@ -1219,6 +1242,7 @@ ivtools/doc/classes/regexp.html
 ivtools/doc/classes/rpcbuf.html
 ivtools/doc/classes/rpcstream.html
 ivtools/doc/classes/smindex.html
+ivtools/doc/classes/streamval_struct.html
 ivtools/doc/classes/symval_struct.html
 ivtools/doc/classes/tiff.html
 ivtools/doc/classes/token.html
@@ -1603,8 +1627,8 @@ ivtools/timestamp.gif
 ivtools/timestamp.html
 ivtools/tjlogo.gif
 ivtools/unidraw.ps
-ivtools/unidrawpic.ps
 ivtools/unidrawinfo.html
+ivtools/unidrawpic.ps
 ivtools/vectaport-logo.gif
 ivtools/vhclserv-logo-square.gif
 ivtools/why-ivtools.html

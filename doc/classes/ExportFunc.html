@@ -1,14 +1,14 @@
 
-<html><head><TITLE>Description of PSColor</TITLE><BASE TARGET="_parent" ></head>
+<html><head><TITLE>Description of ExportFunc</TITLE><BASE TARGET="_parent" ></head>
 <body BGCOLOR=#FFFFFF>
 <FONT FACE=Helvetica>
 <DL><DT>
 <FONT SIZE=4> 
   class  
 </FONT>
-<FONT SIZE=5><B>PSColor</B></FONT>
+<FONT SIZE=5><B>ExportFunc</B></FONT>
 
-  <FONT SIZE=4> : public <A HREF="Color.html" >Color</A>  </FONT>
+  <FONT SIZE=4> : public <A HREF="UnidrawFunc.html" >UnidrawFunc</A>  </FONT>
 
 
 <A HREF="index.html">(Return to index)</A>
@@ -16,7 +16,7 @@
 <br><br>
 
 <DD><FONT FACE=Times SIZE=4>
-"PostScript" color object<br><br>
+command to export a graphic file<br><br>
 
 <B>Type:</B><br>
 <UL>
@@ -27,23 +27,23 @@ Instantiable
 
 <B>Base Classes:</B><br>
 <UL><FONT FACE=Helvetica SIZE=3>
-public <A HREF="Color.html" >Color</A> 
+public <A HREF="UnidrawFunc.html" >UnidrawFunc</A> 
 </FONT></UL>
 <br>
 
 
-<A HREF=derivedclasses.html#PSColor><B>Derived Classes</B></A>
+<A HREF=derivedclasses.html#ExportFunc><B>Derived Classes</B></A>
 <p>
 
 
 <B>Include file:</B><br>
 <UL><FONT FACE=Helvetica SIZE=3>
-Unidraw/Graphic/pspaint.h
+ComUnidraw/unifunc.h
 </FONT></UL>
 <br>
 
 
- <B>Description:</B><P>  <a href=../man3.1/pspaint.html>man page</a>
+ <B>Description:</B><P>  export(compview[,compview[,...compview]] [path] :host host_str :port port_int :socket :string|:str :eps :idraw) -- export in drawtool (or other) format "; 
   <br><br>
 </DL></FONT>
 
@@ -51,9 +51,9 @@ Unidraw/Graphic/pspaint.h
 
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
 
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="GetIntensities(ColorIntensity&#38;&#38;&#38;COMMColorIntensity&#38;&#38;&#38;COMMColorIntensity&#38;)">
-    <B>GetIntensities</B> (ColorIntensity&#38;, ColorIntensity&#38;, ColorIntensity&#38;) </FONT> 
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ExportFunc(ComTerp*c&#38;&#38;COMMEditor*e&#38;&#38;COMMconstchar*appname=nil)">
+    <B>ExportFunc</B> (<A HREF="ComTerp.html" >ComTerp</A>* c, <A HREF="Editor.html" >Editor</A>* e, const char* appname=nil) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -69,8 +69,8 @@ Unidraw/Graphic/pspaint.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>const char* 
-    <A NAME="GetName()">
-    <B>GetName</B> () </FONT> 
+    <A NAME="appname()">
+    <B>appname</B> () </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -85,9 +85,9 @@ Unidraw/Graphic/pspaint.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="None()">
-    <B>None</B> () </FONT> 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="appname(constchar*name)">
+    <B>appname</B> (const char* name) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -102,9 +102,9 @@ Unidraw/Graphic/pspaint.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>
-    <A NAME="PSColor()">
-    <B>PSColor</B> () </FONT> 
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="docstring()">
+    <B>docstring</B> () </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -119,9 +119,9 @@ Unidraw/Graphic/pspaint.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>
-    <A NAME="PSColor(ColorIntensity&#38;&#38;COMMColorIntensity&#38;&#38;COMMColorIntensity&#38;&#38;COMMconstchar*)">
-    <B>PSColor</B> (ColorIntensity, ColorIntensity, ColorIntensity, const char*) </FONT> 
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="execute()">
+    <B>execute</B> () </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -137,8 +137,8 @@ Unidraw/Graphic/pspaint.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual 
-    <A NAME="~PSColor()">
-    <B>~PSColor</B> () </FONT> 
+    <A NAME="~ExportFunc()">
+    <B>~ExportFunc</B> () </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -160,26 +160,25 @@ Unidraw/Graphic/pspaint.h
 
 <FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
 
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="_appname">
+    <B>_appname</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>char* 
-    <A NAME="_name">
-    <B>_name</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        stores name passed into constructor
- <br> 
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="_none">
-    <B>_none</B>
+    <A NAME="_docstring">
+    <B>_docstring</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
@@ -193,14 +192,14 @@ Unidraw/Graphic/pspaint.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>ColorIntensity 
-    <A NAME="_r,_g,_b">
-    <B>_r, _g, _b</B>
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="compout(OverlayComp*&#38;&#38;COMMostream*)">
+    <B>compout</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, ostream*) </FONT> 
+    
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        stores intensities passed to ctor
- <br> 
+      
       <br>
       
       

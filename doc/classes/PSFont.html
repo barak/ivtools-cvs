@@ -16,7 +16,7 @@
 <br><br>
 
 <DD><FONT FACE=Times SIZE=4>
-
+"PostScript" font object<br><br>
 
 <B>Type:</B><br>
 <UL>
@@ -38,123 +38,107 @@ public <A HREF="Font.html" >Font</A>
 
 <B>Include file:</B><br>
 <UL><FONT FACE=Helvetica SIZE=3>
-InterViews/psfont.h
+Unidraw/Graphic/pspaint.h
 </FONT></UL>
 <br>
 
 
-
+ <B>Description:</B><P>  <a href=../man3.1/pspaint.html>man page</a>
+  <br><br>
 </DL></FONT>
 
 
 
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
 
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="GetLineHt()">
+    <B>GetLineHt</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="GetName()">
+    <B>GetName</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="GetPrintFont()">
+    <B>GetPrintFont</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="GetPrintFontAndSize()">
+    <B>GetPrintFontAndSize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="GetPrintSize()">
+    <B>GetPrintSize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>
-    <A NAME="PSFont(constchar*psname&#38;&#38;COMMCoordsize&#38;&#38;COMMconstchar*name&#38;&#38;COMMfloatscale)">
-    <B>PSFont</B> (const char* psname, Coord size, const char* name, float scale) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual const char* 
-    <A NAME="encoding()">
-    <B>encoding</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static boolean 
-    <A NAME="exists(constchar*psname)">
-    <B>exists</B> (const char* psname) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual const char* 
-    <A NAME="name()">
-    <B>name</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual Coord 
-    <A NAME="size()">
-    <B>size</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual Coord 
-    <A NAME="width(constchar*&#38;&#38;COMMint)">
-    <B>width</B> (const char*, int) const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual Coord 
-    <A NAME="width(long)">
-    <B>width</B> (long) const</FONT> 
+    <A NAME="PSFont(constchar*&#38;&#38;COMMconstchar*&#38;&#38;COMMconstchar*)">
+    <B>PSFont</B> (const char*, const char*, const char*) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -190,6 +174,95 @@ InterViews/psfont.h
 
 
 
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_lineHt">
+    <B>_lineHt</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        printsize converted to int
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_name">
+    <B>_name</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        name used by window system
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_printfont">
+    <B>_printfont</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        name used by printer
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_printfontandsize">
+    <B>_printfontandsize</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        name and size separated by a blank
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_printsize">
+    <B>_printsize</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        scale used by printer
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
 
 
 
