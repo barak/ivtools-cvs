@@ -198,5 +198,27 @@ public:
 
 };
 
+//: command to convert from screen to drawing coordinates
+// dx,dy=stod(sx,sy) -- convert from screen to drawing coordinates
+class ScreenToDrawingFunc : public UnidrawFunc {
+public:
+    ScreenToDrawingFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "dx,dy=%s(sx,sy) -- convert from screen to drawing coordinates."; }
+
+};
+
+//: command to convert from drawing to screen coordinates
+// sx,sy=dtos(dx,dy) -- convert from drawing to screen coordinates
+class DrawingToScreenFunc : public UnidrawFunc {
+public:
+    DrawingToScreenFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "sx,sy=%s(dx,dy) -- convert from drawing to screen coordinates."; }
+
+};
+
 #endif /* !defined(_unifunc_h) */
 

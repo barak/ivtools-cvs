@@ -30,6 +30,7 @@
 #include <OverlayUnidraw/ovcomps.h>
 #include <OverlayUnidraw/ovimport.h>
 #include <OverlayUnidraw/ovselection.h>
+#include <OverlayUnidraw/ovviewer.h>
 #include <OverlayUnidraw/ovviews.h>
 #include <OverlayUnidraw/scriptview.h>
 #include <ComGlyph/comtextedit.h>
@@ -558,5 +559,59 @@ void AddToolButtonFunc::execute() {
     } else {
       push_stack(ComValue::nullval());
     }
+}
+
+/*****************************************************************************/
+
+ScreenToDrawingFunc::ScreenToDrawingFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void ScreenToDrawingFunc::execute() {
+  ComValue coordsv(stack_arg(0));
+  reset_stack();
+  OverlayEditor* ed = (OverlayEditor*)GetEditor();
+  OverlayViewer* viewer = ed ? (OverlayViewer*)ed->GetViewer() : nil;
+  if (viewer && coordsv.is_array() && coordsv.array_len()==2) {
+    AttributeValueList *avl = coordsv.array_val();
+    Iterator i;
+    avl->First(i);
+    float sx = avl->GetAttrVal(i)->float_val();
+    avl->Next(i);
+    float sy = avl->GetAttrVal(i)->float_val();
+    float dx, dy;
+    viewer->ScreenToDrawing(sx, sy, dx, dy);
+    AttributeValueList* navl = new AttributeValueList();
+    ComValue retval(navl);
+    navl->Append(new ComValue(dx));
+    navl->Append(new ComValue(dy));
+    push_stack(retval);
+  }
+}
+
+/*****************************************************************************/
+
+DrawingToScreenFunc::DrawingToScreenFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void DrawingToScreenFunc::execute() {
+  ComValue coordsv(stack_arg(0));
+  reset_stack();
+  OverlayEditor* ed = (OverlayEditor*)GetEditor();
+  OverlayViewer* viewer = ed ? (OverlayViewer*)ed->GetViewer() : nil;
+  if (viewer && coordsv.is_array() && coordsv.array_len()==2) {
+    AttributeValueList *avl = coordsv.array_val();
+    Iterator i;
+    avl->First(i);
+    float dx = avl->GetAttrVal(i)->float_val();
+    avl->Next(i);
+    float dy = avl->GetAttrVal(i)->float_val();
+    float sx, sy;
+    viewer->DrawingToScreen(dx, dy, sx, sy);
+    AttributeValueList* navl = new AttributeValueList();
+    ComValue retval(navl);
+    navl->Append(new ComValue(/* (int) */sx));
+    navl->Append(new ComValue(/* (int) */sy));
+    push_stack(retval);
+  }
 }
 
