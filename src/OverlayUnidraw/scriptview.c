@@ -111,33 +111,36 @@ void OverlayScript::Brush (ostream& out) {
 	  out << w;
 	} else {
 	  out << "stroke-width: " << w << "; ";
-	  out << "stroke-dasharray: ";
 
-	  /* reverse dash bit field */
-	  int reverse_p = 0;
-	  for (int i=0; i<16; i++) {
-	    reverse_p <<= 1;
-	    reverse_p |= p & 0x1;
-	    p >>= 1;
-	  }
-
-	  /* output count of on/off runs */
-	  boolean lastbit=1;
-	  int dashlen = 0;
-	  for (int i=0; i<16; i++) {
-	    boolean bit = reverse_p & 1;
-	    if (lastbit==bit) dashlen++;
-	    if (lastbit != bit || i==15)  {
-	      out << dashlen;
-	      if (i != 15 ) out << ", ";
-	      dashlen=1;
+	  if (p != 0xffff) {
+	    out << "stroke-dasharray: ";
+	    
+	    /* reverse dash bit field */
+	    int reverse_p = 0;
+	    for (int i=0; i<16; i++) {
+	      reverse_p <<= 1;
+	      reverse_p |= p & 0x1;
+	      p >>= 1;
 	    }
-	    lastbit = bit;
-	    reverse_p >>= 1;
+	    
+	    /* output count of on/off runs */
+	    boolean lastbit=1;
+	    int dashlen = 0;
+	    for (int i=0; i<16; i++) {
+	      boolean bit = reverse_p & 1;
+	      if (lastbit==bit) dashlen++;
+	      if (lastbit != bit || i==15)  {
+		out << dashlen;
+		if (i != 15 ) out << ", ";
+		dashlen=1;
+	      }
+	      lastbit = bit;
+	      reverse_p >>= 1;
+	    }
+	    out << "; ";
 	  }
-	  out << "; ";
 	}
-
+	
       }
     }
 }
@@ -156,6 +159,10 @@ void OverlayScript::FgColor (ostream& out) {
 	out << "," << r << "," << g << "," << b;
       } else {
 	out << "stroke: rgb(" 
+	    << (int)(r*100) << "%,"
+	    << (int)(g*100) << "%,"
+	    << (int)(b*100) << "%) ";
+	out << "fill-color: rgb(" 
 	    << (int)(r*100) << "%,"
 	    << (int)(g*100) << "%,"
 	    << (int)(b*100) << "%) ";
@@ -244,6 +251,21 @@ void OverlayScript::Pattern (ostream& out) {
 	  out << " :graypat " << graylevel;
 	}
       }
+    }
+}
+
+void OverlayScript::Transformation(ostream& out, char* keyword, Graphic* gr = nil) {
+    Transformer* t = gr ? gr->GetTransformer() : GetOverlayComp()->GetGraphic()->GetTransformer();
+    Transformer identity;
+
+    if (t != nil && *t != identity) {
+	char key[strlen(keyword)+4];
+	sprintf(key," :%s ",keyword);
+	float a00, a01, a10, a11, a20, a21;
+	t->GetEntries(a00, a01, a10, a11, a20, a21);
+	out << key;
+	out << a00 << "," << a01 << "," << a10 << ",";
+	out << a11 << "," << a20 << "," << a21;
     }
 }
 

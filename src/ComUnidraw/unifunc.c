@@ -512,8 +512,8 @@ void ExportFunc::execute() {
 	compout(comp, out);
 	*out << ")\n";
       } else {
-	OverlayPS::idraw_format(idraw_flag.is_true());
 	OverlayPS* psv = (OverlayPS*) comp->Create(POSTSCRIPT_VIEW);
+	psv->idraw_format(idraw_flag.is_true());
 	comp->Attach(psv);
 	psv->Update();
 	psv->Emit(*out);

@@ -179,6 +179,7 @@ protected:
     virtual void Font(ostream& out);
     virtual void Pattern(ostream& out);
     virtual void Transformation(ostream& out);
+    virtual void Transformation(ostream& out, char* keyword, Graphic* gr = nil);
     virtual void Annotation(ostream& out);
 
     void Attributes(ostream& out);
