@@ -91,6 +91,10 @@ ListAtFunc::ListAtFunc(ComTerp* comterp) : ComFunc(comterp) {
 void ListAtFunc::execute() {
   ComValue listv(stack_arg(0));
   ComValue nv(stack_arg(1, false, ComValue::zeroval()));
+  static int set_symid = symbol_add("set");
+  ComValue setv(stack_key(set_symid, false, ComValue::blankval(), true /* return blank if no :set */));
+  boolean setflag = !setv.is_blank();
+
   reset_stack();
 
   if (listv.is_type(ComValue::ArrayType) && !nv.is_nil() && nv.int_val()>=0) {
@@ -100,6 +104,8 @@ void ListAtFunc::execute() {
       Iterator it;
       for (avl->First(it); !avl->Done(it); avl->Next(it)) {
 	if (count==nv.int_val()) {
+	  if (setflag) 
+	    *avl->GetAttrVal(it) = setv;
 	  push_stack(*avl->GetAttrVal(it));
 	  return;
 	}
@@ -114,6 +120,8 @@ void ListAtFunc::execute() {
       for (al->First(it); !al->Done(it); al->Next(it)) {
 	if (count==nv.int_val()) {
 	  ComValue retval(Attribute::class_symid(), (void*) al->GetAttr(it));
+	  if (setflag)
+	    *al->GetAttr(it)->Value() = setv;
 	  push_stack(retval);
 	  return;
 	}

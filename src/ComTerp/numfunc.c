@@ -667,7 +667,8 @@ CharFunc::CharFunc(ComTerp* comterp) : ComFunc(comterp) {}
 
 void CharFunc::execute() {
     ComValue& operand = stack_arg(0);
-    ComValue result(operand.char_val(), ComValue::CharType);
+    ComValue result(operand.char_val(), 
+		    operand.is_nil() ? ComValue::UnknownType : ComValue::CharType);
     reset_stack();
     push_stack(result);
 }
@@ -676,7 +677,8 @@ ShortFunc::ShortFunc(ComTerp* comterp) : ComFunc(comterp) {}
 
 void ShortFunc::execute() {
     ComValue& operand = stack_arg(0);
-    ComValue result(operand.short_val(), ComValue::ShortType);
+    ComValue result(operand.short_val(), 
+		    operand.is_nil() ? ComValue::UnknownType : ComValue::ShortType);
     reset_stack();
     push_stack(result);
 }
@@ -685,7 +687,8 @@ IntFunc::IntFunc(ComTerp* comterp) : ComFunc(comterp) {}
 
 void IntFunc::execute() {
     ComValue& operand = stack_arg(0);
-    ComValue result(operand.int_val(), ComValue::IntType);
+    ComValue result(operand.int_val(),  
+		    operand.is_nil() ? ComValue::UnknownType : ComValue::IntType);
     reset_stack();
     push_stack(result);
 }
@@ -695,6 +698,7 @@ LongFunc::LongFunc(ComTerp* comterp) : ComFunc(comterp) {}
 void LongFunc::execute() {
     ComValue& operand = stack_arg(0);
     ComValue result(operand.long_val());
+    if (operand.is_nil()) result.type(ComValue::UnknownType);
     reset_stack();
     push_stack(result);
 }
@@ -704,6 +708,7 @@ FloatFunc::FloatFunc(ComTerp* comterp) : ComFunc(comterp) {}
 void FloatFunc::execute() {
     ComValue& operand = stack_arg(0);
     ComValue result(operand.float_val());
+    if (operand.is_nil()) result.type(ComValue::UnknownType);
     reset_stack();
     push_stack(result);
 }
@@ -713,6 +718,7 @@ DoubleFunc::DoubleFunc(ComTerp* comterp) : ComFunc(comterp) {}
 void DoubleFunc::execute() {
     ComValue& operand = stack_arg(0);
     ComValue result(operand.double_val());
+    if (operand.is_nil()) result.type(ComValue::UnknownType);
     reset_stack();
     push_stack(result);
 }

@@ -63,8 +63,7 @@ void AssignFunc::execute() {
       Attribute* attr = (Attribute*)operand1.obj_val();
       attr->Value(operand2);
     } else {
-        cerr << "assignment to something other than a symbol ignored\n";
-	// should say something about assignment from something other than a symbol as well.
+        cerr << "assignment to something other than a symbol or attribute ignored\n";
 	delete operand2;
     }
     push_stack(*operand2);

@@ -186,7 +186,7 @@ Run contents of file then exit.
  
  lst=list([olst|strm]) -- create list, copy list, or convert stream
 
- val=at(list|attrlist n) -- return nth item in a list
+ val=at(list|attrlist n :set val) -- return (or set) nth item in a list
 
  num=size(list|attrlist) -- return size of a list
 
@@ -237,6 +237,7 @@ Run contents of file then exit.
 				 
  sym=attrname(attribute) -- return name field of dotted pair
  val=attrval(attribute) -- return value field of dotted pair
+ dotlst=dot(name) -- construct empty dotted pair list	
 
  quit() -- quit the interpreter
 

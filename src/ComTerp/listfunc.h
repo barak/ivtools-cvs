@@ -48,14 +48,14 @@ public:
 };
 
 //: list member command for ComTerp.
-// val=at(list|attrlist n) -- return the nth item in a list.
+// val=at(list|attrlist n :set val) -- return (or set) the nth item in a list.
 class ListAtFunc : public ComFunc {
 public:
     ListAtFunc(ComTerp*);
 
     virtual void execute();
     virtual const char* docstring() { 
-      return "val=at(list|attrlist n) -- return the nth item in a list"; }
+      return "val=at(list|attrlist n :set val) -- return (or set) the nth item in a list"; }
 };
 
 //: list size command for ComTerp.

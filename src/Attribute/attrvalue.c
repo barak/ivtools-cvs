@@ -836,6 +836,10 @@ ostream& operator<< (ostream& out, const AttributeValue& sv) {
 	  out << "<" << symbol_pntr(svp->class_symid()) << ">";
 	  break;
 
+	case AttributeValue::StreamType:
+	  out << "<stream:" << svp->stream_mode() << ">";
+	  break;
+	    
 	default:
 	  out << "nil";
 	  break;
