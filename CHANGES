@@ -365,6 +365,7 @@ Interpreter Changes
 	applied, but in this command overrides that and returns the
 	symbol which is the attribute name.
 
+- perhaps now building on FreeBSD.
 
 	* enable the command interpreter in the text editor panel at
 	the bottom of the flipbook user interface.

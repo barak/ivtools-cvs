@@ -38,7 +38,7 @@
 #define SharedLibraryCmd(ldobjs,extra_flags) gcc -shared extra_flags -o $@ ldobjs
 
 /*
- * Install a shared library on NetBSD.
+ * Install a shared library on FreeBSD.
  */
 #ifndef InstallDynamicSharedLibrary
 #define InstallDynamicSharedLibrary(libname,rev,dest)			@@\
