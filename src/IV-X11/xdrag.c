@@ -38,6 +38,7 @@
 #include <IV-X11/xdrag.h>
 #include <X11/Xatom.h>
 #include <OS/host.h>
+#include <OS/math.h>
 #include <OS/types.h>
 #include <string.h>
 #include <strstream.h>

@@ -30,6 +30,7 @@
 #include <IV-X11/xdisplay.h>
 #include <IV-X11/xselection.h>
 #include <IV-X11/xwindow.h>
+#include <OS/math.h>
 #include <OS/string.h>
 #include <OS/table.h>
 #include <X11/Xatom.h>
