@@ -41,6 +41,8 @@
 
 #include <InterViews/transformer.h>
 
+#include <OS/math.h>
+
 #include <stream.h>
 
 /*****************************************************************************/
@@ -320,8 +322,8 @@ void OverlayIdrawPS::GridSpacing (ostream& out) {
 }
 
 void OverlayIdrawPS::ConstProcs (ostream& out) {
-    int arrowWidth = round(ARROWWIDTH*ivpoints);
-    int arrowHeight = round(ARROWHEIGHT*ivpoints);
+    int arrowWidth = Math::round(ARROWWIDTH*ivpoints);
+    int arrowHeight = Math::round(ARROWHEIGHT*ivpoints);
 
     out << "/arrowHeight " << arrowHeight << " def\n";
     out << "/arrowWidth " << arrowWidth << " def\n\n";

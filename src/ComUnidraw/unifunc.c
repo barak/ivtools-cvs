@@ -52,6 +52,7 @@
 #include <stdio.h>
 #include <strstream.h>
 #include <unistd.h>
+#include <fstream.h>
 
 #define TITLE "UnidrawFunc"
 
@@ -361,9 +362,11 @@ void ExportFunc::execute() {
     ACE_SOCK_Stream* socket = nil;
 #endif
 
+
+#if __GNUG__<3
     filebuf fbuf;
     if (file.is_type(ComValue::StringType))
-        fbuf.open(file.string_ptr(), "w");
+        fbuf.open(file.string_ptr(), input);
 
     else if (sock.is_true()) {
 #ifdef HAVE_ACE
@@ -401,11 +404,63 @@ void ExportFunc::execute() {
             fbuf.attach(fileno(stdout));
     }
 
+#else
+
+    filebuf* pfbuf;
+    FILE* ofptr = nil;
+
+    if (file.is_type(ComValue::StringType)) {
+      pfbuf = new filebuf();
+      pfbuf->open(file.string_ptr(), input);
+    }
+
+    else if (sock.is_true()) {
+#ifdef HAVE_ACE
+	ComTerpServ* terp = (ComTerpServ*)comterp();
+	ComterpHandler* handler = (ComterpHandler*)terp->handler();
+	if (handler) {
+	  ACE_SOCK_Stream peer = handler->peer();
+	  ofptr = fdopen(peer.get_handle());
+	  pfbuf = new fbuf(ofptr, output);
+	}
+	else 
+#endif
+	  pfbuf = new filebuf(stdout, output);
+    }
+
+    else {
+#ifdef HAVE_ACE
+        const char* hoststr = nil;
+        const char* portstr = nil;
+        hoststr = host.type()==ComValue::StringType ? host.string_ptr() : nil;
+        portstr = port.type()==ComValue::StringType ? port.string_ptr() : nil;
+        u_short portnum = portstr ? atoi(portstr) : port.ushort_val();
+    
+        if (portnum) {
+            socket = new ACE_SOCK_Stream;
+            ACE_SOCK_Connector conn;
+            ACE_INET_Addr addr (portnum, hoststr);
+    
+            if (conn.connect (*socket, addr) == -1)
+                ACE_ERROR ((LM_ERROR, "%p\n", "open"));
+            pfbuf = new filebuf(ofptr = fdopen(socket->get_handle(), "r"), output);
+        } else if (comterp()->handler() && comterp()->handler()->get_handle()>-1) {
+            pfbuf = new filebuf(ofptr = fdopen(comterp()->handler()->get_handle(), "r"), output);
+        } else
+#endif
+            pfbuf = new filebuf(stdout, output);
+    }
+
+#endif
     ostream* out;
     if (string.is_true()||str.is_true())
       out = new strstream();
     else
+#if __GNUG__<3      
       out = new ostream(&fbuf);
+#else
+      out = new ostream(pfbuf);
+#endif
 
     if (!compviewv.is_array()) {
 
@@ -438,6 +493,11 @@ void ExportFunc::execute() {
       push_stack(retval);
     }
     delete out;
+
+#if __GNUG__>=3
+    if (ofptr) fclose(ofptr);
+    delete pfbuf;
+#endif    
     
 #ifdef HAVE_ACE
     if (sock.is_false() && socket) {
