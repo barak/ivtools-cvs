@@ -208,9 +208,6 @@ void FileHelper::close_all() {
   }
 
   for (ListItr(StreamList) k(_sl); k.more(); k.next()) {
-#if __GNUG__>=3
-    delete k.cur()->rdbuf();
-#endif
     delete k.cur();
   }
 
@@ -761,7 +758,7 @@ FILE* OvImportCmd::CheckCompression(
 
 
 const char* OvImportCmd::ReadCreator (const char* pathname) {
-    FILE* file = fopen(pathname, "r+");
+    FILE* file = fopen(pathname, "r");
     const int creator_size = 32;
     static char creator[creator_size];
 
@@ -2194,7 +2191,7 @@ FILE* OvImportCmd::Portable_Raster_Open(
     int& ncols, int& nrows, boolean& compressed, boolean& tiled, int& twidth, 
     int& theight
 ) {
-    FILE* file = fopen(pathname, "r+");
+    FILE* file = fopen(pathname, "r");
     file = CheckCompression(file, pathname, compressed);
   
     tiled = false;
@@ -2617,7 +2614,7 @@ GraphicComp* OvImportCmd::PBM_Image (const char* pathname) {
 
 Bitmap* OvImportCmd::PBM_Bitmap (const char* pathname) {
     Bitmap* bitmap = nil;
-    FILE* file = fopen(pathname, "r+");
+    FILE* file = fopen(pathname, "r");
     boolean compressed;
     file = CheckCompression(file, pathname, compressed);
 
