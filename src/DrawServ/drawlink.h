@@ -29,8 +29,10 @@
 
 #include <InterViews/observe.h>
 
+class AckBackHandler;
 class DrawServ;
 class DrawServHandler;
+
 
 #include <OS/table.h>
 declareTable(IncomingSidTable,unsigned int,unsigned int)
@@ -92,11 +94,17 @@ public:
     void remote_linkid(int id) { _remote_linkid = id; }
     // get remote DrawLink id
 
-    void handler(DrawServHandler* handler) { _handler = handler; }
+    void comhandler(DrawServHandler* handler) { _comhandler = handler; }
     // set DrawServHandler associated with incoming connection
 
-    DrawServHandler* handler() { return _handler; }
+    DrawServHandler* comhandler() { return _comhandler; }
     // get DrawServHandler associated with incoming connection
+
+    void ackhandler(AckBackHandler* handler) { _ackhandler = handler; }
+    // set AckBackHandler associated with incoming connection
+
+    AckBackHandler* ackhandler() { return _ackhandler; }
+    // get AckBackHandler associated with incoming connection
 
     IncomingSidTable* incomingsidtable() { return _incomingsidtable; }
     // return pointer to table mapping incoming sessionid's to locally unique sessionid's
@@ -106,6 +114,9 @@ public:
 
     int state() { return _state; }
     // get state of DrawLink
+
+    ACE_SOCK_Stream* socket() { return _socket; }
+    // return pointer to connected socket.
 
 protected:
     const char* _host;
@@ -124,7 +135,8 @@ protected:
     ACE_SOCK_Stream* _socket;
 #endif
 
-    DrawServHandler* _handler;
+    DrawServHandler* _comhandler;
+    AckBackHandler* _ackhandler;
 };
 
 #endif

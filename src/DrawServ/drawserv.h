@@ -116,6 +116,9 @@ public:
   unsigned int sessionid() { return _sessionid; }
   // current unique session id.
 
+  void remove_sids(DrawLink*);
+  // remove all SessionId's associated with this DrawLink
+
   void grid_message(GraphicId* grid);
   // generate graphic id selection message
 

@@ -907,6 +907,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
       if (top_before == _stack_top)
 	status = 2;
       err_str( _errbuf, BUFSIZ, "comterp" );
+      errno = 0;
       if (strlen(_errbuf)==0) {
 	if (quitflag()) {
 	  status = -1;
@@ -939,6 +940,10 @@ int ComTerp::run(boolean one_expr, boolean nested) {
   if (status==1 && _pfnum==0) status=2;
   if (status==1 && !errorflag) status=3;
   if (nested && status!=2) _stack_top--;
+  if (errno == EPIPE) {
+    status = -1;
+    fprintf(stderr, "broken pipe detected: comterp quit\n");
+  }
   return status;
 }
 

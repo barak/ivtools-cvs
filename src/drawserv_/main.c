@@ -216,6 +216,7 @@ void handle_badpipe(int i) {
 
 int main (int argc, char** argv) {
 
+#if 0
     /* ignore broken pipe, so socket writes that are in error return EPIPE */
 #if 0
     struct sigaction oldaction, newaction;
@@ -230,6 +231,7 @@ int main (int argc, char** argv) {
     func = signal(SIGPIPE, &handle_badpipe);
     if (func==SIG_ERR) 
       fprintf(stderr, "SIG_ERR returned from signal, errno = %d\n", errno);
+#endif
 #endif
   
 #ifdef HAVE_ACE

@@ -25,6 +25,7 @@
  * Implementation of Drawlink class.
  */
 
+#include <DrawServ/ackback-handler.h>
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawserv.h>
 #include <DrawServ/drawserv-handler.h>
@@ -53,7 +54,8 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
   _socket = nil;
   _conn = nil;
 
-  _handler = nil;
+  _comhandler = nil;
+  _ackhandler = nil;
   _incomingsidtable = new IncomingSidTable(32);
 }
 
@@ -82,6 +84,14 @@ int DrawLink::open() {
     return -1;
   } else {
     _socket->enable(ACE_NONBLOCK);
+
+    /* set up handler to monitor backtalk */
+    ackhandler(new AckBackHandler);
+    ackhandler()->drawlink(this);
+    ackhandler()->set_handle(_socket->get_handle());
+    if (ComterpHandler::reactor_singleton()->register_handler(ackhandler(), ACE_Event_Handler::READ_MASK|ACE_Event_Handler::TIMER_MASK)==-1)
+      fprintf(stderr, "drawserv: error registering ackback handler (handle==%d)\n", _socket->get_handle());
+
     fileptr_filebuf obuf(_socket->get_handle(), ios_base::out, false, static_cast<size_t>(BUFSIZ));
     ostream out(&obuf);
     out << "drawlink(\"";
@@ -104,6 +114,10 @@ int DrawLink::open() {
     out << ")\n";
     out.flush();
     _ok = true;
+
+    /* schedule timer on ackback link, to detect timeout */
+    ackhandler()->start_timer();
+
     return 0;
   }
 #else
@@ -115,8 +129,15 @@ int DrawLink::open() {
 int DrawLink::close() {
   fprintf(stderr, "Closing link to %s (%s) port # %d (lid=%d, rid=%d)\n", 
 	  hostname(), althostname(), portnum(), local_linkid(), remote_linkid());
-  if (handler()) handler()->drawlink(nil);
+  if (comhandler()) comhandler()->drawlink(nil);
   if (_socket) {
+    if (ackhandler()) {
+      if (ackhandler()->get_handle() !=-1)
+	if (ComterpHandler::reactor_singleton()->remove_handler(ackhandler(), ACE_Event_Handler::READ_MASK|ACE_Event_Handler::TIMER_MASK)==-1)
+	  cerr << "drawserv: error removing ackback handler\n";
+      delete ackhandler();
+      ackhandler(nil);
+    }
     if (_socket->close () == -1)
       ACE_ERROR ((LM_ERROR, "%p\n", "close"));
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1996 Vectaport Inc.
+ * Copyright (c) 2004 Scott E. Johnston
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -26,19 +26,52 @@
 #include <DrawServ/drawserv.h>
 #include <DrawServ/drawserv-handler.h>
 
+int DrawServHandler::_sigpipe_handler_initialized = 0;
+
 /*****************************************************************************/
 
 // Default constructor.
 
 DrawServHandler::DrawServHandler () : UnidrawComterpHandler()
 {
+  _drawlink = nil;
+  if (!_sigpipe_handler_initialized) {
+    if (ComterpHandler::reactor_singleton()->register_handler 
+	(SIGPIPE, this) == -1)
+      ACE_DEBUG ((LM_ERROR, 
+		  "(%P|%t) can't register signal handler with reactor\n"));
+    _sigpipe_handler_initialized = 1;
+    _sigpipe_handler = 1;
+  } else
+    _sigpipe_handler = 0;
+}
+
+int DrawServHandler::open (void * ptr)
+{
+  ComterpHandler::open(ptr);
+  return 0;
 }
 
 void DrawServHandler::destroy (void) {
+  if (_sigpipe_handler) {
+    if (ComterpHandler::reactor_singleton()->remove_handler 
+	(SIGPIPE, (ACE_Sig_Action*)nil) == -1)
+      ACE_DEBUG ((LM_ERROR, 
+		  "(%P|%t) can't remove signal handler from reactor\n"));
+    _sigpipe_handler = _sigpipe_handler_initialized = 0;
+  }
   ComterpHandler::destroy();
   if (drawlink()) {
     ((DrawServ*)unidraw)->linkdown(drawlink());
     drawlink(nil);
   }
+}
+
+int DrawServHandler::handle_signal(int signum, siginfo_t* s, ucontext_t* u) {
+  if (signum==SIGPIPE) {
+    fprintf(stderr, "ignoring SIGPIPE because we don't know what handle it is on\n");
+  } else
+    fprintf(stderr, "unknown signal handled %d\n", signum);
+  return 0;
 }
 #endif /* HAVE_ACE */

@@ -135,7 +135,7 @@ StrEditDialog* StrEditDialog::map(Window* window, const char* message,
   }
   
   StrEditDialog* dialog = new StrEditDialog(message, string, extra, custom);
-  Resource::ref(dialog);
+  // Resource::ref(dialog);
   dialog->map_for(window);
   if (title)
     kit.pop_style();

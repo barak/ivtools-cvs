@@ -35,6 +35,7 @@
 #include <Unidraw/editor.h>
 #include <Unidraw/iterator.h>
 
+#include <IVGlyph/gdialogs.h>
 #include <IVGlyph/stredit.h>
 #include <IVGlyph/textedit.h>
 #include <IVGlyph/textview.h>
@@ -70,7 +71,7 @@ void RemoteConnectPopupAction::execute() {
   StrEditDialog::action_custom(new RemoteConnectAction(dialog), nil);
 #else
     WidgetKit& kit = *WidgetKit::instance();
-    ConnectionsDialog* dlog = new ConnectionsDialog(((DrawServ*)unidraw)->linklist(), &kit, kit.style());
+    ConnectionsDialog* dlog = new ConnectionsDialog(_editor, ((DrawServ*)unidraw)->linklist(), &kit, kit.style());
     dlog->ref();
     dlog->map_for(_editor->GetWindow());
 #endif
@@ -126,13 +127,14 @@ friend class ConnectionsDialog;
     void update_text(boolean);
 };
 
-ConnectionsDialog::ConnectionsDialog(DrawLinkList* list, WidgetKit* kit, Style* s) 
+ConnectionsDialog::ConnectionsDialog(Editor* ed, DrawLinkList* list, WidgetKit* kit, Style* s) 
 : Dialog(nil, s)
 {
   impl_ = new ConnectionsDialogImpl;
   ConnectionsDialogImpl& adi = *impl_;
   adi.kit_ = kit;
   adi.init(list, this, s);
+  _ed = ed;
 }
 
 ConnectionsDialog::~ConnectionsDialog() {
@@ -224,7 +226,11 @@ void ConnectionsDialogImpl::connect() {
   if (hoststr->length() > 0) {
     int portnum=20002;
     if (portstr->length() > 0) portnum = atoi(portstr->string());
-    ((DrawServ*)unidraw)->linkup(hoststr->string(), portnum, 0);
+    if(((DrawServ*)unidraw)->linkup(hoststr->string(), portnum, 0)==nil) {
+      char buffer[BUFSIZ];
+      snprintf(buffer, BUFSIZ, "%s:%d", hoststr->string(), portnum);
+      GAcknowledgeDialog::map(dialog_->GetEditor()->GetWindow(), "Connection refused", buffer, "Connection refused");
+    }
   }
 }
 

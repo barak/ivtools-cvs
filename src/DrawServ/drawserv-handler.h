@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1996,1999 Vectaport Inc.
+ * Copyright (c) 2004 Scott E. Johnston
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -28,6 +28,7 @@
 
 #include <ComUnidraw/comterp-acehandler.h>
 
+class AckBackHandler;
 class DrawLink;
 
 //: specialized UnidrawComterpHandler for integration into DrawServ
@@ -46,8 +47,16 @@ public:
   virtual void destroy (void);
   // traps disconnects
 
+  virtual int open (void *);
+  // open handler hook.
+
+  virtual int handle_signal(int, siginfo_t*, ucontext_t*);
+  // handle signals
+
 protected:
   DrawLink* _drawlink;
+  static int _sigpipe_handler_initialized;
+  int _sigpipe_handler;
 
 };
 

@@ -59,16 +59,19 @@ protected:
 
 class ConnectionsDialogImpl;
 class DrawLinkList;
+class Editor;
 class Style;
 class WidgetKit;
 
 //: dialog for editing list of current connections
 class ConnectionsDialog : public Dialog {
 public:
-    ConnectionsDialog(DrawLinkList*, WidgetKit*, Style*);
+    ConnectionsDialog(Editor*, DrawLinkList*, WidgetKit*, Style*);
     virtual ~ConnectionsDialog();
+    Editor* GetEditor() { return _ed; }
 protected:
     ConnectionsDialogImpl* impl_;
+    Editor* _ed;
 };
 
 #include <InterViews/_leave.h>

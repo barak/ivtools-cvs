@@ -65,6 +65,7 @@ ComUtil/comterp.h
 ComUtil/comutil.h
 ComUtil/util.h
 Dispatch/netinet_in.h
+DrawServ/ackback-handler.h
 DrawServ/drawcatalog.h
 DrawServ/drawclasses.h
 DrawServ/drawcomps.h

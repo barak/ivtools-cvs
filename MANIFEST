@@ -274,6 +274,8 @@ ivtools-1.1/src/Dispatch/rpcstream.c
 ivtools-1.1/src/Dispatch/rpcwriter.c
 ivtools-1.1/src/DrawServ/Imakefile
 ivtools-1.1/src/DrawServ/Makefile
+ivtools-1.1/src/DrawServ/ackback-handler.c
+ivtools-1.1/src/DrawServ/ackback-handler.h
 ivtools-1.1/src/DrawServ/drawcatalog.c
 ivtools-1.1/src/DrawServ/drawcatalog.h
 ivtools-1.1/src/DrawServ/drawclasses.h

@@ -25,6 +25,7 @@
  * Implementation of DrawServ class.
  */
 
+#include <DrawServ/ackback-handler.h>
 #include <DrawServ/draweditor.h>
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawlinklist.h>
@@ -117,10 +118,9 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
     link->remote_linkid(remote_id);
     if (state==DrawLink::one_way && comterp && comterp->handler()) {
       ((DrawServHandler*)comterp->handler())->drawlink(link);
-      link->handler((DrawServHandler*)comterp->handler());
+      link->comhandler((DrawServHandler*)comterp->handler());
     }
-    link->open();
-    if (link && link->ok()) {
+    if (link->open()==0 && link->ok()) {
       _linklist->add_drawlink(link);
       return link;
     } else {
@@ -143,7 +143,7 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
       curlink->state(DrawLink::two_way);
       if (comterp && comterp->handler()) {
 	((DrawServHandler*)comterp->handler())->drawlink(curlink);
-	curlink->handler((DrawServHandler*)comterp->handler());
+	curlink->comhandler((DrawServHandler*)comterp->handler());
       }
       fprintf(stderr, "link up with %s(%s) via port %d\n", 
 	      curlink->hostname(), curlink->althostname(), portnum);
@@ -164,9 +164,10 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
 }
 
 int DrawServ::linkdown(DrawLink* link) {
-  if (_linklist->Includes(link)) {
+  if (link && _linklist->Includes(link)) {
     _linklist->Remove(link);
     link->close();
+    remove_sids(link);
     delete link;
     return 0;
   } else
@@ -334,7 +335,7 @@ void DrawServ::DistributeCmdString(const char* cmdstring) {
   _linklist->First(i);
   while (!_linklist->Done(i)) {
     DrawLink* link = _linklist->GetDrawLink(i);
-    if (link) {
+    if (link && link->state()==DrawLink::two_way) {
       int fd = link->handle();
       if (fd>=0) {
 	fileptr_filebuf fbuf(fd, ios_base::out, false, static_cast<size_t>(BUFSIZ));
@@ -342,6 +343,7 @@ void DrawServ::DistributeCmdString(const char* cmdstring) {
 	out << cmdstring;
 	out << "\n";
 	out.flush();
+	link->ackhandler()->start_timer();
       }
     }
     _linklist->Next(i);
@@ -359,6 +361,7 @@ void DrawServ::SendCmdString(DrawLink* link, const char* cmdstring) {
       out << cmdstring;
       out << "\n";
       out.flush();
+      link->ackhandler()->start_timer();
     }
   }
 }
@@ -568,6 +571,20 @@ void DrawServ::print_sidtable() {
 	   link ? link->local_linkid() : 9999, link ? link->remote_linkid() : 9999, 
 	   sid->pid(), sid->hostid(), sid->username(), sid->hostname());
     it.next();
+  }
+}
+
+void DrawServ::remove_sids(DrawLink* link) {
+  SessionIdTable* table = sessionidtable();
+  SessionIdTable_Iterator it(*table);
+  while(it.more()) {
+    SessionId* sid = (SessionId*)it.cur_value();
+    DrawLink* testlink = sid->drawlink();
+    unsigned int altid = it.cur_key();
+    it.next();
+    if (testlink==link) 
+      if (!table->find_and_remove((void*)sid, altid)) 
+	fprintf(stderr, "unable to remove SessionId's associated with DrawLink\n");
   }
 }
 
