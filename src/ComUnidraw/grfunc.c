@@ -729,9 +729,10 @@ void SelectFunc::execute() {
     }
 
     if (newSel){
+      sel->Clear();
       delete sel;
       _ed->SetSelection(newSel);
-      newSel->Update();
+      newSel->Update(viewer);
       unidraw->Update();
     }
     reset_stack();
