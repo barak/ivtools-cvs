@@ -37,3 +37,18 @@ void AcknowledgeBoxFunc::execute() {
   reset_stack();
   GAcknowledgeDialog::post(GetEditor()->GetWindow(), msgstrv.symbol_ptr());
 }
+
+/*****************************************************************************/
+
+ConfirmBoxFunc::ConfirmBoxFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void ConfirmBoxFunc::execute() {
+  ComValue msgstrv(stack_arg(0));
+  reset_stack();
+  int status = GConfirmDialog::post(GetEditor()->GetWindow(), msgstrv.symbol_ptr());
+  ComValue retval(status);
+  push_stack(retval);
+}
+
+

@@ -63,6 +63,7 @@ public:
     boolean mapped();
     virtual boolean run();
     virtual void dismiss(boolean accept);
+    boolean accepted() { return accepted_; }
 private:
     boolean done_;
     boolean accepted_;

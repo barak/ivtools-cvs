@@ -181,6 +181,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     comterp->add_command("attrlist", new GrAttrListFunc(comterp));
 
     comterp->add_command("acknowledgebox", new AcknowledgeBoxFunc(comterp, this));
+    comterp->add_command("confirmbox", new ConfirmBoxFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {

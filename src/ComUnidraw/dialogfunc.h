@@ -37,4 +37,15 @@ public:
 
 };
 
+//: command to popup a confirmation dialog box
+// acknowledgebox() -- popup a confirmation dialog box, and return 1, 0, or -1 if cancelled.
+class ConfirmBoxFunc : public UnidrawFunc {
+public:
+    ConfirmBoxFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "%s(message_str) -- popup a confirmation dialog box, and return 1, 0, or -1 if cancelled"; }
+
+};
+
 #endif /* !defined(_dialog_func_h) */
