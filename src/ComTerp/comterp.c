@@ -222,12 +222,28 @@ void ComTerp::eval_expr_internals(int pedepth) {
       func->push_funcstate(sv.narg(), sv.nkey(), 
 			   pedepth, sv.command_symid());
     }
+
+    /* output execution trace */
     if (this->trace_mode()) {
       for(int i=0; i<pedepth; i++) cerr << "    ";
-      cerr << symbol_pntr(sv.command_symid()) << ": nargs=" << sv.narg() <<
-	" nkeys=" << sv.nkey() << "\n";
+      cerr << symbol_pntr(sv.command_symid());
+      if (func->post_eval()) 
+	cerr << ": nargs=" << sv.narg() << " nkeys=" << sv.nkey() << "\n";
+      else {
+	int ntotal = func->nargs() + func->nkeys();
+	for(int i=0; i<ntotal; i++) {
+	  if (i) 
+	    cerr << " ";
+	  else 
+	    cerr << "(";
+	  cerr << stack_top(i-ntotal+1);
+	}
+	cerr << ")\n";
+      }
     }
+
     func->execute();
+
     func->pop_funcstate();
     if (_just_reset && !_func_for_next_expr) {
       push_stack(ComValue::blankval());
