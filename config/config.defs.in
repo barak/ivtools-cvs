@@ -55,6 +55,4 @@
 
 #define IvToolsSrcRoot @PWD@
 
-#define BinBash @BIN_BASH@
-
 
