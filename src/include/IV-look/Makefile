@@ -35,41 +35,41 @@ LIBUNIIDRAW = -Wl,-rpath,$(IVTOOLSSRC)/UniIdraw/$(CPU) -L$(IVTOOLSSRC)/UniIdraw/
 LIBTOPOFACE = -Wl,-rpath,$(IVTOOLSSRC)/TopoFace/$(CPU) -L$(IVTOOLSSRC)/TopoFace/$(CPU) -lTopoFace
 LIBOVERLAYUNIDRAW = -Wl,-rpath,$(IVTOOLSSRC)/OverlayUnidraw/$(CPU) -L$(IVTOOLSSRC)/OverlayUnidraw/$(CPU) -lOverlayUnidraw
 
-  LIBACEDISPATCH =
+LIBACEDISPATCH = -Wl,-rpath,$(IVTOOLSSRC)/AceDispatch/$(CPU) -L$(IVTOOLSSRC)/AceDispatch/$(CPU) -lAceDispatch
 
 LIBCOMUNIDRAW = -Wl,-rpath,$(IVTOOLSSRC)/ComUnidraw/$(CPU) -L$(IVTOOLSSRC)/ComUnidraw/$(CPU) -lComUnidraw
 LIBFRAMEUNIDRAW = -Wl,-rpath,$(IVTOOLSSRC)/FrameUnidraw/$(CPU) -L$(IVTOOLSSRC)/FrameUnidraw/$(CPU) -lFrameUnidraw
 LIBGRAPHUNIDRAW = -Wl,-rpath,$(IVTOOLSSRC)/GraphUnidraw/$(CPU) -L$(IVTOOLSSRC)/GraphUnidraw/$(CPU) -lGraphUnidraw
 LIBDRAWSERV = -Wl,-rpath,$(IVTOOLSSRC)/DrawServ/$(CPU) -L$(IVTOOLSSRC)/DrawServ/$(CPU) -lDrawServ
 
-DEPUNIDRAWCOMMON = $(IVTOOLSSRC)/Unidraw-common/$(CPU)/libUnidraw-common.so.$(VERSION)
-DEPIVCOMMON = $(IVTOOLSSRC)/IV-common/$(CPU)/libIV-common.so.$(VERSION)
-DEPTIME = $(IVTOOLSSRC)/Time/$(CPU)/libTime.so.$(VERSION)
-DEPATTRIBUTE = $(IVTOOLSSRC)/Attribute/$(CPU)/libAttribute.so.$(VERSION)
-DEPCOMUTIL = $(IVTOOLSSRC)/ComUtil/$(CPU)/libComUtil.so.$(VERSION)
-DEPCOMTERP = $(IVTOOLSSRC)/ComTerp/$(CPU)/libComTerp.so.$(VERSION)
-DEPIVGLYPH = $(IVTOOLSSRC)/IVGlyph/$(CPU)/libIVGlyph.so.$(VERSION)
-DEPATTRGLYPH = $(IVTOOLSSRC)/AttrGlyph/$(CPU)/libAttrGlyph.so.$(VERSION)
-DEPCOMGLYPH = $(IVTOOLSSRC)/ComGlyph/$(CPU)/libComGlyph.so.$(VERSION)
-DEPGLYPHTERP = $(IVTOOLSSRC)/GlyphTerp/$(CPU)/libGlyphTerp.so.$(VERSION)
-DEPUNIIDRAW = $(IVTOOLSSRC)/UniIdraw/$(CPU)/libUniIdraw.so.$(VERSION)
-DEPTOPOFACE = $(IVTOOLSSRC)/TopoFace/$(CPU)/libTopoFace.so.$(VERSION)
-DEPOVERLAYUNIDRAW = $(IVTOOLSSRC)/OverlayUnidraw/$(CPU)/libOverlayUnidraw.so.$(VERSION)
+DEPUNIDRAWCOMMON = $(IVTOOLSSRC)/Unidraw-common/$(CPU)/libUnidraw-common.$(VERSION).dylib
+DEPIVCOMMON = $(IVTOOLSSRC)/IV-common/$(CPU)/libIV-common.$(VERSION).dylib
+DEPTIME = $(IVTOOLSSRC)/Time/$(CPU)/libTime.$(VERSION).dylib
+DEPATTRIBUTE = $(IVTOOLSSRC)/Attribute/$(CPU)/libAttribute.$(VERSION).dylib
+DEPCOMUTIL = $(IVTOOLSSRC)/ComUtil/$(CPU)/libComUtil.$(VERSION).dylib
+DEPCOMTERP = $(IVTOOLSSRC)/ComTerp/$(CPU)/libComTerp.$(VERSION).dylib
+DEPIVGLYPH = $(IVTOOLSSRC)/IVGlyph/$(CPU)/libIVGlyph.$(VERSION).dylib
+DEPATTRGLYPH = $(IVTOOLSSRC)/AttrGlyph/$(CPU)/libAttrGlyph.$(VERSION).dylib
+DEPCOMGLYPH = $(IVTOOLSSRC)/ComGlyph/$(CPU)/libComGlyph.$(VERSION).dylib
+DEPGLYPHTERP = $(IVTOOLSSRC)/GlyphTerp/$(CPU)/libGlyphTerp.$(VERSION).dylib
+DEPUNIIDRAW = $(IVTOOLSSRC)/UniIdraw/$(CPU)/libUniIdraw.$(VERSION).dylib
+DEPTOPOFACE = $(IVTOOLSSRC)/TopoFace/$(CPU)/libTopoFace.$(VERSION).dylib
+DEPOVERLAYUNIDRAW = $(IVTOOLSSRC)/OverlayUnidraw/$(CPU)/libOverlayUnidraw.$(VERSION).dylib
 
-    DEPACEDISPATCH =
+DEPACEDISPATCH = $(IVTOOLSSRC)/AceDispatch/$(CPU)/libAceDispatch.$(VERSION).dylib
 
-DEPCOMUNIDRAW = $(IVTOOLSSRC)/ComUnidraw/$(CPU)/libComUnidraw.so.$(VERSION)
-DEPFRAMEUNIDRAW = $(IVTOOLSSRC)/FrameUnidraw/$(CPU)/libFrameUnidraw.so.$(VERSION)
-DEPGRAPHUNIDRAW = $(IVTOOLSSRC)/GraphUnidraw/$(CPU)/libGraphUnidraw.so.$(VERSION)
-DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
+DEPCOMUNIDRAW = $(IVTOOLSSRC)/ComUnidraw/$(CPU)/libComUnidraw.$(VERSION).dylib
+DEPFRAMEUNIDRAW = $(IVTOOLSSRC)/FrameUnidraw/$(CPU)/libFrameUnidraw.$(VERSION).dylib
+DEPGRAPHUNIDRAW = $(IVTOOLSSRC)/GraphUnidraw/$(CPU)/libGraphUnidraw.$(VERSION).dylib
+DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.$(VERSION).dylib
 
 # -------------------------------------------------------------------------
 
    PROJECTDIR = /proj
 
-   RELEASE = ivtools-1.0.0
+   RELEASE = ivtools-1.0.1
 
-   VERSION = 1.0.0
+   VERSION = 1.0.1
 
    REPOSITORY_FILES = *.c *.cc *.cxx *.C *.h Imakefile *.def template README INSTALL VERSION MANIFEST COPYRIGHT ANNOUNCE README.ivmkcm *.patch *.bugfix.? *.script *.sed comutil.arg comterp.err comutil.ci comterp.arg comterp.ci site.def.SUN4 site.def.LINUX site.def.SGI site.def.HP800 site.def.ALPHA site.def.CYGWIN site.def.NETBSD site.def.FREEBSD WishList *.defaults *.cf HOWTO Copyright *.sh CHANGES CHANGES-0.? *.cpp ivmkmf *.bash *.1  *.3 config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp *.mk config.mk.in *.tmpl *.flt *.m4 config.defs.in
 
@@ -81,7 +81,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
 	-I$(ABSTOP)/config -I$(CONFIGSRC) -I$(XCONFIGDIR) -I$(IVTOOLSSRC)/../config\
 	$(SPECIAL_IMAKEFLAGS)
  SPECIAL_IMAKEFLAGS =
-             DEPEND = makedepend
+             DEPEND = c++ -M
      DEPEND_CCFLAGS = -w -DMAKEDEPEND $(CCDEFINES) $(CCINCLUDES) -I$(GPLUSPLUS_INCLUDE_DIR) -I$(TOOL_INCLUDE_DIR) -UHAVE_ACE
                MAKE = make
            PASSARCH = ARCH="$(ARCH)" SPECIAL_IMAKEFLAGS="$(SPECIAL_IMAKEFLAGS)" CMFLAGS="$(CMFLAGS)" CMMSG="$(CMMSG)"
@@ -93,7 +93,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
            CCSUFFIX = c
             CDRIVER = gcc
             CSUFFIX = c
-                SRC = /home/scott/src/ivtools-1.0/src/include/IV-look/.
+                SRC = /src/include/IV-look/.
               SLASH = /
                SRCS = $(SRC)$(SLASH)*.$(CCSUFFIX)
                OBJS = *.o
@@ -106,7 +106,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
 	$(SHARED_CCFLAGS)\
 	$(CCDEFINES)\
 	$(CCINCLUDES)
-      DEBUG_CCFLAGS = -g
+      DEBUG_CCFLAGS = -gdwarf-2
    OPTIMIZE_CCFLAGS = -O2
      SHARED_CCFLAGS =
       EXTRA_CCFLAGS =
@@ -118,7 +118,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
     EXTRA_CCDEFINES =
 
  CLIPPOLY_CCDEFINES =
-      ACE_CCDEFINES =
+      ACE_CCDEFINES = -DHAVE_ACE -DACE_MT_SAFE=0
       IUE_CCDEFINES =
 
          CCINCLUDES = $(APP_CCINCLUDES) $(OTHER_CCINCLUDES) $(EXTRA_CCINCLUDES)
@@ -129,8 +129,12 @@ BACKWARD_CCINCLUDES =
    EXTRA_CCINCLUDES =
 
 CLIPPOLY_CCINCLUDES =
-     ACE_CCINCLUDES =
+     ACE_CCINCLUDES = -I$(ACEDIR)
      IUE_CCINCLUDES =
+
+             ACEDIR = /home/scott/src/ACE_wrappers
+
+          ACELIBDIR = /home/scott/src/ACE_wrappers/ace
 
              CFLAGS = $(APP_CCFLAGS) $(IV_CCFLAGS) $(OTHER_CCFLAGS) $(EXTRA_CCFLAGS)
 
@@ -169,8 +173,8 @@ NONSHARED_CCLDFLAGS =
   CLIPPOLY_CCLDLIBS =
      CLIPPOLYLIBDIR =
     CLIPPOLYLIBBASE = libclippoly.so
-       ACE_CCLDLIBS =
-          ACELIBDIR =
+       ACE_CCLDLIBS = -L$(ACELIBDIR) -lACE
+          ACELIBDIR = /home/scott/src/ACE_wrappers/ace
          ACELIBBASE = libACE.so
        IUE_CCLDLIBS =
           IUELIBDIR =
@@ -202,9 +206,9 @@ NONSHARED_CCLDFLAGS =
              RM_CMD = $(RM) ,* .emacs_* *..c *.BAK *.CKP *.a *.bak *.ln *.o a.out core errs make.log make.out tags TAGS
               TROFF = groff
 
-                TOP = /home/scott/src/ivtools-1.0
+                TOP =
              RELTOP = ../../../.
-        CURRENT_DIR = /home/scott/src/ivtools-1.0/src/include/IV-look
+        CURRENT_DIR = /src/include/IV-look
 
               IVSRC = /home/scott/src/ivtools-1.0/src
              BINSRC = $(IVSRC)/bin

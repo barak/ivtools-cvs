@@ -42,26 +42,26 @@ LIBFRAMEUNIDRAW = -Wl,-rpath,$(IVTOOLSSRC)/FrameUnidraw/$(CPU) -L$(IVTOOLSSRC)/F
 LIBGRAPHUNIDRAW = -Wl,-rpath,$(IVTOOLSSRC)/GraphUnidraw/$(CPU) -L$(IVTOOLSSRC)/GraphUnidraw/$(CPU) -lGraphUnidraw
 LIBDRAWSERV = -Wl,-rpath,$(IVTOOLSSRC)/DrawServ/$(CPU) -L$(IVTOOLSSRC)/DrawServ/$(CPU) -lDrawServ
 
-DEPUNIDRAWCOMMON = $(IVTOOLSSRC)/Unidraw-common/$(CPU)/libUnidraw-common.so.$(VERSION)
-DEPIVCOMMON = $(IVTOOLSSRC)/IV-common/$(CPU)/libIV-common.so.$(VERSION)
-DEPTIME = $(IVTOOLSSRC)/Time/$(CPU)/libTime.so.$(VERSION)
-DEPATTRIBUTE = $(IVTOOLSSRC)/Attribute/$(CPU)/libAttribute.so.$(VERSION)
-DEPCOMUTIL = $(IVTOOLSSRC)/ComUtil/$(CPU)/libComUtil.so.$(VERSION)
-DEPCOMTERP = $(IVTOOLSSRC)/ComTerp/$(CPU)/libComTerp.so.$(VERSION)
-DEPIVGLYPH = $(IVTOOLSSRC)/IVGlyph/$(CPU)/libIVGlyph.so.$(VERSION)
-DEPATTRGLYPH = $(IVTOOLSSRC)/AttrGlyph/$(CPU)/libAttrGlyph.so.$(VERSION)
-DEPCOMGLYPH = $(IVTOOLSSRC)/ComGlyph/$(CPU)/libComGlyph.so.$(VERSION)
-DEPGLYPHTERP = $(IVTOOLSSRC)/GlyphTerp/$(CPU)/libGlyphTerp.so.$(VERSION)
-DEPUNIIDRAW = $(IVTOOLSSRC)/UniIdraw/$(CPU)/libUniIdraw.so.$(VERSION)
-DEPTOPOFACE = $(IVTOOLSSRC)/TopoFace/$(CPU)/libTopoFace.so.$(VERSION)
-DEPOVERLAYUNIDRAW = $(IVTOOLSSRC)/OverlayUnidraw/$(CPU)/libOverlayUnidraw.so.$(VERSION)
+DEPUNIDRAWCOMMON = $(IVTOOLSSRC)/Unidraw-common/$(CPU)/libUnidraw-common.$(VERSION).dylib
+DEPIVCOMMON = $(IVTOOLSSRC)/IV-common/$(CPU)/libIV-common.$(VERSION).dylib
+DEPTIME = $(IVTOOLSSRC)/Time/$(CPU)/libTime.$(VERSION).dylib
+DEPATTRIBUTE = $(IVTOOLSSRC)/Attribute/$(CPU)/libAttribute.$(VERSION).dylib
+DEPCOMUTIL = $(IVTOOLSSRC)/ComUtil/$(CPU)/libComUtil.$(VERSION).dylib
+DEPCOMTERP = $(IVTOOLSSRC)/ComTerp/$(CPU)/libComTerp.$(VERSION).dylib
+DEPIVGLYPH = $(IVTOOLSSRC)/IVGlyph/$(CPU)/libIVGlyph.$(VERSION).dylib
+DEPATTRGLYPH = $(IVTOOLSSRC)/AttrGlyph/$(CPU)/libAttrGlyph.$(VERSION).dylib
+DEPCOMGLYPH = $(IVTOOLSSRC)/ComGlyph/$(CPU)/libComGlyph.$(VERSION).dylib
+DEPGLYPHTERP = $(IVTOOLSSRC)/GlyphTerp/$(CPU)/libGlyphTerp.$(VERSION).dylib
+DEPUNIIDRAW = $(IVTOOLSSRC)/UniIdraw/$(CPU)/libUniIdraw.$(VERSION).dylib
+DEPTOPOFACE = $(IVTOOLSSRC)/TopoFace/$(CPU)/libTopoFace.$(VERSION).dylib
+DEPOVERLAYUNIDRAW = $(IVTOOLSSRC)/OverlayUnidraw/$(CPU)/libOverlayUnidraw.$(VERSION).dylib
 
-DEPACEDISPATCH = $(IVTOOLSSRC)/AceDispatch/$(CPU)/libAceDispatch.so.$(VERSION)
+DEPACEDISPATCH = $(IVTOOLSSRC)/AceDispatch/$(CPU)/libAceDispatch.$(VERSION).dylib
 
-DEPCOMUNIDRAW = $(IVTOOLSSRC)/ComUnidraw/$(CPU)/libComUnidraw.so.$(VERSION)
-DEPFRAMEUNIDRAW = $(IVTOOLSSRC)/FrameUnidraw/$(CPU)/libFrameUnidraw.so.$(VERSION)
-DEPGRAPHUNIDRAW = $(IVTOOLSSRC)/GraphUnidraw/$(CPU)/libGraphUnidraw.so.$(VERSION)
-DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
+DEPCOMUNIDRAW = $(IVTOOLSSRC)/ComUnidraw/$(CPU)/libComUnidraw.$(VERSION).dylib
+DEPFRAMEUNIDRAW = $(IVTOOLSSRC)/FrameUnidraw/$(CPU)/libFrameUnidraw.$(VERSION).dylib
+DEPGRAPHUNIDRAW = $(IVTOOLSSRC)/GraphUnidraw/$(CPU)/libGraphUnidraw.$(VERSION).dylib
+DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.$(VERSION).dylib
 
 # -------------------------------------------------------------------------
 
