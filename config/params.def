@@ -1277,3 +1277,8 @@ NONSHARED_CCLDFLAGS = NonSharedCCLdFlags
             XLIBDIR = XLibDir           /* installed X libraries */
           PSFONTDIR = PSFontDir         /* installed PS font metrics (afm) */
 
+#if defined(Typedef_socklen_t)&&!Typedef_socklen_t
+  SOCKLEN_T_DEFINED = NO
+#else
+  SOCKLEN_T_DEFINED = YES
+#endif

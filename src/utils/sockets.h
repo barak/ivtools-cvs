@@ -41,7 +41,7 @@
 #include "thrower.h"
 const int DownLoadAmount = 1024; // Amount per socket read.
 
-#if !defined(_typedef_socklen_t_) || !_typedef_socklen_t
+#if !defined(SOCKLEN_T_DEFINED) || !SOCKLEN_T_DEFINED
 typedef int socklen_t;
 #endif
 
