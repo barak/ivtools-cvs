@@ -685,6 +685,8 @@ void SelectFunc::execute() {
 	ComValue* compval = comp ? new ComValue(_compview_id, new ComponentView(comp)) : nil;
 	if (compval) 
 	  avl->Append(compval);
+	delete newSel;
+        newSel = nil;
       }
 
     } else {
@@ -703,10 +705,12 @@ void SelectFunc::execute() {
       }
     }
 
-    delete sel;
-    _ed->SetSelection(newSel);
-    newSel->Update();
-    unidraw->Update();
+    if (newSel){
+      delete sel;
+      _ed->SetSelection(newSel);
+      newSel->Update();
+      unidraw->Update();
+    }
     reset_stack();
     ComValue retval(avl);
     push_stack(retval);

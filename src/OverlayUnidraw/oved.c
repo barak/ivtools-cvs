@@ -39,6 +39,7 @@
 #include <OverlayUnidraw/ovviewer.h>
 
 #include <IVGlyph/observables.h>
+#include <IVGlyph/textedit.h>
 
 #include <UniIdraw/idcmds.h>
 #include <UniIdraw/idkybd.h>
@@ -74,6 +75,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+implementActionCallback(OverlayEditor)
 
 /*****************************************************************************/
 
@@ -385,3 +388,23 @@ void OverlayEditor::ResetStateVars() {
     delete cmd;
   }
 }
+
+void OverlayEditor::SetText() {
+    GraphicComp* comp = GetFrame()->GetGraphicComp();
+    ((OverlayComp*)comp)->SetAnnotation(TextEditor()->text());
+    ((ModifStatusVar*)GetState("ModifStatusVar"))->SetModifStatus(true);
+}
+
+void OverlayEditor::ClearText() {
+    _texteditor->text("");
+}
+
+void OverlayEditor::UpdateText(OverlayComp* comp, boolean update) {
+    if (_texteditor) {
+	const char* txt = comp->GetAnnotation();
+	if (!txt)
+	    txt = "";
+	_texteditor->text(txt, update);
+    }
+}
+

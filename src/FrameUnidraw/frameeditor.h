@@ -57,15 +57,6 @@ public:
     virtual void InitCommands();
     // execute Unidraw commands as needed after FrameEditor is constructed.
 
-    EivTextEditor* TextEditor() { return _texteditor; }
-    // return pointer to text-editor that holds current frame annotation.
-    void SetText();
-    // set contents of text-editor as frame annotation.
-    void ClearText();
-    // clear contents of text-editor.
-    void UpdateText(OverlayComp*, boolean update =true);
-    // update contents of text-editor with frame annotation.
-
     void SetFrame(FrameView* f) { _prevframe = _currframe;_currframe = f; }
     // set current frame.
     virtual OverlaysView* GetFrame(int index=-1);
@@ -97,7 +88,6 @@ protected:
     FrameView* _prevframe;
     FrameNumberState* _framenumstate;
     FrameListState* _frameliststate;
-    EivTextEditor* _texteditor;
     int _curr_other;
     int _prev_other;
     boolean _autonewframe;

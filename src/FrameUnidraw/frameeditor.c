@@ -170,25 +170,6 @@ void FrameEditor::UpdateFrame(boolean txtupdate) {
     if (frameliststate()) frameliststate()->framenumber(views->Index(last)+1);
 }
 
-void FrameEditor::SetText() {
-    GraphicComp* comp = GetFrame()->GetGraphicComp();
-    ((OverlayComp*)comp)->SetAnnotation(TextEditor()->text());
-    ((ModifStatusVar*)GetState("ModifStatusVar"))->SetModifStatus(true);
-}
-
-void FrameEditor::ClearText() {
-    _texteditor->text("");
-}
-
-void FrameEditor::UpdateText(OverlayComp* comp, boolean update) {
-    if (_texteditor) {
-	const char* txt = comp->GetAnnotation();
-	if (!txt)
-	    txt = "";
-	_texteditor->text(txt, update);
-    }
-}
-
 OverlaysView* FrameEditor::GetFrame(int index) {
   if (index<0) 
     return _currframe;

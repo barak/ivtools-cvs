@@ -102,6 +102,8 @@ public:
     // initialize viewer to go with the editor.
     virtual void InitLayout(const char* name);
     // initialize chrome that goes around the viewer.
+    static void InitLayout(OverlayKit* kit, const char* name);
+    // static method that implements virtual method.
 
     virtual Glyph* MakeMenus();
     // make all the pull-down menus and their menu bar.
@@ -198,12 +200,19 @@ protected:
 
     const char* otherdisplay();
     // returns string that might specify an alternate X display.
+    boolean& set_button_flag() { return _set_button_flag; }
+    // flag to add setr button to text editor
+    boolean& clr_button_flag() { return _clr_button_flag; }
+    // flag to add clear button to text editor
 protected:
     OverlayEditor* _ed;
     Deck* _toolbars;
     Patch* _toolbar;
 
     char* _otherdisplay;
+
+    boolean _set_button_flag;
+    boolean _clr_button_flag;
 
 protected:
     static OverlayKit* _overlaykit;
