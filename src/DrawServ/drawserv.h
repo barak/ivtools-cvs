@@ -42,6 +42,7 @@ class AttributeValueList;
 class ComTerp;
 class DrawLink;
 class DrawLinkList;
+class GraphicId;
 class GraphicIdList;
 
 class DrawServ : public OverlayUnidraw {
@@ -84,6 +85,9 @@ public:
   
   virtual void SendCmdString(DrawLink* link, const char* cmdstring);
   // execute command string on one remote DrawServ
+
+  virtual void ReserveSelection(GraphicId* grid);
+  // send request to reserve graphic for future selection
   
   DrawLinkList* linklist() { return _linklist; }
   // return pointer to list of DrawLink's
@@ -102,12 +106,6 @@ public:
   
   void sessionid_callback_chk(int chk_id, int remote_linkid, int ok_flag);
   // process callbacks on request to check unique session id
-  
-  void sessionid_request_chg();
-  // generate request to change/set unique session id
-  
-  void sessionid_handle_chg(int new_id, int old_id);
-  // handle request to change unique session id
   
   unsigned int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
   // current unique session id.

@@ -80,14 +80,14 @@ void OverlaySelection::Hide (Viewer* viewer) {
 	viewer->GetDamage()->Repair();
 }
 
-int OverlaySelection::Update (Viewer* viewer) {
+void OverlaySelection::Update (Viewer* viewer) {
 #if 0
     if (!viewer) return;
 #else
     if (!viewer) {
       Iterator i;
       First(i);
-      if (Done(i)) return -1;
+      if (Done(i)) return;
       viewer = GetView(i)->GetViewer();
     }
 #endif
@@ -97,7 +97,6 @@ int OverlaySelection::Update (Viewer* viewer) {
     viewer->GetDamage()->Repair();
     if (HandlesEnabled())
 	ShowHandles(viewer);
-    return 0;
 }
 
 void OverlaySelection::Clear (Viewer* viewer) {

@@ -452,5 +452,5 @@ void DrawKit::launch_graphdraw() {
 }
 
 OverlaySelection* DrawKit::MakeSelection(Selection* sel) {
-  return new LinkSelection(((DrawServ*)unidraw)->linklist(), sel);
+  return new LinkSelection(sel);
 }

@@ -347,6 +347,7 @@ void DrawServ::sessionid_handle_chk(int new_id, int remote_linkid) {
       char buf[BUFSIZ];
       snprintf(buf, BUFSIZ, "sessionid(0x%08x :ok %d :rid %d )%c", new_id, okflag, link->local_linkid(), '\0');
       SendCmdString(link, buf);
+      link->sessionid(new_id);
     } else {
       fprintf(stderr, "code for passing selection id request on to other DrawLink's not implemented\n");
     }
@@ -366,14 +367,6 @@ void DrawServ::sessionid_callback_chk(int new_id, int remote_linkid, int ok_flag
     _sessionid = _trialid;
   } else {
   }
-}
-
-// generate request to change/set unique session id
-void DrawServ::sessionid_request_chg() {
-}
-
-// handle request to change unique session id
-void DrawServ::sessionid_handle_chg(int new_id, int old_id) {
 }
 
 int DrawServ::online() {
@@ -428,5 +421,17 @@ int DrawServ::unique_sessionid(unsigned int id) {
     return 0;
   else
     return 1;
+}
+
+void DrawServ::ReserveSelection(GraphicId* grid) {
+  /* find link on which current selector lives */
+  DrawLink* link = _linklist->find_drawlink(grid);
+
+  if (link) {
+    char buf[BUFSIZ];
+    snprintf(buf, BUFSIZ, "reserve(0x%08x :rid %d)%c", grid->id(), link->local_linkid(), '\0');
+    SendCmdString(link, buf);
+  } else
+    fprintf(stderr, "surprisingly no selector link found for GraphicId %u\n", grid->id());
 }
 

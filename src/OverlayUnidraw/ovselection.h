@@ -45,7 +45,7 @@ public:
 
     virtual void Show(Viewer* = nil);	
     virtual void Hide(Viewer* = nil);
-    virtual int Update(Viewer* = nil); 
+    virtual void Update(Viewer* = nil); 
     virtual void Clear(Viewer* = nil);
 
     virtual void RepairClear(Viewer*, boolean);

@@ -103,6 +103,11 @@ public:
 
     enum {SessionIdNada=-1, SessionIdRequested=0, SessionIdApproved=1, SessionIdDenied=2};
 
+    unsigned int sessionid() { return _sessionid; }
+    // get unique session id of other side
+    void sessionid(unsigned int id) { _sessionid = id; }
+    // get unique session id of other side
+
 protected:
     const char* _host;
     const char* _althost;
@@ -113,6 +118,7 @@ protected:
     int _remote_linkid;
     int _state;
     int _sessionid_state;
+    unsigned int _sessionid;
 
 #ifdef HAVE_ACE
     ACE_INET_Addr* _addr;

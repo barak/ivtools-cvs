@@ -37,17 +37,16 @@ class DrawLinkList;
 // between two remote drawing editors that are linked together.
 class LinkSelection: public OverlaySelection {
 public:
-    LinkSelection(DrawLinkList* list, LinkSelection* = nil);
-    LinkSelection(DrawLinkList* list, Selection*);
+    LinkSelection(LinkSelection* = nil);
+    LinkSelection(Selection*);
 
-    virtual int Update(Viewer* = nil); 
+    virtual void Update(Viewer* = nil); 
     virtual void Clear(Viewer* = nil);
 
     virtual void Reserve();
     // reserve newly created graphics in selection across the network
 
 protected:
-    DrawLinkList* _linklist;
 };
 
 #endif

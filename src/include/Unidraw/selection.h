@@ -46,7 +46,7 @@ public:
     virtual ~Selection();
 
     virtual void Show(Viewer* = nil);	/* inits and draws handles (in given viewer) */
-    virtual int Update(Viewer* = nil); /* draws newly-added handles */
+    virtual void Update(Viewer* = nil); /* draws newly-added handles */
     virtual void Hide(Viewer* = nil);
     virtual void Init(Viewer* = nil);   /* explicitly init handles */
     virtual void Clear(Viewer* = nil);	/* removes & clears all views */

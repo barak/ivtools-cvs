@@ -33,6 +33,7 @@
 #include <Unidraw/globals.h>
 
 class DrawLink;
+class GraphicId;
 class Iterator;
 class UList;
 
@@ -43,6 +44,9 @@ public:
 
     void add_drawlink(DrawLink*);
     // add DrawLink to list
+
+    DrawLink* find_drawlink(GraphicId*);
+    // find DrawLink to the selector of this graphic
 
     void First(Iterator&);
     // set iterator to point to first DrawLink in list.
