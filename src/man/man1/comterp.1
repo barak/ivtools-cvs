@@ -85,6 +85,7 @@ Run contents of file then exit.
     Operators  Command Name   Priority    Order       Type
     ---------  ------------   --------    -----       ----
     .          dot            130         R-to-L      binary
+    `          bquote         125         R-to-L      unary-prefix
     ^          power          120         R-to-L      binary
     !          negate         110         R-to-L      unary-prefix
     ++         incr           110         R-to-L      unary-prefix
@@ -148,6 +149,12 @@ Run contents of file then exit.
  dbl=tan(x) -- returns the tangent of x radians
 
  dbl=sqrt(x) -- returns square root of x
+
+ num=floor(num) -- return closest integer value less than or equal to argument
+
+ num=ceil(num) -- return closest integer value greater than or equal to argument
+
+ num=round(num) -- return closest integer value
 
 .SH AFFINE TRANSFORM COMMANDS:
 
@@ -216,7 +223,8 @@ Run contents of file then exit.
 
  arr=posteval(arg1 [arg2 [arg3 ... [argn]]]) -- post-evaluate every fixed argument (until nil) and return array
 				 
- sym=attrname(attribute) -- return name field of dotted pair.
+ sym=attrname(attribute) -- return name field of dotted pair
+ val=attrval(attribute) -- return value field of dotted pair
 
  quit() -- quit the interpreter
 

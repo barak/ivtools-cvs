@@ -896,6 +896,10 @@ void ComTerp::add_defaults() {
     add_command("tan", new TanFunc(this));
     add_command("sqrt", new SqrtFunc(this));
 
+    add_command("floor", new FloorFunc(this));
+    add_command("ceil", new CeilFunc(this));
+    add_command("round", new RoundFunc(this));
+
     add_command("xform", new XformFunc(this));
     add_command("invert", new InvertXformFunc(this));
 
