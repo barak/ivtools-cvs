@@ -367,7 +367,11 @@ config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp
 #if TurnOnOptimizing && !TurnOnDebugging
 #define DebugCCFlags /**/
 #else
+#if LibStdCPlusPlusV3==1
+#define DebugCCFlags -gdwarf-2
+#else
 #define DebugCCFlags -g
+#endif
 #endif
 #endif
 
