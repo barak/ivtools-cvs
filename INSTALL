@@ -8,7 +8,7 @@ Instructions for building ivtools-0.7.10 from source:
 Tools you will need before you can build (note, if you are attempting
 to build on Windows NT, look at README.cygwin as well):
 
-0.a. a Unix machine.  We know it has been built on Linux, NetBSD,
+0.a. a Unix machine.  We know it has been built on Linux, 
 Solaris, Irix, Dec Alpha, HPUX, and SunOS.
 
 0.b. The gcc compiler.  Recently we've been building and testing with
