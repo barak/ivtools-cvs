@@ -8,51 +8,12 @@
 </h1>
 
 <menu>
-<li><a href=#Binary>binary tar file questions</a></li>
 <li><a href=#DrawingEditor>drawing editor questions</a></li>
 <li><a href=#SourceBuild>source building questions</a></li>
 <li><a href=#ProgramDebug>programming and debugging questions</a></li>
+<li><a href=#Binary>binary tar file questions</a></li>
 <li><a href=#Miscellaneous>miscellaneous questions</a></li>
 </menu>
-
-<hr>
-<p>	
-<a name=Binary></a>
-<h2>binary tar file questions</h2>
-
-<menu>
-<li><a href=#runexecutables>How do I run the executables?  I get an unresolved library reference when I try.</a></li>
-<li><a href=#lddresolves>ldd resolves all shared libraries, yet idraw either a) segfaults without warning, or b) can't save/restore a simple drawing</a></li>
-</menu>
-
-
-<p><a name=runexecutables><b>How do I run the executables?  I get an unresolved library reference when I try.</b><p>
-
-Add the appropriate ivtools-0.7/lib sub-directory to your
-LD_LIBRARY_PATH (or LD_ELF_LIBRARY_PATH) environment variable
-(i.e. ivtools-0.7/lib/LINUX) to let the shared library runtime system
-know where they are.  Test with <code>ldd -r</code>. 
-Make sure that you are using only the shared libraries from the binary
-distribution tar file.  If this is inconvenient, consider building from source.
-
-<p><a name=lddresolves><b>ldd resolves all shared libraries, yet idraw either a) segfaults without warning, or b) can't save/restore a simple drawing</b><p>
-
-You may also want to check if the shared libraries listed by ldd are
-actually there, not just bad symbolic links: relative pathnames that
-point to nowhere or absolute pathnames that don't work on your system.
-
-<p>
-Check if the version of libstdc++ displayed by ldd is
-libstdc++.so.27.1.4.  This would be evidence that libraries other than
-those distributed in the tar file are getting used, which can be
-troublesome. <p>
-You also probably want to ensure that the shared
-libraries in the binary tar file do not get used by your other
-executables, unless you happen to be running RedHat 4.1.<p>
-
-Any feedback on how the binary tar files
-worked for you would be appreciated.  You can send e-mail to 
-<a href=mailto:ivtools-info@vectaport.com>ivtools-info@vectaport.com</a>.  Include any information we might find useful, i.e. Linux distribution, kernel version, shared library versions, etc..  
 
 <p>
 <hr>
@@ -238,7 +199,7 @@ not open in idraw.
 <li><a href=#gcc-O>I'm getting compiler errors with gcc-2.7.* when I use -O.</a></li>
 <li><a href=#iostream-missing>I get an "iostream.h: No such file or directory" when compiling ivtools.</a></li>
 <li><a href=#nodynamiclibs>I set "HasDynamicSharedLibraries" to NO (in config/gcc.def), and it didn't seem to work.</a></li>
-<li><a href=#looking-in-proj>The makefiles are looking for source code under /proj/ivtools-0.7, but that is not where I put the source tree on my system.</a></li>
+<li><a href=#looking-in-proj>The makefiles are looking for source code under /proj/ivtools-1.0, but that is not where I put the source tree on my system.</a></li>
 <li><a href=#solaris-rpath>What if I want to configure with --enable-use-rpath, but my copy of gcc is setup to use the Solaris linker, which expects -R instead of -rpath?</a></li>
 <li><a href=#make-not-gnu>The GNU version of make doesn't understand a -w argument.  What do we do?</a></li>
 <li><a href=#make-no-shell>Our version of make doesn't understand the $(shell pwd) construct.  What do we do?</a></li>
@@ -281,7 +242,7 @@ version (gcc-3.0 or greater).  If you are committed to using gcc-2.96, here is a
 
 <code>	
         Making Makefiles for  in <br>
-	/proj/ivtools-0.7/src/IV-common/ <br>
+	/proj/ivtools-1.0/src/IV-common/ <br>
 	/bin/sh: test: argument expected <br>
 </code> 
 <p>
@@ -362,7 +323,7 @@ these are incorporated since 0.6.11).  Supported flags include:<p>
 The configure script might also use the PWD environment variable to
 fix the base directory of the ivtools source tree for use in the
 ivmkmf script.  You may have to set this manually prior to running
-the configure script if your shell does not support it.  For more details see the <a href=./ivtools-0.7-INSTALL.txt>INSTALL</a> directions.<p>
+the configure script if your shell does not support it.  For more details see the <a href=./ivtools-1.0-INSTALL.txt>INSTALL</a> directions.<p>
 
 <p><a name=restoremakefile><b>Do I need to restore the top-level Makefile from the tar file after a faulty start at configuring things?</b><p>
 
@@ -390,11 +351,11 @@ your are trying to static link.  But if you are static linking more
 than a few you might want to stay with shared libraries because of the
 savings in disk, memory, and runtime.
 
-<p><a name=looking-in-proj><b>The makefiles are looking for source code under /proj/ivtools-0.7,
+<p><a name=looking-in-proj><b>The makefiles are looking for source code under /proj/ivtools-1.0,
 but that is not where I put the source tree on my system.</b><p>
 
 IvToolsSrcRoot (in config/local.def) needs to be set to $(TOP) instead of
-/proj/ivtools-0.7 (or the absolute pathname where you installed the
+/proj/ivtools-1.0 (or the absolute pathname where you installed the
 source tree).
 
 <p><a name=solaris-rpath><b>What if I want to configure with --enable-use-rpath, but my copy of gcc is setup to use the Solaris linker, which expects -R instead of -rpath?</b><p>
@@ -468,7 +429,7 @@ if not all, of these warnings were fixed by ivtools-0.7.4.
 </b><p>
 
 You need to turn on optimization to work-around bugs in non-optimized compilation.
-Add these lines to ivtools-0.7/config/local.def:
+Add these lines to ivtools-1.0/config/local.def:
 <p>
 <code>
 /*<br>
@@ -714,6 +675,56 @@ well.<p>
 
 <hr>
 <p>	
+<a name=Binary></a>
+<h2>binary tar file questions</h2>
+
+<menu>
+<li><a href=#outofdate>Why are the binaries you distribute so out of date?</a></li>
+<li><a href=#outofdaterpms>Why are the available RPMs so out of date?</a></li>
+<li><a href=#runexecutables>How do I run the executables?  I get an unresolved library reference when I try.</a></li>
+<li><a href=#lddresolves>ldd resolves all shared libraries, yet idraw either a) segfaults without warning, or b) can't save/restore a simple drawing</a></li>
+</menu>
+
+
+<p><a name=outofdate><b>Why are the binaries you distribute so out of date?</b><p>
+
+We stopped preparing and distributing our own binaries a while back.  But you can find various .deb and .rpm files out there.  Follow the appropriate links from the <a href="http://www.ivtools.org/ivtools/download.html">download page</a>.  
+
+<p><a name=outofdaterpms><b>Why are the available RPMs so out of date?</b><p>
+
+Don't know.  Would you like to volunteer to package some up?  Please contact <a href=mailto:ivtools-devel@lists.sourceforge.net>us</a>.
+
+<p><a name=runexecutables><b>How do I run the executables?  I get an unresolved library reference when I try.</b><p>
+
+Add the appropriate ivtools-0.7/lib sub-directory to your
+LD_LIBRARY_PATH (or LD_ELF_LIBRARY_PATH) environment variable
+(i.e. ivtools-0.7/lib/LINUX) to let the shared library runtime system
+know where they are.  Test with <code>ldd -r</code>. 
+Make sure that you are using only the shared libraries from the binary
+distribution tar file.  If this is inconvenient, consider building from source.
+
+<p><a name=lddresolves><b>ldd resolves all shared libraries, yet idraw either a) segfaults without warning, or b) can't save/restore a simple drawing</b><p>
+
+You may also want to check if the shared libraries listed by ldd are
+actually there, not just bad symbolic links: relative pathnames that
+point to nowhere or absolute pathnames that don't work on your system.
+
+<p>
+Check if the version of libstdc++ displayed by ldd is
+libstdc++.so.27.1.4.  This would be evidence that libraries other than
+those distributed in the tar file are getting used, which can be
+troublesome. <p>
+You also probably want to ensure that the shared
+libraries in the binary tar file do not get used by your other
+executables, unless you happen to be running RedHat 4.1.<p>
+
+Any feedback on how the binary tar files
+worked for you would be appreciated.  You can send e-mail to 
+<a href=mailto:ivtools-info@vectaport.com>ivtools-info@vectaport.com</a>.  Include any information we might find useful, i.e. Linux distribution, kernel version, shared library versions, etc..  
+
+<p>
+<hr>
+<p>	
 <a name=Miscellaneous></a>
 <h2>miscellaneous questions</h2>
 
@@ -722,7 +733,6 @@ well.<p>
 <li><a href=#berlin>How does ivtools relate to Berlin?</a></li>
 <li><a href=#leaksfixed>Have you fixed any documented memory leaks that were in InterViews 3.1?</a></li>
 <li><a href=#whataboutdoc>What happened to Doc?  Where can I find Lexi?</a></li>
-<li><a href=#versionnum>Why is this only version 0.9.*?</a></li>
 </menu>
 
 <p><a name=frescofdraw><b>What about Fresco and fdraw?</b><p>
@@ -786,19 +796,6 @@ study of rebuilding Doc.  You can get the source code for Doc from the
 href=ftp://interviews.stanford.edu/pub/>InterViews ftp site at
 Stanford </a>).  It should build on top of ivtools without
 modification to any source files.  No source code seems available for Lexi.
-
-<p><a name=versionnum><b>Why is this only version 0.9.*?</b><p>
-
-Although some of the code in ivtools is very old (giving users a
-unique form of patent protection), some of the code is always new.  In
-1994 when the effort on ivtools began (two years before we even
-considered directly incorporating the InterViews 3.1 classes) an original
-version number of 0.3 was chosen, to reflect that this was roughly the
-third time our programming team had created and distributed a
-value-added layer on top of InterViews.  Since then the version number
-has increased by .1 a year.  <p>
-
-<i><b>ivtools-1.0 will be out in the near future -- Oct 16th 2001</b></i>
 
 <p>
 <hr>
