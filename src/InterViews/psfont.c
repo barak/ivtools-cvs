@@ -23,7 +23,7 @@
  */
 
 /*
- * PSFont - use PostScript font metrics
+ * iv_PSFont - use PostScript font metrics
  */
 
 #include <InterViews/psfont.h>
@@ -40,7 +40,7 @@
 
 class PSFontImpl {
 private:
-    friend class PSFont;
+    friend class PSFont_31;
 
     char* name;
     char* encoding;
@@ -50,7 +50,7 @@ private:
     static char* psfile(const char* name);
 };
 
-PSFont::PSFont(
+PSFont_31::PSFont_31(
     const char* psname, Coord size, const char* name, float scale
 ) : Font(name, scale) {
     PSFontImpl* p = new PSFontImpl;
@@ -83,19 +83,19 @@ PSFont::PSFont(
     delete metrics_file;
 }
 
-PSFont::~PSFont() {
+PSFont_31::~PSFont_31() {
     delete impl_->name;
     delete impl_->encoding;
     delete impl_;
 }
 
-const char* PSFont::name() const { return impl_->name; }
-const char* PSFont::encoding() const { return impl_->encoding; }
-Coord PSFont::size() const { return impl_->size; }
-Coord PSFont::width(long c) const { return impl_->widths[c]; }
-Coord PSFont::width(const char* s, int n) const { return Font::width(s, n); }
+const char* PSFont_31::name() const { return impl_->name; }
+const char* PSFont_31::encoding() const { return impl_->encoding; }
+Coord PSFont_31::size() const { return impl_->size; }
+Coord PSFont_31::width(long c) const { return impl_->widths[c]; }
+Coord PSFont_31::width(const char* s, int n) const { return Font::width(s, n); }
 
-boolean PSFont::exists(const char* psname) {
+boolean PSFont_31::exists(const char* psname) {
     char* metrics_file = PSFontImpl::psfile(psname);
     FILE* f = fopen(metrics_file, "r");
     delete metrics_file;

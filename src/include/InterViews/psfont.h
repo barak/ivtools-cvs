@@ -23,7 +23,7 @@
  */
 
 /*
- * PSFont - use PostScript font metrics
+ * iv_PSFont - use PostScript font metrics
  */
 
 #ifndef iv_psfont_h
@@ -35,10 +35,10 @@
 
 class PSFontImpl;
 
-class PSFont : public Font {
+class PSFont_31 : public Font {
 public:
-    PSFont(const char* psname, Coord size, const char* name, float scale);
-    virtual ~PSFont();
+    PSFont_31(const char* psname, Coord size, const char* name, float scale);
+    virtual ~PSFont_31();
 
     static boolean exists(const char* psname);
 
