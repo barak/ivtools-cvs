@@ -29,6 +29,9 @@
  */
 // #define OPEN_DRAWTOOL_URL // define for drawtool document loading from a URL
 
+// #define RASTER_INCREMENTAL_DISPLAY // enable incremental display when doing
+                                   // incremental download
+
 #include <OverlayUnidraw/grayraster.h>
 #include <OverlayUnidraw/ovcatalog.h>
 #include <OverlayUnidraw/ovclasses.h>
@@ -560,6 +563,7 @@ int ReadImageHandler::process(const char* newdat, int len) {
     rr->GetOverlayRaster()->rep()->modified_ = true;
     OverlayPainter::Uncache(_itr->raster());
 
+#ifdef RASTER_INCREMENTAL_DISPLAY
     // sets the damage indicator on the view side raster graphic
     // in RasterOvView::Update
     
@@ -569,6 +573,7 @@ int ReadImageHandler::process(const char* newdat, int len) {
     rr->damage_done(0); 
 
     unidraw->Update();
+#endif
   }
 
   _save.seekp(0);
@@ -654,6 +659,13 @@ int ReadImageHandler::inputReady(int fd) {
     }
     else if (stat == 0) {                         // eof
       // cerr << "im: " << _fd << ", EOF, closing" << endl;
+
+#ifndef RASTER_INCREMENTAL_DISPLAY
+      _comp->Notify();    
+      // rr->damage_done(0); 
+      unidraw->Update();
+#endif
+
       delete this;
       return -1;              // don't ever call me again (i.e., detach me)
     } 
