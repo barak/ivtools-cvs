@@ -40,20 +40,20 @@ GrowGroupFunc::GrowGroupFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp
 
 void GrowGroupFunc::execute() {
     ComValue groupval(stack_arg(0));
-    ComValue newval(stack_arg(1));
+    ComValue grval(stack_arg(1));
 
     reset_stack();
-    if (!groupval.object_compview() && !newval.object_compview()) return;
+    if (!groupval.object_compview() && !grval.object_compview()) return;
 
     OverlayViewer* viewer = (OverlayViewer*)GetEditor()->GetViewer();
 
     ComponentView* groupview = (ComponentView*)groupval.obj_val();
     OverlayComp* groupcomp = groupview ? (OverlayComp*)groupview->GetSubject() : nil;
  
-    ComponentView* newview = (ComponentView*)newval.obj_val();
-    OverlayComp* newcomp = newview ? (OverlayComp*)newview->GetSubject() : nil;
+    ComponentView* grview = (ComponentView*)grval.obj_val();
+    OverlayComp* grcomp = grview ? (OverlayComp*)grview->GetSubject() : nil;
 
-    if (groupcomp && newcomp) {
+    if (groupcomp && grcomp) {
 
       /* first determine if group has non-zero members */
       Iterator i;
@@ -76,15 +76,83 @@ void GrowGroupFunc::execute() {
       Clipboard* gcb = new Clipboard();
       for(; !groupcomp->Done(i); groupcomp->Next(i))
 	gcb->Append(groupcomp->GetComp(i));
-      gcb->Append(newcomp);
+      gcb->Append(grcomp);
       OvGroupCmd* gcmd = new OvGroupCmd(GetEditor());
-      OverlaysComp* newgroup = new OverlaysComp();
-      gcmd->SetGroup(newgroup);
+      OverlaysComp* grgroup = new OverlaysComp();
+      grgroup->SetAttributeList(groupcomp->attrlist());
+      gcmd->SetGroup(grgroup);
       gcmd->SetClipboard(gcb);
       mcmd->Append(gcmd);
 
       execute_log(mcmd);
-      ComValue retval(OverlaysComp::class_symid(), new ComponentView(newgroup));
+      ComValue retval(OverlaysComp::class_symid(), new ComponentView(grgroup));
+      retval.object_compview(true);
+      push_stack(retval);
+      return;
+    }
+
+    push_stack(ComValue::nullval());
+}
+
+/*****************************************************************************/
+
+TrimGroupFunc::TrimGroupFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void TrimGroupFunc::execute() {
+    ComValue groupval(stack_arg(0));
+    ComValue grval(stack_arg(1));
+
+    reset_stack();
+    if (!groupval.object_compview() && !grval.object_compview()) return;
+
+    OverlayViewer* viewer = (OverlayViewer*)GetEditor()->GetViewer();
+
+    ComponentView* groupview = (ComponentView*)groupval.obj_val();
+    OverlayComp* groupcomp = groupview ? (OverlayComp*)groupview->GetSubject() : nil;
+ 
+    ComponentView* grview = (ComponentView*)grval.obj_val();
+    OverlayComp* grcomp = grview ? (OverlayComp*)grview->GetSubject() : nil;
+
+    if (groupcomp && grcomp) {
+
+      /* first determine if individual graphic really is in the group graphic */
+      Iterator i;
+      groupcomp->First(i);
+      boolean found = false;
+      while (!groupcomp->Done(i) && !found) {
+	GraphicComp* subcomp = groupcomp->GetComp(i);
+	if (subcomp==grcomp) found = true;
+	groupcomp->Next(i);
+      }
+      if (!found) {
+	push_stack(ComValue::nullval());
+	return;
+      }
+
+      MacroCmd* mcmd = new MacroCmd(GetEditor());
+
+      /* ungroup */
+      Clipboard* ucb = new Clipboard();
+      ucb->Append(groupcomp);
+      UngroupCmd* ucmd = new UngroupCmd(GetEditor());
+      ucmd->SetClipboard(ucb);
+      mcmd->Append(ucmd);
+
+      /* regroup */
+      Clipboard* gcb = new Clipboard();
+      for(groupcomp->First(i); !groupcomp->Done(i); groupcomp->Next(i))
+	if (groupcomp->GetComp(i) != grcomp) 
+	  gcb->Append(groupcomp->GetComp(i));
+      OvGroupCmd* gcmd = new OvGroupCmd(GetEditor());
+      OverlaysComp* grgroup = new OverlaysComp();
+      grgroup->SetAttributeList(groupcomp->attrlist());
+      gcmd->SetGroup(grgroup);
+      gcmd->SetClipboard(gcb);
+      mcmd->Append(gcmd);
+
+      execute_log(mcmd);
+      ComValue retval(OverlaysComp::class_symid(), new ComponentView(grgroup));
       retval.object_compview(true);
       push_stack(retval);
       return;

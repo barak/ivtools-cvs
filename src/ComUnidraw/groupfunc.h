@@ -27,13 +27,23 @@
 #include <ComUnidraw/unifunc.h>
 
 //: command to add graphic to existing group graphic
-// growgroup(groupview compview) -- add graphic to existing group graphic
+// newgroup=growgroup(groupview compview) -- add graphic to existing group graphic
 class GrowGroupFunc : public UnidrawFunc {
 public:
     GrowGroupFunc(ComTerp*,Editor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(groupview compview) -- add graphic to existing group graphic"; }
+	return "newgroup=%s(groupview compview) -- add graphic to existing group graphic"; }
+};
+
+//: command to remove graphic from existing group graphic
+// newgroup=trimgroup(groupview compview) -- remove graphic from existing group graphic
+class TrimGroupFunc : public UnidrawFunc {
+public:
+    TrimGroupFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "newgroup=%s(groupview compview) -- remove graphic from existing group graphic"; }
 };
 
 #endif /* !defined(_groupfunc_h) */

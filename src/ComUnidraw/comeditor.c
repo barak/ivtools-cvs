@@ -191,7 +191,9 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("highlight", new HighlightFunc(comterp, this));
     comterp->add_command("frame", new FrameFunc(comterp, this));
+
     comterp->add_command("growgroup", new GrowGroupFunc(comterp, this));
+    comterp->add_command("trimgroup", new TrimGroupFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
