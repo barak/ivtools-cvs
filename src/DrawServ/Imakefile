@@ -24,6 +24,8 @@ Obj26(drawcreator)
 Obj26(drawcomps)
 Obj26(draweditor)
 Obj26A(drawfunc)
+Obj26A(drawlink)
+Obj26(drawlinklist)
 Obj26(drawserv)
 Obj26(drawviews)
 

@@ -28,15 +28,16 @@
 
 #include <DrawServ/draweditor.h>
 #include <DrawServ/drawfunc.h>
+#include <DrawServ/drawserv.h>
 
-#define TITLE "DrawServFunc"
+#define TITLE "DrawLinkFunc"
 
 /*****************************************************************************/
 
-DrawServFunc::DrawServFunc(ComTerp* comterp, DrawEditor* ed) : UnidrawFunc(comterp, ed) {
+DrawLinkFunc::DrawLinkFunc(ComTerp* comterp, DrawEditor* ed) : UnidrawFunc(comterp, ed) {
 }
 
-void DrawServFunc::execute() {
+void DrawLinkFunc::execute() {
 #ifndef HAVE_ACE
 
   reset_stack();
@@ -58,23 +59,15 @@ void DrawServFunc::execute() {
 #endif
 
   if (hostv.is_string() && portv.is_known()) {
-
+    
     const char* hoststr = hostv.string_ptr();
     const char* portstr = portv.is_string() ? portv.string_ptr() : nil;
     u_short portnum = portstr ? atoi(portstr) : portv.ushort_val();
-    ACE_INET_Addr addr (portnum, hoststr);
-    ACE_SOCK_Stream socket;
-    ACE_SOCK_Connector conn;
-    if (conn.connect (socket, addr) == -1) {
-      ACE_ERROR ((LM_ERROR, "%p\n", "open"));
-      push_stack(ComValue::nullval());
-      return;
-    }
 
-    if (socket.close () == -1)
-        ACE_ERROR ((LM_ERROR, "%p\n", "close"));
-
-    push_stack(ComValue::zeroval());
+    if (((DrawServ*)unidraw)->linkup(hoststr, portnum))
+      push_stack(ComValue::minusoneval());
+    else
+      push_stack(ComValue::zeroval());
   } 
     
   return;
@@ -82,4 +75,3 @@ void DrawServFunc::execute() {
 #endif
 
 }
-

@@ -32,6 +32,9 @@
 //: Unidraw specialized for DrawServ
 // Unidraw (OverlayUnidraw) specialized for DrawServ application.
 // Networked application of the Unidraw framework.
+
+class DrawLinkList;
+
 class DrawServ : public OverlayUnidraw {
 public:
     DrawServ(
@@ -41,7 +44,13 @@ public:
     DrawServ(Catalog*, World*);
     virtual ~DrawServ();
 
+    void Init();
+
+    int linkup(const char* hostname, int portnum);
+    // create new link to remote drawserv, return -1 if error
+
 protected:
+    DrawLinkList* _list;
 };
 
 #endif

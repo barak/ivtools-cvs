@@ -25,18 +25,40 @@
  * Implementation of DrawServ class.
  */
 
+#include <DrawServ/drawlink.h>
+#include <DrawServ/drawlinklist.h>
 #include <DrawServ/drawserv.h>
+
+#include <Unidraw/iterator.h>
+#include <Unidraw/ulist.h>
 /*****************************************************************************/
 
 DrawServ::DrawServ (Catalog* c, int& argc, char** argv, 
 		    OptionDesc* od, PropertyData* pd) 
 : OverlayUnidraw(c, argc, argv, od, pd) {
+  Init();
 }
 
 DrawServ::DrawServ (Catalog* c, World* w) 
 : OverlayUnidraw(c, w) {
+  Init();
+}
+
+void DrawServ::Init() {
+  _list = new DrawLinkList;
 }
 
 DrawServ::~DrawServ () 
 {
+}
+
+int DrawServ::linkup(const char* hostname, int portnum) {
+  DrawLink* link = new DrawLink(hostname, portnum);
+  if (link && link->up()) {
+    _list->add_drawlink(link);
+    return 0;
+  } else {
+    delete link;
+    return -1;
+  }
 }

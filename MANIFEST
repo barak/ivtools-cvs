@@ -287,6 +287,10 @@ ivtools-1.1/src/DrawServ/drawfunc.c
 ivtools-1.1/src/DrawServ/drawfunc.h
 ivtools-1.1/src/DrawServ/drawkit.c
 ivtools-1.1/src/DrawServ/drawkit.h
+ivtools-1.1/src/DrawServ/drawlink.c
+ivtools-1.1/src/DrawServ/drawlink.h
+ivtools-1.1/src/DrawServ/drawlinklist.c
+ivtools-1.1/src/DrawServ/drawlinklist.h
 ivtools-1.1/src/DrawServ/drawserv.c
 ivtools-1.1/src/DrawServ/drawserv.h
 ivtools-1.1/src/DrawServ/drawviews.c
@@ -1387,7 +1391,7 @@ ivtools-1.1/src/include/InterViews/polyglyph.h
 ivtools-1.1/src/include/InterViews/printer.h
 ivtools-1.1/src/include/InterViews/psfont.h
 ivtools-1.1/src/include/InterViews/raster.h
-ivtools-1.1/src/include/InterViews/regexp.h
+ivtools-1.1/src/include/InterViews/regexpo.h
 ivtools-1.1/src/include/InterViews/reqerr.h
 ivtools-1.1/src/include/InterViews/resource.h
 ivtools-1.1/src/include/InterViews/rule.h

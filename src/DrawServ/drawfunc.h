@@ -28,10 +28,10 @@
 #include <ComUnidraw/unifunc.h>
 
 //: command to connect to another drawserv
-// drawserv(hoststr :port portnum) -- connect to remote drawserv
-class DrawServFunc : public UnidrawFunc {
+// drawlink(hoststr :port portnum) -- connect to remote drawserv
+class DrawLinkFunc : public UnidrawFunc {
 public:
-    DrawServFunc(ComTerp*,DrawEditor*);
+    DrawLinkFunc(ComTerp*,DrawEditor*);
     virtual void execute();
     virtual const char* docstring() { 
 	return "%s(hoststr :port portnum) -- connect to remote drawserv"; }

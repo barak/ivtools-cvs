@@ -83,6 +83,6 @@ void DrawEditor::InitCommands() {
 void DrawEditor::AddCommands(ComTerp* comterp) {
   FrameEditor::AddCommands(comterp);
 
-  comterp->add_command("drawserv", new DrawServFunc(comterp, this));
+  comterp->add_command("drawlink", new DrawLinkFunc(comterp, this));
 }
 
