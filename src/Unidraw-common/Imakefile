@@ -17,6 +17,8 @@ Obj(compview)
 Obj(component)
 Obj(geomobjs)
 Obj(iterator)
+Obj(uarray)
+Obj(uhash)
 Obj(ulist)
 
 IncludeDependencies()
