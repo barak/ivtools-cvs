@@ -140,6 +140,7 @@ void ComTE_View::keystroke(const Event& e)
 
 void ComTE_View::newline()
 {
+  /* extract current line from text buffer */
   beginning_of_line();
   int mark =  text_editor_->Dot();
   end_of_line();
@@ -149,7 +150,10 @@ void ComTE_View::newline()
   te_buffer_->Copy(mark, buffer, len);
   buffer[len] = '\0';
 
-  /* put newline in text editor */
+  /* if at the end of the buffer, just add a newline, otherwise, copy the whole line */
+  end_of_text();
+  if (dot != text_editor_->Dot())
+    insert_string(buffer, len);
   insert_char('\n');
 
   /* run this line through comterp */
@@ -219,7 +223,6 @@ void ComTE_View::newline()
   ostream* out = new strstream();
   if (*comterp()->errmsg()) {
     *out << comterp()->errmsg() << "\n";
-    cout << comterp()->errmsg() << "\n";
   } else {
     if (status==0) {
       result.comterp(comterp());

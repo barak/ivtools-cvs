@@ -59,8 +59,8 @@ ivtools-0.8/config/alpha3.0-gcc.mk
 ivtools-0.8/config/alpha3.2-gcc.mk
 ivtools-0.8/config/alpha4-gcc.mk
 ivtools-0.8/config/arch.def
-ivtools-0.8/config/config.mk
 ivtools-0.8/config/config.defs.in
+ivtools-0.8/config/config.mk
 ivtools-0.8/config/config.null.mk
 ivtools-0.8/config/default-gcc.mk
 ivtools-0.8/config/freebsd2.1-gcc.mk
@@ -417,6 +417,8 @@ ivtools-0.8/src/IVGlyph/namestate.c
 ivtools-0.8/src/IVGlyph/namestate.h
 ivtools-0.8/src/IVGlyph/observables.c
 ivtools-0.8/src/IVGlyph/observables.h
+ivtools-0.8/src/IVGlyph/odialogs.c
+ivtools-0.8/src/IVGlyph/odialogs.h
 ivtools-0.8/src/IVGlyph/ofilechooser.c
 ivtools-0.8/src/IVGlyph/ofilechooser.h
 ivtools-0.8/src/IVGlyph/printchooser.c

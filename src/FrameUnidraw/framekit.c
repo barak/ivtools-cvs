@@ -97,8 +97,8 @@ static const char* grid_y_incr = "gridyincr";
 FrameKit* FrameKit::_framekit = nil;
 
 FrameKit::FrameKit () {
-  _set_button_flag = true;
-  _clr_button_flag = true;
+  _set_button_flag = false;
+  _clr_button_flag = false;
 }
 
 FrameKit* FrameKit::Instance() {

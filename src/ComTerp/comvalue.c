@@ -221,16 +221,16 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	    
 	case ComValue::LongType:
 	  if (brief)
-	    out << svp->long_ref();
+	    out << svp->long_ref() << "L";
 	  else
 	    out << "long( " << svp->long_ref() << " )";
 	  break;
 	    
 	case ComValue::ULongType:
 	  if (brief)
-	    out << "ulong( " << svp->ulong_ref() << " )";
+	    out << svp->ulong_ref() << "L";
 	  else
-	    out << svp->ulong_ref();
+	    out << "ulong( " << svp->ulong_ref() << " )";
 	  break;
 	    
 	case ComValue::FloatType:
