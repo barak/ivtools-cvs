@@ -302,9 +302,10 @@ void CreateTextFunc::execute() {
 	    text->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	if (fntVar != nil) text->SetFont(fntVar->GetFont());
-	text->SetTransformer(rel);
-	Unref(rel);
+	text->SetTransformer(new Transformer());
 	text->Translate(args[x0], args[y0]);
+	text->GetTransformer()->postmultiply(rel);
+	Unref(rel);
 	TextOvComp* comp = new TextOvComp(text);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("TextComp"), new ComponentView(comp));
