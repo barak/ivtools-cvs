@@ -28,7 +28,6 @@
 #include <Unidraw/iterator.h>
 #include <Unidraw/viewer.h>
 #include <Attribute/attrlist.h>
-//SECIL
 #include <IV-2_6/InterViews/world.h>
 /*****************************************************************************/
 PixelPokeLineFunc::PixelPokeLineFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
@@ -40,14 +39,11 @@ void PixelPokeLineFunc::execute() {
   ComValue rastcompv(stack_arg(0));
   ComValue xv(stack_arg(1));
   ComValue yv(stack_arg(2));
-  ComValue wv(stack_arg(3));
-  ComValue vallistv(stack_arg(4));
+  ComValue vallistv(stack_arg(3));
   int xval = xv.int_val();
   int yval = yv.int_val();
-  int wval = wv.int_val();  
-  int pixelvals[wval];
   
-  if(!vallistv.is_type(ComValue::ArrayType) || vallistv.array_len() != wval){
+  if(!vallistv.is_type(ComValue::ArrayType) || vallistv.array_len() <= 1){
     reset_stack();
     push_stack(ComValue::nullval());
     return;
@@ -56,6 +52,8 @@ void PixelPokeLineFunc::execute() {
   ALIterator i;
   AttributeValueList* avl = vallistv.array_val();
   avl->First(i);
+  int wval = avl->Number();
+  int pixelvals[wval];
   for (int j=0; j<wval && !avl->Done(i); j++){
     pixelvals[j]= avl->GetAttrVal(i)->int_val();
     avl->Next(i);
@@ -80,7 +78,6 @@ void PixelPokeLineFunc::execute() {
   else 
     push_stack(ComValue::nullval());
 }
-//SECIL
 
 /*****************************************************************************/
 
@@ -101,7 +98,12 @@ void PixelPokeFunc::execute() {
   OverlayRaster* raster = rastrect ? rastrect->GetOriginal() : nil;
 
   if (raster) {
-    raster->poke(xv.int_val(), yv.int_val(), valv.float_val(), valv.float_val(), valv.float_val(), 1.0);
+    ColorIntensity r,g,b;
+    int pixelcolor = valv.int_val();
+    char colorname[7];
+    sprintf(colorname,"#%06x",pixelcolor);
+    Color::find(World::current()->display(),colorname, r, g, b);
+    raster->poke(xv.int_val(), yv.int_val(), r, g, b, 1.0);
     push_stack(rastcompv);
   } else 
     push_stack(ComValue::nullval());

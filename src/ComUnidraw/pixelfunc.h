@@ -26,20 +26,17 @@
 
 #include <ComUnidraw/unifunc.h>
 
-//SECIL
 //: command to poke a line of pixel values into raster
-// pokeline(compview x y w vallist) -- poke pixel values of a line listed in vallist into raster. w is the width of the line(length of the list).
+// pokeline(compview x y vallist) -- poke pixel values of a line listed in vallist into raster.
 
 class PixelPokeLineFunc : public UnidrawFunc {
  public:
   PixelPokeLineFunc(ComTerp*,Editor*);
   virtual void execute();
   virtual const char* docstring() {
-    return "%s(compview x y w vallist) -- poke pixel values of a line listed in vallist into raster. w is the width of the line(length of the list)";
+    return "%s(compview x y vallist) -- poke list of values into a raster line.";
   }
 };
-
-//SECIL
 
 //: command to poke pixel values into raster
 // poke(compview x y val) -- poke pixel value into raster

@@ -131,7 +131,6 @@ public:
 	return "%s(fontnum) -- set current font from menu order"; }
 };
 
-//SECIL
 //: command for setting font state variable by  font name in comdraw.
 // fontbyname(fontname) -- set current font by name
 class FontByNameFunc : public UnidrawFunc {
@@ -172,7 +171,6 @@ public:
 	return "%s(fgcolornum bgcolornum) -- set current colors from menu order"; }
 };
 
-//SECIL
 //:comand for setting color state variables by RGB name in comdraw.
 // colors(fgcolorname bgcolorname). The colorname format is "#RRGGBB"
 class ColorRgbFunc : public UnidrawFunc {
@@ -180,9 +178,8 @@ class ColorRgbFunc : public UnidrawFunc {
   ColorRgbFunc(ComTerp*,Editor*);
   virtual void execute();
   virtual const char* docstring() {
-    return "%s(fgcolorname bgcolorname) -- set current colors by RGB name. The colorname format is \"#RGB\" for 4 bits, \"#RRGGBB\" for 8 bits,\"#RRRGGGBBB\" for 12 bits,\"#RRRRGGGGBBBB\" for 16 bits"; }
+    return "%s(fgcolorname bgcolorname) -- set current colors by RGB name.\nThe colorname format is \"#RGB\" for 4 bits, \"#RRGGBB\" for 8 bits,\n\"#RRRGGGBBB\" for 12 bits,\"#RRRRGGGGBBBB\" for 16 bits"; }
 };
-//SECIL
 
 //: command to select graphics in comdraw.
 // select([compview ...] :all :clear) -- make these graphics the current selection, 

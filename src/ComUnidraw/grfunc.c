@@ -62,13 +62,11 @@
 #include <Unidraw/Graphic/ellipses.h>
 
 #include <InterViews/transformer.h>
-//SECIL
 #include <IV-2_6/InterViews/world.h>
 #include <IV-X11/Xlib.h>
 #include <IV-X11/xdisplay.h>
 #include <IV-X11/xfont.h>
 #include <X11/Xatom.h>
-//SECIL
 
 #include <Attribute/aliterator.h>
 #include <Attribute/attrlist.h>
@@ -680,7 +678,6 @@ void FontFunc::execute() {
 }
 
 /*****************************************************************************/
-//SECIL
 FontByNameFunc::FontByNameFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
 }
 
@@ -816,7 +813,6 @@ void ColorRgbFunc::execute() {
   execute_log(cmd);
 }
 /*****************************************************************************/
-//SECIL
 
 BrushFunc::BrushFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
 }
