@@ -68,11 +68,14 @@ int DrawServ::linkup(const char* hostname, int portnum,
     // search for existing link with matching local_id
     Iterator i;
     _list->First(i);
-    while(!_list->Done(i) && _list->GetDrawLink(i)->local_linkid()!=local_id);
+    while(!_list->Done(i) && _list->GetDrawLink(i)->local_linkid()!=local_id)
+      _list->Next(i);
     if (!_list->Done(i)) {
       DrawLink* curlink = _list->GetDrawLink(i);
       curlink->remote_linkid(remote_id);
-      fprintf(stderr, "link up with %s via port %d\n", hostname, portnum);
+      curlink->althostname(hostname);
+      fprintf(stderr, "link up with %s(%s) via port %d\n", 
+	      curlink->hostname(), curlink->althostname(), portnum);
       fprintf(stderr, "local id %d, remote id %d\n", curlink->local_linkid(), 
 	      curlink->remote_linkid());
     } else
