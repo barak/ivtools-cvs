@@ -426,21 +426,24 @@ int DrawServ::test_sessionid(unsigned int id) {
 }
 
 void DrawServ::grid_message(GraphicId* grid) {
-  /* find link on which current selector lives */
-  DrawLink* link = _linklist->find_drawlink(grid);
-
-  if (link) {
-    char buf[BUFSIZ];
-    if (grid->selected()==LinkSelection::LocallySelected) 
-      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d )%c", grid->id(), grid->selector(), 
-	       LinkSelection::RemotelySelected, '\0');
-    else
+  char buf[BUFSIZ];
+  if (grid->selected()==LinkSelection::LocallySelected) {
+    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d )%c", grid->id(), grid->selector(), 
+	     LinkSelection::RemotelySelected, '\0');
+    DistributeCmdString(buf);
+  } else {
+    
+    /* find link on which current selector lives */
+    DrawLink* link = _linklist->find_drawlink(grid);
+    
+    if (link) {
       snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d :request 0x%08x)%c", grid->id(), 
 	       grid->selector(), LinkSelection::WaitingToBeSelected, sessionid(), '\0');
-    SendCmdString(link, buf);
+      SendCmdString(link, buf);
+    }
   }
 }
-
+  
 // handle reserve request from remote DrawLink.
 void DrawServ::grid_message_handle(DrawLink* link, unsigned int id, unsigned int selector, 
 				   int state, unsigned int newselector)
