@@ -127,7 +127,7 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 #if __GNUG__<3
 	      filebuf obuf(1);
 #else
-	      filebuf obuf(stdout, ios_base::out);
+	      fileptr_filebuf obuf(stdout, ios_base::out);
 #endif
 	      ostream ostr(&obuf);
 	      ostr << "timeexpr result:  ";
@@ -196,7 +196,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr.flush();
       return 0;
 #else
-      filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
+      fileptr_filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
@@ -221,7 +221,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr << "\n";
       ostr.flush();
 #else
-      filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
+      fileptr_filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();

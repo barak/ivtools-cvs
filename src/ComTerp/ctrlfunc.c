@@ -132,7 +132,7 @@ void RemoteFunc::execute() {
     filebuf ofbuf;
     ofbuf.attach(socket.get_handle());
 #else
-    filebuf ofbuf(comterp()->handler() && comterp()->handler()->wrfptr() 
+    fileptr_filebuf ofbuf(comterp()->handler() && comterp()->handler()->wrfptr() 
 		  ? comterp()->handler()->wrfptr() : stdout, ios_base::out);
 #endif
     ostream out(&ofbuf);
@@ -148,7 +148,7 @@ void RemoteFunc::execute() {
       char* buf;
       in.gets(&buf);
 #else
-      filebuf ifbuf(comterp()->handler()->rdfptr(), ios_base::in);
+      fileptr_filebuf ifbuf(comterp()->handler()->rdfptr(), ios_base::in);
       istream in(&ifbuf);
       char buf[BUFSIZ];
       in.get(buf, BUFSIZ);

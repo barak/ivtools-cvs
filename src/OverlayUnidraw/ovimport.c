@@ -599,7 +599,7 @@ int ReadImageHandler::inputReady(int fd) {
     ifs->rdbuf()->attach(_fd);
 #else
     FILE* ifptr = fdopen(_fd, "r");
-    filebuf* fbuf = new filebuf(ifptr, ios_base::in);
+    fileptr_filebuf* fbuf = new fileptr_filebuf(ifptr, ios_base::in);
     istream* ifs = new istream(fbuf);
 #endif
     _helper.add_stream(ifs);
@@ -1085,7 +1085,7 @@ void OvImportCmd::Execute () {
 	  ifstream* ifs = new ifstream;
           ifs->rdbuf()->attach(fileno(fptr));
 #else
-	  filebuf* fbuf = new filebuf(fptr, ios_base::in);
+	  fileptr_filebuf* fbuf = new fileptr_filebuf(fptr, ios_base::in);
 	  istream* ifs = new istream(fbuf);
 #endif
 	  inptr_ = ifs;
@@ -1391,7 +1391,7 @@ GraphicComp* OvImportCmd::Import (const char* path) {
       ifstream* in = new ifstream;
       in->rdbuf()->attach(fileno(fptr));
 #else
-      filebuf* fbuf = new filebuf(fptr, ios_base::in);
+      fileptr_filebuf* fbuf = new fileptr_filebuf(fptr, ios_base::in);
       istream* in = new istream(fbuf);
 #endif
       helper_->add_stream(in);
@@ -1480,7 +1480,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	  ifstream* ifs = new ifstream;
           ifs->rdbuf()->attach(fileno(gunzip_fptr));
 #else
-	  filebuf* fbuf = new filebuf(gunzip_fptr, ios_base::in);
+	  fileptr_filebuf* fbuf = new fileptr_filebuf(gunzip_fptr, ios_base::in);
 	  istream* ifs = new istream(fbuf);
 #endif
           helper.add_stream(ifs);
@@ -1494,7 +1494,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
           ifs->rdbuf()->attach(newfd);
 #else
 	  FILE* ifptr = fdopen(newfd, "r");
-	  filebuf* fbuf = new filebuf(ifptr, ios_base::in);
+	  fileptr_filebuf* fbuf = new fileptr_filebuf(ifptr, ios_base::in);
 	  istream* ifs = new istream(fbuf);
 	  helper.add_file(ifptr);
 #endif
@@ -1542,7 +1542,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 #else
 	  FILE* ifptr = fdopen(new_fd, "r");
 	  helper.add_file(ifptr);
-	  filebuf fbuf(ifptr, ios_base::in);
+	  fileptr_filebuf fbuf(ifptr, ios_base::in);
 	  istream new_in(&fbuf);
 #endif
 	  comp = catalog->ReadPostScript(new_in);
@@ -1578,7 +1578,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	    ifstream new_in;
             new_in.rdbuf()->attach(fileno(pptr));
 #else
-	    filebuf fbuf(pptr, ios_base::in);
+	    fileptr_filebuf fbuf(pptr, ios_base::in);
 	    istream new_in(&fbuf);
 #endif
 	    comp = PNM_Image(new_in);
@@ -1642,7 +1642,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	    ifstream* new_in = new ifstream;
             new_in->rdbuf()->attach(fileno(pptr));
 #else
-	    filebuf* fbuf = new filebuf(pptr, ios_base::in);
+	    fileptr_filebuf* fbuf = new fileptr_filebuf(pptr, ios_base::in);
 	    istream* new_in = new istream(fbuf);
 #endif
             helper.add_stream(new_in);
@@ -1672,7 +1672,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	    ifstream new_in;
             new_in.rdbuf()->attach(fileno(pptr));
 #else
-	    filebuf fbuf(pptr, ios_base::in);
+	    fileptr_filebuf fbuf(pptr, ios_base::in);
 	    istream new_in(&fbuf);
 #endif
 	    comp = PNM_Image(new_in);
@@ -2443,7 +2443,7 @@ GraphicComp* OvImportCmd::PNM_Image_Filter (
     in2.rdbuf()->attach(outfd);
 #else
     FILE* infptr = fdopen(outfd, "r");
-    filebuf fbuf(infptr, ios_base::in);
+    fileptr_filebuf fbuf(infptr, ios_base::in);
     istream in2(&fbuf);
 #endif
 

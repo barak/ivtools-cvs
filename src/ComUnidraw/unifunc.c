@@ -464,7 +464,7 @@ void ExportFunc::execute() {
 	}
 	else 
 #endif
-	  pfbuf = new filebuf(stdout, output);
+	  pfbuf = new fileptr_filebuf(stdout, output);
     }
 
     else {
@@ -487,7 +487,7 @@ void ExportFunc::execute() {
             pfbuf = new filebuf(comterp()->handler()->rdfptr(), output);
         } else
 #endif
-            pfbuf = new filebuf(stdout, output);
+            pfbuf = new fileptr_filebuf(stdout, output);
     }
 
 #endif
