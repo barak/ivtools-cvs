@@ -789,6 +789,8 @@ ivtools-0.8/src/UniIdraw/idvars.h
 ivtools-0.8/src/UniIdraw/idversion.h
 ivtools-0.8/src/Unidraw-common/Imakefile
 ivtools-0.8/src/Unidraw-common/Makefile
+ivtools-0.8/src/Unidraw-common/component.c
+ivtools-0.8/src/Unidraw-common/compview.c
 ivtools-0.8/src/Unidraw-common/geomobjs.c
 ivtools-0.8/src/Unidraw-common/iterator.c
 ivtools-0.8/src/Unidraw-common/ulist.c
