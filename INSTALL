@@ -45,7 +45,7 @@ archives (such as ftp.x.org).
 ** can be troublesome (i.e. the default one delivered with Solaris or
 ** DEC Alpha).  You'll want to rig your PATH environment variable to
 ** find the gcc variant of cpp.  Read more about it at
-** http://www.vectaport.com/ivtools/faq.html#imakecppprob
+** http://www.ivtools.org/ivtools/faq.html#imakecppprob
 
 0.d. If you want to use the polygon intersection tools, acquire and
 build clippoly, a LGPLed library for polygon clipping from:
@@ -169,7 +169,7 @@ necessary.
 Also you may want to review the rest of the entries in the
 site.def.<CPU> file to see if they are good defaults for your system.
 
-** See http://www.vectaport.com/ivtools/faq.html for more info.
+** See http://www.ivtools.org/ivtools/faq.html for more info.
 
 2. Compiling ivtools:
 
@@ -194,7 +194,7 @@ does all these individual steps (the equivalent of "make World"):
 	
 If you have any trouble at this stage take a look at:
 
-  http://www.vectaport.com/ivtools/faq.html#SourceBuild
+  http://www.ivtools.org/ivtools/faq.html#SourceBuild
 
 ** Subsequent use of "make" will only do the "make -k" phase described
 ** above.  To redo everything, either do a "make World", or do a "make

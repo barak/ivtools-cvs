@@ -193,6 +193,7 @@ void HelpFunc::execute() {
 	      ComValue* value = comterp()->localvalue(opr_tbl_commid(op_ids[j]));
 	      if (value) {
 		ComFunc* comfunc = (ComFunc*)value->obj_val();
+		if (postevalflag.is_true() && !comfunc->post_eval()) continue;
 		if (first) 
 		  first = false;
 		else
