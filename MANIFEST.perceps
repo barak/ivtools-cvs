@@ -49,6 +49,7 @@ ComUnidraw/comterp-iohandler.h
 ComUnidraw/dialogfunc.h
 ComUnidraw/grdotfunc.h
 ComUnidraw/grfunc.h
+ComUnidraw/grlistfunc.h
 ComUnidraw/grstatfunc.h
 ComUnidraw/highlightfunc.h
 ComUnidraw/nfunc.h
