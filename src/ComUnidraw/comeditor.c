@@ -212,6 +212,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     comterp->add_command("poke", new PixelPokeFunc(comterp, this));
     comterp->add_command("pcols", new PixelColsFunc(comterp, this));
     comterp->add_command("prows", new PixelRowsFunc(comterp, this));
+    comterp->add_command("pflush", new PixelFlushFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
