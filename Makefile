@@ -19,7 +19,7 @@
 
     APP_CCINCLUDES = $(NORM_CCINCLUDES)
 
-             IVTOOLSSRC = /proj/ivtools-0.7/src
+             IVTOOLSSRC = /proj/ivtools-0.8/src
 
 LIBUNIDRAWCOMMON = -L$(IVTOOLSSRC)/Unidraw-common/$(CPU) -lUnidraw-common
 LIBIVCOMMON = -L$(IVTOOLSSRC)/IV-common/$(CPU) -lIV-common
@@ -67,9 +67,9 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
 
    PROJECTDIR = /proj
 
-   RELEASE = ivtools-0.7
+   RELEASE = ivtools-0.8
 
-   VERSION = 0.7.10
+   VERSION = 0.8
 
    REPOSITORY_FILES = *.c *.cc *.cxx *.C *.h Imakefile *.def template README INSTALL VERSION MANIFEST COPYRIGHT ANNOUNCE README.ivmkcm *.patch *.bugfix.? *.script *.sed comutil.arg comterp.err comutil.ci comterp.arg comterp.ci site.def.SUN4 site.def.LINUX site.def.SGI site.def.HP800 site.def.ALPHA site.def.CYGWIN site.def.NETBSD WishList *.defaults *.cf HOWTO Copyright *.sh CHANGES CHANGES-0.? *.cpp ivmkmf *.bash *.1  *.3 config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp *.mk config.mk.in *.tmpl *.flt *.m4 config.defs.in
 
@@ -93,7 +93,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
            CCSUFFIX = c
             CDRIVER = gcc
             CSUFFIX = c
-                SRC = /.
+                SRC = /proj/ivtools-0.8/.
               SLASH = /
                SRCS = $(SRC)$(SLASH)*.$(CCSUFFIX)
                OBJS = *.o
@@ -132,7 +132,7 @@ CLIPPOLY_CCINCLUDES =
      ACE_CCINCLUDES = -I$(ACEDIR)
      IUE_CCINCLUDES =
 
-             ACEDIR = /proj/ACE_wrappers
+             ACEDIR = /proj/ACE_wrappers/
 
              CFLAGS = $(APP_CCFLAGS) $(IV_CCFLAGS) $(OTHER_CCFLAGS) $(EXTRA_CCFLAGS)
 
@@ -172,7 +172,7 @@ NONSHARED_CCLDFLAGS =
      CLIPPOLYLIBDIR =
     CLIPPOLYLIBBASE = libclippoly.so
        ACE_CCLDLIBS = -L$(ACEDIR)/ace -lACE
-          ACELIBDIR = /proj/ACE_wrappers/ace
+          ACELIBDIR = /proj/ACE_wrappers//ace
          ACELIBBASE = libACE.so
        IUE_CCLDLIBS =
           IUELIBDIR =
@@ -204,11 +204,11 @@ NONSHARED_CCLDFLAGS =
              RM_CMD = $(RM) ,* .emacs_* *..c *.BAK *.CKP *.a *.bak *.ln *.o a.out core errs make.log make.out tags TAGS
               TROFF = groff
 
-                TOP =
+                TOP = /proj/ivtools-0.8
              RELTOP = .
-        CURRENT_DIR =
+        CURRENT_DIR = /proj/ivtools-0.8
 
-              IVSRC = /proj/ivtools-0.7/src
+              IVSRC = /proj/ivtools-0.8/src
              BINSRC = $(IVSRC)/bin
           CONFIGSRC = $(RELTOP)/config
              INCSRC = $(IVSRC)/include
@@ -272,14 +272,14 @@ clean::
 # -------------------------------------------------------------------------
 
 #
-# "make CPU" prints the name you should assign to CPU.
-# "make World" builds everything.
+# "make CPU" prints the CPU name used for machine-specific subdirectories.
+# "make" builds everything.
 # "make install" installs everything.
 #
 
 PACKAGE = top_ivtools
 
-WORLDOPTS = -k
+WORLDOPTS =
 SUBDIRS = src config
 
 CPU:
@@ -297,7 +297,7 @@ World::
 	@echo ""
 	$(MAKE) depend
 	@echo ""
-	$(MAKE) $(WORLDOPTS) all
+	$(MAKE) $(WORLDOPTS) subdirs
 	@echo ""
 	@echo "$(RELEASE) build completed on `date`"
 	@echo ""
@@ -332,6 +332,32 @@ World.noshared::
 	@echo "$(RELEASE) build completed on `date`"
 	@echo ""
 
+all::
+	-@if [ ! -f make.makefile ]; then \
+	echo ""; \
+	echo "Building $(RELEASE) on `date`"; \
+	echo ""; \
+	$(MAKE) Makefile CONFIGSRC=$(CONFIGSRC) XCONFIGDIR=$(XCONFIGDIR);\
+	echo "twice to propogate new toplevel pathname"; \
+	$(MAKE) Makefile; \
+	touch make.makefile; fi
+	-@if [ ! -f make.makefiles ]; then \
+	echo ""; \
+	$(MAKE) Makefiles; \
+	touch make.makefiles; fi
+	-@if [ ! -f make.depend ]; then \
+	echo ""; \
+	$(MAKE) depend; \
+	touch make.depend; fi
+	-@if [ ! -f make.make ]; then \
+	echo ""; fi
+	$(MAKE) $(WORLDOPTS) subdirs
+	-@if [ ! -f make.make ]; then \
+	echo ""; \
+	echo "$(RELEASE) build completed on `date`"; \
+	echo ""; \
+	touch make.make; fi
+
 Makefiles::
 	-@for i in $(SUBDIRS); \
 	do \
@@ -362,7 +388,7 @@ depend::
 	) else continue; fi; \
 	done
 
-all::
+subdirs::
 	-@for i in $(SUBDIRS); \
 	do \
 	if [ -d $$i ]; then ( \
@@ -546,4 +572,7 @@ cmcommit::
 	$(MAKE) $(PASSARCH) cmcommit; \
 	) else continue; fi; \
 	done
+
+clean::
+	@$(RM_CMD) make.makefile make.makefiles make.depend make.make
 
