@@ -228,6 +228,8 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     OverlayEditor::ExecuteCmd(cmd);
   else {
     ostrstream sbuf;
+    boolean oldflag = OverlayScript::ptlist_parens();
+    OverlayScript::ptlist_parens(false);
     switch (cmd->GetClassId()) {
     case PASTE_CMD:
       {
@@ -271,6 +273,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
       }
       break;
     }
+    OverlayScript::ptlist_parens(oldflag);
   }
 }
 
