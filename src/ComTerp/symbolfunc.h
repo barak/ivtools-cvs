@@ -67,7 +67,7 @@ public:
       return "%s(symbol_var [symbol_var...]) -- return value(s) associated with symbol variables(s)"; }
 };
 
-#//: create symbol command for ComTerp.
+//: create symbol command for ComTerp.
 // symadd(symbol [symbol...]) -- create symbol(s) and return without lookup
 class SymAddFunc : public ComFunc {
 public:
@@ -78,4 +78,28 @@ public:
     virtual const char* docstring() { 
       return "%s(symbol [symbol...]) -- create symbol(s) and return without lookup"; }
 };
+
+//: command to split a symbol or string into a list of character objects
+// lst=split(symbol|string) -- split symbol or string into list of characters.
+class SplitStrFunc : public ComFunc {
+public:
+    SplitStrFunc(ComTerp*);
+    virtual void execute();
+
+    virtual const char* docstring() { 
+      return "lst=%s(symbol|string) -- split symbol or string into list of characters"; }
+};
+
+//: command to join list of characters into a string object
+// str=join(clist) -- join list of characters into string
+class JoinStrFunc : public ComFunc {
+public:
+    JoinStrFunc(ComTerp*);
+    virtual void execute();
+
+    virtual const char* docstring() { 
+      return "str=%s(clist) -- join list of characters into string"; }
+};
+
+
 #endif /* !defined(_symbolfunc_h) */

@@ -822,6 +822,9 @@ void ComTerp::add_defaults() {
     add_command("symval", new SymValFunc(this));
     add_command("symbol", new SymbolFunc(this));
     add_command("symadd", new SymAddFunc(this));
+    add_command("split", new SplitStrFunc(this));
+    add_command("join", new JoinStrFunc(this));
+
     add_command("postfix", new PostFixFunc(this));
     add_command("posteval", new PostEvalFunc(this));
 
