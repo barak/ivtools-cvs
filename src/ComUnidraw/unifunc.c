@@ -22,6 +22,11 @@
  * 
  */
 
+#ifdef HAVE_ACE
+#include <ComTerp/comhandler.h>
+#include <ace/SOCK_Connector.h>
+#endif
+
 #include <ComUnidraw/comeditor.h>
 #include <ComUnidraw/unifunc.h>
 #include <OverlayUnidraw/ovcatalog.h>
@@ -53,14 +58,10 @@
 #include <stdio.h>
 #include <strstream.h>
 #include <unistd.h>
-#if __GNUG__>=3
+#if __GNUC__>=3
 #include <fstream.h>
 #endif
-
-#ifdef HAVE_ACE
-#include <ComTerp/comhandler.h>
-#include <ace/SOCK_Connector.h>
-#endif
+#include <string.h>
 
 #define TITLE "UnidrawFunc"
 
@@ -402,7 +403,7 @@ void ExportFunc::execute() {
 #endif
 
 
-#if __GNUG__<3
+#if __GNUC__<3
     filebuf fbuf;
     if (file.is_type(ComValue::StringType))
         fbuf.open(file.string_ptr(), "w");
@@ -495,7 +496,7 @@ void ExportFunc::execute() {
     if (string.is_true()||str.is_true())
       out = new strstream();
     else
-#if __GNUG__<3      
+#if __GNUC__<3      
       out = new ostream(&fbuf);
 #else
       out = new ostream(pfbuf);
@@ -561,7 +562,7 @@ void ExportFunc::execute() {
     }
     delete out;
 
-#if __GNUG__>=3
+#if __GNUC__>=3
     delete pfbuf;
 #endif    
     

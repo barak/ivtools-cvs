@@ -22,16 +22,17 @@
  * 
  */
 
+#include <ComTerp/comhandler.h>
+
 #include <ComTerp/_comterp.h>
 #include <ComTerp/_comutil.h>
-#include <ComTerp/comhandler.h>
 #include <ComTerp/comterpserv.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/ctrlfunc.h>
 #include <OS/math.h>
 #include <iostream.h>
 #include <string.h>
-#if __GNUG__>=3
+#if __GNUC__>=3
 #include <fstream.h>
 #endif
 
@@ -145,7 +146,7 @@ int ComTerpServ::s_fputs(const char* s, void* serv) {
 char* ComTerpServ::fd_fgets(char* s, int n, void* serv) {
     ComTerpServ* server = (ComTerpServ*)serv;
     int fd = Math::max(server->_fd, 1);
-#if __GNUG__<3
+#if __GNUC__<3
     char* instr;
     filebuf fbuf;
     fbuf.attach(fd);
@@ -179,7 +180,7 @@ char* ComTerpServ::fd_fgets(char* s, int n, void* serv) {
     /* append a null byte */
     outstr[outpos] = '\0';
 
-#if __GNUG__>=3
+#if __GNUC__>=3
     if (ifptr) fclose(ifptr);
 #endif
 
@@ -193,7 +194,7 @@ int ComTerpServ::fd_fputs(const char* s, void* serv) {
     int& bufsize = server->_bufsiz;
 
     int fd = (int)server->_fd;
-#if __GNUG__<3
+#if __GNUC__<3
     filebuf fbuf;
     fbuf.attach(fd);
 #else
@@ -205,7 +206,7 @@ int ComTerpServ::fd_fputs(const char* s, void* serv) {
 	out.put(s[outpos]);
     out.flush();
     outpos = 0;
-#if __GNUG__>=3
+#if __GNUC__>=3
     if (ofptr) fclose(ofptr);
 #endif
     return 1;
@@ -286,7 +287,7 @@ int ComTerpServ::runfile(const char* filename) {
     char inbuf[bufsiz];
     char outbuf[bufsiz];
     inbuf[0] = '\0';
-#if __GNUG__<3
+#if __GNUC__<3
     filebuf ibuf;
     ibuf.open(filename, "r");
 #else
@@ -310,7 +311,7 @@ int ComTerpServ::runfile(const char* filename) {
 	if (*inbuf && read_expr()) {
 	    if (eval_expr(true)) {
 	        err_print( stderr, "comterp" );
-#if __GNUG__<3
+#if __GNUC__<3
 	        filebuf obuf(handler() ? handler()->get_handle() : 1);
 #else
                 FILE* ofptr = fdopen(handler() ? handler()->get_handle() : 1, "w"); 
@@ -318,7 +319,7 @@ int ComTerpServ::runfile(const char* filename) {
 #endif
 		ostream ostr(&obuf);
 		ostr.flush();
-#if __GNUG__>=3
+#if __GNUC__>=3
                 if (ofptr) fclose(ofptr);
 #endif
 		status = -1;
@@ -331,7 +332,7 @@ int ComTerpServ::runfile(const char* filename) {
 	    }
 	} else 	if (*inbuf) {
 	  err_print( stderr, "comterp" );
-#if __GNUG__<3
+#if __GNUC__<3
 	  filebuf obuf(handler() ? handler()->get_handle() : 1);
 #else
           FILE* ofptr = fdopen(handler() ? handler()->get_handle() : 1, "w"); 
@@ -339,7 +340,7 @@ int ComTerpServ::runfile(const char* filename) {
 #endif
 	  ostream ostr(&obuf);
 	  ostr.flush();
-#if __GNUG__>=3
+#if __GNUC__>=3
           if (ofptr) fclose(ofptr);
 #endif
 	  status = -1;

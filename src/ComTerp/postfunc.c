@@ -22,8 +22,9 @@
  * 
  */
 
-#include <ComTerp/postfunc.h>
 #include <ComTerp/comhandler.h>
+
+#include <ComTerp/postfunc.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
 
@@ -33,7 +34,7 @@
 #include <OS/math.h>
 
 #include <iostream.h>
-#if __GNUG__>=3
+#if __GNUC__>=3
 #include <fstream.h>
 #endif
 
@@ -46,7 +47,7 @@ PostFixFunc::PostFixFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void PostFixFunc::execute() {
   // print everything on the stack for this function
-#if __GNUG__<3
+#if __GNUC__<3
   filebuf fbuf;
   if (comterp()->handler()) {
     int fd = Math::max(1, comterp()->handler()->get_handle());

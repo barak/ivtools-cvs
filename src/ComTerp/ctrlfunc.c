@@ -21,10 +21,11 @@
  * 
  */
 
-#include <ComTerp/ctrlfunc.h>
 #include <ComTerp/comhandler.h>
-#include <ComTerp/comvalue.h>
+
+#include <ComTerp/ctrlfunc.h>
 #include <ComTerp/comterpserv.h>
+#include <ComTerp/comvalue.h>
 #include <Attribute/attrlist.h>
 #include <fstream.h>
 
@@ -34,7 +35,7 @@
 
 #define TITLE "CtrlFunc"
 
-#if __GNUG__>=3
+#if __GNUC__>=3
 static char newline;
 #endif
 
@@ -129,7 +130,7 @@ void RemoteFunc::execute() {
       return;
     }
 
-#if __GNUG__<3
+#if __GNUC__<3
     filebuf ofbuf;
     ofbuf.attach(socket.get_handle());
 #else
@@ -142,7 +143,7 @@ void RemoteFunc::execute() {
     if (cmdstr[strlen(cmdstr)-1] != '\n') out << "\n";
     out.flush();
     if (nowaitv.is_false()) {
-#if __GNUG__<3
+#if __GNUC__<3
       filebuf ifbuf;
       ifbuf.attach(socket.get_handle());
       istream in(&ifbuf);

@@ -23,8 +23,9 @@
 
 #ifdef HAVE_ACE
 
-#include <OverlayUnidraw/oved.h>
 #include <OverlayUnidraw/aceimport.h>
+
+#include <OverlayUnidraw/oved.h>
 #include <OverlayUnidraw/ovcomps.h>
 #include <OverlayUnidraw/ovimport.h>
 #include <IVGlyph/importchooser.h>
@@ -89,7 +90,7 @@ UnidrawImportHandler::handle_input (ACE_HANDLE fd)
     }
     return _inptr->good() ? 0 : -1;
 #else
-#if __GNUG__<3
+#if __GNUC__<3
     filebuf fbuf;
     if(fbuf.attach(fd)==0) return -1;
 #else
