@@ -360,8 +360,14 @@ boolean RasterPS::Definition (ostream& out) {
     Coord w = raster->Width();
     Coord h = raster->Height();
 
-    if (((OvPrintCmd*)GetCommand())->idraw_format()) {
-
+    boolean idraw_format = false;
+    if (GetCommand()->IsA(OV_EXPORT_CMD))
+      idraw_format = ((OvExportCmd*)GetCommand())->idraw_format();
+    else if (GetCommand()->IsA(OVPRINT_CMD)) 
+      idraw_format = ((OvPrintCmd*)GetCommand())->idraw_format();
+    
+    if (idraw_format) {
+      
 	out << "Begin " << MARK << " " << "Rast\n";
 	Transformation(out);
 

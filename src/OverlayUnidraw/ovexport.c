@@ -109,7 +109,7 @@ void OvExportCmd::Execute () {
 	style = new Style(Session::instance()->style());
 	style->attribute("subcaption", "Export selected graphics to file:");
 	style->attribute("open", "Export");
-	const char *formats[] = {"PostScript", "idraw", "drawtool"};
+	const char *formats[] = {"EPS", "idraw EPS", "drawtool"};
 	const char *commands[] = {"ghostview %s", "idraw %s", "drawtool %s"};
 	chooser_ = new ExportChooser(".", WidgetKit::instance(), style,
 				     formats, sizeof(formats)/sizeof(char*), commands, nil, true);
