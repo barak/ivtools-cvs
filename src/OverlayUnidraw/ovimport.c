@@ -1525,6 +1525,16 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	  cerr << "tiftopnm not found\n";
       }
 
+    } else if (strncmp(creator, "X11", 3)==0) {
+      if (pathname && !return_fd && strcmp(pathname,"-")!=0 && !compressed) 
+	comp = XBitmap_Image(pathname);
+      else {
+	if (OverlayKit::bincheck("xbmtopbm"))
+	  comp = PNM_Image_Filter(*in, return_fd, pnmfd, "xbmtopbm");
+	else
+	  cerr << "xbmtopbm not found\n";
+      }
+
     } else if (strncmp(creator, "JPEG", 4)==0) {
       if (OverlayKit::bincheck("stdcmapppm") && 
 	  OverlayKit::bincheck("djpeg")) {
