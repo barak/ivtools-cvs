@@ -616,9 +616,6 @@ int ReadImageHandler::inputReady(int fd) {
     GraphicComp* comp = OvImportCmd::DoImport(
       *ifs, empty, _helper, _ed, true, _path, newfd
     );
-#if __GNUG__>=3
-    if (ifptr) fclose(ifptr);
-#endif
 
 #if defined(OPEN_DRAWTOOL_URL)
     if (comp && comp->IsA(OVERLAY_IDRAW_COMP)) {
@@ -1451,6 +1448,8 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
     GraphicComp* comp = nil;
     pnmfd = -1;
     OverlayCatalog* catalog = (OverlayCatalog*)unidraw->GetCatalog();
+    static boolean dithermap_flag = catalog->GetAttribute("dithermap") &&
+      strcmp(catalog->GetAttribute("dithermap"),"false")!=0;
 
     int len = 255;
     char buf[len];
@@ -1525,9 +1524,9 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	  if (pathname && !return_fd) {
 	    char buffer[BUFSIZ];
 	    if (compressed) 
-	      sprintf(buffer, "gzip -c %s | pstoedit -f idraw", pathname);
+	      sprintf(buffer, "gzip -c %s | pstoedit -f idraw", pathname, "%d");
 	    else
-	      sprintf(buffer, "pstoedit -f idraw %s", pathname);
+	      sprintf(buffer, "pstoedit -f idraw %s", pathname, "%d");
 	    pptr = popen(buffer, "r");
 	    cerr << "input opened with " << buffer << "\n";
 	    if (pptr) 
@@ -1539,14 +1538,12 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
           new_in.rdbuf()->attach(new_fd);
 #else
 	  FILE* ifptr = fdopen(new_fd, "r");
+	  helper.add_file(ifptr);
 	  filebuf fbuf(ifptr, ios_base::in);
 	  istream new_in(&fbuf);
 #endif
 	  comp = catalog->ReadPostScript(new_in);
 	  if (pptr) pclose(pptr);
-#if __GNUG__>=3
-	  if (ifptr) fclose(ifptr);
-#endif
 	} else
 	  cerr << "pstoedit not found\n";
       }
@@ -1615,17 +1612,17 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 
 	if (pathname && !return_fd) {
 	  char buffer[BUFSIZ];
-#if 0
-	  if (compressed) 
-	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;gzip -c %s | djpeg -map $cm -dither fs -pnm;rm $cm", pathname);
-	  else
-	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -map $cm -dither fs -pnm %s;rm $cm", pathname);
-#else
-	  if (compressed) 
-	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;gzip -c %s | djpeg  -pnm;rm $cm", pathname);
-	  else
-	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -pnm %s;rm $cm", pathname);
-#endif
+	  if (dithermap_flag) {
+	    if (compressed) 
+	      sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;gzip -c %s | djpeg -map $cm -dither fs -pnm;rm $cm", pathname);
+	    else
+	      sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -map $cm -dither fs -pnm %s;rm $cm", pathname);
+	  } else {
+	    if (compressed) 
+	      sprintf(buffer, "gzip -c %s | djpeg  -pnm", pathname);
+	    else
+	      sprintf(buffer, "djpeg -pnm %s", pathname);
+	  }
 	  FILE* pptr = popen(buffer, "r");
           helper.add_pipe(pptr);
 	  if (pptr) {
@@ -1640,8 +1637,12 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
             helper.add_stream(new_in);
 	    comp = PNM_Image(*new_in);
 	  }
-	} else
-	  comp = PNM_Image_Filter(*in, return_fd, pnmfd, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -map $cm -dither fs -pnm;rm $cm");
+	} else {
+	  if (dithermap_flag) 
+	    comp = PNM_Image_Filter(*in, return_fd, pnmfd, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -map $cm -dither fs -pnm;rm $cm");
+	  else 
+	    comp = PNM_Image_Filter(*in, return_fd, pnmfd, "djpeg -pnm");
+	}
       } else
 	cerr << "djpeg or stdcmapppm not found\n";
 
@@ -2404,18 +2405,18 @@ GraphicComp* OvImportCmd::PNM_Image_Filter (
     ifstream in2;
     in2.rdbuf()->attach(outfd);
 #else
-    FILE* outfptr = fdopen(outfd, "w");
-    filebuf fbuf(outfptr, ios_base::out);
+    FILE* infptr = fdopen(outfd, "r");
+    filebuf fbuf(infptr, ios_base::in);
     istream in2(&fbuf);
 #endif
 
     comp = PNM_Image(in2);
 
-#if __GNUG__>=3
-    fclose(outfptr);
-#endif
     if(close(outfd)==-1)
       cerr << "error in parent closing last end of the pipes\n";
+#if __GNUG__>=3
+    if (infptr) fclose(infptr);
+#endif
   }
 
   return comp;
@@ -2480,11 +2481,6 @@ int OvImportCmd::Pipe_Filter (istream& in, const char* filter)
 #if __GNUG__<3
     ofstream out;
     out.rdbuf()->attach(pipe1[1]);
-#else
-    FILE* ofptr = fdopen(pipe1[1], "w");
-    filebuf fbuf(ofptr, ios_base::out);
-    ostream out(&fbuf);
-#endif
     char buffer[BUFSIZ];
     while (!in.eof() && in.good()) {
       in.read(buffer, BUFSIZ);
@@ -2492,8 +2488,13 @@ int OvImportCmd::Pipe_Filter (istream& in, const char* filter)
 	out.write(buffer, in.gcount());
     }
     out.flush();
-#if __GNUG__>=3
-    fclose(ofptr);
+#else
+    char buffer[BUFSIZ];
+    while (!in.eof() && in.good()) {
+      in.read(buffer, BUFSIZ);
+      if (!in.eof() || in.gcount())
+	write(pipe1[1], buffer, in.gcount());
+    }
 #endif
     if(close(pipe1[1])==-1)
       cerr << "error in child closing its output pipe\n";

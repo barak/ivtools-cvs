@@ -144,17 +144,14 @@ void RemoteFunc::execute() {
     filebuf ofbuf;
     ofbuf.attach(socket.get_handle());
 #else
-    FILE* ofptr = fdopen(socket.get_handle(), "w");
-    filebuf ofbuf(ofptr, ios_base::out);
+    filebuf ofbuf(comterp()->handler() && comterp()->handler()->wrfptr() 
+		  ? comterp()->handler()->wrfptr() : stdout, ios_base::out);
 #endif
     ostream out(&ofbuf);
     const char* cmdstr = cmdstrv.string_ptr();
     out << cmdstr;
     if (cmdstr[strlen(cmdstr)-1] != '\n') out << "\n";
     out.flush();
-#if __GNUG__>=3
-    fclose(ofptr);
-#endif
     if (nowaitv.is_false()) {
 #if __GNUG__<3
       filebuf ifbuf;
@@ -163,13 +160,11 @@ void RemoteFunc::execute() {
       char* buf;
       in.gets(&buf);
 #else
-      FILE* ifptr = fdopen(socket.get_handle(), "r");
-      filebuf ifbuf(ifptr, ios_base::in);
+      filebuf ifbuf(comterp()->handler()->rdfptr(), ios_base::in);
       istream in(&ifbuf);
       char buf[BUFSIZ];
       in.get(buf, BUFSIZ);
       in.get(newline);
-      fclose(ifptr);
 #endif
       ComValue& retval = comterpserv()->run(buf, true);
       push_stack(retval);

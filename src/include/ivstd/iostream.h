@@ -3,6 +3,7 @@
 #include_next <iostream.h>
 
 #if __GNUG__>=3
+#if 0
 #include <unistd.h>
 
 // from a posting to libstdc++@gcc.gnu.org by Carlo Wood
@@ -40,6 +41,7 @@ public:
   ofdstream(int fd) : std::ostream(&M_fdbuf), M_fdbuf(fd) { }
   fdbuf* rdbuf(void) const { return &M_fdbuf; }
 };
+#endif
 #endif
 
 #endif

@@ -91,12 +91,8 @@ void ComterpPauseFunc::execute_body(ComValue& msgstrv) {
   } else
     fbufin.attach(fileno(stdin));
 #else
-  FILE* ifptr;
-  if (comterp()->handler())
-    ifptr = fdopen(max(0, comterp()->handler()->get_handle()), "r");
-  else
-    ifptr = stdin;
-  filebuf fbufin(ifptr, ios_base::in);
+  filebuf fbufin(comterp() && comterp()->handler() && comterp()->handler()->rdfptr() 
+		 ? comterp()->handler()->rdfptr() : stdin, ios_base::in);
 #endif
   istream in(&fbufin);
 #if __GNUG__<3
@@ -107,12 +103,8 @@ void ComterpPauseFunc::execute_body(ComValue& msgstrv) {
   } else
     fbufout.attach(fileno(stdout));
 #else
-  FILE* ofptr;
-  if (comterp()->handler())
-    ofptr = fdopen(max(1, comterp()->handler()->get_handle()), "w");
-  else
-    ofptr = stdout;
-  filebuf fbufout(ofptr, ios_base::out);
+  filebuf fbufout(comterp()->handler() && comterp()->handler()->wrfptr()
+		  ? comterp()->handler()->wrfptr() : stdout, ios_base::out);
 #endif
   ostream out(&fbufout);
   vector<char> cvect;
@@ -140,12 +132,6 @@ void ComterpPauseFunc::execute_body(ComValue& msgstrv) {
   sbuf_e.put('\0');
   cerr << sbuf_e.str();
   push_stack(retval);
-#if __GNUG__>=3
-  if (comterp()->handler()) {
-    fclose(ifptr);
-    fclose(ofptr);
-  }
-#endif
 }
 
 void ComterpPauseFunc::execute() {

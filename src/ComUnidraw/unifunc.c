@@ -457,7 +457,7 @@ void ExportFunc::execute() {
                 ACE_ERROR ((LM_ERROR, "%p\n", "open"));
             pfbuf = new filebuf(ofptr = fdopen(socket->get_handle(), "r"), output);
         } else if (comterp()->handler() && comterp()->handler()->get_handle()>-1) {
-            pfbuf = new filebuf(ofptr = fdopen(comterp()->handler()->get_handle(), "r"), output);
+            pfbuf = new filebuf(comterp()->handler()->rdfptr(), output);
         } else
 #endif
             pfbuf = new filebuf(stdout, output);
@@ -535,7 +535,6 @@ void ExportFunc::execute() {
     delete out;
 
 #if __GNUG__>=3
-    if (ofptr) fclose(ofptr);
     delete pfbuf;
 #endif    
     

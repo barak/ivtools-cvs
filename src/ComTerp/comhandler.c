@@ -47,6 +47,7 @@ ComterpHandler::ComterpHandler (void)
     comterp_->handler(this);
     comterp_->add_defaults();
     _timeoutscriptid = -1;
+    _wrfptr = _rdfptr = nil;
 }
 
 ComterpHandler::~ComterpHandler() {
@@ -89,6 +90,14 @@ ComterpHandler::destroy (void)
     if (_timeoutscriptid<0)
       delete comterp_;
     else /* timer could be still running */;
+    if (_wrfptr) {
+      fclose(_wrfptr);
+      _wrfptr = nil;
+    }
+    if (_rdfptr) {
+      fclose(_rdfptr);
+      _rdfptr = nil;
+    }
 }
 
 int
@@ -148,6 +157,9 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     boolean input_good = istr.good();
 #else
 
+    if (!_wrfptr) _wrfptr = fdopen(fd, "w");
+    if (!_rdfptr) _rdfptr = fdopen(fd, "r");
+
     ch = '\0';
     int status;
     while (ch != '\n') {
@@ -171,12 +183,10 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr.flush();
       return 0;
 #else
-      FILE* ofptr = nil;
-      filebuf obuf(fd ? ofptr = fdopen(fd, "w") : stdout, ios_base::out);
+      filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
-      if (ofptr&&0) fclose(ofptr);
       return 0;
 #endif
     }
@@ -198,12 +208,10 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr << "\n";
       ostr.flush();
 #else
-      FILE* ofptr = nil;
-      filebuf obuf(fd ? fdopen(fd, "w") : stdout, ios_base::out);
+      filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
-      if (ofptr&&0) fclose(ofptr);
 #endif
       return (input_good && inbuf[0]!='\004') ? 0 : -1;
     }

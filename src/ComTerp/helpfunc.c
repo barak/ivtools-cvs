@@ -130,9 +130,10 @@ void HelpFunc::execute() {
   ostream outs( comterp()->handler() ? ((streambuf*)&fbuf) : (streambuf*)&sbuf );
   ostream *out = &outs;
 #else
-  ofdstream fdout(Math::max(1, comterp()->handler() ? comterp()->handler()->get_handle() : 0));
-  ostream outs((streambuf*)&sbuf);
-  ostream* out = comterp()->handler() ? &fdout : &outs;
+  filebuf fbuf(comterp()->handler() && comterp()->handler()->wrfptr()
+	       ? comterp()->handler()->wrfptr() : stdout, ios_base::out);
+  ostream outs(comterp()->handler() ? (streambuf*)&fbuf : (streambuf*)&sbuf);
+  ostream *out = &outs;
 #endif
 
   if (noargs) {
