@@ -192,6 +192,8 @@ ivtools-0.8/src/ComUnidraw/comterp-acehandler.c
 ivtools-0.8/src/ComUnidraw/comterp-acehandler.h
 ivtools-0.8/src/ComUnidraw/comterp-iohandler.c
 ivtools-0.8/src/ComUnidraw/comterp-iohandler.h
+ivtools-0.8/src/ComUnidraw/dialogfunc.c
+ivtools-0.8/src/ComUnidraw/dialogfunc.h
 ivtools-0.8/src/ComUnidraw/grdotfunc.c
 ivtools-0.8/src/ComUnidraw/grdotfunc.h
 ivtools-0.8/src/ComUnidraw/grfunc.c

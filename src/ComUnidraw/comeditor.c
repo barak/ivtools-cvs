@@ -27,6 +27,7 @@
 #include <ComUnidraw/grstatfunc.h>
 #include <ComUnidraw/comeditor.h>
 #include <ComUnidraw/comterp-iohandler.h>
+#include <ComUnidraw/dialogfunc.h>
 #include <ComUnidraw/nfunc.h>
 #include <ComUnidraw/plotfunc.h>
 
@@ -178,6 +179,8 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("dot", new GrDotFunc(comterp));
     comterp->add_command("attrlist", new GrAttrListFunc(comterp));
+
+    comterp->add_command("acknowledgebox", new AcknowledgeBoxFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
