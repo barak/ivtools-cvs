@@ -1520,10 +1520,17 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 
 	if (pathname && !return_fd) {
 	  char buffer[BUFSIZ];
+#if 0
 	  if (compressed) 
 	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;gzip -c %s | djpeg -map $cm -dither fs -pnm;rm $cm", pathname);
 	  else
 	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -map $cm -dither fs -pnm %s;rm $cm", pathname);
+#else
+	  if (compressed) 
+	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;gzip -c %s | djpeg  -pnm;rm $cm", pathname);
+	  else
+	    sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -pnm %s;rm $cm", pathname);
+#endif
 	  FILE* pptr = popen(buffer, "r");
           helper.add_pipe(pptr);
 	  if (pptr) {

@@ -329,10 +329,8 @@ Graphic* RasterOvView::GetGraphic () {
     if (graphic == nil) {
         OverlayRasterRect* rr = GetRasterOvComp()->GetOverlayRasterRect();
 
-        OverlayRaster* r = rr->GetOverlayRaster();
-        OverlayRaster* or = rr->GetOverlayRaster();
-	graphic = or ? (new OverlayRasterRect(or, rr)) :
-            (new OverlayRasterRect(r, rr));
+        OverlayRaster* r = rr ? rr->GetOverlayRaster() : nil;
+	graphic = r ? new OverlayRasterRect(r, rr) : nil;
 
         SetGraphic(graphic);
     }

@@ -120,6 +120,7 @@ void * ParamStruct::addr4(void* base) {
 /*****************************************************************************/
 
 LexScan* ParamList::_lexscan = nil;
+ParamStruct* ParamList::_currstruct = nil;
 
 ParamList::ParamList (ParamList* s) {
     _alist = new AList;
@@ -345,7 +346,7 @@ void ParamList::Remove (ParamStruct* p) {
     }
 }
 
-ParamStruct* ParamList::GetStruct (ALIterator i) { return Struct(Elem(i)); }
+ParamStruct* ParamList::GetStruct (ALIterator i) { _currstruct = Struct(Elem(i)); return _currstruct;}
 
 void ParamList::SetStruct (ParamStruct* gv, ALIterator& i) {
     i.SetValue(_alist->Find(gv));

@@ -235,6 +235,9 @@ public:
     static char octal(const char* p);
     // convert string of three octal digits to a character.
 
+    static ParamStruct* CurrParamStruct() { return _currstruct; }
+    // last ParamStruct from ::GetStruct
+
 protected:
     void insert(ParamStruct*);
     void insert_first(ParamStruct*);
@@ -270,6 +273,7 @@ protected:
     int _other_count;
 
     static LexScan* _lexscan;
+    static ParamStruct* _currstruct;
 };
 
 #include <IV-2_6/_leave.h>
