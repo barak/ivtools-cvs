@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2001 Scott E. Johnston
  * Copyright (c) 1994,1995,1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -72,6 +73,17 @@ public:
     virtual void execute();
     virtual const char* docstring() { 
       return ".. is the iterate operator"; }
+
+};
+
+//: next command from stream for ComTerp
+class NextFunc : public StrmFunc {
+public:
+    NextFunc(ComTerp*);
+
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "val=%s(stream) -- return next value from stream"; }
 
 };
 

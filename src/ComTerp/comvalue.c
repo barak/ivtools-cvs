@@ -51,14 +51,11 @@ const ComTerp* ComValue::_comterp = nil;
 
 ComValue::ComValue(ComValue& sv) {
     *this = sv;
-    if (_type == AttributeValue::ArrayType)
-      Resource::ref(_v.arrayval.ptr);
-}
+    ref_as_needed();}
 
 ComValue::ComValue(AttributeValue& sv) {
     *(AttributeValue*)this = sv;
-    if (_type == AttributeValue::ArrayType)
-      Resource::ref(_v.arrayval.ptr);
+    ref_as_needed();
     zero_vals();
 }
 
@@ -87,6 +84,7 @@ ComValue::ComValue(float v) : AttributeValue(v) {zero_vals();}
 ComValue::ComValue(double v) : AttributeValue(v) {zero_vals();}
 ComValue::ComValue(int classid, void* ptr) : AttributeValue(classid, ptr) {zero_vals();}
 ComValue::ComValue(AttributeValueList* avl) : AttributeValue(avl) {zero_vals();}
+ComValue::ComValue(void* funcptr, AttributeValueList* listptr) : AttributeValue(funcptr, listptr) {zero_vals();}
 ComValue::ComValue(const char* string) : AttributeValue(string) {zero_vals();}
 ComValue::ComValue(ComFunc* func) : AttributeValue(ComFunc::class_symid(), func) {zero_vals(); type(ComValue::CommandType); command_symid(func->funcid()); }
 
@@ -287,6 +285,10 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	        avl->Next(i);
 	    }
 	  }
+	  break;
+	    
+	case ComValue::StreamType:
+	  out << "<stream:" << svp->stream_mode() << ">";
 	  break;
 	    
 	case ComValue::CommandType:

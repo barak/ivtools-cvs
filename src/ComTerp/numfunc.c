@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2001 Scott E. Johnston
  * Copyright (c) 1994,1995,1999,2000 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -35,6 +36,12 @@ NumFunc::NumFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void NumFunc::promote(ComValue& op1, ComValue& op2) {
     if (op1.type() == op2.type()) return;
+
+    if (op1.is_unknown() || op2.is_unknown()) {
+      op1.type(ComValue::UnknownType);
+      op2.type(ComValue::UnknownType);
+      return;
+    }
 
     boolean op1bigger = op1.type() > op2.type();
     ComValue* greater = op1bigger ? &op1 : &op2;
@@ -313,7 +320,7 @@ void MpyFunc::execute() {
     ComValue& operand2 = stack_arg(1);
     promote(operand1, operand2);
     ComValue result(operand1);
-
+    
     switch (result.type()) {
     case ComValue::CharType:
 	result.char_ref() = operand1.char_val() * operand2.char_val();
@@ -346,6 +353,7 @@ void MpyFunc::execute() {
 	result.double_ref() = operand1.double_val() * operand2.double_val();
 	break;
     }
+
     reset_stack();
     push_stack(result);
 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2001 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1994-1999 Vectaport Inc.
  *
@@ -37,6 +38,7 @@ extern "C" {
 }
 
 class AttributeValueList;
+
 #include <iosfwd>
 
 //: struct for symbol value, symid + global flag for symbol value
@@ -63,8 +65,8 @@ typedef struct {
 //: void* pointer to ComFunc object plus optional type id
 // used in attr_value.
 typedef struct {
-       void *ptr;
-       unsigned int iter_curr;
+       void *funcptr;
+       AttributeValueList *listptr;
 } streamval_struct;
 
 //: keyword symbol id, plus number of arguments that follow.
@@ -140,7 +142,7 @@ public:
     // ObjectType constructor.
     AttributeValue(AttributeValueList* listptr);
     // ArrayType constructor.
-    AttributeValue(void* comfunc, int iter_curr, int iter_end);
+    AttributeValue(void* comfunc, AttributeValueList* vallist);
     // StreamType constructor.
     AttributeValue(const char* val);
     // StringType constructor.
@@ -231,6 +233,19 @@ public:
     void object_compview(boolean flag) { _object_compview = flag; }
     // true if object is wrapped with a ComponentView
 
+    int stream_mode() { return is_stream() ? _stream_mode : 0; }
+    // 0 = disabled, negative = internal, positive = external
+    void stream_mode(int mode) { if (is_stream()) _stream_mode = mode; }
+    // 0 = disabled, negative = internal, positive = external
+    void* stream_func() { return is_stream() ? _v.streamval.funcptr : nil; }
+    // return function pointer associated with stream object
+    void stream_func(void* func) { if (is_stream()) _v.streamval.funcptr = func; }
+    // set function pointer associated with stream object
+    AttributeValueList* stream_list() { return is_stream() ? _v.streamval.listptr : nil; }
+    // return pointer to AttributeValueList associated with stream object
+    void stream_list(AttributeValueList* list); 
+    // set pointer to AttributeValueList associated with stream object
+
     void negate();
     // negate numeric values.
 
@@ -267,6 +282,8 @@ public:
     // returns true if ArrayType.
     boolean is_stream() { return is_type(StreamType); }
     // returns true if StreamType.
+    boolean is_key() { return is_type(KeywordType); }
+    // returns true if KeywordType.
     boolean is_unknown() { return is_type(UnknownType); }
     // returns true if UnknownType.
     boolean is_null() { return is_unknown(); }
@@ -327,12 +344,18 @@ public:
     // returns void* pointer to value struct.
 
 protected:
+
+    void ref_as_needed();
+    // increment ref counters as needed
+    void unref_as_needed();
+    // decrement ref counters as needed
+
     ValueType _type;
     attr_value _v;
     union { 
       int _command_symid; // used for CommandType.
       boolean _object_compview; // used for ObjectType.
-      unsigned int _iter_end;
+      int _stream_mode; // used for StreamType
     };
     static int* _type_syms;
 

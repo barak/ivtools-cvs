@@ -178,6 +178,10 @@ val=at(list|attrlist n) -- return nth item in a list
 
 num=size(list|attrlist) -- return size of a list
 
+STREAM COMMANDS:
+
+val=next(stream) -- return next value from stream
+
 CONTROL COMMANDS (using post evaluation):
 
 val=cond(testexpr trueexpr falseexpr) -- evaluate testexpr, and if true,

@@ -80,6 +80,8 @@ public:
     // ObjectType constructor.
     ComValue(AttributeValueList* listptr);
     // ArrayType constructor.
+    ComValue(void* funcptr, AttributeValueList* listptr);
+    // StreamType constructor.
     ComValue(const char* val);
     // StringType constructor.
     ComValue(ComFunc* func);
