@@ -58,6 +58,10 @@ public:
     OverlayIdrawComp* GetIdrawComp();
     // return point to underlying top-level component.
     virtual boolean operator == (OverlayComp&);
+
+    virtual void AdjustBaseDir(const char* oldpath, const char* newpath);
+    // adjust base directory used for generating pathnames for this component,
+    // done when a document is saved to a new location.
 protected:
     ParamList* GetParamList();
     void GrowParamList(ParamList*);

@@ -177,6 +177,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     comterp->add_command("import", new ImportFunc(comterp, this));
 
     comterp->add_command("dot", new GrDotFunc(comterp));
+    comterp->add_command("attrlist", new GrAttrListFunc(comterp));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {

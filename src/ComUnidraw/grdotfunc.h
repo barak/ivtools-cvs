@@ -37,9 +37,21 @@ public:
 
     virtual void execute();
     virtual const char* docstring() { 
-      return ". makes compound variables, and gives access to ComponentView AttributeList's."; }
+      return "%s(. makes compound variables, and gives access to ComponentView AttributeList's."; }
 
     CLASS_SYMID("GrDotFunc");
+};
+
+//: attrlist command, for returning the attribute list of a component.
+// attrlist(compview) -- return attribute list of component.
+class GrAttrListFunc : public ComFunc {
+public:
+    GrAttrListFunc(ComTerp*);
+
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "%s(compview) -- return attribute list of component."; }
+
 };
 
 #endif /* !defined(_grdotfunc_h) */

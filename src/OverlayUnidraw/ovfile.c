@@ -135,6 +135,10 @@ void OverlayFileComp::Append(GraphicComp* comp) {
   SetAttributeList(((OverlayComp*)comp)->GetAttributeList());
 }
 
+void OverlayFileComp::AdjustBaseDir(const char* olddir, const char* newdir) {
+  OverlayComp::AdjustBaseDir(olddir, newdir);
+}
+
 /*****************************************************************************/
 
 OverlayFileView::OverlayFileView() : OverlaysView() {}

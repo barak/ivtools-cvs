@@ -39,14 +39,13 @@ GrDotFunc::GrDotFunc(ComTerp* comterp) : DotFunc(comterp) {
 }
 
 void GrDotFunc::execute() {
-    static int ComponentView_symid = symbol_add("ComponentView");
 
     ComValue& before_part(stack_arg(0, true));
     ComValue& after_part(stack_arg(1, true));
     if (!before_part.is_symbol() && 
 	!(before_part.is_attribute() && ((Attribute*)before_part.obj_val())->Value()->is_attributelist()) &&
-	!(before_part.is_object(ComponentView_symid))) {
-      cerr << "expression before \".\" needs to evaluate to a symbol or <AttributeList> or <ComponentView>\n";
+	!(before_part.object_compview())) {
+      cerr << "expression before \".\" needs to evaluate to a symbol or <AttributeList> or <Component>\n";
       return;
     }
     if (!after_part.is_symbol()) {
@@ -57,7 +56,7 @@ void GrDotFunc::execute() {
     /* handle ComponentView case */
     if (before_part.is_symbol()) 
       lookup_symval(before_part);
-    if (before_part.is_object(ComponentView_symid)) {
+    if (before_part.object_compview()) {
       ComponentView* compview = (ComponentView*)before_part.obj_val();
       OverlayComp* comp = (OverlayComp*)compview->GetSubject();
       ComValue stuffval(AttributeList::class_symid(), (void*)comp->GetAttributeList());
@@ -66,3 +65,20 @@ void GrDotFunc::execute() {
     DotFunc::execute();
     
 }
+
+/*****************************************************************************/
+
+GrAttrListFunc::GrAttrListFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void GrAttrListFunc::execute() {
+  ComValue compviewv(stack_arg(0));
+  reset_stack();
+  if (compviewv.object_compview()) {
+    ComponentView* compview = (ComponentView*)compviewv.obj_val();
+    OverlayComp* comp = compview ? (OverlayComp*)compview->GetSubject() : nil;
+    ComValue retval(AttributeList::class_symid(), (void*)comp->GetAttributeList());
+    push_stack(retval);
+  }
+}
+

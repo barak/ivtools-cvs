@@ -192,6 +192,8 @@ postfix(arg1 [arg2 [arg3 ... [argn]]]) -- echo unevaluated postfix arguments
 
 arr=posteval(arg1 [arg2 [arg3 ... [argn]]]) -- post-evaluate every fixed 
 argument (until nil) and return array
+
+sym=attrname(attribute) -- return name field of dotted pair.
 				 
 quit() -- quit the interpreter
 
