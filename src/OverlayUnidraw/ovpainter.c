@@ -1077,7 +1077,7 @@ void OverlayPainter::RasterRect(
 void OverlayPainter::DoRasterRect(
     Canvas* c, IntCoord x, IntCoord y, OverlayRaster* o_r, OverlayRasterRect* r_r
 ) {
-    if (c == nil) {
+    if (c == nil || r_r == nil) {
 	return;
     }
 
