@@ -71,10 +71,10 @@ public:
   // get session id of current selector
 
   void selected(int flag) { _selected = flag; }
-  // set flag that indicates graphic is currently selected
+  // set flag that indicates graphic is remotely selected
 
   int selected() { return _selected; }
-  // get flag that indicates graphics is currently selected
+  // get flag that indicates graphic is remotely selected
 
 protected:
   unsigned int _id;

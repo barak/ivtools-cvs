@@ -205,20 +205,22 @@ ReserveFunc::ReserveFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed
 }
 
 void ReserveFunc::execute() {
-  static int rid_sym = symbol_add("rid");
-  ComValue ridv(stack_key(rid_sym));
+  static int chg_sym = symbol_add("chg");
+  ComValue chgv(stack_key(chg_sym));
 
   ComValue idv(stack_arg(0));
+  ComValue selectorv(stack_arg(1));
 
   reset_stack();
 
-  if (idv.is_known() && ridv.is_known()) {
-    void* ptr = nil;
-    ((DrawServ*)unidraw)->gridtable()->find(ptr, idv.uint_val());
-    if (ptr) 
-      fprintf(stderr, "grid 0x%08x found\n", idv.uint_val());
-    else
-      fprintf(stderr, "grid 0x%08x not found\n", idv.uint_val());
+  if (idv.is_known() && selectorv.is_known()) {
+    if (chgv.is_false()) {
+      ((DrawServ*)unidraw)->reserve_handle
+	(idv.uint_val(), selectorv.uint_val());
+    } else {
+      ((DrawServ*)unidraw)->reserve_change
+	(idv.uint_val(), selectorv.uint_val(), chgv.is_true());
+    }
   }
 }
 

@@ -109,6 +109,15 @@ public:
   
   unsigned int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
   // current unique session id.
+
+  void reserve_handle(unsigned int id, unsigned int selector);
+  // handle reserve request from remote DrawLink.
+
+  void reserve_change(unsigned int id, unsigned int selector, boolean ok); 
+  // callback for reserve request that goes to every DrawLink.
+
+  boolean reserve_if_not_selected(GraphicId* grid, unsigned int selector);
+  // check if graphic is selected, and allow it to be borrowed if not.
   
   static unsigned int candidate_grid();
   // generate candidate graphic id.

@@ -34,6 +34,7 @@
 #include <DrawServ/gridlist.h>
 
 #include <OverlayUnidraw/ovclasses.h>
+#include <OverlayUnidraw/ovviews.h>
 #include <OverlayUnidraw/scriptview.h>
 
 #include <Unidraw/Commands/command.h>
@@ -42,7 +43,9 @@
 #include <Unidraw/clipboard.h>
 #include <Unidraw/creator.h>
 #include <Unidraw/iterator.h>
+#include <Unidraw/selection.h>
 #include <Unidraw/ulist.h>
+#include <Unidraw/viewer.h>
 
 #include <ComTerp/comterpserv.h>
 
@@ -429,9 +432,74 @@ void DrawServ::ReserveSelection(GraphicId* grid) {
 
   if (link) {
     char buf[BUFSIZ];
-    snprintf(buf, BUFSIZ, "reserve(0x%08x :rid %d)%c", grid->id(), link->local_linkid(), '\0');
+    snprintf(buf, BUFSIZ, "reserve(0x%08x 0x%08x)%c", grid->id(), sessionid(), '\0');
     SendCmdString(link, buf);
   } else
     fprintf(stderr, "surprisingly no selector link found for GraphicId %u\n", grid->id());
 }
 
+// handle reserve request from remote DrawLink.
+void DrawServ::reserve_handle(unsigned int id, unsigned int selector)
+{
+  void* ptr = nil;
+  gridtable()->find(ptr, id);
+  if (ptr) {
+    GraphicId* grid = (GraphicId*)ptr;
+    
+    /* check if selected */
+    if( reserve_if_not_selected(grid, selector) ) {
+      
+      /* if available, broadcast to everyone */
+      char buf[BUFSIZ];
+      snprintf(buf, BUFSIZ, "reserve(0x%08x 0x%08x :chg)%c", id, selector, '\0');
+      DistributeCmdString(buf);
+    }
+    
+  } else
+    fprintf(stderr, "grid 0x%08x not found for selector 0x%08x\n", id, selector);
+}
+
+// callback for reserve request that goes to every DrawLink
+void DrawServ::reserve_change(unsigned int id, unsigned int selector, 
+			      boolean ok)
+{
+  if (ok) {
+    void* ptr = nil;
+    gridtable()->find(ptr, id);
+    if (ptr) {
+      GraphicId* grid = (GraphicId*)ptr;
+      grid->selector(selector);
+      grid->selected(false);
+    } else
+      fprintf(stderr, "reserve change received for unknown id 0x%08x\n", id);
+  } else
+    fprintf(stderr, "reserve request for 0x%08x denied\n", id);
+}
+
+boolean DrawServ::reserve_if_not_selected(GraphicId* grid, unsigned int selector) {
+  
+  /* check if graphic is still locally selected */
+  GraphicComp* comp = grid->grcomp();
+  boolean selected = false;
+  Iterator i;
+  First(i);
+  while (!Done(i) && !selected) {
+    Viewer* viewer = GetEditor(i)->GetViewer();
+    Selection* sel = viewer->GetSelection();
+    Iterator j;
+    sel->First(j);
+    while (!sel->Done(j) && !selected) {
+      if (sel->GetView(j)->GetGraphicComp()==comp) selected = true;
+      sel->Next(j);
+    }
+    Next(i);
+  }
+
+  if (selected)
+    return false;
+  else {
+    grid->selector(selector);
+    grid->selected(false);
+    return true;
+  }
+}
