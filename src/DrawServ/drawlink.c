@@ -53,7 +53,7 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
 int DrawLink::open() {
 
 #if defined(HAVE_ACE) && (__GNUC__>3 || __GNUC__==3 && __GNUC_MINOR__>0)
-  _addr = new ACE_INET_Addr(_host, _port);
+  _addr = new ACE_INET_Addr(_port, _host);
   _socket = new ACE_SOCK_Stream;
   _conn = new ACE_SOCK_Connector;
   if (_conn->connect (*_socket, *_addr) == -1)
