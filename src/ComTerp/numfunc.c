@@ -29,6 +29,7 @@
 #include <Attribute/attrlist.h>
 #include <OS/math.h>
 #include <math.h>
+#include <string.h>
 
 #define TITLE "NumFunc"
 
