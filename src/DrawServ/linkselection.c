@@ -101,48 +101,29 @@ void LinkSelection::Reserve() {
     int removed = false;
     OverlayView* view = GetView(it);
     OverlayComp* comp = view ? view->GetOverlayComp() : nil;
-#if 0
-    AttributeList* al = comp ? comp->attrlist() : nil;
-    AttributeValue* av = al ? al->find(id_sym) : nil;
-    if (av) {
-      void* ptr = nil;
-      ((DrawServ*)unidraw)->gridtable()->find(ptr, av->uint_val());
-      if (ptr) {
-	GraphicId* grid = (GraphicId*)ptr;
-	if (grid->selector() && ((DrawServ*)unidraw)->sessionid()!=grid->selector()) {
-
-	  /* make a request to select this in the future */
-	  ((DrawServ*)unidraw)->ReserveSelection(grid);
-
-	  Remove(it);
-	  removed = true;
-
-	  grid->selected(WaitingToBeSelected);
-	} else {
-	  grid->selected(LocallySelected);
-	}
-      }
-    }
-#else
     void* ptr = nil;
     table->find(ptr, (void*)comp);
     if (ptr) {
       GraphicId* grid = (GraphicId*)ptr;
-      if (grid->selector() && ((DrawServ*)unidraw)->sessionid()!=grid->selector()) {
-	
-	/* make a request to select this in the future */
-	((DrawServ*)unidraw)->ReserveSelection(grid);
+      if (grid->selector() && 
+	  ((DrawServ*)unidraw)->sessionid()!=grid->selector()) {
 	
 	Remove(it);
 	removed = true;
 	
-	grid->selected(WaitingToBeSelected);
+	if (grid->selected()==PreviouslySelected || 
+	    grid->selected()==NotSelected) {
+	  
+	  /* make a request to select this in the future */
+	  ((DrawServ*)unidraw)->ReserveSelection(grid);
+	  grid->selected(WaitingToBeSelected);
+	} 
+	
       } else {
 	grid->selected(LocallySelected);
       }
       
     }
-#endif
     if (!removed) 
       Next(it);
   }

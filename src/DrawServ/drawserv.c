@@ -219,6 +219,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	    grid->grcomp(comp);
 	    grid->id(idv->uint_val());
 	    grid->selector(sidv->uint_val());
+	    grid->selected(LinkSelection::RemotelySelected);
 	  } 
 	  
 	  /* generate unique id and add as attribute */
@@ -437,7 +438,7 @@ void DrawServ::ReserveSelection(GraphicId* grid) {
 
   if (link) {
     char buf[BUFSIZ];
-    snprintf(buf, BUFSIZ, "reserve(0x%08x 0x%08x)%c", grid->id(), sessionid(), '\0');
+    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x)%c", grid->id(), sessionid(), '\0');
     SendCmdString(link, buf);
   } else
     fprintf(stderr, "surprisingly no selector link found for GraphicId %u\n", grid->id());
