@@ -997,6 +997,19 @@ void AttributeValue::stream_list(AttributeValueList* list)
   if (is_stream()) {
     Resource::unref(_v.streamval.listptr); 
     _v.streamval.listptr = list; 
-    Resource::ref(list); 
+    if (!list) 
+      stream_mode(0);
+    else
+      Resource::ref(list); 
   }
+}
+
+int AttributeValue::stream_mode() { 
+  if (is_stream()) {
+    if (!stream_list() || stream_list()->Number()==0)
+      return 0;
+    else
+      return _stream_mode;
+  } else
+    return 0;
 }

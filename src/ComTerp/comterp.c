@@ -230,12 +230,18 @@ void ComTerp::eval_expr_internals(int pedepth) {
 
 #ifdef STREAM_MECH
     /* if func has StreamType ComValue's for arguments */
-    /* create a StreamType ComValue to hold all its */
+    /* create another StreamType ComValue to hold all its */
     /* arguments, along with a pointer to the func. */
     boolean has_streams = false;
     if (!((ComFunc*)sv.obj_val())->post_eval())
       for(int i=0; i<sv.narg()+sv.nkey(); i++) {
-	has_streams = stack_top(-i).is_stream();
+	if (!stack_top(-i).is_symbol())
+	  has_streams = stack_top(-i).is_stream();
+	else {
+	  AttributeValue* testval = 
+	    lookup_symval(&stack_top(-i));
+	  has_streams = testval ? testval->is_stream() : false;
+	}
 	if (has_streams) break;
       }
     if (has_streams) {
@@ -750,6 +756,34 @@ ComValue& ComTerp::lookup_symval(ComValue& comval) {
 
     }       
     return comval;
+}
+
+AttributeValue* ComTerp::lookup_symval(ComValue* comval) {
+    if (comval->bquote()) return nil;
+
+    if (comval->type() == ComValue::SymbolType) {
+        void* vptr = nil;
+
+	if (!comval->global_flag() && localtable()->find(vptr, comval->symbol_val()) ) {
+	  return (AttributeValue*)vptr;
+	} else  if (_alist) {
+	  int id = comval->symbol_val();
+	  AttributeValue* aval = _alist->find(id);  
+	  if (aval) {
+	    return aval;
+	  }
+	  return nil;
+	} else if (globaltable()->find(vptr, comval->symbol_val())) {
+	  return (AttributeValue*)vptr;
+	} else
+	  return nil;
+
+    } else if (comval->is_object(Attribute::class_symid())) {
+
+      return ((Attribute*)comval->obj_val())->Value();
+
+    }       
+    return nil;
 }
 
 ComValue& ComTerp::lookup_symval(int symid) {

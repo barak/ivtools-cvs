@@ -185,6 +185,9 @@ void NegFunc::execute() {
     case ComValue::StringType:
         result.boolean_ref() = operand1.symbol_val()<0;
 	break;
+    case ComValue::StreamType:
+        result.boolean_ref() = !operand1.stream_mode();
+        break;
     }
     reset_stack();
     push_stack(result);

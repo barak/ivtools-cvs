@@ -109,6 +109,7 @@ public:
     NextFunc(ComTerp*);
 
     virtual void execute();
+    virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
       return "val=%s(stream) -- return next value from stream"; }
 

@@ -241,7 +241,7 @@ public:
     void object_compview(boolean flag) { _object_compview = flag; }
     // true if object is wrapped with a ComponentView
 
-    int stream_mode() { return is_stream() ? _stream_mode : 0; }
+    int stream_mode();
     // 0 = disabled, negative = internal, positive = external
     void stream_mode(int mode) { if (is_stream()) _stream_mode = mode; }
     // 0 = disabled, negative = internal, positive = external

@@ -308,17 +308,23 @@ NextFunc::NextFunc(ComTerp* comterp) : StrmFunc(comterp) {
 }
 
 void NextFunc::execute() {
-    ComValue streamv(stack_arg(0));
+    ComValue streamv(stack_arg_post_eval(0));
     reset_stack();
 
     if (!streamv.is_stream()) return;
 
     if (streamv.stream_mode()<0) {
+
+      /* internal execution -- handled by stream func */
       push_stack(streamv);
       push_funcstate(1, 0);
       ((ComFunc*)streamv.stream_func())->execute();
       pop_funcstate();
+      if (comterp()->stack_top().is_null()) streamv.stream_list()->clear();
+
     } else if (streamv.stream_mode()>0) {
+
+      /* external execution -- handled by this func */
       ComFunc* funcptr = (ComFunc*)streamv.stream_func();
       AttributeValueList* avl = streamv.stream_list();
       int narg=0;
@@ -330,34 +336,46 @@ void NextFunc::execute() {
 	  AttributeValue* val =  avl->GetAttrVal(i);
 
 	  if (val->is_stream()) {
+
+	    /* stream argument, use stream func to get next one */
 	    push_stack(*val);
 	    push_funcstate(1,0);
 	    if (val->stream_mode()<0 && val->stream_func()) {
 	      /* internal use */
 	      ((ComFunc*)val->stream_func())->execute();
-	      if (comterp()->stack_top().is_null()) val->stream_list(nil);
-	    }
-	    else {
+	      if (comterp()->stack_top().is_null()) 
+		val->stream_list()->clear();
+
+	    } else {
+
 	      /* external use */
 	      this->execute();  
+
 	    }
 	    pop_funcstate();
 	    narg++;
 
 	  } else {
+
+	    /* non-stream argument, push as is */
 	    push_stack(*val);
 	    if (val->is_key()) 
 	      nkey++;
 	    else
 	      narg++;
+
 	  }
 	  avl->Next(i);
 	}
+
 	push_funcstate(narg, nkey);
 	funcptr->execute();
 	pop_funcstate();
-	if (comterp()->stack_top().is_null()) streamv.stream_list(nil);
       }
-    }
+
+      if (comterp()->stack_top().is_null()) streamv.stream_list()->clear();
+
+    } else 
+      push_stack(ComValue::nullval());
 }
 

@@ -44,7 +44,7 @@ public:
     virtual void execute();
     virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "lst=%s([olst]) -- create an empty list or copy existing one"; }
+      return "lst=%s([olst|strm]) -- create an empty list or copy existing one"; }
 };
 
 //: list member command for ComTerp.
