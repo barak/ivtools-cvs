@@ -204,7 +204,7 @@ JoinStrFunc::JoinStrFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void JoinStrFunc::execute() {
   ComValue listv(stack_arg(0));
-  static sym_symid = symbol_add("sym");
+  static int sym_symid = symbol_add("sym");
   ComValue symflagv(stack_key(sym_symid));
   boolean symflag = symflagv.is_true();
   reset_stack();

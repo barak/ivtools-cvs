@@ -82,7 +82,6 @@ public:
     void pop_servstate();
     // pop ComTerpServ state that was saved earlier
 
-
 protected:
 
     static char* s_fgets(char* s, int n, void* serv);
@@ -107,6 +106,7 @@ protected:
     FILE* _fptr;
     int _instat;
     int _npause;
+    int _logger_mode;
 
     ComTerpServState* _ctsstack;  // stack of ComTerpServ state
     int _ctsstack_top;

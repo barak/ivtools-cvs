@@ -5,6 +5,7 @@ SYNOPSIS
      comterp
      comterp remote
      comterp server 'portnum'
+     comterp logger 'portnum'
      comterp client 'host' 'portnum' ['file']
      comterp telcat 'host' 'portnum' ['file']
      comterp run 'file'	
@@ -46,6 +47,12 @@ comterp server 'portnum'
 
 Listens for and accept connections on portnum, then setup a command
 interpreter to wait for and process commands from that connection.
+
+comterp logger 'portnum'
+
+Listens for and accept connections on portnum, then simply forward
+the incoming messages to stdout, while ack'ing back with newlines. For
+debugging purposes, not really a use of the interpreter.
 
 comterp client 'host' 'portnum' ['file']
 

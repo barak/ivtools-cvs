@@ -35,6 +35,8 @@
 #define BUFSIZ 1024
 #endif
 
+int ComterpHandler::_logger_mode = 0;
+
 /*****************************************************************************/
 
 // Default constructor.
@@ -77,8 +79,9 @@ void ComterpHandler::timeoutscriptid(int timeoutscriptid) {
 void
 ComterpHandler::destroy (void)
 {
-    ACE_DEBUG ((LM_DEBUG, 
-	      "(%P|%t) disconnected from %s\n", this->peer_name_));
+    if (ComterpHandler::logger_mode()==0)
+        ACE_DEBUG ((LM_DEBUG, 
+		    "(%P|%t) disconnected from %s\n", this->peer_name_));
 #if 0
     COMTERP_REACTOR::instance ()->cancel_timer (this);
 #endif
@@ -119,9 +122,6 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
     return 0;
 }
 
-// Perform the logging record receive. 
-static const unit = 15;
-
 int
 ComterpHandler::handle_input (ACE_HANDLE fd)
 {
@@ -154,14 +154,24 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr.flush();
       return 0;
     }
-    comterp_->load_string(inbuf);
-    if (fd>0) 
-      cerr << "command via ACE -- " << inbuf << "\n";
-    comterp_->_fd = fd;
-    comterp_->_outfunc = (outfuncptr)&ComTerpServ::fd_fputs;
+    if (!ComterpHandler::logger_mode()) {
+      comterp_->load_string(inbuf);
+      if (fd>0) 
+	cerr << "command via ACE -- " << inbuf << "\n";
+      comterp_->_fd = fd;
+      comterp_->_outfunc = (outfuncptr)&ComTerpServ::fd_fputs;
 
-    int  status = comterp_->ComTerp::run(false /* !once */, false /* !nested */);
-    return (istr.good() ? 0 : -1) && status;
+      int  status = comterp_->ComTerp::run(false /* !once */, false /* !nested */);
+      return (istr.good() ? 0 : -1) && status;
+    } else {
+      if (inbuf[0]!='\004')
+	cout << inbuf << "\n";
+      filebuf obuf(fd ? fd : 1);
+      ostream ostr(&obuf);
+      ostr << "\n";
+      ostr.flush();
+      return (istr.good() && inbuf[0]!='\004') ? 0 : -1;
+    }
 }
 
 int
@@ -193,8 +203,9 @@ ComterpHandler::open (void *)
 			   "can'(%P|%t) t register with reactor\n"), -1);
 #endif
       else
-      	ACE_DEBUG ((LM_DEBUG, 
-		    "(%P|%t) connected with %s\n", this->peer_name_));
+	if (ComterpHandler::logger_mode()==0) 
+	  ACE_DEBUG ((LM_DEBUG, 
+		      "(%P|%t) connected with %s\n", this->peer_name_));
       return 0;
     }
 }

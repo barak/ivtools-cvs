@@ -20,8 +20,9 @@ syntax of the conditional operator "?:".  See the comterp
 documentation for more details.  
 
 All arguments to commands documented below are integers unless
-indicated by a suffix of str or flt.  "compview" is a graphical object
-assigned to an interpreter variable.
+indicated by a suffix of str (which are strings embedded in quotes) or
+flt (which are conventional floating point numbers).  "compview" is a
+graphical object assigned to an interpreter variable.
 
 DRAWING COMMANDS
 
@@ -81,7 +82,7 @@ VIEWER COMMANDS
 
 update() -- update viewer
 
-import(pathname) -- import graphic file from pathname or URL
+import(pathstr) -- import graphic file from pathname or URL
 
 ncols() -- onscreen horizontal extent in pixels
 nrows() -- onscreen vertical extent in pixels

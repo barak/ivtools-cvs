@@ -66,6 +66,8 @@ ComTerpServ::ComTerpServ(int bufsize, int fd)
     _ctsstack_siz = 256;
     if(dmm_calloc((void**)&_ctsstack, _ctsstack_siz, sizeof(ComFuncState)) != 0) 
 	KANRET("error in call to dmm_calloc");
+
+    _logger_mode = 0;
 }
 
 ComTerpServ::~ComTerpServ() {

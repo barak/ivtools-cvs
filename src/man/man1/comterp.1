@@ -11,6 +11,9 @@ remote
 server 'portnum'
 .br
 .B comterp 
+logger 'portnum'
+.br
+.B comterp 
 client 'host' 'portnum' ['file']
 .br
 .B comterp 
@@ -50,11 +53,16 @@ comterp remote
 Invoke a single command interpreter, like the default, and include a
 remote command for accessing other comterp's in server mode.
 
-
 comterp server 'portnum'
 
 Listens for and accept connections on portnum, then setup a command
 interpreter to wait for and process commands from that connection.
+
+comterp logger 'portnum'
+
+Listens for and accept connections on portnum, then simply forward
+the incoming messages to stdout, while ack'ing back with newlines. For
+debugging purposes, not really a use of the interpreter.
 
 comterp client 'host' 'portnum' ['file']
 
