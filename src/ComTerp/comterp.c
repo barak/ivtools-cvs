@@ -260,7 +260,7 @@ void ComTerp::eval_expr_internals(int pedepth) {
     if (stepflag()) {
 #if __GNUG__<3
       filebuf fbufout;
-      fbufout.attach(handler() ? max(1, handler()->get_handle()) : fileno(stdout));
+      fbufout.attach(handler() ? Math::max(1, handler()->get_handle()) : fileno(stdout));
 #else
       FILE* ofptr = handler() ? fdopen(Math::max(1, handler()->get_handle()), "w") : stdout;
       filebuf fbufout(ofptr, ios_base::out);
