@@ -115,10 +115,13 @@ arguments are recognized as --enable as well):
   --x-libraries=DIR       X library files are in DIR
 
   --enable-install-relative[=ARG]  install relative to source tree
-  --prefix=DIR			   to use when install-relative false
+  --enable-install-subdir[=ARG]    install in ivtools sub-directory
+  --prefix=DIR			   to use when install-relative is false
 				   (default is /usr/local)
 
-  --enable-use-rpath[=ARG]        use -rpath when linking
+  --enable-use-rpath[=ARG]        use -rpath when linking, to
+				  embed shared-library pathnames
+				  in executable. 
 
 ARG can be 0 or 1, default is 1 when not specified.  The configure
 script is usually able to automatically determine --x-includes and
