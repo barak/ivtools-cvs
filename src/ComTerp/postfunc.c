@@ -45,7 +45,7 @@ PostFixFunc::PostFixFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void PostFixFunc::execute() {
   // print everything on the stack for this function
-#if __GNUG__>3
+#if __GNUG__<3
   filebuf fbuf;
   if (comterp()->handler()) {
     int fd = Math::max(1, comterp()->handler()->get_handle());

@@ -66,7 +66,7 @@ void PrintFunc::execute() {
     filebuf * fbuf = new filebuf();
     strmbuf = fbuf;
     if (comterp()->handler()) {
-      int fd = max(1, comterp()->handler()->get_handle());
+      int fd = Math::max(1, comterp()->handler()->get_handle());
       fbuf->attach(fd);
     } else
       fbuf->attach(fileno(errflag.is_false() ? stdout : stderr));
