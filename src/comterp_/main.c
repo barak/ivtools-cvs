@@ -54,7 +54,7 @@ FPointObj fp(0.,0.);
 #endif
 
 #if __GNUG__>=3
-static int newline;
+static char newline;
 #endif
 
 int main(int argc, char *argv[]) {

@@ -83,8 +83,13 @@ UnidrawImportHandler::handle_input (ACE_HANDLE fd)
     }
     return _inptr->good() ? 0 : -1;
 #else
+#if __GNUG__<3
     filebuf fbuf;
     if(fbuf.attach(fd)==0) return -1;
+#else
+    FILE* ifptr = nil;
+    filebuf fbuf(ifptr = fdopen(fd, "r"), ios_base::in);
+#endif
     istream in(&fbuf);
     int ch = in.get();
     if (ch != EOF && in.good()) {
@@ -92,7 +97,10 @@ UnidrawImportHandler::handle_input (ACE_HANDLE fd)
       _import_cmd->instream(&in);
       _import_cmd->Execute();
     }
-    return -1;
+#if __GNUG__>=3
+    fclose(ifptr);
+#endif
+    return -1;  /* only return -1, which indicates input handling is fini */
 #endif
 }
 

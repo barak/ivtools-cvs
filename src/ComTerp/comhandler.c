@@ -132,22 +132,11 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 int
 ComterpHandler::handle_input (ACE_HANDLE fd)
 {
-#if 0
-    const int bufsiz = BUFSIZ; //*BUFSIZ;
-    char inbuf[bufsiz];
-    inbuf[0] = '\0';
-    filebuf ibuf(fd);
-    istream istr(&ibuf);
-    istr.getline(inbuf, bufsiz);
-#else
     vector<char> inv;
     char ch;
+
 #if __GNUG__<3
     filebuf ibuf(fd);
-#else
-    FILE* ifptr = fdopen(fd, "r");
-    filebuf ibuf(ifptr, ios_base::in);
-#endif
     istream istr(&ibuf);
 
     // problem handling new-lines embedded in character strings
@@ -155,13 +144,24 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       inv.push_back(ch);
     inv.push_back('\0');
     char* inbuf = &inv[0];
+
+    boolean input_good = istr.good();
+#else
+
+    ch = '\0';
+    int status;
+    while (ch != '\n') {
+      status = read(fd, &ch, 1);
+      if (status == 1 && ch != '\n') inv.push_back(ch);
+    }
+    inv.push_back('\0');
+      
+    boolean input_good = status != -1;
+
 #endif
 
-    boolean istr_good = istr.good();
-#if __GNUG__>=3
-    fclose(ifptr);
-#endif
-    if (!comterp_ || !istr_good)
+    char* inbuf = &inv[0];
+    if (!comterp_ || !input_good)
       return -1;
     else if (!inbuf || !*inbuf) {
 #if __GNUG__<3
@@ -176,7 +176,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
-      if (ofptr) fclose(ofptr);
+      if (ofptr&&0) fclose(ofptr);
       return 0;
 #endif
     }
@@ -188,7 +188,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       comterp_->_outfunc = (outfuncptr)&ComTerpServ::fd_fputs;
 
       int  status = comterp_->ComTerp::run(false /* !once */, false /* !nested */);
-      return (istr_good ? 0 : -1) && status;
+      return (input_good ? 0 : -1) && status;
     } else {
       if (inbuf[0]!='\004')
 	cout << inbuf << "\n";
@@ -203,9 +203,9 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
-      if (ofptr) fclose(ofptr);
+      if (ofptr&&0) fclose(ofptr);
 #endif
-      return (istr_good && inbuf[0]!='\004') ? 0 : -1;
+      return (input_good && inbuf[0]!='\004') ? 0 : -1;
     }
 }
 
