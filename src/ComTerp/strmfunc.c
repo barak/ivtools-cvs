@@ -77,6 +77,19 @@ void StreamFunc::execute() {
       ComValue stream(this, avl);
       stream.stream_mode(-1); // for internal use (use by this func)
       push_stack(stream);
+    } else if (operand1.is_attributelist()) {
+      AttributeValueList* avl = new AttributeValueList();
+      AttributeList* al = (AttributeList*)operand1.obj_val();
+      Iterator i;
+      for(al->First(i); !al->Done(i); al->Next(i)) {
+	Attribute* attr = al->GetAttr(i);
+	AttributeValue* av = 
+	  new AttributeValue(Attribute::class_symid(), (void*)attr);
+	avl->Append(av);
+      }
+      ComValue stream(this, avl);
+      stream.stream_mode(-1); // for internal use (use by this func)
+      push_stack(stream);
     }
     
   }

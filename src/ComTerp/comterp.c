@@ -241,7 +241,7 @@ void ComTerp::eval_expr_internals(int pedepth) {
     if (has_streams) {
       AttributeValueList* avl = new AttributeValueList();
       for(int i=0; i<sv.narg()+sv.nkey(); i++)
-	avl->Prepend(new AttributeValue(pop_stack(false)));
+	avl->Prepend(new AttributeValue(pop_stack(true)));
       ComValue val(sv.obj_val(), avl);
       val.stream_mode(1); // for external use
       push_stack(val);

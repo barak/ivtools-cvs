@@ -294,7 +294,7 @@ AttributeValueList::AttributeValueList (AttributeValueList* s) {
         ALIterator i;
 
         for (s->First(i); !s->Done(i); s->Next(i)) {
-	    Append(s->GetAttrVal(i));
+	    Append(new AttributeValue(*s->GetAttrVal(i)));
 	}
     }
 }

@@ -94,10 +94,10 @@ ListAtFunc::ListAtFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 void ListAtFunc::execute() {
   ComValue listv(stack_arg(0));
-  ComValue nv(stack_arg(1));
+  ComValue nv(stack_arg(1, false, ComValue::zeroval()));
   reset_stack();
 
-  if (listv.is_type(ComValue::ArrayType) && nv.int_val()>=0) {
+  if (listv.is_type(ComValue::ArrayType) && !nv.is_nil() && nv.int_val()>=0) {
     AttributeValueList* avl = listv.array_val();
     if (avl && nv.int_val()<avl->Number()) {
       int count = 0;
