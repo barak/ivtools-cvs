@@ -53,7 +53,9 @@
 #include <stdio.h>
 #include <strstream.h>
 #include <unistd.h>
+#if __GNUG__>=3
 #include <fstream.h>
+#endif
 
 #define TITLE "UnidrawFunc"
 
@@ -371,7 +373,7 @@ void ExportFunc::execute() {
 #if __GNUG__<3
     filebuf fbuf;
     if (file.is_type(ComValue::StringType))
-        fbuf.open(file.string_ptr(), input);
+        fbuf.open(file.string_ptr(), "w");
 
     else if (sock.is_true()) {
 #ifdef HAVE_ACE
