@@ -452,7 +452,7 @@ void DrawServ::grid_message_handle(DrawLink* link, unsigned int id, unsigned int
   gridtable()->find(ptr, id);
   if (ptr) {
     GraphicId* grid = (GraphicId*)ptr;
-    if (selector==sessionid() && newselector) {
+    if (selector==sessionid() && newselector!=0) {
       if (grid->selector()==sessionid() && grid->selected()==LinkSelection::NotSelected) {
 	grid->selector(newselector);
 	char buf[BUFSIZ];
