@@ -189,6 +189,7 @@ not open in idraw.
 <h2>source building questions</h2>
 
 <menu>
+<li><a href=#PWD-read-only>When I run configure on Darwin (Mac OS X), I see "./configure: read-only variable: PWD [1845]".  Should I be worried?</a></li>
 <li><a href=#imake-symbol-clash>The absolute pathname used by the "make depend" pass is not the same as the ABSTOP pathname written to config/config.mk by the configure script.</a></li>
 <li><a href=#libstdcplusplusv3prob>I can't read or import anything, and I built ivtools with gcc-3.0.0 or gcc-2.95.3 bundled with libstdc++-v3.</a></li>
 <li><a href=#cpumissing>I run "make World" or "make Makefiles", and see an error message like this...</a></li>
@@ -214,6 +215,11 @@ not open in idraw.
 
 </menu>
 
+<p><a name=PWD-read-only><b>When I run configure on Darwin (Mac OS X), I see "./configure: read-only variable: PWD [1845]".  Should I be worried?</p></b>
+
+Not about PWD.  The configure script ensures that the PWD environment
+variable is correctly set, and Darwin doesn't want this value reset, but there is no problem because it is already correct.
+
 <p><a name=imake-symbol-clash><b>The absolute pathname used by the "make depend" pass is not the same as the ABSTOP pathname written to config/config.mk by the configure script.</p></b>
 
 There is a vulnerability in the "make Makefiles" pass (the use of
@@ -224,7 +230,7 @@ or you can add <code>-U</code> undefine arguments as necessary to the imake comm
 
 <p><a name=libstdcplusplusv3prob><b>I can't read or import anything, and I built ivtools with gcc-3.0.0 or gcc-2.95.3 bundled with libstdc++-v3.</p></b>
 
-Check out this <a href="./fopen_rplus.patch.txt">patch</a> for more details.
+Check out this <a href="./fopen_rplus.patch.txt">patch</a> for more details.  <i>No longer needed after ivtools-1.0.2 -- the workaround was to replace any rewind with close/open.</i>
 
 <p><a name=gcc296><b>I can't build ivtools with gcc-2.96.  What gives?</p></b><p>
 
@@ -294,6 +300,8 @@ the default cpp available on commercial Unix'es.  Read how to work around this <
 you might want to consider partitioning your hard disk and installing some variant of an open-source Unix
 available for your processor.  The more-inclusive approach of the open-source Unix'es avoids a lot of problems
 and headaches, because there is no single company filtering what goes into the environment, and things that have built once somewhere tend to keep compiling on a free Unix.
+<p>
+<i>Or consider switching to MacOS X with XFree86 4.2.0 available directly from Apple.  ivtools now builds on Darwin (Mac OS X), as of version 1.0.2.</i>
 </li>
 <p><a name=configurescript><b>When are you going to have a configure script?</b><p>
 
