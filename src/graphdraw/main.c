@@ -198,6 +198,7 @@ static char* usage =
 [-panner_align|-pal tl|tc|tr|cl|c|cr|cl|bl|br|l|r|t|b|hc|vc ] \n\
 [-scribble_pointer|-scrpt ] [-slider_off|-soff] [-zoomer_off|-zoff] [file]";
 #else
+static char* usage =
 "Usage: graphdraw [any idraw parameter] [-color5] [-color6] \n\
 [-gray5] [-gray6] [-gray7] [-opaque_off|-opoff] [-pagecols|-ncols n] \n\
 [-pagerows|-nrows n] [-panner_off|-poff] \n\
