@@ -39,7 +39,7 @@ from the IVtools menu 2 or 3 times. You then reselect the completed structure an
 Structure::Group from the IVtools menu. This will give you the result in Fig. 3 above.
 
 Since the structure is now treated as 1 large object, you can reposition it by selecting
-it, and then moving the mouse while holding the middle button down.
+it, and then moving the mouse while holding down the middle-mouse button.
 
 <p>
 Here ia a more complex, finished example:
@@ -73,13 +73,13 @@ typesetting projects. Instead of loading all of the possible chemical widgets, a
 there are alot, only load the ones required for the project at hand, or the ones you find most useful.
 To build a custom toolbar, write a toolbar script similar to this:
 <p>
-addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/wiggly.idraw")
-addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/zigzag.idraw")
-addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/dbl_wiggly.idraw")
-addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/dbl_zigzag.idraw")
-addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/arrow.idraw")
-addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/circle.idraw")
-addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/tetragram.idraw")
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/wiggly.idraw")     <br>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/zigzag.idraw")     <br>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/dbl_wiggly.idraw") <br>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/dbl_zigzag.idraw") <br>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/arrow.idraw")      <br>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/circle.idraw")     <br>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/tetragram.idraw")  <br>
 <p>
 To load the desired toolbar click on Tools::Custom Tools. This will give a stripped down Comdraw
 toolbar into which custom widgets can be inserted. To load the custom widgets, click into the 
@@ -106,10 +106,10 @@ the Idraw/Comdraw/Drawserv Font menus. The best example I have found of this is 
 idraw help</a> (also listed at the bottom of the idraw page). The basic process:
  <ol>
  <li> Edit your .Xresources or .Xdefaults file by adding:
-comdraw.font12:-adobe-symbol-*-*-*-*-*-100-*-*-*-*-*-* Symbol 10
-comdraw.font13:-adobe-symbol-*-*-*-*-*-120-*-*-*-*-*-* Symbol 12
-comdraw.font14:-adobe-symbol-*-*-*-*-*-140-*-*-*-*-*-* Symbol 14
-comdraw.font15:-adobe-symbol-*-*-*-*-*-180-*-*-*-*-*-* Symbol 18
+comdraw.font12:-adobe-symbol-*-*-*-*-*-100-*-*-*-*-*-* Symbol 10 <br>
+comdraw.font13:-adobe-symbol-*-*-*-*-*-120-*-*-*-*-*-* Symbol 12 <br>
+comdraw.font14:-adobe-symbol-*-*-*-*-*-140-*-*-*-*-*-* Symbol 14 <br>
+comdraw.font15:-adobe-symbol-*-*-*-*-*-180-*-*-*-*-*-* Symbol 18 <br>
  </li>
  <li> Save the file and execute:
   xrdb -load ~/.Xresources        (or if you are using .Xdefaults, xrdb -load ~/.Xdefaults)
