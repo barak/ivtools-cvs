@@ -50,6 +50,9 @@ void DrawLinkFunc::execute() {
   static int port_sym = symbol_add("port");
   ComValue default_port(20002);
   ComValue portv(stack_key(port_sym, false, default_port, true));
+  static int state_sym = symbol_add("state");
+  ComValue default_state(20002);
+  ComValue statev(stack_key(state_sym, false, default_state, true));
   reset_stack();
 
 #if __GNUC__==3&&__GNUC_MINOR__<1
@@ -58,13 +61,15 @@ void DrawLinkFunc::execute() {
   return;
 #endif
 
-  if (hostv.is_string() && portv.is_known()) {
+  if (hostv.is_string() && portv.is_known() && statev.is_known()) {
     
     const char* hoststr = hostv.string_ptr();
     const char* portstr = portv.is_string() ? portv.string_ptr() : nil;
     u_short portnum = portstr ? atoi(portstr) : portv.ushort_val();
+    const char* statestr = statev.is_string() ? statev.string_ptr() : nil;
+    u_short statenum = statestr ? atoi(statestr) : statev.ushort_val();
 
-    if (((DrawServ*)unidraw)->linkup(hoststr, portnum))
+    if (((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum))
       push_stack(ComValue::minusoneval());
     else
       push_stack(ComValue::zeroval());

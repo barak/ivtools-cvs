@@ -46,8 +46,9 @@ public:
 
     void Init();
 
-    int linkup(const char* hostname, int portnum);
+    int linkup(const char* hostname, int portnum, int state);
     // create new link to remote drawserv, return -1 if error
+    // state: 0==new link, 1==half-duplex, 2==full-duplex
 
 protected:
     DrawLinkList* _list;

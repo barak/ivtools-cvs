@@ -41,8 +41,10 @@ class ACE_SOCK_Stream;
 //: object to encapsulate 2-way link with remote drawserv
 class DrawLink {
 public:
-    DrawLink(const char* hostname, int portnum);
+    DrawLink(const char* hostname, int portnum, int state);
     virtual ~DrawLink();
+
+    enum { new_link=0, half_duplex, full_duplex };
 
     const char* hostname() { return _host; }
     // return name of remote host

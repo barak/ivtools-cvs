@@ -32,7 +32,7 @@
 
 /*****************************************************************************/
 
-DrawLink::DrawLink (const char* hostname, int portnum)
+DrawLink::DrawLink (const char* hostname, int portnum, int state)
 {
   _host = strnew(hostname);
   _port = portnum;
@@ -49,14 +49,14 @@ DrawLink::DrawLink (const char* hostname, int portnum)
   if (_conn->connect (*_socket, *_addr) == -1)
     ACE_ERROR ((LM_ERROR, "%p\n", "open"));
   else {
-
     fileptr_filebuf obuf(_socket->get_handle(), ios_base::out, false, static_cast<size_t>(BUFSIZ));
     ostream out(&obuf);
     out << "drawlink(\"";
     char buffer[HOST_NAME_MAX];
     gethostname(buffer, HOST_NAME_MAX);
-    out << buffer;
-    out << "\")\n";
+    out << buffer << "\"";
+    out << " :state " << state+1;
+    out << ")\n";
     out.flush();
     _up = true;
   }

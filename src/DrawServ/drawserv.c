@@ -52,13 +52,17 @@ DrawServ::~DrawServ ()
 {
 }
 
-int DrawServ::linkup(const char* hostname, int portnum) {
-  DrawLink* link = new DrawLink(hostname, portnum);
-  if (link && link->up()) {
-    _list->add_drawlink(link);
-    return 0;
+int DrawServ::linkup(const char* hostname, int portnum, int state) {
+  if (state == DrawLink::new_link || state == DrawLink::half_duplex) {
+    DrawLink* link = new DrawLink(hostname, portnum, state);
+    if (link && link->up()) {
+      _list->add_drawlink(link);
+      return 0;
+    } else {
+      delete link;
+      return -1;
+    }
   } else {
-    delete link;
-    return -1;
+    fprintf(stderr, "link up\n");
   }
 }
