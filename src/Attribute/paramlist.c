@@ -880,6 +880,10 @@ int ParamList::parse_pathname (istream& in, char* buf, int buflen, const char* d
     return 0;
 }
 
+boolean ParamList::url_use_ok() {
+  return bincheck("ivdl") || bincheck("w3c") || bincheck("curl") || bincheck("wget");
+}
+
 boolean ParamList::urltest(const char* buf) {
   if (!buf) return false;
   static boolean file_url_ok = bincheck("w3c") || bincheck("curl");
@@ -891,7 +895,7 @@ boolean ParamList::urltest(const char* buf) {
 
 int ParamList::bintest(const char* command) {
   char combuf[BUFSIZ];
-  sprintf( combuf, "which %s", command );
+  sprintf( combuf, "wr=`which %s`; echo $wr", command );
   FILE* fptr = popen(combuf, "r");
   char testbuf[BUFSIZ];	
   fgets(testbuf, BUFSIZ, fptr);  

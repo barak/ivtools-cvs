@@ -220,8 +220,10 @@ public:
     // parse pathname, expanding relative pathnames from 'dir', for use of a
     // param_callback.
 
+    static boolean url_use_ok();
+    // test if url use ok for pathnames.  Same as OpenFileChooser method.
     static boolean urltest(const char*);
-    // test if pathname looks like a URL.
+    // test if pathname looks like a URL.  Same as OpenFileChooser method.
 
     static int bintest(const char* name);
     // return 0 if executable can be found, otherwise -1.

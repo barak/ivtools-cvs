@@ -1302,10 +1302,13 @@ GraphicComp* OvImportCmd::Import (const char* path) {
       char buffer[BUFSIZ];
       static boolean use_w3c = OverlayKit::bincheck("w3c");
       static boolean use_curl = OverlayKit::bincheck("curl");
-      if (use_w3c) 
-	sprintf(buffer,"w3c -q %s", path);
-      else if (use_curl)
+      static boolean use_wget = OverlayKit::bincheck("wget");
+      if (use_curl)
 	sprintf(buffer,"curl %s", path);
+      else if (use_w3c) 
+	sprintf(buffer,"w3c -q %s", path);
+      else if (use_wget) 
+	sprintf(buffer,"wget -q -O - %s", path);
       else
 	sprintf(buffer,"ivdl %s -", path);
       cerr << buffer << "\n";
