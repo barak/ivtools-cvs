@@ -313,7 +313,8 @@ int ComTerp::post_eval_expr(int tokcnt, int offtop, int pedepth) {
 	      push_stack(argoffval);
 	    }
 	  }
-	  push_stack(_pfcomvals[offset]);
+	  if (!_pfcomvals[offset].is_blank())
+	    push_stack(_pfcomvals[offset]);
 	}
 	tokcnt--;
 	offset++;
@@ -374,6 +375,11 @@ boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
   } else if (curr.is_type(ComValue::UnknownType)) {
     cerr << "unexpected unknown found by ComTerp::skip_arg\n";
     return false;
+  } else if (curr.is_type(ComValue::BlankType)) {
+    offset--;
+    boolean val = skip_arg(topval, offset, tokcnt);
+    tokcnt++;
+    return val;
   } else {
     offset--;
     tokcnt++;
@@ -394,7 +400,7 @@ boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
 	} else if (next.is_type(ComValue::BlankType)) {
 	  offset--;
 	  skip_arg(topval, offset, subtokcnt);
-	  tokcnt += subtokcnt;
+	  tokcnt += subtokcnt+1;
 	} else {
 	  offset--;
 	  tokcnt++;

@@ -39,8 +39,8 @@ typedef float ColorIntensity;
 typedef unsigned int ColorOp;
 
 //: an RGB-alpha color object
-// defines an output color, which is specified by a mix of RGB (red,<BR>
-green, and blue) intensities, and an alpha value for blending
+// defines an output color, which is specified by a mix of RGB (red,
+// green, and blue) intensities, and an alpha value for blending
 // <p><a href=../refman3.1/refman.html#PAGE38>in reference manual</a>.
 class Color : public Resource {
 public:
