@@ -231,6 +231,8 @@ ICE_CXX_INCLUDE_DIR
 #AC_CXX_EGCS
 # check for gettimeofday
 #AC_TWO_ARG_TIMEOFDAY
+# check for libstdc++
+AC_CHECK_LIB(stdc++,peek__7istream,LIBSTDCPLUSPLUS=1,LIBSTDCPLUSPLUS=0)
 
 # check for bigendian
 #AC_C_BIGENDIAN
@@ -363,6 +365,8 @@ echo writing \"ABSTOP = `pwd`\"
 echo ABSTOP = `pwd` >>config/config.mk
 echo writing \"CPU = `make CPU`\"
 echo CPU = `make CPU` >>config/config.mk
+echo writing \"LIBSTDCPLUSPLUS = $LIBSTDCPLUSPLUS\"
+echo LIBSTDCPLUSPLUS = $LIBSTDCPLUSPLUS >>config/config.mk
 echo
 echo "now do a \"make\""
 echo
