@@ -114,6 +114,10 @@ implementPtrList(FileList,FILE)
 implementPtrList(StreamList,istream)
 implementPtrList(HandlerList,ReadImageHandler)
 
+#if __GNUG__>=3
+static char newline;
+#endif
+
 
 /*****************************************************************************/
 
@@ -465,6 +469,7 @@ int ReadImageHandler::process(const char* newdat, int len) {
 #else
       char buffer[BUFSIZ];
       in.get(buffer, BUFSIZ);
+      in.get(newline);
 #endif
 
       if (strncmp(buffer, "P6", 2)) {
@@ -478,6 +483,7 @@ int ReadImageHandler::process(const char* newdat, int len) {
         in.gets(&buffer);
 #else
 	in.get(buffer,BUFSIZ);
+	in.get(newline);
 #endif
       } while (buffer[0] == '#');
       sscanf(buffer, "%d %d", &width, &height);
@@ -486,6 +492,7 @@ int ReadImageHandler::process(const char* newdat, int len) {
       in.gets(&buffer);
 #else
       in.get(buffer,BUFSIZ);
+      in.get(newline);
 #endif
       int maxval;
       sscanf(buffer, "%d", &maxval);
@@ -1892,6 +1899,7 @@ OverlayRaster* OvImportCmd::PGM_Raster (istream& in, boolean ascii) {
 #else
     char buffer[BUFSIZ];
     in.get(buffer, BUFSIZ);
+    in.get(newline);
 #endif
 
     do {  // CREATOR and other comments
@@ -1899,6 +1907,7 @@ OverlayRaster* OvImportCmd::PGM_Raster (istream& in, boolean ascii) {
         in.gets(&buffer);
 #else
 	in.get(buffer, BUFSIZ);
+	in.get(newline);
 #endif
     } while (buffer[0] == '#');
 
@@ -1908,13 +1917,14 @@ OverlayRaster* OvImportCmd::PGM_Raster (istream& in, boolean ascii) {
           in.gets(&buffer);
 #else
 	  in.get(buffer, BUFSIZ);
+	  in.get(newline);
 #endif
           sscanf(buffer, "%d", &nrows);
     }
 #if __GNUG__<3 
     in.gets(&buffer);
 #else
-    in.get(buffer, BUFSIZ);
+    in.get(buffer, BUFSIZ, '\n');
 #endif
     int maxval;
     sscanf(buffer, "%d", &maxval);
@@ -2327,6 +2337,7 @@ OverlayRaster* OvImportCmd::PPM_Raster (istream& in, boolean ascii) {
 #else
     char buffer[BUFSIZ];
     in.get(buffer,BUFSIZ);
+    in.get(newline);
 #endif
 
     do { // CREATOR and other comments
@@ -2334,6 +2345,7 @@ OverlayRaster* OvImportCmd::PPM_Raster (istream& in, boolean ascii) {
         in.gets(&buffer);
 #else
 	in.get(buffer,BUFSIZ);
+	in.get(newline);
 #endif
     } while (buffer[0] == '#');
     int nrows, ncols;
@@ -2342,6 +2354,7 @@ OverlayRaster* OvImportCmd::PPM_Raster (istream& in, boolean ascii) {
     in.gets(&buffer);
 #else
     in.get(buffer,BUFSIZ);
+    in.get(newline);
 #endif
     int maxval;
     sscanf(buffer, "%d", &maxval);
@@ -2651,6 +2664,7 @@ Bitmap* OvImportCmd::PBM_Bitmap (istream& in) {
 #else
     char buffer[BUFSIZ];
     in.get(buffer,BUFSIZ);
+    in.get(newline);
 #endif
 
     boolean asciiflag = strncmp("P1", buffer, 2) == 0;
@@ -2660,6 +2674,7 @@ Bitmap* OvImportCmd::PBM_Bitmap (istream& in) {
         in.gets(&buffer);
 #else
 	in.get(buffer,BUFSIZ);
+	in.get(newline);
 #endif
     } while (buffer[0] == '#');
 
@@ -2669,6 +2684,7 @@ Bitmap* OvImportCmd::PBM_Bitmap (istream& in) {
           in.gets(&buffer);
 #else
 	  in.get(buffer,BUFSIZ);
+	  in.get(newline);
 #endif
           sscanf(buffer, "%d", &nrows);
     }

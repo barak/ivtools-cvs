@@ -112,7 +112,11 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 	    return -1;
 	} else {
 	    if (!comterp_->stack_empty()) {
+#if __GNUG__<3
 	      filebuf obuf(1);
+#else
+	      filebuf obuf(stdout, ios_base::out);
+#endif
 	      ostream ostr(&obuf);
 	      ostr << "timeexpr result:  ";
 	      comterp_->print_stack_top(ostr);
@@ -138,7 +142,12 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
 #else
     vector<char> inv;
     char ch;
+#if __GNUG__<3
     filebuf ibuf(fd);
+#else
+    FILE* ifptr = fdopen(fd, "r");
+    filebuf ibuf(ifptr, ios_base::in);
+#endif
     istream istr(&ibuf);
 
     // problem handling new-lines embedded in character strings
@@ -148,14 +157,28 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     char* inbuf = &inv[0];
 #endif
 
-    if (!comterp_ || !istr.good())
-      return -1; 
+    boolean istr_good = istr.good();
+#if __GNUG__>=3
+    fclose(ifptr);
+#endif
+    if (!comterp_ || !istr_good)
+      return -1;
     else if (!inbuf || !*inbuf) {
+#if __GNUG__<3
       filebuf obuf(fd ? fd : 1);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
       return 0;
+#else
+      FILE* ofptr = nil;
+      filebuf obuf(fd ? ofptr = fdopen(fd, "w") : stdout, ios_base::out);
+      ostream ostr(&obuf);
+      ostr << "\n";
+      ostr.flush();
+      if (ofptr) fclose(ofptr);
+      return 0;
+#endif
     }
     if (!ComterpHandler::logger_mode()) {
       comterp_->load_string(inbuf);
@@ -165,15 +188,24 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       comterp_->_outfunc = (outfuncptr)&ComTerpServ::fd_fputs;
 
       int  status = comterp_->ComTerp::run(false /* !once */, false /* !nested */);
-      return (istr.good() ? 0 : -1) && status;
+      return (istr_good ? 0 : -1) && status;
     } else {
       if (inbuf[0]!='\004')
 	cout << inbuf << "\n";
+#if __GNUG__<3
       filebuf obuf(fd ? fd : 1);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
-      return (istr.good() && inbuf[0]!='\004') ? 0 : -1;
+#else
+      FILE* ofptr = nil;
+      filebuf obuf(fd ? fdopen(fd, "w") : stdout, ios_base::out);
+      ostream ostr(&obuf);
+      ostr << "\n";
+      ostr.flush();
+      if (ofptr) fclose(ofptr);
+#endif
+      return (istr_good && inbuf[0]!='\004') ? 0 : -1;
     }
 }
 

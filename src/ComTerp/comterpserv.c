@@ -33,6 +33,7 @@
 #include <string.h>
 #if __GNUG__>=3
 #include <fstream.h>
+static char newline;
 #endif
 
 #if BUFSIZ>1024
@@ -156,7 +157,8 @@ char* ComTerpServ::fd_fgets(char* s, int n, void* serv) {
     FILE* ifptr = fdopen(fd, "r");
     filebuf fbuf(ifptr, ios_base::in);
     istream in (&fbuf);
-    in.get(instr, BUFSIZ, '\n');  // needs to be generalized with <vector.h>
+    in.get(instr, BUFSIZ);  // needs to be generalized with <vector.h>
+    in.get(newline);
 #endif
     server->_instat = in.good(); 
   
