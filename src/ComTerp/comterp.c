@@ -679,9 +679,11 @@ void ComTerp::quitflag(boolean flag) {
     _quitflag = flag;
 }
 
-int ComTerp::run(boolean once) {
-  int status = 0;
+int ComTerp::run(boolean one_expr) {
+  int status = 1;
   _errbuf[0] = '\0';
+  char errbuf_save[BUFSIZ];
+  errbuf_save[0] = '\0';
   
   filebuf fbuf;
   if (handler()) {
@@ -695,7 +697,11 @@ int ComTerp::run(boolean once) {
   while (!eof() && !quitflag() && !eolflag) {
     
     if (read_expr()) {
+      status = 0;
+      int top_before = _stack_top;
       eval_expr();
+      if (top_before == _stack_top)
+	status = 2;
       err_str( _errbuf, BUFSIZ, "comterp" );
       if (strlen(_errbuf)==0) {
 	if (quitflag()) {
@@ -707,19 +713,24 @@ int ComTerp::run(boolean once) {
 	}
       } else {
 	out << _errbuf << "\n"; out.flush();
+	strcpy(errbuf_save, _errbuf);
 	_errbuf[0] = '\0';
       }
     } else {
       err_str( _errbuf, BUFSIZ, "comterp" );
       if (strlen(_errbuf)>0) {
 	out << _errbuf << "\n"; out.flush();
+	strcpy(errbuf_save, _errbuf);
 	_errbuf[0] = '\0';
-      } else
+      } else {
 	eolflag = true;
+        if (errbuf_save[0]) strcpy(_errbuf, errbuf_save);
+      }
     }
     _stack_top = -1;
-    if (once) break;
+    if (one_expr) break;
   }
+  if (status==1 && _pfnum==0) status=2;
   return status;
 }
 
@@ -771,7 +782,7 @@ void ComTerp::add_defaults() {
     add_command("iterate", new IterateFunc(this));
 
     add_command("dot", new DotFunc(this));
-    add_command("name", new DotNameFunc(this));
+    add_command("dotname", new DotNameFunc(this));
 
     add_command("list", new ListFunc(this));
     add_command("at", new ListAtFunc(this));

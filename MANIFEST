@@ -125,6 +125,10 @@ ivtools-0.8/src/ComGlyph/Imakefile
 ivtools-0.8/src/ComGlyph/Makefile
 ivtools-0.8/src/ComGlyph/attrdialog.c
 ivtools-0.8/src/ComGlyph/attrdialog.h
+ivtools-0.8/src/ComGlyph/comtextedit.c
+ivtools-0.8/src/ComGlyph/comtextedit.h
+ivtools-0.8/src/ComGlyph/comtextview.c
+ivtools-0.8/src/ComGlyph/comtextview.h
 ivtools-0.8/src/ComGlyph/terpdialog.c
 ivtools-0.8/src/ComGlyph/terpdialog.h
 ivtools-0.8/src/ComTerp/Imakefile

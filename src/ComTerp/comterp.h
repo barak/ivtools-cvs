@@ -148,8 +148,12 @@ public:
     virtual void exit(int status=0);
     // call _exit().
 
-    virtual int run(boolean once=false);
-    // run interpreter until end-of-file or quit command, unless 'once' is true.
+    virtual int run(boolean one_expr=false);
+    // run interpreter until end-of-file or quit command, unless 
+    // 'one_expr' is true.  Leave 'one_expr' false when using a ComTerpServ.
+    // Return Value:  -1 if eof, 0 if normal operation, 1 if 
+    // partial expression parsed, 2 if no result computed
+
     virtual int runfile(const char* filename);
     // run interpreter on contents of 'filename'.
     void add_defaults();
@@ -206,6 +210,9 @@ public:
     void clr_val_for_next_func();
     // clear out ComValue to pass to subequent command
 
+    unsigned int& linenum() { return _linenum; }
+    // count of lines processed
+
 protected:
     void incr_stack();
     void incr_stack(int n);
@@ -232,6 +239,7 @@ protected:
     unsigned int _stack_siz;
     boolean _quitflag;
     char* _errbuf;
+    char* _errbuf2;
     int _pfoff;
     boolean _brief; // when used to produce ComValue output
     boolean _just_reset;
