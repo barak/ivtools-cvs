@@ -431,6 +431,7 @@ ComValue& ComTerpServ::run(postfix_token* tokens, int ntokens) {
     _linenum = save_linenum;
     _just_reset = save_just_reset;
 #else
+    _pfbuf = nil;
     pop_servstate();
 #endif
     return retval;
