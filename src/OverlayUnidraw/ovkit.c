@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2002 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1998-2000 Vectaport Inc.
  * Copyright (c) 1994-1995 Vectaport Inc., Cartoactive Systems
@@ -149,6 +150,8 @@
 #include <Attribute/attribute.h>
 #include <Attribute/attrlist.h>
 #include <Attribute/attrvalue.h>
+
+#include <X11/keysym.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -1306,6 +1309,10 @@ MenuItem* OverlayKit::MakeFrameMenu() {
 }
 
 MenuItem* OverlayKit::MakeViewMenu() {
+    /* for handling special keys */
+    char keystr[3];
+    keystr[2] = '\0';
+
     LayoutKit& lk = *LayoutKit::instance();
     WidgetKit& kit = *WidgetKit::instance();
     
@@ -1381,22 +1388,28 @@ MenuItem* OverlayKit::MakeViewMenu() {
     MenuItem* spani = kit.menu_item(kit.label("Small Pan        "));
     Menu* span = kit.pullright();
     spani->menu(span);
-    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Up"), NO_PAN, PLUS_SMALL_PAN),
+    *(unsigned short*)keystr = XK_Up;
+    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Up", "", keystr), NO_PAN, PLUS_SMALL_PAN),
 	     "Small Pan Up     ");
-    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Down"), NO_PAN, MINUS_SMALL_PAN),
+    *(unsigned short*)keystr = XK_Down;
+    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Down", "", keystr), NO_PAN, MINUS_SMALL_PAN),
 	     "Small Pan Down   ");
-    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Left"), MINUS_SMALL_PAN, NO_PAN),
+    *(unsigned short*)keystr = XK_Left;
+    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Left", "", keystr), MINUS_SMALL_PAN, NO_PAN),
 	     "Small Pan Left   ");
-    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Right"), PLUS_SMALL_PAN, NO_PAN),
+    *(unsigned short*)keystr = XK_Right;
+    MakeMenu(spani, new FixedPanCmd(new ControlInfo("Small Pan Right", "", keystr), PLUS_SMALL_PAN, NO_PAN),
 	     "Small Pan Right  ");
     mbi->menu()->append_item(spani);
 
     MenuItem* lpani = kit.menu_item(kit.label("Large Pan        "));
     Menu* lpan = kit.pullright();
     lpani->menu(lpan);
-    MakeMenu(lpani, new FixedPanCmd(new ControlInfo("Large Pan Up"), NO_PAN, PLUS_LARGE_PAN),
+    *(unsigned short*)keystr = XK_Page_Up;
+    MakeMenu(lpani, new FixedPanCmd(new ControlInfo("Large Pan Up", "PgUp", keystr), NO_PAN, PLUS_LARGE_PAN),
 	     "Large Pan Up     ");
-    MakeMenu(lpani, new FixedPanCmd(new ControlInfo("Large Pan Down"), NO_PAN, MINUS_LARGE_PAN),
+    *(unsigned short*)keystr = XK_Page_Down;
+    MakeMenu(lpani, new FixedPanCmd(new ControlInfo("Large Pan Down", "PgDn", keystr), NO_PAN, MINUS_LARGE_PAN),
 	     "Large Pan Down   ");
     MakeMenu(lpani, new FixedPanCmd(new ControlInfo("Large Pan Left"), MINUS_LARGE_PAN, NO_PAN),
 	     "Large Pan Left   ");
