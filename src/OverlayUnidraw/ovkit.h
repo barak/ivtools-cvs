@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1995-1999 Vectaport Inc.
  * Copyright (c) 1994 Vectaport Inc., Cartoactive Systems
  * Copyright (c) 1993 David B. Hollenbeck
@@ -176,6 +177,7 @@ public:
     static const char mouse_logscale[] = "l-drag: Logarithmically Scale Image between Pixel Values on Line; m-drag: Move; r-click/drag: Select";
     static const char mouse_pseudocolor[] = "l-drag: Pseudocolor Image between Pixel Values on Line; m-drag: Move; r-click/drag: Select";
     static const char mouse_grloc[] = "l-click: Location within Graphic; m-drag: Move; r-click/drag: Select";
+    static const char mouse_custom[] = "l-click: Drop icon; m-drag: Move; r-click/drag: Select";
 
     void otherdisplay(const char* display);
     // set possible alternate X display string for constructing viewer.  
@@ -204,10 +206,22 @@ protected:
 
     const char* otherdisplay();
     // returns string that might specify an alternate X display.
+
+protected:
+    void toolbar0();
+    // switch to default toolbar
+    void toolbar1();
+    // switch to alternate toolbar
+    void add_custom_tool();
+    // import idraw-format tool button
+
 protected:
     OverlayEditor* _ed;
     Deck* _toolbars;
     Patch* _toolbar;
+    Glyph** _toolbar_vbox;
+    TelltaleGroup* _tg;
+    FloatCoord _maxwidth;
 
     char* _otherdisplay;
     boolean _set_button_flag;

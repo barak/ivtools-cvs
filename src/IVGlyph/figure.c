@@ -684,15 +684,17 @@ void Graphic31::allocate(Canvas* c, const Allocation& a, Extension& ext) {
 void Graphic31::draw(Canvas* c, const Allocation& a) const {
     if (c != nil) {
         boolean no_transformer = !_t;
-        if (no_transformer) ((Graphic31*)this)->_t = new Transformer();
-	_t->Translate(a.x(), a.y());
-        Graphic31* gr = (Graphic31*) this;
+        if (no_transformer) {
+	  ((Graphic31*)this)->_t = new Transformer();
+	  _t->Translate(a.x(), a.y());
+	}
+	Graphic31* gr = (Graphic31*) this;
         CanvasDamage& cd = c->rep()->damage_;
         gr->drawclipped(
             c, cd.left, cd.bottom, cd.right, cd.top
         );
-	_t->Translate(-a.x(), -a.y());
 	if (no_transformer) {
+	  _t->Translate(-a.x(), -a.y());
 	  delete _t;
 	  ((Graphic31*)this)->_t = nil;
 	}
