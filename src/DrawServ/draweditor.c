@@ -84,6 +84,7 @@ void DrawEditor::AddCommands(ComTerp* comterp) {
   FrameEditor::AddCommands(comterp);
 
   comterp->add_command("drawlink", new DrawLinkFunc(comterp, this));
+  comterp->add_command("sessionid", new SessionIdFunc(comterp, this));
   comterp->add_command("reserve", new ReserveFunc(comterp, this));
 }
 

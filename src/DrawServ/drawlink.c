@@ -50,6 +50,7 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
 
   _handler = nil;
 
+  _sessionid_state = SessionIdNada;
 }
 
 DrawLink::~DrawLink () 

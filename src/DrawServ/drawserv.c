@@ -50,10 +50,8 @@
 #include <fstream.h>
 #include <strstream>
 
-int DrawServ::_reserve_batch_min = 3;
-int DrawServ::_reserve_batch_size = 5;
-
 implementTable(GraphicIdTable,int,void*)
+implementTable(SessionIdTable,int,void*)
 
 /*****************************************************************************/
 
@@ -70,16 +68,17 @@ DrawServ::DrawServ (Catalog* c, World* w)
 
 void DrawServ::Init() {
   _linklist = new DrawLinkList;
-  _grid_request_list = new GraphicIdList;
-  _grid_reserved_list = new GraphicIdList;
+
   _gridtable = new GraphicIdTable(1024);
+  _sessionidtable = new SessionIdTable(256);
+
+  _sessionid = -1;
+  _trialid = -1;
 }
 
 DrawServ::~DrawServ () 
 {
   delete _linklist;
-  delete _grid_request_list;
-  delete _grid_reserved_list;
   delete _gridtable;
 }
 
@@ -260,82 +259,67 @@ void DrawServ::DistributeCmdString(const char* cmdstring) {
 
 }
 
-void DrawServ::reserve_batch_request(int nids) {
+void DrawServ::SendCmdString(DrawLink* link, const char* cmdstring) {
 
-  /* generate a new batch of id's while generating command to reserve them*/
-  GraphicIdsRequest* gridr = new GraphicIdsRequest();
-  GraphicIdList* gridr_list = gridr->sublist();
-  std::ostrstream sbuf;
-  sbuf << "reserve(";
-  for (int i=0; i<_reserve_batch_size; i++) {
-    GraphicId* grid = new GraphicId();
-    gridr_list->Append(grid);
-    if (i) sbuf << ',';
-    sbuf << grid->id();
+  if (link) {
+    int fd = link->handle();
+    if (fd>=0) {
+      fileptr_filebuf fbuf(fd, ios_base::out, false, static_cast<size_t>(BUFSIZ));
+      ostream out(&fbuf);
+      out << cmdstring;
+      out << "\n";
+      out.flush();
+    }
   }
-  sbuf << ":batchid " << gridr->id() << ")";
-  DistributeCmdString(sbuf.str());
-
 }
 
-void DrawServ::reserve_batch_response(int reserved, unsigned int batchid) {
-}
+// generate request to reserve unique session id
+void DrawServ::sessionid_request_new() {
+  _trialid = GraphicId::candidate_sessionid();
 
-void DrawServ::reserve_batch_handle(DrawLink* link, unsigned int *ids, int nids, unsigned int batchid) {
-  fprintf(stderr, "reserve batch request has been made, batchid==%d\n, batchid");
-  for (int i=0; i<nids; i++) {
-    if (i) fprintf(stderr, ",");
-    fprintf(stderr, "%d", ids[i]);
-  }
-  fprintf(stderr, "\n");
-}
-
-int DrawServ::reserved_id() {
-  int return_id = 0;
-
-  /* process next batch if no more id's ready */
-  if (_grid_reserved_list->Number()==0) reserved_batch();
-
-  /* reserve a new batch if number available falls below a threshold */
-  if (_grid_request_list->Number()<reserve_batch_min()) reserve_batch_request(reserve_batch_size());
-
-  return return_id;
-}
-
-int DrawServ::reserved_batch() {
-
-  int count = 0;
-
-  /* search through list of candidate id sets, and remove 1st */
-  /* set that has completed the reservation process           */
   Iterator it;
-  _grid_request_list->First(it);
-  GraphicIdsRequest* gridr = nil;
-  while (!_grid_request_list->Done(it) && !gridr) {
-    GraphicIdsRequest* gridr = (GraphicIdsRequest*)_grid_request_list->GetGraphicId(it);
-    if(gridr && gridr->reserved()) {
-      _grid_request_list->Remove(it);
-    }
-    _grid_request_list->Next(it);
+  _linklist->First(it);
+  char buf[BUFSIZ];
+  while(!_linklist->Done(it)) {
+    DrawLink* link = _linklist->GetDrawLink(it);
+    link->sessionid_state(DrawLink::SessionIdRequested);
+    snprintf(buf, BUFSIZ, "session(0x%08x :rid %d)%c", _trialid, link->local_linkid(), '\0');
+    SendCmdString(link, buf);
+    _linklist->Next(it);
   }
+}
 
-  /* transfer all of these to the reservation completed list */
-  if (gridr && gridr->sublist()) {
-    Iterator jt;
-    GraphicIdList* gridr_list = gridr->sublist();
-    count = gridr_list->Number();
-    gridr_list->First(jt);
-    while (!gridr_list->Done(jt)) {
-      GraphicId* grid = gridr_list->GetGraphicId(jt);
-      gridr_list->Remove(jt);
-      if (grid) _grid_reserved_list->Append(grid);
+// handle request to reserve unique session id
+void DrawServ::sessionid_handle_new(int new_id, int remote_linkid) {
+  DrawLink* link = linkget(-1, remote_linkid);
+  if (link) {
+    if (_linklist->Number()==1) {
+      int okflag = false;
+      if (okflag = GraphicId::unique_sessionid(new_id)) {
+	SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
+	table->insert(new_id, link);
+      }
+      char buf[BUFSIZ];
+      snprintf(buf, BUFSIZ, "sessionid(0x08x :ok %d)%c", new_id, okflag, '\0');
+      SendCmdString(link, buf);
+    } else {
+      fprintf(stderr, "code for passing selection id request on to other DrawLink's not implemented\n");
     }
-    delete gridr;
-    return count;
-  } else {
-    fprintf(stderr, "No batch of graphic ids has completed reservation process\n");
-    fprintf(stderr, "Someone should really do something about this\n");
-    return 0;
-  }
+  } else
+    fprintf(stderr, "no link with remote id of %d found\n", remote_linkid);
+}
+
+// process callbacks on request to reserve unique session id
+void DrawServ::sessionid_callback_new(int new_id, int remote_linkid, int ok_flag) {
+  fprintf(stderr, "sessionid_callback_new: new_id %d,  remote_linkid %d, ok_flag %d\n",
+	  new_id, remote_linkid, ok_flag);
+}
+
+// generate request to change/set unique session id
+void DrawServ::sessionid_request_chg() {
+}
+
+// handle request to change unique session id
+void DrawServ::sessionid_handle_chg(int new_id, int old_id) {
 }
 

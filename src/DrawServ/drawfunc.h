@@ -34,7 +34,17 @@ public:
     DrawLinkFunc(ComTerp*,DrawEditor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(hoststr :port portnum) -- connect to remote drawserv"; }
+	return "%s(hoststr :port portnum :state num :lid num :rid num :close) -- connect to remote drawserv"; }
+};
+
+//: command to reserve unique session id
+// sessionid(:new) -- command to manage session id's
+class SessionIdFunc : public UnidrawFunc {
+public:
+    SessionIdFunc(ComTerp*,DrawEditor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "%s(:new) -- command to manage session id's"; }
 };
 
 //: command to reserve graphics for selection in remote editors

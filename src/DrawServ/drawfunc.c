@@ -122,10 +122,84 @@ void DrawLinkFunc::execute() {
 
 /*****************************************************************************/
 
+SessionIdFunc::SessionIdFunc(ComTerp* comterp, DrawEditor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void SessionIdFunc::execute() {
+#ifndef HAVE_ACE
+
+  reset_stack();
+  fprintf(stderr, "rebuild ivtools with ACE support to get full drawserv functionality\n");
+  push_stack(ComValue::nullval());
+
+#else
+  static int new_sym = symbol_add("new");
+  ComValue newv(stack_key(new_sym));
+
+  static int trial_sym = symbol_add("trial");
+  ComValue trialv(stack_key(trial_sym));
+
+  static int rid_sym = symbol_add("rid");
+  ComValue ridv(stack_key(rid_sym));
+
+  static int ok_sym = symbol_add("ok");
+  ComValue okv(stack_key(ok_sym));
+
+  ComValue idv(stack_arg(0));
+
+  reset_stack();
+
+#if __GNUC__==3&&__GNUC_MINOR__<1
+  fprintf(stderr, "Please upgrade to gcc-3.1 or greater\n");
+  push_stack(ComValue::nullval());
+  return;
+#endif
+
+  unsigned int returnid = 0;
+
+  /* request a new session id */
+  if (newv.is_true()) {    
+    ((DrawServ*)unidraw)->sessionid_request_new();
+    returnid = ((DrawServ*)unidraw)->sessionid(true);
+  }
+
+  /* return the trial id */
+  else if (trialv.is_true()) {    
+    returnid = ((DrawServ*)unidraw)->sessionid(true);
+  }
+
+  /* handle new session id request */
+  else if (nargs()==1 && nkeys()==0 && idv.is_known() && ridv.is_known()) {
+    returnid = idv.uint_val();
+    ((DrawServ*)unidraw)->sessionid_handle_new(returnid, ridv.int_val());
+  }
+
+  /* handle callback */ 
+  else if (okv.is_known() && ridv.is_known()) {
+    returnid = idv.uint_val();
+    ((DrawServ*)unidraw)->sessionid_callback_new(ridv.int_val(), returnid, okv.is_true());
+  }
+
+  /* return current session id */
+  else if (nargs()==0 && nkeys()==0) 
+    returnid = ((DrawServ*)unidraw)->sessionid();
+
+  ComValue retval(returnid);
+  push_stack(retval);
+  return;
+
+#endif
+
+}
+
+
+/*****************************************************************************/
+
 ReserveFunc::ReserveFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
 }
 
 void ReserveFunc::execute() {
+#if 0
 #if 1
   static int batchid_symid = symbol_add("batchid");
   ComValue batchidv(stack_key(batchid_symid));
@@ -235,6 +309,7 @@ void ReserveFunc::execute() {
     reset_stack();
     ComValue retval(avl);
     push_stack(retval);
+#endif
 #endif
 }
 

@@ -93,6 +93,16 @@ public:
     DrawServHandler* handler() { return _handler; }
     // get DrawServHandler associated with incoming connection
 
+    int sessionid_state() { return _sessionid_state; }
+    // get state of session id negotiation
+    // -1 = no id, 0 = request made, 1 = request approved, 2 = request denied.
+
+    void sessionid_state(int state) { _sessionid_state = state; }
+    // set state of session id negotiation
+    // -1 = no id, 0 = request made, 1 = request approved, 2 = request denied.
+
+    enum {SessionIdNada=-1, SessionIdRequested=0, SessionIdApproved=1, SessionIdDenied=2};
+
 protected:
     const char* _host;
     const char* _althost;
@@ -102,6 +112,7 @@ protected:
     int _local_linkid;
     int _remote_linkid;
     int _state;
+    int _sessionid_state;
 
 #ifdef HAVE_ACE
     ACE_INET_Addr* _addr;

@@ -32,6 +32,7 @@
 
 #include <OS/table.h>
 declareTable(GraphicIdTable,int,void*)
+declareTable(SessionIdTable,int,void*)
 
 //: Unidraw specialized for DrawServ
 // Unidraw (OverlayUnidraw) specialized for DrawServ application.
@@ -76,49 +77,53 @@ public:
     // execute Command's locally, and on remote linked DrawServ's.
 
     virtual void DistributeCmdString(const char* cmdstring);
-    // execute command string locally, and on remote DrawServ's
+    // execute command string remote DrawServ's
+
+    virtual void SendCmdString(DrawLink* link, const char* cmdstring);
+    // execute command string on one remote DrawServ
 
     DrawLinkList* linklist() { return _linklist; }
     // return pointer to list of DrawLink's
 
-
-    /* mechanism for reserving graphic ids */
-
-    void reserve_batch_request(int nids);
-    // initiate reservation of a set of graphic ids.
-    void reserve_batch_response(int reserved, unsigned int batchid);
-    // finalize reservation of a set of graphic ids
-    void reserve_batch_handle(DrawLink* link, unsigned int* ids, int nids, unsigned int batchid);
-    // respond to a request to reserve ids from a particular DrawLink
-    int reserved_id();
-    // next available reserved id.
-    int reserved_batch();
-    // process next available batch of reserved id's.
-
-    static int reserve_batch_min() { return _reserve_batch_min; }
-    // get the minimum number of reserved id batches allowed.
-    static void reserve_batch_min(int min) { _reserve_batch_min = min; }
-    // set the minimum number of reserved id batches allowed.
-    static int reserve_batch_size() { return _reserve_batch_size; }
-    // get the batch size for a request to reserve ids
-    static void reserve_batch_size(int size) { _reserve_batch_size = size; }
-    // set the batch size for a request to reserve ids
-
     GraphicIdTable* gridtable() { return _gridtable; }
     // return pointer to table of GraphicId's.
+
+    SessionIdTable* sessionidtable() { return _sessionidtable; }
+    // return pointer to table of DrawLink's as a function of session id's.
+
+    void sessionid_request_new();
+    // generate request to reserve unique session id
+
+    void sessionid_handle_new(int new_id, int remote_linkid);
+    // handle request to reserve unique session id
+
+    void sessionid_callback_new(int new_id, int remote_linkid, int ok_flag);
+    // process callbacks on request to reserve unique session id
+
+    void sessionid_request_chg();
+    // generate request to change/set unique session id
+
+    void sessionid_handle_chg(int new_id, int old_id);
+    // handle request to change unique session id
+
+    int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
+    // current unique session id.
 
 protected:
     DrawLinkList* _linklist;
     // DrawLink list
-    GraphicIdList* _grid_request_list;
-    // GraphicId reservation request list
-    GraphicIdList* _grid_reserved_list;
-    // GraphicId reservation completed list
     GraphicIdTable* _gridtable;
     // table of all GraphicId's.
+    // maps from id to GraphicId*
+    SessionIdTable* _sessionidtable;
+    // table of all session id's.
+    // maps from id to DrawLink*
 
-    static int _reserve_batch_min;
-    static int _reserve_batch_size;
+    int _sessionid;
+    // unique session id.
+    int _trialid;
+    // session id undergoing reservation
+
 };
 
 #endif

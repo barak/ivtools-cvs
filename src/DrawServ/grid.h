@@ -43,18 +43,25 @@ public:
 
   virtual int composite() { return 0; }
   // return true if can be cast to GraphicIds
-  virtual int request() { return 0; }
-  // return true if can be cast to GraphicIdsRequest
+
   virtual GraphicIdList* sublist() { return nil; }
   // returns pointer to sublist of GraphicId's, if any
-protected:
-  static int candidate_id();
+
+  static int candidate_grid();
   // generate candidate graphic id.
-  static int unique_id(unsigned int id);
-  // test candidate id for uniqueness
+  static int unique_grid(unsigned int id);
+  // test candidate graphic id for local uniqueness
+  static int candidate_sessionid();
+  // generate candidate session id.
+  static int unique_sessionid(unsigned int id);
+  // test candidate session id for local uniqueness
   
+  static unsigned int GraphicIdMask;
+  static unsigned int SessionIdMask;
+  
+protected:
   unsigned int _id;
-  
+
 };
 
 //: object to encapsulate a set of graphic ids
@@ -71,26 +78,6 @@ public:
 
 protected:
   GraphicIdList* _sublist;
-};
-
-//: object to encapsulate a request to reserve a set of graphic ids
-class GraphicIdsRequest : public GraphicIds {
-public:
-  GraphicIdsRequest(GraphicId* subids, int nsubids); 
-  GraphicIdsRequest(GraphicIdList* sublist=nil);
-  virtual ~GraphicIdsRequest();
-
-  void Init();
-
-  virtual int request() { return 1; }
-  // return true if can be cast to GraphicIdsRequest
-  int reserved();
-  // return 1 if id is completely reserved, otherwise 0.
-
-protected:
-  int* _ready;
-  DrawLink** _links;
-  int _nlinks;
 };
 
 #endif
