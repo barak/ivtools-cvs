@@ -1301,7 +1301,7 @@ GraphicComp* OvImportCmd::Import (const char* path) {
       static boolean use_w3c = OverlayKit::bincheck("w3c");
       static boolean use_curl = OverlayKit::bincheck("curl");
       if (use_w3c) 
-	sprintf(buffer,"w3c %s", path);
+	sprintf(buffer,"w3c -q %s", path);
       else if (use_curl)
 	sprintf(buffer,"curl %s", path);
       else
