@@ -196,11 +196,11 @@ void GraphicIdFunc::execute() {
   DrawLink* link = handler ? (DrawLink*)handler->drawlink() : nil;
 
   if (idv.is_known() && selectorv.is_known()) {
-    if (requestv.is_true())
+    if (grantv.is_false())
     ((DrawServ*)unidraw)->grid_message_handle
       (link, idv.uint_val(), selectorv.uint_val(), statev.int_val(), 
        requestv.is_known() ? requestv.uint_val() : 0);
-    else if (grantv.is_true()) 
+    else 
     ((DrawServ*)unidraw)->grid_message_callback
       (link, idv.uint_val(), selectorv.uint_val(), statev.int_val(), 
        grantv.is_known() ? grantv.uint_val() : 0);
