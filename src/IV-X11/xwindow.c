@@ -62,7 +62,7 @@
 #include <stropts.h>
 #include <sys/conf.h>
 #endif
-#if !defined(__linux__) && !defined(__CYGWIN__)
+#if !defined(__linux__) && !defined(__CYGWIN__) && !defined(__NetBSD__)
 /* no standard place for this */
 extern "C" {
     extern int ioctl(int, int, ...);

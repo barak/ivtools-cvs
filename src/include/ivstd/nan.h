@@ -3,7 +3,7 @@
 
 #if defined(__GLIBC__) && (__GLIBC__==2 && __GLIBC_MINOR__>0 || __GLIBC__>2)
 #include <bits/nan.h>
-#elif !defined(__CYGWIN__)
+#elif !defined(__CYGWIN__) && !defined(__NetBSD__)
 #include_next <nan.h>
 #else
 #include <math.h>

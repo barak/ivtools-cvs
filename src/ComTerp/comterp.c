@@ -376,11 +376,6 @@ boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
     return false;
   } else {
     offset--;
-    if (curr.is_type(ComValue::BlankType)) {
-      boolean status = skip_arg(topval, offset, tokcnt);
-      tokcnt++;
-      return status;
-    }
     tokcnt++;
 
     if (curr.narg() || curr.nkey()) {
@@ -394,6 +389,10 @@ boolean ComTerp::skip_arg(ComValue* topval, int& offset, int& tokcnt) {
 	  if (subtokcnt) count++;
 	} else if (next.is_type(ComValue::CommandType) ||
 		   next.is_type(ComValue::SymbolType)) {
+	  skip_arg(topval, offset, subtokcnt);
+	  tokcnt += subtokcnt;
+	} else if (next.is_type(ComValue::BlankType)) {
+	  offset--;
 	  skip_arg(topval, offset, subtokcnt);
 	  tokcnt += subtokcnt;
 	} else {
