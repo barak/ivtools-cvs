@@ -516,12 +516,11 @@ Glyph* OverlayKit::MakeToolbar() {
     ToolButton* rotate;
     ToolButton* reshape;
     ToolButton* magnify;
-    ToolButton* attribute;
 
     _toolbars = layout.deck(1);
 
 
-    PolyGlyph* vb = layout.vbox(19);
+    PolyGlyph* vb = layout.vbox();
     _toolbar_vbox = new Glyph*[2];
     _toolbar_vbox[0] = vb;
 
@@ -686,27 +685,6 @@ Glyph* OverlayKit::MakeToolbar() {
 			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
 				       layout.hcenter(gcspl)),
 			_tg, _ed->MouseDocObservable(), mouse_cspl));
-    vb->append(MakeTool(new AnnotateTool(new ControlInfo("Annotate", "A", "A")),
-			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
-				       layout.hcenter(anno)), _tg, _ed->MouseDocObservable(), mouse_anno));
-    vb->append(attribute = MakeTool(new AttributeTool(new ControlInfo("Attribute", "T", "T")),
-			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
-				       layout.hcenter(attr)), _tg, _ed->MouseDocObservable(), mouse_attr));
-#ifdef CLIPPOLY
-    vb->append(MakeTool(new ClipRectTool(new ControlInfo("ClipRect", "C", "C")),
-			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
-				       layout.hcenter(clipr)), _tg, _ed->MouseDocObservable(), mouse_clipr));
-    vb->append(MakeTool(new ClipPolyTool(new ControlInfo("ClipPoly")),
-			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
-				       layout.hcenter(clipp)), _tg, _ed->MouseDocObservable(), mouse_clipp));
-    if (!bintest("qhull"))
-      vb->append(MakeTool(new ConvexHullTool(new ControlInfo("ConvexHull")),
-			  layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
-					 layout.hcenter(hull)), _tg, _ed->MouseDocObservable(), mouse_convexhull));
-#endif
-    vb->append(MakeTool(new GrLocTool(new ControlInfo("GraphicLoc", "", "")),
-			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
-				       layout.hcenter(grloc)), _tg, _ed->MouseDocObservable(), mouse_grloc));
 
     _toolbars->append(vb);
     vb = layout.vbox();
@@ -717,7 +695,27 @@ Glyph* OverlayKit::MakeToolbar() {
     vb->append(rotate);
     vb->append(reshape);
     vb->append(magnify);
-    vb->append(attribute);
+    vb->append(MakeTool(new AttributeTool(new ControlInfo("Attribute", "T", "T")),
+			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
+				       layout.hcenter(attr)), _tg, _ed->MouseDocObservable(), mouse_attr));
+    vb->append(MakeTool(new AnnotateTool(new ControlInfo("Annotate", "A", "A")),
+			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
+				       layout.hcenter(anno)), _tg, _ed->MouseDocObservable(), mouse_anno));
+    vb->append(MakeTool(new GrLocTool(new ControlInfo("GraphicLoc", "", "")),
+			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
+				       layout.hcenter(grloc)), _tg, _ed->MouseDocObservable(), mouse_grloc));
+#ifdef CLIPPOLY
+    vb->append(MakeTool(new ClipRectTool(new ControlInfo("ClipRect", "C", "C")),
+			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
+				       layout.hcenter(clipr)), _tg, _ed->MouseDocObservable(), mouse_clipr));
+    vb->append(MakeTool(new ClipPolyTool(new ControlInfo("ClipPoly")),
+			layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
+				       layout.hcenter(clipp)), _tg, _ed->MouseDocObservable(), mouse_clipp));
+#endif
+    if (!bintest("qhull"))
+      vb->append(MakeTool(new ConvexHullTool(new ControlInfo("ConvexHull")),
+			  layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
+					 layout.hcenter(hull)), _tg, _ed->MouseDocObservable(), mouse_convexhull));
     _toolbars->append(vb);
     _toolbars->flip_to(0);
     _toolbar = new Patch(_toolbars);
@@ -1471,7 +1469,7 @@ MenuItem * OverlayKit::MakeToolsMenu() {
     MenuItem *mbi = kit.menubar_item(kit.label("Tools"));
     mbi->menu(kit.pulldown());
 
-    MenuItem* menu_item = kit.menu_item(kit.label("Custom Tools"));
+    MenuItem* menu_item = kit.menu_item(kit.label("Extra Tools"));
     menu_item->action(new ActionCallback(OverlayKit)(this, &OverlayKit::toolbar1));
     mbi->menu()->append_item(menu_item);
 
