@@ -33,6 +33,7 @@
 #include <OverlayUnidraw/ovimport.h>
 #include <TopoFace/topoedge.h>
 #include <Attribute/paramlist.h>
+#include <ctype.h>
 #include <iostream.h>
 #include <stdio.h>
 #include <string.h>
