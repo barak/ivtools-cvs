@@ -28,6 +28,7 @@
 #define drawserv_h
 
 #include <OverlayUnidraw/ovunidraw.h>
+#include <stdio.h>
 
 //: Unidraw specialized for DrawServ
 // Unidraw (OverlayUnidraw) specialized for DrawServ application.

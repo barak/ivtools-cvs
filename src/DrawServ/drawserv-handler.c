@@ -36,6 +36,9 @@ DrawServHandler::DrawServHandler () : UnidrawComterpHandler()
 
 void DrawServHandler::destroy (void) {
   ComterpHandler::destroy();
-  if (drawlink()) ((DrawServ*)unidraw)->linkdown(drawlink());
+  if (drawlink()) {
+    ((DrawServ*)unidraw)->linkdown(drawlink());
+    drawlink(nil);
+  }
 }
 #endif /* HAVE_ACE */

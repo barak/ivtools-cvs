@@ -103,9 +103,13 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
 }
 
 int DrawServ::linkdown(DrawLink* link) {
-  _list->Remove(link);
-  link->close();
-  delete link;
+  if (_list->Includes(link)) {
+    _list->Remove(link);
+    link->close();
+    delete link;
+    return 0;
+  } else
+    return -1;
 }
 
 DrawLink* DrawServ::linkget(int local_id, int remote_id) {
