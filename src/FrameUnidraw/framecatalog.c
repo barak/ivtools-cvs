@@ -35,9 +35,11 @@
 
 #include <stdio.h>
 #include <stream.h>
-#include <fstream.h>
 #include <string.h>
 #include <ctype.h>
+#if __GNUG__>=3
+#include <fstream.h>
+#endif
 
 
 /*****************************************************************************/

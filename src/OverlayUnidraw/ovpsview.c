@@ -101,6 +101,8 @@ static void CollectFontsFromGraphic (Graphic* gr, UList* fonts) {
 
 /*****************************************************************************/
 
+boolean OverlayPS::idraw_format = true;
+
 ClassId OverlayPS::GetClassId () { return OVERLAY_PS; }
 
 boolean OverlayPS::IsA (ClassId id) {
@@ -109,6 +111,10 @@ boolean OverlayPS::IsA (ClassId id) {
 
 OverlayPS::OverlayPS (OverlayComp* subj) : PostScriptView(subj) {
     _command = nil;
+}
+
+void OverlayPS::Creator (ostream& out) {
+    out << "%%Creator: " << (idraw_format ? "idraw" : "unidraw") << "\n";
 }
 
 UList* OverlayPS::GetPSFonts () {
@@ -299,10 +305,6 @@ ClassId OverlayIdrawPS::GetClassId () { return OVERLAY_IDRAW_PS; }
 
 boolean OverlayIdrawPS::IsA (ClassId id) { 
     return OVERLAY_IDRAW_PS == id || OverlaysPS::IsA(id);
-}
-
-void OverlayIdrawPS::Creator (ostream& out) {
-    out << "%%Creator: idraw\n";
 }
 
 void OverlayIdrawPS::Prologue (ostream& out) {

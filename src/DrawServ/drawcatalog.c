@@ -33,10 +33,12 @@
 #include <OverlayUnidraw/ovimport.h>
 #include <TopoFace/topoedge.h>
 #include <Attribute/paramlist.h>
-#include <fstream.h>
 #include <iostream.h>
 #include <stdio.h>
 #include <string.h>
+#if __GNUG__>=3
+#include <fstream.h>
+#endif
 
 /*****************************************************************************/
 
