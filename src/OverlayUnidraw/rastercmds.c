@@ -169,12 +169,15 @@ void UnhighlightRasterCmd::Execute() {
 /*-----------------------------------------------------------------*/
 
 AlphaTransparentRasterCmd::AlphaTransparentRasterCmd(ControlInfo* ci) : Command(ci) {
+  _alpha_set = false;
 }
 
 Command* AlphaTransparentRasterCmd::Copy() {
-    Command* copy = new AlphaTransparentRasterCmd(GetControlInfo());
+    Command* copy = new AlphaTransparentRasterCmd(CopyControlInfo());
     InitCopy(copy);
     ((AlphaTransparentRasterCmd*)copy)->_alpha = _alpha;
+    ((AlphaTransparentRasterCmd*)copy)->_oldalpha = _oldalpha;
+    ((AlphaTransparentRasterCmd*)copy)->_alpha_set = _alpha_set;
     return copy;
 }
 
@@ -189,15 +192,17 @@ boolean AlphaTransparentRasterCmd::Reversible() {
 }
 
 void AlphaTransparentRasterCmd::Execute() {
-  // find the rasters in the current comp and unhighlight
 
-  char* newalpha = StrEditDialog::post
-    (GetEditor()->GetWindow(), 
-     "Enter alpha value", "0.5");
-  if (newalpha)
-    _alpha = atof(newalpha);
-  else
-    _alpha = 1.0;
+  if (!_alpha_set) {
+    char* newalpha = StrEditDialog::post
+      (GetEditor()->GetWindow(), 
+       "Enter alpha value", "0.5");
+    if (newalpha)
+      _alpha = atof(newalpha);
+    else
+      _alpha = 1.0;
+    _alpha_set = true;
+  }
 
   OverlayEditor* ed = (OverlayEditor*)GetEditor();
   OverlaySelection* sel = (OverlaySelection*) ed->GetSelection();
@@ -207,11 +212,38 @@ void AlphaTransparentRasterCmd::Execute() {
     if (view->IsA(OVRASTER_VIEW)) {
       RasterOvView* rastview = (RasterOvView*)view;
       if (rastview) {
-	OverlayRasterRect* rr = rastview->GetOverlayRasterRect();
+	RasterOvComp* rastcomp = (RasterOvComp*)rastview->GetSubject();
+	OverlayRasterRect* rr = rastcomp->GetOverlayRasterRect();
 	if (rr) {
+	  _oldalpha = rr->alphaval();
 	  rr->alphaval(_alpha);
+	  rastcomp->Notify();
+	  unidraw->Update();
 	}
       }
     }
   }
 }
+
+void AlphaTransparentRasterCmd::Unexecute() {
+
+  OverlayEditor* ed = (OverlayEditor*)GetEditor();
+  OverlaySelection* sel = (OverlaySelection*) ed->GetSelection();
+  Iterator i;
+  for (sel->First(i); !sel->Done(i); sel->Next(i)) {
+    GraphicView* view = sel->GetView(i);
+    if (view->IsA(OVRASTER_VIEW)) {
+      RasterOvView* rastview = (RasterOvView*)view;
+      if (rastview) {
+	RasterOvComp* rastcomp = (RasterOvComp*)rastview->GetSubject();
+	OverlayRasterRect* rr = rastcomp->GetOverlayRasterRect();
+	if (rr) {
+	  rr->alphaval(_oldalpha);
+	  rastcomp->Notify();
+	  unidraw->Update();
+	}
+      }
+    }
+  }
+}
+

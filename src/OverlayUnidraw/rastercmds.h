@@ -80,6 +80,7 @@ public:
     AlphaTransparentRasterCmd(ControlInfo* ci); 
 
     virtual void Execute();
+    virtual void Unexecute();
 
     virtual Command* Copy();
     virtual ClassId GetClassId();
@@ -89,6 +90,8 @@ public:
 
 protected: 
     float _alpha;
+    float _oldalpha;
+    boolean _alpha_set;
 };
 
 
