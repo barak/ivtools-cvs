@@ -73,11 +73,45 @@
 
 #define TITLE "GrFunc"
 
-static int transformer_symid = symbol_add("transformer");
+/*****************************************************************************/
+
+CreateGraphicFunc::CreateGraphicFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+Transformer* CreateGraphicFunc::get_transformer(AttributeList* al) {
+  static int transform_symid = symbol_add("transform");
+
+  AttributeValue* transformv = nil;
+  Transformer* rel = nil;
+  AttributeValueList* avl = nil;
+  if (al && 
+      (transformv=al->find(transform_symid)) && 
+      transformv->is_array() && 
+      (avl=transformv->array_val()) &&
+      avl->Number()==6) {
+    float a00, a01, a10, a11, a20, a21;
+    Iterator it;
+    avl->First(it); a00=avl->GetAttrVal(it)->float_val();
+    avl->Next(it); a01=avl->GetAttrVal(it)->float_val();
+    avl->Next(it); a10=avl->GetAttrVal(it)->float_val();
+    avl->Next(it); a11=avl->GetAttrVal(it)->float_val();
+    avl->Next(it); a20=avl->GetAttrVal(it)->float_val();
+    avl->Next(it); a21=avl->GetAttrVal(it)->float_val();
+    rel = new Transformer(a00, a01, a10, a11, a20, a21);
+  } else {
+    rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
+    if (rel != nil) {
+      rel = new Transformer(rel);
+      rel->Invert();
+    }
+  }
+  return rel;
+  
+}
 
 /*****************************************************************************/
 
-CreateRectFunc::CreateRectFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateRectFunc::CreateRectFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateRectFunc::execute() {
@@ -113,11 +147,7 @@ void CreateRectFunc::execute() {
 	PatternVar* patVar = (PatternVar*) _ed->GetState("PatternVar");
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
+        Transformer* rel = get_transformer(al);
 
 	SF_Rect* rect = new SF_Rect(coords[x0], coords[y0], coords[x1], coords[y1], stdgraphic);
 
@@ -146,7 +176,7 @@ void CreateRectFunc::execute() {
 
 /*****************************************************************************/
 
-CreateLineFunc::CreateLineFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateLineFunc::CreateLineFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateLineFunc::execute() {
@@ -182,11 +212,7 @@ void CreateLineFunc::execute() {
 	PatternVar* patVar = (PatternVar*) _ed->GetState("PatternVar");
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
+        Transformer* rel = get_transformer(al);
 
 	ArrowVar* aVar = (ArrowVar*) _ed->GetState("ArrowVar");
 	ArrowLine* line = new ArrowLine(coords[x0], coords[y0], coords[x1], coords[y1], aVar->Head(), aVar->Tail(), 
@@ -216,7 +242,7 @@ void CreateLineFunc::execute() {
 
 /*****************************************************************************/
 
-CreateEllipseFunc::CreateEllipseFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateEllipseFunc::CreateEllipseFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateEllipseFunc::execute() {
@@ -252,12 +278,8 @@ void CreateEllipseFunc::execute() {
 	PatternVar* patVar = (PatternVar*) _ed->GetState("PatternVar");
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
-
+	Transformer* rel = get_transformer(al);
+	
 	SF_Ellipse* ellipse = new SF_Ellipse(args[x0], args[y0], args[r1], args[r2], stdgraphic);
 
 	if (brVar != nil) ellipse->SetBrush(brVar->GetBrush());
@@ -287,7 +309,7 @@ void CreateEllipseFunc::execute() {
 
 // this one needs to get the string value, plus x,y location
 
-CreateTextFunc::CreateTextFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateTextFunc::CreateTextFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateTextFunc::execute() {
@@ -323,11 +345,7 @@ void CreateTextFunc::execute() {
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 	FontVar* fntVar = (FontVar*) _ed->GetState("FontVar");
 	
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
+        Transformer* rel = get_transformer(al);
 	
 	TextGraphic* text = new TextGraphic(txt, stdgraphic);
 
@@ -356,7 +374,7 @@ void CreateTextFunc::execute() {
 
 /*****************************************************************************/
 
-CreateMultiLineFunc::CreateMultiLineFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateMultiLineFunc::CreateMultiLineFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateMultiLineFunc::execute() {
@@ -392,11 +410,7 @@ void CreateMultiLineFunc::execute() {
 	PatternVar* patVar = (PatternVar*) _ed->GetState("PatternVar");
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
+        Transformer* rel = get_transformer(al);
 
 	ArrowVar* aVar = (ArrowVar*) _ed->GetState("ArrowVar");
 	ArrowMultiLine* multiline = new ArrowMultiLine(x, y, npts, aVar->Head(), aVar->Tail(), 
@@ -427,7 +441,7 @@ void CreateMultiLineFunc::execute() {
 
 /*****************************************************************************/
 
-CreateOpenSplineFunc::CreateOpenSplineFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateOpenSplineFunc::CreateOpenSplineFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateOpenSplineFunc::execute() {
@@ -463,11 +477,7 @@ void CreateOpenSplineFunc::execute() {
 	PatternVar* patVar = (PatternVar*) _ed->GetState("PatternVar");
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
+        Transformer* rel = get_transformer(al);
 
 	ArrowVar* aVar = (ArrowVar*) _ed->GetState("ArrowVar");
 	ArrowOpenBSpline* openspline = new ArrowOpenBSpline(x, y, npts, aVar->Head(), aVar->Tail(), 
@@ -498,7 +508,7 @@ void CreateOpenSplineFunc::execute() {
 
 /*****************************************************************************/
 
-CreatePolygonFunc::CreatePolygonFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreatePolygonFunc::CreatePolygonFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreatePolygonFunc::execute() {
@@ -534,11 +544,7 @@ void CreatePolygonFunc::execute() {
 	PatternVar* patVar = (PatternVar*) _ed->GetState("PatternVar");
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
+        Transformer* rel = get_transformer(al);
 
 	SF_Polygon* polygon = new SF_Polygon(x, y, npts, stdgraphic);
 
@@ -567,7 +573,7 @@ void CreatePolygonFunc::execute() {
 
 /*****************************************************************************/
 
-CreateClosedSplineFunc::CreateClosedSplineFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateClosedSplineFunc::CreateClosedSplineFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateClosedSplineFunc::execute() {
@@ -603,11 +609,7 @@ void CreateClosedSplineFunc::execute() {
 	PatternVar* patVar = (PatternVar*) _ed->GetState("PatternVar");
 	ColorVar* colVar = (ColorVar*) _ed->GetState("ColorVar");
 
-        Transformer* rel = ((OverlayViewer*)_ed->GetViewer())->GetRel();
-	if (rel != nil) {
-	    rel = new Transformer(rel);
-	    rel->Invert();
-	}
+        Transformer* rel = get_transformer(al);
 
 	ArrowVar* aVar = (ArrowVar*) _ed->GetState("ArrowVar");
 	SFH_ClosedBSpline* closedspline = new SFH_ClosedBSpline(x, y, npts, stdgraphic);
@@ -637,7 +639,7 @@ void CreateClosedSplineFunc::execute() {
 
 /*****************************************************************************/
 
-CreateRasterFunc::CreateRasterFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+CreateRasterFunc::CreateRasterFunc(ComTerp* comterp, Editor* ed) : CreateGraphicFunc(comterp, ed) {
 }
 
 void CreateRasterFunc::execute() {
@@ -683,10 +685,14 @@ void CreateRasterFunc::execute() {
 
 	OverlayRasterRect* rasterrect = new OverlayRasterRect(raster, stdgraphic);
 
+#if 1
 	Transformer* t = new Transformer();
 	t->Translate(dcoords[x0], dcoords[y0]);
 	rasterrect->SetTransformer(t);
 	Unref(t);
+#else
+        Transformer* rel = get_transformer(al);
+#endif
 
 	RasterOvComp* comp = new RasterOvComp(rasterrect);
 	comp->SetAttributeList(al);
