@@ -169,7 +169,7 @@ void SessionIdFunc::execute() {
   }
 
   /* handle new session id request */
-  else if (nargs()==1 && nkeys()==0 && idv.is_known() && ridv.is_known()) {
+  else if (idv.is_known() && ridv.is_known()) {
     returnid = idv.uint_val();
     ((DrawServ*)unidraw)->sessionid_handle_new(returnid, ridv.int_val());
   }
