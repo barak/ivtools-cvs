@@ -1096,8 +1096,7 @@ int blank_count = 0;
 
                for (i = 0; i < lp; i++)
                {
-		  ParenStack[TopOfParenStack].narg += 
-		     blank_count>1 ? blank_count-1 : 0;
+		  ParenStack[TopOfParenStack].narg += blank_count>0;
   	          PFOUT( TOK_COMMAND,
                      ParenStack[TopOfParenStack].comm_id,
                      ParenStack[TopOfParenStack].narg,
