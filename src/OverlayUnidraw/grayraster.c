@@ -31,6 +31,8 @@
 #include <OS/math.h>
 #include <math.h>
 #include <nan.h>
+#undef max
+#undef min
 
 #include <OverlayUnidraw/grayraster.h>
 #include <OverlayUnidraw/ovcatalog.h>
@@ -455,6 +457,7 @@ OverlayRaster* GrayRaster::pseudocolor(
 	    newr = grayfract < 0.5 ? 0.0 : (grayfract-.5)*2;
 	    newg = grayfract < 0.5 ? grayfract*2 : 1.0 - (grayfract-.5)*2;
 	    newb = grayfract < 0.5 ? 1.0 - (grayfract-.5)*2 : 0.0;
+	    
 	    newr = Math::max((float)0.0, newr);
 	    newg = Math::max((float)0.0, newg);
 	    newb = Math::max((float)0.0, newb);
