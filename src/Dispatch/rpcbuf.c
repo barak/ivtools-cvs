@@ -55,6 +55,10 @@ extern "C" {
 }
 #endif
 
+#if !defined(SOCKLEN_T_DEFINED) || !SOCKLEN_T_DEFINED
+typedef int socklen_t;
+#endif
+
 // I need a pointer to an iostreamb so I can insert and extract values
 // in the length field of RPC requests.  If I don't have a stream, I
 // won't allow you to call start_request().
