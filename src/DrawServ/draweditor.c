@@ -85,9 +85,11 @@ void DrawEditor::InitCommands() {
 void DrawEditor::AddCommands(ComTerp* comterp) {
   FrameEditor::AddCommands(comterp);
 
+#ifdef HAVE_ACE
   comterp->add_command("drawlink", new DrawLinkFunc(comterp, this));
   comterp->add_command("sid", new SessionIdFunc(comterp, this));
   comterp->add_command("grid", new GraphicIdFunc(comterp, this));
   comterp->add_command("chgid", new ChangeIdFunc(comterp, this));
+#endif
 }
 

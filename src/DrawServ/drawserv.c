@@ -61,6 +61,7 @@
 #include <strstream>
 #include <unistd.h>
 
+#ifdef HAVE_ACE
 implementTable(GraphicIdTable,int,void*)
 implementTable(SessionIdTable,int,void*)
 implementTable(CompIdTable,void*,void*)
@@ -69,6 +70,7 @@ unsigned int DrawServ::GraphicIdMask = 0x000fffff;
 unsigned int DrawServ::SessionIdMask = 0xfff00000;
 
 static int seed=0;
+#endif /* HAVE_ACE */
 
 /*****************************************************************************/
 
@@ -84,6 +86,7 @@ DrawServ::DrawServ (Catalog* c, World* w)
 }
 
 void DrawServ::Init() {
+#ifdef HAVE_ACE
   _linklist = new DrawLinkList;
 
   _gridtable = new GraphicIdTable(1024);
@@ -91,7 +94,9 @@ void DrawServ::Init() {
   _compidtable = new CompIdTable(1024);
 
   _sessionid = unique_sessionid();
+#if 0
   _sessionid = 0xfff00000;  // for testing purposes
+#endif
   char hostbuf[HOST_NAME_MAX];
   gethostname(hostbuf, HOST_NAME_MAX);
   char* username = getlogin();
@@ -101,10 +106,12 @@ void DrawServ::Init() {
   _sessionidtable->insert(_sessionid, sid);
 
   _comdraw_port = atoi(unidraw->GetCatalog()->GetAttribute("comdraw"));
+#endif /* HAVE_ACE */
 }
 
 DrawServ::~DrawServ () 
 {
+#ifdef HAVE_ACE
   Iterator it;
   _linklist->First(it);
   while(_linklist->GetDrawLink(it) && !_linklist->Done(it)) {
@@ -116,7 +123,10 @@ DrawServ::~DrawServ ()
   delete _gridtable;
   delete _sessionidtable;
   delete _compidtable;
+#endif /* HAVE_ACE */
 }
+
+#ifdef HAVE_ACE
 
 DrawLink* DrawServ::linkup(const char* hostname, int portnum, 
 		     int state, int local_id, int remote_id,
@@ -706,3 +716,5 @@ boolean DrawServ::PrintAttributeList(ostream& out, AttributeList* attrlist) {
   }
   return true;
 }
+
+#endif /* HAVE_ACE */

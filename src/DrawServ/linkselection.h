@@ -28,6 +28,7 @@
 #ifndef link_selection_h
 #define link_selection_h
 
+#ifdef HAVE_ACE
 #include <OverlayUnidraw/ovselection.h>
 
 class DrawLinkList;
@@ -62,5 +63,5 @@ protected:
   static char* _selected_strings[];
 
 };
-
+#endif /* HAVE_ACE */
 #endif

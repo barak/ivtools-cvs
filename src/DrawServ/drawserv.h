@@ -47,6 +47,10 @@ class DrawLinkList;
 class GraphicId;
 class GraphicIdList;
 
+#if !defined (HOST_NAME_MAX)
+#  define HOST_NAME_MAX 256
+#endif /* !HOST_NAME_MAX */
+
 class DrawServ : public OverlayUnidraw {
 public:
   DrawServ(
@@ -58,6 +62,7 @@ public:
   
   void Init();
   
+#ifdef HAVE_ACE
   DrawLink* linkup(const char* hostname, int portnum, 
 		   int state, int local_id=-1, int remote_id=-1,
 		   ComTerp* comterp=nil);
@@ -189,6 +194,7 @@ protected:
     int _comdraw_port;
     // port used for comdraw command interpreter
 
+#endif /* HAVE_ACE */
 };
 
 #endif

@@ -45,6 +45,7 @@ class ACE_INET_Addr;
 class ACE_SOCK_Stream;
 class ACE_SOCK_Stream;
 #endif
+#include <stdio.h>
 
 //: object to encapsulate 2-way link with remote drawserv
 class DrawLink : public Observable {
@@ -118,8 +119,10 @@ public:
     int state() { return _state; }
     // get state of DrawLink
 
+#ifdef HAVE_ACE
     ACE_SOCK_Stream* socket() { return _socket; }
     // return pointer to connected socket.
+#endif
 
     unsigned int sid_lookup(unsigned int sid);
     // map incoming sid to local sid.

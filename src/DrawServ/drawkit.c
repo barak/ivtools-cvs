@@ -453,10 +453,15 @@ void DrawKit::launch_graphdraw() {
 }
 
 OverlaySelection* DrawKit::MakeSelection(Selection* sel) {
+#ifdef HAVE_ACE
   return new LinkSelection((DrawEditor*)GetEditor(), sel);
+#else
+  return FrameKit::MakeSelection(sel);
+#endif
 }
 
 MenuItem * DrawKit::MakeViewersMenu() {
+#ifdef HAVE_ACE
     LayoutKit& lk = *LayoutKit::instance();
     WidgetKit& kit = *WidgetKit::instance();
 
@@ -468,6 +473,9 @@ MenuItem * DrawKit::MakeViewersMenu() {
     mbi->menu()->append_item(menu_item);
 
     return mbi;
+#else
+    return nil;
+#endif
 }
 
 
