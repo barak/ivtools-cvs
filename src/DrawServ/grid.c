@@ -38,11 +38,13 @@
 
 /*****************************************************************************/
 
-GraphicId::GraphicId () 
+GraphicId::GraphicId (unsigned int sessionid) 
 {
   _id = DrawServ::candidate_grid();
+  _sid = sessionid&DrawServ::SessionIdMask;
   GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
-  table->insert(_id, this);
+  table->insert(_id&_sid, this);
+  _comp = nil;
 }
 
 GraphicId::~GraphicId () 
@@ -53,7 +55,7 @@ GraphicId::~GraphicId ()
 
 /*****************************************************************************/
 
-GraphicIds::GraphicIds(GraphicId* subids, int nsubs) : GraphicId ()
+GraphicIds::GraphicIds(unsigned int sessionid, GraphicId* subids, int nsubs) : GraphicId (sessionid)
 {
   if (nsubs>0) {
     _sublist = new GraphicIdList();
@@ -63,7 +65,7 @@ GraphicIds::GraphicIds(GraphicId* subids, int nsubs) : GraphicId ()
   Resource::ref(_sublist);
 }
 
-GraphicIds::GraphicIds(GraphicIdList* sublist) : GraphicId ()
+GraphicIds::GraphicIds(unsigned int sessionid, GraphicIdList* sublist) : GraphicId (sessionid)
 {
   if (!sublist) sublist = new GraphicIdList;
   _sublist = sublist;

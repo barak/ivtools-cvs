@@ -109,14 +109,14 @@ public:
   void sessionid_handle_chg(int new_id, int old_id);
   // handle request to change unique session id
   
-  int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
+  unsigned int sessionid(int trial=false) { return trial ? _trialid : _sessionid; }
   // current unique session id.
   
-  static int candidate_grid();
+  static unsigned int candidate_grid();
   // generate candidate graphic id.
   static int unique_grid(unsigned int id);
   // test candidate graphic id for local uniqueness
-  static int candidate_sessionid();
+  static unsigned int candidate_sessionid();
   // generate candidate session id.
   static int unique_sessionid(unsigned int id);
   // test candidate session id for local uniqueness

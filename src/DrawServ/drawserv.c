@@ -46,6 +46,7 @@
 #include <ComTerp/comterpserv.h>
 
 #include <Attribute/attrlist.h>
+#include <Attribute/attrvalue.h>
 
 #include <fstream.h>
 #include <strstream>
@@ -177,6 +178,8 @@ void DrawServ::linkdump(FILE* fptr) {
 }
 
 void DrawServ::ExecuteCmd(Command* cmd) {
+  static int id_sym = symbol_add("id");
+
   if(!_linklist || _linklist->Number()==0) 
 
     /* normal Unidraw command execution */
@@ -197,6 +200,13 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	Iterator it;
 	for (cb->First(it); !cb->Done(it); cb->Next(it)) {
 	  OverlayComp* comp = (OverlayComp*)cb->GetComp(it);
+
+	  /* generate unique id and add as attribute */
+	  GraphicId* grid = new GraphicId(sessionid());
+	  grid->grcomp(comp);
+	  AttributeList* al = comp->GetAttributeList();
+	  al->add_attr(id_sym, new AttributeValue(grid->id(), AttributeValue::UIntType));
+
 	  if (comp) {
 	    Creator* creator = unidraw->GetCatalog()->GetCreator();
 	    OverlayScript* scripter = (OverlayScript*)
@@ -340,7 +350,7 @@ int DrawServ::online() {
   return _sessionid==_trialid && _sessionid!=-1;
 }
 
-int DrawServ::candidate_grid() {
+unsigned int DrawServ::candidate_grid() {
   static int seed=0;
   if (!seed) {
     seed = time(nil) & (time(nil) << 16);
@@ -365,7 +375,7 @@ int DrawServ::unique_grid(unsigned int id) {
     return 1;
 }
 
-int DrawServ::candidate_sessionid() {
+unsigned int DrawServ::candidate_sessionid() {
   static int seed=0;
   if (!seed) {
     seed = time(nil) & (time(nil) << 16);

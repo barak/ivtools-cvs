@@ -30,36 +30,52 @@
 #include <Unidraw/globals.h>
 
 class DrawLink;
+class GraphicComp;
 class GraphicIdList;
 
 //: object to encapsulate unique graphic id
 class GraphicId {
 public:
-  GraphicId();
+  GraphicId(unsigned int sessionid);
   virtual ~GraphicId();
   
-  unsigned int id() { return _id; }
-  // get associated unique integer id
+  unsigned int id() { return _id&_sid; }
+  // get associated unique composite integer id
 
-  virtual int composite() { return 0; }
+  unsigned int grid() { return _id; }
+  // return graphic id portion of composite id
+  // unique only to this process
+
+  unsigned int sessionid() { return _sid; }
+  // return session id portion of composite id
+
+  virtual int is_list() { return 0; }
   // return true if can be cast to GraphicIds
 
   virtual GraphicIdList* sublist() { return nil; }
   // returns pointer to sublist of GraphicId's, if any
 
+  void grcomp(GraphicComp* comp) { _comp = comp; }
+  // set pointer to associated GraphicComp
+
+  GraphicComp* grcomp() { return _comp; }
+  // set pointer to associated GraphicComp
+
 protected:
   unsigned int _id;
+  unsigned int _sid;
+  GraphicComp* _comp;
 
 };
 
 //: object to encapsulate a set of graphic ids
 class GraphicIds : public GraphicId {
 public:
-  GraphicIds(GraphicId* subids, int nsubids); 
-  GraphicIds(GraphicIdList* sublist=nil);
+  GraphicIds(unsigned int sessionid, GraphicId* subids, int nsubids); 
+  GraphicIds(unsigned int sessionid, GraphicIdList* sublist=nil);
   virtual ~GraphicIds();
 
-  virtual int composite() { return 1; }
+  virtual int is_list() { return 1; }
   // return true if can be cast to GraphicIds
   virtual GraphicIdList* sublist() { return _sublist; }
   // returns pointer to sublist of GraphicId's, if any
