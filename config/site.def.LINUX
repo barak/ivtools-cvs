@@ -56,5 +56,3 @@ uninstall::								@@\
 
 /* file output by configure script */
 #include "config-linux-gcc.defs"
-
-

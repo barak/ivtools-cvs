@@ -93,6 +93,7 @@
 #include <Dispatch/iohandler.h>
 #include <Dispatch/dispatcher.h>
 #include <fstream.h>
+#include <string.h>
 #include <strstream.h>
 #include <fcntl.h>
 #include <errno.h>

@@ -150,9 +150,6 @@ necessary.
 
 Also you may want to review the rest of the entries in the
 site.def.<CPU> file to see if they are good defaults for your system.
-Some of these, like UseRpath and InstallRelative, are overridden in
-the config/config-<os>-gcc.defs file, so their value in
-config/site.def.<CPU> has no affect.
 
 ** See http://www.vectaport.com/ivtools/faq.html for more info.
 

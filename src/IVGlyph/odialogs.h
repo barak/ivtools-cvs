@@ -1,6 +1,7 @@
 /*
  * Copyright 2000 IET Inc.
- * Copyright 1998-1999 Vectaport Inc.
+ * Copyright 1996 Vectaport Inc.
+ * Copyright 1995 Cartoactive Systems, Cider Press
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -22,39 +23,28 @@
  * 
  */
 
-#ifndef geoloc_h
-#define geoloc_h
+#ifndef odialogs_h
+#define odialogs_h
 
-#include <Unidraw/Tools/tool.h>
+#include <IV-3_1/InterViews/dialog.h>
 
-class Dialog;
+#include <InterViews/_enter.h>
+
 class ObservableText;
+class ObsTextDialogImpl;
+class WidgetKit;
 
-//: tool to display coordinates relative to a graphic.
-// For a raster or stencil the origin is 0,0.  
-// For all other graphics the origin is relative to the coordinates used to
-// construct the graphic, i.e. the lower-left corner of the original screen
-// canvas if created from mouse events.
-class GrLocTool : public Tool {
+class ObsTextDialog : public Dialog {
 public:
-    GrLocTool(ControlInfo* = nil);
-    virtual ~GrLocTool();
+    ObsTextDialog(ObservableText* otext, const char* title);
+    virtual ~ObsTextDialog();
 
-    virtual Manipulator* CreateManipulator(Viewer*, Event&, Transformer* =nil);
-    // use event to select a component and determine graphic-relative coordinates
-    // to display in a pop-up window.
+    virtual void keystroke(const Event&);
 
-    virtual Tool* Copy();
-    virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
-
-    Dialog* dialog();
-
-protected:
-    Dialog* _dialog;
-    ObservableText* _otext;
-    char* _buffer;
-    int _bufsiz;
+private:
+    ObsTextDialogImpl* impl_;
 };
+
+#include <InterViews/_leave.h>
 
 #endif
