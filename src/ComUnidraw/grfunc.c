@@ -43,6 +43,7 @@
 #include <Unidraw/catalog.h>
 #include <Unidraw/clipboard.h>
 #include <Unidraw/editor.h>
+#include <Unidraw/selection.h>
 #include <Unidraw/statevars.h>
 #include <Unidraw/unidraw.h>
 
@@ -653,13 +654,16 @@ SelectFunc::SelectFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) 
 }
 
 void SelectFunc::execute() {
-    Selection* s = _ed->GetSelection();
-    delete s;
+    static int all_symid = symbol_add("all");
+    ComValue all_flagv(stack_key(all_symid));
+    boolean all_flag = all_flagv.is_true();
+
+    Selection* sel = _ed->GetViewer()->GetSelection();
     OverlaySelection* newSel = new OverlaySelection();
     
     Viewer* viewer = _ed->GetViewer();
     AttributeValueList* avl = new AttributeValueList();
-    if (nargs()==0) {
+    if (all_flag) {
 
       GraphicView* gv = ((OverlayEditor*)_ed)->GetFrame();
       Iterator i;
@@ -670,6 +674,17 @@ void SelectFunc::execute() {
 	GraphicComp* comp = subgv->GetGraphicComp();
 	ComValue* compval = new ComValue(_compview_id, new ComponentView(comp));
 	avl->Append(compval);
+      }
+
+    } if (nargs()==0) {
+      Iterator i;
+      int count=0;
+      for (sel->First(i); !sel->Done(i); sel->Next(i)) {
+	GraphicView* grview = sel->GetView(i);
+	Component* comp = grview ? grview->GetSubject() : nil;
+	ComValue* compval = comp ? new ComValue(_compview_id, new ComponentView(comp)) : nil;
+	if (compval) 
+	  avl->Append(compval);
       }
 
     } else {
@@ -688,6 +703,7 @@ void SelectFunc::execute() {
       }
     }
 
+    delete sel;
     _ed->SetSelection(newSel);
     newSel->Update();
     unidraw->Update();

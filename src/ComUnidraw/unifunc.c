@@ -53,7 +53,7 @@ int UnidrawFunc::_compview_id = -1;
 UnidrawFunc::UnidrawFunc(ComTerp* comterp, Editor* ed) : ComFunc(comterp) {
     _ed = ed;
     if (_compview_id<0)
-        _compview_id = symbol_add("CompView");
+        _compview_id = symbol_add("ComponentView");
 }
 
 void UnidrawFunc::execute_log(Command* cmd) {
