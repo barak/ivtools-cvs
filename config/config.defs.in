@@ -55,6 +55,6 @@
 
 #define IvToolsSrcRoot @PWD@
 
-#define BsdTest @BSD_TEST@
+#define BinBash @BIN_BASH@
 
 

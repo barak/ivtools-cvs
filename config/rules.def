@@ -1054,7 +1054,7 @@ uninstall::								@@\
  * Install header files on Linux.
  */
 
-#if BsdTest
+#if BinBash
 #define SYMTEST -h
 #else
 #define SYMTEST -L

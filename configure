@@ -1725,21 +1725,21 @@ fi
 
 
 if test "$cross_compiling" = yes; then
-  BSD_TEST=2
+  BIN_BASH=1
 else
   cat > conftest.$ac_ext <<EOF
 #line 1761 "configure"
 #include "confdefs.h"
-int main() { return system("test -h src/include/IV-3_1/InterViews"); }
+int access(); int main() { return access("/bin/bash", 1); }
 EOF
 if { (eval echo configure:1765: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
-  BSD_TEST=0
+  BIN_BASH=1
 else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -fr conftest*
-  BSD_TEST=1
+  BIN_BASH=0
 fi
 rm -fr conftest*
 fi
@@ -1957,7 +1957,7 @@ s%@PWD@%$PWD%g
 s%@INSTALLRELATIVE@%$INSTALLRELATIVE%g
 s%@USERPATH@%$USERPATH%g
 s%@INSTALLSUBDIR@%$INSTALLSUBDIR%g
-s%@BSD_TEST@%$BSD_TEST%g
+s%@BIN_BASH@%$BIN_BASH%g
 
 CEOF
 EOF
