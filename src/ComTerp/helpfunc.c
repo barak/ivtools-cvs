@@ -198,7 +198,7 @@ void HelpFunc::execute() {
 		}
 #endif
 	      } else 
-		out_form(*out, "unknown operator: %s\n", symbol_pntr(command_ids[i]));
+		out_form((*out), "unknown operator: %s\n", symbol_pntr(command_ids[i]));
 
 	    }
 	  }
