@@ -253,6 +253,9 @@ public:
     // returns true if CommandType (for use of ComTerp).
     boolean is_object() { return is_type(ObjectType); }
     // returns true if ObjectType.
+    boolean is_object(int class_symid) { return is_type(ObjectType) &&
+					   this->class_symid() == class_symid; }
+    // returns true if ObjectType and matching class_symid.
 
     static boolean is_char(ValueType t) 
       { return t==CharType || t==UCharType; }

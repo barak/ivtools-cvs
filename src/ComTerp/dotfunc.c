@@ -51,7 +51,6 @@ void DotFunc::execute() {
       return;
     }
 
-
     /* lookup value of before variable */
     void* vptr = nil; 
     AttributeList* al = nil;

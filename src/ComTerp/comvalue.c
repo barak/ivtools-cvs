@@ -22,6 +22,7 @@
  * 
  */
 
+#include <ComTerp/comfunc.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
 #include <Attribute/attrlist.h>
@@ -85,6 +86,7 @@ ComValue::ComValue(double v) : AttributeValue(v) {zero_vals();}
 ComValue::ComValue(int classid, void* ptr) : AttributeValue(classid, ptr) {zero_vals();}
 ComValue::ComValue(AttributeValueList* avl) : AttributeValue(avl) {zero_vals();}
 ComValue::ComValue(const char* string) : AttributeValue(string) {zero_vals();}
+ComValue::ComValue(ComFunc* func) : AttributeValue(ComFunc::class_symid(), func) {zero_vals(); type(ComValue::CommandType); command_symid(func->funcid()); }
 
 ComValue::~ComValue() {
 }
@@ -340,7 +342,7 @@ ComValue& ComValue::zeroval() {
 }
 
 void* ComValue::geta(int id) {
-    if (type() == ComValue::ObjectType && obj_type_val() == id) 
+    if (is_object(id)) 
         return obj_val();
     else
         return nil;

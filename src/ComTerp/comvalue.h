@@ -32,6 +32,7 @@
 #include <ComTerp/_comterp.h>
 #include <Attribute/attrvalue.h>
 
+class ComFunc;
 class ComTerp;
 
 //: AttributeValue with extensions for use with ComTerp.
@@ -81,6 +82,8 @@ public:
     // ArrayType constructor.
     ComValue(const char* val);
     // StringType constructor.
+    ComValue(ComFunc* func);
+    // CommandType constructor.
 
     void init();
     // initialize member variables.

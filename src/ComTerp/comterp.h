@@ -194,8 +194,17 @@ public:
     virtual boolean is_serv() { return false; } 
     // flag to test if ComTerp or ComTerpServ
 
-    void func_for_next_sym(ComFunc* func);
+    void func_for_next_expr(ComFunc* func);
     // set ComFunc to use on subsequent expression
+    ComFunc* func_for_next_expr();
+    // get ComFunc to use on subsequent expression
+
+    void val_for_next_func(ComValue& val);
+    // set ComValue to pass to subequent command
+    ComValue& val_for_next_func();
+    // get ComValue to pass to subequent command
+    void clr_val_for_next_func();
+    // clear out ComValue to pass to subequent command
 
 protected:
     void incr_stack();
@@ -247,6 +256,9 @@ protected:
 
     ComFunc* _func_for_next_expr;
     // ComFunc to run on next expression
+
+    ComValue* _val_for_next_func;
+    // ComValue to pass to next command
 
 
     friend class ComFunc;

@@ -137,8 +137,9 @@ public:
 
     AttributeValue* find(const char*);
     // find AttributeValue by symbol.
-    AttributeValue* find(int);
+    AttributeValue* find(int symid);
     // find AttributeValue by symbol id.
+
 
 protected:
     int add_attr(Attribute* attr);

@@ -114,6 +114,8 @@ void ComTerp::init() {
     _just_reset = false;
     _defaults_added = false;
     _handler = nil;
+    _val_for_next_func = nil;
+    _func_for_next_expr = nil;
 }
 
 
@@ -187,30 +189,39 @@ int ComTerp::eval_expr(ComValue* pfvals, int npfvals) {
 }
 
 void ComTerp::eval_expr_internals(int pedepth) {
-  ComValue& sv = pop_stack(false);
+  ComValue sv = pop_stack(false);
   
   if (sv.type() == ComValue::CommandType) {
-    
-    ComFunc* func = (ComFunc*)sv.obj_val();
-    func->push_funcstate(sv.narg(), sv.nkey(), pedepth, sv.command_symid());
+
+    ComFunc* func = nil;
+    if (_func_for_next_expr) {
+      func = _func_for_next_expr;
+      _func_for_next_expr = nil;
+      push_stack(sv);
+      func->push_funcstate(1, 0, pedepth, func->funcid());
+    } else {   
+      func = (ComFunc*)sv.obj_val();
+      func->push_funcstate(sv.narg(), sv.nkey(), 
+			   pedepth, sv.command_symid());
+    }
     func->execute();
     func->pop_funcstate();
-    if (_just_reset) {
+    if (_just_reset && !_func_for_next_expr) {
       push_stack(ComValue::blankval());
       _just_reset = false;
     }
     
   } else if (sv.type() == ComValue::SymbolType) {
 
-    if (_func_for_next_sym) {
-      ComFunc* func = _func_for_next_sym;
-      _func_for_next_sym = nil;
+    if (_func_for_next_expr) {
+      ComFunc* func = _func_for_next_expr;
+      _func_for_next_expr = nil;
 
       push_stack(sv);
       func->push_funcstate(1, 0, pedepth, func->funcid());
       func->execute();
       func->pop_funcstate();
-      if (_just_reset) {
+      if (_just_reset && val_for_next_func().is_null()) {
 	push_stack(ComValue::blankval());
 	_just_reset = false;
       }
@@ -603,7 +614,7 @@ ComValue& ComTerp::lookup_symval(ComValue& comval) {
 	    } else 
 	        return ComValue::nullval();
 	}
-    } else if (comval.type() == ComValue::ObjectType && comval.class_symid() == Attribute::class_symid()) {
+    } else if (comval.is_object(Attribute::class_symid())) {
 
       comval.assignval(*((Attribute*)comval.obj_val())->Value());
 
@@ -690,7 +701,7 @@ int ComTerp::run(boolean once) {
 	if (quitflag()) {
 	  status = -1;
 	  break;
-	} else {
+	} else if (!func_for_next_expr() && val_for_next_func().is_null()) {
 	  print_stack_top(out);
 	  out << "\n"; out.flush();
 	}
@@ -760,8 +771,6 @@ void ComTerp::add_defaults() {
     add_command("iterate", new IterateFunc(this));
 
     add_command("dot", new DotFunc(this));
-    add_command("dname", new DotNameFunc(this));
-    add_command("dval", new DotValFunc(this));
 
     add_command("at", new ListAtFunc(this));
     add_command("size", new ListSizeFunc(this));
@@ -1035,9 +1044,32 @@ void ComTerp::push_funcstate(ComFuncState& funcstate) {
   *sfs = ComFuncState(funcstate);
 }
 
-void ComTerp::func_for_next_sym(ComFunc* func) {
-  if (!_func_for_next_sym)
-    _func_for_next_sym = func;
+void ComTerp::func_for_next_expr(ComFunc* func) {
+  if (!_func_for_next_expr)
+    _func_for_next_expr = func;
+}
+
+ComFunc* ComTerp::func_for_next_expr() {
+  return _func_for_next_expr;
+}
+
+void ComTerp::val_for_next_func(ComValue& val) {
+  if (_val_for_next_func) {
+    delete _val_for_next_func;
+  }
+  _val_for_next_func = new ComValue(val);
+}
+
+ComValue& ComTerp::val_for_next_func() {
+  if (_val_for_next_func) {
+    return *_val_for_next_func;
+  } else
+    return ComValue::nullval();
+}
+
+void ComTerp::clr_val_for_next_func() {
+  delete _val_for_next_func;
+  _val_for_next_func = nil;
 }
 
 

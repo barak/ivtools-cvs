@@ -10,10 +10,11 @@ extern "C" {
 // unique id for a given type of component.
 #define CLASS_SYMID(name) \
 public: \
+  virtual int classid() { return _symid; }\
   static const char* class_name() {return name;}\
   static int class_symid()\
     { if (_symid<0) _symid=symbol_add((char*)class_name()); return _symid;} \
 protected: \
   static int _symid;
-
 #endif /* !defined(__comutil.h) */
+
