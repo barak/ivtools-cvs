@@ -308,17 +308,17 @@ void ComTerp::load_sub_expr() {
       token_to_comvalue(_pfbuf+i, sv);
     }
     int offset = 0;
-    for (int i=_pfnum-1; i>=0; i--) {
-      ComValue* sv = _pfcomvals + i;
+    for (int j=_pfnum-1; j>=0; j--) {
+      ComValue* sv = _pfcomvals + j;
       if (sv->is_type(ComValue::CommandType)) {
 	ComFunc* func = (ComFunc*)sv->obj_val();
 	if (func && func->post_eval()) {
 	  int newoffset = offset;
 	  skip_func(_pfcomvals+_pfnum-1, newoffset, -_pfnum);
-	  int start = i-1;
+	  int start = j-1;
 	  int stop = _pfnum+newoffset;
-	  for (int j=start; j>=stop; j--) 
-	    _pfcomvals[j].pedepth()++;
+	  for (int k=start; k>=stop; k--) 
+	    _pfcomvals[k].pedepth()++;
 	}
       }
       offset--;
@@ -1087,13 +1087,14 @@ int* ComTerp::get_commands(int& ncomm, boolean sort) {
   if (sort) {
     int* sortedbuffer = new int[ncomm];
     int i = 0;  /* operators first */
-    for (int j=0; j< ncomm; j++) sortedbuffer[j] = -1;
-    for (int j=0; j< ncomm; j++)
+    int j;
+    for (j=0; j< ncomm; j++) sortedbuffer[j] = -1;
+    for (j=0; j< ncomm; j++)
       if (!isalpha(*symbol_pntr(buffer[j])))
 	  sortedbuffer[i++] = buffer[j];
     if (i != opercnt) cerr << "bad number of operators\n";
       
-    for (int j=0; j<ncomm; j++) {
+    for (j=0; j<ncomm; j++) {
       if (!isalpha(*symbol_pntr(buffer[j]))) continue;
 
       /* count the number of strings greater than this one */
@@ -1108,7 +1109,7 @@ int* ComTerp::get_commands(int& ncomm, boolean sort) {
 
     /* one more pass over the sorted buffer to remove duplicates */
     int copydist = 0;
-    for (int j=0; j<ncomm; j++) {
+    for (j=0; j<ncomm; j++) {
       if (sortedbuffer[j]<0) 
 	copydist++;
       else 

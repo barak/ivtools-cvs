@@ -597,7 +597,7 @@ int Dispatcher::fillInReady(
     return rmaskret.numSet() + wmaskret.numSet() + emaskret.numSet();
 }
 
-void Dispatcher::sigCLD(...) {
+void Dispatcher::sigCLD() {
     pid_t pid;
     int status;
 

@@ -91,7 +91,7 @@ protected:
     TimerQueue* _queue;
     ChildQueue* _cqueue;
 
-    static void sigCLD(...);
+    static void sigCLD();
 
 private:
     static Dispatcher* _instance;

@@ -810,7 +810,10 @@ ivtools-0.8/src/Unidraw-common/component.c
 ivtools-0.8/src/Unidraw-common/compview.c
 ivtools-0.8/src/Unidraw-common/geomobjs.c
 ivtools-0.8/src/Unidraw-common/iterator.c
+ivtools-0.8/src/Unidraw-common/uarray.c
+ivtools-0.8/src/Unidraw-common/uhash.c
 ivtools-0.8/src/Unidraw-common/ulist.c
+ivtools-0.8/src/Unidraw-common/umap.c
 ivtools-0.8/src/Unidraw/Imakefile
 ivtools-0.8/src/Unidraw/Makefile
 ivtools-0.8/src/Unidraw/align.c
