@@ -284,6 +284,10 @@ void OverlayKit::InitLayout(OverlayKit* kit, const char* name) {
       WidgetKit& wk = *WidgetKit::instance();
       PolyGlyph* topbox = lk.vbox();
 
+      Glyph* menus = kit->MakeMenus();
+      Glyph* states = kit->MakeStates();
+      Glyph* toolbar = kit->MakeToolbar();
+
       if (stripped_flag) {
 
 	Target* viewer = 
@@ -293,9 +297,6 @@ void OverlayKit::InitLayout(OverlayKit* kit, const char* name) {
 
       } else {
 
-	Glyph* menus = kit->MakeMenus();
-	Glyph* states = kit->MakeStates();
-	Glyph* toolbar = kit->MakeToolbar();
 	if (states)
 	    menus->append(states);
 	Target* viewer = 

@@ -192,7 +192,7 @@ ImportFunc::ImportFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) 
 OvImportCmd* ImportFunc::import(const char* path, boolean popen) {
   OvImportCmd* cmd = new OvImportCmd(editor());
   cmd->pathname(path, popen);
-  execute_log(cmd);
+  cmd->Execute();
   if (cmd->component()) {
     ((OverlayComp*)cmd->component())->SetPathName(path);
     ((OverlayComp*)cmd->component())->SetByPathnameFlag(!popen);
@@ -212,6 +212,7 @@ void ImportFunc::execute() {
 	if ((cmd = import(pathnamev.string_ptr(), popen_flag)) && cmd->component()) {
 	  ComValue compval(((OverlayComp*)cmd->component())->classid(),
 			   new ComponentView(cmd->component()));
+	  delete cmd;
 	  compval.object_compview(true);
 	  push_stack(compval);
 	} else
@@ -221,6 +222,7 @@ void ImportFunc::execute() {
 	  if (cmd = import(stack_arg(i).string_ptr(), popen_flag)) {
 	    ComValue compval(((OverlayComp*)cmd->component())->classid(),
 			     new ComponentView(cmd->component()));
+	    delete cmd;
 	    compval.object_compview(true);
 	    push_stack(compval);
 
@@ -236,6 +238,7 @@ void ImportFunc::execute() {
 	cmd = import(inlist->GetAttrVal(it)->string_ptr(), popen_flag);
 	ComValue* val = new ComValue(((OverlayComp*)cmd->component())->classid(),
 				     new ComponentView(cmd->component()));
+	delete cmd;
 	val->object_compview(true);
 	outlist->Append(val);
 	inlist->Next(it);
