@@ -267,7 +267,7 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	      avl->Next(i);
 	      if (!avl->Done(i)) out << ",";
 	    }
-	    if (!first) out << "}\n";
+	    if (!first) out << "}";
 	  } else {
 	    out << "array of length " << svp->array_len();
 	    ALIterator i;
@@ -298,7 +298,7 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	  if (svp->class_symid() == Attribute::class_symid())
 	    out << *((Attribute*)svp->obj_val())->Value();
 	  else
-	    out << "<" << symbol_pntr(svp->class_symid()) << ">";
+            out << "<" << symbol_pntr(svp->class_symid()) << ">";
 	  break;
 
 	case ComValue::UnknownType:

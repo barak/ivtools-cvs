@@ -82,6 +82,8 @@ static void NullGS (Graphic* g) { FullGraphic null; *g = null; }
 
 /*****************************************************************************/
 
+int OverlayComp::_symid = -1;
+
 ParamList* OverlayComp::_overlay_comp_params = nil;
 
 OverlayComp::OverlayComp (Graphic* g, OverlayComp* parent) : GraphicComp(g)
@@ -353,7 +355,7 @@ AttributeValue* OverlayComp::FindValue
     cerr << "breadth search not yet unsupported\n";
     return nil;
   } else if (up) {
-    cerr << "upward search not yet unsupported\n";
+    if (GetParent()) return ((OverlayComp*)GetParent())->FindValue(symid, last, breadth, down, up);
     return nil;
   } else if (last) {
     cerr << "search for last value not yet unsupported\n";
@@ -1125,8 +1127,13 @@ AttributeValue* OverlaysComp::FindValue
     cerr << "breadth search not yet unsupported\n";
     return nil;
   } else if (up) {
-    cerr << "upward search not yet unsupported\n";
-    return nil;
+    if (AttributeList* al = attrlist()) {
+      AttributeValue* av = al->find(symid);
+      if (av) return av;
+    } 
+    return GetParent() 
+      ? ((OverlayComp*)GetParent())->FindValue(symid, last, breadth, down, up) 
+      : nil;
   } else if (last) {
     cerr << "search for last value not yet unsupported\n";
     return nil;

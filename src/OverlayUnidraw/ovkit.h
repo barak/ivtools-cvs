@@ -181,6 +181,10 @@ public:
     // set possible alternate X display string for constructing viewer.  
     // Not yet working.
 
+    boolean& set_button_flag() { return _set_button_flag; }
+    // flag to add setr button to text editor
+    boolean& clr_button_flag() { return _clr_button_flag; }
+    // flag to add clear button to text editor
 protected:
     Glyph* MenuLine(PSBrush*);
     // create line to put in a pulldown menu.
@@ -200,17 +204,12 @@ protected:
 
     const char* otherdisplay();
     // returns string that might specify an alternate X display.
-    boolean& set_button_flag() { return _set_button_flag; }
-    // flag to add setr button to text editor
-    boolean& clr_button_flag() { return _clr_button_flag; }
-    // flag to add clear button to text editor
 protected:
     OverlayEditor* _ed;
     Deck* _toolbars;
     Patch* _toolbar;
 
     char* _otherdisplay;
-
     boolean _set_button_flag;
     boolean _clr_button_flag;
 

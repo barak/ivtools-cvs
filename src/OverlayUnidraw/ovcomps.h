@@ -171,6 +171,8 @@ protected:
 
 friend OverlayScript;
 friend OverlaysScript;
+
+    CLASS_SYMID("OverlayComp"); 
 };
 
 //: composite component, clone of GraphicComps derived from OverlayComp

@@ -118,7 +118,8 @@ void CreateRectFunc::execute() {
 	Unref(rel);
 	RectOvComp* comp = new RectOvComp(rect);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("RectComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else 
 	push_stack(ComValue::nullval());
@@ -180,7 +181,8 @@ void CreateLineFunc::execute() {
 	Unref(rel);
 	ArrowLineOvComp* comp = new ArrowLineOvComp(line);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("ArrowLineComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else 
 	push_stack(ComValue::nullval());
@@ -241,7 +243,8 @@ void CreateEllipseFunc::execute() {
 	Unref(rel);
 	EllipseOvComp* comp = new EllipseOvComp(ellipse);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("EllipseComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else 
 	push_stack(ComValue::nullval());
@@ -303,7 +306,8 @@ void CreateTextFunc::execute() {
 	text->Translate(args[x0], args[y0]);
 	TextOvComp* comp = new TextOvComp(text);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("TextComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else
         push_stack(ComValue::nullval());
@@ -366,7 +370,8 @@ void CreateMultiLineFunc::execute() {
 	Unref(rel);
 	ArrowMultiLineOvComp* comp = new ArrowMultiLineOvComp(multiline);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("ArrowMultiLineComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else 
 	push_stack(ComValue::nullval());
@@ -429,7 +434,8 @@ void CreateOpenSplineFunc::execute() {
 	Unref(rel);
 	ArrowSplineOvComp* comp = new ArrowSplineOvComp(openspline);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("ArrowSplineComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else 
 	push_stack(ComValue::nullval());
@@ -490,7 +496,8 @@ void CreatePolygonFunc::execute() {
 	Unref(rel);
 	PolygonOvComp* comp = new PolygonOvComp(polygon);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("PolygonComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else 
 	push_stack(ComValue::nullval());
@@ -552,7 +559,8 @@ void CreateClosedSplineFunc::execute() {
 	Unref(rel);
 	ClosedSplineOvComp* comp = new ClosedSplineOvComp(closedspline);
 	cmd = new PasteCmd(_ed, new Clipboard(comp));
-	ComValue compval(_compview_id, new ComponentView(comp));
+	ComValue compval(symbol_add("ClosedSplineComp"), new ComponentView(comp));
+	compval.object_compview(true);
 	push_stack(compval);
     } else 
 	push_stack(ComValue::nullval());
@@ -672,7 +680,8 @@ void SelectFunc::execute() {
 	GraphicView* subgv = gv->GetView(i);
 	newSel->Append(subgv);
 	GraphicComp* comp = subgv->GetGraphicComp();
-	ComValue* compval = new ComValue(_compview_id, new ComponentView(comp));
+	ComValue* compval = new ComValue(symbol_add("Component"), new ComponentView(comp));
+	compval->object_compview(true);
 	avl->Append(compval);
       }
 
@@ -682,9 +691,12 @@ void SelectFunc::execute() {
       for (sel->First(i); !sel->Done(i); sel->Next(i)) {
 	GraphicView* grview = sel->GetView(i);
 	Component* comp = grview ? grview->GetSubject() : nil;
-	ComValue* compval = comp ? new ComValue(_compview_id, new ComponentView(comp)) : nil;
-	if (compval) 
+	ComValue* compval = comp ? new ComValue(symbol_add("Component"), new ComponentView(comp)) : nil;
+
+	if (compval) {
+	  compval->object_compview(true);
 	  avl->Append(compval);
+	}
 	delete newSel;
         newSel = nil;
       }
@@ -698,7 +710,8 @@ void SelectFunc::execute() {
 	  OverlayComp* comp = (OverlayComp*)comview->GetSubject();
 	  if (comp) {
 	    newSel->Append(comp->FindView(viewer));
-	    ComValue* compval = new ComValue(_compview_id, new ComponentView(comp));
+	    ComValue* compval = new ComValue(symbol_add("Component"), new ComponentView(comp));
+	    compval->object_compview(true);
 	    avl->Append(compval);
 	  }
 	}
