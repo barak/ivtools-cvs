@@ -207,7 +207,7 @@ void FrameEditor::AddCommands(ComTerp* comterp) {
   ComEditor::AddCommands(comterp);
   comterp->add_command("moveframe", new MoveFrameFunc(comterp, this));
   comterp->add_command("createframe", new CreateFrameFunc(comterp, this));
-  comterp->add_command("autonewframe", new AutoNewFrameFunc(comterp, this));
+  comterp->add_command("autoframe", new AutoNewFrameFunc(comterp, this));
 }
 
 void FrameEditor::DoAutoNewFrame() {

@@ -363,6 +363,6 @@ echo ABSTOP = `pwd` >>config/config.mk
 echo writing \"CPU = `make CPU`\"
 echo CPU = `make CPU` >>config/config.mk
 echo
-echo "now do a \"make World\""
+echo "now do a \"make\""
 echo
 
