@@ -127,6 +127,10 @@ clippoly, or IUE are not supplied, the configure script prints a
 reminder, then proceeds to set up to build ivtools without these
 libraries.
 
+If you want to run the executables without installing them, use
+--enable-use-rpath to embed the shared library pathnames into the
+executables at link time.
+
 Here is an example of using the configure script with ACE and clippoly
 libraries:
 

@@ -116,11 +116,12 @@ ivmkcm-0.7.2 available through http://www.vectaport.com/ivmkcm/
 ivtools is known to build with many versions of gcc (<= gcc-2.7.2, >=
 gcc-2.8.1, >= egcs-1.0.1) and on a variety of Unix'es: SunOS 4.1
 (MIT's X11R5), Solaris 2.6 (X11R6), Irix 5.2 (SGI's X11R5), Linux 1.2
-(Slackware 3.0, XFree86 3.1) and Linux 2.* (RedHat 4.0 thru 5.2,
-Debian 2.*).  There are contributed configs for HPUX and Dec
+(Slackware 3.0, XFree86 3.1), Linux 2.* (RedHat 4.0 thru 6.0, Debian
+2.*), and NetBSD.  There are contributed configs for HPUX and Dec
 Alpha. Recently it has been built on Windows NT 4.0 using Cygwin from
 Cygnus Solutions (see README.cygwin).  You can pick up Linux-ELF
-binaries from the ivtools web page (http://www.vectaport.com/ivtools/).
+binaries from the ivtools web page
+(http://www.vectaport.com/ivtools/).
 
 If you have a question about this software, desire to add code, found
 a bug, want to request a feature, or wonder how to get further
@@ -285,7 +286,7 @@ Algebra routnes" (algebra3.h) from Jean-Francois Doue.
 HPUX (HP-800) config contributed by Neal Becker.  ALPHA config
 contributed by Bruno Delfosse at Thomson CSF.  A lot of feedback on
 Solaris 2.6 building from M. Rasit Eskicioglu at the University of
-Alberta.
+Alberta. NetBSD port by Todd Gruhn.
 
 Cygwin development environment for Windows NT from Cygnus Solutions.
 
