@@ -168,16 +168,20 @@ void SessionIdFunc::execute() {
     returnid = ((DrawServ*)unidraw)->sessionid(true);
   }
 
-  /* handle new session id request */
   else if (idv.is_known() && ridv.is_known()) {
     returnid = idv.uint_val();
-    ((DrawServ*)unidraw)->sessionid_handle_new(returnid, ridv.int_val());
+
+    /* handle new session id request */
+    if (!okv.is_known()) 
+      ((DrawServ*)unidraw)->sessionid_handle_new(returnid, ridv.int_val());
+    
+    /* handle callback */ 
+    else
+    ((DrawServ*)unidraw)->sessionid_callback_new(returnid, ridv.int_val(), okv.is_true());
   }
 
-  /* handle callback */ 
-  else if (okv.is_known() && ridv.is_known()) {
+  else if (idv.is_known() && okv.is_known() && ridv.is_known()) {
     returnid = idv.uint_val();
-    ((DrawServ*)unidraw)->sessionid_callback_new(ridv.int_val(), returnid, okv.is_true());
   }
 
   /* return current session id */

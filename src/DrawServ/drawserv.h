@@ -55,6 +55,9 @@ public:
 
     void Init();
 
+    int online();
+    // return true if session id initialized, otherwise false.
+
     DrawLink* linkup(const char* hostname, int portnum, 
 		     int state, int local_id=-1, int remote_id=-1,
 		     ComTerp* comterp=nil);

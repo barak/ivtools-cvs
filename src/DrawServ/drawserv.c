@@ -73,7 +73,7 @@ void DrawServ::Init() {
   _sessionidtable = new SessionIdTable(256);
 
   _sessionid = -1;
-  _trialid = -1;
+  _trialid = GraphicId::candidate_sessionid();
 }
 
 DrawServ::~DrawServ () 
@@ -275,8 +275,6 @@ void DrawServ::SendCmdString(DrawLink* link, const char* cmdstring) {
 
 // generate request to reserve unique session id
 void DrawServ::sessionid_request_new() {
-  _trialid = GraphicId::candidate_sessionid();
-
   Iterator it;
   _linklist->First(it);
   char buf[BUFSIZ];
@@ -290,6 +288,8 @@ void DrawServ::sessionid_request_new() {
 }
 
 // handle request to reserve unique session id
+// can be answered locally, because others are required to
+// propogate their request completely before adopting new id.
 void DrawServ::sessionid_handle_new(int new_id, int remote_linkid) {
   DrawLink* link = linkget(-1, remote_linkid);
   if (link) {
@@ -313,6 +313,14 @@ void DrawServ::sessionid_handle_new(int new_id, int remote_linkid) {
 void DrawServ::sessionid_callback_new(int new_id, int remote_linkid, int ok_flag) {
   fprintf(stderr, "sessionid_callback_new: new_id %d,  remote_linkid %d, ok_flag %d\n",
 	  new_id, remote_linkid, ok_flag);
+  if (new_id != _trialid) {
+    ok_flag = false;
+    fprintf(stderr, "new_id (%d) does not match _trialid (%d)\n", new_id, _trialid);
+  }
+  if (ok_flag) {
+    _sessionid = _trialid;
+  } else {
+  }
 }
 
 // generate request to change/set unique session id
@@ -323,3 +331,6 @@ void DrawServ::sessionid_request_chg() {
 void DrawServ::sessionid_handle_chg(int new_id, int old_id) {
 }
 
+int DrawServ::online() {
+  return _sessionid==_trialid && _sessionid!=-1;
+}
