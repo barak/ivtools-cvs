@@ -30,6 +30,7 @@
 
 class Command;
 class ComTerp;
+class OverlayComp;
 class OvImportCmd;
 class OvSaveCompCmd;
 class OverlayCatalog;
@@ -132,6 +133,25 @@ public:
     virtual const char* docstring() { 
 	return "compview=%s(pathname :popen) -- import graphic file from pathname or URL, or from a command if :popen"; }
 
+};
+
+//: command to export a graphic file
+// export(compview[,compview[,...compview]] [path] :host host_str :port port_int :socket :string|:str) -- remote in drawtool (or other) format "; 
+class ExportFunc : public UnidrawFunc {
+public:
+  ExportFunc(ComTerp* c, Editor* e, const char* appname=nil);
+  virtual ~ExportFunc() { delete _docstring; }
+  virtual void execute();
+  virtual const char* docstring();
+  const char* appname() { return _appname ? _appname : "drawtool"; }
+  void appname(const char* name) 
+    { _appname = name; delete _docstring; _docstring=nil;}
+
+ protected:
+  void compout(OverlayComp*, ostream*);
+
+  const char* _appname;
+  char* _docstring;
 };
 
 //: command to set attributes on a graphic

@@ -181,8 +181,9 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     if (OverlayKit::bincheck("plotmtv"))
       comterp->add_command("barplot", new BarPlotFunc(comterp, this));
 
-    comterp->add_command("import", new ImportFunc(comterp, this));
     comterp->add_command("save", new SaveFileFunc(comterp, this));
+    comterp->add_command("import", new ImportFunc(comterp, this));
+    comterp->add_command("export", new ExportFunc(comterp, this));
 
     comterp->add_command("dot", new GrDotFunc(comterp));
     comterp->add_command("attrlist", new GrAttrListFunc(comterp));

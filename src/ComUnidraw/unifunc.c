@@ -26,10 +26,12 @@
 #include <ComUnidraw/unifunc.h>
 #include <OverlayUnidraw/ovcatalog.h>
 #include <OverlayUnidraw/ovcmds.h>
+#include <OverlayUnidraw/ovclasses.h>
 #include <OverlayUnidraw/ovcomps.h>
 #include <OverlayUnidraw/ovimport.h>
 #include <OverlayUnidraw/ovselection.h>
 #include <OverlayUnidraw/ovviews.h>
+#include <OverlayUnidraw/scriptview.h>
 #include <ComGlyph/comtextedit.h>
 #include <ComGlyph/comtextview.h>
 #include <Unidraw/clipboard.h>
@@ -308,6 +310,152 @@ void ImportFunc::execute() {
 	inlist->Next(it);
       }
     }
+}
+
+/*****************************************************************************/
+
+ExportFunc::ExportFunc(ComTerp* comterp, Editor* editor, 
+		       const char* appname) :     
+  UnidrawFunc(comterp, editor)
+{
+  _appname = appname;
+  _docstring = nil;
+}
+
+const char* ExportFunc::docstring() { 
+  const char* df = 
+#ifdef HAVE_ACE
+    "%s(compview[,compview[,...compview]] [path] :host host_str :port port_int :socket :string|:str) -- export in %s format ";
+#else
+  "%s(compview[,compview[,...compview]] [path] :string|:str) -- export in %s format ";
+#endif
+  if (!_docstring) {
+    _docstring = new char[strlen(df)+strlen(appname())+1];
+    sprintf(_docstring, df, "%s", appname() );
+  }
+  return _docstring;
+}
+
+void ExportFunc::execute() {
+    static int _host_symid = symbol_add("host");
+    static int _port_symid = symbol_add("port");
+    static int _sock_symid = symbol_add("socket");
+    static int _string_symid = symbol_add("string");
+    static int _str_symid = symbol_add("str");
+    ComValue compviewv(stack_arg(0));
+    ComValue file(stack_arg(1));
+    ComValue host(stack_key(_host_symid));
+    ComValue port(stack_key(_port_symid));
+    ComValue sock(stack_key(_sock_symid));
+    ComValue string(stack_key(_string_symid));
+    ComValue str(stack_key(_str_symid));
+    reset_stack();
+    if (nargs()==0 || compviewv.null() 
+	|| compviewv.type() == ComValue::BlankType) {
+        push_stack(ComValue::nullval());
+        return;
+    }
+
+#ifdef HAVE_ACE
+    ACE_SOCK_Stream* socket = nil;
+#endif
+
+    filebuf fbuf;
+    if (file.is_type(ComValue::StringType))
+        fbuf.open(file.string_ptr(), "w");
+
+    else if (sock.is_true()) {
+#ifdef HAVE_ACE
+	ComTerpServ* terp = (ComTerpServ*)comterp();
+	ComterpHandler* handler = (ComterpHandler*)terp->handler();
+	if (handler) {
+	  ACE_SOCK_Stream peer = handler->peer();
+	  fbuf.attach(peer.get_handle());
+	}
+	else
+#endif
+	  fbuf.attach(fileno(stdout));
+    }
+
+    else {
+#ifdef HAVE_ACE
+        const char* hoststr = nil;
+        const char* portstr = nil;
+        hoststr = host.type()==ComValue::StringType ? host.string_ptr() : nil;
+        portstr = port.type()==ComValue::StringType ? port.string_ptr() : nil;
+        u_short portnum = portstr ? atoi(portstr) : port.ushort_val();
+    
+        if (portnum) {
+            socket = new ACE_SOCK_Stream;
+            ACE_SOCK_Connector conn;
+            ACE_INET_Addr addr (portnum, hoststr);
+    
+            if (conn.connect (*socket, addr) == -1)
+                ACE_ERROR ((LM_ERROR, "%p\n", "open"));
+            fbuf.attach(socket->get_handle());
+        } else if (comterp()->handler() && comterp()->handler()->get_handle()>-1) {
+            fbuf.attach(comterp()->handler()->get_handle());
+        } else
+#endif
+            fbuf.attach(fileno(stdout));
+    }
+
+    ostream* out;
+    if (string.is_true()||str.is_true())
+      out = new strstream();
+    else
+      out = new ostream(&fbuf);
+
+    if (!compviewv.is_array()) {
+
+      ComponentView* view = (ComponentView*)compviewv.obj_val();
+      OverlayComp* comp = view ? (OverlayComp*)view->GetSubject() : nil;
+      if (!comp) return;
+      *out << appname() << "(\n";
+      compout(comp, out);
+      *out << ")\n";
+      
+    } else {
+
+      *out << appname() << "(\n";
+      AttributeValueList* avl = compviewv.array_val();
+      Iterator i;
+      for(avl->First(i);!avl->Done(i); ) {
+	ComponentView* view = (ComponentView*)avl->GetAttrVal(i)->obj_val();
+	OverlayComp* comp = view ? (OverlayComp*)view->GetSubject() : nil;
+	if (!comp) break;
+	compout(comp, out);
+	avl->Next(i);
+	if (!avl->Done(i)) *out << ",\n";
+      }
+      *out << ")\n";
+    }
+    
+    if (string.is_true()||str.is_true()) {
+      *out << '\0'; out->flush();
+      ComValue retval(((strstream*)out)->str());
+      push_stack(retval);
+    }
+    delete out;
+    
+#ifdef HAVE_ACE
+    if (sock.is_false() && socket) {
+      if (socket->close () == -1)
+	ACE_ERROR ((LM_ERROR, "%p\n", "close"));
+      delete(socket);
+    }
+#endif
+}
+
+void ExportFunc::compout(OverlayComp* comp, ostream* out) {
+  OverlayScript* ovsv = (OverlayScript*) comp->Create(SCRIPT_VIEW);
+  comp->Attach(ovsv);
+  ovsv->Update();
+  ovsv->Definition(*out);
+  delete ovsv;
+  AttributeList* attrlist = comp->GetAttributeList();
+  *out << *attrlist;
+  out->flush();
 }
 
 /*****************************************************************************/
