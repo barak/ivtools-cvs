@@ -1029,6 +1029,7 @@ void ComTerp::add_defaults() {
 
     add_command("xform", new XformFunc(this));
     add_command("invert", new InvertXformFunc(this));
+    add_command("xpose", new XposeFunc(this));
 
     add_command("cond", new CondFunc(this));
     add_command("seq", new SeqFunc(this));

@@ -76,7 +76,8 @@ void ListFunc::execute() {
 	return;
       }
 
-    }
+    } else
+      avl->Append(new AttributeValue(listv));
   }
   Resource::ref(avl);
   ComValue retval(avl);
