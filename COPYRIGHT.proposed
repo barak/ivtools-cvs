@@ -1,3 +1,15 @@
+	     **Notice** 6/12/2000(modified 8/22/2000) **
+
+This proposed revised license is no longer under active
+consideration. It seems what I proposed below would make the nature of
+the licensing fixed, and I'm not that sure about it to cast it in
+stone.  I am really looking for a free software acceptable LGPL-like
+extension to the BSD/X11 license that approximates the WxWindows
+license (which grants more freedom with binaries than the basic LGPL).
+Send any thoughts to ivtools-info@vectaport.com.
+
+-----------------------------------------------------------------------
+
 I'm considering a possible modification to the ivtools COPYRIGHT
 notice, to take affect with ivtools-0.8.  The idea is to get some of
 the protection of an LGPL style license without adapting a license
@@ -61,13 +73,7 @@ Please send comments and suggestions to ivtools-info@vectaport.com
 
 
 /*
- * Copyright (c) 1999  Vectaport Inc.
- * Copyright (c) 1998  Vectaport Inc., R.B. Kissh and Associates, Eric F. Kahler
- * Copyright (c) 1997  Vectaport Inc., R.B. Kissh and Associates
- * Copyright (c) 1996  Vectaport Inc., R.B. Kissh and Associates, Cider Press
- * Copyright (c) 1994, 1995  Vectaport Inc., Cartoactive Systems, Cider Press
- * Copyright (c) 1991 Silicon Graphics, Inc.
- * Copyright (c) 1987, 1988, 1989, 1990, 1991 Stanford University
+ * ... copyright holders names and dates would go here ...
  *
  * Permission to use, copy, distribute, and sell this software and its
  * related documentation and data files for any purpose is hereby granted

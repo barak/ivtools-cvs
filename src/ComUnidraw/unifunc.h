@@ -154,13 +154,13 @@ public:
 };
 
 //: command to add button to custom toolbar
-// compview=addtool(pathname :popen) -- add button to toolbar based on zero-centered idraw drawing.
+// compview=addtool(pathname) -- add button to toolbar based on zero-centered idraw drawing.
 class AddToolButtonFunc : public UnidrawFunc {
 public:
     AddToolButtonFunc(ComTerp*,Editor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "compview=%s(pathname :popen) -- add button to toolbar based on zero-centered idraw drawing."; }
+	return "compview=%s(pathname) -- add button to toolbar based on zero-centered idraw drawing."; }
 
 };
 

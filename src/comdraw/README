@@ -85,7 +85,7 @@ update() -- update viewer
 compview=import(pathstr :popen) -- import graphic file from pathname or URL, or from a command if :popen
 compview=paste(compview [xscale yscale xoff yoff | a00,a01,a10,a11,a20,a21]) -- paste graphic into the viewer
 val=pastemode([val] :get) -- toggle or set paste mode, default is 0, always paste new graphics
-compview=addtool(pathname :popen) -- add button to toolbar based on zero-centered idraw drawing.
+compview=addtool(pathname) -- add button to toolbar based on zero-centered idraw drawing.
 
 ncols() -- onscreen horizontal extent in pixels
 nrows() -- onscreen vertical extent in pixels
@@ -118,9 +118,6 @@ barplot([var_str value_float] [...] :title title_str :xtitle xtitle_str
 	:ytitle ytitle_str :valtitle valtitle_str :newview) -- display a barplot
 
 OTHER COMMANDS
-
-acknowledgebox(msgstr) -- popup an acknowledge dialog box
-confirmbox(msgstr) -- popup a confirmation dialog box, and return 1, 0, or -1 if cancelled
 
 run(filename) -- run commands from file
 quit() -- quit this interpreter
