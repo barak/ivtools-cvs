@@ -621,16 +621,7 @@ boolean ArrowMultiLinePS::IsA (ClassId id) {
 
 boolean ArrowMultiLinePS::Definition (ostream& out) {
 
-    Command* cmd = GetCommand();
-    boolean idraw_format = OverlayPS::idraw_format;
-    if (cmd) {
-      if (cmd->IsA(OVPRINT_CMD)) 
-	idraw_format = ((OvPrintCmd*)cmd)->idraw_format();
-      else if (cmd->IsA(OV_EXPORT_CMD))
-	idraw_format = true;
-    }
-      
-    if (idraw_format) {
+    if (idraw_format()) {
 	ArrowMultiLineOvComp* comp = (ArrowMultiLineOvComp*) GetSubject();
 	ArrowMultiLine* aml = comp->GetArrowMultiLine();
 	

@@ -63,9 +63,11 @@ public:
     virtual void Creator(ostream&);
     // output idraw as creator
 
-    static boolean idraw_format;
+    boolean idraw_format();
+    void idraw_format(boolean);
 protected:
     OverlayPS(OverlayComp* = nil);
+    static boolean _idraw_format;
 
     Command* _command;
 };
