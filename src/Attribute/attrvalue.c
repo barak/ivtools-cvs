@@ -210,6 +210,8 @@ boolean AttributeValue::boolean_val() {
 	return boolean_ref();
     case AttributeValue::SymbolType:
 	return (boolean) int_val();
+    case AttributeValue::ObjectType:
+	return (boolean) obj_val();
     default:
 	return 0;
     }

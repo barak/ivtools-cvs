@@ -317,6 +317,7 @@ MenuItem* FrameKit::MakeFrameMenu() {
 #else
     menu_item = kit.check_menu_item(kit.label("Auto New Frame"));
     menu_item->state()->set(TelltaleState::is_chosen, ((FrameEditor*)GetEditor())->AutoNewFrame());
+    ((FrameEditor*)GetEditor())->_autonewframe_tts = menu_item->state();
     AutoNewFrameCmd::default_instance(new AutoNewFrameCmd(GetEditor()));
     menu_item->action
       (new ActionCallback(AutoNewFrameCmd)

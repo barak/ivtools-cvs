@@ -808,6 +808,7 @@ void ComTerp::add_defaults() {
 
     add_command("help", new HelpFunc(this));
     add_command("symid", new SymIdFunc(this));
+    add_command("symval", new SymValFunc(this));
     add_command("symbol", new SymbolFunc(this), "symval");
     add_command("symvar", new SymVarFunc(this));
     add_command("postfix", new PostFixFunc(this));
