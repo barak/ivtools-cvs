@@ -35,14 +35,14 @@ class ComTerp;
 class ComValue;
 
 //: create list command for ComTerp.
-// lst=list() -- create an empty list.
+// lst=list([olst]) -- create an empty list or copy existing one.
 class ListFunc : public ComFunc {
 public:
     ListFunc(ComTerp*);
 
     virtual void execute();
     virtual const char* docstring() { 
-      return "lst=%s() -- create an empty list"; }
+      return "lst=%s([olst]) -- create an empty list or copy existing one"; }
 };
 
 //: list member command for ComTerp.

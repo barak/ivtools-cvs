@@ -820,8 +820,8 @@ void ComTerp::add_defaults() {
     add_command("help", new HelpFunc(this));
     add_command("symid", new SymIdFunc(this));
     add_command("symval", new SymValFunc(this));
-    add_command("symbol", new SymbolFunc(this), "symval");
-    add_command("symvar", new SymVarFunc(this));
+    add_command("symbol", new SymbolFunc(this));
+    add_command("symadd", new SymAddFunc(this));
     add_command("postfix", new PostFixFunc(this));
     add_command("posteval", new PostEvalFunc(this));
 
@@ -864,11 +864,12 @@ int ComTerp::runfile(const char* filename) {
     FILE* fptr = fopen(filename, "r");
     _inptr = fptr;
     _outfunc = nil;
+    if (!fptr) cerr << "unable to run from file " << filename << "\n";
     
 
     ComValue* retval = nil;
     int status = 0;
-    while( !feof(fptr)) {
+    while( fptr && !feof(fptr)) {
 	if (read_expr()) {
 	    if (eval_expr(true)) {
 	        err_print( stderr, "comterp" );

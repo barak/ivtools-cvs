@@ -49,14 +49,15 @@ void GrDotFunc::execute() {
       return;
     }
     if (!after_part.is_symbol()) {
-      cerr << "expression after \".\" needs to be a symbol or evaluate to a syymbol\n";
+      cerr << "expression after \".\" needs to be a symbol or evaluate to a symbol\n";
+      reset_stack();
       return;
     }
 
     /* handle ComponentView case */
     if (before_part.is_symbol()) 
       lookup_symval(before_part);
-    if (before_part.object_compview()) {
+    if (before_part.is_object() && before_part.object_compview()) {
       ComponentView* compview = (ComponentView*)before_part.obj_val();
       OverlayComp* comp = (OverlayComp*)compview->GetSubject();
       ComValue stuffval(AttributeList::class_symid(), (void*)comp->GetAttributeList());

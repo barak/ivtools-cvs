@@ -105,3 +105,15 @@ void AutoNewFrameFunc::execute() {
   }
 }
 
+/*****************************************************************************/
+
+NumFramesFunc::NumFramesFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void NumFramesFunc::execute() {
+  reset_stack();
+  FrameEditor* ed = (FrameEditor*)GetEditor();
+  ComValue retval(ed->NumFrames());
+  push_stack(retval);
+}
+

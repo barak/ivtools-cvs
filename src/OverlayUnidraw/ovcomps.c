@@ -923,8 +923,11 @@ void OverlaysComp::InsertAfter (Iterator i, GraphicComp* comp) {
     if (g != nil) {
         Iterator j;
         parent = GetGraphic();
-        parent->SetGraphic(GetComp(i)->GetGraphic(), j);
-        parent->InsertAfter(j, g);
+	GraphicComp* comp = GetComp(i);
+	if (comp) {
+	  parent->SetGraphic(comp->GetGraphic(), j);
+	  parent->InsertAfter(j, g);
+	}
     }
     SetParent(comp, this);
 }

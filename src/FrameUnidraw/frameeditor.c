@@ -173,7 +173,7 @@ void FrameEditor::UpdateFrame(boolean txtupdate) {
 OverlaysView* FrameEditor::GetFrame(int index) {
   if (index<0) 
     return _currframe;
-  else if (index<_frameliststate->framenumber()) {
+  else if (_frameliststate && index<_frameliststate->framenumber()) {
     FrameIdrawView* views = (FrameIdrawView*)GetViewer()->GetGraphicView();
     Iterator i;
     int count = 0;
@@ -189,6 +189,7 @@ void FrameEditor::AddCommands(ComTerp* comterp) {
   comterp->add_command("moveframe", new MoveFrameFunc(comterp, this));
   comterp->add_command("createframe", new CreateFrameFunc(comterp, this));
   comterp->add_command("autoframe", new AutoNewFrameFunc(comterp, this));
+  comterp->add_command("numframes", new NumFramesFunc(comterp, this));
 }
 
 void FrameEditor::DoAutoNewFrame() {
@@ -202,4 +203,18 @@ void FrameEditor::DoAutoNewFrame() {
 void FrameEditor::ToggleAutoNewFrame() { 
   _autonewframe = !_autonewframe; 
   if (_autonewframe_tts) _autonewframe_tts->set(TelltaleState::is_chosen, _autonewframe);
+}
+
+int FrameEditor::NumFrames() {
+  if (_frameliststate) 
+    return _frameliststate->framenumber();
+  else {
+    FrameIdrawView* views = (FrameIdrawView*)GetViewer()->GetGraphicView();
+    Iterator i;
+    int count = 0;
+    for (views->First(i); !views->Done(i); views->Next(i)) {
+      if (views->IsA(FRAME_VIEW)) count++;
+    }
+    return count-1;
+  }
 }

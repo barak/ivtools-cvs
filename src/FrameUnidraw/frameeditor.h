@@ -83,6 +83,9 @@ public:
     // virtual method which does the work of creating a new frame
     // if flag is set.
 
+    int NumFrames();
+    // number of frames not counting background frame
+
 protected:
     FrameView* _currframe;
     FrameView* _prevframe;

@@ -56,4 +56,14 @@ public:
       return "%s(:on :off) -- command to toggle autonewframe"; }
 };
 
+//: interpreter command to return number of frames in viewer
+// numframes() -- return number of frames in viewer
+class NumFramesFunc : public UnidrawFunc {
+public:
+    NumFramesFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "%s() -- return number of frames in viewer"; }
+};
+
 #endif /* !defined(_framefunc_h) */
