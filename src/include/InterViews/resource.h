@@ -32,7 +32,7 @@
 #include <InterViews/enter-scope.h>
 
 //: shared reference-counted objects.
-// <a href=../man3.1/Resource.html>Resource</a>
+// <a href=../man3.1/Resource.html>man page</a>
 class Resource {
 public:
     Resource();
