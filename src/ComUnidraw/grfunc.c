@@ -113,6 +113,7 @@ void CreateRectFunc::execute() {
 	if (patVar != nil) rect->SetPattern(patVar->GetPattern());
 
 	if (colVar != nil) {
+	    rect->FillBg(!colVar->GetBgColor()->None());
 	    rect->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	rect->SetTransformer(rel);
@@ -177,6 +178,7 @@ void CreateLineFunc::execute() {
 	if (brVar != nil) line->SetBrush(brVar->GetBrush());
 
 	if (colVar != nil) {
+	    line->FillBg(!colVar->GetBgColor()->None());
 	    line->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	line->SetTransformer(rel);
@@ -240,6 +242,7 @@ void CreateEllipseFunc::execute() {
 	if (patVar != nil) ellipse->SetPattern(patVar->GetPattern());
 
 	if (colVar != nil) {
+	    ellipse->FillBg(!colVar->GetBgColor()->None());
 	    ellipse->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	ellipse->SetTransformer(rel);
@@ -302,6 +305,7 @@ void CreateTextFunc::execute() {
 	TextGraphic* text = new TextGraphic(txt, stdgraphic);
 
 	if (colVar != nil) {
+	    text->FillBg(!colVar->GetBgColor()->None());
 	    text->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	if (fntVar != nil) text->SetFont(fntVar->GetFont());
@@ -370,6 +374,7 @@ void CreateMultiLineFunc::execute() {
 	if (patVar != nil) multiline->SetPattern(patVar->GetPattern());
 
 	if (colVar != nil) {
+	    multiline->FillBg(!colVar->GetBgColor()->None());
 	    multiline->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	multiline->SetTransformer(rel);
@@ -435,6 +440,7 @@ void CreateOpenSplineFunc::execute() {
 	if (patVar != nil) openspline->SetPattern(patVar->GetPattern());
 
 	if (colVar != nil) {
+	    openspline->FillBg(!colVar->GetBgColor()->None());
 	    openspline->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	openspline->SetTransformer(rel);
@@ -498,6 +504,7 @@ void CreatePolygonFunc::execute() {
 	if (patVar != nil) polygon->SetPattern(patVar->GetPattern());
 
 	if (colVar != nil) {
+	    polygon->FillBg(!colVar->GetBgColor()->None());
 	    polygon->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	polygon->SetTransformer(rel);
@@ -562,6 +569,7 @@ void CreateClosedSplineFunc::execute() {
 	if (patVar != nil) closedspline->SetPattern(patVar->GetPattern());
 
 	if (colVar != nil) {
+	    closedspline->FillBg(!colVar->GetBgColor()->None());
 	    closedspline->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
             }
 	closedspline->SetTransformer(rel);

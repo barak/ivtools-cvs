@@ -478,7 +478,7 @@ ClassId Graphic::CompId () { return GRAPHIC_COMP; }
 void Graphic::update (Graphic* gs) {
     Transformer* t = _p->GetTransformer();
 
-    _p->FillBg(gs->BgFilled());
+    _p->FillBg(gs->BgFilled() && !gs->GetBgColor()->None());
     _p->SetColors(gs->GetFgColor(), gs->GetBgColor());
     _p->SetPattern(gs->GetPattern());
     _p->SetBrush(gs->GetBrush());

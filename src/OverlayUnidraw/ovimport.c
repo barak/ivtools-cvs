@@ -1528,7 +1528,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	  if (pathname && !return_fd) {
 	    char buffer[BUFSIZ];
 	    if (compressed) 
-	      sprintf(buffer, "tf=`ivtmpnam`;gzip -c %s | pstoedit -f idraw - $tf.%s;cat $tf.*;rm $tf.*", pathname, "%d");
+	      sprintf(buffer, "tf=`ivtmpnam`;gunzip -c %s | pstoedit -f idraw - $tf.%s;cat $tf.*;rm $tf.*", pathname, "%d");
 	    else
 	      sprintf(buffer, "tf=`ivtmpnam`;pstoedit -f idraw %s $tf.%s;cat $tf.*;rm $tf.*", pathname, "%d");
 	    pptr = popen(buffer, "r");
@@ -1569,7 +1569,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	if (pathname && !return_fd) {
 	  char buffer[BUFSIZ];
 	  if (compressed)
-	    sprintf(buffer, "gzip -c %s | giftopnm", pathname);
+	    sprintf(buffer, "gunzip -c %s | giftopnm", pathname);
 	  else
 	    sprintf(buffer, "giftopnm %s", pathname);
 	  FILE* pptr = popen(buffer, "r");
@@ -1624,12 +1624,12 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	  char buffer[BUFSIZ];
 	  if (dithermap_flag) {
 	    if (compressed) 
-	      sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;gzip -c %s | djpeg -map $cm -dither fs -pnm;rm $cm", pathname);
+	      sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;gunzip -c %s | djpeg -map $cm -dither fs -pnm;rm $cm", pathname);
 	    else
 	      sprintf(buffer, "cm=`ivtmpnam`;stdcmapppm>$cm;djpeg -map $cm -dither fs -pnm %s;rm $cm", pathname);
 	  } else {
 	    if (compressed) 
-	      sprintf(buffer, "gzip -c %s | djpeg  -pnm", pathname);
+	      sprintf(buffer, "gunzip -c %s | djpeg  -pnm", pathname);
 	    else
 	      sprintf(buffer, "djpeg -pnm %s", pathname);
 	  }
@@ -1661,7 +1661,7 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
 	if (pathname && !return_fd) {
 	  char buffer[BUFSIZ];
 	  if (compressed)
-	    sprintf(buffer, "gzip -c %s | pngtopnm", pathname);
+	    sprintf(buffer, "gunzip -c %s | pngtopnm", pathname);
 	  else
 	    sprintf(buffer, "pngtopnm %s", pathname);
 	  FILE* pptr = popen(buffer, "r");
