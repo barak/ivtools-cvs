@@ -54,10 +54,12 @@ int DrawServHandler::open (void * ptr)
 
 void DrawServHandler::destroy (void) {
   if (_sigpipe_handler) {
+#if 0
     if (ComterpHandler::reactor_singleton()->remove_handler 
 	(SIGPIPE, (ACE_Sig_Action*)nil) == -1)
       ACE_DEBUG ((LM_ERROR, 
 		  "(%P|%t) can't remove signal handler from reactor\n"));
+#endif
     _sigpipe_handler = _sigpipe_handler_initialized = 0;
   }
   ComterpHandler::destroy();

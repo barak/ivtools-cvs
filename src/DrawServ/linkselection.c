@@ -90,7 +90,7 @@ void LinkSelection::Clear(Viewer* viewer) {
       if (grid->selected()==LocallySelected || grid->selected()==WaitingToBeSelected) 
 	grid->selected(NotSelected);
       char buf[BUFSIZ];
-      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :state %d)%c",
+      snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :state %d)%c",
 	       grid->id(), grid->selector(), grid->selected(), '\0');
       ((DrawServ*)unidraw)->DistributeCmdString(buf);
     }

@@ -52,6 +52,7 @@
 
 #include <ComTerp/comterpserv.h>
 
+#include <Attribute/attribute.h>
 #include <Attribute/attrlist.h>
 #include <Attribute/attrvalue.h>
 
@@ -65,6 +66,8 @@ implementTable(CompIdTable,void*,void*)
 
 unsigned int DrawServ::GraphicIdMask = 0x000fffff;
 unsigned int DrawServ::SessionIdMask = 0xfff00000;
+
+static int seed=0;
 
 /*****************************************************************************/
 
@@ -87,6 +90,7 @@ void DrawServ::Init() {
   _compidtable = new CompIdTable(1024);
 
   _sessionid = unique_sessionid();
+  _sessionid = 0xfff00000;  // for testing purposes
   char hostbuf[HOST_NAME_MAX];
   gethostname(hostbuf, HOST_NAME_MAX);
   char* username = getlogin();
@@ -223,7 +227,7 @@ void DrawServ::linkdump(FILE* fptr) {
 }
 
 void DrawServ::ExecuteCmd(Command* cmd) {
-  static int id_sym = symbol_add("id");
+  static int grid_sym = symbol_add("grid");
   static int sid_sym = symbol_add("sid");
   boolean original = false;
 
@@ -248,28 +252,28 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	for (cb->First(it); !cb->Done(it); cb->Next(it)) {
 	  OverlayComp* comp = (OverlayComp*)cb->GetComp(it);
 	  AttributeList* al = comp->GetAttributeList();
-	  AttributeValue* idv = al->find(id_sym);
+	  AttributeValue* idv = al->find(grid_sym);
 	  AttributeValue* sidv = al->find(sid_sym);
 	  
 	  /* unique id already remotely assigned */
 	  if (idv && idv->uint_val() !=0 && sidv && sidv->uint_val() !=0) {
-	    GraphicId* grid = new GraphicId();
-	    grid->grcomp(comp);
-	    grid->id(idv->uint_val());
-	    grid->selector(sidv->uint_val());
-	    grid->selected(LinkSelection::RemotelySelected);
+	    GraphicId* graphicid = new GraphicId();
+	    graphicid->grcomp(comp);
+	    graphicid->id(idv->uint_val());
+	    graphicid->selector(sidv->uint_val());
+	    graphicid->selected(LinkSelection::RemotelySelected);
 	  } 
 	  
 	  /* generate unique id and add as attribute */
 	  /* also mark with selector id */
 	  else {
-	    GraphicId* grid = new GraphicId(sessionid());
-	    grid->grcomp(comp);
-	    grid->selector(((DrawServ*)unidraw)->sessionid());
-	    AttributeValue* idv = new AttributeValue(grid->id(), AttributeValue::UIntType);
-	    idv->state(AttributeValue::HexState);
-	    al->add_attr(id_sym, idv);
-	    AttributeValue* sidv = new AttributeValue(grid->selector(), AttributeValue::UIntType);
+	    GraphicId* graphicid = new GraphicId(sessionid());
+	    graphicid->grcomp(comp);
+	    graphicid->selector(((DrawServ*)unidraw)->sessionid());
+	    AttributeValue* gridv = new AttributeValue(graphicid->id(), AttributeValue::UIntType);
+	    gridv->state(AttributeValue::HexState);
+	    al->add_attr(grid_sym, gridv);
+	    AttributeValue* sidv = new AttributeValue(graphicid->selector(), AttributeValue::UIntType);
 	    sidv->state(AttributeValue::HexState);
 	    al->add_attr(sid_sym, sidv);
 	    original = true;
@@ -398,7 +402,12 @@ void DrawServ::sessionid_register_handle
       alt_id = DrawServ::unique_sessionid();
     SessionId* session_id = new SessionId(alt_id, osid, pid, username, hostname, hostid, link);
     sidtable->insert(alt_id, session_id);
-    link->incomingsidtable()->insert(sid, alt_id);
+    link->sid_insert(sid, alt_id);
+    if (sid != alt_id) {
+      char buffer[BUFSIZ];
+      snprintf(buffer, BUFSIZ, "sid(0x%08x 0x%08x :remap)\n", sid, alt_id);
+      SendCmdString(link, buffer);
+    }
 
     /* propagate */
     sessionid_register_propagate(link, alt_id, osid, pid, username,
@@ -425,7 +434,6 @@ void DrawServ::sessionid_register_propagate
 }
 
 unsigned int DrawServ::unique_grid() {
-  static int seed=0;
   if (!seed) {
     seed = time(nil) & (time(nil) << 16);
     srand(seed);
@@ -450,14 +458,12 @@ int DrawServ::test_grid(unsigned int id) {
 }
 
 unsigned int DrawServ::unique_sessionid() {
-  static int seed=0;
   if (!seed) {
     seed = time(nil) & (time(nil) << 16);
     srand(seed);
   }
   int retval;
   do {
-    static int flip=0;
     while ((retval=rand()&SessionIdMask)==0);
 
   } while (!test_sessionid(retval));
@@ -478,7 +484,7 @@ void DrawServ::grid_message(GraphicId* grid) {
   char buf[BUFSIZ];
   if (grid->selected()==LinkSelection::LocallySelected ||
       (grid->selector()==sessionid() && grid->selected()==LinkSelection::NotSelected)) {
-    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :state %d )%c", grid->id(), grid->selector(), 
+    snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :state %d )%c", grid->id(), grid->selector(), 
 	     grid->selected()==LinkSelection::LocallySelected ? 
 	     LinkSelection::RemotelySelected : LinkSelection::NotSelected, '\0');
     DistributeCmdString(buf);
@@ -488,7 +494,7 @@ void DrawServ::grid_message(GraphicId* grid) {
     DrawLink* link = _linklist->find_drawlink(grid);
     
     if (link) {
-      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :request 0x%08x)%c", grid->id(), 
+      snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :request chgid(0x%08x))%c", grid->id(), 
 	       grid->selector(), sessionid(), '\0');
       SendCmdString(link, buf);
     }
@@ -510,7 +516,7 @@ void DrawServ::grid_message_handle(DrawLink* link, unsigned int id, unsigned int
 	grid->selected(LinkSelection::NotSelected);
 	grid->selector(newselector);
 	char buf[BUFSIZ];
-	snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :grant 0x%08x)%c",
+	snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :grant chgid(0x%08x))%c",
 		 grid->id(), newselector, sessionid(), '\0');
 	SendCmdString(link, buf);
       }
@@ -607,3 +613,35 @@ boolean DrawServ::cycletest(unsigned int sid, const char* host,
   return found;
 }
 
+boolean DrawServ::selftest(const char* host, unsigned int portnum) 
+{
+  if (portnum==comdraw_port()) {
+    if (strcmp(host, "localhost")==0 ||
+	strcmp(host, "127.0.0.1")==0)
+      return 1;
+    else {
+      char hostbuf[HOST_NAME_MAX];
+      gethostname(hostbuf, HOST_NAME_MAX);
+      if (strcmp(host, hostbuf)==0)
+	return 1;
+    }
+  }
+  return 0;
+}
+
+boolean DrawServ::PrintAttributeList(ostream& out, AttributeList* attrlist) {
+  static int grid_sym = symbol_add("grid");
+  static int sid_sym = symbol_add("sid");
+
+  ALIterator i;
+  for (attrlist->First(i); !attrlist->Done(i); attrlist->Next(i)) {
+    Attribute* attr = attrlist->GetAttr(i);
+    out << " :" << attr->Name() << " ";
+    AttributeValue* attrval = attr->Value();
+    boolean special = attr->SymbolId()==grid_sym || attr->SymbolId()==sid_sym;
+    if (special) out << "chgid(";
+    out << *attrval;
+    if (special) out << ")";
+  }
+  return true;
+}

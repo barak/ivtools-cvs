@@ -156,6 +156,14 @@ public:
   // return port used for comdraw command interpreter
 
   boolean cycletest(unsigned int sid, const char* host, const char* user, int pid);
+  // test for new incoming link that would establish a cycle
+
+  boolean selftest(const char* host, unsigned int portnum);
+  // test if a new outgoing link is really to yourself
+
+  virtual boolean PrintAttributeList(ostream& out, AttributeList* list);
+  // alternate method for serializing an AttributeList
+  // returns false if really not there.
 
 protected:
     DrawLinkList* _linklist;

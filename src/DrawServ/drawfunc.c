@@ -32,6 +32,7 @@
 #include <Attribute/attrlist.h>
 #include <Attribute/attrvalue.h>
 
+#include <fstream.h>
 #define TITLE "DrawLinkFunc"
 
 /*****************************************************************************/
@@ -61,6 +62,8 @@ void DrawLinkFunc::execute() {
   ComValue ridv(stack_key(rid_sym));
   static int close_sym = symbol_add("close");
   ComValue closev(stack_key(close_sym));
+  static int dump_sym = symbol_add("dump");
+  ComValue dumpv(stack_key(dump_sym));
   static int pid_sym = symbol_add("pid");
   ComValue pidv(stack_key(pid_sym));
   static int sid_sym = symbol_add("sid");
@@ -85,6 +88,10 @@ void DrawLinkFunc::execute() {
 	((DrawServ*)unidraw)->cycletest
 	(sidv.uint_val(), hostv.string_ptr(), userv.string_ptr(), pidv.int_val())) {
 #if 1
+      fileptr_filebuf obuf(comterp()->handler()->get_handle(), ios_base::out, false, static_cast<size_t>(BUFSIZ));
+      ostream out(&obuf);
+      out << "ackback(cycle)\n";
+      out.flush();
       comterp()->quit();
 #else
       comterp()->handler()->destroy();
@@ -111,11 +118,15 @@ void DrawLinkFunc::execute() {
     link = ((DrawServ*)unidraw)->linkget
       (lidv.is_known() ? lidv.int_val() : -1, 
        ridv.is_known() ? ridv.int_val() : -1);
-
+    
     /* close if that flag is set. */
     if (link && closev.is_true()) {
       ((DrawServ*)unidraw)->linkdown(link);
       link = nil;
+    }
+    
+    else if (link && dumpv.is_true()) {
+      link->dump(stderr);
     }
     
   }
@@ -162,6 +173,8 @@ void SessionIdFunc::execute() {
 #else
   static int all_sym = symbol_add("all");
   ComValue allv(stack_key(all_sym));
+  static int remap_sym = symbol_add("remap");
+  ComValue remapv(stack_key(remap_sym));
 
   static int pid_sym = symbol_add("pid");
   ComValue pidv(stack_key(pid_sym));
@@ -191,11 +204,13 @@ void SessionIdFunc::execute() {
   }
 
   if (sidv.is_known() && osidv.is_known()) {
-    ((DrawServ*)unidraw)->sessionid_register_handle
-      (link, sidv.uint_val(), osidv.uint_val(), pidv.int_val(), 
-       userv.string_ptr(), hostv.string_ptr(), 
-       hostidv.int_val());
-    
+    if (remapv.is_false()) 
+      ((DrawServ*)unidraw)->sessionid_register_handle
+	(link, sidv.uint_val(), osidv.uint_val(), pidv.int_val(), 
+	 userv.string_ptr(), hostv.string_ptr(), 
+	 hostidv.int_val());
+    else
+      link->sid_insert(osidv.uint_val(), sidv.uint_val());
   } else {
     ((DrawServ*)unidraw)->print_sidtable();
   }
@@ -241,3 +256,26 @@ void GraphicIdFunc::execute() {
     ((DrawServ*)unidraw)->print_gridtable();
   }
 }
+
+/*****************************************************************************/
+
+ChangeIdFunc::ChangeIdFunc(ComTerp* comterp, DrawEditor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void ChangeIdFunc::execute() {
+
+  ComValue idv(stack_arg(0));
+  reset_stack();
+
+  DrawServHandler* handler = comterp() ? (DrawServHandler*)comterp()->handler() : nil;
+  DrawLink* link = handler ? (DrawLink*)handler->drawlink() : nil;
+  
+  if (idv.is_known()) {
+    unsigned int id = idv.uint_val();
+    link->sid_change(id);
+    ComValue result(id, ComValue::UIntType);
+    push_stack(result);
+  }
+}
+
+

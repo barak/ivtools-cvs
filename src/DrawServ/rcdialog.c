@@ -223,12 +223,34 @@ void ConnectionsDialogImpl::build(DrawLinkList* list) {
 void ConnectionsDialogImpl::connect() {
   const String* hoststr = hostfe_->text();
   const String* portstr = portfe_->text();
-  if (hoststr->length() > 0) {
+
+  /* remove terminating spaces */
+  int hostlen = strlen(hoststr->string())+1;
+  int portlen = strlen(portstr->string())+1;
+  char hostbuf[hostlen];
+  char portbuf[portlen];
+  strcpy(hostbuf, hoststr->string());
+  strcpy(portbuf, portstr->string());
+  char *ptr;
+  ptr = hostbuf + hostlen - 2;
+  while (*ptr == ' ' && ptr >= (char*)hostbuf) *ptr-- = '\0';
+  ptr = portbuf + portlen - 2;
+  while (*ptr == ' ' && ptr >= (char*)portbuf) *ptr-- = '\0';
+
+  if (strlen(hostbuf) > 0) {
     int portnum=20002;
-    if (portstr->length() > 0) portnum = atoi(portstr->string());
-    if(((DrawServ*)unidraw)->linkup(hoststr->string(), portnum, 0)==nil) {
+    if (strlen(portbuf) > 0) portnum = atoi(portbuf);
+
+    if(((DrawServ*)unidraw)->selftest(hostbuf, portnum)) {
       char buffer[BUFSIZ];
-      snprintf(buffer, BUFSIZ, "%s:%d", hoststr->string(), portnum);
+      snprintf(buffer, BUFSIZ, "%s:%d", hostbuf, portnum);
+      GAcknowledgeDialog::map(dialog_->GetEditor()->GetWindow(), "Can't connect to self", buffer, "Can't connect to self");
+      return;
+    }
+
+    if(((DrawServ*)unidraw)->linkup(hostbuf, portnum, 0)==nil) {
+      char buffer[BUFSIZ];
+      snprintf(buffer, BUFSIZ, "%s:%d", hostbuf, portnum);
       GAcknowledgeDialog::map(dialog_->GetEditor()->GetWindow(), "Connection refused", buffer, "Connection refused");
     }
   }
@@ -237,10 +259,24 @@ void ConnectionsDialogImpl::connect() {
 void ConnectionsDialogImpl::disconnect() {
   const String* hoststr = hostfe_->text();
   const String* portstr = portfe_->text();
-  if (hoststr->length() > 0) {
+
+  /* remove terminating spaces */
+  int hostlen = strlen(hoststr->string())+1;
+  int portlen = strlen(portstr->string())+1;
+  char hostbuf[hostlen];
+  char portbuf[portlen];
+  strcpy(hostbuf, hoststr->string());
+  strcpy(portbuf, portstr->string());
+  char *ptr;
+  ptr = hostbuf + hostlen - 2;
+  while (*ptr == ' ' && ptr >= (char*)hostbuf) *ptr-- = '\0';
+  ptr = portbuf + portlen - 2;
+  while (*ptr == ' ' && ptr >= (char*)portbuf) *ptr-- = '\0';
+
+  if (strlen(hostbuf) > 0) {
     int portnum=20002;
-    if (portstr->length() > 0) portnum = atoi(portstr->string());
-    DrawLink* link = ((DrawServ*)unidraw)->linkget(hoststr->string(), portnum);
+    if (strlen(portbuf) > 0) portnum = atoi(portbuf);
+    DrawLink* link = ((DrawServ*)unidraw)->linkget(hostbuf, portnum);
     if (link) 
       ((DrawServ*)unidraw)->linkdown(link);
   }

@@ -24,8 +24,14 @@
 #ifdef HAVE_ACE
 
 #include <DrawServ/ackback-handler.h>
+#include <DrawServ/draweditor.h>
+#include <DrawServ/drawkit.h>
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawserv.h>
+
+#include <IVGlyph/gdialogs.h>
+#include <InterViews/window.h>
+
 #include <vector.h>
 #include <err.h>
 
@@ -37,6 +43,7 @@ AckBackHandler::AckBackHandler ()
 {
   _timer_started = false;
   _ackback_arrived = false;
+  _eof_expected = false;
 }
 
 AckBackHandler::~AckBackHandler() {
@@ -53,7 +60,19 @@ int AckBackHandler::handle_input (ACE_HANDLE fd)
     int status;
     while((status = read(fd, &ch, 1))==1) inv.push_back(ch);
     inv.push_back('\0');
+    if (strcmp((char*)&inv[0], "ackback(cycle)\n")==0) {
+      char buffer[BUFSIZ];
+      snprintf(buffer, BUFSIZ, "%s:%d", drawlink()->hostname(), drawlink()->portnum());
+      GAcknowledgeDialog::map(DrawKit::Instance()->GetEditor()->GetWindow(), "Redundant connection rejected", buffer, "Redundant connection rejected");
+      _eof_expected = true;
+    }
     if (status == 0) {
+      if (!_eof_expected) {
+	char buffer[BUFSIZ];
+	snprintf(buffer, BUFSIZ, "%s:%d", drawlink()->hostname(), drawlink()->portnum());
+	GAcknowledgeDialog::map(DrawKit::Instance()->GetEditor()->GetWindow(), "Unexpected end-of-file on connection", buffer, "Unexpected end-of-file on connection");
+      } else
+	_eof_expected = false;
       cerr << "AckBack (end of file):  [" << (char*)&inv[0] << "]\n";
       drawlink()->ackhandler(nil);
       ((DrawServ*)unidraw)->linkdown(drawlink());

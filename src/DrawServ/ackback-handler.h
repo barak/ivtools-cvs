@@ -74,6 +74,7 @@ protected:
   int _ackback_arrived;
   long _timerid;
   ACE_HANDLE _handle;
+  int _eof_expected;
 
 };
 

@@ -57,6 +57,7 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
   _comhandler = nil;
   _ackhandler = nil;
   _incomingsidtable = new IncomingSidTable(32);
+  _incomingsidtable_size = 0;
 }
 
 DrawLink::~DrawLink () 
@@ -106,7 +107,7 @@ int DrawLink::open() {
     out << " :state " << _state+1;
     out << " :rid " << _local_linkid;
     out << " :lid " << _remote_linkid;
-    out << " :sid " << sid;
+    out << " :sid 0x" << std::hex << sid << std::dec;
     if (sessionid) {
       out << " :pid " << sessionid->pid();
       out << " :user \"" << sessionid->username() << "\"";
@@ -160,4 +161,46 @@ void DrawLink::althostname(const char* althost) {
 int DrawLink::handle() {
   if (_socket) return _socket->get_handle();
   else return -1;
+}
+
+unsigned DrawLink::sid_lookup(unsigned int sid) {
+  unsigned int local_sid = 0;
+  if (_incomingsidtable_size==0) return sid;
+  incomingsidtable()->find(local_sid, sid);
+  return local_sid ? local_sid : sid;
+}
+
+void DrawLink::sid_change(unsigned int& id) {
+  if (_incomingsidtable_size==0) return;
+  id = sid_lookup(id & DrawServ::SessionIdMask) | (id & DrawServ::GraphicIdMask);
+  return;
+}
+
+void DrawLink::sid_insert(unsigned int sid, unsigned int alt_sid) {
+  if (sid!=alt_sid) {
+    _incomingsidtable_size++;
+    _incomingsidtable->insert(sid, alt_sid);
+  }
+}
+
+void DrawLink::dump(FILE* fptr) {
+  fprintf(fptr, "Host                            Alt.                            Port    LID  RID  State\n");
+  fprintf(fptr, "------------------------------  ------------------------------  ------  ---  ---  -----\n");
+  fprintf(fptr, "%-30.30s  %-30.30s  %-6d  %-3d  %-3d  %-3d\n", 
+	  hostname(), althostname(), portnum(),
+	  local_linkid(), remote_linkid(), state());
+  dump_incomingsidtable(fptr);
+}
+
+void DrawLink::dump_incomingsidtable(FILE* fptr) {
+  IncomingSidTable* table = incomingsidtable();
+  IncomingSidTable_Iterator it(*table);
+  printf("sid         osid\n");
+  printf("----------  ----------\n");
+  while(it.more()) {
+    unsigned int osid = (unsigned int)it.cur_value();
+    unsigned int sid = (unsigned int)it.cur_key();
+    fprintf(fptr, "0x%08x  0x%08x\n", sid, osid);
+    it.next();
+  }
 }

@@ -28,23 +28,23 @@
 #include <ComUnidraw/unifunc.h>
 
 //: command to connect to another drawserv
-// drawlink(hoststr :port portnum :state num :lid nu :rid num :close) -- connect to remote drawserv
+// drawlink([hoststr] :port portnum :state num :lid nu :rid num :close :dump) -- connect to remote drawserv
 class DrawLinkFunc : public UnidrawFunc {
 public:
     DrawLinkFunc(ComTerp*,DrawEditor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(hoststr :port portnum :state num :lid num :rid num :close) -- connect to remote drawserv"; }
+	return "%s([hoststr] :port portnum :state num :lid num :rid num :close :dump) -- connect to remote drawserv"; }
 };
 
 //: command to reserve unique session id
-// sessionid([sid osid] :all) -- command to manage session id's
+// sid([sid osid :pid pid :user namestr :host hoststr :hostid hostid :remap] |  :all) -- command to manage session id's
 class SessionIdFunc : public UnidrawFunc {
 public:
     SessionIdFunc(ComTerp*,DrawEditor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s([sid osid] :all) -- command to manage session id's"; }
+	return "%s([sid osid :pid pid :user namestr :host hoststr :hostid hostid :remap] | :all) -- command to manage session id's"; }
 };
 
 //: command to send message between remote selections
@@ -55,6 +55,16 @@ public:
     virtual void execute();
     virtual const char* docstring() { 
 	return "%s(id selector :state selected :request newselector :grant oldselector) -- command to send message between remote selections"; }
+};
+
+//: command to change session (or graphic id) to use local session id
+// chgid(id) -- command to change session (or graphic id) to use local session id
+class ChangeIdFunc : public UnidrawFunc {
+public:
+    ChangeIdFunc(ComTerp*,DrawEditor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "%s(id) -- command to change session (or graphic id) to use local session id"; }
 };
 
 #endif /* !defined(_drawfunc_h) */

@@ -118,6 +118,21 @@ public:
     ACE_SOCK_Stream* socket() { return _socket; }
     // return pointer to connected socket.
 
+    unsigned int sid_lookup(unsigned int sid);
+    // map incoming sid to local sid.
+
+    void sid_change(unsigned int& id);
+    // change sid portion of an id to use local sid.
+
+    void sid_insert(unsigned int sid, unsigned int alt_sid);
+    // insert new sid pair into table
+
+    void dump(FILE*);
+    // dump complete information on this DrawLink
+
+    void dump_incomingsidtable(FILE*);
+    // dump complete information on this DrawLink's IncomingSidTable
+
 protected:
     const char* _host;
     const char* _althost;
@@ -128,6 +143,7 @@ protected:
     int _remote_linkid;
     int _state;
     IncomingSidTable* _incomingsidtable;
+    int _incomingsidtable_size;
 
 #ifdef HAVE_ACE
     ACE_INET_Addr* _addr;
