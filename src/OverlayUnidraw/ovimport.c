@@ -1288,7 +1288,8 @@ GraphicComp* OvImportCmd::Import (const char* path) {
     GraphicComp* comp = nil;
     FILE* fptr = nil;
     boolean incremental_flag = false;
-    if (chooser_ && chooser_->auto_convert()) {
+    static boolean use_anytopnm = OverlayKit::bincheck("anytopnm");
+    if (chooser_ && chooser_->auto_convert() && use_anytopnm) {
       char buffer[BUFSIZ];
       sprintf( buffer, "anytopnm %s", path );
       fptr = popen(buffer, "r");
