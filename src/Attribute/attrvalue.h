@@ -97,33 +97,33 @@ public:
     AttributeValue();
     // default constructor (UnknownType constructor).
 
-    AttributeValue(char);
+    AttributeValue(char val);
     // CharType constructor.
-    AttributeValue(unsigned char);
+    AttributeValue(unsigned char val);
     // UCharType constructor.
-    AttributeValue(short);
+    AttributeValue(short val);
     // ShortType constructor.
-    AttributeValue(unsigned short);
+    AttributeValue(unsigned short val);
     // UShortType constructor.
-    AttributeValue(int, ValueType);
+    AttributeValue(int val, ValueType type);
     // IntType constructor or any other int-like value.
-    AttributeValue(unsigned int, ValueType);
+    AttributeValue(unsigned int val, ValueType type);
     // UIntType constructor or any other unsigned-int-like value including SymbolType.
-    AttributeValue(unsigned int, unsigned int, ValueType=KeywordType);
+    AttributeValue(unsigned int keysym, unsigned int narg, ValueType=KeywordType);
     // KeywordType constructor (or can be used for ObjectType).
-    AttributeValue(long);
+    AttributeValue(long val);
     // LongType constructor.
-    AttributeValue(unsigned long);
+    AttributeValue(unsigned long val);
     // ULongType constructor.
-    AttributeValue(float);
+    AttributeValue(float val);
     // FloatType constructor.
     AttributeValue(double);
     // DoubleType constructor.
-    AttributeValue(int class_symid, void*);
+    AttributeValue(int class_symid, void* objptr);
     // ObjectType constructor.
-    AttributeValue(AttributeValueList*);
+    AttributeValue(AttributeValueList* listptr);
     // ArrayType constructor.
-    AttributeValue(const char*);
+    AttributeValue(const char* val);
     // StringType constructor.
 
     virtual ~AttributeValue();
