@@ -25,6 +25,7 @@
 #include <ComTerp/comfunc.h>
 #include <ComTerp/comterp.h>
 #include <ComTerp/comvalue.h>
+#include <ComUtil/comutil.h>
 #include <Attribute/attrlist.h>
 #include <string.h>
 
@@ -417,6 +418,15 @@ AttributeList* ComFunc::stack_keys(boolean symbol, AttributeValue& dflt) {
   return al;
 }
 
+ComTerpServ* ComFunc::comterpserv() { 
+  return _comterp && _comterp->is_serv() ? (ComTerpServ*)_comterp : nil; 
+}
+
+ostream& operator<< (ostream& out, const ComFunc& cf) {
+    out << symbol_pntr(cf.funcid());
+    return out;
+}
+
 /*****************************************************************************/
 
 ComFuncState::ComFuncState(int narg, int nkey, int pedepth, 
@@ -433,4 +443,11 @@ ComFuncState::ComFuncState(int narg, int nkey, int pedepth,
 ComFuncState::ComFuncState(ComFuncState& cfs) {
   *this = cfs;
 }
+
+ostream& operator<< (ostream& out, const ComFuncState& cf) {
+    out << "nargs = " << cf._nargs;
+    out << ";nkeys = " << cf._nkeys;
+    return out;
+}
+
 
