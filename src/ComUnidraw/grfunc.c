@@ -167,10 +167,10 @@ void CreateRectFunc::execute() {
 	ComValue compval(symbol_add("RectComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -233,10 +233,10 @@ void CreateLineFunc::execute() {
 	ComValue compval(symbol_add("ArrowLineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -298,10 +298,10 @@ void CreateEllipseFunc::execute() {
 	ComValue compval(symbol_add("EllipseComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -365,10 +365,10 @@ void CreateTextFunc::execute() {
 	ComValue compval(symbol_add("TextComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else
         push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -432,10 +432,10 @@ void CreateMultiLineFunc::execute() {
 	ComValue compval(symbol_add("ArrowMultiLineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -499,10 +499,10 @@ void CreateOpenSplineFunc::execute() {
 	ComValue compval(symbol_add("ArrowSplineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -564,10 +564,10 @@ void CreatePolygonFunc::execute() {
 	ComValue compval(symbol_add("PolygonComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -630,10 +630,10 @@ void CreateClosedSplineFunc::execute() {
 	ComValue compval(symbol_add("ClosedSplineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -701,10 +701,10 @@ void CreateRasterFunc::execute() {
 	ComValue compval(symbol_add("RasterComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
+	execute_log(cmd);
     } else 
 	push_stack(ComValue::nullval());
 
-    execute_log(cmd);
     Unref(al);
 }
 
@@ -725,9 +725,9 @@ void FontFunc::execute() {
 
     if (font) {
 	cmd = new FontCmd(_ed, font);
+	execute_log(cmd);
     }
 
-    execute_log(cmd);
 }
 
 /*****************************************************************************/
@@ -839,9 +839,9 @@ void FontByNameFunc::execute() {
   
   if (font) {
     cmd = new FontCmd(_ed, font);
+    execute_log(cmd);
   }
   
-  execute_log(cmd);
 }
 /*****************************************************************************/
 ColorRgbFunc::ColorRgbFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
@@ -882,9 +882,9 @@ void BrushFunc::execute() {
 
     if (brush) {
 	cmd = new BrushCmd(_ed, brush);
+	execute_log(cmd);
     }
 
-    execute_log(cmd);
 }
 
 /*****************************************************************************/
@@ -904,9 +904,9 @@ void PatternFunc::execute() {
 
     if (pattern) {
 	cmd = new PatternCmd(_ed, pattern);
+	execute_log(cmd);
     }
 
-    execute_log(cmd);
 }
 
 /*****************************************************************************/
@@ -1064,9 +1064,9 @@ void MoveFunc::execute() {
 
     if (delx != 0  || dely != 0) {
 	cmd = new MoveCmd(_ed, delx, dely);
+	execute_log(cmd);
     }
 
-    execute_log(cmd);
 }
 
 /*****************************************************************************/
@@ -1085,9 +1085,9 @@ void ScaleFunc::execute() {
 
     if (fx > 0.0  || fy > 0.0) {
 	cmd = new ScaleCmd(_ed, fx, fy);
+	execute_log(cmd);
     }
 
-    execute_log(cmd);
 }
 
 /*****************************************************************************/
@@ -1123,9 +1123,9 @@ void PanFunc::execute() {
 
     if (delx != 0  || dely != 0) {
 	cmd = new PanCmd(_ed, delx, dely);
+	execute_log(cmd);
     }
 
-    execute_log(cmd);
 }
 
 /*****************************************************************************/
@@ -1231,9 +1231,9 @@ void ZoomFunc::execute() {
     
     if (zoom > 0.0) {
 	cmd = new ZoomCmd(_ed, zoom);
+	execute_log(cmd);
     }
     
-    execute_log(cmd);
 }
 
 /*****************************************************************************/

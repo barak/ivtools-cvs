@@ -53,6 +53,9 @@ public:
     virtual ~DrawLink();
 
     enum { new_link=0, one_way, two_way, redundant };
+    
+    static char* state_string(int state)
+      { return state>=0 && state<=redundant ?  _state_strings[state] : nil; }
 
     const char* hostname() { return _host; }
     // return name of remote host
@@ -153,6 +156,8 @@ protected:
 
     DrawServHandler* _comhandler;
     AckBackHandler* _ackhandler;
+
+    static char* _state_strings[];
 };
 
 #endif

@@ -46,9 +46,13 @@ public:
     virtual void Reserve();
     // reserve newly created graphics in selection across the network
 
+    void AddComp(OverlayComp*);
+    // add this graphic to the Selection.
+
   enum { NotSelected, LocallySelected, RemotelySelected, WaitingToBeSelected };
 
-  static const char* selected_string(int state) { return _selected_strings[state]; }
+  static const char* selected_string(int state) 
+    { return state>=0 && state<=WaitingToBeSelected ?  _selected_strings[state] : nil; }
 
 protected:
   DrawEditor* _editor;

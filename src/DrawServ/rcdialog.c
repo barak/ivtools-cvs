@@ -376,8 +376,8 @@ void ConnectionsDialogImpl::update_text(boolean update) {
   for(int i=0; i<strlen(buf); i++) vbuf.push_back(buf[i]);
   for (list_->First(i); !list_->Done(i); list_->Next(i)) {
     DrawLink* link = list_->GetDrawLink(i);
-    snprintf(buf, BUFSIZ, "%-30.30s  %-6d  %-3d\n", 
-	     link->hostname(), link->portnum(), link->state());
+    snprintf(buf, BUFSIZ, "%-30.30s  %-6d  %s\n", 
+	     link->hostname(), link->portnum(), DrawLink::state_string(link->state()));
     for(int i=0; i<strlen(buf); i++) vbuf.push_back(buf[i]);
   }
   vbuf.push_back('\0');

@@ -27,6 +27,7 @@
 
 #include <DrawServ/ackback-handler.h>
 #include <DrawServ/draweditor.h>
+#include <DrawServ/drawkit.h>
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawlinklist.h>
 #include <DrawServ/drawserv.h>
@@ -106,8 +107,11 @@ DrawServ::~DrawServ ()
 {
   Iterator it;
   _linklist->First(it);
-  while(_linklist->GetDrawLink(it) && !_linklist->Done(it))
-    linkdown(_linklist->GetDrawLink(it));
+  while(_linklist->GetDrawLink(it) && !_linklist->Done(it)) {
+    DrawLink* link = _linklist->GetDrawLink(it);
+    _linklist->Next(it);
+    linkdown(link);
+  }
   delete _linklist;
   delete _gridtable;
   delete _sessionidtable;
@@ -210,6 +214,12 @@ DrawLink* DrawServ::linkget(const char* hostname, int portnum) {
   return link;
 }
 
+DrawLink* DrawServ::linkget(unsigned int sessionid) {
+  void* ptr = nil;
+  if (sessionid>0) sessionidtable()->find(ptr, sessionid);
+  return ptr ? ((SessionId*)ptr)->drawlink() : nil;
+}
+
 void DrawServ::linkdump(FILE* fptr) {
   fprintf(fptr, "Host                            Alt.                            Port    LID  RID  State\n");
   fprintf(fptr, "------------------------------  ------------------------------  ------  ---  ---  -----\n");
@@ -230,6 +240,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
   static int grid_sym = symbol_add("grid");
   static int sid_sym = symbol_add("sid");
   boolean original = false;
+  unsigned int from_sid = 0;
 
   if(!_linklist || _linklist->Number()==0) 
 
@@ -254,6 +265,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	  AttributeList* al = comp->GetAttributeList();
 	  AttributeValue* idv = al->find(grid_sym);
 	  AttributeValue* sidv = al->find(sid_sym);
+	  from_sid = sidv ? sidv->uint_val() : 0;
 	  
 	  /* unique id already remotely assigned */
 	  if (idv && idv->uint_val() !=0 && sidv && sidv->uint_val() !=0) {
@@ -279,8 +291,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	    original = true;
 	  }
 	    
-
-	  if (comp&&original) {
+	  if (comp && (original || linklist()->Number()>1)) {
 	    Creator* creator = unidraw->GetCatalog()->GetCreator();
 	    OverlayScript* scripter = (OverlayScript*)
 	      creator->Create(Combine(comp->GetClassId(), SCRIPT_VIEW));
@@ -296,7 +307,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	  }
 	}
       }
-      if (original) {
+      if (original || linklist()->Number()>1) {
 	if (!scripted)
 	  sbuf << "print(\"Failed attempt to generate script for a PASTE_CMD\\n\" :err)";
 	sbuf.put('\0');
@@ -313,7 +324,8 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 #endif
 
       /* then send everywhere else */
-      if (original) DistributeCmdString(sbuf.str());
+      if (original || linklist()->Number()>1) 
+	DistributeCmdString(sbuf.str(), linkget(from_sid));
       
       }
       break;
@@ -333,13 +345,13 @@ void DrawServ::ExecuteCmd(Command* cmd) {
   }
 }
 
-void DrawServ::DistributeCmdString(const char* cmdstring) {
+void DrawServ::DistributeCmdString(const char* cmdstring, DrawLink* orglink) {
 
   Iterator i;
   _linklist->First(i);
   while (!_linklist->Done(i)) {
     DrawLink* link = _linklist->GetDrawLink(i);
-    if (link && link->state()==DrawLink::two_way) {
+    if (link && link != orglink && link->state()==DrawLink::two_way) {
       int fd = link->handle();
       if (fd>=0) {
 	fileptr_filebuf fbuf(fd, ios_base::out, false, static_cast<size_t>(BUFSIZ));
@@ -405,7 +417,7 @@ void DrawServ::sessionid_register_handle
     link->sid_insert(sid, alt_id);
     if (sid != alt_id) {
       char buffer[BUFSIZ];
-      snprintf(buffer, BUFSIZ, "sid(0x%08x 0x%08x :remap)\n", sid, alt_id);
+      snprintf(buffer, BUFSIZ, "sid(0x%08x 0x%08x :remap)%c", sid, alt_id, '\0');
       SendCmdString(link, buffer);
     }
 
@@ -509,20 +521,63 @@ void DrawServ::grid_message_handle(DrawLink* link, unsigned int id, unsigned int
   gridtable()->find(ptr, id);
   if (ptr) {
     GraphicId* grid = (GraphicId*)ptr;
+
+    /* if this request is aimed here */
     if (selector==sessionid() && newselector!=0) {
-      if (grid->selector()==sessionid() && 
-	  (grid->selected()==LinkSelection::NotSelected || 
-	   grid->selected()==LinkSelection::WaitingToBeSelected)) {
-	grid->selected(LinkSelection::NotSelected);
-	grid->selector(newselector);
+
+      /* if graphic is still locally owned */
+      if (grid->selector()==sessionid()) {
+
+	/* if graphic is not actually selected */
+	if ((grid->selected()==LinkSelection::NotSelected || 
+	     grid->selected()==LinkSelection::WaitingToBeSelected)) {
+	  grid->selected(LinkSelection::NotSelected);
+	  grid->selector(newselector);
+	  char buf[BUFSIZ];
+	  snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :grant chgid(0x%08x))%c",
+		   grid->id(), newselector, sessionid(), '\0');
+	  SendCmdString(link, buf);
+	  fprintf(stderr, "grid: request granted\n");
+	} 
+
+	/* else do nothing, because it is selected */
+	else {
+	  fprintf(stderr, "grid: request ignored, graphic locally selected\n");
+	}
+      } 
+      
+      /* else reformulate this request and pass it along */
+      else {
+	fprintf(stderr, "grid: request passed along to current selector\n");
 	char buf[BUFSIZ];
-	snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :grant chgid(0x%08x))%c",
-		 grid->id(), newselector, sessionid(), '\0');
-	SendCmdString(link, buf);
+	snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :request chgid(0x%08x))%c",
+		 grid->id(), grid->selector(), newselector, '\0');
+	SendCmdString(linkget(grid->selector()), buf);
       }
-    } else {
-      grid->selector(selector);
-      grid->selected(state);
+    }
+
+    /* else this request and/or simple state update should be passed along */
+    else {
+      /* if simple state, set the values here, and pass it on to everyone else */
+      if (newselector==0) {
+	if (linklist()->Number()>1)
+	  fprintf(stderr, "grid: state change passed along to everyone else\n");
+	grid->selector(selector);
+	grid->selected(state);
+	char buf[BUFSIZ];
+	snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :state %d)%c",
+		 grid->id(), grid->selector(), grid->selected(), '\0');
+	DistributeCmdString(buf, link);
+      } 
+
+      /* else pass the request on to the target selector */
+      else {
+	fprintf(stderr, "grid:  request passed along to targeted selector");
+	char buf[BUFSIZ];
+	snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :request chgid(0x%08x))%c",
+		 grid->id(), selector, newselector, '\0');
+	SendCmdString(linkget(grid->selector()), buf);
+      }
     }
   }
 }
@@ -535,18 +590,24 @@ void DrawServ::grid_message_callback(DrawLink* link, unsigned int id, unsigned i
   gridtable()->find(ptr, id);
   if (ptr) {
     GraphicId* grid = (GraphicId*)ptr;
-    grid->selector(selector);
-  }
-}
 
-// handle reserve request from remote DrawLink.
-void DrawServ::grid_message_propagate(DrawLink* link, unsigned int id, unsigned int selector, 
-				      int selected, unsigned int otherselector)
-{
-  void* ptr = nil;
-  gridtable()->find(ptr, id);
-  if (ptr) {
-    GraphicId* grid = (GraphicId*)ptr;
+    /* if request is granted, add to selection */
+    if (grid->selected()==LinkSelection::WaitingToBeSelected && selector==sessionid()) {
+      grid->selector(selector);
+      fprintf(stderr, "grid:  request granted, add to selection now\n");
+      OverlayComp* comp = (OverlayComp*)grid->grcomp();
+      LinkSelection* sel = (LinkSelection*)DrawKit::Instance()->GetEditor()->GetSelection();
+      sel->AddComp(comp);
+    }
+
+    /* otherwise, pass the granting message along */
+    else {
+      fprintf(stderr, "grid:  pass grant request along\n");
+      char buf[BUFSIZ];
+      snprintf(buf, BUFSIZ, "grid(chgid(0x%08x) chgid(0x%08x) :grant chgid(0x%08x))%c",
+	       grid->id(), selector, oldselector, '\0');
+      SendCmdString(linkget(selector), buf);
+    }
   }
 }
 

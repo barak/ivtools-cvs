@@ -76,14 +76,17 @@ public:
   DrawLink* linkget(const char* hostname, int portnum);
   // return pointer to existing DrawLink
   
+  DrawLink* linkget(unsigned int sessionid);
+  // return pointer to existing DrawLink given a sessionid.
+  
   void linkdump(FILE*);
   // dump text table of DrawLink's
   
   virtual void ExecuteCmd(Command*);
   // execute Command's locally, and on remote linked DrawServ's.
   
-  virtual void DistributeCmdString(const char* cmdstring);
-  // execute command string remote DrawServ's
+  virtual void DistributeCmdString(const char* cmdstring, DrawLink* orglink=nil);
+  // send command string to every remote DrawServ (except where it came from).
   
   virtual void SendCmdString(DrawLink* link, const char* cmdstring);
   // execute command string on one remote DrawServ
@@ -130,9 +133,11 @@ public:
 			     int state, unsigned int oldselector);
   // callback for graphic id selection message 
 
+#if 0
   void grid_message_propagate(DrawLink* link, unsigned int id, unsigned int selector, 
 			      int state, unsigned int otherselector=0);
   // propagate graphic id selection message
+#endif
 
   static unsigned int unique_grid();
   // generate unique graphic id.

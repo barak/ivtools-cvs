@@ -177,3 +177,9 @@ void LinkSelection::Reserve() {
     Next(it);
   }
 }
+
+void LinkSelection::AddComp(OverlayComp* comp) {
+  OverlayView* ov = comp->FindView(_editor->GetViewer());
+  Append(ov);
+  Update(_editor->GetViewer());
+}
