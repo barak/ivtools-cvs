@@ -200,6 +200,11 @@ void RepeatFunc::execute() {
     ComValue operand2(stack_arg(1));
     reset_stack();
 
+    if (operand1.is_nil() || operand2.is_nil()) {
+      push_stack(ComValue::nullval());
+      return;
+    }
+
     int n = operand2.int_val();
     if (n<=0) return;
 
@@ -256,6 +261,11 @@ void IterateFunc::execute() {
 
     ComValue operand2(stack_arg(1));
     reset_stack();
+
+    if (operand1.is_nil() || operand2.is_nil()) {
+      push_stack(ComValue::nullval());
+      return;
+    }
 
     int start = operand1.int_val();
     int stop = operand2.int_val();
