@@ -596,7 +596,9 @@ int ReadImageHandler::inputReady(int fd) {
     istream* ifs = new istream(fbuf);
 #endif
     _helper.add_stream(ifs);
+#if __GNUG__>=3
     _helper.add_file(ifptr);
+#endif
     boolean empty;
 
     int newfd;

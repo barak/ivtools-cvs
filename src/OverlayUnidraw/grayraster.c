@@ -31,8 +31,6 @@
 #include <OS/math.h>
 #include <math.h>
 #include <nan.h>
-#undef max
-#undef min
 
 #include <OverlayUnidraw/grayraster.h>
 #include <OverlayUnidraw/ovcatalog.h>
@@ -41,6 +39,9 @@
 #include <OS/math.h>
 #include <OS/memory.h>
 #include <IV-X11/xdisplay.h>
+
+#undef max
+#undef min
 
 /*****************************************************************************/
 
