@@ -333,6 +333,7 @@ if test ! -d src/include/IV-3_1/InterViews ; then
 	ln -s ../InterViews;
 	cd ../../..;	
 fi
+
 if test ! -f src/IV-common/listimpl.c ; then
 	echo "establishing symbolic links for src/IV-common"
 	cd src/IV-common;
@@ -347,11 +348,46 @@ if test ! -f src/IV-common/listimpl.c ; then
 	ln -s ../IV-2_6/tform2_6.c;
 	cd ../..;
 fi
-if test ! -f src/Unidraw-common/iterator.c ; then
-	echo "establishing symbolic links for src/Unidraw-common"
+
+if test ! -f src/Unidraw-common/component.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/component.c"
+	cd src/Unidraw-common;
+	ln -s ../Unidraw/component.c;
+	cd ../..;
+fi
+if test ! -f src/Unidraw-common/compview.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/compview.c"
+	cd src/Unidraw-common;
+	ln -s ../Unidraw/compview.c;
+	cd ../..;
+fi
+if test ! -f src/Unidraw-common/geomobjs.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/geomobjs.c"
 	cd src/Unidraw-common;
 	ln -s ../Unidraw/geomobjs.c;
+	cd ../..;
+fi
+if test ! -f src/Unidraw-common/iterator.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/iterator.c"
+	cd src/Unidraw-common;
 	ln -s ../Unidraw/iterator.c;
+	cd ../..;
+fi
+if test ! -f src/Unidraw-common/uarray.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/uarray.c"
+	cd src/Unidraw-common;
+	ln -s ../Unidraw/uarray.c;
+	cd ../..;
+fi
+if test ! -f src/Unidraw-common/uhash.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/uhash.c"
+	cd src/Unidraw-common;
+	ln -s ../Unidraw/uhash.c;
+	cd ../..;
+fi
+if test ! -f src/Unidraw-common/ulist.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/ulist.c"
+	cd src/Unidraw-common;
 	ln -s ../Unidraw/ulist.c;
 	cd ../..;
 fi
