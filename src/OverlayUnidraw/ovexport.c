@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2002 Scott E. Johnston
  * Copyright (c) 1994, 1995, 1998 Vectaport Inc.
  * Copyright (c) 1990, 1991 Stanford University 
  *
@@ -110,8 +111,8 @@ void OvExportCmd::Execute () {
 	style = new Style(Session::instance()->style());
 	style->attribute("subcaption", "Export selected graphics to file:");
 	style->attribute("open", "Export");
-	const char *formats[] = {"EPS", "idraw EPS", "drawtool"};
-	const char *commands[] = {"ghostview %s", "idraw %s", "drawtool %s"};
+	const char *formats[] = {"EPS", "idraw EPS", "drawtool", "SVG"};
+	const char *commands[] = {"ghostview %s", "idraw %s", "drawtool %s", "netscape %s"};
 	chooser_ = new ExportChooser(".", WidgetKit::instance(), style,
 				     formats, sizeof(formats)/sizeof(char*), commands, nil, true);
 	Resource::ref(chooser_);
