@@ -30,7 +30,6 @@
 #include <ComTerp/comfunc.h>
 #include <ComTerp/comhandler.h>
 #include <ComTerp/comterp.h>
-#include <ComTerp/comterpserv.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/condfunc.h>
 #include <ComTerp/ctrlfunc.h>
@@ -129,8 +128,6 @@ void ComTerp::init() {
     _val_for_next_func = nil;
     _func_for_next_expr = nil;
     _trace_mode = 0;
-    _npause = 0;
-    _stepflag = 0;
 }
 
 
@@ -212,15 +209,9 @@ int ComTerp::eval_expr(ComValue* pfvals, int npfvals) {
 }
 
 void ComTerp::eval_expr_internals(int pedepth) {
-  static int step_symid = symbol_add("step");
-  static ComFunc* stepfunc = nil;
-  if (!stepfunc)
-    stepfunc = new ComterpStepFunc(this);
-
   ComValue sv = pop_stack(false);
   
   if (sv.type() == ComValue::CommandType) {
-
 
     ComFunc* func = nil;
     if (_func_for_next_expr) {
@@ -253,22 +244,9 @@ void ComTerp::eval_expr_internals(int pedepth) {
       }
     }
 
-    if (stepflag()) {
-      filebuf fbufout;
-      fbufout.attach(handler() ? max(1, handler()->get_handle()) : fileno(stdout));
-      ostream out(&fbufout);
-      out << *func << "(" << *func->funcstate() << ")\n";
-      static int pause_symid = symbol_add("pause");
-      ComValue pausekey(pause_symid, 0, ComValue::KeywordType);
-      push_stack(pausekey);
-      stepfunc->push_funcstate(0,1, pedepth, step_symid);
-      stepfunc->execute();
-      stepfunc->pop_funcstate();
-    }
-
     func->execute();
-    func->pop_funcstate();
 
+    func->pop_funcstate();
     if (_just_reset && !_func_for_next_expr) {
       push_stack(ComValue::blankval());
       _just_reset = false;
@@ -930,9 +908,7 @@ void ComTerp::add_defaults() {
     add_command("run", new RunFunc(this));
 
     add_command("help", new HelpFunc(this));
-    add_command("trace", new ComterpTraceFunc(this));
-    add_command("pause", new ComterpPauseFunc(this));
-    add_command("step", new ComterpStepFunc(this));
+    add_command("trace", new TraceFunc(this));
     add_command("symid", new SymIdFunc(this));
     add_command("symval", new SymValFunc(this));
     add_command("symbol", new SymbolFunc(this));

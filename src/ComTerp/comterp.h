@@ -232,12 +232,6 @@ public:
     int trace_mode() { return _trace_mode; }
     // return trace mode
 
-    int& npause() { return _npause; }
-    // return (reference to) number of pauses
-
-    int& stepflag() { return _stepflag; }
-    // return flag that controls stepwise execution
-
 protected:
     void incr_stack();
     void incr_stack(int n);
@@ -301,12 +295,6 @@ protected:
 
     int _trace_mode;
     // trace mode
-
-    int _npause;
-    // depth of pause
-
-    int _stepflag;
-    // true if single-stepping interpreter
 
     friend class ComFunc;
     friend class ComterpHandler;
