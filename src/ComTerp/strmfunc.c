@@ -353,12 +353,18 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 
     if (!streamv.is_stream()) return;
 
+    int outside_stackh = comterp->stack_height();
+
     if (streamv.stream_mode()<0) {
 
       /* internal execution -- handled by stream func */
       comterp->push_stack(streamv);
       ((ComFunc*)streamv.stream_func())->exec(1, 0);
-      if (comterp->stack_top().is_null()) streamv.stream_list()->clear();
+      if (comterp->stack_top().is_null() && 
+	  comterp->stack_height()>outside_stackh) 
+	streamv.stream_list()->clear();
+      else if (comterp->stack_height()==outside_stackh)
+	comterp->push_stack(ComValue::blankval());
 
     } else if (streamv.stream_mode()>0) {
 
@@ -375,6 +381,8 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 
 	  if (val->is_stream()) {
 
+	    int inside_stackh = comterp->stack_height();
+
 	    /* stream argument, use stream func to get next one */
 	    if (val->stream_mode()<0 && val->stream_func()) {
 	      /* internal use */
@@ -388,14 +396,16 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 
 	    }
 	    
-	    if (comterp->stack_top().is_null()) {
+	    if (comterp->stack_top().is_null() && 
+		comterp->stack_height()>inside_stackh) {
 	      
 	      /* sub-stream return null, zero it, and return null for this one */
 	      val->stream_list()->clear();
 	      comterp->push_stack(ComValue::nullval());
 	      streamv.stream_list()->clear();
 	      return;
-	    }
+	    } else if (comterp->stack_height()==inside_stackh)
+	      comterp->push_stack(ComValue::blankval());
 
 	    narg++;
 
@@ -415,7 +425,11 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 	funcptr->exec(narg, nkey);
       }
 
-      if (comterp->stack_top().is_null()) streamv.stream_list()->clear();
+      if (comterp->stack_top().is_null() &&
+	  comterp->stack_height() > outside_stackh) 
+	streamv.stream_list()->clear();
+      else if (comterp->stack_height()==outside_stackh)
+	comterp->push_stack(ComValue::blankval());
 
     } else 
       comterp->push_stack(ComValue::nullval());
