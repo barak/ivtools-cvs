@@ -65,6 +65,7 @@ ivtools-1.0/config/arch.def
 ivtools-1.0/config/config.defs.in
 ivtools-1.0/config/config.mk
 ivtools-1.0/config/config.null.mk
+ivtools-1.0/config/darwin-gcc.mk
 ivtools-1.0/config/default-gcc.mk
 ivtools-1.0/config/freebsd-gcc.mk
 ivtools-1.0/config/freebsd2.1-gcc.mk
