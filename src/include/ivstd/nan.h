@@ -9,7 +9,7 @@
 #include <math.h>
 #endif
 
-#if defined(__sun__) && defined(__svr4__) || defined(__CYGWIN__) || defined(__linux__)
+#if defined(__sun__) && defined(__svr4__) || defined(__CYGWIN__) || defined(__linux__) || defined(__NetBSD)
 #define isnanorinf(dval) (isnan(dval)||isinf(dval))
 #elif defined(__alpha)
 #define isnanorinf(dval) (IsNANorINF(dval))
