@@ -95,6 +95,8 @@ nrows() -- onscreen vertical extent in pixels
 
 dx,dy=stod(sx,sy) -- convert from screen to drawing coordinates
 sx,sy=dtos(dx,dy) -- convert from drawing to screen coordinates
+dx,dy=gtod(compview gx,gy) -- convert from graphic to drawing coordinates
+gx,gy=dtog(compview dx,dy) -- convert from drawing to graphic coordinates
 
 handles(flag) -- enable/disable current selection tic marks and/or highlighting
 highlight(compview compviewgs) -- set the highlight graphic state for a graphic
