@@ -174,6 +174,7 @@ public:
 protected:
     virtual void FillBg(ostream& out);
     virtual void Brush(ostream& out);
+    virtual void Colors(ostream& out);
     virtual void FgColor(ostream& out);
     virtual void BgColor(ostream& out);
     virtual void Font(ostream& out);

@@ -145,6 +145,41 @@ void OverlayScript::Brush (ostream& out) {
     }
 }
 
+void OverlayScript::Colors (ostream& out) {
+  if (!svg_format()) {
+    FgColor(out);
+    BgColor(out);
+  } else {
+
+    PSColor* fgcolor = (PSColor*) GetOverlayComp()->GetGraphic()->GetFgColor();
+    PSColor* bgcolor = (PSColor*) GetOverlayComp()->GetGraphic()->GetBgColor();
+
+    ColorIntensity fr, fg, fb;
+    fgcolor->GetIntensities(fr, fg, fb);
+
+    out << "stroke: rgb(" 
+	<< (int)(fr*100) << "%,"
+	<< (int)(fg*100) << "%,"
+	<< (int)(fb*100) << "%); ";
+    
+    ColorIntensity br, bg, bb;
+    bgcolor->GetIntensities(br, bg, bb);
+
+    PSPattern* pat = (PSPattern*) GetOverlayComp()->GetGraphic()->GetPattern();
+    if (pat != nil && !pat->None() && 
+	pat->GetGrayLevel()>=0.0 && pat->GetGrayLevel()<=1.0) { 
+      
+      float fp = 100.0*(1.0-pat->GetGrayLevel());
+      float bp = 100.0-fp;
+      out << "fill: rgb(" 
+	  << (int)(fr*fp+br*bp) << "%,"
+	  << (int)(fg*fp+bg*bp) << "%,"
+	  << (int)(fb*fp+bb*bp) << "%); ";
+    }
+  }
+  
+}
+
 void OverlayScript::FgColor (ostream& out) {
     PSColor* fgcolor = (PSColor*) GetOverlayComp()->GetGraphic()->GetFgColor();
 
@@ -154,20 +189,9 @@ void OverlayScript::FgColor (ostream& out) {
       ColorIntensity r, g, b;
       fgcolor->GetIntensities(r, g, b);
 
-      if (!svg_format()) {
-	out << " :fgcolor \"" << name << "\"";
-	out << "," << r << "," << g << "," << b;
-      } else {
-	out << "stroke: rgb(" 
-	    << (int)(r*100) << "%,"
-	    << (int)(g*100) << "%,"
-	    << (int)(b*100) << "%) ";
-	out << "fill-color: rgb(" 
-	    << (int)(r*100) << "%,"
-	    << (int)(g*100) << "%,"
-	    << (int)(b*100) << "%) ";
-      }
-      
+      out << " :fgcolor \"" << name << "\"";
+      out << "," << r << "," << g << "," << b;
+
     }
 }
 
@@ -180,11 +204,9 @@ void OverlayScript::BgColor (ostream& out) {
       ColorIntensity r, g, b;
       bgcolor->GetIntensities(r, g, b);
 
-      if (!svg_format()) {
 	out << " :bgcolor \"" << name << "\"";
 	out << "," << r << "," << g << "," << b;
-      } 
-      
+
     }
 }
 
@@ -212,9 +234,10 @@ void OverlayScript::Pattern (ostream& out) {
       
       if (pat->None()) {
 
-	if (!svg_format()) {
+	if (!svg_format())
 	  out << " :nonepat";
-	}
+	else 
+	  out << "fill: none;";
 
       } else if (pat->GetSize() > 0) {
 	
@@ -754,8 +777,7 @@ boolean OverlayScript::EmitGS(ostream& out, Clipboard* cb, boolean prevout) {
 	out << "    gs(";
 	FillBg(out);
 	Brush(out);
-	FgColor(out);
-	BgColor(out);
+	Colors(out);
 	Font(out);
 	Pattern(out);
 	out << ")";
@@ -853,8 +875,7 @@ void OverlayScript::MinGS (ostream& out) {
 	    if (svg_format()) out << "style=\"";
 	    FillBg(out);
 	    Brush(out);
-	    FgColor(out);
-	    BgColor(out);
+	    Colors(out);
 	    Pattern(out);
 	    if (svg_format()) out << "\" ";
 	}
@@ -870,8 +891,7 @@ void OverlayScript::FullGS (ostream& out) {
 	else {
 	    FillBg(out);
 	    Brush(out);
-	    FgColor(out);
-	    BgColor(out);
+	    Colors(out);
 	    Font(out);
 	    Pattern(out);
 	} 
@@ -899,8 +919,7 @@ void OverlayScript::StencilGS (ostream& out) {
 	if (cb) 
 	    out << " :gs " << MatchedGS(cb);
 	else {
-	    FgColor(out);
-	    BgColor(out);
+	    Colors(out);
 	} 
     }
     Transformation(out);
