@@ -97,7 +97,7 @@ void MbrFunc::execute() {
     boolean lrbt_flag = stack_key(lrbt_symval).is_true();
 
     Viewer* viewer = _ed->GetViewer();
-    ComValue& obj = stack_arg(0);
+    ComValue obj(stack_arg(0));
     reset_stack();
     if (obj.object_compview()) {
       ComponentView* compview = (ComponentView*)obj.obj_val();
@@ -131,7 +131,7 @@ PointsFunc::PointsFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) 
 void PointsFunc::execute() {
     
     Viewer* viewer = _ed->GetViewer();
-    ComValue& obj = stack_arg(0);
+    ComValue obj(stack_arg(0));
     reset_stack();
     if (obj.object_compview()) {
       ComponentView* compview = (ComponentView*)obj.obj_val();
