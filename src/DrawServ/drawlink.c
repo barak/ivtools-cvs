@@ -42,13 +42,18 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
   _ok = false;
   _local_linkid = _linkcnt++;
   _remote_linkid = -1;
+  _state = state;
 
   _addr = nil;
   _socket = nil;
   _conn = nil;
 
+}
+
+int DrawLink::open() {
+
 #if defined(HAVE_ACE) && (__GNUC__>3 || __GNUC__==3 && __GNUC_MINOR__>0)
-  _addr = new ACE_INET_Addr(portnum, hostname);
+  _addr = new ACE_INET_Addr(_host, _port);
   _socket = new ACE_SOCK_Stream;
   _conn = new ACE_SOCK_Connector;
   if (_conn->connect (*_socket, *_addr) == -1)
@@ -60,7 +65,7 @@ DrawLink::DrawLink (const char* hostname, int portnum, int state)
     char buffer[HOST_NAME_MAX];
     gethostname(buffer, HOST_NAME_MAX);
     out << buffer << "\"";
-    out << " :state " << state+1;
+    out << " :state " << _state+1;
     out << " :rid " << _local_linkid;
     out << " :lid " << _remote_linkid;
     out << ")\n";

@@ -56,8 +56,9 @@ int DrawServ::linkup(const char* hostname, int portnum,
 		     int state, int local_id, int remote_id) {
   if (state == DrawLink::new_link || state == DrawLink::one_way) {
     DrawLink* link = new DrawLink(hostname, portnum, state);
+    link->remote_linkid(remote_id);
+    link->open();
     if (link && link->ok()) {
-      link->remote_linkid(remote_id);
       _list->add_drawlink(link);
       return 0;
     } else {
