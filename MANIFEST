@@ -1743,11 +1743,11 @@ ivtools-0.9/src/scripts/ivfb.cpp
 ivtools-0.9/src/scripts/ivgd.cpp
 ivtools-0.9/src/scripts/ivgetjpg.bash
 ivtools-0.9/src/scripts/ivmkmf.cpp
+ivtools-0.9/src/scripts/ivtiftopnm.bash
 ivtools-0.9/src/scripts/mkdirhier.sh
 ivtools-0.9/src/scripts/mkgif89a.bash
 ivtools-0.9/src/scripts/mkgif89ac.bash
 ivtools-0.9/src/scripts/pnmtopgm.sh
-ivtools-0.9/src/scripts/ivtiftopnm.bash
 ivtools-0.9/src/tests/Imakefile
 ivtools-0.9/src/tests/Makefile
 ivtools-0.9/src/tests/y2k/Imakefile

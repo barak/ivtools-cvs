@@ -276,5 +276,5 @@ src/scripts/ivmkmf.cpp
 src/scripts/mkdirhier.sh
 src/scripts/mkgif89a.bash
 src/scripts/mkgif89ac.bash
-src/scripts/pnmtopgm.sh
 src/scripts/ivtiftopnm.bash
+src/scripts/pnmtopgm.sh
