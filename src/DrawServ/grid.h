@@ -36,11 +36,14 @@ class GraphicIdList;
 //: object to encapsulate unique graphic id
 class GraphicId {
 public:
-  GraphicId(unsigned int sessionid);
+  GraphicId(unsigned int sessionid=0);
   virtual ~GraphicId();
   
   unsigned int id() { return _id|_sid; }
   // get associated unique composite integer id
+
+  void id(unsigned int id);
+  // set associated unique composite integer id
 
   unsigned int grid() { return _id; }
   // return graphic id portion of composite id

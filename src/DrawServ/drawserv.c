@@ -180,6 +180,7 @@ void DrawServ::linkdump(FILE* fptr) {
 
 void DrawServ::ExecuteCmd(Command* cmd) {
   static int id_sym = symbol_add("id");
+  static int sid_sym = symbol_add("sid");
 
   if(!_linklist || _linklist->Number()==0) 
 
@@ -201,15 +202,31 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	Iterator it;
 	for (cb->First(it); !cb->Done(it); cb->Next(it)) {
 	  OverlayComp* comp = (OverlayComp*)cb->GetComp(it);
-
-	  /* generate unique id and add as attribute */
-	  GraphicId* grid = new GraphicId(sessionid());
-	  grid->grcomp(comp);
 	  AttributeList* al = comp->GetAttributeList();
-	  AttributeValue* av = new AttributeValue(grid->id(), AttributeValue::UIntType);
-	  av->state(AttributeValue::HexState);
-	  al->add_attr(id_sym, av);
-
+	  AttributeValue* idv = al->find(id_sym);
+	  AttributeValue* sidv = al->find(sid_sym);
+	  
+	  /* unique id already remotely assigned */
+	  if (idv && idv->uint_val() !=0 && sidv && sidv->uint_val()) {
+	    GraphicId* grid = new GraphicId();
+	    grid->id(idv->uint_val());
+	    grid->selector(sidv->uint_val());
+	  } 
+	  
+	  /* generate unique id and add as attribute */
+	  /* also mark with selector id */
+	  else {
+	    GraphicId* grid = new GraphicId(sessionid());
+	    grid->grcomp(comp);
+	    grid->selector(((DrawServ*)unidraw)->sessionid());
+	    AttributeValue* idv = new AttributeValue(grid->id(), AttributeValue::UIntType);
+	    idv->state(AttributeValue::HexState);
+	    al->add_attr(id_sym, idv);
+	    AttributeValue* sidv = new AttributeValue(grid->selector(), AttributeValue::UIntType);
+	    sidv->state(AttributeValue::HexState);
+	    al->add_attr(sid_sym, sidv);
+	  }
+	    
 	  if (comp) {
 	    Creator* creator = unidraw->GetCatalog()->GetCreator();
 	    OverlayScript* scripter = (OverlayScript*)

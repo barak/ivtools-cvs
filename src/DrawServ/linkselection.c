@@ -66,7 +66,7 @@ int LinkSelection::Update(Viewer* viewer) {
       ((DrawServ*)unidraw)->gridtable()->find(ptr, av->uint_val());
       if (ptr) {
 	GraphicId* grid = (GraphicId*)ptr;
-	if (grid->selector() && grid->sessionid()!=grid->selector())
+	if (grid->selector() && ((DrawServ*)unidraw)->sessionid()!=grid->selector())
 	  Remove(it);
       }
     }

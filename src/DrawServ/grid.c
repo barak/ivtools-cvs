@@ -40,17 +40,30 @@
 
 GraphicId::GraphicId (unsigned int sessionid) 
 {
-  _id = DrawServ::candidate_grid();
-  _sid = sessionid&DrawServ::SessionIdMask;
-  GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
-  table->insert(_id|_sid, this);
   _comp = nil;
+  if (sessionid != 0) {
+    _id = DrawServ::candidate_grid();
+    _sid = sessionid&DrawServ::SessionIdMask;
+    GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
+    table->insert(_id|_sid, this);
+  } else {
+    _id = _sid = 0;
+  }
 }
 
 GraphicId::~GraphicId () 
 {
   GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
-  table->remove(_id);
+  table->remove(_id&_sid);
+}
+
+void GraphicId::id(unsigned int id) {
+  GraphicIdTable* table = ((DrawServ*)unidraw)->gridtable();
+  if (_id!=0 && _sid!=0) 
+    table->remove(_id&_sid);
+  _id = id & DrawServ::GraphicIdMask;
+  _sid = id & DrawServ::SessionIdMask;
+  table->insert(id, this);
 }
 
 /*****************************************************************************/
