@@ -26,6 +26,7 @@
 #include <ComTerp/_comutil.h>
 #include <ComTerp/assignfunc.h>
 #include <ComTerp/boolfunc.h>
+#include <ComTerp/bquotefunc.h>
 #include <ComTerp/comfunc.h>
 #include <ComTerp/comhandler.h>
 #include <ComTerp/comterp.h>
@@ -665,6 +666,8 @@ ComValue& ComTerp::pop_stack(boolean lookupsym) {
 }
 
 ComValue& ComTerp::lookup_symval(ComValue& comval) {
+    if (comval.bquote()) return comval;
+
     if (comval.type() == ComValue::SymbolType) {
         void* vptr = nil;
 
@@ -865,6 +868,7 @@ void ComTerp::add_defaults() {
 
     add_command("dot", new DotFunc(this));
     add_command("attrname", new DotNameFunc(this));
+    add_command("attrval", new DotValFunc(this));
 
     add_command("list", new ListFunc(this));
     add_command("at", new ListAtFunc(this));
@@ -911,6 +915,8 @@ void ComTerp::add_defaults() {
 
     add_command("type", new TypeSymbolFunc(this));
     add_command("class", new ClassSymbolFunc(this));
+
+    add_command("bquote", new BackQuoteFunc(this));
 
     add_command("postfix", new PostFixFunc(this));
     add_command("posteval", new PostEvalFunc(this));

@@ -68,7 +68,7 @@ ComValue& ComFunc::stack_arg(int n, boolean symbol, ComValue& dflt) {
 		  keyref.keynarg_val())
 		return ComValue::nullval();
 	    }
-	    if (!symbol) 
+	    if (!symbol)
 	        argref = _comterp->lookup_symval(argref);
 	    return argref;
 	}
@@ -98,7 +98,7 @@ ComValue& ComFunc::stack_key(int id, boolean symbol, ComValue& dflt, boolean use
 		  else
 		    return dflt;
 		} else {
-		  if (!symbol) 
+		  if (!symbol)
 		    valref = _comterp->lookup_symval(valref);
 		  return valref;
 		}

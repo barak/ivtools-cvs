@@ -19,6 +19,7 @@ MakeLibrary($(LIB),$(VERSION))
 
 Obj(assignfunc)
 Obj(boolfunc)
+Obj(bquotefunc)
 Obj(comfunc)	
 ObjA(comterpserv)
 Obj(comvalue)

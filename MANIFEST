@@ -140,6 +140,8 @@ ivtools-0.8/src/ComTerp/assignfunc.c
 ivtools-0.8/src/ComTerp/assignfunc.h
 ivtools-0.8/src/ComTerp/boolfunc.c
 ivtools-0.8/src/ComTerp/boolfunc.h
+ivtools-0.8/src/ComTerp/bquotefunc.c
+ivtools-0.8/src/ComTerp/bquotefunc.h
 ivtools-0.8/src/ComTerp/comfunc.c
 ivtools-0.8/src/ComTerp/comfunc.h
 ivtools-0.8/src/ComTerp/comhandler.c
