@@ -51,7 +51,7 @@ void DrawLinkFunc::execute() {
   ComValue default_port(20002);
   ComValue portv(stack_key(port_sym, false, default_port, true));
   static int state_sym = symbol_add("state");
-  ComValue default_state(20002);
+  ComValue default_state(0);
   ComValue statev(stack_key(state_sym, false, default_state, true));
   reset_stack();
 
