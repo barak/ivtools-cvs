@@ -58,7 +58,7 @@ AttributeValue::AttributeValue(AttributeValue& sv) {
 AttributeValue::AttributeValue() {
     clear();
     type(UnknownType);
-    _aggregate_type = UnknownType;
+    _command_symid = -1;
 }
 
 AttributeValue::AttributeValue(unsigned char v) { 
@@ -142,6 +142,13 @@ AttributeValue::AttributeValue(AttributeValueList* ptr) {
     Resource::ref(ptr);
 }
 
+AttributeValue::AttributeValue(void* comfuncptr, int iter_curr, int iter_end) {
+    _type = AttributeValue::StreamType;
+    _v.streamval.ptr = comfuncptr;
+    _v.streamval.iter_curr = iter_curr;
+    _iter_end = iter_end;
+}
+
 AttributeValue::AttributeValue(const char* string) { 
     _type = AttributeValue::StringType;
     _v.dfintval = symbol_add((char*)string);
@@ -168,7 +175,7 @@ AttributeValue& AttributeValue::operator= (const AttributeValue& sv) {
     const void* v2 = &sv._v;
     memcpy(v1, v2, sizeof(double));
     _type = sv._type;
-    _aggregate_type = sv._aggregate_type;
+    _command_symid = sv._command_symid;
 #if 0  // disable symbol reference counting
     if (_type == StringType || _type == SymbolType) {
         char* sptr = (char *)string_ptr();
@@ -184,7 +191,6 @@ AttributeValue& AttributeValue::operator= (const AttributeValue& sv) {
 
 AttributeValue::ValueType AttributeValue::type() const { return _type; }
 void AttributeValue::type(AttributeValue::ValueType type) { _type = type; }
-AttributeValue::ValueType AttributeValue::aggregate_type() const { return _aggregate_type; }
 
 unsigned char& AttributeValue::uchar_ref() { return _v.ucharval; }
 char& AttributeValue::char_ref() { return _v.charval; }
@@ -607,8 +613,8 @@ int AttributeValue::array_len() {
         return 0;
 }
 
-unsigned int AttributeValue::command_symid() { return _command_symid; }
-void AttributeValue::command_symid(unsigned int id, boolean alias) { 
+int AttributeValue::command_symid() { return _command_symid; }
+void AttributeValue::command_symid(int id, boolean alias) { 
   _command_symid = (alias ? -1 : 1) * id; }
 
 ostream& operator<< (ostream& out, const AttributeValue& sv) {
@@ -896,7 +902,7 @@ void AttributeValue::assignval (const AttributeValue& av) {
     const void* v2 = &av._v;
     memcpy(v1, v2, sizeof(double));
     _type = av._type;
-    _aggregate_type = av._aggregate_type;
+    _command_symid = av._command_symid;
 #if 0 // this end of reference counting disabled as well
     if (_type == StringType || _type == SymbolType) 
 	symbol_add((char *)string_ptr());

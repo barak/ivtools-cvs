@@ -64,13 +64,13 @@ ComValue::ComValue(AttributeValue& sv) {
 
 ComValue::ComValue() {
     type(UnknownType);
-    _aggregate_type = UnknownType;
+    _command_symid = -1;
     zero_vals();
 }
 
 ComValue::ComValue(ValueType valtype) {
     type(valtype);
-    _aggregate_type = UnknownType;
+    _command_symid = -1;
     zero_vals();
 }
 
@@ -116,7 +116,7 @@ ComValue::ComValue(postfix_token* token) {
     _narg = token->narg;
     _nkey = token->nkey;
     _nids = token->nids;
-    _aggregate_type = UnknownType;
+    _command_symid = -1;
     _pedepth = 0;
     _bquote = 0;
 }

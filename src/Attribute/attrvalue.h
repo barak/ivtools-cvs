@@ -60,6 +60,13 @@ typedef struct {
   unsigned int type;
 } arrayval_struct;
 
+//: void* pointer to ComFunc object plus optional type id
+// used in attr_value.
+typedef struct {
+       void *ptr;
+       unsigned int iter_curr;
+} streamval_struct;
+
 //: keyword symbol id, plus number of arguments that follow.
 // used in attr_value.
 typedef struct {
@@ -83,6 +90,7 @@ typedef union attr_value_union
       symval_struct     symval;
       objval_struct     objval;
       arrayval_struct   arrayval;
+      streamval_struct  streamval;
       keyval_struct     keyval;
 } attr_value;
 
@@ -132,6 +140,8 @@ public:
     // ObjectType constructor.
     AttributeValue(AttributeValueList* listptr);
     // ArrayType constructor.
+    AttributeValue(void* comfunc, int iter_curr, int iter_end);
+    // StreamType constructor.
     AttributeValue(const char* val);
     // StringType constructor.
 
@@ -148,8 +158,6 @@ public:
     // return type enum.
     void type(ValueType);
     // set type enum.
-    ValueType aggregate_type() const;
-    // set type used for aggregate values (ArrayType, StreamType).
     int type_size() { return type_size(type()); }
     // return sizeof of value of this type.
     static int type_size(ValueType);
@@ -211,9 +219,9 @@ public:
     int array_len();
     // length of list of values when ArrayType.
 
-    unsigned int command_symid();
+    int command_symid();
     // symbol id of associated command name, for use with ComTerp.
-    void command_symid(unsigned int, boolean alias=false);
+    void command_symid(int, boolean alias=false);
     // set symbol id of associated command name, for use with ComTerp.
     boolean command_alias();
     // returns true if command is an alias, not the first name.
@@ -257,6 +265,8 @@ public:
 
     boolean is_array() { return is_type(ArrayType); }
     // returns true if ArrayType.
+    boolean is_stream() { return is_type(StreamType); }
+    // returns true if StreamType.
     boolean is_unknown() { return is_type(UnknownType); }
     // returns true if UnknownType.
     boolean is_null() { return is_unknown(); }
@@ -320,9 +330,9 @@ protected:
     ValueType _type;
     attr_value _v;
     union { 
-      ValueType _aggregate_type; // used for ArrayType.
-      unsigned int _command_symid; // used for CommandType.
+      int _command_symid; // used for CommandType.
       boolean _object_compview; // used for ObjectType.
+      unsigned int _iter_end;
     };
     static int* _type_syms;
 
