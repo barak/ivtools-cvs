@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1994-1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -143,6 +144,9 @@ public:
     static int type_size(ValueType);
     // return sizeof of value of given type.
 
+    void assignval (const AttributeValue&);
+    // copy contents of AttributeValue
+
     char& char_ref();                 // char by reference.
     unsigned char& uchar_ref();       // unsigned char by reference.
     short& short_ref();               // short by reference.
@@ -178,6 +182,7 @@ public:
     unsigned int symbol_val();	      // symbol id by value.                        
     void* obj_val();		      // void* pointer to object by value.          
     unsigned int obj_type_val();      // classid of object by value.                
+    unsigned int class_symid();       // classid of object by value.                
     AttributeValueList* array_val();  // values in list by value.                   
     unsigned int array_type_val();    // type of values in list by value            
     unsigned int keyid_val();	      // symbol id of keyword by value.             
@@ -268,11 +273,15 @@ public:
     static boolean is_num(ValueType t)
       { return is_integer(t) || is_floatingpoint(t); }
 
-
     boolean is_blank() { return is_type(BlankType); }
     // returns true if BlankType.
     static boolean is_blank(ValueType t)
       { return t==BlankType; };
+
+    boolean is_attributelist();
+    // returns true if ObjectType with an AttributeList object.
+    boolean is_attribute();
+    // returns true if ObjectType with an Attribute object.
 
     friend ostream& operator << (ostream& s, const AttributeValue&);
     // output AttributeValue to ostream.

@@ -88,8 +88,6 @@ public:
 
     ComValue& operator= (const ComValue&);
     // assignment operator.
-    void assignval (const ComValue&);
-    // assign only the AttributeValue portion of a ComValue.
 
     int narg() const;
     // number of arguments associated with this command or keyword.

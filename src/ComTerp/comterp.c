@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1994-1998 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -31,6 +32,7 @@
 #include <ComTerp/comvalue.h>
 #include <ComTerp/condfunc.h>
 #include <ComTerp/ctrlfunc.h>
+#include <ComTerp/dotfunc.h>
 #include <ComTerp/helpfunc.h>
 #include <ComTerp/iofunc.h>
 #include <ComTerp/listfunc.h>
@@ -43,6 +45,7 @@
 #include <ComTerp/symbolfunc.h>
 #include <ComTerp/xformfunc.h>
 #include <Attribute/attrlist.h>
+#include <Attribute/attribute.h>
 
 #include <ctype.h>
 #include <iostream.h>
@@ -188,6 +191,10 @@ void ComTerp::eval_expr_internals(int pedepth) {
 	push_stack(ComValue::nullval());
     } else 
       push_stack(lookup_symval(sv));
+    
+  } else if (sv.type() == ComValue::ObjectType && sv.class_symid() == Attribute::class_symid()) {
+    
+    push_stack(*((Attribute*)sv.obj_val())->Value());
     
   } else if (sv.type() == ComValue::BlankType) {
 
@@ -559,6 +566,10 @@ ComValue& ComTerp::lookup_symval(ComValue& comval) {
 	    } else 
 	        return ComValue::nullval();
 	}
+    } else if (comval.type() == ComValue::ObjectType && comval.class_symid() == Attribute::class_symid()) {
+
+      comval.assignval(*((Attribute*)comval.obj_val())->Value());
+
     }       
     return comval;
 }
@@ -709,6 +720,10 @@ void ComTerp::add_defaults() {
     add_command("stream", new StreamFunc(this));
     add_command("repeat", new RepeatFunc(this));
     add_command("iterate", new IterateFunc(this));
+
+    add_command("dot", new DotFunc(this));
+    add_command("dname", new DotNameFunc(this));
+    add_command("dval", new DotValFunc(this));
 
     add_command("at", new ListAtFunc(this));
     add_command("size", new ListSizeFunc(this));

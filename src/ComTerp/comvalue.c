@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1994-1998 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -24,6 +25,7 @@
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
 #include <Attribute/attrlist.h>
+#include <Attribute/attribute.h>
 #include <Attribute/aliterator.h>
 #include <Attribute/paramlist.h>
 
@@ -122,22 +124,6 @@ ComValue& ComValue::operator= (const ComValue& sv) {
     return *this;
 }
     
-void ComValue::assignval (const ComValue& sv) {
-    void* v1 = &_v;
-    const void* v2 = &sv._v;
-    memcpy(v1, v2, sizeof(double));
-    _type = sv._type;
-    _aggregate_type = sv._aggregate_type;
-#if 0 // this end of reference counting disabled as well
-    if (_type == StringType || _type == SymbolType) 
-	symbol_add((char *)string_ptr());
-    else 
-#endif
-    if (_type == ArrayType && _v.arrayval.ptr)
-        Resource::ref(_v.arrayval.ptr);
-}
-    
-
 int ComValue::narg() const { return _narg; }
 int ComValue::nkey() const { return _nkey; }
 int ComValue::nids() const { return _nids; }
@@ -301,12 +287,19 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	case ComValue::BlankType:
 	  break;
 
+	case ComValue::ObjectType:
+	  if (svp->class_symid() == Attribute::class_symid())
+	    out << "<" << *((Attribute*)svp->obj_val())->Value() << ">";
+	  else
+	    out << "<" << symbol_pntr(svp->class_symid()) << ">";
+	  break;
+
 	case ComValue::UnknownType:
-	    out << "nil";
-	    break;
+	  out << "nil";
+	  break;
 	    
 	default:
-	    break;
+	  break;
 	}
     return out;
 }

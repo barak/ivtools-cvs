@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1996 Vectaport Inc.
+ * Copyright (c) 2000 IET Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -21,52 +21,43 @@
  * 
  */
 
-#include <Attribute/attribute.h>
-#include <Attribute/attrvalue.h>
+/* 
+ * dot func supports a compound variable
+ */
 
-/*****************************************************************************/
+#if !defined(_dotfunc_h)
+#define _dotfunc_h
 
-int Attribute::_symid = -1;
+#include <ComTerp/numfunc.h>
 
-Attribute::Attribute(const char* name, AttributeValue* value) {
-    if (name)
-	symbolid = symbol_add((char *)name);
-    else
-	symbolid = -1;
-    valueptr = value;
-}
+//: . (dot) operator, for compound variables.
+class DotFunc : public ComFunc {
+public:
+    DotFunc(ComTerp*);
 
-Attribute::Attribute(int symid, AttributeValue* value) {
-  symbolid = symid;
-  valueptr = value;
-}
+    virtual void execute();
+    virtual const char* docstring() { 
+      return ". makes compound variables"; }
+};
 
-Attribute::Attribute(const Attribute& attr) {
-    symbolid = attr.symbolid;
-    if (symbolid != -1) // for reference count
-	symbol_add(symbol_pntr(symbolid));
-    valueptr = new AttributeValue(*attr.valueptr);
-}
+//: dname returns name field of a dotted pair
+class DotNameFunc : public ComFunc {
+public:
+    DotNameFunc(ComTerp*);
 
-Attribute::~Attribute() {
-    if (0 && symbolid != -1)  // need to rewrite symbol table
-	symbol_del(symbolid);
-    delete valueptr;
-}
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "%s(attribute) returns name field of a dotted pair"; }
+};
 
-char* Attribute::Name() {
-    return symbol_pntr(symbolid);
-}
+//: dval returns value field of a dotted pair
+class DotValFunc : public ComFunc {
+public:
+    DotValFunc(ComTerp*);
 
-void Attribute::Value(AttributeValue* value) {
-    delete valueptr;
-    valueptr = value;
-}
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "%s(attribute) returns value field of a dotted pair"; }
+};
+#endif /* !defined(_dotfunc_h) */
 
-AttributeValue* Attribute::Value() {
-    return valueptr;
-}
-
-int Attribute::SymbolId() {
-    return symbolid;
-}

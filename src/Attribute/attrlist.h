@@ -36,6 +36,18 @@
 #define AList _lib_iv(UList)
 #endif
 
+//: define methods for a class name and class symbol id.
+// adds ::class_name() and ::class_symid() based on 'name' to any 
+// class definition.  For use in servers built on ComTerp for generating a
+// unique id for a given type of component.
+#define classid(name) \
+public: \
+  static const char* class_name() {return name;}\
+  static int class_symid()\
+    { if (_symid<0) _symid=symbol_add((char*)class_name()); return _symid;} \
+protected: \
+  static int _symid;
+
 class ALIterator;
 class AList;
 class istream;
@@ -91,6 +103,8 @@ public:
 
     Attribute* GetAttr(const char*);
     // get attribute by name.
+    Attribute* GetAttr(int symid);
+    // get attribute by symbol id.
     Attribute* GetAttr(ALIterator);
     // get attribute pointed to by iterator.
     void SetAttr(Attribute*, ALIterator&);
@@ -145,6 +159,8 @@ protected:
 
     AList* _alist;
     unsigned int _count;
+
+    classid("AttributeList");
 };
 
 //: list of AttributeValue objects.

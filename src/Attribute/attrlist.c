@@ -42,6 +42,8 @@
 
 /*****************************************************************************/
 
+int AttributeList::_symid = -1;
+
 AttributeList::AttributeList (AttributeList* s) {
     _alist = new AList;
     _count = 0;
@@ -113,6 +115,16 @@ Attribute* AttributeList::GetAttr (const char* n) {
     for (First(i); !Done(i); Next(i)) {
 	Attribute* attr = GetAttr(i);
 	if (strcmp(n, attr->Name()) == 0)
+	    return attr;
+    }
+    return nil;
+}
+
+Attribute* AttributeList::GetAttr (int symid) {
+    ALIterator i;
+    for (First(i); !Done(i); Next(i)) {
+	Attribute* attr = GetAttr(i);
+	if (symid == attr->SymbolId())
 	    return attr;
     }
     return nil;
