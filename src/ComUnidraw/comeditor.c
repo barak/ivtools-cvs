@@ -201,6 +201,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("paste", new PasteFunc(comterp, this));
     comterp->add_command("pastemode", new PasteModeFunc(comterp, this));
+    comterp->add_command("addtool", new AddToolButtonFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {

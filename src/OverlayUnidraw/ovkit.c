@@ -1430,7 +1430,6 @@ void OverlayKit::toolbar1() {
 void OverlayKit::add_custom_tool() {
     static OpenFileChooser* chooser = nil;
     Editor* ed = GetEditor();
-    LayoutKit& layout = *LayoutKit::instance();
     Style* style = new Style(Session::instance()->style());
     if (!chooser) {
       style->attribute("subcaption", "Open Idraw Icon For Tool Button:");
@@ -1463,18 +1462,29 @@ void OverlayKit::add_custom_tool() {
     if (reset_caption) {
 	style->attribute("caption", "            ");
     }
+    add_tool_button(name, (OverlayComp*)comp);
+}
 
+OverlayComp* OverlayKit::add_tool_button(const char* path, OverlayComp* comp) {
+    LayoutKit& layout = *LayoutKit::instance();
+    if (!comp) {
+      IdrawCatalog* catalog = (IdrawCatalog*)unidraw->GetCatalog();
+      catalog->IdrawCatalog::Retrieve(path, (Component*&)comp);
+    }
     _toolbars->flip_to(1);
-    Glyph* newbutton = name&&comp ? IdrawReader::load(name) : nil;
+    Glyph* newbutton = path&&comp ? IdrawReader::load(path) : nil;
     if (newbutton) {
       _toolbar_vbox[1]->append(MakeTool(new GraphicCompTool(new ControlInfo(comp, "", ""), comp),
 					layout.overlay(layout.hcenter(layout.hspace(_maxwidth)),
 						       layout.hcenter(newbutton)),
 					_tg, _ed->MouseDocObservable(), mouse_custom));
-    } else 
+    } else {
       delete comp;
+      comp = nil;
+    }
     _ed->GetKeyMap()->Execute(CODE_SELECT);
     _toolbar->redraw();
+    return comp;
 }
 
 MenuItem * OverlayKit::MakeViewersMenu() {

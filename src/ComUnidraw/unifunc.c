@@ -363,3 +363,20 @@ void UnidrawPauseFunc::execute() {
   }
 }
 
+/*****************************************************************************/
+
+AddToolButtonFunc::AddToolButtonFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void AddToolButtonFunc::execute() {
+    ComValue pathnamev(stack_arg(0));
+    static int popen_symid = symbol_add("popen");
+    boolean popen_flag = stack_key(popen_symid).is_true();
+    reset_stack();
+    OverlayEditor* ed = (OverlayEditor*)GetEditor();
+    OverlayComp* comp = ed->overlay_kit()->add_tool_button(pathnamev.symbol_ptr());
+    ComValue retval(comp->classid(), new ComponentView(comp));
+    retval.object_compview(true);
+    push_stack(retval);
+}
+

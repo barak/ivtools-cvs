@@ -187,6 +187,9 @@ public:
     // flag to add setr button to text editor
     boolean& clr_button_flag() { return _clr_button_flag; }
     // flag to add clear button to text editor
+
+    OverlayComp* add_tool_button(const char* path, OverlayComp* comp=nil);
+    // low-level routine used by ::add_custom_tool and others
 protected:
     Glyph* MenuLine(PSBrush*);
     // create line to put in a pulldown menu.
