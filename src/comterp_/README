@@ -197,6 +197,8 @@ lst=split(symbol|string) -- split symbol or string into list of characters.
 
 str=join(clist :sym) -- join list of characters into string
 
+bool=eq(str1 str2 :n len) -- partial string comparison
+
 postfix(arg1 [arg2 [arg3 ... [argn]]]) -- echo unevaluated postfix arguments
 (with [narg|nkey] after defined commands, {narg|nkey} after undefined commands,
 (narg) after keys, and a * following post-evaluation commands)

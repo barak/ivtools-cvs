@@ -96,6 +96,7 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 				 const void *arg)
 {
     if (_timeoutscriptid<0) return 0;
+    comterp_->push_servstate();
     comterp_->load_string(symbol_pntr(_timeoutscriptid));
     if (comterp_->read_expr()) {
         if (comterp_->eval_expr()) {
@@ -106,6 +107,7 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 	    delete comterp_;
 #endif
 	    timeoutscriptid(-1);
+	    comterp_->pop_servstate();
 	    comterp_ = nil;
 	    return -1;
 	} else {
@@ -119,6 +121,7 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 	    }
 	}
     }
+    comterp_->pop_servstate();
     return 0;
 }
 
