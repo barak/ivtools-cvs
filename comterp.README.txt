@@ -146,6 +146,12 @@ dbl=tan(x) -- returns the tangent of x radians
 
 dbl=sqrt(x) -- returns square root of x
 
+dbl=pi() -- returns the value of pi
+
+dbl=radtodeg(dbl) -- convert radians to degrees
+
+dbl=degtorad(dbl) -- convert degrees to radians
+
 num=floor(num) -- return closest integer value less than or equal to argument
 
 num=ceil(num) -- return closest integer value greater than or equal to argument
