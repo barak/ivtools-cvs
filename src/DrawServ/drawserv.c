@@ -444,6 +444,8 @@ void DrawServ::grid_message_handle(unsigned int id, unsigned int selector, int s
   gridtable()->find(ptr, id);
   if (ptr) {
     GraphicId* grid = (GraphicId*)ptr;
+    grid->selector(selector);
+    grid->selected(selected);
   }
 }
 
