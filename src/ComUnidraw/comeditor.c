@@ -149,6 +149,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     comterp->add_command("setattr", new SetAttrFunc(comterp, this));
 
     comterp->add_command("select", new SelectFunc(comterp, this));
+    comterp->add_command("delete", new DeleteFunc(comterp, this));
     comterp->add_command("move", new MoveFunc(comterp, this));
     comterp->add_command("scale", new ScaleFunc(comterp, this));
     comterp->add_command("rotate", new RotateFunc(comterp, this));
@@ -189,6 +190,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("highlight", new HighlightFunc(comterp, this));
     comterp->add_command("frame", new FrameFunc(comterp, this));
+    comterp->add_command("reorder", new ReorderFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {

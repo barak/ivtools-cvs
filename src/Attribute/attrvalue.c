@@ -235,7 +235,8 @@ boolean AttributeValue::boolean_val() {
     case AttributeValue::BooleanType:
 	return boolean_ref();
     case AttributeValue::SymbolType:
-	return (boolean) int_val();
+    case AttributeValue::StringType:
+	return (boolean) int_val()!=-1;
     case AttributeValue::ObjectType:
 	return (boolean) obj_val();
     default:
