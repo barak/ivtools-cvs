@@ -60,7 +60,7 @@ void DrawLinkList::add_drawlink(DrawLink* new_link) {
 
 DrawLink* DrawLinkList::find_drawlink(GraphicId* grid) {
   void* ptr = nil;
-  ((DrawServ*)unidraw)->sessionidtable()->find(ptr, grid->sessionid());
+  ((DrawServ*)unidraw)->sessionidtable()->find(ptr, grid->selector());
   return (DrawLink*)ptr;
 }
 

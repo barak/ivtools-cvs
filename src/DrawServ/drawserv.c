@@ -453,7 +453,10 @@ void DrawServ::grid_message_handle(DrawLink* link, unsigned int id, unsigned int
   if (ptr) {
     GraphicId* grid = (GraphicId*)ptr;
     if (selector==sessionid() && newselector!=0) {
-      if (grid->selector()==sessionid() && grid->selected()==LinkSelection::NotSelected) {
+      if (grid->selector()==sessionid() && 
+	  (grid->selected()==LinkSelection::NotSelected || 
+	   grid->selected()==LinkSelection::WaitingToBeSelected)) {
+	grid->selected(LinkSelection::NotSelected);
 	grid->selector(newselector);
 	char buf[BUFSIZ];
 	snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :grant 0x%08x)%c",
