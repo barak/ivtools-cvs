@@ -168,6 +168,8 @@ ivtools-0.7/src/ComTerp/statfunc.c
 ivtools-0.7/src/ComTerp/statfunc.h
 ivtools-0.7/src/ComTerp/strmfunc.c
 ivtools-0.7/src/ComTerp/strmfunc.h
+ivtools-0.7/src/ComTerp/symbolfunc.c
+ivtools-0.7/src/ComTerp/symbolfunc.h
 ivtools-0.7/src/ComTerp/xformfunc.c
 ivtools-0.7/src/ComTerp/xformfunc.h
 ivtools-0.7/src/ComUnidraw/Imakefile
@@ -180,6 +182,8 @@ ivtools-0.7/src/ComUnidraw/comterp-iohandler.c
 ivtools-0.7/src/ComUnidraw/comterp-iohandler.h
 ivtools-0.7/src/ComUnidraw/grfunc.c
 ivtools-0.7/src/ComUnidraw/grfunc.h
+ivtools-0.7/src/ComUnidraw/grstatfunc.c
+ivtools-0.7/src/ComUnidraw/grstatfunc.h
 ivtools-0.7/src/ComUnidraw/nfunc.c
 ivtools-0.7/src/ComUnidraw/nfunc.h
 ivtools-0.7/src/ComUnidraw/plotfunc.c

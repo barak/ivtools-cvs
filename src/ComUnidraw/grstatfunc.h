@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998,1999 Vectaport Inc.
+ * Copyright (c) 1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -21,27 +21,39 @@
  * 
  */
 
-/*
- * collection of help functions
- */
+#if !defined(grstatfunc_h)
+#define _grstatfunc_h
 
-#if !defined(_helpfunc_h)
-#define _helpfunc_h
+#include <ComUnidraw/unifunc.h>
 
-#include <ComTerp/comfunc.h>
-
-class ComTerp;
-
-//: help command for ComTerp.
-// help([command] [command...] :all) -- help for commands.
-class HelpFunc : public ComFunc {
+//: command to return center of graphics in comdraw.
+// xylist=center(compview :xy :yx :x :y) -- center of compview (dflt :xy)
+class CenterFunc : public UnidrawFunc {
 public:
-    HelpFunc(ComTerp*);
+    CenterFunc(ComTerp*,Editor*);
     virtual void execute();
-
-    virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "%s([command] [command...] :all) -- help for commands"; }
+      return "xylist=%s(compview :xy :yx :x :y) -- center of compview (dflt :xy)"; }
 };
 
-#endif /* !defined(_helpfunc_h) */
+//: command to return minimum-bounding rectangle of graphics in comdraw.
+// rectlist=mbr(compview :lbrt :lrbt) -- minimum-bounding rectangle of compview (dflt :lbrt)
+class MbrFunc : public UnidrawFunc {
+public:
+    MbrFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "rectlist=%s(compview :lbrt :lrbt) -- minimum-bounding rectangle of compview (dflt :lbrt :lrbt)"; }
+};
+
+//: command to return point list associated with a graphic
+// ptlist=points(compview) -- return point list from compview graphic
+class PointsFunc : public UnidrawFunc {
+public:
+    PointsFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "ptlist=%s(compview) -- return point list from compview graphic"; }
+};
+
+#endif /* !defined(_grstatfunc_h) */

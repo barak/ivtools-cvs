@@ -40,6 +40,7 @@
 #include <ComTerp/randfunc.h>
 #include <ComTerp/statfunc.h>
 #include <ComTerp/strmfunc.h>
+#include <ComTerp/symbolfunc.h>
 #include <ComTerp/xformfunc.h>
 #include <Attribute/attrlist.h>
 
@@ -162,7 +163,7 @@ int ComTerp::eval_expr(boolean nested) {
 }
 
 void ComTerp::eval_expr_internals(int pedepth) {
-  ComValue& sv = pop_stack();
+  ComValue& sv = pop_stack(false);
   
   if (sv.type() == ComValue::CommandType) {
     
@@ -186,7 +187,7 @@ void ComTerp::eval_expr_internals(int pedepth) {
       } else
 	push_stack(ComValue::nullval());
     } else 
-      push_stack(sv);
+      push_stack(lookup_symval(sv));
     
   } else if (sv.type() == ComValue::BlankType) {
 
@@ -242,7 +243,8 @@ void ComTerp::load_sub_expr() {
 	push_stack(argoffval);
       }
     }
-    push_stack(_pfcomvals[_pfoff]);
+    if (!_pfcomvals[_pfoff].is_null())
+      push_stack(_pfcomvals[_pfoff]);
     _pfoff++;
     if (stack_top().type() == ComValue::CommandType && 
 	!_pfcomvals[_pfoff-1].pedepth()) break;
@@ -566,13 +568,21 @@ ComValue& ComTerp::pop_symbol() {
         return ComValue::nullval();
 }
 
-int ComTerp::add_command(const char* name, ComFunc* func) {
+int ComTerp::add_command(const char* name, ComFunc* func, const char* alias) {
     int symid = symbol_add((char *)name);
     ComValue* comval = new ComValue();
     comval->type(ComValue::CommandType);
     comval->obj_ref() = (void*)func;
     comval->command_symid(symid);
     localtable()->insert(symid, comval);
+    if (alias) {
+      int alias_symid = symbol_add((char *)alias);
+      ComValue* aliasval = new ComValue();
+      aliasval->type(ComValue::CommandType);
+      aliasval->obj_ref() = (void*)func;
+      aliasval->command_symid(alias_symid, true /* alias */);
+      localtable()->insert(symid, aliasval);
+    }
     return symid;
 }
 
@@ -723,7 +733,8 @@ void ComTerp::add_defaults() {
 
     add_command("help", new HelpFunc(this));
     add_command("symid", new SymIdFunc(this));
-    add_command("symval", new SymValFunc(this));
+    add_command("symbol", new SymbolFunc(this), "symval");
+    add_command("symvar", new SymVarFunc(this));
     add_command("postfix", new PostFixFunc(this));
     add_command("posteval", new PostEvalFunc(this));
 

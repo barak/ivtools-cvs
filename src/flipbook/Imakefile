@@ -47,6 +47,7 @@ ComplexProgramTarget(flipbook)
 #define Obj(file) MakeObjectFromSrcFlags(file,)
 
 Obj(main)
+Obj(malloc)
 
 IncludeDependencies()
 

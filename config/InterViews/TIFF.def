@@ -233,4 +233,3 @@ dst.o: src.c								@@\
 	$(TIFF_CDRIVER) $(TIFF_CFLAGS) flags -c src.c
 #endif
 
-

@@ -22,26 +22,48 @@
  */
 
 /*
- * collection of help functions
+ * collection of symbol functions
  */
 
-#if !defined(_helpfunc_h)
-#define _helpfunc_h
+#if !defined(_symbolfunc_h)
+#define _symbolfunc_h
 
 #include <ComTerp/comfunc.h>
 
 class ComTerp;
 
-//: help command for ComTerp.
-// help([command] [command...] :all) -- help for commands.
-class HelpFunc : public ComFunc {
+//: symbol id command for ComTerp.
+// symid(symbol [symbol...]) -- return id(s) associated with symbol(s)
+class SymIdFunc : public ComFunc {
 public:
-    HelpFunc(ComTerp*);
+    SymIdFunc(ComTerp*);
     virtual void execute();
 
     virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "%s([command] [command...] :all) -- help for commands"; }
+      return "%s(symbol [symbol...]) -- return id(s) associated with symbol(s)"; }
 };
 
-#endif /* !defined(_helpfunc_h) */
+//: symbol command for ComTerp.
+// symbol(symid [symid ...]) -- return symbol(s) associated with integer id(s)
+class SymbolFunc : public ComFunc {
+public:
+    SymbolFunc(ComTerp*);
+    virtual void execute();
+
+    virtual const char* docstring() { 
+      return "%s(symid [symid...]) -- return symbol(s) associated with integer id(s)"; }
+};
+
+//: symbol variable command for ComTerp.
+// symvar(symbol_var [symbol_var ...]) -- return value(s) associated with symbol variable(s)
+class SymVarFunc : public ComFunc {
+public:
+    SymVarFunc(ComTerp*);
+    virtual void execute();
+
+    virtual const char* docstring() { 
+      return "%s(symbol_var [symbol_var...]) -- return value(s) associated with symbol variables(s)"; }
+};
+
+#endif /* !defined(_symbolfunc_h) */
