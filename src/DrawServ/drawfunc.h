@@ -37,5 +37,15 @@ public:
 	return "%s(hoststr :port portnum) -- connect to remote drawserv"; }
 };
 
+//: command to reserve graphics for selection in remote editors
+// reserve([compview ...] :all :clear) -- reserve graphic(s) for remote selection
+class ReserveFunc : public UnidrawFunc {
+public:
+    ReserveFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "%s([compview ...] :all :clear) -- reserve graphic(s) for remote selection"; }
+};
+
 #endif /* !defined(_drawfunc_h) */
 

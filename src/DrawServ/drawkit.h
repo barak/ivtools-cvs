@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2004 Scott E. Johnston
  * Copyright (c) 1994-1997,1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -47,6 +48,8 @@ public:
 
     static DrawKit* Instance();
 
+    virtual OverlaySelection* MakeSelection(Selection* sel = nil);
+    // make Selection of the proper derivation.
 protected:
     void toolbar0();
     void toolbar1();

@@ -898,7 +898,7 @@ void SelectFunc::execute() {
       return;
     }
       
-    OverlaySelection* newSel = new OverlaySelection();
+    OverlaySelection* newSel = ((OverlayEditor*)_ed)->overlay_kit()->MakeSelection();
     
     Viewer* viewer = _ed->GetViewer();
     AttributeValueList* avl = new AttributeValueList();

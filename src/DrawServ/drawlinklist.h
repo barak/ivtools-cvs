@@ -32,6 +32,7 @@
 
 #include <Unidraw/globals.h>
 
+class DrawLink;
 class Iterator;
 class UList;
 

@@ -30,6 +30,8 @@
 #include <DrawServ/drawlinklist.h>
 #include <DrawServ/drawserv.h>
 #include <DrawServ/drawserv-handler.h>
+#include <DrawServ/grid.h>
+#include <DrawServ/gridlist.h>
 
 #include <OverlayUnidraw/ovclasses.h>
 #include <OverlayUnidraw/scriptview.h>
@@ -43,8 +45,15 @@
 
 #include <ComTerp/comterpserv.h>
 
+#include <Attribute/attrlist.h>
+
 #include <fstream.h>
 #include <strstream>
+
+int DrawServ::_reserve_batch_min = 3;
+int DrawServ::_reserve_batch_size = 5;
+
+implementTable(GraphicIdTable,int,void*)
 
 /*****************************************************************************/
 
@@ -60,11 +69,18 @@ DrawServ::DrawServ (Catalog* c, World* w)
 }
 
 void DrawServ::Init() {
-  _list = new DrawLinkList;
+  _linklist = new DrawLinkList;
+  _grid_request_list = new GraphicIdList;
+  _grid_reserved_list = new GraphicIdList;
+  _gridtable = new GraphicIdTable(1024);
 }
 
 DrawServ::~DrawServ () 
 {
+  delete _linklist;
+  delete _grid_request_list;
+  delete _grid_reserved_list;
+  delete _gridtable;
 }
 
 DrawLink* DrawServ::linkup(const char* hostname, int portnum, 
@@ -79,7 +95,7 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
     }
     link->open();
     if (link && link->ok()) {
-      _list->add_drawlink(link);
+      _linklist->add_drawlink(link);
       return link;
     } else {
       delete link;
@@ -89,13 +105,13 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
 
     // search for existing link with matching local_id
     Iterator i;
-    _list->First(i);
-    while(!_list->Done(i) && _list->GetDrawLink(i)->local_linkid()!=local_id)
-      _list->Next(i);
+    _linklist->First(i);
+    while(!_linklist->Done(i) && _linklist->GetDrawLink(i)->local_linkid()!=local_id)
+      _linklist->Next(i);
 
     /* if found, finalize linkup */
-    if (!_list->Done(i)) {
-      DrawLink* curlink = _list->GetDrawLink(i);
+    if (!_linklist->Done(i)) {
+      DrawLink* curlink = _linklist->GetDrawLink(i);
       curlink->remote_linkid(remote_id);
       curlink->althostname(hostname);
       if (comterp && comterp->handler()) {
@@ -115,8 +131,8 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
 }
 
 int DrawServ::linkdown(DrawLink* link) {
-  if (_list->Includes(link)) {
-    _list->Remove(link);
+  if (_linklist->Includes(link)) {
+    _linklist->Remove(link);
     link->close();
     delete link;
     return 0;
@@ -126,16 +142,16 @@ int DrawServ::linkdown(DrawLink* link) {
 
 DrawLink* DrawServ::linkget(int local_id, int remote_id) {
   DrawLink* link = nil;
-  if (_list) {
+  if (_linklist) {
     Iterator(i);
-    _list->First(i);
-    while (!_list->Done(i) && !link) {
-      DrawLink* l = _list->GetDrawLink(i);
+    _linklist->First(i);
+    while (!_linklist->Done(i) && !link) {
+      DrawLink* l = _linklist->GetDrawLink(i);
       if (l->local_linkid()==local_id && remote_id==-1 ||
 	  local_id==-1 && l->remote_linkid()==remote_id ||
 	  l->local_linkid()==local_id && l->remote_linkid()==remote_id)
 	link = l;
-      _list->Next(i);
+      _linklist->Next(i);
     }
   }
   return link;
@@ -144,21 +160,21 @@ DrawLink* DrawServ::linkget(int local_id, int remote_id) {
 void DrawServ::linkdump(FILE* fptr) {
   fprintf(fptr, "Host                            Alt.                            Port    LID  RID\n");
   fprintf(fptr, "------------------------------  ------------------------------  ------  ---  ---\n");
-  if (_list) {
+  if (_linklist) {
     Iterator i;
-    _list->First(i);
-    while(!_list->Done(i)) {
-      DrawLink* link = _list->GetDrawLink(i);
+    _linklist->First(i);
+    while(!_linklist->Done(i)) {
+      DrawLink* link = _linklist->GetDrawLink(i);
       fprintf(fptr, "%-30.30s  %-30.30s  %-6d  %-3d  %-3d\n", 
 	      link->hostname(), link->althostname(), link->portnum(),
 	      link->local_linkid(), link->remote_linkid());
-      _list->Next(i);
+      _linklist->Next(i);
     }
   }
 }
 
 void DrawServ::ExecuteCmd(Command* cmd) {
-  if(!_list || _list->Number()==0) 
+  if(!_linklist || _linklist->Number()==0) 
 
     /* normal Unidraw command execution */
     Unidraw::ExecuteCmd(cmd);
@@ -226,9 +242,9 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 void DrawServ::DistributeCmdString(const char* cmdstring) {
 
   Iterator i;
-  _list->First(i);
-  while (!_list->Done(i)) {
-    DrawLink* link = _list->GetDrawLink(i);
+  _linklist->First(i);
+  while (!_linklist->Done(i)) {
+    DrawLink* link = _linklist->GetDrawLink(i);
     if (link) {
       int fd = link->handle();
       if (fd>=0) {
@@ -239,7 +255,87 @@ void DrawServ::DistributeCmdString(const char* cmdstring) {
 	out.flush();
       }
     }
-    _list->Next(i);
+    _linklist->Next(i);
   }
 
 }
+
+void DrawServ::reserve_batch_request(int nids) {
+
+  /* generate a new batch of id's while generating command to reserve them*/
+  GraphicIdsRequest* gridr = new GraphicIdsRequest();
+  GraphicIdList* gridr_list = gridr->sublist();
+  std::ostrstream sbuf;
+  sbuf << "reserve(";
+  for (int i=0; i<_reserve_batch_size; i++) {
+    GraphicId* grid = new GraphicId();
+    gridr_list->Append(grid);
+    if (i) sbuf << ',';
+    sbuf << grid->id();
+  }
+  sbuf << ":batchid " << gridr->id() << ")";
+  DistributeCmdString(sbuf.str());
+
+}
+
+void DrawServ::reserve_batch_response(int reserved, unsigned int batchid) {
+}
+
+void DrawServ::reserve_batch_handle(DrawLink* link, unsigned int *ids, int nids, unsigned int batchid) {
+  fprintf(stderr, "reserve batch request has been made, batchid==%d\n, batchid");
+  for (int i=0; i<nids; i++) {
+    if (i) fprintf(stderr, ",");
+    fprintf(stderr, "%d", ids[i]);
+  }
+  fprintf(stderr, "\n");
+}
+
+int DrawServ::reserved_id() {
+  int return_id = 0;
+
+  /* process next batch if no more id's ready */
+  if (_grid_reserved_list->Number()==0) reserved_batch();
+
+  /* reserve a new batch if number available falls below a threshold */
+  if (_grid_request_list->Number()<reserve_batch_min()) reserve_batch_request(reserve_batch_size());
+
+  return return_id;
+}
+
+int DrawServ::reserved_batch() {
+
+  int count = 0;
+
+  /* search through list of candidate id sets, and remove 1st */
+  /* set that has completed the reservation process           */
+  Iterator it;
+  _grid_request_list->First(it);
+  GraphicIdsRequest* gridr = nil;
+  while (!_grid_request_list->Done(it) && !gridr) {
+    GraphicIdsRequest* gridr = (GraphicIdsRequest*)_grid_request_list->GetGraphicId(it);
+    if(gridr && gridr->reserved()) {
+      _grid_request_list->Remove(it);
+    }
+    _grid_request_list->Next(it);
+  }
+
+  /* transfer all of these to the reservation completed list */
+  if (gridr && gridr->sublist()) {
+    Iterator jt;
+    GraphicIdList* gridr_list = gridr->sublist();
+    count = gridr_list->Number();
+    gridr_list->First(jt);
+    while (!gridr_list->Done(jt)) {
+      GraphicId* grid = gridr_list->GetGraphicId(jt);
+      gridr_list->Remove(jt);
+      if (grid) _grid_reserved_list->Append(grid);
+    }
+    delete gridr;
+    return count;
+  } else {
+    fprintf(stderr, "No batch of graphic ids has completed reservation process\n");
+    fprintf(stderr, "Someone should really do something about this\n");
+    return 0;
+  }
+}
+

@@ -270,7 +270,7 @@ void OverlayKit::InitMembers (OverlayComp* comp) {
     _ed->_comp = comp;
     _ed->_keymap = new KeyMap;
     _ed->_curCtrl = new ControlState;
-    _ed->_selection = new OverlaySelection;
+    _ed->_selection = MakeSelection();
     _ed->_tray = new Tray;
     _ed->_tray->Propagate(false);
 }
@@ -1662,3 +1662,8 @@ boolean OverlayKit::bincheck(const char* command) {
 const char* OverlayKit::otherdisplay() { return _otherdisplay; }
 void OverlayKit::otherdisplay(const char* display) 
 { delete _otherdisplay; _otherdisplay= strdup(display); }
+
+
+OverlaySelection* OverlayKit::MakeSelection(Selection* sel) {
+  return new OverlaySelection(sel);
+}

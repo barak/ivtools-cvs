@@ -1119,7 +1119,8 @@ void OvImportCmd::Execute () {
     if (comp_ != nil) {
         OverlaySelection* oldsel;
 	if (preserve_selection_)
-	  oldsel = new OverlaySelection((OverlaySelection*)GetEditor()->GetSelection());
+	  oldsel = ((OverlayEditor*)GetEditor())->overlay_kit()->
+	    MakeSelection((OverlaySelection*)GetEditor()->GetSelection());
 	((OverlayEditor*)GetEditor())->DoAutoNewFrame();
 	if (comp_->IsA(GRAPHIC_COMP)) {
 	    PasteCmd* paste_cmd = new PasteCmd(GetEditor(), new Clipboard((GraphicComp*)comp_));

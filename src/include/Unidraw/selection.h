@@ -51,12 +51,12 @@ public:
     virtual void Init(Viewer* = nil);   /* explicitly init handles */
     virtual void Clear(Viewer* = nil);	/* removes & clears all views */
 
-    void Append(GraphicView*);
-    void Prepend(GraphicView*);
-    void InsertAfter(Iterator, GraphicView*);
-    void InsertBefore(Iterator, GraphicView*);
-    void Remove(GraphicView*);
-    void Remove(Iterator&);
+    virtual void Append(GraphicView*);
+    virtual void Prepend(GraphicView*);
+    virtual void InsertAfter(Iterator, GraphicView*);
+    virtual void InsertBefore(Iterator, GraphicView*);
+    virtual void Remove(GraphicView*);
+    virtual void Remove(Iterator&);
 
     GraphicView* GetView(Iterator);
     void SetView(GraphicView*, Iterator&);

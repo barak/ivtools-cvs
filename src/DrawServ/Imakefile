@@ -30,6 +30,9 @@ Obj26(drawlinklist)
 Obj26(drawserv)
 Obj26A(drawserv-handler)
 Obj26(drawviews)
+Obj26(grid)
+Obj26(gridlist)
+Obj26(linkselection)
 
 
 #define Obj31(file) MakeObjectFromSrcFlags(file, -Div2_6_incompatible -I$(TOP)/src/include $(TOP_CCINCLUDES))

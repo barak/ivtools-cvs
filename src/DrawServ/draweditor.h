@@ -26,6 +26,8 @@
 
 #include <FrameUnidraw/frameeditor.h>
 
+class DrawKit;
+
 //: editor for DrawServ application
 class DrawEditor : public FrameEditor {
 public:
@@ -44,6 +46,8 @@ public:
     // this DrawEditor.
 
 protected:
+
+friend class DrawKit;
 
 };
 

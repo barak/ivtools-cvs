@@ -29,7 +29,10 @@
 
 #include <DrawServ/drawkit.h>
 #include <DrawServ/drawcomps.h>
-#include <ComUnidraw/comeditor.h>
+#include <DrawServ/draweditor.h>
+#include <DrawServ/drawlinklist.h>
+#include <DrawServ/drawserv.h>
+#include <DrawServ/linkselection.h>
 
 #include <FrameUnidraw/frameeditor.h>
 
@@ -448,3 +451,6 @@ void DrawKit::launch_graphdraw() {
   unidraw->Open(ed);
 }
 
+OverlaySelection* DrawKit::MakeSelection(Selection* sel) {
+  return new LinkSelection(((DrawServ*)unidraw)->linklist(), sel);
+}

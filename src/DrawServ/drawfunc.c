@@ -27,6 +27,9 @@
 #include <DrawServ/drawlinkcomp.h>
 #include <DrawServ/drawserv.h>
 
+#include <Attribute/attrlist.h>
+#include <Attribute/attrvalue.h>
+
 #define TITLE "DrawLinkFunc"
 
 /*****************************************************************************/
@@ -115,3 +118,123 @@ void DrawLinkFunc::execute() {
 #endif
 
 }
+
+
+/*****************************************************************************/
+
+ReserveFunc::ReserveFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void ReserveFunc::execute() {
+#if 1
+  static int batchid_symid = symbol_add("batchid");
+  ComValue batchidv(stack_key(batchid_symid));
+  unsigned int batchid = batchidv.is_known() ? batchidv.uint_val() : 0;
+
+  static int batch_symid = symbol_add("batch");
+  ComValue batch_flagv(stack_key(batch_symid));
+  boolean batch_flag = batch_flagv.is_true();
+
+  ComValue arrayv(stack_arg(0));
+
+  reset_stack();
+
+  /* provoke a batch request */
+  if (batch_flag) 
+    ((DrawServ*)unidraw)->reserve_batch_request(DrawServ::reserve_batch_size());
+
+  /* handle a batch request */
+  else if (arrayv.is_array()) {
+    AttributeValueList* avl = arrayv.array_val();
+    Iterator it;
+    avl->First(it);
+    const int nids = avl->Number();
+    unsigned int ids[nids];
+    for (int i=0; i<nids; i++) {
+      ids[i] = avl->GetAttrVal(it)->uint_val();
+      avl->Next(it);
+    }
+    ((DrawServ*)unidraw)->reserve_batch_handle(nil, ids, nids, batchid);
+  }
+    
+
+#else
+    static int all_symid = symbol_add("all");
+    ComValue all_flagv(stack_key(all_symid));
+    boolean all_flag = all_flagv.is_true();
+
+    static int clear_symid = symbol_add("clear");
+    ComValue clear_flagv(stack_key(clear_symid));
+    boolean clear_flag = clear_flagv.is_true();
+
+    Selection* sel = _ed->GetViewer()->GetSelection();
+    if (clear_flag) {
+      sel->Clear();
+      reset_stack();
+      return;
+    }
+      
+    OverlaySelection* newSel = ((OverlayEditor*)_ed)->overlay_kit()->MakeSelection();
+    
+    Viewer* viewer = _ed->GetViewer();
+    AttributeValueList* avl = new AttributeValueList();
+    if (all_flag) {
+
+      GraphicView* gv = ((OverlayEditor*)_ed)->GetFrame();
+      Iterator i;
+      int count=0;
+      for (gv->First(i); !gv->Done(i); gv->Next(i)) {
+	GraphicView* subgv = gv->GetView(i);
+	newSel->Append(subgv);
+	OverlayComp* comp = (OverlayComp*)subgv->GetGraphicComp();
+	ComValue* compval = new ComValue(comp->classid(), new ComponentView(comp));
+	compval->object_compview(true);
+	avl->Append(compval);
+      }
+
+    } else if (nargs()==0) {
+      Iterator i;
+      int count=0;
+      for (sel->First(i); !sel->Done(i); sel->Next(i)) {
+	GraphicView* grview = sel->GetView(i);
+	OverlayComp* comp = grview ? (OverlayComp*)grview->GetSubject() : nil;
+	ComValue* compval = comp ? new ComValue(comp->classid(), new ComponentView(comp)) : nil;
+
+	if (compval) {
+	  compval->object_compview(true);
+	  avl->Append(compval);
+	}
+	delete newSel;
+        newSel = nil;
+      }
+
+    } else {
+
+      for (int i=0; i<nargsfixed(); i++) {
+        ComValue& obj = stack_arg(i);
+	if (obj.object_compview()) {
+	  ComponentView* comview = (ComponentView*)obj.obj_val();
+	  OverlayComp* comp = (OverlayComp*)comview->GetSubject();
+	  if (comp) {
+	    newSel->Append(comp->FindView(viewer));
+	    ComValue* compval = new ComValue(comp->classid(), new ComponentView(comp));
+	    compval->object_compview(true);
+	    avl->Append(compval);
+	  }
+	}
+      }
+    }
+
+    if (newSel){
+      sel->Clear();
+      delete sel;
+      _ed->SetSelection(newSel);
+      newSel->Update(viewer);
+      unidraw->Update();
+    }
+    reset_stack();
+    ComValue retval(avl);
+    push_stack(retval);
+#endif
+}
+

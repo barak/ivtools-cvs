@@ -30,13 +30,18 @@
 #include <OverlayUnidraw/ovunidraw.h>
 #include <stdio.h>
 
+#include <OS/table.h>
+declareTable(GraphicIdTable,int,void*)
+
 //: Unidraw specialized for DrawServ
 // Unidraw (OverlayUnidraw) specialized for DrawServ application.
 // Networked application of the Unidraw framework.
 
+class AttributeValueList;
 class ComTerp;
 class DrawLink;
 class DrawLinkList;
+class GraphicIdList;
 
 class DrawServ : public OverlayUnidraw {
 public:
@@ -73,8 +78,47 @@ public:
     virtual void DistributeCmdString(const char* cmdstring);
     // execute command string locally, and on remote DrawServ's
 
+    DrawLinkList* linklist() { return _linklist; }
+    // return pointer to list of DrawLink's
+
+
+    /* mechanism for reserving graphic ids */
+
+    void reserve_batch_request(int nids);
+    // initiate reservation of a set of graphic ids.
+    void reserve_batch_response(int reserved, unsigned int batchid);
+    // finalize reservation of a set of graphic ids
+    void reserve_batch_handle(DrawLink* link, unsigned int* ids, int nids, unsigned int batchid);
+    // respond to a request to reserve ids from a particular DrawLink
+    int reserved_id();
+    // next available reserved id.
+    int reserved_batch();
+    // process next available batch of reserved id's.
+
+    static int reserve_batch_min() { return _reserve_batch_min; }
+    // get the minimum number of reserved id batches allowed.
+    static void reserve_batch_min(int min) { _reserve_batch_min = min; }
+    // set the minimum number of reserved id batches allowed.
+    static int reserve_batch_size() { return _reserve_batch_size; }
+    // get the batch size for a request to reserve ids
+    static void reserve_batch_size(int size) { _reserve_batch_size = size; }
+    // set the batch size for a request to reserve ids
+
+    GraphicIdTable* gridtable() { return _gridtable; }
+    // return pointer to table of GraphicId's.
+
 protected:
-    DrawLinkList* _list;
+    DrawLinkList* _linklist;
+    // DrawLink list
+    GraphicIdList* _grid_request_list;
+    // GraphicId reservation request list
+    GraphicIdList* _grid_reserved_list;
+    // GraphicId reservation completed list
+    GraphicIdTable* _gridtable;
+    // table of all GraphicId's.
+
+    static int _reserve_batch_min;
+    static int _reserve_batch_size;
 };
 
 #endif

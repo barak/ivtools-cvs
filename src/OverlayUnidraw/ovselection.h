@@ -67,7 +67,7 @@ public:
     OverlayView* GetView(Iterator);
     void SetView(OverlayView*, Iterator&);
 
-    OverlaySelection* ViewsWithin(IntCoord l, IntCoord b, IntCoord r, IntCoord t);
+    virtual OverlaySelection* ViewsWithin(IntCoord l, IntCoord b, IntCoord r, IntCoord t);
 
 protected:
     boolean _clear_to_repair;

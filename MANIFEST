@@ -299,6 +299,12 @@ ivtools-1.1/src/DrawServ/drawserv-handler.c
 ivtools-1.1/src/DrawServ/drawserv-handler.h
 ivtools-1.1/src/DrawServ/drawviews.c
 ivtools-1.1/src/DrawServ/drawviews.h
+ivtools-1.1/src/DrawServ/grid.c
+ivtools-1.1/src/DrawServ/grid.h
+ivtools-1.1/src/DrawServ/gridlist.c
+ivtools-1.1/src/DrawServ/gridlist.h
+ivtools-1.1/src/DrawServ/linkselection.c
+ivtools-1.1/src/DrawServ/linkselection.h
 ivtools-1.1/src/FrameUnidraw/Imakefile
 ivtools-1.1/src/FrameUnidraw/Makefile
 ivtools-1.1/src/FrameUnidraw/framecatalog.c

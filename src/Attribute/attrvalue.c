@@ -1067,3 +1067,16 @@ int AttributeValue::stream_mode() {
   } else
     return 0;
 }
+
+int AttributeValue::state() {
+  if (!is_stream() && !is_object() && !is_command()) 
+    return _state;
+  else
+    return -1;
+}
+
+void AttributeValue::state(int val) {
+  if (!is_stream() && !is_object() && !is_command()) 
+    _state = val;
+}
+
