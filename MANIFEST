@@ -33,6 +33,7 @@ ivtools-0.8/config/InterViews/iv-bsd.cf
 ivtools-0.8/config/InterViews/iv-convex.cf
 ivtools-0.8/config/InterViews/iv-cray.cf
 ivtools-0.8/config/InterViews/iv-cygwin.cf
+ivtools-0.8/config/InterViews/iv-freebsd.cf
 ivtools-0.8/config/InterViews/iv-generic.cf
 ivtools-0.8/config/InterViews/iv-hp.cf
 ivtools-0.8/config/InterViews/iv-ibm.cf
@@ -63,6 +64,7 @@ ivtools-0.8/config/config.defs.in
 ivtools-0.8/config/config.mk
 ivtools-0.8/config/config.null.mk
 ivtools-0.8/config/default-gcc.mk
+ivtools-0.8/config/freebsd-gcc.mk
 ivtools-0.8/config/freebsd2.1-gcc.mk
 ivtools-0.8/config/gcc.def
 ivtools-0.8/config/hpux-gcc.mk
@@ -80,6 +82,7 @@ ivtools-0.8/config/rules.def
 ivtools-0.8/config/sco3.2.4-gcc.mk
 ivtools-0.8/config/site.def.ALPHA
 ivtools-0.8/config/site.def.CYGWIN
+ivtools-0.8/config/site.def.FREEBSD
 ivtools-0.8/config/site.def.HP800
 ivtools-0.8/config/site.def.LINUX
 ivtools-0.8/config/site.def.NETBSD
