@@ -134,7 +134,7 @@ void NegFunc::execute() {
     ComValue& operand1 = stack_arg(0);
     ComValue result(operand1);
     result.type(ComValue::BooleanType);
-    switch (result.type()) {
+    switch (operand1.type()) {
     case ComValue::CharType:
 	result.char_ref() = ! operand1.char_val();
 	break;
@@ -167,6 +167,17 @@ void NegFunc::execute() {
 	break;
     case ComValue::BooleanType:
         result.boolean_ref() = ! operand1.boolean_val();
+	break;
+    case ComValue::UnknownType:
+        result.boolean_ref() = true;
+	break;
+    case ComValue::ArrayType:
+    case ComValue::ObjectType:
+        result.boolean_ref() = false;
+	break;
+    case ComValue::SymbolType:
+    case ComValue::StringType:
+        result.boolean_ref() = operand1.symbol_val()<0;
 	break;
     }
     reset_stack();
