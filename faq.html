@@ -189,6 +189,7 @@ not open in idraw.
 <h2>source building questions</h2>
 
 <menu>
+<li><a href=#gcc-2.96-problem>I'm using RedHat 7.* and gcc-2.96, and I get all kinds of errors.  How can this be?</a></li>
 <li><a href=#PWD-read-only>When I run configure on Darwin (Mac OS X), I see "./configure: read-only variable: PWD [1845]".  Should I be worried?</a></li>
 <li><a href=#imake-symbol-clash>The absolute pathname used by the "make depend" pass is not the same as the ABSTOP pathname written to config/config.mk by the configure script.</a></li>
 <li><a href=#libstdcplusplusv3prob>I can't read or import anything, and I built ivtools with gcc-3.0.0 or gcc-2.95.3 bundled with libstdc++-v3.</a></li>
@@ -215,6 +216,15 @@ not open in idraw.
 
 </menu>
 
+<p><a name=gcc296><a name=gcc-2.96-problem><b>I'm using RedHat 7.* and gcc-2.96, and I get all kinds of errors.  How can this be?</p></b>
+
+The 7.* series of RedHat distributions incorporates a variant of the
+gcc compiler that was never approved by the gcc steering committee.  A decision was made to skip this version, and migrate to gcc-3.* when it came out.  This has been done, but RedHat is still shipping gcc-2.96 with it's distribution.  The fix is to upgrade to gcc-3.* or downgrade to gcc-2.95.*.  This problem only impacts RedHat 7.*.  Any other free Unix you can name has avoided this problem.
+
+If you are committed to using gcc-2.96, here is a patch submitted by Murray Jensen that attempts to do this on Solaris:
+
+<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=400986&group_id=275&atid=300275">http://sourceforge.net/tracker/index.php?func=detail&aid=400986&group_id=275&atid=300275</a>
+
 <p><a name=PWD-read-only><b>When I run configure on Darwin (Mac OS X), I see "./configure: read-only variable: PWD [1845]".  Should I be worried?</p></b>
 
 Not about PWD.  The configure script ensures that the PWD environment
@@ -231,15 +241,6 @@ or you can add <code>-U</code> undefine arguments as necessary to the imake comm
 <p><a name=libstdcplusplusv3prob><b>I can't read or import anything, and I built ivtools with gcc-3.0.0 or gcc-2.95.3 bundled with libstdc++-v3.</p></b>
 
 Check out this <a href="./fopen_rplus.patch.txt">patch</a> for more details.  <i>No longer needed after ivtools-1.0.2 -- the workaround was to replace any rewind with close/open.</i>
-
-<p><a name=gcc296><b>I can't build ivtools with gcc-2.96.  What gives?</p></b><p>
-
-gcc-2.96 is a variant of gcc put out by RedHat/Cygnus which was never
-approved by the gcc steering committee.  ivtools should compile much
-easier with any earlier version (gcc-2.95.3 or less), and any later
-version (gcc-3.0 or greater).  If you are committed to using gcc-2.96, here is a patch submitted by Murray Jensen that attempts to do this on Solaris:
-
-<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=400986&group_id=275&atid=300275">http://sourceforge.net/tracker/index.php?func=detail&aid=400986&group_id=275&atid=300275</a>
 
 <p><a name=cpumissing><b>I run "make World" or "make Makefiles", and see an error message like this</p></b><p>
 
