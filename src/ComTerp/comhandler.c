@@ -83,7 +83,9 @@ ComterpHandler::destroy (void)
     COMTERP_REACTOR::instance ()->cancel_timer (this);
 #endif
     this->peer ().close ();
-    delete comterp_;
+    if (_timeoutscriptid<0)
+      delete comterp_;
+    else /* timer could be still running */;
 }
 
 int
