@@ -27,6 +27,7 @@
 #include <ComTerp/comterp.h>
 #include <Unidraw/iterator.h>
 #include <Attribute/attrlist.h>
+#include <OS/math.h>
 #include <math.h>
 
 #define TITLE "NumFunc"
@@ -455,7 +456,8 @@ AttributeValueList* MpyFunc::matrix_mpy(AttributeValueList* list1,
     list1->GetAttrVal(it2)->array_val()->Number() : 0;
 
   /* ensure inner dimension is the same */
-  if (j1max != i2max) return nil;
+  /* allow for vector argument on rhs */
+  if (j1max != i2max && (j1max || i2max!=1)) return nil;
 
   /* ensure each row is of equal length */
   list1->First(it1);
@@ -494,40 +496,71 @@ AttributeValueList* MpyFunc::matrix_mpy(AttributeValueList* list1,
     AttributeValueList* row1 = row1v && row1v->is_array() ? 
       row1v->array_val() : nil;
 
-    if (!row1) break;
-
-    /* loop over output columns */
-    for (int j3=0; j3<j3max; j3++) {
+    if (j3max) {
+      /* loop over output columns */
+      for (int j3=0; j3<j3max; j3++) {
+	
+	if (row1) row1->First(itj1);
+	
+	/* generate inner product */
+	for (int n=0; n<Math::max(j1max,1); n++) {
+	  
+	  /* locate the value from the second matrix */
+	  Iterator iti2, itj2;
+	  list2->First(iti2);
+	  for (int i=0; i<n; i++) list2->Next(iti2);
+	  AttributeValue* row2v = list1->GetAttrVal(iti2);
+	  AttributeValueList* row2 = row2v && row2v->is_array() ? 
+	    row2v->array_val() : nil;
+	  if (row2) {
+	    row2->First(itj2);
+	    for (int j=0; j<j3; j++) row2->Next(itj2);
+	  }
+	  if ((row1 || !j1max) && row2) {
+	    if (row1) 
+	      comterp()->push_stack(*row1->GetAttrVal(itj1));
+	    else
+	      comterp()->push_stack(*row1v);
+	    comterp()->push_stack(*row2->GetAttrVal(itj2));
+	    exec(2,0);
+	    if (n) addfunc.exec(2,0);
+	  }
+	  
+	  if (row1) row1->Next(itj1);
+	}
+	
+	prodrow->Append(new AttributeValue(comterp()->pop_stack()));
+      }
+      /* done looping over output columsn */
       
-      row1->First(itj1);
+    } else {
+      /* handle single output column */
 
+      if (row1) row1->First(itj1);
+	
       /* generate inner product */
-      for (int n=0; n<j1max; n++) {
-
-	/* locate the value from the second matrix */
-	Iterator iti2, itj2;
+      for (int n=0; n<Math::max(j1max,1); n++) {
+	  
+	/* locate the value from the lhs vector */
+	Iterator iti2;
 	list2->First(iti2);
 	for (int i=0; i<n; i++) list2->Next(iti2);
-	AttributeValue* row2v = list1->GetAttrVal(iti2);
-	AttributeValueList* row2 = row2v && row2v->is_array() ? 
-	  row2v->array_val() : nil;
-	if (row2) {
-	  row2->First(itj2);
-	  for (int j=0; j<j3; j++) row2->Next(itj2);
-	}
-	if (row1 && row2) {
-	  comterp()->push_stack(*row1->GetAttrVal(itj1));
-	  comterp()->push_stack(*row2->GetAttrVal(itj2));
+	AttributeValue* val2v = list1->GetAttrVal(iti2);
+	if ((row1 || !j1max) && val2v) {
+	  if (row1) 
+	    comterp()->push_stack(*row1->GetAttrVal(itj1));
+	  else
+	    comterp()->push_stack(*row1v);
+	  comterp()->push_stack(*val2v);
 	  exec(2,0);
 	  if (n) addfunc.exec(2,0);
 	}
-
-	row1->Next(itj1);
+	
+	if (row1) row1->Next(itj1);
       }
       
       prodrow->Append(new AttributeValue(comterp()->pop_stack()));
     }
-    /* done looping over output columsn */
 
     list1->Next(iti1);
   }
