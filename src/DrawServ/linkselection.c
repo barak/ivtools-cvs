@@ -42,7 +42,7 @@
 
 GraphicIdList* LinkSelection::_locally_selected = nil;
 GraphicIdList* LinkSelection::_waiting_to_be_selected = nil;
-char* LinkSelection::_selected_strings[] =  { "NotSelected", "LocallySelected", "RemotelySelected", "WaitingToBeSelected", "PreviouslySelected" };
+char* LinkSelection::_selected_strings[] =  { "NotSelected", "LocallySelected", "RemotelySelected", "WaitingToBeSelected"};
 
 /*****************************************************************************/
 
@@ -78,13 +78,11 @@ void LinkSelection::Clear(Viewer* viewer) {
     table->find(ptr, (void*)comp);
     if (ptr) {
       GraphicId* grid = (GraphicId*)ptr;
-      if (grid->selected()==LocallySelected) 
-	grid->selected(PreviouslySelected);
-      else if (grid->selected()==WaitingToBeSelected)
+      if (grid->selected()==LocallySelected || grid->selected()==WaitingToBeSelected) 
 	grid->selected(NotSelected);
       char buf[BUFSIZ];
       snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d)%c",
-	       grid->id(), grid->selector(), NotSelected, '\0');
+	       grid->id(), grid->selector(), grid->selected(), '\0');
       ((DrawServ*)unidraw)->DistributeCmdString(buf);
     }
     Next(it);
@@ -115,16 +113,16 @@ void LinkSelection::Reserve() {
 	Remove(it);
 	removed = true;
 	
-	if (grid->selected()==PreviouslySelected || 
-	    grid->selected()==NotSelected) {
+	if (grid->selected()==NotSelected) {
 	  
 	  /* make a request to select this in the future */
-	  ((DrawServ*)unidraw)->ReserveSelection(grid);
 	  grid->selected(WaitingToBeSelected);
+	  ((DrawServ*)unidraw)->ReserveSelection(grid);
 	} 
 	
       } else {
 	grid->selected(LocallySelected);
+	((DrawServ*)unidraw)->ReserveSelection(grid);
       }
       
     }

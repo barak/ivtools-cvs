@@ -431,7 +431,9 @@ void DrawServ::ReserveSelection(GraphicId* grid) {
 
   if (link) {
     char buf[BUFSIZ];
-    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x)%c", grid->id(), sessionid(), '\0');
+    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x)%c", grid->id(), sessionid(), 
+	     grid->selected()==LinkSelection::LocallySelected ? 
+	     LinkSelection::RemotelySelected : LinkSelection::WaitingToBeSelected, '\0');
     SendCmdString(link, buf);
   } else
     fprintf(stderr, "surprisingly no selector link found for GraphicId %u\n", grid->id());
