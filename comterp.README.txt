@@ -74,9 +74,11 @@ OPERATOR TABLE
 
     Operators     Command Name         Priority    Order       Type
     ---------     ------------         --------    -----       ----
-    .             dot                  130         R-to-L      binary
-    ^             power                120         R-to-L      binary
+    .             dot                  130         L-to-R      binary
+    `             bquote               125         R-to-L      unary-prefix
+    $             stream               125         R-to-L      unary-prefix
     !             negate               110         R-to-L      unary-prefix
+    ~             bit_not              110         R-to-L      unary-prefix
     ++            incr                 110         R-to-L      unary-prefix
     ++            incr_after           110         R-to-L      unary-postfix
     -             minus                110         R-to-L      unary-prefix
@@ -89,15 +91,21 @@ OPERATOR TABLE
     /             div                  70          L-to-R      binary
     +             add                  60          L-to-R      binary
     -             sub                  60          L-to-R      binary
+    <<            lshift               55          L-to-R      binary
+    >>            rshift               55          L-to-R      binary
     <             lt                   50          L-to-R      binary
     <=            lt_or_eq             50          L-to-R      binary
     >             gt                   50          L-to-R      binary
     >=            gt_or_eq             50          L-to-R      binary
     !=            not_eq               45          L-to-R      binary
     ==            eq                   45          L-to-R      binary
+    &             bit_and              44          L-to-R      binary
+    ^             bit_xor              43          L-to-R      binary
+    |             bit_or               42          L-to-R      binary
     &&            and                  41          L-to-R      binary
     ||            or                   40          L-to-R      binary
-    ,             stream               35          L-to-R      binary
+    ,             tuple                35          L-to-R      binary
+    ,,            concat               33          L-to-R      binary
     %=            mod_assign           30          R-to-L      binary
     *=            mpy_assign           30          R-to-L      binary
     +=            add_assign           30          R-to-L      binary
@@ -138,6 +146,12 @@ dbl=tan(x) -- returns the tangent of x radians
 
 dbl=sqrt(x) -- returns square root of x
 
+num=floor(num) -- return closest integer value less than or equal to argument
+
+num=ceil(num) -- return closest integer value greater than or equal to argument
+
+num=round(num) -- return closest integer value
+
 AFFINE TRANSFORM COMMANDS:
 
 point=xform(x,y a00,a01,a10,a11,a20,a21) -- affine transform of x,y coordinates
@@ -160,11 +174,20 @@ srand(seedval) -- seed random number generator
 
 LIST COMMANDS:
 
-lst=list([olst]) -- create an empty list or copy existing one
+lst=list([olst|strm] :strmlst) -- create list, copy list, or convert stream
 
-val=at(list|attrlist n) -- return nth item in a list
+val=at(list|attrlist n :set val ) -- return (or set) nth item in a list
 
 num=size(list|attrlist) -- return size of a list
+
+
+STREAM COMMANDS:
+
+val=next(strm) -- return next value from stream
+
+strm=stream(ostrm|list) -- copy stream or convert list
+
+cnt=each(strm) -- traverse the stream returning its length
 
 CONTROL COMMANDS (using post evaluation):
 
@@ -176,11 +199,13 @@ execute the :then expression if true, the :else expression if false.
 
 val=for(initexpr whileexpr [nextexpr [bodyexpr]] :body expr) -- for loop
 
-val=while([testexpr [bodyexpr]] :until :body expr ) -- while loop
+val=while([testexpr [bodyexpr]] :nilchk :until :body expr ) -- while loop
 
 OTHER COMMANDS
 
-help(cmdname [cmdname ...]) -- help for commands
+help(cmdname [cmdname ...] :all :posteval) -- help for commands
+
+val=trace([flag] :get) -- toggle or set trace mode
 
 [str]=print(fmtstr val :string|:str :err) -- print value with format string
 [str]=print(val :string|:str :err) -- print value with format string
@@ -199,6 +224,8 @@ str=join(clist :sym) -- join list of characters into string
 
 bool=eq(str1 str2 :n len) -- partial string comparison
 
+bool=eq(sym1 sym2 :sym) -- symbol comparison
+
 postfix(arg1 [arg2 [arg3 ... [argn]]]) -- echo unevaluated postfix arguments
 (with [narg|nkey] after defined commands, {narg|nkey} after undefined commands,
 (narg) after keys, and a * following post-evaluation commands)
@@ -206,7 +233,9 @@ postfix(arg1 [arg2 [arg3 ... [argn]]]) -- echo unevaluated postfix arguments
 arr=posteval(arg1 [arg2 [arg3 ... [argn]]]) -- post-evaluate every fixed 
 argument (until nil) and return array
 
-sym=attrname(attribute) -- return name field of dotted pair.
+sym=attrname(attribute) -- return name field of dotted pair
+val=attrval(attribute) -- return value field of dotted pair
+dotlst=dot(name) -- construct empty dotted pair list	
 				 
 quit() -- quit the interpreter
 
@@ -236,6 +265,10 @@ f=float(num) -- convert any numeric to a float
 
 d=double(num) -- convert any numeric to a double
 
+sym|lst=type(val [val ...]) -- return type symbol(s) for value(s)
+
+sym|lst=class(val [val ...]) -- return class symbol(s) for value(s) of object type
+
 ONLY IN SERVER MODE
 
 str=timeexpr(comstr :sec n) -- command string to execute at intervals
@@ -244,4 +277,4 @@ SEE ALSO
 	comdraw
 
 WEB PAGES
-	 http://www.vectaport.com/ivtools/comterp.html
+	 http://www.ivtools.org/ivtools/comterp.html

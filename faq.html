@@ -61,6 +61,7 @@ worked for you would be appreciated.  You can send e-mail to
 <h2>drawing editor questions</h2>
 
 <menu>
+<li><a href=#unabletoread>I am unable to read or import anything into any ivtools drawing editor.</a></li>
 <li><a href=#importpostscript>When I try importing (or opening) a postscript or an eps file in idraw it segfaults without warning.</a></li>
 <li><a href=#exportgraphics>I tried exporting (or printing) graphics to a filter (by selecting the "export to filter" checkbox on the dialog box), but when I type in something like "xv -" it doesn't work.</a></li>
 <li><a href=#otherdrawingeditors>What other drawing editors are available like idraw and ivtools drawtool?</a></li>
@@ -68,6 +69,10 @@ worked for you would be appreciated.  You can send e-mail to
 <li><a href=#idrawversions>Others see "<code>warning: drawing version 0 newer than idraw version 0</code>" when they load my drawing into their copy of idraw.</a></li>
 <li><a href=#segvidrawversions>Others see "<code>warning: drawing version 0 newer than idraw version 0</code>" followed by a segfault when they load my drawing into their copy of idraw</a></li>
 </menu>
+
+<p><a name=unabletoread><b>I am unable to read or import anything into an ivtools drawing editor.</b><p>
+
+Do you think your version of ivtools was compiled with gcc-3.0?  Or could it have been compiled with a gcc-2.95.3 that was bundled with an early copy of libstdc++-v3?  Check out this <a href=#libstdcplusplusv3prob>faq entry</a> for more details.  Otherwise, read the other faq entries below.
 
 <p><a name=importpostscript><b>When I try importing (or opening) a postscript or an eps file in idraw it
 segfaults without warning.</b><p>
@@ -223,7 +228,8 @@ not open in idraw.
 <h2>source building questions</h2>
 
 <menu>
-<li><a href=#gcc296>I can't build ivtools with gcc-2.96.  What gives?</a></li>
+<li><a href=#imake-symbol-clash>The absolute pathname used by the "make depend" pass is not the same as the ABSTOP pathname written to config/config.mk by the configure script.</a></li>
+<li><a href=#libstdcplusplusv3prob>I can't read or import anything, and I built ivtools with gcc-3.0.0 or gcc-2.95.3 bundled with libstdc++-v3.</a></li>
 <li><a href=#cpumissing>I run "make World" or "make Makefiles", and see an error message like this...</a></li>
 <li><a href=#cpuforsolaris>How should I set the CPU environment variable for Solaris?</a></li>
 <li><a href=#notlinuxbsd>I just can't get ivtools built on anything but Linux or FreeBSD.  What do I do?</a></li>
@@ -249,6 +255,18 @@ not open in idraw.
 <li><a href=#installUnidrawprob>"make install" does not install the Unidraw include files.</a></li>
 
 </menu>
+
+<p><a name=imake-symbol-clash><b>The absolute pathname used by the "make depend" pass is not the same as the ABSTOP pathname written to config/config.mk by the configure script.</p></b>
+
+There is a vulnerability in the "make Makefiles" pass (the use of
+imake), where absolute pathnames that incorporate predefined C symbols get these symbols expanded to another value.  For example, most PC-based uses of gcc have <code>i386</code> defined to <code>1</code>, so a path like <code>/usr/src/i386/ivtools-1.0</code> gets expanded to <code>/usr/src/1/ivtools-1.0</code>.  To check the set of pre-defined symbols, enter this command: <code>touch test.c;gcc -dM -E test.c</code>.<p>
+
+You can either rename the affected directory in which ivtools resides,
+or you can add <code>-U</code> undefine arguments as necessary to the imake command line.  See the definition of <code>ImakeFlags</code> in <code>config/site.def.NETBSD</code> for an example.
+
+<p><a name=libstdcplusplusv3prob><b>I can't read or import anything, and I built ivtools with gcc-3.0.0 or gcc-2.95.3 bundled with libstdc++-v3.</p></b>
+
+Check out this <a href="./fopen_rplus.patch.txt">patch</a> for more details.
 
 <p><a name=gcc296><b>I can't build ivtools with gcc-2.96.  What gives?</p></b><p>
 

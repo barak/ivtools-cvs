@@ -1,137 +1,241 @@
-*** cppcomp.h.dist	Sat Jul 14 08:41:26 2001
---- src/cppcomp.h	Tue Aug 21 15:46:02 2001
+This patch should improve raster support for the idraw output format
+of pstoedit. Now you enter "drawtool -" directly into the print dialog
+box of Netscape and have the PostScript rendered directly into the
+drawing editor. Should work on pstoedit-3.30 and earlier releases, and
+has been incorporated into pstoedit-3.31.
+
+THIS PATCH HAD INCORRECT CONTENTS AS POSTED FROM SEP 2001 to JAN 2002.
+(at least I mailed the right one to Wolfgang Glunz)
+
+
+*** drvidraw.cpp.dist	Fri Sep  7 11:51:51 2001
+--- src/drvidraw.cpp	Wed Sep 12 12:03:13 2001
 ***************
-*** 30,36 ****
-  // NOTE: If your compiler or installation does not come with
-  // an installation of the STL, just umcomment the next line
+*** 35,41 ****
+        iscale(X) != iscale(newpointlist[newtotalpoints-1]->x_) ||	\
+        iscale(Y) != iscale(newpointlist[newtotalpoints-1]->y_)){		\
+      newpointlist[newtotalpoints++] = new Point(X,Y);			\
+!     assert(newpointlist[newtotalpoints] != NIL); }		        \
+  } while (0)
   
-! // #define HAVESTL
-  // now this is again commented out by default, since now all
-  // drivers can be compiled without the STL
   
---- 30,36 ----
-  // NOTE: If your compiler or installation does not come with
-  // an installation of the STL, just umcomment the next line
+--- 35,41 ----
+        iscale(X) != iscale(newpointlist[newtotalpoints-1]->x_) ||	\
+        iscale(Y) != iscale(newpointlist[newtotalpoints-1]->y_)){		\
+      newpointlist[newtotalpoints++] = new Point(X,Y);			\
+!     assert(newpointlist[newtotalpoints-1] != NIL); }		        \
+  } while (0)
   
-! #define HAVESTL
-  // now this is again commented out by default, since now all
-  // drivers can be compiled without the STL
   
-*** drvbase.cpp.dist	Mon Aug 13 01:33:16 2001
---- src/drvbase.cpp	Wed Sep 12 11:09:33 2001
 ***************
-*** 841,865 ****
-  				if (is_a_rectangle()) {
-  					float llx, lly, urx, ury;
-  					llx =
-! 						min(min
-  							(pathElement(0).getPoint(0).x_,
-  							 pathElement(1).getPoint(0).x_),
-! 							min(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
-  					urx =
-! 						max(max
-  							(pathElement(0).getPoint(0).x_,
-  							 pathElement(1).getPoint(0).x_),
-! 							max(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
-  					lly =
-! 						min(min
-  							(pathElement(0).getPoint(0).y_,
-  							 pathElement(1).getPoint(0).y_),
-! 							min(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
-  					ury =
-! 						max(max
-  							(pathElement(0).getPoint(0).y_,
-  							 pathElement(1).getPoint(0).y_),
-! 							max(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
-  
-  					show_rectangle(llx, lly, urx, ury);
-  				} else {
---- 841,865 ----
-  				if (is_a_rectangle()) {
-  					float llx, lly, urx, ury;
-  					llx =
-! 						std::min(std::min
-  							(pathElement(0).getPoint(0).x_,
-  							 pathElement(1).getPoint(0).x_),
-! 							std::min(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
-  					urx =
-! 						std::max(std::max
-  							(pathElement(0).getPoint(0).x_,
-  							 pathElement(1).getPoint(0).x_),
-! 							std::max(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
-  					lly =
-! 						std::min(std::min
-  							(pathElement(0).getPoint(0).y_,
-  							 pathElement(1).getPoint(0).y_),
-! 							std::min(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
-  					ury =
-! 						std::max(std::max
-  							(pathElement(0).getPoint(0).y_,
-  							 pathElement(1).getPoint(0).y_),
-! 							std::max(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
-  
-  					show_rectangle(llx, lly, urx, ury);
-  				} else {
-*** drvmpost.cpp.dist	Sat Jul 14 08:53:46 2001
---- src/drvmpost.cpp	Tue Aug 21 16:20:54 2001
+*** 262,267 ****
+--- 262,268 ----
+  	outf << "/Circ {\n";
+  	outf << "newpath\n";
+  	outf << "0 360 arc\n";
++ 	outf << "closepath\n";
+  	outf << "patternNone not { ifill } if\n";
+  	outf << "brushNone not { istroke } if\n";
+  	outf << "} def\n";
 ***************
-*** 20,26 ****
-      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-  
-  */
-! #define _POSIX_					// for MSVC and limits.h
-  
-  #include "drvmpost.h"
-  
---- 20,26 ----
-      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-  
-  */
-! // #define _POSIX_					// for MSVC and limits.h
-  
-  #include "drvmpost.h"
-  
+*** 293,298 ****
+--- 294,300 ----
+  	outf << "translate\n";
+  	outf << "scale\n";
+  	outf << "0 0 1 0 360 arc\n";
++ 	outf << "closepath\n";
+  	outf << "patternNone not { ifill } if\n";
+  	outf << "brushNone not { istroke } if\n";
+  	outf << "end\n";
+***************
+*** 842,848 ****
+  			numpoints = totalpoints == 1 ? 1 : totalpoints - 1;
+  			print_header("Poly");	// Output a polygon
+  			outf << "%I " << numpoints << endl;
+! 			for (i = 0; i < totalpoints; i++) {
+  				outf << iscale(pointlist[i]->x_) << ' ';
+  				outf << iscale(pointlist[i]->y_) << endl;
+  			}
+--- 844,850 ----
+  			numpoints = totalpoints == 1 ? 1 : totalpoints - 1;
+  			print_header("Poly");	// Output a polygon
+  			outf << "%I " << numpoints << endl;
+! 			for (i = 0; i < numpoints; i++) {
+  				outf << iscale(pointlist[i]->x_) << ' ';
+  				outf << iscale(pointlist[i]->y_) << endl;
+  			}
 *** image.cpp.dist	Fri Sep  7 11:55:02 2001
 --- src/image.cpp	Wed Sep 12 12:17:30 2001
 ***************
-*** 269,278 ****
-  	Point P4((float) (width - border), 0.0f);
-  	Point P4T = P4.transform(normalizedImageCurrentMatrix);
+*** 425,491 ****
+  	outi << "%I" << endl;
+  	const int perline = width;
   
-! 	ur.x_ = max(max(P1T.x_, P2T.x_), max(P3T.x_, P4T.x_));
-! 	ur.y_ = max(max(P1T.y_, P2T.y_), max(P3T.y_, P4T.y_));
-! 	ll.x_ = min(min(P1T.x_, P2T.x_), min(P3T.x_, P4T.x_));
-! 	ll.y_ = min(min(P1T.y_, P2T.y_), min(P3T.y_, P4T.y_));
+! 	switch (type) {
+! 	case colorimage:
+! 		outi << width << " " << height << " " << bits <<
+! 			" Rast { currentfile " << perline << " string readhexstring pop }" << endl;
+! 		outi << "image";
+! 		{
+! 			int first = true;
+! 			for (unsigned int i = 0; i < nextfreedataitem; i += 3) {
+! 				if (i % (perline * ncomp) == 0) {
+! 					outi << endl;	// debug " " << i << endl;
+! 					first = true;
+! 				}
+! 				if (first) {
+! 					first = false;
+! 					outi << "%I ";
+! 				}
+! 				outi << setw(2) << setfill('0') << hex << (int) data[i] << dec;
+! 			}
+! 		}
+! 		outi << endl << "%I colorimage";
+  		{
+! 			int first = true;
+! 			for (unsigned int i = 0; i < nextfreedataitem; i++) {
+! 				if (i % (perline * ncomp) == 0) {
+! 					outi << endl;	// debug " " << i << endl;
+! 					first = true;
+! 				}
+! 				if (first) {
+! 					first = false;
+! 					outi << "%I ";
+! 				}
+! 				outi << setw(2) << setfill('0') << hex << (int) data[i] << dec;
+! 			}
+! 		}
+! 		if (nextfreedataitem % (perline * ncomp) != 0) {
+! 			for (unsigned int i = nextfreedataitem; i % (perline * ncomp) != 0; i++)
+! 				outi << setw(2) << setfill('0') << hex << 0 << dec;
+! 		}
+! 		break;
+! 	case imagemask:
+! 		// just treat it as a normal image for the moment
+! 	case normalimage:
+! 		outi << "/str1 1 string def" << endl << endl;
+! 		outi << "% display normal image" << endl;
+! 		outi << width << " " << height << " " << bits << " % width, height, bits/component" << endl;
+! 		outi << "% number of data " << nextfreedataitem << endl;
+! 		outi << "[ 1 0 0 1 0 0 ] %image matrix" << endl;
+! 		outi << "{currentfile str1 readhexstring pop} % decoding procedure" << endl;
+! 		outi << "image" << endl;
+  		{
+! 			for (unsigned int i = 0; i < nextfreedataitem; i++) {
+! 				if (i % (12 * 3) == 0)
+! 					outi << endl;
+! 				outi << setw(2) << setfill('0') << hex << (unsigned int)
+! 					data[i] << dec;
+  			}
+! 		}
+! 		break;
+! 	default:
+! 		break;
+  	}
+  
+  	outi << endl << "End " << endl << endl;
   }
+--- 425,527 ----
+  	outi << "%I" << endl;
+  	const int perline = width;
   
+! 	outi << width << " " << height << " " << "8" <<
+! 	  " Rast { currentfile " << perline << " string readhexstring pop }" << endl;
+! 	outi << "image";
+! 
+! 	/* unpack 4 bit rgb data, skipping last nybble on odd-width images */
+! 	unsigned char* udata = NULL;
+!         unsigned char* dataptr = data;
+! 	if (bits==4) 
+!         {
+! 	       udata = new unsigned char[nextfreedataitem*2];
+! 	       dataptr = udata;
+! 
+! 	       unsigned int curnybble = 0;  /* 0=r,1=g,2=b */
+! 	       unsigned int curcol = 0;
+! 	       unsigned int currow = 0;
+! 	       unsigned int udata_loc=0;
+! 
+! 	       for (unsigned int i = 0; i< nextfreedataitem; i++) 
+!                {
+!      
+! 	       	       /* replicate most-significant nybble first */
+! 	               udata[udata_loc++] = (data[i]&0xf0) | ((data[i]&0xf0)>>4);
+! 		     
+!                        curnybble++;
+! 		       if (curnybble==3) 
+!                        {
+! 		               curnybble=0;
+! 		               curcol++;
+! 		       }
+! 
+!                        /* replicate least-significant nybble if not at end of odd-width row */
+! 		       if (curcol != width || !(width%2)) 
+!                        {
+! 			      udata[udata_loc++] = (data[i]&0x0f) | ((data[i]&0x0f)<<4);
+! 
+! 			      curnybble++;
+! 			      if (curnybble==3) 
+!                               {
+! 			             curnybble=0;
+! 			             curcol++;
+! 			      }
+! 		       }
+! 
+! 		       /* skip nybble at end of odd-width row */
+! 		       if (curcol == width) 
+!                        {
+! 			      currow++;
+! 			      curcol=0;
+! 		       }
+! 			  
+! 	        }
+!         }
+! 
+!         /* output graylevel image for B&W printers */
+! 	int cur=0;
+! 	for (unsigned int row = 0; row < height; row++) 
+! 	{
+! 	        outi << endl << "%I ";
+! 		for (unsigned int col = 0; col < width; col++)
+  		{
+! 		        unsigned int grayval;
+! 			if (type==colorimage) 
+!                                 grayval = (unsigned int)
+! 			                (.299*dataptr[cur++] 
+!                                         + .587*dataptr[cur++] 
+!                                         + .114*dataptr[cur++]);
+! 			else
+! 			        grayval = dataptr[cur++];       
+! 			outi << setw(2) << setfill('0') << hex << grayval << dec;
+! 		}                
+! 	}
+! 
+!         /* output color image for use of idraw */
+! 	outi << endl << "%I colorimage";
+! 	cur = 0;
+! 	for (unsigned int row = 0; row < height; row++) 
+! 	{
+! 	        outi << endl << "%I ";
+! 		for (unsigned int col = 0; col < width; col++)
+  		{
+! 		        if (type==colorimage) 
+!                         {       
+! 		                outi << setw(2) << setfill('0') << hex << (unsigned int) dataptr[cur++] << dec;
+! 		                outi << setw(2) << setfill('0') << hex << (unsigned int) dataptr[cur++] << dec;
+! 		                outi << setw(2) << setfill('0') << hex << (unsigned int) dataptr[cur++] << dec;
+! 
+! 			} 
+!                         else
+! 			{
+! 		                outi << setw(2) << setfill('0') << hex << (unsigned int) dataptr[cur] << dec;
+! 		                outi << setw(2) << setfill('0') << hex << (unsigned int) dataptr[cur] << dec;
+! 		                outi << setw(2) << setfill('0') << hex << (unsigned int) dataptr[cur++] << dec;
+  			}
+! 		}                
+  	}
   
---- 269,278 ----
-  	Point P4((float) (width - border), 0.0f);
-  	Point P4T = P4.transform(normalizedImageCurrentMatrix);
-  
-! 	ur.x_ = std::max(std::max(P1T.x_, P2T.x_), std::max(P3T.x_, P4T.x_));
-! 	ur.y_ = std::max(std::max(P1T.y_, P2T.y_), std::max(P3T.y_, P4T.y_));
-! 	ll.x_ = std::min(std::min(P1T.x_, P2T.x_), std::min(P3T.x_, P4T.x_));
-! 	ll.y_ = std::min(std::min(P1T.y_, P2T.y_), std::min(P3T.y_, P4T.y_));
+  	outi << endl << "End " << endl << endl;
++ 
++ 	delete [] udata;
   }
-  
-  
-*** miscutil.cpp.dist	Wed Aug  8 09:21:32 2001
---- src/miscutil.cpp	Tue Aug 21 16:12:55 2001
-***************
-*** 69,75 ****
-  
-  #if defined(__STRICT_ANSI__)
-  // normally this is in stdio.h except if __STRICT_ANSI__ is defined (GNU specific)
-! extern "C" char *tempnam(const char *, const char *pfx);
-  #endif
-  
-  #if defined(riscos)
---- 69,75 ----
-  
-  #if defined(__STRICT_ANSI__)
-  // normally this is in stdio.h except if __STRICT_ANSI__ is defined (GNU specific)
-! // extern "C" char *tempnam(const char *, const char *pfx);
-  #endif
-  
-  #if defined(riscos)

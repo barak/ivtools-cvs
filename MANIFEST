@@ -1,5 +1,6 @@
 ivtools/COPYRIGHT.proposed.txt
 ivtools/MANIFEST
+ivtools/NetBSD.PKG.IVtools.cpio
 ivtools/README.cygwin.txt
 ivtools/aaron-1.gif
 ivtools/aaron-2.gif
@@ -1406,6 +1407,7 @@ ivtools/flipbook-README.txt
 ivtools/flipbook-icon.gif
 ivtools/flipbook-logo.gif
 ivtools/flipbook.html
+ivtools/fopen_rplus.patch.txt
 ivtools/forestdrive.frs
 ivtools/formdemo-main.gif
 ivtools/formdemo-popup.gif
@@ -1526,6 +1528,10 @@ ivtools/latexbuttons/templates/
 ivtools/latexbuttons/templates/index.html
 ivtools/latexbuttons/templates/krebs-fin.jpeg
 ivtools/latexbuttons/templates/krebs1.jpeg
+ivtools/latexbuttons/templates/mainring.jpeg
+ivtools/latexbuttons/templates/mainring.ps
+ivtools/latexbuttons/templates/symmetry.jpeg
+ivtools/latexbuttons/templates/symmetry.ps
 ivtools/libgraphic.ps
 ivtools/mailinglists.html
 ivtools/malloc.c
