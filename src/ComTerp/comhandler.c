@@ -193,6 +193,10 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     if (!comterp_ || !input_good)
       return -1;
     else if (!inbuf || !*inbuf) {
+#if 1 // do nothing on null input
+      fprintf(stderr, "ComterpHandler::handle_input null input\n");
+      return 0;
+#else
 #if __GNUC__<3
       filebuf obuf(fd ? fd : 1);
       ostream ostr(&obuf);
@@ -205,6 +209,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr << "\n";
       ostr.flush();
       return 0;
+#endif
 #endif
     }
     if (!ComterpHandler::logger_mode()) {
