@@ -96,7 +96,7 @@ ComValue::ComValue(postfix_token* token) {
     clear();
     void* v1 = &_v;
     void* v2 = &token->v;
-    memcpy(v1, v2, sizeof(double));
+    memcpy(v1, v2, sizeof(_v));
     switch (token->type) {
     case TOK_STRING:  type(StringType); break;
     case TOK_CHAR:    type(CharType); break;

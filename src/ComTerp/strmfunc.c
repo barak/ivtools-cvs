@@ -46,32 +46,29 @@ StreamFunc::StreamFunc(ComTerp* comterp) : StrmFunc(comterp) {
 }
 
 void StreamFunc::execute() {
-  ComValue operand1(stack_arg(0));
+  ComValue operand1(stack_arg_post_eval(0));
   
   reset_stack();
   
   if (operand1.is_stream()) {
     
-    /* invoked by the next command */
-    AttributeValueList* avl = operand1.stream_list();
-    if (avl) {
-      Iterator i;
-      avl->First(i);
-      AttributeValue* retval = avl->Done(i) ? nil : avl->GetAttrVal(i);
-      if (retval) {
-	push_stack(*retval);
-	avl->Remove(retval);
-	delete retval;
-      } else {
-	operand1.stream_list(nil);
-	push_stack(ComValue::nullval());
-      }
-    } else
-      push_stack(ComValue::nullval());
+    /* stream copy */
+    AttributeValueList* old_avl = operand1.stream_list();
+    AttributeValueList* new_avl = new AttributeValueList(old_avl);
+    ComValue retval(operand1.stream_func(), new_avl);
+    retval.stream_mode(operand1.stream_mode());
+    push_stack(retval);
     
   } else {
     
     /* conversion operator */
+
+    static StreamNextFunc* snfunc = nil;
+    if (!snfunc) {
+      snfunc = new StreamNextFunc(comterp());
+      snfunc->funcid(symbol_add("stream"));
+    }
+
     if (operand1.is_array()) {
       AttributeValueList* avl = new AttributeValueList(operand1.array_val());
       ComValue stream(this, avl);
@@ -87,12 +84,43 @@ void StreamFunc::execute() {
 	  new AttributeValue(Attribute::class_symid(), (void*)attr);
 	avl->Append(av);
       }
-      ComValue stream(this, avl);
+      ComValue stream(snfunc, avl);
       stream.stream_mode(-1); // for internal use (use by this func)
       push_stack(stream);
     }
     
   }
+}
+
+/*****************************************************************************/
+
+int StreamNextFunc::_symid;
+
+StreamNextFunc::StreamNextFunc(ComTerp* comterp) : StrmFunc(comterp) {
+}
+
+void StreamNextFunc::execute() {
+  ComValue operand1(stack_arg_post_eval(0));
+  
+  reset_stack();
+  
+  /* invoked by the next command */
+  AttributeValueList* avl = operand1.stream_list();
+  if (avl) {
+    Iterator i;
+    avl->First(i);
+    AttributeValue* retval = avl->Done(i) ? nil : avl->GetAttrVal(i);
+    if (retval) {
+      push_stack(*retval);
+      avl->Remove(retval);
+      delete retval;
+    } else {
+      operand1.stream_list(nil);
+      push_stack(ComValue::nullval());
+    }
+  } else
+    push_stack(ComValue::nullval());
+  
 }
 
 /*****************************************************************************/
@@ -352,8 +380,14 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 	      /* internal use */
 	      comterp->push_stack(*val);
 	      ((ComFunc*)val->stream_func())->exec(1,0);
-	      if (comterp->stack_top().is_null()) 
+	      if (comterp->stack_top().is_null()) {
+		
+		/* sub-stream return null, zero it, and return null for this one */
 		val->stream_list()->clear();
+		comterp->push_stack(ComValue::nullval());
+		streamv.stream_list()->clear();
+		return;
+	      }
 
 	    } else {
 

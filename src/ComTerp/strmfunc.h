@@ -47,10 +47,24 @@ public:
     StreamFunc(ComTerp*);
 
     virtual void execute();
+    virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "strm=%s(list) -- convert list to stream"; }
+      return "strm=%s(ostrm|list) -- copy stream or convert list"; }
 
     CLASS_SYMID("StreamFunc");
+
+};
+
+//: hidden func used by next command for stream command
+class StreamNextFunc : public StrmFunc {
+public:
+    StreamNextFunc(ComTerp*);
+
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "hidden func used by next command for stream command."; }
+
+    CLASS_SYMID("StreamNextFunc");
 
 };
 

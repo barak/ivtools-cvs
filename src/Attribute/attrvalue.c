@@ -172,7 +172,7 @@ void AttributeValue::clear() {
 AttributeValue& AttributeValue::operator= (const AttributeValue& sv) {
     void* v1 = &_v;
     const void* v2 = &sv._v;
-    memcpy(v1, v2, sizeof(double));
+    memcpy(v1, v2, sizeof(_v));
     _type = sv._type;
     _command_symid = sv._command_symid;
 #if 0  // disable symbol reference counting
@@ -921,7 +921,7 @@ int AttributeValue::type_size(ValueType type) {
 void AttributeValue::assignval (const AttributeValue& av) {
     void* v1 = &_v;
     const void* v2 = &av._v;
-    memcpy(v1, v2, sizeof(double));
+    memcpy(v1, v2, sizeof(_v));
     _type = av._type;
     _command_symid = av._command_symid;
 #if 0 // this end of reference counting disabled as well
