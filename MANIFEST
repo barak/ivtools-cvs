@@ -40,6 +40,7 @@ ivtools-0.7/config/InterViews/iv-luna.cf
 ivtools-0.7/config/InterViews/iv-m4330.cf
 ivtools-0.7/config/InterViews/iv-macII.cf
 ivtools-0.7/config/InterViews/iv-moto.cf
+ivtools-0.7/config/InterViews/iv-netbsd.cf
 ivtools-0.7/config/InterViews/iv-pegasus.cf
 ivtools-0.7/config/InterViews/iv-sgi.cf
 ivtools-0.7/config/InterViews/iv-sony.cf
@@ -71,6 +72,7 @@ ivtools-0.7/config/local.def
 ivtools-0.7/config/m88k-sysv3-gcc.mk
 ivtools-0.7/config/m88k-sysv4-gcc.mk
 ivtools-0.7/config/makevars.def
+ivtools-0.7/config/netbsd-gcc.mk
 ivtools-0.7/config/params.def
 ivtools-0.7/config/rules.def
 ivtools-0.7/config/sco3.2.4-gcc.mk
@@ -78,6 +80,7 @@ ivtools-0.7/config/site.def.ALPHA
 ivtools-0.7/config/site.def.CYGWIN
 ivtools-0.7/config/site.def.HP800
 ivtools-0.7/config/site.def.LINUX
+ivtools-0.7/config/site.def.NETBSD
 ivtools-0.7/config/site.def.SGI
 ivtools-0.7/config/site.def.SUN4
 ivtools-0.7/config/solaris-gcc.mk
