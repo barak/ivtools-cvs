@@ -263,24 +263,19 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	    ALIterator i;
 	    AttributeValueList* avl = svp->array_val();
 	    avl->First(i);
-	    boolean first = true;
+	    out << "{";
 	    while (!avl->Done(i)) {
-	      if (first) {
-		out << "{";
-		first = false; 
-	      }
 	      ComValue val(*avl->GetAttrVal(i));
 	      out << val;
 	      avl->Next(i);
 	      if (!avl->Done(i)) out << ",";
-	    }
-	    if (!first) out << "}";
+	    };
+	    out << "}";
 	  } else {
 	    out << "list of length " << svp->array_len();
 	    ALIterator i;
 	    AttributeValueList* avl = svp->array_val();
 	    avl->First(i);
-	    boolean first = true;
 	    while (!avl->Done(i)) {
  	        out << "\n\t" << *avl->GetAttrVal(i);
 	        avl->Next(i);

@@ -235,7 +235,7 @@ void ComTerp::eval_expr_internals(int pedepth) {
     boolean has_streams = false;
     if (!((ComFunc*)sv.obj_val())->post_eval())
       for(int i=0; i<sv.narg()+sv.nkey(); i++) {
-	if (!stack_top(-i).is_symbol())
+	if (!stack_top(-i).is_symbol() && !stack_top(-i).is_attribute())
 	  has_streams = stack_top(-i).is_stream();
 	else {
 	  AttributeValue* testval = 
