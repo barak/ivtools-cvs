@@ -1048,6 +1048,8 @@ OverlayRasterRect& OverlayRasterRect::operator = (OverlayRasterRect& rect) {
     _clippts = rect._clippts;
     Resource::ref(_clippts);
 
+    _alphaval = rect.alphaval();
+
     return *this;
 }
 

@@ -220,6 +220,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     comterp->add_command("prows", new PixelRowsFunc(comterp, this));
     comterp->add_command("pflush", new PixelFlushFunc(comterp, this));
     comterp->add_command("pclip", new PixelClipFunc(comterp, this));
+    comterp->add_command("alpha", new AlphaTransFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
