@@ -74,6 +74,9 @@ public:
     int ok() { return _ok; }
     // return 1 if link ok (but not necessarily two-way yet), 0 if not
 
+    int handle();
+    // return file descriptor associated with link
+
     int local_linkid() { return _local_linkid; }
     // get local DrawLink id
     int remote_linkid() { return _remote_linkid; }

@@ -116,3 +116,7 @@ void DrawLink::althostname(const char* althost) {
   if (althost) _althost = strnew(althost);
 }
 
+int DrawLink::handle() {
+  if (_socket) return _socket->get_handle();
+  else return -1;
+}

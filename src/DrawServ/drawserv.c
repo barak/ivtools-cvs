@@ -25,15 +25,27 @@
  * Implementation of DrawServ class.
  */
 
+#include <DrawServ/draweditor.h>
 #include <DrawServ/drawlink.h>
 #include <DrawServ/drawlinklist.h>
 #include <DrawServ/drawserv.h>
 #include <DrawServ/drawserv-handler.h>
 
+#include <OverlayUnidraw/ovclasses.h>
+#include <OverlayUnidraw/scriptview.h>
+
+#include <Unidraw/Commands/command.h>
+#include <Unidraw/catalog.h>
+#include <Unidraw/clipboard.h>
+#include <Unidraw/creator.h>
 #include <Unidraw/iterator.h>
 #include <Unidraw/ulist.h>
 
-#include <ComTerp/comterp.h>
+#include <ComTerp/comterpserv.h>
+
+#include <fstream.h>
+#include <strstream>
+
 /*****************************************************************************/
 
 DrawServ::DrawServ (Catalog* c, int& argc, char** argv, 
@@ -143,4 +155,91 @@ void DrawServ::linkdump(FILE* fptr) {
       _list->Next(i);
     }
   }
+}
+
+void DrawServ::ExecuteCmd(Command* cmd) {
+  if(!_list || _list->Number()==0) 
+
+    /* normal Unidraw command execution */
+    Unidraw::ExecuteCmd(cmd);
+
+  else {
+
+    /* indirect command execution, all by script */
+    std::ostrstream sbuf;
+    boolean oldflag = OverlayScript::ptlist_parens();
+    OverlayScript::ptlist_parens(false);
+    switch (cmd->GetClassId()) {
+    case PASTE_CMD:
+      {
+      boolean scripted = false;
+      Clipboard* cb = cmd->GetClipboard();
+      if (cb) {
+	Iterator it;
+	for (cb->First(it); !cb->Done(it); cb->Next(it)) {
+	  OverlayComp* comp = (OverlayComp*)cb->GetComp(it);
+	  if (comp) {
+	    Creator* creator = unidraw->GetCatalog()->GetCreator();
+	    OverlayScript* scripter = (OverlayScript*)
+	      creator->Create(Combine(comp->GetClassId(), SCRIPT_VIEW));
+	    if (scripter) {
+	      scripter->SetSubject(comp);
+	      if (scripted) 
+		sbuf << ';';
+	      else 
+		scripted = true;
+	      boolean status = scripter->Definition(sbuf);
+	      delete scripter;
+	    }
+	  }
+	}
+      }
+      if (!scripted)
+	sbuf << "print(\"Failed attempt to generate script for a PASTE_CMD\\n\" :err)";
+      sbuf.put('\0');
+      cout << sbuf.str() << "\n";
+      cout.flush();
+
+      /* first execute here */
+      ((ComEditor*)cmd->GetEditor())->GetComTerp()->run(sbuf.str());
+
+      /* then send everywhere else */
+      DistributeCmdString(sbuf.str());
+
+      delete cmd;
+      }
+      break;
+    default:
+      sbuf << "print(\"Attempt to convert unknown command (id == %d) to interpretable script\\n\" " << cmd->GetClassId() << " :err)";
+      cmd->Execute();
+      if (cmd->Reversible()) {
+	cmd->Log();
+      } else {
+	delete cmd;
+      }
+      break;
+    }
+    OverlayScript::ptlist_parens(oldflag);
+  }
+}
+
+void DrawServ::DistributeCmdString(const char* cmdstring) {
+
+  Iterator i;
+  _list->First(i);
+  while (!_list->Done(i)) {
+    DrawLink* link = _list->GetDrawLink(i);
+    if (link) {
+      int fd = link->handle();
+      if (fd>=0) {
+	fileptr_filebuf fbuf(fd, ios_base::out, false, static_cast<size_t>(BUFSIZ));
+	ostream out(&fbuf);
+	out << cmdstring;
+	out << "\n";
+	out.flush();
+      }
+    }
+    _list->Next(i);
+  }
+
 }

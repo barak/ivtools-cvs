@@ -34,6 +34,8 @@
 #include <vector.h>
 #endif
 
+#include <signal.h>
+
 #if BUFSIZ>1024
 #undef BUFSIZ
 #define BUFSIZ 1024
@@ -193,10 +195,6 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     if (!comterp_ || !input_good)
       return -1;
     else if (!inbuf || !*inbuf) {
-#if 1 // shut down on null input
-      fprintf(stderr, "ComterpHandler::handle_input null input--shutting down\n");
-      return -1;
-#else
 #if __GNUC__<3
       filebuf obuf(fd ? fd : 1);
       ostream ostr(&obuf);
@@ -204,12 +202,19 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr.flush();
       return 0;
 #else
+      /* ignore broken pipe just in case that is why the input was null */
+      struct sigaction oldaction, newaction;
+      newaction.sa_handler = SIG_IGN;
+      newaction.sa_mask = 0;
+      newaction.sa_flags = 0;
+      newaction.sa_sigaction = 0;
+      int status = sigaction(SIGPIPE, &newaction, &oldaction);  // this doesn't work yet
       fileptr_filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
+      status = sigaction(SIGPIPE, &oldaction, nil);
       return 0;
-#endif
 #endif
     }
     if (!ComterpHandler::logger_mode()) {

@@ -67,6 +67,12 @@ public:
     void linkdump(FILE*);
     // dump text table of DrawLink's
 
+    virtual void ExecuteCmd(Command*);
+    // execute Command's locally, and on remote linked DrawServ's.
+
+    virtual void DistributeCmdString(const char* cmdstring);
+    // execute command string locally, and on remote DrawServ's
+
 protected:
     DrawLinkList* _list;
 };

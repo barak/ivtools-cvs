@@ -1630,8 +1630,9 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
       }
 
     } else if (strncmp(creator, "JPEG", 4)==0) {
-      if (OverlayKit::bincheck("stdcmapppm") && 
-	  OverlayKit::bincheck("djpeg")) {
+      boolean stdcmapppm_flag = OverlayKit::bincheck("stdcmapppm");
+      boolean djpeg_flag = OverlayKit::bincheck("djpeg");
+      if (stdcmapppm_flag && djpeg_flag) {
 
 	if (pathname && !return_fd) {
 	  char buffer[BUFSIZ];
