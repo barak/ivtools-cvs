@@ -38,7 +38,9 @@
 #include <iostream.h>
 #include <stdio.h>
 #include <string.h>
+#ifndef __APPLE__
 #include <strstream.h>
+#endif
 
 /*****************************************************************************/
 
