@@ -43,6 +43,9 @@ public:
   void drawlink(DrawLink* link) { _drawlink = link; }
   // set DrawLink associated with this handler
 
+  virtual void destroy (void);
+  // traps disconnects
+
 protected:
   DrawLink* _drawlink;
 

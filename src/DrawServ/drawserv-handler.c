@@ -23,6 +23,7 @@
 
 #ifdef HAVE_ACE
 
+#include <DrawServ/drawserv.h>
 #include <DrawServ/drawserv-handler.h>
 
 /*****************************************************************************/
@@ -33,4 +34,8 @@ DrawServHandler::DrawServHandler () : UnidrawComterpHandler()
 {
 }
 
+void DrawServHandler::destroy (void) {
+  ComterpHandler::destroy();
+  if (drawlink()) ((DrawServ*)unidraw)->linkdown(drawlink());
+}
 #endif /* HAVE_ACE */
