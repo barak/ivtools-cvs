@@ -26,6 +26,7 @@
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterpserv.h>
 #include <Attribute/attrlist.h>
+#include <fstream.h>
 
 #ifdef HAVE_ACE
 #include <ace/SOCK_Connector.h>

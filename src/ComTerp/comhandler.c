@@ -28,6 +28,7 @@
 #include <ComTerp/comterpserv.h>
 
 #include <iostream.h>
+#include <fstream.h>
 #if __GNUC__==2 && __GNUC_MINOR__<=7
 #else
 #include <vector.h>
