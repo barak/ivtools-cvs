@@ -71,7 +71,7 @@ void StreamFunc::execute() {
 
     if (operand1.is_array()) {
       AttributeValueList* avl = new AttributeValueList(operand1.array_val());
-      ComValue stream(this, avl);
+      ComValue stream(snfunc, avl);
       stream.stream_mode(-1); // for internal use (use by this func)
       push_stack(stream);
     } else if (operand1.is_attributelist()) {
@@ -100,7 +100,7 @@ StreamNextFunc::StreamNextFunc(ComTerp* comterp) : StrmFunc(comterp) {
 }
 
 void StreamNextFunc::execute() {
-  ComValue operand1(stack_arg_post_eval(0));
+  ComValue operand1(stack_arg(0));
   
   reset_stack();
   
@@ -380,22 +380,23 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 	      /* internal use */
 	      comterp->push_stack(*val);
 	      ((ComFunc*)val->stream_func())->exec(1,0);
-	      if (comterp->stack_top().is_null()) {
-		
-		/* sub-stream return null, zero it, and return null for this one */
-		val->stream_list()->clear();
-		comterp->push_stack(ComValue::nullval());
-		streamv.stream_list()->clear();
-		return;
-	      }
-
-	    } else {
+	    }else {
 
 	      /* external use */
 	      ComValue cval(*val);
 	      NextFunc::execute_impl(comterp, cval);
 
 	    }
+	    
+	    if (comterp->stack_top().is_null()) {
+	      
+	      /* sub-stream return null, zero it, and return null for this one */
+	      val->stream_list()->clear();
+	      comterp->push_stack(ComValue::nullval());
+	      streamv.stream_list()->clear();
+	      return;
+	    }
+
 	    narg++;
 
 	  } else {

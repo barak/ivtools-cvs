@@ -724,7 +724,7 @@ ComValue& ComTerp::pop_stack(boolean lookupsym) {
     else 
       return stacktop;
   } else
-    return ComValue::nullval();
+    return ComValue::blankval();
 }
 
 ComValue& ComTerp::lookup_symval(ComValue& comval) {
@@ -797,7 +797,7 @@ ComValue& ComTerp::lookup_symval(int symid) {
 
 ComValue& ComTerp::stack_top(int n) {
   if (_stack_top+n < 0 || _stack_top+n >= _stack_siz) {
-    return ComValue::unkval();    
+    return ComValue::blankval();    
   }
   else
     return _stack[_stack_top+n];
