@@ -124,7 +124,7 @@ void HelpFunc::execute() {
 #if __GNUG__<3
   filebuf fbuf;
   if (comterp()->handler()) {
-    int fd = max(1, comterp()->handler()->get_handle());
+    int fd = Math::max(1, comterp()->handler()->get_handle());
     fbuf.attach(fd);
   } 
 #else
