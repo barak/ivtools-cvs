@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2001 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1994-1997 Vectaport Inc.
  *
@@ -28,6 +29,9 @@
 #include <string.h>
 
 #define TITLE "BoolFunc"
+
+static int sym_symid = symbol_add("sym");
+static int n_symid = symbol_add("n");
 
 /*****************************************************************************/
 
@@ -190,12 +194,11 @@ EqualFunc::EqualFunc(ComTerp* comterp) : NumFunc(comterp) {
 }
 
 void EqualFunc::execute() {
-    static int sym_symid = symbol_add("sym");
     boolean symflag = stack_key(sym_symid).is_true(); 
+    ComValue& nval = stack_key(n_symid); 
+
     ComValue& operand1 = stack_arg(0, symflag);
     ComValue& operand2 = stack_arg(1, symflag);
-    static int n_symid = symbol_add("n");
-    ComValue& nval =stack_key(n_symid); 
     promote(operand1, operand2);
     ComValue result(operand1);
     result.type(ComValue::BooleanType);
@@ -259,12 +262,11 @@ NotEqualFunc::NotEqualFunc(ComTerp* comterp) : NumFunc(comterp) {
 }
 
 void NotEqualFunc::execute() {
-    static int sym_symid = symbol_add("sym");
     boolean symflag = stack_key(sym_symid).is_true(); 
+    ComValue& nval = stack_key(n_symid); 
+
     ComValue& operand1 = stack_arg(0);
     ComValue& operand2 = stack_arg(1);
-    static int n_symid = symbol_add("n");
-    ComValue& nval =stack_key(n_symid); 
     promote(operand1, operand2);
     ComValue result(operand1);
     result.type(ComValue::BooleanType);
@@ -322,6 +324,9 @@ GreaterThanFunc::GreaterThanFunc(ComTerp* comterp) : NumFunc(comterp) {
 }
 
 void GreaterThanFunc::execute() {
+    boolean symflag = stack_key(sym_symid).is_true(); 
+    ComValue& nval = stack_key(n_symid); 
+
     ComValue& operand1 = stack_arg(0);
     ComValue& operand2 = stack_arg(1);
     promote(operand1, operand2);
@@ -359,6 +364,14 @@ void GreaterThanFunc::execute() {
     case ComValue::DoubleType:
 	result.boolean_ref() = operand1.double_val() > operand2.double_val();
 	break;
+    case ComValue::SymbolType:
+	const char* str1 = operand1.symbol_ptr();
+	const char* str2 = operand2.symbol_ptr();
+	if (nval.is_unknown())
+	  result.boolean_ref() = strcmp(str1, str2)>0;
+	else
+	  result.boolean_ref() = strncmp(str1, str2, nval.int_val())>0;
+	break;
     }
     reset_stack();
     push_stack(result);
@@ -368,6 +381,9 @@ GreaterThanOrEqualFunc::GreaterThanOrEqualFunc(ComTerp* comterp) : NumFunc(comte
 }
 
 void GreaterThanOrEqualFunc::execute() {
+    boolean symflag = stack_key(sym_symid).is_true(); 
+    ComValue& nval = stack_key(n_symid); 
+
     ComValue& operand1 = stack_arg(0);
     ComValue& operand2 = stack_arg(1);
     promote(operand1, operand2);
@@ -405,6 +421,14 @@ void GreaterThanOrEqualFunc::execute() {
     case ComValue::DoubleType:
 	result.boolean_ref() = operand1.double_val() >= operand2.double_val();
 	break;
+    case ComValue::SymbolType:
+	const char* str1 = operand1.symbol_ptr();
+	const char* str2 = operand2.symbol_ptr();
+	if (nval.is_unknown())
+	  result.boolean_ref() = strcmp(str1, str2)>=0;
+	else
+	  result.boolean_ref() = strncmp(str1, str2, nval.int_val())>=0;
+	break;
     }
     reset_stack();
     push_stack(result);
@@ -414,6 +438,9 @@ LessThanFunc::LessThanFunc(ComTerp* comterp) : NumFunc(comterp) {
 }
 
 void LessThanFunc::execute() {
+    boolean symflag = stack_key(sym_symid).is_true(); 
+    ComValue& nval = stack_key(n_symid); 
+
     ComValue& operand1 = stack_arg(0);
     ComValue& operand2 = stack_arg(1);
     promote(operand1, operand2);
@@ -451,6 +478,14 @@ void LessThanFunc::execute() {
     case ComValue::DoubleType:
 	result.boolean_ref() = operand1.double_val() < operand2.double_val();
 	break;
+    case ComValue::SymbolType:
+	const char* str1 = operand1.symbol_ptr();
+	const char* str2 = operand2.symbol_ptr();
+	if (nval.is_unknown())
+	  result.boolean_ref() = strcmp(str1, str2)<0;
+	else
+	  result.boolean_ref() = strncmp(str1, str2, nval.int_val())<0;
+	break;
     }
     reset_stack();
     push_stack(result);
@@ -460,6 +495,9 @@ LessThanOrEqualFunc::LessThanOrEqualFunc(ComTerp* comterp) : NumFunc(comterp) {
 }
 
 void LessThanOrEqualFunc::execute() {
+    boolean symflag = stack_key(sym_symid).is_true(); 
+    ComValue& nval = stack_key(n_symid); 
+
     ComValue& operand1 = stack_arg(0);
     ComValue& operand2 = stack_arg(1);
     promote(operand1, operand2);
@@ -496,6 +534,14 @@ void LessThanOrEqualFunc::execute() {
 	break;
     case ComValue::DoubleType:
 	result.boolean_ref() = operand1.double_val() <= operand2.double_val();
+	break;
+    case ComValue::SymbolType:
+	const char* str1 = operand1.symbol_ptr();
+	const char* str2 = operand2.symbol_ptr();
+	if (nval.is_unknown())
+	  result.boolean_ref() = strcmp(str1, str2)<=0;
+	else
+	  result.boolean_ref() = strncmp(str1, str2, nval.int_val())<=0;
 	break;
     }
     reset_stack();
