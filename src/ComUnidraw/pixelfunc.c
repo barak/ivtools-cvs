@@ -25,7 +25,9 @@
 
 #include <OverlayUnidraw/ovraster.h>
 #include <Unidraw/Graphic/damage.h>
+#include <Unidraw/iterator.h>
 #include <Unidraw/viewer.h>
+#include <Attribute/attrlist.h>
 
 /*****************************************************************************/
 
@@ -125,6 +127,41 @@ void PixelFlushFunc::execute() {
   } else 
     push_stack(ComValue::nullval());
 
+
+}
+
+/*****************************************************************************/
+
+PixelClipFunc::PixelClipFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void PixelClipFunc::execute() {
+  Viewer* viewer = _ed->GetViewer();
+
+  ComValue rastcompv(stack_arg(0));
+  ComValue ptsv(stack_arg(1));
+  reset_stack();
+  
+  RasterOvComp* rastcomp = (RasterOvComp*) rastcompv.geta(RasterOvComp::class_symid());
+  OverlayRasterRect* rastrect = rastcomp ? rastcomp->GetOverlayRasterRect() : nil;
+  OverlayRaster* raster = rastrect ? rastrect->GetOriginal() : nil;
+
+  if (rastrect && ptsv.is_array() && ptsv.array_val()->Number()>2 ) {
+    int n = ptsv.array_val()->Number()/2;
+    IntCoord x[n], y[n];
+    Iterator it;
+    AttributeValueList* avl = ptsv.array_val();
+    avl->First(it);
+    for( int i=0; i<n; i++ ) {
+      x[i] = avl->GetAttrVal(it)->int_val();
+      avl->Next(it);
+      y[i] = avl->GetAttrVal(it)->int_val();
+      avl->Next(it);
+    }
+    rastrect->clippts(x, y, n);
+    rastcomp->Notify();
+  } else 
+    push_stack(ComValue::nullval());
 
 }
 

@@ -1142,6 +1142,20 @@ void OverlayPainter::DoRasterRect(
     XIntersectRegion(rg, tmp, rg);
     XDestroyRegion(tmp);
 
+    if (r_r && r_r->clippts()) {
+      MultiLineObj* mlo = r_r->clippts();
+      XPoint polypts[mlo->count()];
+      for (int i=0; i<mlo->count(); i++) {
+	IntCoord x, y;
+	MapRoundUp(c, mlo->x()[i], mlo->y()[i], x, y);
+	polypts[i].x = x;
+	polypts[i].y = y;
+      }
+      Region poly = XPolygonRegion(polypts, mlo->count(), EvenOddRule);
+      XIntersectRegion(rg, poly, rg);
+      XDestroyRegion(poly);
+    }
+
     boolean free_pmap;
     IntCoord xmin, ymin;
 

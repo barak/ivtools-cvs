@@ -65,4 +65,14 @@ public:
     virtual const char* docstring() { 
 	return "%s(compview) -- flush pixels poked into a raster"; }
 };
+
+//: command to clip raster with polygon
+// pclip(compview x1,y1,x2,y2,x3,y3[,...,xn,yn]) -- clip raster with polygon
+class PixelClipFunc : public UnidrawFunc {
+public:
+    PixelClipFunc(ComTerp*,Editor*);
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "%s(compview x1,y1,x2,y2,x3,y3[,...,xn,yn]) -- clip raster with polygon"; }
+};
 #endif /* !defined(_pixelfunc_h) */

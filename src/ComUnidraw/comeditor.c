@@ -210,11 +210,14 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("dtos", new DrawingToScreenFunc(comterp, this));
     comterp->add_command("stod", new ScreenToDrawingFunc(comterp, this));
+    comterp->add_command("dtog", new DrawingToGraphicFunc(comterp, this));
+    comterp->add_command("gtod", new GraphicToDrawingFunc(comterp, this));
 
     comterp->add_command("poke", new PixelPokeFunc(comterp, this));
     comterp->add_command("pcols", new PixelColsFunc(comterp, this));
     comterp->add_command("prows", new PixelRowsFunc(comterp, this));
     comterp->add_command("pflush", new PixelFlushFunc(comterp, this));
+    comterp->add_command("pclip", new PixelClipFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
