@@ -33,6 +33,7 @@
 #include <DrawServ/grid.h>
 #include <DrawServ/gridlist.h>
 #include <DrawServ/linkselection.h>
+#include <DrawServ/sid.h>
 
 #include <OverlayUnidraw/ovclasses.h>
 #include <OverlayUnidraw/ovviews.h>
@@ -55,11 +56,11 @@
 
 #include <fstream.h>
 #include <strstream>
+#include <unistd.h>
 
 implementTable(GraphicIdTable,int,void*)
 implementTable(SessionIdTable,int,void*)
 implementTable(CompIdTable,void*,void*)
-implementTable(OriginalSidTable,unsigned int,unsigned int)
 
 unsigned int DrawServ::GraphicIdMask = 0x000fffff;
 unsigned int DrawServ::SessionIdMask = 0xfff00000;
@@ -83,10 +84,17 @@ void DrawServ::Init() {
   _gridtable = new GraphicIdTable(1024);
   _sessionidtable = new SessionIdTable(256);
   _compidtable = new CompIdTable(1024);
-  _originalsidtable = new OriginalSidTable(32);
 
   _sessionid = unique_sessionid();
-  _sessionidtable->insert(_sessionid, nil); // nil pointer refers to local session id
+  char hostbuf[HOST_NAME_MAX];
+  gethostname(hostbuf, HOST_NAME_MAX);
+  char userbuf[BUFSIZ];
+  getlogin_r(userbuf, BUFSIZ);
+  int pid = getpid();
+  int hostid = gethostid();
+  SessionId* sid = new SessionId(_sessionid, _sessionid, pid, userbuf, hostbuf, hostid);
+  _sessionidtable->insert(_sessionid, sid);
+  _comdraw_port = atoi(unidraw->GetCatalog()->GetAttribute("comdraw"));
 }
 
 DrawServ::~DrawServ () 
@@ -99,7 +107,6 @@ DrawServ::~DrawServ ()
   delete _gridtable;
   delete _sessionidtable;
   delete _compidtable;
-  delete _originalsidtable;
 }
 
 DrawLink* DrawServ::linkup(const char* hostname, int portnum, 
@@ -343,19 +350,17 @@ void DrawServ::SendCmdString(DrawLink* link, const char* cmdstring) {
 
 // generate request to register each locally unique session id
 void DrawServ::sessionid_register(DrawLink* link) {
-  char buf[BUFSIZ];
-  snprintf(buf, BUFSIZ, "sid(0x%08x 0x%08x)%c", sessionid(), sessionid(), '\0');
-  SendCmdString(link, buf);
   SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
   SessionIdTable_Iterator it(*table);
   while(it.more()) {
     if(it.cur_value()) {
-      DrawLink* otherlink = (DrawLink*)it.cur_value();
-      if (otherlink != link) {
-	unsigned int sid, osid;
-	sid = (unsigned int)it.cur_key();
-	originalsidtable()->find(osid, sid);
-	snprintf(buf, BUFSIZ, "sid(0x%08x 0x%08x)%c", sid, osid, '\0');
+      SessionId* sessionid = (SessionId*)it.cur_value();
+      if (sessionid && sessionid->drawlink() != link) {
+	char buf[BUFSIZ];
+	snprintf(buf, BUFSIZ, "sid(0x%08x 0x%08x :pid %d :user \"%s\" :host \"%s\" :hostid 0x%08x)%c", 
+		 sessionid->sid(), sessionid->osid(), 
+		 sessionid->pid(), sessionid->username(),
+		 sessionid->hostname(), sessionid->hostid(), '\0');
 	SendCmdString(link, buf);
       }
     }
@@ -364,20 +369,42 @@ void DrawServ::sessionid_register(DrawLink* link) {
 }
 
 // handle request to register session id
-void DrawServ::sessionid_register_handle(DrawLink* link, unsigned int sid, unsigned osid) {
+void DrawServ::sessionid_register_handle
+(DrawLink* link, unsigned int sid, unsigned osid, int pid, 
+ const char* username, const char* hostname, int hostid) 
+{
   if (link) {
     SessionIdTable* sidtable = ((DrawServ*)unidraw)->sessionidtable();
     unsigned int alt_id = sid;
     if (!DrawServ::test_sessionid(sid)) 
       alt_id = DrawServ::unique_sessionid();
-    sidtable->insert(alt_id, link);
+    SessionId* session_id = new SessionId(alt_id, osid, pid, username, hostname, hostid, link);
+    sidtable->insert(alt_id, session_id);
     link->incomingsidtable()->insert(sid, alt_id);
-    ((DrawServ*)unidraw)->originalsidtable()->insert(alt_id, osid);
 
     /* propagate */
- }
+    sessionid_register_propagate(link, alt_id, osid, pid, username,
+				 hostname, hostid);
+  }
+}
 
- }
+// propagate request to register session id
+void DrawServ::sessionid_register_propagate
+(DrawLink* link, unsigned int sid, unsigned int osid, int pid, 
+ const char* username, const char* hostname, int hostid)
+{
+  Iterator it;
+  _linklist->First(it);
+  while (!_linklist->Done(it)) {
+    char buf[BUFSIZ];
+    DrawLink* otherlink = _linklist->GetDrawLink(it);
+    if (otherlink != link) {
+      snprintf(buf, BUFSIZ, "sid(0x%08x 0x%08x :pid %d :user \"%s\" :host \"%s\" :hostid 0x%08x)%c", sid, osid, pid, username, hostname, hostid, '\0');
+      SendCmdString(otherlink, buf);
+    }
+    _linklist->Next(it);
+  }
+}
 
 unsigned int DrawServ::unique_grid() {
   static int seed=0;
@@ -514,5 +541,17 @@ void DrawServ::print_gridtable() {
 }
 
 void DrawServ::print_sidtable() {
-  printf("not implemented yet\n");
+  SessionIdTable* table = sessionidtable();
+  SessionIdTable_Iterator it(*table);
+  printf("sid         osid        &DrawLink   lid   rid   pid     hostid  user              host            \n");
+  printf("----------  ----------  ----------  ----  ----  ------  ------  ----              ----            \n");
+  while(it.more()) {
+    SessionId* sid = (SessionId*)it.cur_value();
+    DrawLink* link = sid->drawlink();
+    printf("0x%08x  0x%08x  0x%08x  %4d  %4d  %6d  %6d  %16s  %16s\n", 
+	   sid->sid(), sid->osid(), link, 
+	   link ? link->local_linkid() : 9999, link ? link->remote_linkid() : 9999, 
+	   sid->pid(), sid->hostid(), sid->username(), sid->hostname());
+    it.next();
+  }
 }

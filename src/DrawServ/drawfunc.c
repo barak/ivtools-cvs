@@ -145,6 +145,15 @@ void SessionIdFunc::execute() {
   static int all_sym = symbol_add("all");
   ComValue allv(stack_key(all_sym));
 
+  static int pid_sym = symbol_add("pid");
+  ComValue pidv(stack_key(pid_sym));
+  static int user_sym = symbol_add("user");
+  ComValue userv(stack_key(user_sym));
+  static int host_sym = symbol_add("host");
+  ComValue hostv(stack_key(host_sym));
+  static int hostid_sym = symbol_add("hostid");
+  ComValue hostidv(stack_key(hostid_sym));
+
   ComValue sidv(stack_arg(0));
   ComValue osidv(stack_arg(1));
 
@@ -165,7 +174,9 @@ void SessionIdFunc::execute() {
 
   if (sidv.is_known() && osidv.is_known()) {
     ((DrawServ*)unidraw)->sessionid_register_handle
-      (link, sidv.uint_val(), osidv.uint_val());
+      (link, sidv.uint_val(), osidv.uint_val(), pidv.int_val(), 
+       userv.string_ptr(), hostv.string_ptr(), 
+       hostidv.int_val());
     
   } else {
     ((DrawServ*)unidraw)->print_sidtable();

@@ -26,6 +26,7 @@
  */
 
 #include <DrawServ/drawlink.h>
+#include <DrawServ/drawserv.h>
 #include <DrawServ/drawserv-handler.h>
 #include <Unidraw/globals.h>
 #include <fstream.h>
@@ -85,6 +86,7 @@ int DrawLink::open() {
     char buffer[HOST_NAME_MAX];
     gethostname(buffer, HOST_NAME_MAX);
     out << buffer << "\"";
+    out << " :port " << ((DrawServ*)unidraw)->comdraw_port();
     out << " :state " << _state+1;
     out << " :rid " << _local_linkid;
     out << " :lid " << _remote_linkid;

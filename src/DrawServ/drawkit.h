@@ -45,6 +45,7 @@ public:
     virtual MenuItem *MakeFileMenu();
     virtual Glyph* MakeToolbar();
     virtual MenuItem* MakeToolsMenu();
+    virtual MenuItem* MakeViewersMenu();
 
     static DrawKit* Instance();
 

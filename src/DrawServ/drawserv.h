@@ -34,7 +34,6 @@
 declareTable(GraphicIdTable,int,void*)
 declareTable(SessionIdTable,int,void*)
 declareTable(CompIdTable,void*,void*);
-declareTable(OriginalSidTable,unsigned int,unsigned int);
      
 
 //: Unidraw specialized for DrawServ
@@ -93,23 +92,22 @@ public:
   // return pointer to table of GraphicId's.
   
   SessionIdTable* sessionidtable() { return _sessionidtable; }
-  // return pointer to table of DrawLink's as a function of session id's.
+  // return pointer to table of SessionId's
   
   CompIdTable* compidtable() { return _compidtable; }
   // return pointer to table that map from GraphicComp* to GraphicId*
-  
-  OriginalSidTable* originalsidtable() { return _originalsidtable; }
-  // return pointer to table that maps from unique local session ids 
-  // to original session ids.
   
   void sessionid_register(DrawLink* link);
   // register all sessionid's used by this DrawServ with remote DrawServ
   
   void sessionid_register_handle(DrawLink* link, unsigned int sid, 
-				 unsigned int osid);
+				 unsigned int osid, int pid, const char* user, 
+				 const char* host, int hostid);
   // handle request to register unique session id
   
-  void sessionid_register_propagate(unsigned int sid, unsigned int osid);
+  void sessionid_register_propagate(DrawLink* link, unsigned int sid, 
+				    unsigned int osid, int pid, 
+				    const char* user, const char *host, int hostid);
   // propagate a newly registered session id to all other DrawLink's
   
   unsigned int sessionid() { return _sessionid; }
@@ -148,6 +146,9 @@ public:
   void print_sidtable();
   // print contents of table of SessionId's
 
+  int comdraw_port() { return _comdraw_port; }
+  // return port used for comdraw command interpreter
+
 protected:
     DrawLinkList* _linklist;
     // DrawLink list
@@ -156,16 +157,16 @@ protected:
     // maps from id to GraphicId*
     SessionIdTable* _sessionidtable;
     // table of all session id's.
-    // maps from id to DrawLink*
+    // maps from id to SessionId*
     CompIdTable* _compidtable;
     // table of all GraphicComp's associated with a GraphicId.
     // maps from GraphicComp* to GraphicId*
-    OriginalSidTable* _originalsidtable;
-    // table of that maps locally unique session ids to original
-    // session ids.
 
     int _sessionid;
     // unique session id.
+
+    int _comdraw_port;
+    // port used for comdraw command interpreter
 
 };
 
