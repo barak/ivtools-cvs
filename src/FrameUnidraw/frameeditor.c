@@ -123,6 +123,7 @@ void FrameEditor::Init (OverlayComp* comp, const char* name) {
 }
 
 void FrameEditor::InitCommands() {
+  //  ComEditor::InitCommands();
   int secs = 0;
   Catalog* catalog = unidraw->GetCatalog();
   const char* slideshow_str = catalog->GetAttribute("slideshow");
