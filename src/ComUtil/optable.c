@@ -90,6 +90,7 @@ struct _opr_tbl_default_entry {
   {"--",         "decr_after",         110,        TRUE,       OPTYPE_UNARY_POSTFIX },
   {"**",         "repeat",             90,         FALSE,      OPTYPE_BINARY },
   {"..",         "iterate",            80,         FALSE,      OPTYPE_BINARY },
+  {",,",         "stream",             75,         FALSE,      OPTYPE_BINARY },
   {"%",          "mod",                70,         FALSE,      OPTYPE_BINARY },
   {"*",          "mpy",                70,         FALSE,      OPTYPE_BINARY },
   {"/",          "div",                70,         FALSE,      OPTYPE_BINARY },
@@ -108,7 +109,7 @@ struct _opr_tbl_default_entry {
   {"|",          "bit_or",             42,         FALSE,      OPTYPE_BINARY },
   {"&&",         "and",                41,         FALSE,      OPTYPE_BINARY },
   {"||",         "or",                 40,         FALSE,      OPTYPE_BINARY },
-  {",",          "stream",             35,         FALSE,      OPTYPE_BINARY },
+  {",",          "tuple",             35,         FALSE,      OPTYPE_BINARY },
   {"%=",         "mod_assign",         30,         TRUE,       OPTYPE_BINARY },
   {"*=",         "mpy_assign",         30,         TRUE,       OPTYPE_BINARY },
   {"+=",         "add_assign",         30,         TRUE,       OPTYPE_BINARY },
@@ -911,6 +912,7 @@ Operator   Command            Priority   RtoL   Type
 --         decr_after         110        Y      UNARY POSTFIX
 **         repeat             90         N      BINARY
 ..         iterate            80         N      BINARY
+,,         stream             75         N      BINARY
 %          mod                70         N      BINARY
 *          mpy                70         N      BINARY
 /          div                70         N      BINARY
@@ -929,7 +931,7 @@ Operator   Command            Priority   RtoL   Type
 |          bit_or             42         N      BINARY
 &&         and                41         N      BINARY
 ||         or                 40         N      BINARY
-,          stream             35         N      BINARY
+,          tuple              35         N      BINARY
 %=         mod_assign         30         Y      BINARY
 *=         mpy_assign         30         Y      BINARY
 +=         add_assign         30         Y      BINARY

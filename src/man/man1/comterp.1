@@ -95,6 +95,7 @@ Run contents of file then exit.
     --         decr_after     110         R-to-L      unary-postfix
     **         repeat         90          L-to-R      binary
     ..         iterate        80          L-to-R      binary
+    ,,         stream         75          L-to-R      binary
     %          mod            70          L-to-R      binary
     *          mpy            70          L-to-R      binary
     /          div            70          L-to-R      binary
@@ -113,7 +114,7 @@ Run contents of file then exit.
     |          bit_or         42          L-to-R      binary
     &&         and            41          L-to-R      binary
     ||         or             40          L-to-R      binary
-    ,          stream         35          L-to-R      binary
+    ,          tuple          35          L-to-R      binary
     %=         mod_assign     30          R-to-L      binary
     *=         mpy_assign     30          R-to-L      binary
     +=         add_assign     30          R-to-L      binary
@@ -183,15 +184,17 @@ Run contents of file then exit.
 
 .SH LIST COMMANDS:
  
- lst=list([olst]) -- create an empty list or copy existing one
+ lst=list([olst|strm]) -- create list, copy list, or convert stream
 
  val=at(list|attrlist n) -- return nth item in a list
 
  num=size(list|attrlist) -- return size of a list
 
-.SH LIST COMMANDS:
+.SH STREAM COMMANDS:
  
  val=next(stream) -- return next value from stream
+
+ strm=stream(list) -- convert list to stream
 
 .SH CONTROL COMMANDS (using post evaluation):
 

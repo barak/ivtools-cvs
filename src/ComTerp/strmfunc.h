@@ -48,7 +48,7 @@ public:
 
     virtual void execute();
     virtual const char* docstring() { 
-      return ", is the stream operator"; }
+      return ",, is the stream operator"; }
 
     CLASS_SYMID("StreamFunc");
 

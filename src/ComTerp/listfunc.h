@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2001 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1999 Vectaport Inc.
  *
@@ -35,12 +36,13 @@ class ComTerp;
 class ComValue;
 
 //: create list command for ComTerp.
-// lst=list([olst]) -- create an empty list or copy existing one.
+// lst=list([olst|strm]) -- create list, copy list, or convert stream
 class ListFunc : public ComFunc {
 public:
     ListFunc(ComTerp*);
 
     virtual void execute();
+    virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
       return "lst=%s([olst]) -- create an empty list or copy existing one"; }
 };
@@ -66,5 +68,19 @@ public:
     virtual const char* docstring() { 
       return "val=size(list|attrlist) -- return the size of the list"; }
 };
+
+//: , (tuple) operator.
+class TupleFunc : public ComFunc {
+public:
+    TupleFunc(ComTerp*);
+
+    virtual void execute();
+    virtual const char* docstring() { 
+      return ", is the tuple operator"; }
+
+    CLASS_SYMID("TupleFunc");
+
+};
+
 
 #endif /* !defined(_listfunc_h) */

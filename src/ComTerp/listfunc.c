@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2001 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1999 Vectaport Inc.
  *
@@ -23,6 +24,7 @@
  */
 
 #include <ComTerp/listfunc.h>
+#include <ComTerp/strmfunc.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
 #include <Attribute/aliterator.h>
@@ -38,12 +40,32 @@ ListFunc::ListFunc(ComTerp* comterp) : ComFunc(comterp) {
 }
 
 void ListFunc::execute() {
-  ComValue listv(stack_arg(0));
+  ComValue listv(stack_arg_post_eval(0));
   reset_stack();
 
-  AttributeValueList* avl = listv.is_array() 
-    ? new AttributeValueList(listv.array_val())
-    : new AttributeValueList();
+  AttributeValueList* avl;
+
+  if (listv.is_array()) 
+    avl = new AttributeValueList(listv.array_val());
+  else {
+    avl = new AttributeValueList();
+    if (listv.is_stream()) {
+      NextFunc nextfunc(comterp());
+      boolean done = false;
+      while (!done) {
+	push_stack(listv);
+	push_funcstate(1,0);
+	nextfunc.execute();
+	pop_funcstate();
+	AttributeValue* newval = new AttributeValue(pop_stack());
+	if (newval->is_unknown()) {
+	  done = true;
+	  delete newval;
+	} else
+	  avl->Append(newval);
+      }
+    }
+  }
   Resource::ref(avl);
   ComValue retval(avl);
   push_stack(retval);
@@ -117,4 +139,30 @@ void ListSizeFunc::execute() {
   push_stack(ComValue::nullval());
 }
 
+
+/*****************************************************************************/
+
+int TupleFunc::_symid;
+
+TupleFunc::TupleFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void TupleFunc::execute() {
+    ComValue* operand1 = new ComValue(stack_arg(0));
+    ComValue* operand2 = new ComValue(stack_arg(1));
+    reset_stack();
+
+    if (!operand1->is_type(ComValue::ArrayType)) {
+	AttributeValueList* avl = new AttributeValueList();
+	avl->Append(operand1);
+	avl->Append(operand2);
+	ComValue retval(avl);
+	push_stack(retval);
+    } else {
+        AttributeValueList* avl = operand1->array_val();
+	avl->Append(operand2);
+	push_stack(*operand1);
+	delete operand1;
+    }
+}
 

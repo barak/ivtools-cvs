@@ -51,7 +51,8 @@ const ComTerp* ComValue::_comterp = nil;
 
 ComValue::ComValue(ComValue& sv) {
     *this = sv;
-    ref_as_needed();}
+    ref_as_needed();
+}
 
 ComValue::ComValue(AttributeValue& sv) {
     *(AttributeValue*)this = sv;

@@ -46,23 +46,80 @@ StreamFunc::StreamFunc(ComTerp* comterp) : StrmFunc(comterp) {
 }
 
 void StreamFunc::execute() {
-    ComValue* operand1 = new ComValue(stack_arg(0));
-    ComValue* operand2 = new ComValue(stack_arg(1));
+  ComValue operand1(stack_arg(0));
+  
+  if (nargs()==1) {
     reset_stack();
-
-    if (!operand1->is_type(ComValue::ArrayType)) {
-	AttributeValueList* avl = new AttributeValueList();
-	avl->Append(operand1);
-	avl->Append(operand2);
-	ComValue retval(avl);
-	push_stack(retval);
+    
+    if (operand1.is_stream()) {
+      
+      /* invoked by the next command */
+      AttributeValueList* avl = operand1.stream_list();
+      if (avl) {
+	Iterator i;
+	avl->First(i);
+	AttributeValue* retval = avl->Done(i) ? nil : avl->GetAttrVal(i);
+	if (retval) {
+	  push_stack(*retval);
+	  avl->Remove(retval);
+	  delete retval;
+	} else {
+	  operand1.stream_list(nil);
+	  push_stack(ComValue::nullval());
+	}
+      } else
+	push_stack(ComValue::nullval());
+      
     } else {
-        AttributeValueList* avl = operand1->array_val();
-	avl->Append(operand2);
-	push_stack(*operand1);
-	delete operand1;
+      
+      /* conversion operator */
+      if (operand1.is_array()) {
+	AttributeValueList* avl = new AttributeValueList(operand1.array_val());
+	ComValue stream(this, avl);
+	stream.stream_mode(-1); // for internal use (use by this func)
+	push_stack(stream);
+      }
+      
+    }
+  } else {
+    
+#if 0
+    if (operand1.is_stream()) {
+      reset_stack();
+      AttributeValueList* avl = operand1.stream_list();
+      if (avl) {
+	Iterator i;
+	avl->First(i);
+	AttributeValue* repval = avl->GetAttrVal(i);
+	avl->Next(i);
+	AttributeValue* cntval = avl->GetAttrVal(i);
+	if (cntval->int_val()>0)
+	  push_stack(*repval);
+	else
+	  push_stack(ComValue::nullval());
+	cntval->int_ref()--;
+      } else
+	push_stack(ComValue::nullval());
+      return;
     }
     
+    ComValue* operand2 = new ComValue(stack_arg(1));
+    reset_stack();
+    
+    if (!operand1->is_type(ComValue::ArrayType)) {
+      AttributeValueList* avl = new AttributeValueList();
+      avl->Append(operand1);
+      avl->Append(operand2);
+      ComValue retval(avl);
+      push_stack(retval);
+    } else {
+      AttributeValueList* avl = operand1->array_val();
+      avl->Append(operand2);
+      push_stack(*operand1);
+      delete operand1;
+    }
+#endif
+  }
 }
 
 /*****************************************************************************/
