@@ -807,6 +807,9 @@ const char* OvImportCmd::ReadCreator (const char* pathname) {
 	    else if (CheckMagicBytes(JPEG_MAGIC_BYTES, line)) 
 	      strncpy(creator, "JPEG", creator_size);
     
+	    else if (strncmp(line, "\211PNG", 4)==0)
+	      strncpy(creator, "PNG", creator_size);
+
             /* One-byte Magic numbers */
 	    else {
 		switch (line[0]) {
@@ -932,6 +935,9 @@ const char* OvImportCmd::ReadCreator (istream& in, FileType& ftype) {
     else if (CheckMagicBytes(JPEG_MAGIC_BYTES, line)) 
       strncpy(creator, "JPEG", creator_size);
     
+    else if (strncmp(line, "\211PNG", 4)==0)
+      strncpy(creator, "PNG", creator_size);
+
     /* One-byte Magic numbers */
     else {
       switch (line[0]) {
@@ -1646,7 +1652,33 @@ GraphicComp* OvImportCmd::Import (istream& instrm, boolean& empty) {
       } else
 	cerr << "djpeg or stdcmapppm not found\n";
 
+    } else if (strncmp(creator, "PNG", 3)==0) {
+      if (OverlayKit::bincheck("pngtopnm")) {
+	if (pathname && !return_fd) {
+	  char buffer[BUFSIZ];
+	  if (compressed)
+	    sprintf(buffer, "gzip -c %s | pngtopnm", pathname);
+	  else
+	    sprintf(buffer, "pngtopnm %s", pathname);
+	  FILE* pptr = popen(buffer, "r");
+	  if (pptr) {
+	    cerr << "input opened with " << buffer << "\n";
+#if __GNUG__<3
+	    ifstream new_in;
+            new_in.rdbuf()->attach(fileno(pptr));
+#else
+	    filebuf fbuf(pptr, ios_base::in);
+	    istream new_in(&fbuf);
+#endif
+	    comp = PNM_Image(new_in);
+	    pclose(pptr);
+	  }
+	} else	
+	  comp = PNM_Image_Filter(*in, return_fd, pnmfd, "pngtopnm");
+      } else 
+	cerr << "pngtopnm not found\n";
     }
+
 
     if (comp && comp->IsA(OVRASTER_COMP)) 
       ((RasterOvComp*)comp)->SetByPathnameFlag(false);

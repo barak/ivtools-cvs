@@ -28,6 +28,8 @@ ac_help="$ac_help
 ac_help="$ac_help
   --with-iue-libs=<path> path to compiled IUE libs"
 ac_help="$ac_help
+  --with-x                use the X Window System"
+ac_help="$ac_help
  --enable-install-relative[=ARG]	enable installation relative to the source tree"
 ac_help="$ac_help
  --enable-use-rpath[=ARG]	enable use of -rpath when linking"
@@ -168,6 +170,33 @@ Configuration:
 Directory and file names:
   --prefix=PREFIX         install architecture-independent files in PREFIX
                           [$ac_default_prefix]
+  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
+                          [same as prefix]
+  --bindir=DIR            user executables in DIR [EPREFIX/bin]
+  --sbindir=DIR           system admin executables in DIR [EPREFIX/sbin]
+  --libexecdir=DIR        program executables in DIR [EPREFIX/libexec]
+  --datadir=DIR           read-only architecture-independent data in DIR
+                          [PREFIX/share]
+  --sysconfdir=DIR        read-only single-machine data in DIR [PREFIX/etc]
+  --sharedstatedir=DIR    modifiable architecture-independent data in DIR
+                          [PREFIX/com]
+  --localstatedir=DIR     modifiable single-machine data in DIR [PREFIX/var]
+  --libdir=DIR            object code libraries in DIR [EPREFIX/lib]
+  --includedir=DIR        C header files in DIR [PREFIX/include]
+  --oldincludedir=DIR     C header files for non-gcc in DIR [/usr/include]
+  --infodir=DIR           info documentation in DIR [PREFIX/info]
+  --mandir=DIR            man documentation in DIR [PREFIX/man]
+  --srcdir=DIR            find the sources in DIR [configure dir or ..]
+  --program-prefix=PREFIX prepend PREFIX to installed program names
+  --program-suffix=SUFFIX append SUFFIX to installed program names
+  --program-transform-name=PROGRAM
+                          run sed PROGRAM on installed program names
+EOF
+    cat << EOF
+Host type:
+  --build=BUILD           configure for building on BUILD [BUILD=HOST]
+  --host=HOST             configure for HOST [guessed]
+  --target=TARGET         configure for TARGET [TARGET=HOST]
 Features and packages:
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
@@ -1767,6 +1796,42 @@ fi
 
 # AC_TRY_RUN(int access(); int main() { return access("/bin/bash", 1); },BIN_BASH=1,BIN_BASH=0,BIN_BASH=1)
 
+echo $ac_n "checking for socklen_t""... $ac_c" 1>&6
+echo "configure:1801: checking for socklen_t" >&5
+if eval "test \"`echo '$''{'ac_cv_type_socklen_t'+set}'`\" = set"; then
+  echo $ac_n "(cached) $ac_c" 1>&6
+else
+  
+  cat > conftest.$ac_ext <<EOF
+#line 1807 "configure"
+#include "confdefs.h"
+#include <sys/socket.h>
+int main() {
+socklen_t len = 42; return len;
+; return 0; }
+EOF
+if { (eval echo configure:1814: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
+  rm -rf conftest*
+  ac_cv_type_socklen_t=YES
+else
+  echo "configure: failed program was:" >&5
+  cat conftest.$ac_ext >&5
+  rm -rf conftest*
+  ac_cv_type_socklen_t=NO
+fi
+rm -f conftest*
+
+fi
+
+echo "$ac_t""$ac_cv_type_socklen_t" 1>&6
+  if test $ac_cv_type_socklen_t != yes; then
+    cat >> confdefs.h <<\EOF
+#define socklen_t int
+EOF
+
+  fi
+
+
 
 #AC_SUBST(OPENGL)
 #AC_SUBST(XGL)
@@ -1801,6 +1866,7 @@ fi
 
 
 #AC_SUBST(BIN_BASH)
+
 
 #output to config-$host_fragd 
 PWD=`pwd`; export PWD
@@ -1983,6 +2049,7 @@ s%@PWD@%$PWD%g
 s%@INSTALLRELATIVE@%$INSTALLRELATIVE%g
 s%@USERPATH@%$USERPATH%g
 s%@INSTALLSUBDIR@%$INSTALLSUBDIR%g
+s%@ac_cv_type_socklen_t@%$ac_cv_type_socklen_t%g
 
 CEOF
 EOF
