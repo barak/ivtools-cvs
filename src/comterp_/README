@@ -189,7 +189,7 @@ OTHER COMMANDS
 
 help(cmdname [cmdname ...]) -- help for commands
 
-trace([flag] :get) -- toggle or set trace mode
+val=trace([flag] :get) -- toggle or set trace mode
 
 [str]=print(fmtstr val :string|:str :err) -- print value with format string
 [str]=print(val :string|:str :err) -- print value with format string

@@ -34,14 +34,14 @@ class ComTerp;
 class ComValue;
 
 //: command for toggling or setting trace mode
-// trace([flag] :val) -- toggle or set trace mode
+// val=trace([flag] :val) -- toggle or set trace mode
 class TraceFunc : public ComFunc {
 public:
     TraceFunc(ComTerp*);
 
     virtual void execute();
     virtual const char* docstring() { 
-      return "%s([flag] :val) -- toggle or set trace mode"; }
+      return "val=%s([flag] :val) -- toggle or set trace mode"; }
 };
 
 #endif /* !defined(_debugfunc_h) */

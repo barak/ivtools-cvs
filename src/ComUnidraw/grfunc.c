@@ -118,7 +118,8 @@ void CreateRectFunc::execute() {
 	rect->SetTransformer(rel);
 	Unref(rel);
 	RectOvComp* comp = new RectOvComp(rect);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("RectComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
@@ -181,7 +182,8 @@ void CreateLineFunc::execute() {
 	line->SetTransformer(rel);
 	Unref(rel);
 	ArrowLineOvComp* comp = new ArrowLineOvComp(line);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ArrowLineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
@@ -243,7 +245,8 @@ void CreateEllipseFunc::execute() {
 	ellipse->SetTransformer(rel);
 	Unref(rel);
 	EllipseOvComp* comp = new EllipseOvComp(ellipse);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("EllipseComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
@@ -307,7 +310,8 @@ void CreateTextFunc::execute() {
 	text->GetTransformer()->postmultiply(rel);
 	Unref(rel);
 	TextOvComp* comp = new TextOvComp(text);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("TextComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
@@ -371,7 +375,8 @@ void CreateMultiLineFunc::execute() {
 	multiline->SetTransformer(rel);
 	Unref(rel);
 	ArrowMultiLineOvComp* comp = new ArrowMultiLineOvComp(multiline);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ArrowMultiLineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
@@ -435,7 +440,8 @@ void CreateOpenSplineFunc::execute() {
 	openspline->SetTransformer(rel);
 	Unref(rel);
 	ArrowSplineOvComp* comp = new ArrowSplineOvComp(openspline);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ArrowSplineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
@@ -497,7 +503,8 @@ void CreatePolygonFunc::execute() {
 	polygon->SetTransformer(rel);
 	Unref(rel);
 	PolygonOvComp* comp = new PolygonOvComp(polygon);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("PolygonComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);
@@ -560,7 +567,8 @@ void CreateClosedSplineFunc::execute() {
 	closedspline->SetTransformer(rel);
 	Unref(rel);
 	ClosedSplineOvComp* comp = new ClosedSplineOvComp(closedspline);
-	cmd = new PasteCmd(_ed, new Clipboard(comp));
+	if (PasteModeFunc::paste_mode()==0)
+	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ClosedSplineComp"), new ComponentView(comp));
 	compval.object_compview(true);
 	push_stack(compval);

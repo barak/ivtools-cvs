@@ -120,8 +120,8 @@ void PasteFunc::execute() {
 
     /* extract comp and scale/translate before pasting */
     ComponentView* view = (ComponentView*)viewv.obj_val();
-    OverlayComp* comp = (OverlayComp*)view->GetSubject();
-    Graphic* gr = comp->GetGraphic();
+    OverlayComp* comp = view ? (OverlayComp*)view->GetSubject() : nil;
+    Graphic* gr = comp ? comp->GetGraphic() : nil;
     if (gr) {
       if (xscalev.is_num() && yscalev.is_num()) {
 	float af[6];
@@ -147,6 +147,9 @@ void PasteFunc::execute() {
 	}
 	gr->SetTransformer(new Transformer(af[0],af[1],af[2],af[3],af[4],af[5]));
       }
+    } else {
+      push_stack(ComValue::nullval());
+      return;
     }
     
     /* set creator for gvupdater to use and disable unidraw (!use_unidraw) */
@@ -162,6 +165,37 @@ void PasteFunc::execute() {
     Component::use_unidraw(uflag);
 
     push_stack(viewv);
+}
+
+/*****************************************************************************/
+
+int PasteModeFunc:: _paste_mode = 0;
+
+PasteModeFunc::PasteModeFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void PasteModeFunc::execute() {
+  static int get_symid = symbol_add("get");
+  boolean get_flag = stack_key(get_symid).is_true();
+  if (get_flag) {
+    reset_stack();
+    int mode = paste_mode();
+    ComValue retval(mode, ComValue::IntType);
+    push_stack(retval);
+  } else {
+    if (nargs()==0) {
+      reset_stack();
+      int mode = !paste_mode();
+      paste_mode(mode);
+      ComValue retval(mode, ComValue::IntType);
+      push_stack(retval);
+    } else {
+      ComValue retval(stack_arg(0));
+      reset_stack();
+      paste_mode(retval.int_val());
+      push_stack(retval);
+    }
+  }
 }
 
 /*****************************************************************************/
