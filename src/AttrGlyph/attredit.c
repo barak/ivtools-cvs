@@ -162,7 +162,7 @@ void AttributeListEditor::update_text(boolean update) {
 #ifndef STL_VECTOR
     _ete->text(buf, update);
 #else
-    _ete->text(&vbuf[0], update);
+    _ete->text(&vbuf[0] ? &vbuf[0] : "", update);
 #endif
 }
 
