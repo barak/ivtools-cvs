@@ -19,7 +19,6 @@
 #include <OS/string.h>
 #include <stdlib.h>
 #include <ctype.h>
-
 class BrushInfo {
 public:
     const Brush* brush_;
@@ -478,9 +477,9 @@ const Font* IdrawReaderImpl::read_font() {
     NullTerminatedString psname_nt(psname);
     float pointsize;
     read(pointsize);
-    if (PSFont_31::exists(psname_nt.string())) {
+    if (PSFont31::exists(psname_nt.string())) {
         NullTerminatedString s_nt(s);
-        return new PSFont_31(psname_nt.string(), pointsize, s_nt.string(), 1.0)
+        return new PSFont31(psname_nt.string(), pointsize, s_nt.string(), 1.0)
 ;
     }
     return WidgetKit::instance()->font();

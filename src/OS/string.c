@@ -34,10 +34,10 @@
 
 extern "C" {
 #ifndef tolower
-    extern int tolower(int);
+    extern wchar_t tolower(wchar_t);
 #endif
 #ifndef toupper
-    extern int toupper(int);
+    extern wchar_t toupper(wchar_t);
 #endif
     extern long int strtol(const char*, char**, int);
     extern double strtod(const char*, char**);

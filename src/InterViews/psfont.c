@@ -40,7 +40,7 @@
 
 class PSFontImpl {
 private:
-    friend class PSFont_31;
+    friend class PSFont31;
 
     char* name;
     char* encoding;
@@ -50,7 +50,7 @@ private:
     static char* psfile(const char* name);
 };
 
-PSFont_31::PSFont_31(
+PSFont31::PSFont31(
     const char* psname, Coord size, const char* name, float scale
 ) : Font(name, scale) {
     PSFontImpl* p = new PSFontImpl;
@@ -83,19 +83,19 @@ PSFont_31::PSFont_31(
     delete metrics_file;
 }
 
-PSFont_31::~PSFont_31() {
+PSFont31::~PSFont31() {
     delete impl_->name;
     delete impl_->encoding;
     delete impl_;
 }
 
-const char* PSFont_31::name() const { return impl_->name; }
-const char* PSFont_31::encoding() const { return impl_->encoding; }
-Coord PSFont_31::size() const { return impl_->size; }
-Coord PSFont_31::width(long c) const { return impl_->widths[c]; }
-Coord PSFont_31::width(const char* s, int n) const { return Font::width(s, n); }
+const char* PSFont31::name() const { return impl_->name; }
+const char* PSFont31::encoding() const { return impl_->encoding; }
+Coord PSFont31::size() const { return impl_->size; }
+Coord PSFont31::width(long c) const { return impl_->widths[c]; }
+Coord PSFont31::width(const char* s, int n) const { return Font::width(s, n); }
 
-boolean PSFont_31::exists(const char* psname) {
+boolean PSFont31::exists(const char* psname) {
     char* metrics_file = PSFontImpl::psfile(psname);
     FILE* f = fopen(metrics_file, "r");
     delete metrics_file;

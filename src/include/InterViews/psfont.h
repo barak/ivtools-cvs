@@ -35,10 +35,10 @@
 
 class PSFontImpl;
 
-class PSFont_31 : public Font {
+class PSFont31 : public Font {
 public:
-    PSFont_31(const char* psname, Coord size, const char* name, float scale);
-    virtual ~PSFont_31();
+    PSFont31(const char* psname, Coord size, const char* name, float scale);
+    virtual ~PSFont31();
 
     static boolean exists(const char* psname);
 

@@ -83,11 +83,7 @@
 #include <OS/list.h>
 
 #include <math.h>
-#if __GNUG__<3
-#include <pfstream.h>
-#else
 #include <fstream.h>
-#endif
 #include <stdio.h>
 #include <stream.h>
 #include <string.h>
