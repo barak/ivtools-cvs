@@ -31,6 +31,8 @@
 
 #include <InterViews/enter-scope.h>
 
+//: shared reference-counted objects.
+// <a href=../man3.1/Resource.html>Resource</a>
 class Resource {
 public:
     Resource();
