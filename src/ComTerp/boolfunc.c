@@ -286,6 +286,9 @@ void NotEqualFunc::execute() {
     case ComValue::DoubleType:
 	result.boolean_ref() = operand1.double_val() != operand2.double_val();
 	break;
+    case ComValue::UnknownType:
+	result.boolean_ref() = operand2.is_known();
+	break;
     }
     reset_stack();
     push_stack(result);

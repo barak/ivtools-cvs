@@ -25,6 +25,7 @@
 #include <ComUnidraw/grdotfunc.h>
 #include <ComUnidraw/grfunc.h>
 #include <ComUnidraw/grstatfunc.h>
+#include <ComUnidraw/highlightfunc.h>
 #include <ComUnidraw/comeditor.h>
 #include <ComUnidraw/comterp-iohandler.h>
 #include <ComUnidraw/dialogfunc.h>
@@ -182,6 +183,8 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("acknowledgebox", new AcknowledgeBoxFunc(comterp, this));
     comterp->add_command("confirmbox", new ConfirmBoxFunc(comterp, this));
+
+    comterp->add_command("highlight", new HighlightFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
