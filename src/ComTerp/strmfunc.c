@@ -401,7 +401,6 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 	      
 	      /* sub-stream return null, zero it, and return null for this one */
 	      val->stream_list()->clear();
-	      comterp->push_stack(ComValue::nullval());
 	      streamv.stream_list()->clear();
 	      return;
 	    } else if (comterp->stack_height()==inside_stackh)
