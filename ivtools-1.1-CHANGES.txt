@@ -1,0 +1,23 @@
+October 29th, 2003  ivtools-1.1.0
+
+- re-enable use of shared memory for X11 image rendering under MacOS X
+
+- fix command passed to popen() to detect executables on MacOS X
+
+- fix up some AttrValue stuff
+
+- all the changes it took to get it built with ACE on MacOS X (though
+it doesn't work yet).
+
+- the cpp bundled with gcc-3.3 has a bug, and gets confused by
+back-slashed commas in macro arguments (it thinks they start a new
+argument, which they don't).  This introduced a problem to long stable
+config files, but a workaround is here.
+
+- this also fixes things so FreeBSD can configure on alpha architectures.
+
+- add -svgexport flag to drawtool that by default suppresses (the
+incomplete) SVG export mechanism.
+
+- incorporate an XML dump of all the SourceForge tracker info, in case
+SourceForge goes away (sourceforge.102203.xml).
