@@ -292,7 +292,7 @@ ostream& operator<< (ostream& out, const ComValue& sv) {
 	  break;
 	    
 	case ComValue::BlankType:
-	  cerr << "<blank>";
+	  // cerr << "<blank>";
 	  break;
 
 	case ComValue::ObjectType:
