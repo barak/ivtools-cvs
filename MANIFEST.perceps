@@ -108,6 +108,7 @@ IVGlyph/exportchooser.h
 IVGlyph/fieldedit.h
 IVGlyph/figure.h
 IVGlyph/gdialogs.h
+IVGlyph/idraw.h
 IVGlyph/importchooser.h
 IVGlyph/namestate.h
 IVGlyph/observables.h

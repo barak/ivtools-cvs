@@ -138,6 +138,10 @@
 #undef None
 #include <OS/math.h>
 
+#define TEST_PICTOOLS
+#if defined(TEST_PICTOOLS)
+#include <IVGlyph/idraw.h>
+#endif
 #include <IVGlyph/figure.h>
 #include <IVGlyph/textform.h>
 #include <IVGlyph/toolbutton.h>
@@ -473,6 +477,9 @@ Glyph* OverlayKit::MakeToolbar() {
 				    fxClosed, fyClosed, nClosed);
     Glyph* gcspl = new Fig31Closed_BSpline(new Brush(0), kit.foreground(), nil,
 					   fxClosed, fyClosed, nClosed);
+#if defined(TEST_PICTOOLS) /* test of zero-centered idraw drawing toolbutton */
+    Glyph* gtest = IdrawReader::load("/tmp/test.idr");
+#endif
     Glyph* anno = kit.label("Annotate");
     Glyph* attr = kit.label("Attribute");
     Glyph* clipr = kit.label("ClipRect");
@@ -512,6 +519,10 @@ Glyph* OverlayKit::MakeToolbar() {
 			 maxwidth);
     maxwidth = Math::max((gcspl->request(req), req.x_requirement().natural()),
 			 maxwidth);
+#if defined(TEST_PICTOOLS)
+    maxwidth = Math::max((gtest->request(req), req.x_requirement().natural()),
+			 maxwidth);
+#endif
     maxwidth = Math::max((anno->request(req), req.x_requirement().natural()),
 			 maxwidth);
     maxwidth = Math::max((attr->request(req), req.x_requirement().natural()),
@@ -610,6 +621,12 @@ Glyph* OverlayKit::MakeToolbar() {
 			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
 				       layout.hcenter(gcspl)),
 			tg, _ed->MouseDocObservable(), mouse_cspl));
+#if defined(TEST_PICTOOLS)
+    vb->append(MakeTool(new GraphicCompTool(new ControlInfo(csplineComp, "X", "X"), csplineComp),
+			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
+				       layout.hcenter(gtest)),
+			tg, _ed->MouseDocObservable(), mouse_cspl));
+#endif
     vb->append(MakeTool(new AnnotateTool(new ControlInfo("Annotate", "A", "A")),
 			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
 				       layout.hcenter(anno)), tg, _ed->MouseDocObservable(), mouse_anno));
