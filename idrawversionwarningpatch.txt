@@ -1,0 +1,22 @@
+diff -c idcatalog.c:1.1 UniIdraw/idcatalog.c:1.2
+*** idcatalog.c:1.1	Mon Aug  3 12:19:51 1998
+--- idcatalog.c	Mon Aug  3 12:29:10 1998
+***************
+*** 177,184 ****
+      in >> _buf >> _psversion;
+  
+      if (_psversion > PSV_LATEST) {
+!         fprintf(stderr, "warning: drawing version %d ", _psversion);
+!         fprintf(stderr, "newer than idraw version %d\n", PSV_LATEST);
+      }
+  
+      float xincr, yincr;
+--- 177,184 ----
+      in >> _buf >> _psversion;
+  
+      if (_psversion > PSV_LATEST) {
+!         fprintf(stderr, "warning: drawing version %f ", _psversion);
+!         fprintf(stderr, "newer than idraw version %f\n", PSV_LATEST);
+      }
+  
+      float xincr, yincr;

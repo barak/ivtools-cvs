@@ -1,0 +1,1179 @@
+
+<html><head><TITLE>Description of ParamList</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ParamList</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+list of <A HREF="ParamStruct.html" >ParamStruct</A> objects for de-serialization of a previously serialized object.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#ParamList><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Attribute/paramlist.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  list of <A HREF="ParamStruct.html" >ParamStruct</A> objects that defines the possible signature
+ of a serialized object, for use in de-serialization (istream constructors). 
+ <p>
+ See <A HREF="OverlayScript.html" >OverlayScript</A> and <A HREF="OverlayComp.html" >OverlayComp</A> for an example of how this is used.  
+ <A HREF="OverlayScript.html" >OverlayScript</A> is a serializing view of an <A HREF="OverlayComp.html" >OverlayComp</A>, and generates a variable
+ length, ASCII record (with arguments enclosed in parenthesis following the object
+ name) that describes the internal state of an <A HREF="OverlayComp.html" >OverlayComp</A>.  Then later, the 
+ istream constructor of an <A HREF="OverlayComp.html" >OverlayComp</A> uses the static <A HREF="ParamList.html" >ParamList</A> object of its 
+ class to reverse the process (called de-serialization), to set the internal state 
+ of a newly constructed <A HREF="OverlayComp.html" >OverlayComp</A> to mirror the internal state of the original 
+ object.  This mechanism can be used for any struct or C++ class that needs to be 
+ saved out to disk for persistent storage, or transmitted over a socket. 
+ <p>
+ Keep in mind that only relative addresses are used to construct the <A HREF="ParamStruct.html" >ParamStruct</A>
+ objects that make up the <A HREF="ParamList.html" >ParamList</A>, and the actual base address used to
+ resolve where to place data is different when the final object is constructed
+ (except for the very first time an object of a given class gets constructed --
+ at that time the addresses used to build up the <A HREF="ParamList.html" >ParamList</A> are the same ones
+ used to populate the object).
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamStruct.html" >ParamStruct</A>* 
+    <A NAME="CurrParamStruct()">
+    <B>CurrParamStruct</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        last <A HREF="ParamStruct.html" >ParamStruct</A> from ::GetStruct
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ParamList(ParamList*=nil)">
+    <B>ParamList</B> (<A HREF="ParamList.html" >ParamList</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct with optional <A HREF="ParamList.html" >ParamList</A> to copy.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_param(constchar*name&#38;&#38;COMMParamStruct::ParamFormatformat&#38;&#38;COMMparam_callbackifunc&#38;&#38;COMMvoid*base&#38;&#38;COMMvoid*addr1&#38;&#38;COMMvoid*addr2=nil&#38;&#38;COMMvoid*addr3=nil&#38;&#38;COMMvoid*addr4=nil)">
+    <B>add_param</B> ( const char* name, <A HREF="ParamStruct.html" >ParamStruct</A>::ParamFormat format, param_callback ifunc, void* base, void* addr1, void* addr2 = nil, void* addr3 = nil, void* addr4 = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compose and insert <A HREF="ParamStruct.html" >ParamStruct</A>, computing offsets 1 thru 4 by differing
+ against 'base'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_param_first(constchar*name&#38;&#38;COMMParamStruct::ParamFormatformat&#38;&#38;COMMparam_callbackifunc&#38;&#38;COMMvoid*base=&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC0x1&#38;&#38;COMMvoid*addr1=&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC0x1&#38;&#38;COMMvoid*addr2=nil&#38;&#38;COMMvoid*addr3=nil&#38;&#38;COMMvoid*addr4=nil)">
+    <B>add_param_first</B> ( const char* name, <A HREF="ParamStruct.html" >ParamStruct</A>::ParamFormat format, param_callback ifunc, void* base = (void*)0x1, void* addr1 = (void*)0x1, void* addr2 = nil, void* addr3 = nil, void* addr4 = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compose and insert <A HREF="ParamStruct.html" >ParamStruct</A> as far forward in the <A HREF="ParamList.html" >ParamList</A> as possible
+ given its desired format type. In this manner a parameter handler can be 
+ easily overriden.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_param_indirect(constchar*name&#38;&#38;COMMParamStruct::ParamFormatformat&#38;&#38;COMMparam_callbackifunc&#38;&#38;COMMvoid*base&#38;&#38;COMMvoid*offset&#38;&#38;COMMvoid*addr1&#38;&#38;COMMvoid*addr2=nil&#38;&#38;COMMvoid*addr3=nil&#38;&#38;COMMvoid*addr4=nil)">
+    <B>add_param_indirect</B> ( const char* name, <A HREF="ParamStruct.html" >ParamStruct</A>::ParamFormat format, param_callback ifunc, void* base, void* offset, void* addr1, void* addr2 = nil, void* addr3 = nil, void* addr4 = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compose and insert <A HREF="ParamStruct.html" >ParamStruct</A>, computing offsets 1 thru 4 by differing
+ against the content of 'offset', and subtracting 'base' from 'offset'
+ to arrive at indirection offset to set in the <A HREF="ParamStruct.html" >ParamStruct</A> (the offset from
+ the base address of the object being constructed where you will find
+ an address to add the other offsets to, to arrive a final address).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="bincheck(constchar*name)">
+    <B>bincheck</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if executable can be found.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="bintest(constchar*name)">
+    <B>bintest</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return 0 if executable can be found, otherwise -1.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="filter(constchar*string&#38;&#38;COMMintlen)">
+    <B>filter</B> (const char* string, int len) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        filter text buffer for octal constants.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="LexScan.html" >LexScan</A>* 
+    <A NAME="lexscan()">
+    <B>lexscan</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct default <A HREF="LexScan.html" >LexScan</A> for use.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static char 
+    <A NAME="octal(constchar*p)">
+    <B>octal</B> (const char* p) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        convert string of three octal digits to a character.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static char* 
+    <A NAME="octal(unsignedcharc&#38;&#38;COMMregisterchar*p)">
+    <B>octal</B> (unsigned char c, register char* p) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        convert a character to an octal string.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="output_text(ostream&#38;out&#38;&#38;COMMconstchar*text&#38;&#38;COMMintindent=0)">
+    <B>output_text</B> (ostream&#38; out, const char* text, int indent=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output text in a format readable by parse_text().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_dblpts(istream&#38;&#38;&#38;COMMdouble*&#38;&#38;&#38;COMMdouble*&#38;&#38;&#38;COMMint&#38;)">
+    <B>parse_dblpts</B> (istream&#38;, double*&#38;, double*&#38;, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse parenthesized point list of doubles from istream, for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_fltpts(istream&#38;&#38;&#38;COMMfloat*&#38;&#38;&#38;COMMfloat*&#38;&#38;&#38;COMMint&#38;)">
+    <B>parse_fltpts</B> (istream&#38;, float*&#38;, float*&#38;, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse parenthesized point list of floats from istream, for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_pathname(istream&#38;in&#38;&#38;COMMchar*buffer&#38;&#38;COMMintbuflen&#38;&#38;COMMconstchar*dir)">
+    <B>parse_pathname</B> (istream&#38; in, char* buffer, int buflen, const char* dir) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse pathname, expanding relative pathnames from 'dir', for use of a
+ param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_points(istream&#38;&#38;&#38;COMMCoord*&#38;&#38;&#38;COMMCoord*&#38;&#38;&#38;COMMint&#38;)">
+    <B>parse_points</B> (istream&#38;, Coord*&#38;, Coord*&#38;, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse parenthesized point list of integers from istream, for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_string(istream&#38;in&#38;&#38;COMMchar*buffer&#38;&#38;COMMintbuflen)">
+    <B>parse_string</B> (istream&#38; in, char* buffer, int buflen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse string from istream, correctly handling embedded quotes prefixed
+ by back-slashes, for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_text(istream&#38;in&#38;&#38;COMMchar*buffer&#38;&#38;COMMintbuflen)">
+    <B>parse_text</B> (istream&#38; in, char* buffer, int buflen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse text string, converting embedded octal constants, and handling 
+ embedded quotes preceded by back-slashes, for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static char* 
+    <A NAME="parse_textbuf(istream&#38;in)">
+    <B>parse_textbuf</B> (istream&#38; in) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse multi-line comma-separated set of character strings into a single buffer,
+ for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_token(istream&#38;in&#38;&#38;COMMchar*buffer&#38;&#38;COMMintbuflen&#38;&#38;COMMchardelim=&#38;&#38;QUOTS&#38;&#38;BRAKO&#38;&#38;QUOTS)">
+    <B>parse_token</B> (istream&#38; in, char* buffer, int buflen, char delim = '(') </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse <A HREF="token.html" >token</A> from istream, for use of a param_callback. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="parse_token(istream&#38;in&#38;&#38;COMMchar*buffer&#38;&#38;COMMintbuflen&#38;&#38;COMMchar*delim)">
+    <B>parse_token</B> (istream&#38; in, char* buffer, int buflen, char* delim) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parse <A HREF="token.html" >token</A> from istream ended by one of a string of delimters, 
+ for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="read_args(istream&#38;in&#38;&#38;COMMvoid*base)">
+    <B>read_args</B> (istream&#38; in, void* base) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        work-horse method that assumes istream is positioned right before
+ the open-paren of the serialized object (the object name precedes
+ the open-paren). Handles the logic to parse first required, then
+ optional, then keyword arguments (or 'other' arugments, which means
+ pass the rest of the arguments on as is). Invokes all the function
+ pointers of type param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_double(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_double</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read up to four comma-separated doubles from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_doubles(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_doubles</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read any number of comma-separated doubles from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_float(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_float</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read up to four comma-separated floats from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_floats(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_floats</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read any number of comma-separated floats from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_int(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_int</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read up to four comma-separated integers from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_ints(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_ints</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read any number of comma-separated integers from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_string(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_string</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read up to four comma-separated character strings from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_strings(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>read_strings</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        param_callback to read any number of comma-separated strings from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="skip_space(istream&#38;in)">
+    <B>skip_space</B> (istream&#38; in) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        skip whitespace in istream, for use of a param_callback.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="url_use_ok()">
+    <B>url_use_ok</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test if url use ok for pathnames. Same as <A HREF="OpenFileChooser.html" >OpenFileChooser</A> method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="urltest(constchar*)">
+    <B>urltest</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test if pathname looks like a URL. Same as <A HREF="OpenFileChooser.html" >OpenFileChooser</A> method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~ParamList()">
+    <B>~ParamList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Append(ParamStruct*)">
+    <B>Append</B> (<A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Done(ALIterator)">
+    <B>Done</B> (<A HREF="ALIterator.html" >ALIterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AList.html" >AList</A>* 
+    <A NAME="Elem(ALIterator)">
+    <B>Elem</B> (<A HREF="ALIterator.html" >ALIterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="First(ALIterator&#38;)">
+    <B>First</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamStruct.html" >ParamStruct</A>* 
+    <A NAME="GetStruct(ALIterator)">
+    <B>GetStruct</B> (<A HREF="ALIterator.html" >ALIterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Includes(ParamStruct*)">
+    <B>Includes</B> (<A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InsertAfter(ALIterator&#38;&#38;COMMParamStruct*)">
+    <B>InsertAfter</B> (<A HREF="ALIterator.html" >ALIterator</A>, <A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InsertBefore(ALIterator&#38;&#38;COMMParamStruct*)">
+    <B>InsertBefore</B> (<A HREF="ALIterator.html" >ALIterator</A>, <A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="IsEmpty()">
+    <B>IsEmpty</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Last(ALIterator&#38;)">
+    <B>Last</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Next(ALIterator&#38;)">
+    <B>Next</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="Number()">
+    <B>Number</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Prepend(ParamStruct*)">
+    <B>Prepend</B> (<A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Prev(ALIterator&#38;)">
+    <B>Prev</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(ALIterator&#38;)">
+    <B>Remove</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(ParamStruct*)">
+    <B>Remove</B> (<A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetStruct(ParamStruct*&#38;&#38;COMMALIterator&#38;)">
+    <B>SetStruct</B> (<A HREF="ParamStruct.html" >ParamStruct</A>*, <A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamStruct.html" >ParamStruct</A>* 
+    <A NAME="Struct(AList*)">
+    <B>Struct</B> (<A HREF="AList.html" >AList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AList.html" >AList</A>* 
+    <A NAME="_alist">
+    <B>_alist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_count">
+    <B>_count</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamStruct.html" >ParamStruct</A>* 
+    <A NAME="_currstruct">
+    <B>_currstruct</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_keyword_count">
+    <B>_keyword_count</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="LexScan.html" >LexScan</A>* 
+    <A NAME="_lexscan">
+    <B>_lexscan</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_optional_count">
+    <B>_optional_count</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_other_count">
+    <B>_other_count</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_required_count">
+    <B>_required_count</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="insert(ParamStruct*)">
+    <B>insert</B> (<A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="insert_first(ParamStruct*)">
+    <B>insert_first</B> (<A HREF="ParamStruct.html" >ParamStruct</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

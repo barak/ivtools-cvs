@@ -1,0 +1,333 @@
+
+<html><head><TITLE>Description of OvNewViewCmd</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OvNewViewCmd</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="NewViewCmd.html" >NewViewCmd</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+derived new-view command.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="NewViewCmd.html" >NewViewCmd</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OvNewViewCmd><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovcmds.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Command.html" >Command</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Execute()">
+    <B>Execute</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create new view by constructing an <A HREF="OverlayEditor.html" >OverlayEditor</A> and asking
+ the unidraw object to open it.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OvNewViewCmd(ControlInfo*&#38;&#38;COMMconstchar*display=nil)">
+    <B>OvNewViewCmd</B> (<A HREF="ControlInfo.html" >ControlInfo</A>*, const char* display=nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OvNewViewCmd(Editor*=nil&#38;&#38;COMMconstchar*display=nil)">
+    <B>OvNewViewCmd</B> (<A HREF="Editor.html" >Editor</A>* = nil, const char* display=nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="OvNewViewCmd::default_instance(OvNewViewCmd*cmd)">
+    <B>OvNewViewCmd::default_instance</B> (<A HREF="OvNewViewCmd.html" >OvNewViewCmd</A>* cmd) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set default instance of this command.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="clr_display()">
+    <B>clr_display</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        clear alternate X11 display to attempt opening new view upon.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OvNewViewCmd.html" >OvNewViewCmd</A>* 
+    <A NAME="default_instance()">
+    <B>default_instance</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return default instance of this command.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="display()">
+    <B>display</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return alternate X11 display string.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="display(constchar*)">
+    <B>display</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set alternate X11 display string.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="set_display()">
+    <B>set_display</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        prompt for alternate X11 display to attempt opening new view upon.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OvNewViewCmd()">
+    <B>~OvNewViewCmd</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OvNewViewCmd.html" >OvNewViewCmd</A>* 
+    <A NAME="_default">
+    <B>_default</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char * 
+    <A NAME="_display">
+    <B>_display</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

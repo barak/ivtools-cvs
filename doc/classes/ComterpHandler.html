@@ -1,0 +1,517 @@
+
+<html><head><TITLE>Description of ComterpHandler</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ComterpHandler</B></FONT>
+
+  <FONT SIZE=4> : public ACE_Svc_Handler&#60;ACE_SOCK_STREAM, ACE_NULL_SYNCH&#62;  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+handler to invoke <A HREF="ComTerp.html" >ComTerp</A> on socket (version with ACE)<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public ACE_Svc_Handler&#60;ACE_SOCK_STREAM, ACE_NULL_SYNCH&#62; 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#ComterpHandler><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+ComTerp/comhandler.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  = Initialization and termination methods.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComterpHandler(void)">
+    <B>ComterpHandler</B> (void) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="close(u_long)">
+    <B>close</B> (u_long) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        close handler hook.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="comterp()">
+    <B>comterp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return associated <A HREF="ComTerpServ.html" >ComTerpServ</A> pointer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="destroy(void)">
+    <B>destroy</B> (void) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Ensure dynamic allocation.
+ = Hooks for opening and closing handlers.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="logger_mode()">
+    <B>logger_mode</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates comterp is in logging-only mode
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="logger_mode(intflag)">
+    <B>logger_mode</B> (int flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag to put comterp in logging mode, where commands are echoed
+ to stdout without executing
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="open(void*)">
+    <B>open</B> (void *) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        open handler hook.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>FILE* 
+    <A NAME="rdfptr()">
+    <B>rdfptr</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        file pointer for reading from handle
+ = Demultiplexing hooks.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="timeoutscript()">
+    <B>timeoutscript</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return text of commands to execute every timeout.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="timeoutscript(constchar*)">
+    <B>timeoutscript</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        install new text of commands to execute every timeout.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="timeoutscriptid()">
+    <B>timeoutscriptid</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return symbol id of text of commands to execute every timeout.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="timeoutscriptid(int)">
+    <B>timeoutscriptid</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set symbol id of text of commands to execute every timeout.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="timeoutseconds()">
+    <B>timeoutseconds</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return timeout period in seconds.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="timeoutseconds(intseconds)">
+    <B>timeoutseconds</B> (int seconds) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set timeout period in seconds.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>FILE* 
+    <A NAME="wrfptr()">
+    <B>wrfptr</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        file pointer for writing to handle
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~ComterpHandler()">
+    <B>~ComterpHandler</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="_logger_mode">
+    <B>_logger_mode</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        mode for logging commands: 0 = no log, 1 = log only
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>FILE* 
+    <A NAME="_rdfptr">
+    <B>_rdfptr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        file pointer for reading from handle
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_seconds">
+    <B>_seconds</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        timeout in seconds
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_timeoutscriptid">
+    <B>_timeoutscriptid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        command for timeoutscript execution
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>FILE* 
+    <A NAME="_wrfptr">
+    <B>_wrfptr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        file pointer for writing to handle
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="comterp_">
+    <B>comterp_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        private local comterp server
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_input(ACE_HANDLE)">
+    <B>handle_input</B> (ACE_HANDLE) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        called when input ready on ACE_HANDLE.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_timeout(constACE_Time_Value&#38;tv&#38;&#38;COMMconstvoid*arg)">
+    <B>handle_timeout</B> (const ACE_Time_Value &#38;tv, const void *arg) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        called when timer goes off.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char 
+    <A NAME="peer_name_[MAXHOSTNAMELEN">
+    <B>peer_name_[MAXHOSTNAMELEN </B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        <A HREF="Host.html" >Host</A> we are connected to.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

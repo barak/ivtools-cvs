@@ -1,0 +1,820 @@
+
+<html><head><TITLE>Description of OverlayView</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayView</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="GraphicView.html" >GraphicView</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+base class for graphic view of an <A HREF="OverlayComp.html" >OverlayComp</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="GraphicView.html" >GraphicView</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayView><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovviews.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AdjustForPan(floatdx&#38;&#38;COMMfloatdy)">
+    <B>AdjustForPan</B> (float dx, float dy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        called once per <A HREF="OverlayView.html" >OverlayView</A> before each pan, to let
+ fixed location graphics adjust accordingly.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AdjustForZoom(floatfactor&#38;&#38;COMMCoordcx&#38;&#38;COMMCoordcy)">
+    <B>AdjustForZoom</B> (float factor, Coord cx, Coord cy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        called once per <A HREF="OverlayView.html" >OverlayView</A> before each zoom, to let
+ fixed size graphics adjust accordingly.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Manipulator.html" >Manipulator</A>* 
+    <A NAME="CreateManipulator(Viewer*&#38;&#38;COMMEvent&#38;&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*)">
+    <B>CreateManipulator</B> (<A HREF="Viewer.html" >Viewer</A>*,<A HREF="Event.html" >Event</A>&#38;,<A HREF="Transformer.html" >Transformer</A>*,<A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create move tool manipulator.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Manipulator.html" >Manipulator</A>* 
+    <A NAME="CreateStretchManip(Viewer*&#38;&#38;COMMEvent&#38;&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*)">
+    <B>CreateStretchManip</B> (<A HREF="Viewer.html" >Viewer</A>*, <A HREF="Event.html" >Event</A>&#38;, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        specialized method to construct <A HREF="OpaqueDragManip.html" >OpaqueDragManip</A> instead of <A HREF="DragManip.html" >DragManip</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Desensitizable()">
+    <B>Desensitizable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true for this class.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Desensitize()">
+    <B>Desensitize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        desensitize the graphic (ignore mouse events)
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Desensitized()">
+    <B>Desensitized</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if desensitized.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DrawHandles()">
+    <B>DrawHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        draw tic mark handles and highlight some things with a new graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="EraseHandles()">
+    <B>EraseHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        erase tic mark handles and unhighlight some things by replacing their
+ old graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="FixLocation()">
+    <B>FixLocation</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        enable fixing of graphic location.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="FixSize(floatfactor=1.0)">
+    <B>FixSize</B> (float factor=1.0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        fix size of graphic, with optional factor to reduce or increase effect.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="FixedLocation()">
+    <B>FixedLocation</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag to indicate if graphic is of fixed location.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="FixedSize()">
+    <B>FixedSize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag to indicate if graphic is of fixed size.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="GetOverlayComp()">
+    <B>GetOverlayComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Hidable()">
+    <B>Hidable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true for this class.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Hidden()">
+    <B>Hidden</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if hidden.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Hide()">
+    <B>Hide</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        hide the graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Highlight()">
+    <B>Highlight</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        cause highlighting by graphic state to happen.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="HighlightGraphic()">
+    <B>HighlightGraphic</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        graphic used to highlight by changing graphic state. 
+ A nil returned from this method disables the mechanism.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="HighlightGraphic(Graphic*hilite_gs)">
+    <B>HighlightGraphic</B> (<A HREF="Graphic.html" >Graphic</A>* hilite_gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        graphic used to highlight by changing graphic state. 
+ A nil returned from this method disables the mechanism.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Highlightable()">
+    <B>Highlightable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if set up to be highlighted with a graphic state. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Highlighted()">
+    <B>Highlighted</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if highlighted with a graphic state. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitHandles()">
+    <B>InitHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize tic mark handles and set up to highlight some things with a new 
+ graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Interpret(Command*)">
+    <B>Interpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        interpret hide-view, desensitize-view, (un)fix-size, and (un)fix-location 
+ commands.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="MakeSelection()">
+    <B>MakeSelection</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        factor method to construct an <A HREF="OverlaySelection.html" >OverlaySelection</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="RedrawHandles()">
+    <B>RedrawHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        redraw tic mark handles and highlight some things with a new graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Sensitize()">
+    <B>Sensitize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        resensitize the graphic (pay attention to mouse events)
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Show()">
+    <B>Show</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        unhide the graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="UnfixLocation()">
+    <B>UnfixLocation</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        disable fixing of graphic location.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="UnfixSize()">
+    <B>UnfixSize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        disable fixing of graphic size.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Unhighlight()">
+    <B>Unhighlight</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        undo any highlighting by graphic state to happen.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Uninterpret(Command*)">
+    <B>Uninterpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        uninterpret hide-view, desensitize-view, (un)fix-size, and (un)fix-location 
+ commands.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayView.html" >OverlayView</A>* 
+    <A NAME="GetOverlayView(Graphic*)">
+    <B>GetOverlayView</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayView(OverlayComp*=nil)">
+    <B>OverlayView</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayView.html" >OverlayView</A>* 
+    <A NAME="View(UList*)">
+    <B>View</B> (<A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_fixed_location">
+    <B>_fixed_location</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_fixed_size">
+    <B>_fixed_size</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>float 
+    <A NAME="_fixed_size_factor">
+    <B>_fixed_size_factor</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="_hilite_gs">
+    <B>_hilite_gs</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_touched">
+    <B>_touched</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

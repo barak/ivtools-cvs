@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       MoveTool - tool for translating components
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Tools/move.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       MoveTool  lets  the user translate components to new posi-
+       tions by direct manipulation.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>MoveTool(ControlInfo*</B> <B>=</B> <B>nil)</B>
+              Create a new MoveTool.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              CreateManipulator detects whether the user  clicked
+              on  a  component.   If  not, it clears the editor's
+              selection and returns a nil manipulator.  If a com-
+              ponent was hit, and if the component was not previ-
+              ously selected, then CreateManipulator  clears  the
+              editor's  selection, selects the component the user
+              hit, and delegates manipulator creation and  inter-
+              pretation  to  it.   If  the component was the only
+              selected component, it again delegates  manipulator
+              creation  and  interpretation to the component, but
+              the selection is unaltered.  If the user clicks  on
+              one of many selected components, then CreateManipu-
+              lator will delegate manipulator creation and inter-
+              pretation without altering the selection by calling
+              GraphicView::CreateManipulator      and      Graph-
+              icView::InterpretManipulator on the component.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>GraphicView(3U)</B>, <B>Tool(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Frame,  ShadowFrame,  MarginFrame,  ShowFrame, TitleFrame,
+       BorderFrame - surrounding interactor
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/frame.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A frame is a  monoscene  subclass  that  outlines  another
+       interactor.   A  shadow frame draws an outline with a drop
+       shadow.  A margin frame surrounds its component with hori-
+       zontal and vertical glue.
+
+       A show frame is an abstract class that changes its appear-
+       ance in response to an EnterEvent or LeaveEvent.  A  title
+       frame  provides a banner that it displays in reverse video
+       when it receives an EnterEvent.  A border frame  draws  an
+       outline   using  a  solid  pattern  when  it  receives  an
+       EnterEvent and draws the outline using a gray pattern when
+       it receives a LeaveEvent.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Frame(Interactor*,</B> <B>int</B> <B>width</B> <B>=</B> <B>1)</B>
+              Construct  a frame.  If the given interactor is not
+              nil, it is inserted as the frame's component.   The
+              frame  extends <I>width</I> pixels outside of the interac-
+              tor.
+
+       <B>ShadowFrame(Interactor*,</B> <B>int</B> <B>h</B> <B>=</B> <B>1,</B> <B>int</B> <B>v</B> <B>=</B> <B>1)</B>
+              Construct a shadow frame.  The <I>h</I> and <I>v</I>  ShadowFrame
+              parameters  specify the width of the horizontal and
+              vertical shadows,  respectively.   Positive  values
+              for these parameters specify shadows falling to the
+              right and below the interactor, respectively; nega-
+              tive values specify shadows falling to the left and
+              above.
+
+       <B>MarginFrame(Interactor*</B> <B>=</B> <B>nil,</B> <B>int</B> <B>margin</B> <B>=</B> <B>0)</B>
+       <B>MarginFrame(Interactor*,</B> <B>int</B> <B>margin,</B> <B>int</B> <B>shrink,</B> <B>int</B>
+              <B>stretch)</B>
+       <B>MarginFrame(Interactor*,</B> <B>int</B> <B>hmargin,</B> <B>int</B> <B>vmargin)</B>
+       <B>MarginFrame(Interactor*,</B>  <B>int</B> <B>hm,</B> <B>int</B> <B>hshr,</B> <B>int</B> <B>hstr,</B> <B>int</B>
+              <B>vm,</B> <B>int</B> <B>vshr,</B> <B>int</B> <B>vstr)</B>
+              Construct  a  margin  frame.  The first constructor
+              puts rigid, fixed-sized glue around the  component,
+              while the second surrounds it with fixed-sized glue
+              of  the  given  shrinkability  and  stretchability.
+              Independent horizontal and vertical margins are set
+              with the third constructor.  The  last  constructor
+              allows  full  specification  of  the margin frame's
+              horizontal and vertical  margins,  shrinkabilities,
+              and stretchabilities.
+
+              ShowFrame   objects   listen   for  EnterEvent  and
+              LeaveEvent.   When  an  EnterEvent   is   received,
+              ShowFrame::Handle  calls InsideFrame(true); when an
+              LeaveEvent   is   received,   it   calls    Inside-
+              Frame(false).   For  any other event, it calls Han-
+              dleInput.   ShowFrame::InsideFrame  does   nothing.
+              ShowFrame::HandleInput  calls Handle on the frame's
+              component.
+
+       <B>TitleFrame(Banner*,</B> <B>Interactor*,</B> <B>int</B> <B>width</B> <B>=</B> <B>1)</B>
+              Construct a title  frame  with  the  given  banner.
+              TitleFrame::InsideFrame highlights and unhighlights
+              the banner.
+
+       <B>BorderFrame(Interactor*,</B> <B>int</B> <B>width</B> <B>=</B> <B>1)</B>
+              Construct a border frame.  BorderFrame::InsideFrame
+              highlights and unhighlights the border.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Frame(Interactor*,</B> <B>int,</B> <B>int,</B> <B>int,</B> <B>int)</B>
+              This  constructor  is used by subclasses to explic-
+              itly set the widths of each line  in  the  outline.
+              The integers specify the width of the left, bottom,
+              right, and top lines, respectively.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Banner(3I)</B>, <B>Event(3I)</B>, <B>Glue(3I)</B>, <B>Scene(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>special note on building ivtools-0.6.11</title>
+  </head>
+
+  <body>
+    <h3>special note on building ivtools-0.6.11</h3>
+
+    A problem has come up in the transition to using a configure
+    script for building ivtools.  It should be fixed in
+    ivtools-0.6.12, available by October 23rd 1998 at the latest.
+    <b>The workaround</b> is to use the old-style configuration method
+    described in the INSTALL file.  If you have run the configure
+    script already, you need to re-run it with no arguments before
+    following the INSTALL directions, or start over from a fresh copy
+    of the source tree.  You also need to change the <code>#if
+    0</code> near the end of the ivtools-0.6/config/site.def.$CPU file
+    to <code>#if 1</code> to bring back the definitions that were to
+    be handled by the configure script instead.  More details on the
+    problem below.
+
+    <p>
+
+      <b>The problem</b> lies in compiling C source code (as opposed to C++)
+      when using the configure script.  Without the configure script,
+      everything works fine for any gcc-2.7.2 installation, because
+      with that version of gcc (any earlier version), there is full
+      support for the -x argument (-xc, -xc++), which directs the
+      plain vanilla gcc as to what language needs to be compiled.
+
+      <p>
+
+      With the configure script, all the C compilation is broken with
+      any compiler (gcc-2.7.2 and <, gcc-2.8.1 and >, egcs-1.0.1 and
+      >), because the default C++ compiler becomes "c++" instead of
+      gcc, and even though the -xc++ argument still works on gcc-2.7.2
+      installations, the compilation had not been setup to provide an
+      -xc whereever it was needed (the TIFF modules and the ComUtil
+      library).
+
+      <p>
+
+      <b>The fix</b> forthcoming in ivtools-0.6.12 is to use the
+      configure script to find a C compiler as well as a C++ compiler,
+      and remove all use of -xc++ and -xc from the compilation command
+      lines.  This should work for gcc-2.7.2 (and <), gcc-2.8.1 (and
+      >), and egcs-1.0.1 (and >).  
+
+<p>The old-style configuration process will be modified as well, to
+add full support for a separate rule to compile C modules.  That will
+get used in the ComUtil library.  The TIFF modules always had a
+special rule to compile as C code, but that rule will be adjusted to
+make sure gcc gets used instead of a g++ or c++ specified by the
+configure script.<p>
+<hr>
+
+<a href=./index.html>back to ivtools home page</a><p>
+<a href=./download.html>back to ivtools download page</a><p>
+<a href=http://www.vectaport.com/pub/src/index.html>back to Vectaport source page</a>
+
+
+
+
+
+  </body>
+</html>

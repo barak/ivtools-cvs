@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>ivtools technical info</title>
+  </head>
+
+  <body>
+      <h1>ivtools technical info</h1>
+
+<p> <a href="../ivtools/index.html"><b>ivtools</b></a> is a collection
+of C++ frameworks for developing custom drawing editors and spatial
+data servers that incorporates <a href=./interviews.html><b>InterViews 3.1</b></a> and
+<a href=./unidrawinfo.html><b>Unidraw</b></a> (from Stanford and Silicon Graphics).  Here is an <a
+href=./ivtools-layers.html>overview</a> of the layered frameworks of
+ivtools.  The following is a list of libraries that comprise ivtools,
+most of them with more information available on-line:
+
+<p>
+	<li><em>Libraries</em>
+	  <ul>
+	    <li> <b><a href=./doc/man3.1/index.html#InterViews>IV</a></b>
+	      The base InterViews library.  Contains base classes for glyphs
+	      and 2.6 interactors plus helper Dispatch, TIFF, Math, OS
+	      classes <a href=./doc/refman3.1/index.html>(reference manual)</a>
+              <a href=./doc/refman3.1/refman.html>(no frames)</a>.
+	    </li>
+	    <li> <a href="unidrawinfo.html"><b>Unidraw</b></a>
+	      The structured graphics library.  Actually a general framework
+	      for constructing graphical editors.
+	    </li>
+	    <li> <b>UniIdraw</b>: librarification of 3.1 idraw (adds a few extra features to Unidraw)
+	    </li>
+	    <li> <b>ComUtil</b>: command interpreter C library
+	    </li>
+	    <li> <a href=attribute.html><b>Attribute</b></a>: attribute library based on ComUtil
+	    </li>
+	    <li> <a href=comterp.html><b>ComTerp</b></a>: command interpreter library
+	    </li>
+	    <li> <a href=glyphinfo.html><b>IVGlyph</b></a>: iv-3.1 glyph extensions
+	    </li>
+	    <li> <b>AttrGlyph/ComGlyph</b>: dialog boxes that leverage Attribute and ComTerp
+	    <li> <b>Dispatch/AceDispatch</b></a>: layering of <a href=http://www.cs.wustl.edu/%7Eschmidt/ACE.html>ACE</a> 
+               Reactor under the InterViews Dispatcher
+	    <li> <a href=ovinfo.html><b>OverlayUnidraw</b></a>: extended Unidraw framework
+	    </li>
+	    <li> <a href=comunidrawinfo.html><b>ComUnidraw</b></a>: command interpreter extensions to Unidraw
+	    </li>
+	    <li> <a href=frameinfo.html><b>FrameUnidraw</b></a>: multi-frame extensions to Unidraw
+	    </li>
+	    <li> <a href=graphinfo.html><b>GraphUnidraw/TopoFace</b></a>: graph-oriented extensions to Unidraw 
+	    </li>
+	    <li> <b>DrawServ</b>: layer to combine graph and multi-frame.
+	    </li>
+	    </li>
+	  </ul>
+	</li>
+	<li><em>Sample Programs &nbsp; / &nbsp; Applications</em>
+	  <ul>
+	    <li> <a href=iclass.html><b>iclass</b></a>
+	      An interactor based C++ class browser.  Lets you cruise the
+	      class hierarchy from C++ header files (text based, not
+	      graphical.)
+	    </li>
+	    <li> <b>idemo</b>:
+	      Glyph demonstration program.  Shows the usual GUI
+	      widgets using OpenLook, Motif or SGIMotif look and feel.
+	    </li>
+	    <li> <a href=../ivtools/idraw-README.txt><b>idraw</b></a>:
+	      Unidraw based drawing editor.  Edit shapes and text by
+	      direct manipulation, many tools and commands, save drawings
+	      in PostScript.
+	    </li>
+	    <li> <a href=../ivtools/drawtool.html><b>drawtool</b></a>: 
+	      extended version of idraw
+	    </li>
+	    <li> <b><a href=./comdraw.html>comdraw</a></b>: drawtool with command interpreter
+	    </li>
+	    <li> <a href=../ivtools/flipbook.html><b>flipbook</b></a>
+	       multi-frame editor based on comdraw
+	    </li>
+	    <li> <a href=../ivtools/graphdraw.html><b>graphdraw</b></a>:
+	      connected-graph editor based on comdraw
+	    </li>
+	    <li> <b>drawserv</b>: comdraw with multi-frame and graph editing both folded in.
+	    </li>
+	  </ul>
+
+<p>
+ivtools makes use of:
+<li> <a href=http://www.ph.tn.tudelft.nl/People/klamer/clippoly_entry.html>clippoly</a>
+polygon intersection software from Klamer Schutte
+<li><a href=http://www.cs.wustl.edu/%7Eschmidt/ACE.html>ACE</a> framework for middleware mechanisms.
+<p>
+
+Here is the <a href=ftp://interviews.stanford.edu/pub/>InterViews ftp site at 
+Stanford </a>, where you can get a wide variety of documentation and example source code, notably papers on  
+<a href=ftp://interviews.stanford.edu/pub/papers/unidraw.ps.Z>Unidraw</a>, 
+<a href=ftp://interviews.stanford.edu/pub/papers/libgraphic.ps.Z>structured graphics</a>, and 
+<a href=ftp://interviews.stanford.edu/pub/papers/glyphs.ps.Z>glyphs</a>.  
+
+Here are local copies for your convenience (<a href=../pub/doc/unidraw.ps.Z>Unidraw</a>/<a href=../pub/doc/libgraphic.ps.Z>structured graphics</a>/<a href=../pub/doc/glyphs.ps.Z>glyphs</a>).
+
+
+ Here is info on <a href=http://www.x.org/consortium/x_info.html>X Windows</a>.
+
+<p>
+<!-- hhmts start -->
+Last modified: Fri Mar  5 15:33:32 PST 1999
+<!-- hhmts end -->
+  </body>
+</html>

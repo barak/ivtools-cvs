@@ -1,0 +1,332 @@
+
+<html><head><TITLE>Description of GraphIdrawComp</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>GraphIdrawComp</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+top-level component in a graphdraw document.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#GraphIdrawComp><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+GraphUnidraw/graphcomp.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  Note: in the future this class could be derived from <A HREF="GraphComp.html" >GraphComp</A>, once the
+ signature of <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A> is completely available as a mixin.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Component.html" >Component</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="GetNumEdge()">
+    <B>GetNumEdge</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of edges in the document.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="GetNumNode()">
+    <B>GetNumNode</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of nodes in the document.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="GraphIdrawComp(constchar*pathname=nil&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>GraphIdrawComp</B> (const char* pathname = nil, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct from 'pathname'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="GraphIdrawComp(istream&#38;&#38;&#38;COMMconstchar*pathname=nil&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>GraphIdrawComp</B> (istream&#38;, const char* pathname = nil, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct from istream that may have been opened on 'pathname'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Interpret(Command*)">
+    <B>Interpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        interpret ungroup command; pass rest to base class.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Ungroup(OverlayComp*&#38;&#38;COMMClipboard*&#38;&#38;COMMCommand*)">
+    <B>Ungroup</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="Clipboard.html" >Clipboard</A>*, <A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method to assist in ungrouping.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDGraphIdrawComp&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="GraphIdrawComp.html" >GraphIdrawComp</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="GetParamList()">
+    <B>GetParamList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GrowParamList(ParamList*)">
+    <B>GrowParamList</B> (<A HREF="ParamList.html" >ParamList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="_graph_idraw_params">
+    <B>_graph_idraw_params</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_num_edge">
+    <B>_num_edge</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_num_node">
+    <B>_num_node</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

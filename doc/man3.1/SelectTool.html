@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       SelectTool - tool for modifying an editor's current selec-
+       tion
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Tools/select.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       SelectTool lets a user change  the  current  selection  by
+       direct manipulation, thus affecting the enclosing editor's
+       selection object.  A single click directly on a  component
+       view selects that view and unselects all others.  Clicking
+       while holding the Shift key down adds the target component
+       to  the  selection  if  it  was  not  already selected and
+       removes it if it was selected.  The user  can  select  all
+       components  within  a  rectangular  area  in the viewer by
+       clicking somewhere outside the nearest component and drag-
+       ging to specify the rectangular area.  All components com-
+       pletely within the area will be selected.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>SelectTool(ControlInfo*</B> <B>=</B> <B>nil)</B>
+              Create a new SelectTool.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              If the user did not click on a component, then Cre-
+              ateManipulator  creates  a DragManip with a Rubber-
+              Rect for dragging out a rectangular  area.   Other-
+              wise,  CreateManipulator clears the editor's selec-
+              tion and selects the hit component.   If  the  user
+              holds the Shift key down in either case, the compo-
+              nents that would have otherwise been selected  will
+              be  unselected, and vice versa.  InterpretManipula-
+              tor  will  only  be  called  if   CreateManipulator
+              returned a non-nil manipulator; in this case Inter-
+              pretManipulator will examine the  DragManipulator's
+              RubberRect  and  select the component views falling
+              completely within it.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Localize(Selection*,</B> <B>Viewer*)</B>
+              Localize ensures that the  given  selection  object
+              contains  only  those  views displayed in the given
+              viewer.  CreateManipulator calls this  function  to
+              avoid possibly shift-selecting views from different
+              components.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Editor(3U)</B>,    <B>Rubband(3I)</B>,    <B>Selection(3U)</B>,    <B>Tool(3U)</B>,
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

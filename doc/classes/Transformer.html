@@ -1,0 +1,895 @@
+
+<html><head><TITLE>Description of Transformer</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Transformer</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+a 3x2 matrix for use in translating 2d coordinates.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#Transformer><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+InterViews/transformer.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../refman3.1/refman.html#PAGE40>in reference manual</a>
+ <p><a href=../man3.1/Transformer.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetEntries(float&#38;a00&#38;&#38;COMMfloat&#38;a01&#38;&#38;COMMfloat&#38;a10&#38;&#38;COMMfloat&#38;a11&#38;&#38;COMMfloat&#38;a20&#38;&#38;COMMfloat&#38;a21)">
+    <B>GetEntries</B> ( float&#38; a00, float&#38; a01, float&#38; a10, float&#38; a11, float&#38; a20, float&#38; a21 ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InvTransform(IntCoord&#38;tx&#38;&#38;COMMIntCoord&#38;ty)">
+    <B>InvTransform</B> (IntCoord&#38; tx, IntCoord&#38; ty) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InvTransform(IntCoordtx&#38;&#38;COMMIntCoordty&#38;&#38;COMMIntCoord&#38;x&#38;&#38;COMMIntCoord&#38;y)">
+    <B>InvTransform</B> ( IntCoord tx, IntCoord ty, IntCoord&#38; x, IntCoord&#38; y ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InvTransform(floattx&#38;&#38;COMMfloatty&#38;&#38;COMMfloat&#38;x&#38;&#38;COMMfloat&#38;y)">
+    <B>InvTransform</B> (float tx, float ty, float&#38; x, float&#38; y) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InvTransformList(IntCoordtx[]&#38;&#38;COMMIntCoordty[]&#38;&#38;COMMintn)">
+    <B>InvTransformList</B> (IntCoord tx[], IntCoord ty[], int n) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InvTransformList(IntCoordtx[]&#38;&#38;COMMIntCoordty[]&#38;&#38;COMMintn&#38;&#38;COMMIntCoordx[]&#38;&#38;COMMIntCoordy[])">
+    <B>InvTransformList</B> ( IntCoord tx[], IntCoord ty[], int n, IntCoord x[], IntCoord y[] ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InvTransformRect(IntCoord&#38;&#38;&#38;COMMIntCoord&#38;&#38;&#38;COMMIntCoord&#38;&#38;&#38;COMMIntCoord&#38;)">
+    <B>InvTransformRect</B> (IntCoord&#38;, IntCoord&#38;, IntCoord&#38;, IntCoord&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InvTransformRect(float&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;)">
+    <B>InvTransformRect</B> (float&#38;, float&#38;, float&#38;, float&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Invert()">
+    <B>Invert</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Postmultiply(Transformer*t)">
+    <B>Postmultiply</B> (<A HREF="Transformer.html" >Transformer</A>* t) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Premultiply(Transformer*t)">
+    <B>Premultiply</B> (<A HREF="Transformer.html" >Transformer</A>* t) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Rotate(floatangle)">
+    <B>Rotate</B> (float angle) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Rotated(float=1e-6)">
+    <B>Rotated</B> (float = 1e-6) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Rotated90(float=1e-6)">
+    <B>Rotated90</B> (float = 1e-6) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Scale(floatsx&#38;&#38;COMMfloatsy)">
+    <B>Scale</B> (float sx, float sy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Scaled(float=1e-6)">
+    <B>Scaled</B> (float = 1e-6) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Stretched(float=1e-6)">
+    <B>Stretched</B> (float = 1e-6) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Transform(IntCoord&#38;x&#38;&#38;COMMIntCoord&#38;y)">
+    <B>Transform</B> (IntCoord&#38; x, IntCoord&#38; y) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Transform(IntCoordx&#38;&#38;COMMIntCoordy&#38;&#38;COMMIntCoord&#38;tx&#38;&#38;COMMIntCoord&#38;ty)">
+    <B>Transform</B> (IntCoord x, IntCoord y, IntCoord&#38; tx, IntCoord&#38; ty) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Transform(floatx&#38;&#38;COMMfloaty&#38;&#38;COMMfloat&#38;tx&#38;&#38;COMMfloat&#38;ty)">
+    <B>Transform</B> (float x, float y, float&#38; tx, float&#38; ty) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="TransformList(IntCoordx[]&#38;&#38;COMMIntCoordy[]&#38;&#38;COMMintn)">
+    <B>TransformList</B> (IntCoord x[], IntCoord y[], int n) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="TransformList(IntCoordx[]&#38;&#38;COMMIntCoordy[]&#38;&#38;COMMintn&#38;&#38;COMMIntCoordtx[]&#38;&#38;COMMIntCoordty[])">
+    <B>TransformList</B> ( IntCoord x[], IntCoord y[], int n, IntCoord tx[], IntCoord ty[] ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="TransformRect(IntCoord&#38;&#38;&#38;COMMIntCoord&#38;&#38;&#38;COMMIntCoord&#38;&#38;&#38;COMMIntCoord&#38;)">
+    <B>TransformRect</B> (IntCoord&#38;, IntCoord&#38;, IntCoord&#38;, IntCoord&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="TransformRect(float&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;)">
+    <B>TransformRect</B> (float&#38;, float&#38;, float&#38;, float&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Transformer()">
+    <B>Transformer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Transformer(constTransformer*)">
+    <B>Transformer</B> (const <A HREF="Transformer.html" >Transformer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Transformer(constTransformer*)">
+    <B>Transformer</B> (const <A HREF="Transformer.html" >Transformer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Transformer(floata00&#38;&#38;COMMfloata01&#38;&#38;COMMfloata10&#38;&#38;COMMfloata11&#38;&#38;COMMfloata20&#38;&#38;COMMfloata21)">
+    <B>Transformer</B> ( float a00, float a01, float a10, float a11, float a20, float a21 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Translate(floatdx&#38;&#38;COMMfloatdy)">
+    <B>Translate</B> (float dx, float dy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Translated(float=1e-6)">
+    <B>Translated</B> (float = 1e-6) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>float 
+    <A NAME="det()">
+    <B>det</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="identity()">
+    <B>identity</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="inverse_transform(float&#38;tx&#38;&#38;COMMfloat&#38;ty)">
+    <B>inverse_transform</B> (float&#38; tx, float&#38; ty) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="inverse_transform(floattx&#38;&#38;COMMfloatty&#38;&#38;COMMfloat&#38;x&#38;&#38;COMMfloat&#38;y)">
+    <B>inverse_transform</B> ( float tx, float ty, float&#38; x, float&#38; y ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="invert()">
+    <B>invert</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="invertible()">
+    <B>invertible</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="matrix(float&#38;a00&#38;&#38;COMMfloat&#38;a01&#38;&#38;COMMfloat&#38;a10&#38;&#38;COMMfloat&#38;a11&#38;&#38;COMMfloat&#38;a20&#38;&#38;COMMfloat&#38;a21)">
+    <B>matrix</B> ( float&#38; a00, float&#38; a01, float&#38; a10, float&#38; a11, float&#38; a20, float&#38; a21 ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="operator!=(constTransformer&#38;)">
+    <B>operator !=</B> (const <A HREF="Transformer.html" >Transformer</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>&#38; 
+    <A NAME="operator=(constTransformer&#38;)">
+    <B>operator =</B> (const <A HREF="Transformer.html" >Transformer</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="operator==(constTransformer&#38;)">
+    <B>operator ==</B> (const <A HREF="Transformer.html" >Transformer</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="postmultiply(constTransformer&#38;)">
+    <B>postmultiply</B> (const <A HREF="Transformer.html" >Transformer</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="premultiply(constTransformer&#38;)">
+    <B>premultiply</B> (const <A HREF="Transformer.html" >Transformer</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="rotate(floatangle)">
+    <B>rotate</B> (float angle) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="scale(floatsx&#38;&#38;COMMfloatsy)">
+    <B>scale</B> (float sx, float sy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="skew(floatsx&#38;&#38;COMMfloatsy)">
+    <B>skew</B> (float sx, float sy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="transform(float&#38;x&#38;&#38;COMMfloat&#38;y)">
+    <B>transform</B> (float&#38; x, float&#38; y) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="transform(floatx&#38;&#38;COMMfloaty&#38;&#38;COMMfloat&#38;tx&#38;&#38;COMMfloat&#38;ty)">
+    <B>transform</B> (float x, float y, float&#38; tx, float&#38; ty) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="translate(floatdx&#38;&#38;COMMfloatdy)">
+    <B>translate</B> (float dx, float dy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Transformer()">
+    <B>~Transformer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

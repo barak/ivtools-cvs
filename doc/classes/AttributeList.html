@@ -1,0 +1,753 @@
+
+<html><head><TITLE>Description of AttributeList</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>AttributeList</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Resource.html" >Resource</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+list of <A HREF="Attribute.html" >Attribute</A> objects, i.e. a property list.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Resource.html" >Resource</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#AttributeList><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Attribute/attrlist.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  An <A HREF="AttributeList.html" >AttributeList</A> is derived from <A HREF="Resource.html" >Resource</A>, so it is a reference-counted
+ object that can be freely shared between other objects.
+
+ An <A HREF="AttributeList.html" >AttributeList</A> assumes responsibility for the memory of its member
+ <A HREF="Attribute.html" >Attribute</A> objects, which in turn assume responsibility for the memory
+ of their member <A HREF="AttributeValue.html" >AttributeValue</A> objects.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Attribute.html" >Attribute</A>* 
+    <A NAME="Attr(AList*)">
+    <B>Attr</B> (<A HREF="AList.html" >AList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return attribute pointed to by <A HREF="AList.html" >AList</A> (<A HREF="UList.html" >UList</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="AttributeList(AttributeList*=nil)">
+    <B>AttributeList</B> (<A HREF="AttributeList.html" >AttributeList</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct with optional <A HREF="AttributeList.html" >AttributeList</A> to copy.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Done(ALIterator)">
+    <B>Done</B> (<A HREF="ALIterator.html" >ALIterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if iterator is pointing off the end of the list.
+ works for forward and backward traversals.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AList.html" >AList</A>* 
+    <A NAME="Elem(ALIterator)">
+    <B>Elem</B> (<A HREF="ALIterator.html" >ALIterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return <A HREF="AList.html" >AList</A> (<A HREF="UList.html" >UList</A>) pointed to by <A HREF="ALIterator.html" >ALIterator</A> (<A HREF="Iterator.html" >Iterator</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="First(ALIterator&#38;)">
+    <B>First</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set iterator to point to first <A HREF="Attribute.html" >Attribute</A> in list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Attribute.html" >Attribute</A>* 
+    <A NAME="GetAttr(ALIterator)">
+    <B>GetAttr</B> (<A HREF="ALIterator.html" >ALIterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get attribute pointed to by iterator.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Attribute.html" >Attribute</A>* 
+    <A NAME="GetAttr(constchar*)">
+    <B>GetAttr</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get attribute by name.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Attribute.html" >Attribute</A>* 
+    <A NAME="GetAttr(intsymid)">
+    <B>GetAttr</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get attribute by symbol id.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Includes(Attribute*)">
+    <B>Includes</B> (<A HREF="Attribute.html" >Attribute</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        check if list includes <A HREF="Attribute.html" >Attribute</A> by pointer-comparison.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="IsEmpty()">
+    <B>IsEmpty</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if no <A HREF="Attribute.html" >Attribute</A> objects in list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Last(ALIterator&#38;)">
+    <B>Last</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set iterator to point to last <A HREF="Attribute.html" >Attribute</A> in list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Next(ALIterator&#38;)">
+    <B>Next</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set iterator to point to next <A HREF="Attribute.html" >Attribute</A> in list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="Number()">
+    <B>Number</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of <A HREF="Attribute.html" >Attribute</A> objects in list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Prev(ALIterator&#38;)">
+    <B>Prev</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set iterator to point to previous <A HREF="Attribute.html" >Attribute</A> in list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(Attribute*)">
+    <B>Remove</B> (<A HREF="Attribute.html" >Attribute</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        remove <A HREF="Attribute.html" >Attribute</A> from list, returning responsibility for freeing the
+ associated memory.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetAttr(Attribute*&#38;&#38;COMMALIterator&#38;)">
+    <B>SetAttr</B> (<A HREF="Attribute.html" >Attribute</A>*, <A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set attribute pointed to by iterator.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_attr(constchar*name&#38;&#38;COMMAttributeValue&#38;value)">
+    <B>add_attr</B> (const char* name, <A HREF="AttributeValue.html" >AttributeValue</A>&#38; value) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add attribute by making copy of an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_attr(constchar*name&#38;&#38;COMMAttributeValue*value)">
+    <B>add_attr</B> (const char* name, <A HREF="AttributeValue.html" >AttributeValue</A>* value) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add attribute by using pointer to <A HREF="AttributeValue.html" >AttributeValue</A>, assuming responsibility
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_attr(intsymid&#38;&#38;COMMAttributeValue&#38;value)">
+    <B>add_attr</B> (int symid, <A HREF="AttributeValue.html" >AttributeValue</A>&#38; value) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add attribute by making copy of an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_attr(intsymid&#38;&#38;COMMAttributeValue*value)">
+    <B>add_attr</B> (int symid, <A HREF="AttributeValue.html" >AttributeValue</A>* value) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add attribute by using pointer to <A HREF="AttributeValue.html" >AttributeValue</A>, assuming responsibility
+ for the memory.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_attribute(Attribute*attr)">
+    <B>add_attribute</B> (<A HREF="Attribute.html" >Attribute</A>* attr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add complete <A HREF="Attribute.html" >Attribute</A> object to the list, accepting responsibility
+ for the memory of the <A HREF="Attribute.html" >Attribute</A> object. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="dump()">
+    <B>dump</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method to call ostream output method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="find(constchar*)">
+    <B>find</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        find <A HREF="AttributeValue.html" >AttributeValue</A> by symbol.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="find(intsymid)">
+    <B>find</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        find <A HREF="AttributeValue.html" >AttributeValue</A> by symbol id.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="merge(AttributeList*)">
+    <B>merge</B> (<A HREF="AttributeList.html" >AttributeList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        merge the contents of another <A HREF="AttributeList.html" >AttributeList</A> into this one,
+ replicating the <A HREF="AttributeValue.html" >AttributeValue</A> as needed.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~AttributeList()">
+    <B>~AttributeList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        do not call directly. Frees memory of associated <A HREF="Attribute.html" >Attribute</A> objects.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Append(Attribute*)">
+    <B>Append</B> (<A HREF="Attribute.html" >Attribute</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        append <A HREF="Attribute.html" >Attribute</A> to end of list. Could cause duplicates.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDAttributeList&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="AttributeList.html" >AttributeList</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InsertAfter(ALIterator&#38;&#38;COMMAttribute*)">
+    <B>InsertAfter</B> (<A HREF="ALIterator.html" >ALIterator</A>, <A HREF="Attribute.html" >Attribute</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        append <A HREF="Attribute.html" >Attribute</A> after position pointed by iterator. Could cause duplicates.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InsertBefore(ALIterator&#38;&#38;COMMAttribute*)">
+    <B>InsertBefore</B> (<A HREF="ALIterator.html" >ALIterator</A>, <A HREF="Attribute.html" >Attribute</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        append <A HREF="Attribute.html" >Attribute</A> before position pointed by iterator. Could cause duplicates.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Prepend(Attribute*)">
+    <B>Prepend</B> (<A HREF="Attribute.html" >Attribute</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        append <A HREF="Attribute.html" >Attribute</A> to front of list. Could cause duplicates.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(ALIterator&#38;)">
+    <B>Remove</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        remove <A HREF="Attribute.html" >Attribute</A> pointed to by iterator from the list, 
+ returning responsibility for freeing the associated memory.
+ This requires saving a pointer to the <A HREF="Attribute.html" >Attribute</A> before calling this method.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AList.html" >AList</A>* 
+    <A NAME="_alist">
+    <B>_alist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="_count">
+    <B>_count</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="add_attr(Attribute*attr)">
+    <B>add_attr</B> (<A HREF="Attribute.html" >Attribute</A>* attr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add attribute, returning 0 if new, -1 if it already existed.
+ When -1 is returned you need to clear the valueptr of 'attr' before 
+ deleting it. That's why this is protected.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="clear()">
+    <B>clear</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        empty <A HREF="AttributeList.html" >AttributeList</A>, deleting all Attributes.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend ostream&#38; 
+    <A NAME="operator&#60;&#60;(ostream&#38;s&#38;&#38;COMMconstAttributeList&#38;)">
+    <B>operator <<</B> (ostream&#38; s, const <A HREF="AttributeList.html" >AttributeList</A>&#38;)  </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print list to ostream.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

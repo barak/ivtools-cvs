@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       MatchEditor - StringEditor with pattern matching
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/matcheditor.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       MatchEditor  is  a  StringEditor  subclass that checks the
+       validity of its contents against a specified pattern.   It
+       is  suitable  for  entering strings that must conform to a
+       particular format such as a number or a  file  name.   The
+       matching  pattern  is  specified according to the rules of
+       <B>scanf(3)</B>.  For example, a pattern of "%3d"  will  match  a
+       3-digit  integer, a pattern of "%[ab]" will match a string
+       containing only a's and b's, and a pattern of  "(%f,  %f)"
+       will match the string "(12.0, 5E23)".
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>MatchEditor(ButtonState*,</B> <B>const</B> <B>char*</B> <B>sample,</B> <B>const</B> <B>char*</B>
+              <B>done)</B>
+              Create a new MatchEditor object.  The  ButtonState,
+              sample string, and termination string are passed to
+              the StringEditor constructor.
+
+       <B>void</B> <B>Match(const</B> <B>char*</B> <B>pattern,</B> <B>boolean</B> <B>keystroke</B> <B>=</B> <B>true)</B>
+              Specify  the  pattern  to  match   against.    When
+              MatchEditor  performs  matching,  it will highlight
+              any trailing part of the edit string that does  not
+              conform  to <I>pattern</I>.  The user can then correct the
+              string.  If <I>keystroke</I> is true, matching will  occur
+              on  every  keystroke;  otherwise matching will only
+              occur on the completion of the edit.   The  initial
+              pattern  matches  any string, and the initial value
+              of keystroke is true.
+
+
+</PRE>
+<H2>RESTRICTIONS</H2><PRE>
+       MatchEditor uses sscanf internally to  check  the  pattern
+       match.   Different versions of sscanf have different scan-
+       ning capabilities; check with your local  version  to  see
+       what patterns you can use.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>StringEditor(3I)</B>
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

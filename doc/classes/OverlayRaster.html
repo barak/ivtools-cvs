@@ -1,0 +1,1171 @@
+
+<html><head><TITLE>Description of OverlayRaster</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayRaster</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Raster.html" >Raster</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+specialized <A HREF="Raster.html" >Raster</A> object for use with <A HREF="RasterOvComp.html" >RasterOvComp</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Raster.html" >Raster</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayRaster><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovraster.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayRaster(constOverlayRaster&#38;raster)">
+    <B>OverlayRaster</B> (const <A HREF="OverlayRaster.html" >OverlayRaster</A>&#38; raster) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy constructor
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayRaster(constRaster&#38;raster)">
+    <B>OverlayRaster</B> (const <A HREF="Raster.html" >Raster</A>&#38; raster) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        conversion constructor
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayRaster(unsignedlongwidth&#38;&#38;COMMunsignedlongheight)">
+    <B>OverlayRaster</B> (unsigned long width, unsigned long height) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct an empty raster ready to accept width*height of pixel values.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayRaster(unsignedlongwidth&#38;&#38;COMMunsignedlongheight&#38;&#38;COMMunsignedlongbwidth)">
+    <B>OverlayRaster</B> ( unsigned long width, unsigned long height, unsigned long bwidth ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize with a border of width bwidth using the default fg/bg colors
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="addgrayramp(CopyString&#38;cmd&#38;&#38;COMMIntCoordx&#38;&#38;COMMIntCoordy)">
+    <B>addgrayramp</B> ( <A HREF="CopyString.html" >CopyString</A>&#38; cmd, IntCoord x, IntCoord y ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        embed gray-level ramp in raster at given alignment, and return 'cmd'
+ string to reproduce this effect after save/restore.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="addgrayramp(CopyString&#38;cmd&#38;&#38;COMMRampAlignment=R_LT)">
+    <B>addgrayramp</B> ( <A HREF="CopyString.html" >CopyString</A>&#38; cmd, RampAlignment = R_LT ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        embed gray-level ramp in raster at given alignment, and return 'cmd'
+ string to reproduce this effect after save/restore.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="copy()">
+    <B>copy</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="flush()">
+    <B>flush</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flush internal XImage data structure to a pixmap on the X server.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="flushrect(IntCoordl&#38;&#38;COMMIntCoordb&#38;&#38;COMMIntCoordt&#38;&#38;COMMIntCoordt)">
+    <B>flushrect</B> (IntCoord l, IntCoord b, IntCoord t, IntCoord t) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flush rectangular region of internal XImage data structure 
+ to a pixmap on the X server.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="gray_flag()">
+    <B>gray_flag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates this a graylevel image.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="gray_flag(booleanflag)">
+    <B>gray_flag</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates this a graylevel image (r==g==b).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValue&#38;)">
+    <B>graypeek</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get green pixel value at 'x','y' and convert to a float.
+ get green pixel value at 'x','y' and convert to a double.
+ get green pixel value at 'x','y' and place in an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValue&#38;)">
+    <B>graypeek</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get green pixel value at 'x','y' and convert to a float.
+ get green pixel value at 'x','y' and convert to a double.
+ get green pixel value at 'x','y' and place in an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValue&#38;)">
+    <B>graypeek</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get green pixel value at 'x','y' and convert to a float.
+ get green pixel value at 'x','y' and convert to a double.
+ get green pixel value at 'x','y' and place in an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedlong&#38;)">
+    <B>graypeek</B> (unsigned long x, unsigned long y, unsigned long&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get green pixel value at 'x','y' and convert to an unsigned int.
+ get green pixel value at 'x','y' and convert to an unsigned long.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedlong&#38;)">
+    <B>graypeek</B> (unsigned long x, unsigned long y, unsigned long&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get green pixel value at 'x','y' and convert to an unsigned int.
+ get green pixel value at 'x','y' and convert to an unsigned long.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValue)">
+    <B>graypoke</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set rgb pixel values at 'x','y' with the contents of an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMdouble)">
+    <B>graypoke</B> (unsigned long x, unsigned long y, double) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set rgb pixel values at 'x','y' with a double.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMfloat)">
+    <B>graypoke</B> (unsigned long x, unsigned long y, float) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set rgb pixel values at 'x','y' with a float.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedlong)">
+    <B>graypoke</B> (unsigned long x, unsigned long y, unsigned long) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set rgb pixel values at 'x','y' with an unsigned int.
+ set rgb pixel values at 'x','y' with an unsigned long.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedlong)">
+    <B>graypoke</B> (unsigned long x, unsigned long y, unsigned long) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set rgb pixel values at 'x','y' with an unsigned int.
+ set rgb pixel values at 'x','y' with an unsigned long.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="grayraster()">
+    <B>grayraster</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates whether this is a <A HREF="GrayRaster.html" >GrayRaster</A>
+ (always false for <A HREF="OverlayRaster.html" >OverlayRaster</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="highlight(unsignedlongx&#38;&#38;COMMunsignedlongy)">
+    <B>highlight</B> (unsigned long x, unsigned long y) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        saturate the red value at 'x','y' to highlight a pixel. Implemented
+ only in <A HREF="GrayRaster.html" >GrayRaster</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="initialize()">
+    <B>initialize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        creates pixmap_ with correct data
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="initialized()">
+    <B>initialized</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get initialized flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="initialized(boolean)">
+    <B>initialized</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set initialized flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="is_type(AttributeValue::ValueTypetype)">
+    <B>is_type</B> (<A HREF="AttributeValue.html" >AttributeValue</A>::ValueType type) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        arbitrary type is not enabled in this class, only <A HREF="GrayRaster.html" >GrayRaster</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="logscale(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray&#38;&#38;COMMCopyString&#38;cmd)">
+    <B>logscale</B> ( ColorIntensity mingray, ColorIntensity maxgray, <A HREF="CopyString.html" >CopyString</A>&#38; cmd ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create new raster logarithmically scaled between 'mingray' and 'maxgray', 
+ and return command string to reproduce this effect after save/restore.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="paintgrayramp(IntCoordleft&#38;&#38;COMMIntCoordbottom&#38;&#38;COMMunsignedwidth&#38;&#38;COMMunsignedheight&#38;&#38;COMMbooleanhoriz)">
+    <B>paintgrayramp</B> ( IntCoord left, IntCoord bottom, unsigned width, unsigned height, boolean horiz ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for painting the grayramp.
+ protected: 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="poke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMColorIntensityred&#38;&#38;COMMColorIntensitygreen&#38;&#38;COMMColorIntensityblue&#38;&#38;COMMfloatalpha)">
+    <B>poke</B> ( unsigned long x, unsigned long y, ColorIntensity red, ColorIntensity green, ColorIntensity blue, float alpha ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        lookup <A HREF="Color.html" >Color</A> that best matches a given 'red', 'green', 'blue', and
+ 'alpha' value, and poke corresponding entry in the colormap into
+ the raster.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="pseudocolor(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray&#38;&#38;COMMCopyString&#38;cmd)">
+    <B>pseudocolor</B> ( ColorIntensity mingray, ColorIntensity maxgray, <A HREF="CopyString.html" >CopyString</A>&#38; cmd ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create new raster pseudo-colored between 'mingray' and 'maxgray', 
+ and return command string to reproduce this effect after save/restore.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="read(istream&#38;in)">
+    <B>read</B> (istream&#38; in) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read pixels values written out by write method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="scale(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray&#38;&#38;COMMCopyString&#38;cmd)">
+    <B>scale</B> ( ColorIntensity mingray, ColorIntensity maxgray, <A HREF="CopyString.html" >CopyString</A>&#38; cmd ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create new raster scaled between 'mingray' and 'maxgray', and return
+ command string to reproduce this effect after save/restore.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="status()">
+    <B>status</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="unhighlight()">
+    <B>unhighlight</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        clear the highlighted pixels. Implemented only in <A HREF="GrayRaster.html" >GrayRaster</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="AttributeValue.html" >AttributeValue</A>::ValueType 
+    <A NAME="value_type()">
+    <B>value_type</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        arbitrary type is not enabled in this class, only <A HREF="GrayRaster.html" >GrayRaster</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="write(ostream&#38;out)">
+    <B>write</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        write pixel values of raster to ostream as comma-separated 
+ parenthesized rgb triples in ASCII.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlayRaster()">
+    <B>~OverlayRaster</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="_addgrayramp(RampAlignmentalgn&#38;&#38;COMMIntCoordw=0&#38;&#38;COMMIntCoordh=0)">
+    <B>_addgrayramp</B> ( RampAlignment algn, IntCoord w = 0, IntCoord h = 0 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static XColor* 
+    <A NAME="_color_map">
+    <B>_color_map</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="_gray_initialized">
+    <B>_gray_initialized</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static XColor* 
+    <A NAME="_gray_map">
+    <B>_gray_map</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_grayflag">
+    <B>_grayflag</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_init">
+    <B>_init</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="_unique_colors">
+    <B>_unique_colors</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="_unique_grays">
+    <B>_unique_grays</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="color_init(intnlevels)">
+    <B>color_init</B> (int nlevels) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        setup colormap for 'nlevels' of R, G, B, i.e. if 'nlevels'==6, 
+ the number of entries set up in the colormap is 216 (6*6*6).
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="computeramp(booleanvert&#38;&#38;COMMRampAlignment&#38;&#38;COMMIntCoord&#38;w&#38;&#38;COMMIntCoord&#38;h)">
+    <B>computeramp</B> (boolean vert, RampAlignment, IntCoord&#38; w, IntCoord&#38; h) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="construct(constRaster&#38;)">
+    <B>construct</B> (const <A HREF="Raster.html" >Raster</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="gray_init()">
+    <B>gray_init</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        setup colormap for viewing graylevel imagery with good rubberband
+ visibility.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="gray_init(intnbits)">
+    <B>gray_init</B> (int nbits) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        setup colormap for viewing graylevel imagery with good rubberband
+ visibility, using a specified number of gray-level bits.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="gray_initialized()">
+    <B>gray_initialized</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns true if graylevel colormap has been initialized.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static long 
+    <A NAME="gray_lookup(intbyte)">
+    <B>gray_lookup</B> (int byte) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        lookup the original gray-level value associated with a colormap entry.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="init_rep(unsignedlongwidth&#38;&#38;COMMunsignedlongheight)">
+    <B>init_rep</B> (unsigned long width, unsigned long height) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="init_space()">
+    <B>init_space</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="logscale(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray)">
+    <B>logscale</B> ( ColorIntensity mingray, ColorIntensity maxgray ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="pseudocolor(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray)">
+    <B>pseudocolor</B> ( ColorIntensity mingray, ColorIntensity maxgray ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>RampAlignment 
+    <A NAME="ramppos(IntCoordx&#38;&#38;COMMIntCoordy)">
+    <B>ramppos</B> (IntCoord x, IntCoord y) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="scale(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray)">
+    <B>scale</B> ( ColorIntensity mingray, ColorIntensity maxgray ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="OvImportCmd">
+    <B>OvImportCmd</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="RasterOvComp">
+    <B>RasterOvComp</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Viewer - displays a graphical component view hierarchy
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/viewer.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  Viewer displays a graphical component view and provides
+       an interface to scrolling and zooming it.  The viewer also
+       processes  user input events and generates the appropriate
+       calls on Unidraw objects in response.  The Viewer class is
+       a  derived  from GraphicBlock; thus it can draw the struc-
+       tured  graphics  hierarchy   embodied   in   GraphicView's
+       graphic.  A viewer uses a damage object to keep the screen
+       up to date.  Viewer's sensor catches up and  down  events,
+       and its Handle implements implements the tool manipulation
+       loop.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Viewer(</B>
+           <B>Editor*,</B> <B>GraphicView*,</B> <B>Page*,</B> <B>Grid*</B> <B>=</B> <B>nil,</B>
+           <B>Coord</B> <B>width</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>height</B> <B>=</B> <B>0,</B> <B>Orientation</B> <B>=</B> <B>Nor-</B>
+              <B>mal,</B>
+           <B>Alignment</B> <B>=</B> <B>Center,</B> <B>Zooming</B> <B>=</B> <B>Binary</B>
+       <B>)</B>
+
+       <B>Viewer(</B>
+           <B>const</B> <B>char*,</B> <B>Editor*,</B> <B>GraphicView*,</B> <B>Page*,</B> <B>Grid*</B> <B>=</B>
+              <B>nil,</B>
+           <B>Coord</B> <B>width</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>height</B> <B>=</B> <B>0</B>
+           <B>Alignment</B> <B>=</B> <B>Center,</B> <B>Zooming</B> <B>=</B> <B>Binary</B>
+       <B>)</B>
+              Both constructors take the  enclosing  editor,  the
+              GraphicView  object that the viewer will display, a
+              page object, and optionally a grid, a natural width
+              and  height,  initial  page orientation, alignment,
+              and zooming specifications.  The second form adds a
+              parameter  for  specifying  the  Viewer's  instance
+              name.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Viewer augments GraphicBlock's Update semantics  by
+              repairing any damage that has been accumulated.  In
+              addition, Update will replace its graphical view if
+              its subject differs from the editor's component; in
+              that case, it will create a graphical view  of  the
+              editor's   component,  delete  its  own  view,  and
+              replace it with the new one.
+
+       <B>virtual</B> <B>void</B> <B>Adjust(Perspective&amp;)</B>
+              Viewer's Adjust operation will automatically update
+              the  editor's  MagnifVar  (if  it  defines  one) to
+              reflect the current magnification.
+              By default, Handle  employs  the  editor's  current
+              tool  on a LEFTMOUSE down event.  On MIDDLEMOUSE or
+              RIGHTMOUSE down events, it momentarily engages  the
+              editor's   MoveTool  or  SelectTool,  respectively,
+              allowing the user to move  or  select  a  graphical
+              component without changing the current tool explic-
+              itly.  Nothing  happens  if  the  editor  does  not
+              define  a  keyboard  equivalent  for engaging these
+              tools.  The Handle function calls either  the  Use-
+              Tool or MomentaryUseTool protected member functions
+              (described below) in response to these events.
+
+       <B>virtual</B> <B>void</B> <B>SetGraphicView(GraphicView*)</B>
+       <B>virtual</B> <B>void</B> <B>SetPage(Page*)</B>
+       <B>virtual</B> <B>void</B> <B>SetGrid(Grid*)</B>
+       <B>virtual</B> <B>GraphicView*</B> <B>GetGraphicView()</B>
+       <B>virtual</B> <B>Page*</B> <B>GetPage()</B>
+       <B>virtual</B> <B>Grid*</B> <B>GetGrid()</B>
+       <B>virtual</B> <B>Editor*</B> <B>GetEditor()</B>
+              Explicitly  set  or  get  a   constructor-specified
+              parameter.   The  Set  operations  delete the value
+              they replace if it is different from the given one.
+
+       <B>virtual</B> <B>void</B> <B>SetMagnification(float)</B>
+              Viewer's  SetMagnification  operation amends Graph-
+              icBlock::SetMagnification to set the value  of  the
+              enclosing editor's MagnifVar, if it defines one.
+
+       <B>virtual</B> <B>void</B> <B>SetOrientation(Orientation)</B>
+       <B>virtual</B> <B>Orientation</B> <B>GetOrientation()</B>
+              Set  and  get  the  viewer's orientation parameter,
+              which specifies whether the graphical  view,  page,
+              and grid will appear in portrait or landscape mode.
+              No transformation will be applied in portrait mode,
+              while  landscape  mode  will  rotate  the  page -90
+              degrees and translate it  vertically  by  an  amout
+              equal to the width of the page's bounding box.
+
+       <B>virtual</B> <B>Selection*</B> <B>GetSelection()</B>
+              Return  the enclosing editor's selection object; it
+              is equivalent to calling GetEditor and then calling
+              GetSelection on the result.
+
+       <B>virtual</B> <B>Damage*</B> <B>GetDamage()</B>
+              Return the viewer's damage object.
+
+       <B>virtual</B> <B>void</B> <B>InitRubberband(Rubberband*)</B>
+       <B>virtual</B> <B>void</B> <B>InitTextDisplay(TextDisplay*,</B> <B>Painter*)</B>
+              These  operations  let  Rubberband  and TextDisplay
+              instances appear to work in a  viewer  by  allowing
+              them  to  draw on the viewer's canvas.  InitRubber-
+              band sets the rubberband's canvas to  the  viewer's
+              canvas to the viewer's.  It also modifies the given
+              painter's background color to  match  the  viewer's
+              and supplies the painter to the TextDisplay for its
+              use.
+
+       <B>virtual</B> <B>void</B> <B>IncurTextDisplayDamage(TextDisplay*,</B>
+              <B>Painter*)</B>
+              Incur  minimal damage on the viewer's damage object
+              to account for the TextDisplay's current size.  The
+              TextDisplay's painter must be passed explicitly.
+
+       <B>virtual</B> <B>void</B> <B>CenterOp()</B>
+       <B>virtual</B> <B>void</B> <B>Magnify(Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord)</B>
+       <B>virtual</B> <B>void</B> <B>ReduceToFit()</B>
+              Convenience  functions  for  adjusting the viewer's
+              perspective.  CenterOp  centers  the  page  in  the
+              viewer's canvas without changing the magnification.
+              Magnify scrolls and magnifies the  given  area  (in
+              canvas  coordinates)  so that it fills the viewer's
+              canvas.  Magnify ensures that the area will  remain
+              fully  visible  in the viewer.  ReduceToFit scrolls
+              and reduces the view so that  the  entire  page  is
+              visible.
+
+       <B>virtual</B> <B>void</B> <B>Constrain(Coord&amp;,</B> <B>Coord&amp;)</B>
+              Constrain  the  supplied coordinates to fall on the
+              nearest grid point if the viewer defines a grid and
+              if  the enclosing editor defines an active Gravity-
+              Var.
+
+       <B>virtual</B> <B>void</B> <B>UseTool(Tool*)</B>
+              Commence direct-manipulation with  the  given  tool
+              without  an  explicit  action  on  the user's part.
+              Normally, direct manipulation  with  the  currently
+              engaged  tool  (as returned by the editor's GetCur-
+              Tool operation) starts automatically when the  user
+              clicks in the viewer.
+
+       <B>virtual</B> <B>void</B> <B>Align(GraphicComp*,</B> <B>Alignment)</B>
+              Align  the  graphical  component  with  respect  to
+              viewer's canvas, assuming a view of  the  component
+              appears  in  the viewer.  For example, a ``Center''
+              alignment will align the  component's  center  with
+              the  canvas'; a ``BottomLeft'' alignment will align
+              the component's bottom-left corner to the  canvas'.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>Init(</B>
+           <B>Editor*,</B> <B>GraphicView*,</B> <B>Page*,</B> <B>Grid*,</B>
+           <B>Coord,</B> <B>Coord,</B> <B>Orientation</B>
+       <B>)</B>
+
+              Initialize  the  viewer's  member  variables.   The
+              first form of this operation initializes all param-
+              eters  that  can  be  passed to a constructor.  The
+              first form calls the second form, which initializes
+              a subset of the attributes that may change indepen-
+              dently of the others.
+
+       <B>Tool*</B> <B>CurTool()</B>
+              A convenience function equivalent  to  calling  the
+              same operation on the enclosing editor.
+
+       <B>Transformer*</B> <B>GetTransformer()</B>
+              Return  the  transformer  that  the  viewer uses to
+              implement scrolling and zooming.
+
+       <B>virtual</B> <B>void</B> <B>Manipulate(Manipulator*,</B> <B>Event&amp;)</B>
+              This operation  implements  a  direct  manipulation
+              loop  governed  by the given manipulator.  First it
+              calls Grasp  on  the  manipulator  with  the  given
+              event.  Then it reads events in a loop, calling the
+              manipulator's Manipulating operation with each  new
+              event.   When  Manipulating returns false, it calls
+              Effect on the manipulator with the event read last.
+
+       <B>virtual</B> <B>void</B> <B>UseTool(Tool*,</B> <B>Event&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>MomentaryUseTool(Tool*,</B> <B>Event&amp;)</B>
+              Helper functions for initiating direct manipulation
+              with tools and  executing  their  effect.   UseTool
+              first  instructs the given tool to create a manipu-
+              lator, and then it calls Manipulate  to  carry  the
+              manipulation  through  to completion.  Next it asks
+              the tool to interpret  the  manipulator,  which  in
+              turn  may produce a command.  Finally, UseTool exe-
+              cutes and logs the command produced.  MomentaryUse-
+              Tool  simply engages the given tool, calls UseTool,
+              and re-engages the original tool.
+
+       <B>virtual</B> <B>void</B> <B>Reorient()</B>
+              A helper function that rotates the viewer's graphic
+              to reflect its current orientation.
+
+       <B>virtual</B> <B>void</B> <B>UpdateMagnifVar()</B>
+              A  helper  function  used  in  SetMagnification  to
+              notify the  enclosing  viewer's  MagnifVar  (if  it
+              defines one) of the change in magnification.
+
+       <B>virtual</B> <B>ClassId</B> <B>ViewCategory()</B>
+              Returns  the  view  category  (see <B>classes(3U)</B>) the
+              viewer will use to instantiate a view if it is  not
+              given  one explicitly.  ViewCategory returns COMPO-
+              NENT_VIEW by default.
+
+       <B>Damage(3U)</B>,  <B>Editor(3U)</B>,  <B>Event(3I)</B>,  <B>Graphic(3U)</B>,  Graph-
+       <B>icBlock(3U)</B>,  <B>GraphicComp(3U)</B>,  <B>GraphicView(3U)</B>, <B>Grid(3U)</B>,
+       <B>Manipulator(3U)</B>, <B>MoveTool(3U)</B>, <B>Page(3U)</B>,  <B>Perspective(3I)</B>,
+       <B>Rubband(3I)</B>,  <B>SelectTool(3U)</B>,  <B>Selection(3U)</B>,  <B>Sensor(3I)</B>,
+       <B>TextDisplay(3I)</B>, <B>Tool(3U)</B>, <B>classes(3U)</B>, <B>globals(3U)</B>, stat-
+       <B>evars(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

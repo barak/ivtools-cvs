@@ -1,0 +1,339 @@
+
+<html><head><TITLE>Description of ComEditor</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ComEditor</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayEditor.html" >OverlayEditor</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+editor that integrates <A HREF="ComTerp.html" >ComTerp</A> into the drawing editor framework.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayEditor.html" >OverlayEditor</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#ComEditor><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+ComUnidraw/comeditor.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AddCommands(ComTerp*)">
+    <B>AddCommands</B> (<A HREF="ComTerp.html" >ComTerp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method for adding <A HREF="ComFunc.html" >ComFunc</A> objects to the <A HREF="ComTerp.html" >ComTerp</A> associated with
+ this <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComEditor(OverlayComp*&#38;&#38;COMMOverlayKit*=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>ComEditor</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        constructor for using existing component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComEditor(booleaninitflag&#38;&#38;COMMOverlayKit*=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>ComEditor</B> (boolean initflag, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        constructor for use of derived classes.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComEditor(constchar*file&#38;&#38;COMMOverlayKit*=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>ComEditor</B> (const char* file, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        constructor for building top-level component from a file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ExecuteCmd(Command*cmd)">
+    <B>ExecuteCmd</B> (<A HREF="Command.html" >Command</A>* cmd) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        indirect command execution for distributed whiteboard mechanism.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="GetComTerp()">
+    <B>GetComTerp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to associated <A HREF="ComTerp.html" >ComTerp</A> (always a <A HREF="ComTerpServ.html" >ComTerpServ</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(OverlayComp*=nil&#38;&#38;COMMconstchar*name=&#38;&#38;QUOTDComEditor&#38;&#38;QUOTD)">
+    <B>Init</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* = nil, const char* name = "<A HREF="ComEditor.html" >ComEditor</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitCommands()">
+    <B>InitCommands</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method for running <A HREF="Unidraw.html" >Unidraw</A> <A HREF="Command.html" >Command</A> objects after <A HREF="OverlayEditor.html" >OverlayEditor</A>
+ is constructed.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetComTerp(ComTerpServ*terp)">
+    <B>SetComTerp</B> (<A HREF="ComTerpServ.html" >ComTerpServ</A>* terp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set pointer to associated <A HREF="ComTerp.html" >ComTerp</A> (always a <A HREF="ComTerpServ.html" >ComTerpServ</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="comterp()">
+    <B>comterp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to associated <A HREF="ComTerp.html" >ComTerp</A> (always a <A HREF="ComTerpServ.html" >ComTerpServ</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="comterp(ComTerpServ*terp)">
+    <B>comterp</B> (<A HREF="ComTerpServ.html" >ComTerpServ</A>* terp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set pointer to associated <A HREF="ComTerp.html" >ComTerp</A> (always a <A HREF="ComTerpServ.html" >ComTerpServ</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="whiteboard()">
+    <B>whiteboard</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test for distributed whiteboard mode, which only exists when
+ used with a <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="_terp">
+    <B>_terp</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerpIOHandler.html" >ComTerpIOHandler</A>* 
+    <A NAME="_terp_iohandler">
+    <B>_terp_iohandler</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_whiteboard">
+    <B>_whiteboard</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        -1 == unitialized, 0 = false, 1 = true
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

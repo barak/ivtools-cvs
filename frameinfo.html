@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>FrameUnidraw</title>
+  </head>
+
+  <body>
+      <h1>FrameUnidraw</h1>
+<p>
+<a href=./flipbook.html>example application</a>
+<p>
+
+FrameUnidraw is a library that extends <a
+href=comunidrawinfo.html>ComUnidraw</a> with multi-frame editing and display mechanisms.
+
+<p><b>overall framework objects</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/FrameEditor.html>FrameEditor</a>/<a href=./doc/classes/FrameKit.html>FrameKit</a>:</code> editor with multi-frame extensions
+	<li> <code><a href=./doc/classes/FrameViewer.html>FrameViewer</a>:</code> multi-frame viewer
+	<li> <code><a href=./doc/classes/FrameCreator.html>FrameCreator</a>/<a href=./doc/classes/FrameCatalog.html>FrameCatalog</a>:</code> save/restore mechanism with multi-frame extensions
+      </ul>
+
+<p><b>specialized graphic objects</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/FrameComp.html>FrameComp</a> (<a href=./doc/classes/FrameView.html>FrameView</a>/<a href=./doc/classes/FrameScript.html>FrameScript</a>):</code> frame component and views
+	<li> <code><a href=./doc/classes/FramesComp.html>FramesComp</a> (<a href=./doc/classes/FramesView.html>FramesView</a>/<a href=./doc/classes/FramesScript.html>FramesScript</a>):</code> multi-frame component and views
+	<li> <code><a href=./doc/classes/FrameIdrawComp.html>FrameIdrawComp</a> (<a href=./doc/classes/FrameIdrawView.html>FrameIdrawView</a>/<a href=./doc/classes/FrameIdrawPS.html>FrameIdrawPS</a>/<a href=./doc/classes/FrameIdrawScript.html>FrameIdrawScript</a>):</code> multi-frame top-level component and views
+        <li> <code><a href=./doc/classes/FrameOverlaysComp.html>FrameOverlaysComp</a> (<a href=./doc/classes/FrameOverlaysView.html>FrameOverlaysView</a>/<a href=./doc/classes/FrameOverlaysScript.html>FrameOverlaysScript</a>): </code> <code><a href=./doc/classes/OverlaysComp.html>OverlaysComp</a></code> specialized for this framework
+      </ul>
+
+<p><b>multi-frame editing commands</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/CreateFrameCmd.html>CreateFrameCmd</a>/<a href=./doc/classes/DeleteFrameCmd.html>DeleteFrameCmd</a>: </code> frame creation/deletion commands
+	<li> <code><a href=./doc/classes/MoveFrameCmd.html>MoveFrameCmd</a>/<a href=./doc/classes/FrameBeginCmd.html>FrameBeginCmd</a>/<a href=./doc/classes/FrameEndCmd.html>FrameEndCmd</a>: </code> frame nagivation commands
+	<li> <code><a href=./doc/classes/CreateMoveFrameCmd.html>CreateMoveFrameCmd</a>: </code> macro command
+	<li> <code><a href=./doc/classes/FrameGroupCmd.html>FrameGroupCmd</a>/<a href=./doc/classes/FrameUngroupCmd.html>FrameUngroupCmd</a>/<a href=./doc/classes/FrameFrontCmd.html>FrameFrontCmd</a>/<a href=./doc/classes/FrameBacktCmd.html>FrameBacktCmd</a>: </code> specialized structure commands
+	<li> <code><a href=./doc/classes/FrameCopyCmd.html>FrameCopyCmd</a>: </code> specialized copy command
+	<li> <code><a href=./doc/classes/FrameNewViewCmd.html>FrameNewViewCmd</a>: </code> specialized new viewer command
+      </ul>
+
+
+
+<a href=./techinfo.html>back to ivtools technical info</a>
+
+<p>
+  </body>
+</html>

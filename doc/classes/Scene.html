@@ -1,0 +1,463 @@
+
+<html><head><TITLE>Description of Scene</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Scene</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Interactor.html" >Interactor</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+basic composite object for interaction.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Interactor.html" >Interactor</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Scene><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+IV-2_6/InterViews/scene.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/Scene.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Change(Interactor*=nil)">
+    <B>Change</B> (<A HREF="Interactor.html" >Interactor</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Highlight(boolean)">
+    <B>Highlight</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Insert(Interactor*)">
+    <B>Insert</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Insert(Interactor*&#38;&#38;COMMCoordx&#38;&#38;COMMCoordy&#38;&#38;COMMAlignment=BottomLeft)">
+    <B>Insert</B> (<A HREF="Interactor.html" >Interactor</A>*, Coord x, Coord y, Alignment = BottomLeft) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Lower(Interactor*)">
+    <B>Lower</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Move(Interactor*&#38;&#38;COMMCoordx&#38;&#38;COMMCoordy&#38;&#38;COMMAlignment=BottomLeft)">
+    <B>Move</B> (<A HREF="Interactor.html" >Interactor</A>*, Coord x, Coord y, Alignment = BottomLeft) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Propagate(boolean)">
+    <B>Propagate</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Raise(Interactor*)">
+    <B>Raise</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(Interactor*)">
+    <B>Remove</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Scene()">
+    <B>~Scene</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoChange(Interactor*)">
+    <B>DoChange</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoInsert(Interactor*&#38;&#38;COMMboolean&#38;&#38;COMMCoord&#38;x&#38;&#38;COMMCoord&#38;y)">
+    <B>DoInsert</B> (<A HREF="Interactor.html" >Interactor</A>*, boolean, Coord&#38; x, Coord&#38; y) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoLower(Interactor*)">
+    <B>DoLower</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoMove(Interactor*&#38;&#38;COMMCoord&#38;x&#38;&#38;COMMCoord&#38;y)">
+    <B>DoMove</B> (<A HREF="Interactor.html" >Interactor</A>*, Coord&#38; x, Coord&#38; y) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoRaise(Interactor*)">
+    <B>DoRaise</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoRemove(Interactor*)">
+    <B>DoRemove</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Map(Interactor*&#38;&#38;COMMbooleanraised=true)">
+    <B>Map</B> (<A HREF="Interactor.html" >Interactor</A>*, boolean raised = true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Place(Interactor*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMbooleanmap=true)">
+    <B>Place</B> (<A HREF="Interactor.html" >Interactor</A>*, Coord, Coord, Coord, Coord, boolean map = true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="PrepareToInsert(Interactor*)">
+    <B>PrepareToInsert</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Scene()">
+    <B>Scene</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Unmap(Interactor*)">
+    <B>Unmap</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Interactor.html" >Interactor</A>* 
+    <A NAME="Wrap(Interactor*)">
+    <B>Wrap</B> (<A HREF="Interactor.html" >Interactor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="propagate">
+    <B>propagate</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

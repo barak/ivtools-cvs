@@ -1,0 +1,524 @@
+
+<html><head><TITLE>Description of DragManip</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>DragManip</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Manipulator.html" >Manipulator</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+drag manipulator<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Manipulator.html" >Manipulator</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#DragManip><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/manips.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/manips.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="DragManip(Viewer*&#38;&#38;COMMRubberband*&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*&#38;&#38;COMMDragConstraint&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>DragManip</B> ( <A HREF="Viewer.html" >Viewer</A>*, <A HREF="Rubberband.html" >Rubberband</A>*, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Tool.html" >Tool</A>*, DragConstraint, Coord, Coord ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="DragManip(Viewer*&#38;&#38;COMMRubberband*&#38;&#38;COMMTransformer*=nil&#38;&#38;COMMTool*=nil&#38;&#38;COMMDragConstraint=None)">
+    <B>DragManip</B> ( <A HREF="Viewer.html" >Viewer</A>*, <A HREF="Rubberband.html" >Rubberband</A>*, <A HREF="Transformer.html" >Transformer</A>* = nil, <A HREF="Tool.html" >Tool</A>* = nil, DragConstraint = None ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Effect(Event&#38;)">
+    <B>Effect</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual DragConstraint 
+    <A NAME="GetConstraint()">
+    <B>GetConstraint</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Rubberband.html" >Rubberband</A>* 
+    <A NAME="GetRubberband()">
+    <B>GetRubberband</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Tool.html" >Tool</A>* 
+    <A NAME="GetTool()">
+    <B>GetTool</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="GetTransformer()">
+    <B>GetTransformer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Viewer.html" >Viewer</A>* 
+    <A NAME="GetViewer()">
+    <B>GetViewer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Grasp(Event&#38;)">
+    <B>Grasp</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const <A HREF="Event.html" >Event</A>&#38; 
+    <A NAME="GraspEvent()">
+    <B>GraspEvent</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Manipulating(Event&#38;)">
+    <B>Manipulating</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetConstraint(DragConstraint)">
+    <B>SetConstraint</B> (DragConstraint) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetRubberband(Rubberband*)">
+    <B>SetRubberband</B> (<A HREF="Rubberband.html" >Rubberband</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetTool(Tool*)">
+    <B>SetTool</B> (<A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetTransformer(Transformer*)">
+    <B>SetTransformer</B> (<A HREF="Transformer.html" >Transformer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetViewer(Viewer*)">
+    <B>SetViewer</B> (<A HREF="Viewer.html" >Viewer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~DragManip()">
+    <B>~DragManip</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Constrain(Event&#38;)">
+    <B>Constrain</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(Viewer*&#38;&#38;COMMRubberband*&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*&#38;&#38;COMMDragConstraint)">
+    <B>Init</B> (<A HREF="Viewer.html" >Viewer</A>*, <A HREF="Rubberband.html" >Rubberband</A>*, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Tool.html" >Tool</A>*, DragConstraint) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>DragConstraint 
+    <A NAME="_constraint">
+    <B>_constraint</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Event.html" >Event</A> 
+    <A NAME="_grasp_e">
+    <B>_grasp_e</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_origPreset">
+    <B>_origPreset</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>Coord 
+    <A NAME="_origx,_origy">
+    <B>_origx, _origy</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Rubberband.html" >Rubberband</A>* 
+    <A NAME="_r">
+    <B>_r</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="_relative">
+    <B>_relative</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Tool.html" >Tool</A>* 
+    <A NAME="_tool">
+    <B>_tool</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Viewer.html" >Viewer</A>* 
+    <A NAME="_viewer">
+    <B>_viewer</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

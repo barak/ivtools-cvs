@@ -1,0 +1,193 @@
+
+                README for GroupKit 1.0
+                -----------------------
+ 
+This directory contains the initial release of GroupKit 1.0, from 
+the University of Calgary.  GroupKit is a C++ toolkit for building 
+real-time groupware conferencing applications (such as shared 
+drawing tools, group writing systems, group support tools, etc.).
+
+GroupKit is provided free of charge, to encourage more reseach and
+development into groupware applications.  GroupKit makes it relatively
+easy to develop new applications, by providing many "standard" groupware
+components, for registration, communications, etc.  GroupKit also
+supports several features motivated by groupware "human factors"
+work, including overlays to support gesturing and annotation, flexible
+registration mechanisms to support group processes, etc.
+
+GroupKit is an on-going research project.  The latest version of the 
+software will always be available for ftp from "cpsc.ucalgary.ca".  
+Inquiries can be addressed to Mark Roseman (roseman@cpsc.ucalgary.ca)
+or Saul Greenberg (saul@cpsc.ucalgary.ca).
+
+
+
+What Else You Need
+------------------
+
+GroupKit is built using InterViews, currently version 3.1-beta3.  
+GroupKit will be updated to IV 3.1 when it is made available.  The
+InterViews distribution is available by anonymous ftp from 
+"interviews.stanford.edu".  See also the "comp.windows.interviews"
+Usenet group.  
+
+A C++ compiler is also required, which accepts revision 2.0 or later
+of the language.  X11-R4 or -R5 are also required, as are imake and
+makedepend.  The FAQ for InterViews or the InterViews newsgroup 
+is probably a good place to check about specific compilers.
+
+
+
+Structure of the Distribution
+-----------------------------
+
+The GroupKit distribution contains a set of include files, source for
+the C++ classes implementing the GroupKit libraries, and a number of
+GroupKit based programs.
+
+Three libraries (reflected in the "include" and "src") directories are
+included:
+
+  gk     - this provides core GroupKit classes for managing conferences,
+           communications, overlays (for sketching and gesturing), etc.
+
+  gk-reg - this provides core classes for building "Registrar Clients"
+           which are programs allowing users to register for conferences
+
+  gk-ui  - this provides a number of "normal" widgets used by GroupKit
+           programs, including a shell, a table widget, string browsers,
+           a static text field, etc.  These could be used in non-GroupKit
+           InterViews programs
+
+The "src/examples" tree contains a number of GroupKit based programs,
+both "standard" GroupKit programs and examples:
+
+  registrar -   a program maintaining a list of all active conferences
+
+  reg-open -    a client program to the registrar, allowing users to join
+                conferences using an "open" registration protocol
+
+  reg-master -  a client program to the registrar, suitable for use
+                by a facilitator in a strictly controlled conference
+
+  reg-slave -   a client program to the registrar, suitable for use
+                by a user in a strictly controlled conference
+
+  deck-flip -   a simple GroupKit conference example, making the
+                InterViews deck example multi-user
+ 
+  cursor-demo - a GroupKit conference which demonstrates the
+                cursor overlay for gesturing
+
+  groupsketch - a simple multi-user freehand sketching program
+
+  monitor -     a GroupKit conference component which will monitor
+                the list of users in the conference
+
+  brainstorm -  a simple brainstorming tool, where ideas typed by
+                each user are broadcast to other users
+
+  vote -        a Conference where users can poll other users on 
+                yes/no questions and receive a tally of responses
+
+
+
+Documentation
+-------------
+
+A tutorial on building GroupKit applications is contained in 
+"doc/tutorial.ps".
+
+A reference manual is contained in "doc/reference.ps"
+
+A paper describing GroupKit (GroupKit: A Groupware Toolkit for
+Building Real-Time Conferencing Applications, Roseman and Greenberg,
+Proc. CSCW '92, Toronto) is contained in "doc/gk_cscw92.ps".
+
+An intro guide to using InterViews (meant to supplement the 
+reference manual contained in the InterViews distribution) is
+contained in "doc/ivtutorial.ps".
+
+
+
+Building GroupKit
+----------------- 
+
+After unpacking the tar files (zcat gk1.0.tar.Z | tar xf -), there
+are a number of customizations which must be made:
+
+1. Near the top of src/gk/groupsession.c is a structure called
+   "gkProps" providing default resources for GroupKit.  Three will
+   need to be changed:
+
+    {  "*RegistrarHost",	"janu.cpsc.ucalgary.ca" } ,
+    {  "*RegistrarPort", 	"1500" },
+    {  "*DomainRoot",           "cpsc.ucalgary.ca" }
+    {  "*GroupKitBinDir",       "/home/grads/roseman/cscw/groupkit/bin/SUN4" }
+
+   The first two refer to the host and port number that the registrar
+   process will normally run on.  Make sure the hostname is fully
+   qualified with the domain name.
+
+   The third is the name of the Internet domain the system will run on.
+
+   The last is the directory where by default GroupKit applications are
+   located.  This is "./bin/$ARCH" from the top of the distribution.
+
+2. In the file "./gk_template" the directory "GroupKitTop" should be
+   changed to point to the top of the distribution.  
+
+3. The file "./gkmkmf" (a GroupKit version of "ivmkmf") should be changed
+   so that the first parameter to imake points to the "./gk_template"
+   file, and the second points to the InterViews config directory.  
+   This can be obtained from the existing "ivmkmf" shell script.
+
+The GroupKit distribution can then be built as follows:
+
+1. Change directories to the "./src" directory.
+
+2. Set your CPU environment variable, e.g. "setenv CPU SUN4".
+
+3. Type "../gkmkmf".  This will create the top level Makefile.
+
+4. Type "make Makefiles".  This will recursively create Makefiles
+   in all the subdirectories in the "src" tree.
+
+5. Type "make install".  This will recursively build the three
+   GroupKit libraries, followed by the GroupKit programs in the
+   "src/examples" tree.  The libraries will be installed in 
+   "./lib/$ARCH" and the programs in "./bin/$ARCH" off the main
+   distribution.
+
+
+
+Using GroupKit
+--------------
+
+Before using any GroupKit applications, it is necessary to start
+up the registrar.  From the machine specified by the "*RegistrarHost*
+resource in "./src/gk/groupsession.c", start up the registrar by
+typing "registrar &".
+
+To try out GroupKit, place the following in your ~/.Xdefaults file:
+
+    startup*conferenceTypes:	6
+    startup*conf1-desc:  	Deck Flip
+    startup*conf1-prog:  	deckeg
+    startup*conf2-desc:  	Cursor Demo
+    startup*conf2-prog:  	cursoreg
+    startup*conf3-desc:  	GroupSketch
+    startup*conf3-prog:  	gs
+    startup*conf4-desc:  	User Monitor
+    startup*conf4-prog:  	mon
+    startup*conf5-desc:  	Brainstorming Tool
+    startup*conf5-prog:  	bstorm
+    startup*conf6-desc:  	Voting Tool
+    startup*conf6-prog:  	vote
+
+And then from the "./bin/$ARCH" directory, type "startup &".  
+
+A better idea is to get the registrar running and then turn to
+the GroupKit tutorial in "./doc/tutorial.ps".
+
+

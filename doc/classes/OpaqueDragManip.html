@@ -1,0 +1,334 @@
+
+<html><head><TITLE>Description of OpaqueDragManip</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OpaqueDragManip</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="DragManip.html" >DragManip</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+manipulator for opaque move.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="DragManip.html" >DragManip</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OpaqueDragManip><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovmanips.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Grasp(Event&#38;)">
+    <B>Grasp</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        down-event method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(Graphic*&#38;&#38;COMMRubberband*)">
+    <B>Init</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Rubberband.html" >Rubberband</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        constructor initialization method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Manipulating(Event&#38;)">
+    <B>Manipulating</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        until up-event method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OpaqueDragManip(Viewer*&#38;&#38;COMMRubberband*&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*&#38;&#38;COMMDragConstraint&#38;&#38;COMMIntCoord&#38;&#38;COMMIntCoord&#38;&#38;COMMGraphic*=nil)">
+    <B>OpaqueDragManip</B> ( <A HREF="Viewer.html" >Viewer</A>*, <A HREF="Rubberband.html" >Rubberband</A>*, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Tool.html" >Tool</A>*, DragConstraint, IntCoord, IntCoord, <A HREF="Graphic.html" >Graphic</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OpaqueDragManip(Viewer*&#38;&#38;COMMRubberband*&#38;&#38;COMMTransformer*=nil&#38;&#38;COMMTool*=nil&#38;&#38;COMMDragConstraint=None&#38;&#38;COMMGraphic*=nil)">
+    <B>OpaqueDragManip</B> ( <A HREF="Viewer.html" >Viewer</A>*, <A HREF="Rubberband.html" >Rubberband</A>*, <A HREF="Transformer.html" >Transformer</A>* = nil, <A HREF="Tool.html" >Tool</A>* = nil, DragConstraint = None, <A HREF="Graphic.html" >Graphic</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Track(IntCoordx&#38;&#38;COMMIntCoordy)">
+    <B>Track</B> (IntCoord x, IntCoord y) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        track method implemented here instead of in a rubberband.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OpaqueDragManip()">
+    <B>~OpaqueDragManip</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="_graphic">
+    <B>_graphic</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        graphic for opaque move.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_notrans">
+    <B>_notrans</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to say whether graphic had <A HREF="Transformer.html" >Transformer</A> to start with
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="_origtrans">
+    <B>_origtrans</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        original transformation of graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Rubberband.html" >Rubberband</A>* 
+    <A NAME="_r2">
+    <B>_r2</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        save pointer to _r member variable, which gets set to nil.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="_totaltrans">
+    <B>_totaltrans</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        total transformation for parent graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>float 
+    <A NAME="current_angle(Rubberband*)">
+    <B>current_angle</B> (<A HREF="Rubberband.html" >Rubberband</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for computing current angle of a rotating rubberband.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>float 
+    <A NAME="current_scaling(Rubberband*)">
+    <B>current_scaling</B> (<A HREF="Rubberband.html" >Rubberband</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for computing current factor of a scaling rubberband.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="opaqueable_rubband(Rubberband*)">
+    <B>opaqueable_rubband</B> (<A HREF="Rubberband.html" >Rubberband</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test to see if this kind of rubberband can be directly visualized instead.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

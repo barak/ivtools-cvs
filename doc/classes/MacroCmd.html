@@ -1,0 +1,548 @@
+
+<html><head><TITLE>Description of MacroCmd</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>MacroCmd</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Command.html" >Command</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+command containing a sequence of other commands to execute<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Command.html" >Command</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#MacroCmd><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/Commands/macro.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/MacroCmd.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Append(Command*&#38;&#38;COMMCommand*=nil&#38;&#38;COMMCommand*=nil&#38;&#38;COMMCommand*=nil)">
+    <B>Append</B> (<A HREF="Command.html" >Command</A>*, <A HREF="Command.html" >Command</A>* = nil, <A HREF="Command.html" >Command</A>* = nil, <A HREF="Command.html" >Command</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Command.html" >Command</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Done(Iterator&#38;)">
+    <B>Done</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Execute()">
+    <B>Execute</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="First(Iterator&#38;)">
+    <B>First</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Command.html" >Command</A>* 
+    <A NAME="GetCommand(Iterator&#38;)">
+    <B>GetCommand</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InsertAfter(Iterator&#38;&#38;&#38;COMMCommand*)">
+    <B>InsertAfter</B> (<A HREF="Iterator.html" >Iterator</A>&#38;, <A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InsertBefore(Iterator&#38;&#38;&#38;COMMCommand*)">
+    <B>InsertBefore</B> (<A HREF="Iterator.html" >Iterator</A>&#38;, <A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Last(Iterator&#38;)">
+    <B>Last</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="MacroCmd(ControlInfo*)">
+    <B>MacroCmd</B> (<A HREF="ControlInfo.html" >ControlInfo</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="MacroCmd(Editor*=nil&#38;&#38;COMMCommand*=nil&#38;&#38;COMMCommand*=nil&#38;&#38;COMMCommand*=nil&#38;&#38;COMMCommand*=nil)">
+    <B>MacroCmd</B> ( <A HREF="Editor.html" >Editor</A>* = nil, <A HREF="Command.html" >Command</A>* = nil, <A HREF="Command.html" >Command</A>* = nil, <A HREF="Command.html" >Command</A>* = nil, <A HREF="Command.html" >Command</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Next(Iterator&#38;)">
+    <B>Next</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Prepend(Command*&#38;&#38;COMMCommand*=nil&#38;&#38;COMMCommand*=nil&#38;&#38;COMMCommand*=nil)">
+    <B>Prepend</B> (<A HREF="Command.html" >Command</A>*, <A HREF="Command.html" >Command</A>* = nil, <A HREF="Command.html" >Command</A>* = nil, <A HREF="Command.html" >Command</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Prev(Iterator&#38;)">
+    <B>Prev</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Read(istream&#38;)">
+    <B>Read</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(Command*)">
+    <B>Remove</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(Iterator&#38;)">
+    <B>Remove</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Reversible()">
+    <B>Reversible</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetCommand(Command*&#38;&#38;COMMIterator&#38;)">
+    <B>SetCommand</B> (<A HREF="Command.html" >Command</A>*, <A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetEditor(Editor*)">
+    <B>SetEditor</B> (<A HREF="Editor.html" >Editor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Unexecute()">
+    <B>Unexecute</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Write(ostream&#38;)">
+    <B>Write</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~MacroCmd()">
+    <B>~MacroCmd</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Command.html" >Command</A>* 
+    <A NAME="Cmd(UList*)">
+    <B>Cmd</B> (<A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UList.html" >UList</A>* 
+    <A NAME="Elem(Iterator&#38;)">
+    <B>Elem</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UList.html" >UList</A>* 
+    <A NAME="_cmds">
+    <B>_cmds</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

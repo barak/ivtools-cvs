@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FileBrowser - browse and/or select file names
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/filebrowser.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       FileBrowser  is  a StringBrowser that displays file names.
+       In addition  to  the  standard  StringBrowser  constructor
+       parameters,  the FileBrowser constructor takes a directory
+       name as an argument.  The  FileBrowser  scans  the  corre-
+       sponding  directory,  appending the file names to its list
+       of strings.  FileBrowser lets the user choose a file name,
+       and the application queries the FileBrowser for the chosen
+       file.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>FileBrowser(ButtonState*,</B> <B>const</B> <B>char*</B> <B>dir,</B> <B>int</B>  <B>rows,</B>  <B>int</B>
+              <B>cols,</B> <B>boolean</B> <B>uniqueSel,</B> <B>int</B> <B>highlight,</B> <B>const</B> <B>char*</B>
+              <B>done)</B>
+       <B>FileBrowser(const</B>  <B>char*</B>  <B>name,</B>  <B>ButtonState*,</B>  <B>const</B>
+              <B>char*,</B> <B>int,</B> <B>int,</B> <B>boolean,</B> <B>int,</B> <B>const</B> <B>char*)</B>
+              Create  a new FileBrowser object.  The ButtonState,
+              <I>rows,</I> <I>cols,</I> <I>uniqueSel,</I> <I>highlight,</I>  <I>done</I>,  and  <I>name</I>
+              parameters have semantics identical to those of the
+              corresponding StringBrowser  parameters.   The  <I>dir</I>
+              parameter  specifies  the  directory  to search for
+              file names.  Internally, FileBrowser  prepends  <I>dir</I>
+              to  relative path specifications in operations that
+              require them, thus avoiding a <B>chdir(2)</B>.
+
+       <B>boolean</B> <B>IsADirectory(const</B> <B>char*)</B>
+              Return whether or not the given relative path  cor-
+              responds to a valid directory.
+
+       <B>boolean</B> <B>SetDirectory(const</B> <B>char*</B> <B>newdir)</B>
+              Change  the  search  directory  to  <I>newdir</I>  if that
+              directory is accessible.  The function returns true
+              if successful.
+
+       <B>const</B> <B>char*</B> <B>GetDirectory()</B>
+              Return the name of the search directory.
+
+       <B>const</B> <B>char*</B> <B>ValidDirectories(const</B> <B>char*</B> <B>path)</B>
+              Given  a  path string, return the largest substring
+              (starting from the beginning of <I>path</I>)  that  repre-
+              sents a valid path.  The substring is returned in a
+              static buffer and should be copied before use.
+
+       <B>const</B> <B>char*</B> <B>Normalize(const</B> <B>char*</B> <B>path)</B>
+              Return a normalized version of <I>path</I> with all spuri-
+              ous  slashes,  dots,  and  tildes interpreted.  The
+              normalized path is returned in a static buffer  and
+              Return  the  <I>i</I>th  string as it appears in the File-
+              Browser.  This function prepends the search  direc-
+              tory  to  the string, normalizes the concatenation,
+              and returns the result.
+
+       <B>void</B> <B>RereadDirectory()</B>
+              Rescan the current directory without  updating  the
+              FileBrowser's appearance.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Rescan  the  current directory and update the File-
+              Browser's appearance to reflect any changes in  the
+              set of files it should display.
+
+       <B>void</B> <B>SetTextFilter(const</B> <B>char*)</B>
+       <B>void</B> <B>SetDirectoryTextFilter(const</B> <B>char*)</B>
+       <B>void</B> <B>SetModeFilter(int)</B>
+       <B>void</B> <B>SetDirectoryModeFilter(int)</B>
+              By  default, FileBrowser displays all the files and
+              directories  it  finds  in  the  search  directory.
+              These  functions  provide  some  control  over  the
+              entries that FileBrowser  displays.   SetTextFilter
+              specifies  a regular expression (see <B>Regexp(3I)</B>) to
+              match against file  names.   SetDirectoryTextFilter
+              serves a similar role for directory names.  SetMod-
+              eFilter and SetDirectoryModeFilter specify the mode
+              (see <B>chmod(1)</B>) that displayed files and directories
+              should have.  Only files and directories that match
+              both  the  regular  expression  and  the  mode will
+              appear in the FileBrowser.   Passing  <I>nil</I>  for  the
+              regular  expression  or 0 for the mode restores the
+              default behavior.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>UpdateStrings()</B>
+              Explicitly update the FileBrowser's  appearance  to
+              reflect  any  changes in the set of files it should
+              display without rescanning the directory.
+
+       <B>virtual</B> <B>boolean</B> <B>Acceptable(const</B> <B>char*)</B>
+              Return whether the given file name is an acceptable
+              name.   By  default, files that conform to the text
+              or mode filter specifications are acceptable.  Only
+              acceptable   files  will  be  displayed  by  Updat-
+              eStrings.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(2I)</B>, <B>Button(3I)</B>, <B>StringBrowser(3I)</B>, <B>Regexp(3I)</B>,
+       <B>chmod(1)</B>
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

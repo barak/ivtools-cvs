@@ -1,0 +1,10 @@
+graphdraw(3,3
+    gs( :fillbg 0 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :nonepat),
+    gs( :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :graypat 0),
+    node( :reqlabel 1 :ellipse 331,665,35,20 :ellipsetrans 1,0,0,1,-20,-132 :text 12,"A" :texttrans 1,0,0,1,307,526 :gs 0),
+    node( :reqlabel 1 :ellipse 236,514,35,20 :ellipsetrans 1,0,0,1,-20.5,-132 :text 12,"B" :texttrans 1,0,0,1,212,375 :gs 0),
+    node( :reqlabel 1 :ellipse 453,480,35,20 :ellipsetrans 1,0,0,1,-20,-132 :text 12,"C" :texttrans 1,0,0,1,429,341 :gs 0),
+    edge(300,515,228,401 :arrowscale 1.5 :tail :startnode 0 :endnode 1 :gs 1),
+    edge(323,515,420,367 :arrowscale 1.5 :tail :startnode 0 :endnode 2 :gs 1),
+    edge(249,377,400,353 :arrowscale 1.5 :tail :startnode 1 :endnode 2 :gs 1)
+)

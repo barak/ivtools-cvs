@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Adjuster   -   button-like   interactors  for  incremental
+       scrolling and zooming
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/adjuster.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Adjuster</B> objects manipulate a perspective using a pushbut-
+       ton-like interface.  Adjusters also provide an auto-repeat
+       capability.  Depressing and holding down any mouse  button
+       on  an  adjuster for a specified time causes it to repeat-
+       edly perform its operation.   The  auto-repeat  terminates
+       when the button is released.
+
+       Predefined  subclasses  of  Adjuster  include  <B>Zoomer</B>  and
+       <B>Mover</B>.  Zoomers  adjust  the  perspective's  <I>curwidth</I>  and
+       <I>curheight</I>  members  to  suggest  magnification.   The user
+       clicks on a zoomer to magnify or reduce  the  contents  of
+       the  interactor  through  its  perspective.   The <B>Enlarger</B>
+       zoomer subclass halves the perspective  values  while  the
+       <B>Reducer</B> class doubles them.  Movers provide an incremental
+       movement of the perspective in  one  of  four  directions;
+       left,  right,  down, or up.  The user clicks on a mover to
+       move the perspective.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Adjuster(Interactor*,</B> <B>int</B> <B>=</B> <B>NO_AUTOREPEAT)</B>
+              Adjuster constructors take a pointer to the  inter-
+              actor  whose  perspective  will  be  adjusted and a
+              delay (in tenths of a  second)  after  which  auto-
+              repeat will begin once the adjuster is ``pressed''.
+
+       <B>virtual</B> <B>void</B> <B>Highlight()</B>
+       <B>virtual</B> <B>void</B> <B>UnHighlight()</B>
+              These  functions  define  how  the  adjuster  draws
+              itself  when  it is pressed.  The adjuster is high-
+              lighted when it is pressed with  any  mouse  button
+              and unhighlighted when the button is released.  The
+              default is to invert the adjuster when highlighted.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>AdjustView(Event&amp;)</B>
+              This  function defines how the adjuster adjusts the
+              interactor's perspective.  It is called  after  the
+              adjuster  is  pressed  and  released, or repeatedly
+              during auto-repeat.  Derived classes  should  rede-
+              fine  this function to implement the desired behav-
+              ior.
+
+
+</PRE>
+<H2>DERIVED CLASSES</H2><PRE>
+       <B>Enlarger(Interactor*)</B>
+       <B>Reducer(Interactor*)</B>
+              by factors of one half and two, respectively.  This
+              suggests  to an interactor to enlarge or reduce its
+              contents.   Auto-repeat  is   disabled   on   these
+              adjusters.
+
+       <B>LeftMover(Interactor*,</B> <B>int</B> <B>delay</B> <B>=</B> <B>NO_AUTOREPEAT)</B>
+       <B>RightMover(Interactor*,</B> <B>int</B> <B>delay</B> <B>=</B> <B>NO_AUTOREPEAT)</B>
+       <B>DownMover(Interactor*,</B> <B>int</B> <B>delay</B> <B>=</B> <B>NO_AUTOREPEAT)</B>
+       <B>UpMover(Interactor*,</B> <B>int</B> <B>delay</B> <B>=</B> <B>NO_AUTOREPEAT)</B>
+              These subclasses of <B>Mover</B> adjust the current origin
+              of the interactor's perspective by an amount in the
+              corresponding  direction.  If the shift key is down
+              while the mover is pressed, the amount  corresponds
+              to  the  perspective's  <I>lx</I>  or <I>ly</I> member variables;
+              otherwise, the <I>sx</I> or <I>sy</I> values are used.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(3I)</B>, <B>Perspective(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

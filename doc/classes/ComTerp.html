@@ -1,0 +1,2027 @@
+
+<html><head><TITLE>Description of ComTerp</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ComTerp</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Parser.html" >Parser</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+extendable command interpreter.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Parser.html" >Parser</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#ComTerp><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+ComTerp/comterp.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <A HREF="ComTerp.html" >ComTerp</A> is an extendable command interpreter with a simple C-like expression
+ syntax and support for commands with fixed-location and keyword-prefixed 
+ arguments.  The underlying architecture of this interpreter is patterned
+ after Fischer and LeBlanc's "Crafting a Compiler with C", with their pipeline
+ of scanner --> parser --> code_conversion --> code_generation retrofitted into 
+ one of scanner --> parser --> code_conversion --> interpreter.
+ <p>
+ You use a <A HREF="ComTerp.html" >ComTerp</A> by first constructing one with a default set of commands
+ and operators, then add any commands (derived <A HREF="ComFunc.html" >ComFunc</A> objects) needed for a
+ particular application, then start it running on either stdin or 
+ some alternate input file described by arguments to the constructor.
+ To embed a <A HREF="ComTerp.html" >ComTerp</A> in another application you'll probably want to use
+ a <A HREF="ComTerpServ.html" >ComTerpServ</A>, which has extensions to <A HREF="ComTerp.html" >ComTerp</A> for passing input and output
+ strings from/to the interpreter by buffers.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComTerp()">
+    <B>ComTerp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct with default set of <A HREF="ComFunc.html" >ComFunc</A> objects.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComTerp(constchar*path)">
+    <B>ComTerp</B> (const char* path) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct and run on commands read from 'path'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComTerp(void*&#38;&#38;COMMchar*&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOchar*&#38;&#38;COMMint&#38;&#38;COMMvoid*&#38;&#38;BRAKC&#38;&#38;COMMint&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC&#38;&#38;COMMint&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC)">
+    <B>ComTerp</B> (void*, char*(*)(char*,int,void*), int(*)(void*), int(*)(void*)) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct with IO system based on a void* pointer and three function
+ pointers to receive that void* as their first argument, with
+ signatures that match fgets, feof, and ferror.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="add_command(constchar*name&#38;&#38;COMMComFunc*&#38;&#38;COMMconstchar*alias=nil)">
+    <B>add_command</B> (const char* name, <A HREF="ComFunc.html" >ComFunc</A>*, const char* alias = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add a derived <A HREF="ComFunc.html" >ComFunc</A> to be known by 'name'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_defaults()">
+    <B>add_defaults</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add default commands (<A HREF="ComFunc.html" >ComFunc</A> objects).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="brief()">
+    <B>brief</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return brief mode flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="brief(booleanflag)">
+    <B>brief</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set brief mode flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="clr_val_for_next_func()">
+    <B>clr_val_for_next_func</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        clear out <A HREF="ComValue.html" >ComValue</A> to pass to subequent command
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="disable_prompt()">
+    <B>disable_prompt</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        disable '>' prompting sent in response to an unfinished input expression.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>* 
+    <A NAME="eithervalue(intsymid&#38;&#38;COMMbooleanglobalfirst=false)">
+    <B>eithervalue</B> (int symid, boolean globalfirst=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        value associated with a symbol id in either symbol table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="enable_prompt()">
+    <B>enable_prompt</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        enable '>' prompting sent in response to an unfinished input expression.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="eof()">
+    <B>eof</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true when end-of-file found on the input.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="errmsg()">
+    <B>errmsg</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        current error message buffer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="eval_expr(ComValue*pfvals&#38;&#38;COMMintnpfvals)">
+    <B>eval_expr</B> (<A HREF="ComValue.html" >ComValue</A>* pfvals, int npfvals) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        evaluate postfix expression stored in <A HREF="ComValue.html" >ComValue</A> objects.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="eval_expr(booleannested=false)">
+    <B>eval_expr</B> (boolean nested=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        evaluate topmost expression on the stack, with a flag to
+ indicate if this call to eval_expr() is nested inside
+ another, so that initialization doesn't get repeated.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="exit(intstatus=0)">
+    <B>exit</B> (int status=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        call _exit().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="expr_top(intn=0)">
+    <B>expr_top</B> (int n=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        top of currently evaluating expression buffer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComFunc.html" >ComFunc</A>* 
+    <A NAME="func_for_next_expr()">
+    <B>func_for_next_expr</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get <A HREF="ComFunc.html" >ComFunc</A> to use on subsequent expression
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="func_for_next_expr(ComFunc*func)">
+    <B>func_for_next_expr</B> (<A HREF="ComFunc.html" >ComFunc</A>* func) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="ComFunc.html" >ComFunc</A> to use on subsequent expression
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="get_attributes()">
+    <B>get_attributes</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to <A HREF="AttributeList.html" >AttributeList</A> being used as an additional 
+ local symbol table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int* 
+    <A NAME="get_commands(int&#38;ncommands&#38;&#38;COMMbooleansorted=false)">
+    <B>get_commands</B> (int &#38;ncommands, boolean sorted = false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return an optionally sorted list of command names.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>ComValueTable* 
+    <A NAME="globaltable()">
+    <B>globaltable</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        global symbol table associated with every <A HREF="ComTerp.html" >ComTerp</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>* 
+    <A NAME="globalvalue(intsymid)">
+    <B>globalvalue</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        value associated with a symbol id in the global symbol table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComterpHandler.html" >ComterpHandler</A>* 
+    <A NAME="handler()">
+    <B>handler</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to handler that can read_expressions from
+ a connection and interpret them.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="handler(ComterpHandler*h)">
+    <B>handler</B> (<A HREF="ComterpHandler.html" >ComterpHandler</A>* h ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set handler for invoking <A HREF="ComFunc.html" >ComFunc</A> execute methods.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="init()">
+    <B>init</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize memory for the regular stack, the <A HREF="ComFuncState.html" >ComFuncState</A> stack,
+ and the symbol tables.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComTerp.html" >ComTerp</A>&#38; 
+    <A NAME="instance()">
+    <B>instance</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        instance of <A HREF="ComTerp.html" >ComTerp</A> for global use.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="is_serv()">
+    <B>is_serv</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to test if <A HREF="ComTerp.html" >ComTerp</A> or <A HREF="ComTerpServ.html" >ComTerpServ</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int&#38; 
+    <A NAME="linenum()">
+    <B>linenum</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        count of lines processed
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="list_commands(ostream&#38;out&#38;&#38;COMMbooleansorted=false)">
+    <B>list_commands</B> (ostream&#38; out, boolean sorted = false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print an optionally sorted list of commands to an ostream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>ComValueTable* 
+    <A NAME="localtable()">
+    <B>localtable</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        local symbol table associated with an individual <A HREF="ComTerp.html" >ComTerp</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>* 
+    <A NAME="localvalue(intsymid)">
+    <B>localvalue</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        value associated with a symbol id in the local symbol table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="lookup_symval(ComValue&#38;)">
+    <B>lookup_symval</B> (<A HREF="ComValue.html" >ComValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        look up a <A HREF="ComValue.html" >ComValue</A> associated with a symbol (specified in the
+ input <A HREF="ComValue.html" >ComValue</A>) in the local or global symbol tables.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="lookup_symval(ComValue*)">
+    <B>lookup_symval</B> (<A HREF="ComValue.html" >ComValue</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        look up a pointer to an <A HREF="AttributeValue.html" >AttributeValue</A> associated with a symbol
+ (specified in the input <A HREF="ComValue.html" >ComValue</A>) in the local or global symbol
+ tables. Do not alter the input <A HREF="ComValue.html" >ComValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="lookup_symval(intsymid)">
+    <B>lookup_symval</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        look up a <A HREF="ComValue.html" >ComValue</A> associated with a symbol (specified with a
+ symbol id) in the local or global symbol tables.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="npause()">
+    <B>npause</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return (reference to) number of pauses
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int&#38; 
+    <A NAME="pfnum()">
+    <B>pfnum</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments in the input postfix buffer of a tokenized 
+ tree like expression ready to be evaluated, but not yet
+ converted to <A HREF="ComValue.html" >ComValue</A> objects.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="pop_servstate()">
+    <B>pop_servstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pop <A HREF="ComTerpServ.html" >ComTerpServ</A> state that was saved earlier
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="pop_stack(booleanlookupsym=true)">
+    <B>pop_stack</B> (boolean lookupsym=true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return a reference (on the stack) to what was the top of the stack,
+ if 'lookupsym' is false, don't look up <A HREF="ComValue.html" >ComValue</A> objects in 
+ the local or global symbol table to replace a symbol, just
+ return the symbol itself.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="pop_symbol()">
+    <B>pop_symbol</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return a reference (on the stack) to what was the top of the stack,
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="post_eval_expr(inttokcnt&#38;&#38;COMMintofftop&#38;&#38;COMMintpedepth)">
+    <B>post_eval_expr</B> (int tokcnt, int offtop, int pedepth) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy unevaluated expression to the stack and evaluate.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="print_stack()">
+    <B>print_stack</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print the entire stack to stdout.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="print_stack_top()">
+    <B>print_stack_top</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print the top of the stack to stdout.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="print_stack_top(ostream&#38;out)">
+    <B>print_stack_top</B> (ostream&#38; out) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print the top of the stack to an ostream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="push_servstate()">
+    <B>push_servstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        push <A HREF="ComTerpServ.html" >ComTerpServ</A> state for later retrieval
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="push_stack(AttributeValue&#38;)">
+    <B>push_stack</B> (<A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy the state of an <A HREF="AttributeValue.html" >AttributeValue</A> into a <A HREF="ComValue.html" >ComValue</A> on the stack, 
+ incrementing the reference count of any <A HREF="AttributeValueList.html" >AttributeValueList</A>, 
+ otherwise replicating data.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="push_stack(ComValue&#38;)">
+    <B>push_stack</B> (<A HREF="ComValue.html" >ComValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy the state of a <A HREF="ComValue.html" >ComValue</A> onto the stack, incrementing the
+ reference count of any <A HREF="AttributeValueList.html" >AttributeValueList</A>, otherwise replicating data.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="quit(booleanquitflag=true)">
+    <B>quit</B> (boolean quitflag=true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that will cause a quit to happen as soon as possible.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="quitflag()">
+    <B>quitflag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return value of flag that will cause a quit to happen as soon as possible.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="quitflag(booleanflag)">
+    <B>quitflag</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that will cause a quit to happen as soon as possible.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="read_expr()">
+    <B>read_expr</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read expression from the input, return true if all ok.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="run(booleanone_expr=false&#38;&#38;COMMbooleannested=false)">
+    <B>run</B> (boolean one_expr=false, boolean nested=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        run interpreter until end-of-file or quit command, unless 
+ 'one_expr' is true. Leave 'one_expr' false when using a <A HREF="ComTerpServ.html" >ComTerpServ</A>.
+ Return Value: -1 if eof, 0 if normal operation, 1 if 
+ partial expression parsed, 2 if no result computed. 'nested' indicates
+ contents of stack should be preserved.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="runfile(constchar*filename)">
+    <B>runfile</B> (const char* filename) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        run interpreter on contents of 'filename'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="set_attributes(AttributeList*)">
+    <B>set_attributes</B> (<A HREF="AttributeList.html" >AttributeList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="AttributeList.html" >AttributeList</A> to be used as an additional local symbol table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="stack_empty()">
+    <B>stack_empty</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="stack_height()">
+    <B>stack_height</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return current height of the stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_top(intn=0)">
+    <B>stack_top</B> (int n=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return reference to top of the stack, offset by 'n' (usually negative).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="stepflag()">
+    <B>stepflag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that controls stepwise execution
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerpState.html" >ComTerpState</A>* 
+    <A NAME="top_servstate()">
+    <B>top_servstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to top state on <A HREF="ComTerpServ.html" >ComTerpServ</A> state stack
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="trace_mode()">
+    <B>trace_mode</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return trace mode
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="trace_mode(intmode)">
+    <B>trace_mode</B> (int mode) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set trace mode
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="val_for_next_func()">
+    <B>val_for_next_func</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get <A HREF="ComValue.html" >ComValue</A> to pass to subequent command
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="val_for_next_func(ComValue&#38;val)">
+    <B>val_for_next_func</B> (<A HREF="ComValue.html" >ComValue</A>&#38; val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="ComValue.html" >ComValue</A> to pass to subequent command
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="~ComTerp()">
+    <B>~ComTerp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="_alist">
+    <B>_alist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        extends symbol tables with names in an <A HREF="AttributeList.html" >AttributeList</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_brief">
+    <B>_brief</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        when used to produce <A HREF="ComValue.html" >ComValue</A> output
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerpState.html" >ComTerpState</A>* 
+    <A NAME="_ctsstack">
+    <B>_ctsstack</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        stack of <A HREF="ComTerpServ.html" >ComTerpServ</A> state
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="_ctsstack_siz">
+    <B>_ctsstack_siz</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_ctsstack_top">
+    <B>_ctsstack_top</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_defaults_added">
+    <B>_defaults_added</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag for base set of commands added 
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_errbuf">
+    <B>_errbuf</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        buffer used for rendering error messages
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_errbuf2">
+    <B>_errbuf2</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        ancillary buffer for rendering error messages
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComFuncState.html" >ComFuncState</A>* 
+    <A NAME="_fsstack">
+    <B>_fsstack</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        stack of func-status (nargs/nkeys/...) 
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="_fsstack_siz">
+    <B>_fsstack_siz</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_fsstack_top">
+    <B>_fsstack_top</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComFunc.html" >ComFunc</A>* 
+    <A NAME="_func_for_next_expr">
+    <B>_func_for_next_expr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        <A HREF="ComFunc.html" >ComFunc</A> to run on next expression
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static ComValueTable* 
+    <A NAME="_globaltable">
+    <B>_globaltable</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        interpreter shared symbol table
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComterpHandler.html" >ComterpHandler</A>* 
+    <A NAME="_handler">
+    <B>_handler</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        I/O handler for this <A HREF="ComTerp.html" >ComTerp</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComTerp.html" >ComTerp</A>* 
+    <A NAME="_instance">
+    <B>_instance</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        default instance of a <A HREF="ComTerp.html" >ComTerp</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_just_reset">
+    <B>_just_reset</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag that gets set after call to ::reset_stack()
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>ComValueTable* 
+    <A NAME="_localtable">
+    <B>_localtable</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        per interpreter symbol table
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_npause">
+    <B>_npause</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        depth of pause
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>* 
+    <A NAME="_pfcomvals">
+    <B>_pfcomvals</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        postfix buffer of <A HREF="ComValue.html" >ComValue</A>'s converted from postfix_token
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_pfoff">
+    <B>_pfoff</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        current offset in _pfbuf
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_quitflag">
+    <B>_quitflag</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag that can be set to terminate interpreter
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>* 
+    <A NAME="_stack">
+    <B>_stack</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        stack of multi-value objects, central to the interpreter
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="_stack_siz">
+    <B>_stack_siz</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        current maximum stack size
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_stack_top">
+    <B>_stack_top</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        current top of stack, -1 indicates empty
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_stepflag">
+    <B>_stepflag</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if single-stepping interpreter
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_trace_mode">
+    <B>_trace_mode</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        trace mode
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>* 
+    <A NAME="_val_for_next_func">
+    <B>_val_for_next_func</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        <A HREF="ComValue.html" >ComValue</A> to pass to next command
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="decr_stack(intn=1)">
+    <B>decr_stack</B> (int n=1) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="eval_expr_internals(intpedepth=0)">
+    <B>eval_expr_internals</B> (int pedepth=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="incr_stack()">
+    <B>incr_stack</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="incr_stack(intn)">
+    <B>incr_stack</B> (int n) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="load_postfix(postfix_token*&#38;&#38;COMMinttoklen&#38;&#38;COMMinttokoff)">
+    <B>load_postfix</B> (postfix_token*, int toklen, int tokoff) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="load_sub_expr()">
+    <B>load_sub_expr</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="pop_funcstate()">
+    <B>pop_funcstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pop <A HREF="ComFuncState.html" >ComFuncState</A> off stack
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="push_funcstate(ComFuncState&#38;funcstate)">
+    <B>push_funcstate</B> (<A HREF="ComFuncState.html" >ComFuncState</A>&#38; funcstate) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        push <A HREF="ComFuncState.html" >ComFuncState</A> onto stack
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="push_stack(postfix_token*)">
+    <B>push_stack</B> (postfix_token*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_arg(ComValue*topval&#38;&#38;COMMint&#38;offset&#38;&#38;COMMintofflimit&#38;&#38;COMMint&#38;argcnt)">
+    <B>skip_arg</B> (<A HREF="ComValue.html" >ComValue</A>* topval, int&#38; offset, int offlimit, int&#38; argcnt) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_func(ComValue*topval&#38;&#38;COMMint&#38;offset&#38;&#38;COMMintofflimit)">
+    <B>skip_func</B> (<A HREF="ComValue.html" >ComValue</A>* topval, int&#38; offset, int offlimit) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_key(ComValue*topval&#38;&#38;COMMint&#38;offset&#38;&#38;COMMintofflimit&#38;&#38;COMMint&#38;argcnt)">
+    <B>skip_key</B> (<A HREF="ComValue.html" >ComValue</A>* topval, int&#38; offset, int offlimit, int&#38; argcnt) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const <A HREF="ComValue.html" >ComValue</A>* 
+    <A NAME="stack(unsignedint&#38;top)">
+    <B>stack</B> (unsigned int &#38;top) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="token_to_comvalue(postfix_token*&#38;&#38;COMMComValue*)">
+    <B>token_to_comvalue</B> (postfix_token*, <A HREF="ComValue.html" >ComValue</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComFuncState.html" >ComFuncState</A>* 
+    <A NAME="top_funcstate()">
+    <B>top_funcstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return top <A HREF="ComFuncState.html" >ComFuncState</A> on stack
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="ComFunc">
+    <B>ComFunc</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="ComTerpIOHandler">
+    <B>ComTerpIOHandler</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="ComterpHandler">
+    <B>ComterpHandler</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       MagnifyTool  - tool for magnifying a portion of the Graph-
+       icView displayed in a viewer
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Tools/magnify.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       MagnifyTool lets the user magnify  a  portion  a  viewer's
+       contents.  The user sweeps out a rectangular area with the
+       MagnifyTool, and the  viewer  will  magnify  the  area  to
+       occupy the entire screen, if possible.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>MagnifyTool(ControlInfo*</B> <B>=</B> <B>nil)</B>
+              Instantiate a MagnifyTool.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              CreateManipulator generates a DragManip with a Rub-
+              berRect to provide visual feedback  for  specifying
+              the rectangular area to be magnified.  InterpretMa-
+              nipulator does not create  a  command;  rather,  it
+              examines the DragManipulator's RubberRect and calls
+              Magnify on the viewer with the  RubberRect's  final
+              coordinates.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Rubband(3I)</B>, <B>Tool(3U)</B>, <B>Viewer(3U)</B>, <B>manips(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

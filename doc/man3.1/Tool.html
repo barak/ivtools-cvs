@@ -1,0 +1,178 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Tool - base class for tool objects
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Tools/tool.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Tool  is  an  abstract base class for objects that support
+       direct manipulation of components.  Tools employ animation
+       and  other  visual effects for immediate feedback to rein-
+       force the user's perception that he is dealing  with  real
+       objects.   The  user <I>grasps</I> and <I>wields</I> a tool to achieve a
+       desired <I>effect</I>.  The effect may involve a change to one or
+       more  components' internal state, or it may change the way
+       components are viewed, or there may be no  effect  at  all
+       (if  for  example the tool is used in an inapropriate con-
+       text).
+
+       Conceptually, tools do their work within viewers, in which
+       graphical  component  views are displayed and manipulated.
+       Whenever a viewer receives an input event (such as a mouse
+       click  or  key  press),  it  in turn asks the current tool
+       (defined by the enclosing  editor  object)  to  produce  a
+       manipulator  object. A tool implements its CreateManipula-
+       tor operation to  create  and  initialize  an  appropriate
+       manipulator,  which  encapsulates  the tool's manipulation
+       semantics by defining  the  three  phases  (grasp,  wield,
+       effect)  of  the manipulation.  Moreover, a tool can dele-
+       gate manipulator creation to one or  more  of  the  Graph-
+       icView  objects  in the viewer to allow component-specific
+       interaction.   A  tool's  InterpretManipulator   operation
+       accesses  and analyzes information in the manipulator that
+       characterizes the manipulation and then creates a  command
+       that  carries out the desired effect.  If a tool delegated
+       manipulator creation to a graphical  view,  then  it  must
+       delegate its interpretation to the same view.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              Operations  that define how the tool reacts when it
+              is used and its  ultimate  effect.   The  tool  can
+              defer  manipulator creation and interpretation to a
+              GraphicView.  This allows the same tool  to  behave
+              differently  depending  on the component it manipu-
+              lates.
+
+
+              CreateManipulator creates  a  manipulator  that  is
+              appropriate  for  the tool.  It receives the viewer
+              sary, and the coordinate transformation  that  maps
+              canvas  coordinates  into  the subject's coordinate
+              space.  InterpretManipulator  is  called  following
+              manipulation and defines how to construct a command
+              that carries out the manipulation's desired effect.
+
+       <B>virtual</B> <B>void</B> <B>SetControlInfo(ControlInfo*)</B>
+       <B>virtual</B> <B>ControlInfo*</B> <B>GetControlInfo()</B>
+              Tools use a ControlInfo object to store information
+              from which to build a user interface  for  engaging
+              the  tool.   These  operations set and get the Con-
+              trolInfo object.  SetControlInfo  does  <I>not</I>  delete
+              the ControlInfo being replaced.
+
+       <B>virtual</B> <B>Component*</B> <B>Copy()</B>
+              Return a copy of the tool.  Subclasses should rede-
+              fine this operation to return an instance of  their
+              type.
+
+       <B>virtual</B> <B>void</B> <B>Read(istream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Write(ostream&amp;)</B>
+              Read  and  write the tool's contents to a stream to
+              support catalog operations.  Read and  write  typi-
+              cally   call  first  the  corresponding  operations
+              defined by their parent class, and then  they  read
+              or write their class-specific state.  Note that you
+              must ensure that the objects are read in  the  same
+              order they are written.
+
+       <B>virtual</B> <B>ClassId</B> <B>GetClassId()</B>
+       <B>virtual</B> <B>boolean</B> <B>IsA(ClassId)</B>
+              GetClassId  returns the unique class identifier for
+              the Tool subclass, while IsA  returns  whether  the
+              instance is of a class or subclass corresponding to
+              the given identifier.   IsA  typically  checks  the
+              given  identifier  against  the  instance's own (as
+              defined by its GetClassId operation)  and,  failing
+              that, calls its parent classes' IsA operation.  All
+              subclasses must  redefine  GetClassId  and  IsA  to
+              ensure  that  their identifiers are unique and that
+              instances are written and read properly.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Tool(ControlInfo*</B> <B>=</B> <B>nil)</B>
+              The constructor is protected to  prevent  instatia-
+              tion  of  the abstract base class.  The ControlInfo
+              object is optional, but only  tools  that  have  no
+              visible  manifestion  in  the interface should omit
+              it.
+
+       <B>ControlInfo*</B> <B>CopyControlInfo()</B>
+              CopyControlInfo is a convenience function that sub-
+              it  non-nil,  simply  checking  for  a nil argument
+              before calling the corresponding Copy on  the  Con-
+              trolInfo object.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>,   <B>Command(3U)</B>,  <B>ControlInfo(3U)</B>,  <B>Editor(3U)</B>,
+       <B>Event(3I)</B>,   <B>GraphicView(3U)</B>,   <B>Manipulator(3U)</B>,    Trans-
+       <B>former(3I)</B>,    <B>Viewer(3U)</B>,   <B>classes(3U)</B>,   istream(3C++),
+       ostream(3C++)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,623 @@
+
+<html><head><TITLE>Description of FrameIdrawComp</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>FrameIdrawComp</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="FramesComp.html" >FramesComp</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+top-level component for flipbook document.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="FramesComp.html" >FramesComp</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#FrameIdrawComp><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+FrameUnidraw/framecomps.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <A HREF="FrameIdrawComp.html" >FrameIdrawComp</A> is a clone of <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A> derived from <A HREF="FramesComp.html" >FramesComp</A>.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Component.html" >Component</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FrameIdrawComp(OverlayComp*parent)">
+    <B>FrameIdrawComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FrameIdrawComp(booleanadd_bg=true&#38;&#38;COMMconstchar*pathname=nil&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>FrameIdrawComp</B> (boolean add_bg = true, const char* pathname = nil, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FrameIdrawComp(istream&#38;&#38;&#38;COMMconstchar*pathname=nil&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>FrameIdrawComp</B> (istream&#38;, const char* pathname = nil, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="GetIndexedGS(int)">
+    <B>GetIndexedGS</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlaysComp.html" >OverlaysComp</A>* 
+    <A NAME="GetIndexedPic(int)">
+    <B>GetIndexedPic</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MultiLineObj.html" >MultiLineObj</A>* 
+    <A NAME="GetIndexedPts(int)">
+    <B>GetIndexedPts</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="GetPathName()">
+    <B>GetPathName</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedGS(Graphic*)">
+    <B>GrowIndexedGS</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedPic(OverlaysComp*)">
+    <B>GrowIndexedPic</B> (<A HREF="OverlaysComp.html" >OverlaysComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedPts(MultiLineObj*)">
+    <B>GrowIndexedPts</B> (<A HREF="MultiLineObj.html" >MultiLineObj</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Interpret(Command*)">
+    <B>Interpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetIndexedGS()">
+    <B>ResetIndexedGS</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetPathName(constchar*)">
+    <B>SetPathName</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Uninterpret(Command*)">
+    <B>Uninterpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~FrameIdrawComp()">
+    <B>~FrameIdrawComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDFrameIdrawComp&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="FrameIdrawComp.html" >FrameIdrawComp</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="GetBaseDir()">
+    <B>GetBaseDir</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="GetParamList()">
+    <B>GetParamList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GrowParamList(ParamList*)">
+    <B>GrowParamList</B> (<A HREF="ParamList.html" >ParamList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_basedir">
+    <B>_basedir</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="_frame_idraw_params">
+    <B>_frame_idraw_params</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Picture.html" >Picture</A>* 
+    <A NAME="_gslist">
+    <B>_gslist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_pathname">
+    <B>_pathname</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlaysComp.html" >OverlaysComp</A>** 
+    <A NAME="_picbuf">
+    <B>_picbuf</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_piclen">
+    <B>_piclen</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_picnum">
+    <B>_picnum</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="MultiLineObj.html" >MultiLineObj</A>** 
+    <A NAME="_ptsbuf">
+    <B>_ptsbuf</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_ptslen">
+    <B>_ptslen</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_ptsnum">
+    <B>_ptsnum</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>float 
+    <A NAME="_xincr,_yincr">
+    <B>_xincr, _yincr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

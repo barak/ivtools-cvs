@@ -1,0 +1,137 @@
+*** cppcomp.h.dist	Sat Jul 14 08:41:26 2001
+--- src/cppcomp.h	Tue Aug 21 15:46:02 2001
+***************
+*** 30,36 ****
+  // NOTE: If your compiler or installation does not come with
+  // an installation of the STL, just umcomment the next line
+  
+! // #define HAVESTL
+  // now this is again commented out by default, since now all
+  // drivers can be compiled without the STL
+  
+--- 30,36 ----
+  // NOTE: If your compiler or installation does not come with
+  // an installation of the STL, just umcomment the next line
+  
+! #define HAVESTL
+  // now this is again commented out by default, since now all
+  // drivers can be compiled without the STL
+  
+*** drvbase.cpp.dist	Mon Aug 13 01:33:16 2001
+--- src/drvbase.cpp	Wed Sep 12 11:09:33 2001
+***************
+*** 841,865 ****
+  				if (is_a_rectangle()) {
+  					float llx, lly, urx, ury;
+  					llx =
+! 						min(min
+  							(pathElement(0).getPoint(0).x_,
+  							 pathElement(1).getPoint(0).x_),
+! 							min(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
+  					urx =
+! 						max(max
+  							(pathElement(0).getPoint(0).x_,
+  							 pathElement(1).getPoint(0).x_),
+! 							max(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
+  					lly =
+! 						min(min
+  							(pathElement(0).getPoint(0).y_,
+  							 pathElement(1).getPoint(0).y_),
+! 							min(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
+  					ury =
+! 						max(max
+  							(pathElement(0).getPoint(0).y_,
+  							 pathElement(1).getPoint(0).y_),
+! 							max(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
+  
+  					show_rectangle(llx, lly, urx, ury);
+  				} else {
+--- 841,865 ----
+  				if (is_a_rectangle()) {
+  					float llx, lly, urx, ury;
+  					llx =
+! 						std::min(std::min
+  							(pathElement(0).getPoint(0).x_,
+  							 pathElement(1).getPoint(0).x_),
+! 							std::min(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
+  					urx =
+! 						std::max(std::max
+  							(pathElement(0).getPoint(0).x_,
+  							 pathElement(1).getPoint(0).x_),
+! 							std::max(pathElement(2).getPoint(0).x_, pathElement(3).getPoint(0).x_));
+  					lly =
+! 						std::min(std::min
+  							(pathElement(0).getPoint(0).y_,
+  							 pathElement(1).getPoint(0).y_),
+! 							std::min(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
+  					ury =
+! 						std::max(std::max
+  							(pathElement(0).getPoint(0).y_,
+  							 pathElement(1).getPoint(0).y_),
+! 							std::max(pathElement(2).getPoint(0).y_, pathElement(3).getPoint(0).y_));
+  
+  					show_rectangle(llx, lly, urx, ury);
+  				} else {
+*** drvmpost.cpp.dist	Sat Jul 14 08:53:46 2001
+--- src/drvmpost.cpp	Tue Aug 21 16:20:54 2001
+***************
+*** 20,26 ****
+      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+  
+  */
+! #define _POSIX_					// for MSVC and limits.h
+  
+  #include "drvmpost.h"
+  
+--- 20,26 ----
+      Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+  
+  */
+! // #define _POSIX_					// for MSVC and limits.h
+  
+  #include "drvmpost.h"
+  
+*** image.cpp.dist	Fri Sep  7 11:55:02 2001
+--- src/image.cpp	Wed Sep 12 12:17:30 2001
+***************
+*** 269,278 ****
+  	Point P4((float) (width - border), 0.0f);
+  	Point P4T = P4.transform(normalizedImageCurrentMatrix);
+  
+! 	ur.x_ = max(max(P1T.x_, P2T.x_), max(P3T.x_, P4T.x_));
+! 	ur.y_ = max(max(P1T.y_, P2T.y_), max(P3T.y_, P4T.y_));
+! 	ll.x_ = min(min(P1T.x_, P2T.x_), min(P3T.x_, P4T.x_));
+! 	ll.y_ = min(min(P1T.y_, P2T.y_), min(P3T.y_, P4T.y_));
+  }
+  
+  
+--- 269,278 ----
+  	Point P4((float) (width - border), 0.0f);
+  	Point P4T = P4.transform(normalizedImageCurrentMatrix);
+  
+! 	ur.x_ = std::max(std::max(P1T.x_, P2T.x_), std::max(P3T.x_, P4T.x_));
+! 	ur.y_ = std::max(std::max(P1T.y_, P2T.y_), std::max(P3T.y_, P4T.y_));
+! 	ll.x_ = std::min(std::min(P1T.x_, P2T.x_), std::min(P3T.x_, P4T.x_));
+! 	ll.y_ = std::min(std::min(P1T.y_, P2T.y_), std::min(P3T.y_, P4T.y_));
+  }
+  
+  
+*** miscutil.cpp.dist	Wed Aug  8 09:21:32 2001
+--- src/miscutil.cpp	Tue Aug 21 16:12:55 2001
+***************
+*** 69,75 ****
+  
+  #if defined(__STRICT_ANSI__)
+  // normally this is in stdio.h except if __STRICT_ANSI__ is defined (GNU specific)
+! extern "C" char *tempnam(const char *, const char *pfx);
+  #endif
+  
+  #if defined(riscos)
+--- 69,75 ----
+  
+  #if defined(__STRICT_ANSI__)
+  // normally this is in stdio.h except if __STRICT_ANSI__ is defined (GNU specific)
+! // extern "C" char *tempnam(const char *, const char *pfx);
+  #endif
+  
+  #if defined(riscos)

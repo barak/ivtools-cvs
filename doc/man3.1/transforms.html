@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       MoveCmd,  RotateCmd,  ScaleCmd - coordinate transformation
+       commands
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/transforms.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The Unidraw library predefines three  purely  interpretive
+       commands   for   performing   coordinate  transformations:
+       MoveCmd defines a translation, RotateCmd defines  a  rota-
+       tion, and ScaleCmd defines a two-dimensional scaling.
+
+
+</PRE>
+<H2>MOVECMD PUBLIC OPERATIONS</H2><PRE>
+       <B>MoveCmd(ControlInfo*,</B> <B>float</B> <B>dx</B> <B>=</B> <B>0,</B> <B>float</B> <B>dy</B> <B>=</B> <B>0)</B>
+       <B>MoveCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>float</B> <B>=</B> <B>0,</B> <B>float</B> <B>=</B> <B>0)</B>
+              Construct a new MoveCmd, specifying the translation
+              distances in the horizontal (<I>dx</I>) and vertical  (<I>dy</I>)
+              dimensions.
+
+       <B>void</B> <B>GetMovement(float&amp;,</B> <B>float&amp;)</B>
+              Return  the  translation distances specified in the
+              constructor.
+
+
+</PRE>
+<H2>ROTATECMD PUBLIC OPERATIONS</H2><PRE>
+       <B>RotateCmd(ControlInfo*,</B> <B>float</B> <B>=</B> <B>0)</B>
+       <B>RotateCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>float</B> <B>=</B> <B>0)</B>
+              Construct a new RotateCmd, specifying the  rotation
+              angle in degrees.
+
+       <B>float</B> <B>GetRotation()</B>
+              Return  the  rotation  angle  specified in the con-
+              structor.
+
+
+</PRE>
+<H2>SCALECMD PUBLIC OPERATIONS</H2><PRE>
+       <B>ScaleCmd(</B>
+           <B>ControlInfo*,</B> <B>float</B> <B>sx</B> <B>=</B> <B>1,</B> <B>float</B> <B>sy</B> <B>=</B> <B>1,</B> <B>Alignment</B> <B>=</B>
+              <B>Center</B>
+       <B>)</B>
+
+       <B>ScaleCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>float</B> <B>=</B> <B>1,</B> <B>float</B> <B>=</B> <B>1,</B> <B>Alignment</B> <B>=</B>
+              <B>Center)</B>
+              Construct  a  new  ScaleCmd, specifying the scaling
+              factors in the horizontal (<I>sx</I>)  and  vertical  (<I>sy</I>)
+              dimensions  and  an  alignment suggesting the point
+              about which the component should be scaled.
+
+       <B>void</B> <B>GetScaleing(float&amp;,</B> <B>float&amp;)</B>
+       <B>Alignment</B> <B>GetAlignment()</B>
+              Return the scaling factors and alignment  specified
+              in the constructor.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,6 @@
+To build TargetJr 2.6 on top of ivtools look at:
+http://www.vectaport.com/ivtools/targetjr-2.6.txt
+
+To build TargetJr 3.0beta on top of ivtools look at:
+http://www.vectaport.com/ivtools/targetjr-3.0beta.txt
+

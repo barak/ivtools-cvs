@@ -1,0 +1,415 @@
+
+<html><head><TITLE>Description of Raster</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Raster</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Resource.html" >Resource</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+raster data object.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Resource.html" >Resource</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Raster><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+InterViews/raster.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../refman3.1/refman.html#PAGE43>in reference manual</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="Height()">
+    <B>Height</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Raster(constRaster&#38;)">
+    <B>Raster</B> (const <A HREF="Raster.html" >Raster</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Raster(unsignedlongwidth&#38;&#38;COMMunsignedlongheight)">
+    <B>Raster</B> (unsigned long width, unsigned long height) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="Width()">
+    <B>Width</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual Coord 
+    <A NAME="ascent()">
+    <B>ascent</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual Coord 
+    <A NAME="descent()">
+    <B>descent</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="flush()">
+    <B>flush</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="flushrect(IntCoordl&#38;&#38;COMMIntCoordb&#38;&#38;COMMIntCoordt&#38;&#38;COMMIntCoordt)">
+    <B>flushrect</B> (IntCoord l, IntCoord b, IntCoord t, IntCoord t) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flush rectangular region of internal XImage data structure 
+ to a pixmap on the X server.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual Coord 
+    <A NAME="height()">
+    <B>height</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual Coord 
+    <A NAME="left_bearing()">
+    <B>left_bearing</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="peek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMColorIntensity&#38;red&#38;&#38;COMMColorIntensity&#38;green&#38;&#38;COMMColorIntensity&#38;blue&#38;&#38;COMMfloat&#38;alpha)">
+    <B>peek</B> ( unsigned long x, unsigned long y, ColorIntensity&#38; red, ColorIntensity&#38; green, ColorIntensity&#38; blue, float&#38; alpha ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual unsigned long 
+    <A NAME="pheight()">
+    <B>pheight</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="poke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMColorIntensityred&#38;&#38;COMMColorIntensitygreen&#38;&#38;COMMColorIntensityblue&#38;&#38;COMMfloatalpha)">
+    <B>poke</B> ( unsigned long x, unsigned long y, ColorIntensity red, ColorIntensity green, ColorIntensity blue, float alpha ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual unsigned long 
+    <A NAME="pwidth()">
+    <B>pwidth</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="RasterRep.html" >RasterRep</A>* 
+    <A NAME="rep()">
+    <B>rep</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual Coord 
+    <A NAME="right_bearing()">
+    <B>right_bearing</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual Coord 
+    <A NAME="width()">
+    <B>width</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Raster()">
+    <B>~Raster</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Raster(RasterRep*)">
+    <B>Raster</B> (<A HREF="RasterRep.html" >RasterRep</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="init_shared_memory()">
+    <B>init_shared_memory</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,327 @@
+
+<html><head><TITLE>Description of Drag</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Drag</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="MonoGlyph.html" >MonoGlyph</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+
+
+<B>Type:</B><br>
+<UL>
+Abstract
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="MonoGlyph.html" >MonoGlyph</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Drag><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+InterViews/drag.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Drag(Glyph*glyph)">
+    <B>Drag</B> (<A HREF="Glyph.html" >Glyph</A>* glyph) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="abort(constEvent&#38;)">
+    <B>abort</B> (const <A HREF="Event.html" >Event</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="allocate(Canvas*&#38;&#38;COMMconstAllocation&#38;&#38;&#38;COMMExtension&#38;)">
+    <B>allocate</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;, <A HREF="Extension.html" >Extension</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="caught(constEvent&#38;)">
+    <B>caught</B> (const <A HREF="Event.html" >Event</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="commit(constEvent&#38;)">
+    <B>commit</B> (const <A HREF="Event.html" >Event</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>pure virtual <A HREF="Cursor.html" >Cursor</A>* 
+    <A NAME="dragCursor()">
+    <B>dragCursor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>pure virtual void 
+    <A NAME="dragData(char*&#38;value&#38;&#38;COMMint&#38;length)">
+    <B>dragData</B> (char*&#38; value, int&#38; length) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>pure virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="dragGlyph()">
+    <B>dragGlyph</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="dragOffset(Event&#38;event&#38;&#38;COMMint&#38;dx&#38;&#38;COMMint&#38;dy)">
+    <B>dragOffset</B> (<A HREF="Event.html" >Event</A>&#38; event, int&#38; dx, int&#38; dy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="dragType(char*&#38;value&#38;&#38;COMMint&#38;length)">
+    <B>dragType</B> (char*&#38; value, int&#38; length) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="dragable()">
+    <B>dragable</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="dragable(boolean)">
+    <B>dragable</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="pick(Canvas*&#38;&#38;COMMconstAllocation&#38;&#38;&#38;COMMintdepth&#38;&#38;COMMHit&#38;)">
+    <B>pick</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;, int depth, <A HREF="Hit.html" >Hit</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Drag()">
+    <B>~Drag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>DragRep* 
+    <A NAME="rep()">
+    <B>rep</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

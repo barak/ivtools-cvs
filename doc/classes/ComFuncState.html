@@ -1,0 +1,368 @@
+
+<html><head><TITLE>Description of ComFuncState</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ComFuncState</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+state object for holding invocation specific data about a <A HREF="ComFunc.html" >ComFunc</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#ComFuncState><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+ComTerp/comfunc.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  object that holds the state of a <A HREF="ComFunc.html" >ComFunc</A> used in a particular context,
+ which allows for nested and recursive use of a singular <A HREF="ComFunc.html" >ComFunc</A>.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComFuncState(ComFuncState&#38;)">
+    <B>ComFuncState</B> (<A HREF="ComFuncState.html" >ComFuncState</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComFuncState(intnargs&#38;&#38;COMMintnkeys&#38;&#38;COMMintpedepth=0&#38;&#38;COMMintcommand_symid=0)">
+    <B>ComFuncState</B> (int nargs, int nkeys, int pedepth=0, int command_symid=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize with number of arguments (including arguments following
+ keywords), number of keywords, an option post-eval depth (nesting
+ within blocks of post-evaluation commands), and an optional 
+ symbol id associated with the <A HREF="ComFunc.html" >ComFunc</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="command_symid()">
+    <B>command_symid</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        symbol id associated with the <A HREF="ComFunc.html" >ComFunc</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="nargs()">
+    <B>nargs</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments (including arguments following keywords).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="nargskey()">
+    <B>nargskey</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments following keywords. Assumption of nargskey()<=nkey().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="nargspost()">
+    <B>nargspost</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of unevaluated <A HREF="ComValue.html" >ComValue</A> objects input to a post-evaluation <A HREF="ComFunc.html" >ComFunc</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="nkeys()">
+    <B>nkeys</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of keywords, ':' prefixed symbols in a list of arguments.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="npops()">
+    <B>npops</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of pops since the execute method called.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="pedepth()">
+    <B>pedepth</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        post-evaluation depth: the nesting within blocks of post-evaluation commands,
+ within blocks of conditionally executing control commands.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_command_symid">
+    <B>_command_symid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nargs">
+    <B>_nargs</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nargskey">
+    <B>_nargskey</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nargspost">
+    <B>_nargspost</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nkeys">
+    <B>_nkeys</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_npops">
+    <B>_npops</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_pedepth">
+    <B>_pedepth</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend ostream&#38; 
+    <A NAME="operator&#60;&#60;(ostream&#38;s&#38;&#38;COMMconstComFuncState&#38;)">
+    <B>operator <<</B> (ostream&#38; s, const <A HREF="ComFuncState.html" >ComFuncState</A>&#38;)  </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print contents to ostream, brief or not depending on
+ associated <A HREF="ComTerp.html" >ComTerp</A> brief flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

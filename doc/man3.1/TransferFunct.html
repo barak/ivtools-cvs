@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       TransferFunct - transfer function base class
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/transfn.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  transfer  function  defines relationships between state
+       variables.   A  component  uses  a  transfer  function  to
+       enforce  dependencies  between  its state variables during
+       dataflow. State variables whose values change as a  result
+       of  data  flowing  into  the component can thus affect the
+       component's dependent state variables as  defined  by  its
+       transfer  function.  A transfer function can define depen-
+       dencies between any number of state variables, but a  com-
+       ponent can define only one transfer function.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Evaluate(Path*</B> <B>=</B> <B>nil)</B>
+              Enforce   the   transfer   function's  dependencies
+              between its state variables,  optionally  depending
+              on  the information in a path.  This operation does
+              nothing by default.
+
+       <B>virtual</B> <B>TransferFunct*</B> <B>Copy()</B>
+              Return a copy of the transfer function.  Subclasses
+              redefine  this  operation  to return an instance of
+              their type.
+
+       <B>virtual</B> <B>void</B> <B>Read(istream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Write(ostream&amp;)</B>
+              Read and write the transfer function's contents  to
+              a  stream  to support catalog operations.  Read and
+              write typically call first the corresponding opera-
+              tions  defined by their parent class, and then they
+              read or write their class-specific state.
+
+       <B>virtual</B> <B>ClassId</B> <B>GetClassId()</B>
+       <B>virtual</B> <B>boolean</B> <B>IsA(ClassId)</B>
+              GetClassId returns the unique class identifier  for
+              the   TransferFunct  subclass,  while  IsA  returns
+              whether the instance is of a class or subclass cor-
+              responding  to the given identifier.  IsA typically
+              checks the given identifier against the  instance's
+              own  (as  defined by its GetClassId operation) and,
+              failing that, calls its parent classes' IsA  opera-
+              tion.   All subclasses must redefine GetClassId and
+              IsA to ensure that their identifiers are unique and
+              that instances are written and read properly.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>TransferFunct()</B>
+              The  constructor is protected to prevent instantia-
+              Return the connector to which a state  variable  is
+              bound.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>,  <B>Component(3U)</B>,  <B>Connector(3U)</B>,  <B>Creator(3U)</B>,
+       <B>Path(3U)</B>,   <B>StateVar(3U)</B>    <B>classes(3U)</B>,    istream(3C++),
+       ostream(3C++)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Rect, S_Rect, F_Rect, SF_Rect, Polygon, S_Polygon, F_Poly-
+       gon, SF_Polygon - structured graphics classes for  rectan-
+       gles and polygons
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/polygons.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Rect  and Polygon serve as abstract base classes for rect-
+       angle and polygon structured graphics.  They  are  derived
+       from  Graphic and Vertices, respectively.  Predefined sub-
+       classes include S_Rect, F_Rect, and  SF_Rect,  which  draw
+       stroked,  filled,  and  stroked-filled rectangles, respec-
+       tively; and S_Polygon, F_Polygon,  and  SF_Polygon,  which
+       draw stroked, filled, and stroked-filled polygons, respec-
+       tively.  The  stroked  subclasses  store  a  PSBrush,  the
+       filled  subclasses  store  a  PSPattern,  and the stroked-
+       filled subclasses store one of each.
+
+
+</PRE>
+<H2>RECT PUBLIC OPERATIONS</H2><PRE>
+       <B>void</B> <B>GetOriginal(Coord&amp;</B> <B>x0,</B> <B>Coord&amp;</B> <B>y0,</B> <B>Coord&amp;</B> <B>x1,</B> <B>Coord&amp;</B>
+              <B>y1)</B>
+              Return  the  rectangle's  geometry, as specified in
+              the constructor.  (<I>x0,</I> <I>y0</I>) defines  one  corner  of
+              the  rectangle, while (<I>x1</I>, <I>y1</I>) defines the opposing
+              corner.
+
+
+</PRE>
+<H2>RECT PROTECTED OPERATIONS</H2><PRE>
+       <B>Rectangle(Coord</B> <B>x0,</B> <B>Coord</B> <B>y0,</B> <B>Coord</B> <B>x1,</B> <B>Coord</B> <B>y1,</B> <B>Graphic*</B>
+              <B>=</B> <B>nil)</B>
+              The constructor is protected to disallow instantia-
+              tion  of  the  abstract  base class.  A rectangle's
+              geometry is defined by two points, corresponding to
+              opposing corners of the rectangle.  The constructor
+              also takes an optional graphic from which to obtain
+              an initial set of graphics state.
+
+       <B>void</B> <B>s_getExtent(</B>
+           <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>void</B> <B>f_getExtent(</B>
+           <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>boolean</B> <B>s_contains(PointObj&amp;,</B> <B>Graphic*)</B>
+       <B>boolean</B> <B>f_contains(PointObj&amp;,</B> <B>Graphic*)</B>
+       <B>boolean</B> <B>s_intersects(BoxObj&amp;,</B> <B>Graphic*)</B>
+       <B>boolean</B> <B>f_intersects(BoxObj&amp;,</B> <B>Graphic*)</B>
+              Helper  functions that return extent and hit detec-
+              tion information based on the bounding box that the
+              rectangle  defines.   s_getExtent,  s_contains, and
+              rectangle is  stroked,  while  f_getExtent,  f_con-
+              tains,  and f_intersects assumes that the rectangle
+              is filled.  Subclasses can use  the  operations  to
+              help   implement  their  getExtent,  contains,  and
+              intersects operations.
+
+
+</PRE>
+<H2>RECT SUBCLASS PUBLIC OPERATIONS</H2><PRE>
+       <B>S_Rect(Coord</B> <B>x0,</B> <B>Coord</B> <B>y0,</B> <B>Coord</B> <B>x1,</B> <B>Coord</B> <B>y1,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>F_Rect(Coord</B> <B>x0,</B> <B>Coord</B> <B>y0,</B> <B>Coord</B> <B>x1,</B> <B>Coord</B> <B>y1,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>SF_Rect(Coord</B> <B>x0,</B> <B>Coord</B> <B>y0,</B> <B>Coord</B> <B>x1,</B> <B>Coord</B> <B>y1,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+              Constructors  for  the various predefined Rect sub-
+              classes.
+
+
+</PRE>
+<H2>POLYGON PROTECTED OPERATIONS</H2><PRE>
+       <B>Polygon(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Polygon's  constructor  is  protected  to   prevent
+              instantiation  of  the  abstract  base  class.  The
+              parameters are passed directly to the Vertices con-
+              structor.
+
+
+</PRE>
+<H2>POLYGON SUBCLASS PUBLIC OPERATIONS</H2><PRE>
+       <B>S_Polygon(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+       <B>F_Polygon(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+       <B>SF_Polygon(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Constructors  for  the various predefined Rect sub-
+              classes.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>, <B>Vertices(3U)</B>, <B>geomobjs(3U)</B>, <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

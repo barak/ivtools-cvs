@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       StateVar - state variable subject base class
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/statevar.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       StateVar  is  the  base class for state variable subjects.
+       State variables provide a standard way  to  represent  and
+       access  state  that can be modified by the user or through
+       dataflow.  State variable subjects store the state,  while
+       state  variable  views  provide  a graphical interface for
+       examining and potentially modifying  the  state  in  their
+       subject.   The  StateVar  class  defines  the protocol for
+       state variable subjects.  It is an abstract class and thus
+       cannot be instantiated.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Connector*</B> <B>GetBinding()</B>
+              Return the connector to which the state variable is
+              bound to support dataflow.  Data flows through con-
+              nected  connectors  with bound state variables: the
+              library automatically assigns one bound state vari-
+              able's  state  to another's.  The direction of this
+              assignment depends on the participating connectors.
+              See  <B>Connector(3U)</B> for details on how to bind state
+              variables to connectors  and  how  to  specify  the
+              direction of flow.
+
+       <B>virtual</B> <B>void</B> <B>Attach(StateVarView*)</B>
+       <B>virtual</B> <B>void</B> <B>Detach(StateVarView*)</B>
+              Attach  associates  the subject with a view, repre-
+              sented by an instance of a  StateVarView  subclass.
+              Detach  dissociates  a  previously  attached  view.
+              These operations do not ensure that the argument is
+              an appropriate view of the subject.
+
+       <B>virtual</B> <B>void</B> <B>Notify()</B>
+              Notify  iterates  through  the  views, calling each
+              one's Update operation to notify the view that  the
+              subject has potentially changed.  Notify is usually
+              called by the subject's state-modifying operations.
+
+       <B>virtual</B> <B>StateVar&amp;</B> <B>operator</B> <B>=</B> <B>(StateVar&amp;)</B>
+              The  assignment  operation  should  be redefined to
+              carry out subclass-specific  assignment  semantics.
+              Typically  this  operator calls the parent classes'
+              assignment operator and  then  performs  additional
+              assignments of its own.  This operator is used dur-
+              ing dataflow to transfer state variable values.
+
+       <B>virtual</B> <B>StateVar*</B> <B>Copy()</B>
+              Return a copy of the  state  variable.   Subclasses
+
+       <B>virtual</B> <B>void</B> <B>Read(istream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Write(ostream&amp;)</B>
+              Read and write the state variable's contents  to  a
+              stream  to  support  catalog  operations.  Read and
+              write typically call first the corresponding opera-
+              tions  defined by their parent class, and then they
+              read or write  their  class-specific  state.   Note
+              that  you  must ensure that the objects are read in
+              the same order they are written.
+
+       <B>virtual</B> <B>ClassId</B> <B>GetClassId()</B>
+       <B>virtual</B> <B>boolean</B> <B>IsA(ClassId)</B>
+              GetClassId returns the unique class identifier  for
+              the  StateVar  subclass,  while IsA returns whether
+              the instance is of a class or subclass  correspond-
+              ing  to the given identifier.  IsA typically checks
+              the given identifier against the instance's own (as
+              defined  by  its GetClassId operation) and, failing
+              that, calls its parent classes' IsA operation.  All
+              subclasses  must  redefine  GetClassId  and  IsA to
+              ensure that their identifiers are unique  and  that
+              instances are written and read properly.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>StateVar()</B>
+              The  constructor is protected to prevent instantia-
+              tion.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>, <B>Connector(3U)</B>, <B>Creator(3U)</B>, <B>StateVarView(3U)</B>,
+       <B>classes(3U)</B>, istream(3C++), ostream(3C++)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

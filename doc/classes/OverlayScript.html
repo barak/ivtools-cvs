@@ -1,0 +1,1021 @@
+
+<html><head><TITLE>Description of OverlayScript</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayScript</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayPS.html" >OverlayPS</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+serialized view of <A HREF="OverlayComp.html" >OverlayComp</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayPS.html" >OverlayPS</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayScript><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/scriptview.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  the <A HREF="OverlayScript.html" >OverlayScript</A> class hierarchy is a tree of <A HREF="ExternView.html" >ExternView</A> classes
+ that are derived from <A HREF="OverlayPS.html" >OverlayPS</A> and <A HREF="PostScriptView.html" >PostScriptView</A> for convenience,
+ to inherit a complete mechanism for writing and reading graphical data.
+ <p>
+ This capability is similar to the serialization mechanism of JavaBeans,
+ but there is no need for a versioning system because the format used
+ for the ASCII serialization supports arbitrary extension of an object's
+ format by adding defaulted keyword-prefixed arguments.  
+ <p>
+ An older program can read newer formats, because the deserialization 
+ is set up to convert unknown keyword arguments into attributes on 
+ in a property list.  A newer program can read older formats by 
+ using default values for missing keyword-prefixed arguments.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="DefaultGS()">
+    <B>DefaultGS</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if this is default gs, with no brush, colors, font, or pattern
+ specified.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="EmitGS(ostream&#38;&#38;&#38;COMMClipboard*&#38;&#38;COMMboolean)">
+    <B>EmitGS</B> (ostream&#38;, <A HREF="Clipboard.html" >Clipboard</A>*, boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output a decription of this component's graphic state, and append a
+ copy to a clipboard used to avoid outputting it twice.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="EmitPic(ostream&#38;&#38;&#38;COMMClipboard*&#38;&#38;COMMClipboard*&#38;&#38;COMMboolean)">
+    <B>EmitPic</B> (ostream&#38;, <A HREF="Clipboard.html" >Clipboard</A>*, <A HREF="Clipboard.html" >Clipboard</A>*, boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output a decription of this component's compound graphic, and append a 
+ copy to a clipboard used to avoid outputting it twice.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="EmitPts(ostream&#38;&#38;&#38;COMMClipboard*&#38;&#38;COMMboolean)">
+    <B>EmitPts</B> (ostream&#38;, <A HREF="Clipboard.html" >Clipboard</A>*, boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output a decription of this component's point list, and append a 
+ copy to a clipboard used to avoid outputting it twice.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="FullGS(ostream&#38;)">
+    <B>FullGS</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output a full description of a graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="GetByPathnameFlag()">
+    <B>GetByPathnameFlag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates whether to serialize component
+ by only a pathname or by the raw data.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Clipboard.html" >Clipboard</A>* 
+    <A NAME="GetGSList()">
+    <B>GetGSList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to clipboard of components with unique graphic states.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Clipboard.html" >Clipboard</A>* 
+    <A NAME="GetPicList()">
+    <B>GetPicList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to clipboard of components with unique compound graphics.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Clipboard.html" >Clipboard</A>* 
+    <A NAME="GetPtsList()">
+    <B>GetPtsList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to clipboard of components with unique point lists.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="Indent(ostream&#38;&#38;&#38;COMMintextra=0)">
+    <B>Indent</B> (ostream&#38;, int extra = 0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method to indent nested object output.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
+    <A NAME="MatchedGS(Clipboard*&#38;&#38;COMMint&#38;)">
+    <B>MatchedGS</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of where the graphic state of this component
+ matches the graphic state of a component in the clipboard.
+ return iterator that points to where the graphic state of this component
+ matches the graphic state of a component in the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
+    <A NAME="MatchedGS(Clipboard*&#38;&#38;COMMint&#38;)">
+    <B>MatchedGS</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of where the graphic state of this component
+ matches the graphic state of a component in the clipboard.
+ return iterator that points to where the graphic state of this component
+ matches the graphic state of a component in the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
+    <A NAME="MatchedPic(Clipboard*&#38;&#38;COMMint&#38;)">
+    <B>MatchedPic</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of where the compound graphic of this component
+ matches the compound graphic of a component in the clipboard.
+ return iterator that points to where the compound graphic of this component
+ matches the compound graphic of a component in the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
+    <A NAME="MatchedPic(Clipboard*&#38;&#38;COMMint&#38;)">
+    <B>MatchedPic</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of where the compound graphic of this component
+ matches the compound graphic of a component in the clipboard.
+ return iterator that points to where the compound graphic of this component
+ matches the compound graphic of a component in the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
+    <A NAME="MatchedPts(Clipboard*&#38;&#38;COMMint&#38;)">
+    <B>MatchedPts</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of where the point list of this component
+ matches the point list of a component in the clipboard.
+ return iterator that points to where the point list of this component
+ matches the point list of a component in the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
+    <A NAME="MatchedPts(Clipboard*&#38;&#38;COMMint&#38;)">
+    <B>MatchedPts</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of where the point list of this component
+ matches the point list of a component in the clipboard.
+ return iterator that points to where the point list of this component
+ matches the point list of a component in the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="MinGS(ostream&#38;)">
+    <B>MinGS</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output a minimal description of a graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayScript(OverlayComp*=nil)">
+    <B>OverlayScript</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadAnnotation(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadAnnotation</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ an annotation.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadBgColor(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadBgColor</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ a background-color description.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadBrush(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadBrush</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ all brush descriptions except for a none-brush.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadFgColor(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadFgColor</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ a foreground-color description.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadFillBg(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadFillBg</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ the fill-background flag of a graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadFont(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadFont</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ a font description.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGS(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGS</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ a description of graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayPat(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayPat</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ the gray-pattern description.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadNoneBr(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadNoneBr</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ the none-brush description.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadNonePat(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadNonePat</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ the none-pattern description.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadOther(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadOther</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ any keyword-prefixed argument with unknown keyword symbol, by
+ adding the value to a components property list (an <A HREF="AttributeList.html" >AttributeList</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadPattern(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadPattern</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ all brush descriptions except for a none-pattern and gray-pattern.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadTransform(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadTransform</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method used by <A HREF="OverlayComp.html" >OverlayComp</A> istream constructor to deserialize 
+ a 6-parameter affine transform (a 2x3 matrix).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="StencilGS(ostream&#38;)">
+    <B>StencilGS</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output a description of a graphic state adequate for a stencil graphic (<A HREF="UStencil.html" >UStencil</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="TextGS(ostream&#38;)">
+    <B>TextGS</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output a description of a graphic state adequate for a text graphic (<A HREF="TextGraphic.html" >TextGraphic</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="skip_comp(istream&#38;in)">
+    <B>skip_comp</B> (istream&#38; in) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        skip the text for the current component while de-serializing.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlayScript()">
+    <B>~OverlayScript</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Annotation(ostream&#38;out)">
+    <B>Annotation</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Attributes(ostream&#38;out)">
+    <B>Attributes</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="BgColor(ostream&#38;out)">
+    <B>BgColor</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Brush(ostream&#38;out)">
+    <B>Brush</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayScript.html" >OverlayScript</A>* 
+    <A NAME="CreateOverlayScript(OverlayComp*)">
+    <B>CreateOverlayScript</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="FgColor(ostream&#38;out)">
+    <B>FgColor</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="FillBg(ostream&#38;out)">
+    <B>FillBg</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Font(ostream&#38;out)">
+    <B>Font</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComponentView.html" >ComponentView</A>* 
+    <A NAME="GetParent()">
+    <B>GetParent</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Pattern(ostream&#38;out)">
+    <B>Pattern</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetParent(ComponentView*child&#38;&#38;COMMComponentView*parent)">
+    <B>SetParent</B> (<A HREF="ComponentView.html" >ComponentView</A>* child, <A HREF="ComponentView.html" >ComponentView</A>* parent) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Transformation(ostream&#38;out)">
+    <B>Transformation</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Transformation(ostream&#38;out&#38;&#38;COMMchar*keyword&#38;&#38;COMMGraphic*gr=nil)">
+    <B>Transformation</B> (ostream&#38; out, char* keyword, <A HREF="Graphic.html" >Graphic</A>* gr = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayScript.html" >OverlayScript</A>* 
+    <A NAME="_parent">
+    <B>_parent</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

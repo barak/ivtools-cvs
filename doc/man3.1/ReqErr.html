@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ReqErr - handle request errors
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/reqerr.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Some  requests to the window server may generate an error.
+       For example, if a window is destroyed while  it  is  being
+       repositioned  interactively, the request to place the win-
+       dow in the new position will fail.  Normally, errors cause
+       a  process to terminate.  The ReqErr class is used to han-
+       dle errors within an application.  The base class  defines
+       the  attributes  associated  with  each error, including a
+       <I>message</I> string describing the error,  an  integer  <I>request</I>
+       code  that  specifies  the kind of call that generated the
+       error, and a <I>id</I> object that was the target of the request.
+       When  an  error  occurs,  the  attributes  of  the current
+       request handler are assigned and the handler's Error oper-
+       ation is called.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>ReqErr*</B> <B>Install()</B>
+              Use  this  error  handler for subsequent errors and
+              return the previous error handler.
+
+       <B>virtual</B> <B>void</B> <B>Error()</B>
+              Handle a detected error.  The default handler is  a
+              nop.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

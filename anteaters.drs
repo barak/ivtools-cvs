@@ -1,0 +1,18 @@
+drawtool(
+    gs( :fillbg 1 :nonebr :fgcolor "White",1,1,1 :bgcolor "White",1,1,1 :graypat 0),
+    gs( :fillbg 0 :fgcolor "Black",0,0,0 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 0),
+    raster("http://www.vectaport.com/ivtools/aaron.gif" :transform -4.64781e-08,-1,1,-2.79648e-08,457,418.5),
+    rectangle(457,348,547,430 :gs 0 :transform 1,-0,-0,1,-18,-382),
+    raster("http://www.vectaport.com/ivtools/aaron.gif" :transform 1,0,0,1,-56.5,286),
+    raster("http://www.reg.uci.edu/IMAGES/ANTEATERS/ant_surf.gif" :transform 1,0,0,1,377.5,597),
+    text(12,"http://www.reg.uci.edu/IMAGES/ANTEATERS/ant_surf.gif" :gs 1 :transform -4.37114e-08,-1,1,-4.37114e-08,633.5,823.5),
+    raster("http://www.birminghamzoo.com/ao/mammal/echidna.jpg" :transform 1,0,0,1,1.5,474.5),
+    text(12,"http://www.birminghamzoo.com/ao/mammal/echidna.jpg" :gs 1 :transform -4.37114e-08,1,-1,-4.37114e-08,258,517),
+    text(12,"http://www.cwpost.liunet.edu/~edt/professional/anteater.jpg" :gs 1 :transform 1,0,0,1,2,11),
+    text(12,"http://www.vectaport.com/ivtools/aaron.gif" :gs 1 :transform 1,0,0,1,22,380),
+    raster("http://www.reg.uci.edu/IMAGES/ANTEATERS/ant_surf.gif" :transform 1,0,0,1,275.5,597),
+    rectangle(457,348,547,430 :gs 0 :transform 1,-0,-0,1,-12,-25),
+    raster("http://www.cwpost.liunet.edu/~edt/professional/anteater.jpg" :transform 1,0,0,1,7.5,18),
+    raster("http://www-personal.umich.edu/~schupska/graphics/Zooey.gif" :transform 1,0,0,1,273.5,380),
+    text(12,"http://www-personal.umich.edu/~schupska/graphics/Zooey.gif" :gs 1 :transform 1,0,0,1,282,379)
+)

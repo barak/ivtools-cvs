@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       MatchEditor - StringEditor with string completion
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/compeditor.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       CompletionEditor is a StringEditor subclass with the added
+       ability to complete  the  current  contents  of  the  edit
+       buffer  against  a  specified  set  of strings.  A Comple-
+       tionEditor is often useful when  a  user  must  specify  a
+       selection from a large set of well-known strings--the user
+       need only type the first few characters of the string;  he
+       types  the completion character to fill out the remainder.
+
+       When the user  types  the  completion  character,  Comple-
+       tionEditor  checks  the current string against the list of
+       possible completions.  If the current string is  a  prefix
+       of one or more completion strings, characters are appended
+       so that the edit string contains the longest  common  pre-
+       fix;  if  the current string does not match any completion
+       string, trailing characters are removed until  the  string
+       matches at least one completion.  In any case, if there is
+       more than one possible completion  of  a  string,  Comple-
+       tionEditor rings the workstation bell.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>CompletionEditor(ButtonState*,</B>  <B>const</B>  <B>char*</B>  <B>sample,</B>
+              <B>const</B> <B>char*</B> <B>done)</B>
+              Create  a new CompletionEditor object.  The Button-
+              State, sample string, and  termination  string  are
+              passed to the StringEditor constructor.
+
+       <B>void</B>  <B>Completions(const</B> <B>char*</B> <B>completions[],</B> <B>int</B> <B>count,</B>
+              <B>char</B> <B>com-</B> <B>plete)</B>
+              Specify the list of completion strings and the com-
+              pletion character.  The initial completion list  is
+              empty,  and  the completion character defaults to a
+              space.  CompletionEditor does not copy the  strings
+              in the list.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>StringEditor(3I)</B>
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

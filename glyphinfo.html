@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Glyphs</title>
+  </head>
+
+  <body>
+      <h1>Glyphs</h1>
+
+      <b><a href=./glyphs.html>screendumps of example programs</a></b><p>
+
+      <p>InterViews Glyph objects provide the usual user interface
+widgets like buttons, scrollbars, pulldown menus, string editors, etc.
+(They also provide a limited graphical capability; since they don't have
+a general editing framework the glyph graphics are mostly useful for
+static pictures, e.g. a graphic inside a button.)  We use glyphs to
+implement layout, look-and-feel, and controls/displays for application
+programs.</p>
+
+      <p>The main technical advantages of glyphs are:
+</p>
+      <ul>
+	<li><em>lightweight:</em> they use less memory than other equivalent widget
+	  sets, so they are fast.</li>
+	<li><em>multiple look-and-feel styles:</em> every program supports
+	  OpenLook, Motif or SGIMotif styles, selectable by a command line
+	  flag at startup.</li>
+      </ul>
+
+      <p>The ultimate reference for glyphs is the <a href=./doc/refman3.1/index.html><em>"InterViews Reference Manual
+      Version 3.1"</em></a> <a href=./doc/refman3.1/refman.html>(no frames)</a>  dated December 14, 1992.  It is included in the
+      InterViews source tree under iv/src/man/refman/refman.PS.  Here we will
+      provide supplementary information and more practical hints.</p>
+
+      <p>Some of the more important glyph classes are:</p>
+      <ul>
+	<li> <code><a href=./doc/classes/Glyph.html>Glyph</a>:</code> base class for all glyph objects </li>
+	<li> <code><a href=./doc/classes/MonoGlyph.html>MonoGlyph</a>:</code> wrapper to override some aspect of a glyph </li>
+	<li> <code><a href=./doc/classes/PolyGlyph.html>PolyGlyph</a>:</code> wrapper for list of glyphs </li>
+	<li> <code><a href=./doc/classes/InputHandler.html>InputHandler</a>:</code> glyph that receives input (mouse or keys) </li>
+	<li> <code><a href=./doc/classes/Action.html>Action</a>:</code> object to provide callback functions for input
+	  handling glyphs (used by buttons, menus, etc.)</li>
+	<li> <code><a href=./doc/classes/Style.html>Style</a>:</code> keep track of X resources, command line flags and
+	  programmer-defined parameters with default values</li>
+	<li> <code><a href=./doc/classes/Observable.html>Observable</a>/<a href=./doc/classes/Observer.html>Observer</a>:</code> provide automatic update of
+	  displays when a data value changes</li>
+	<li> <code><a href=./doc/classes/Window.html>Window</a>, <a href=./doc/classes/Display.html>Display</a>:</code> X Window basic objects</li>
+	<li> <code><a href=./doc/classes/WidgetKit.html>WidgetKit</a>:</code> object factory to create common user interface
+	  objects with a concrete look-and-feel (beveled frames, menus,
+	  buttons, scrollers)</li>
+	<li> <code><a href=./doc/classes/LayoutKit.html>LayoutKit</a>:</code> object factory to create objects that
+	  manage the physical layout of one or more glyphs (boxes and glue)
+	</li>
+	<li> <code><a href=./doc/classes/DialogKit.html>DialogKit</a>:</code> object factory for dialoglike objects.
+	  Field editors and file choosers.
+      </ul>
+
+      <p>The basic glyph demo program is <b>idemo</b>, included in the
+      InterViews source tree under iv/src/bin/idemo/.  It features pulldown
+      menus, text labels (normal and rotated), push buttons, check boxes,
+      radio buttons, palette buttons, field (text) editors, scrollbars and
+      a panner.  By using the flags -openlook, -motif or -sgimotif at
+	program startup you can see the same glyphs under each different
+	look-and-feel discipline.
+      </p>
+
+      <p>
+	We also have a few other glyph-based derived classes and example
+	programs in the ivtools package.  These are examples of glyph usage
+	and/or subclasses that extend the basic glyph functionality in
+	some way. Most of these are contained in the IVGlyph library
+	within ivtools.
+      </p>
+      <ul>
+	<li><em>"forms" objects:</em> display and edit common simple
+	  types.  These use an observable/observer relationship to
+	  keep display updated to current value.
+	  <ul>
+	    <li><code><a href=./doc/classes/BoundedValue.html>BoundedValue</a></code> is a  constrained float value.
+	      <code><a href=./doc/classes/BoundedValueObserver.html>BoundedValueObserver</a></code> is a simple textual display of the value.
+	      <code><a href=./doc/classes/MeterObserver.html>MeterObserver</a></code> is a scrolling display of the value.
+	      <code><a href=./doc/classes/BoundedValueEditor.html>BoundedValueEditor</a></code> is an editor for a value using textual input
+	      or a movable scrollbar</li>
+	    <li><code><a href=./doc/classes/ObservableBoolean.html>ObservableBoolean</a></code> is a true/false value.  BooleanObserver
+	      is a simple textual display of the value.  <code><a href=./doc/classes/CheckBooleanEditor.html>CheckBooleanEditor</a></code>
+	      and <code><a href=./doc/classes/PaletteBooleanEditor.html>PaletteBooleanEditor</a></code> modify the value via checkbox or
+	      palette button</li>
+	    <li><code><a href=./doc/classes/ObservableEnum.html>ObservableEnum</a></code> is an enumerated value.  <code><a href=./doc/classes/EnumObserver.html>EnumObserver</a></code> is its
+	      simple textual display.  <code><a href=./doc/classes/MenuEnumEditor.html>MenuEnumEditor</a></code>, <code><a href=./doc/classes/RadioEnumEditor.html>RadioEnumEditor</a></code>
+	      and <code><a href=./doc/classes/CycleEnumEditor.html>CycleEnumEditor</a></code> modify the enumerated value via menus,
+	      radio buttons or previous/next buttons</li>
+	    <li>similarly for <code><a href=./doc/classes/ObservableText.html>ObservableText</a></code>, <code><a href=./doc/classes/TextObserver.html>TextObserver</a></code>, <code><a href=./doc/classes/ObsTextEditor.html>ObsTextEditor</a></code></li>
+	  </ul>
+	</li>
+	<li> <code><a href=./doc/classes/CharFieldEditor.html>CharFieldEditor</a></code>: field editor that calls update on every keystroke
+	</li>
+	<li> <code><a href=./doc/classes/GFieldEditor.html>GFieldEditor</a></code>: a purely <code><a href=./doc/classes/Glyph.html>Glyph</a></code> field editor without Interactors
+	  (hence can be scrolled within another glyph.)
+	  </li>
+	<li> <code><a href=./doc/classes/OpenFileChooser.html>OpenFileChooser</a></code>: a file chooser more suited for derivation.
+	  Subclasses are <code><a href=./doc/classes/ImportChooser.html>ImportChooser</a></code>, <code><a href=./doc/classes/PrintChooser.html>PrintChooser</a></code>, <a href=./doc/classes/ExportChooser.html>ExportChooser</a>, and <a href=./doc/classes/SaveAsChooser.html>SaveAsChooser</a></li>
+	<li><code><a href=./doc/classes/StrChooser.html>StrChooser</a></code>: dialog for choosing one from a list of strings</li>
+	<li> <code><a href=./doc/classes/EivTextEditor.html>EivTextEditor</a></code>: contributed glyph for editing largish quantities
+	  of text within an application</li>
+	<li> <code><a href=./doc/classes/Scrollable.html>Scrollable</a></code>: a glyph that can scroll other glyphs within its
+	  body</li>
+	<li> <code><a href=./doc/classes/Fig31.html>Fig31</a></code>: graphic-like figure glyphs.  <code><a href=./doc/classes/Fig31Line.html>Fig31Line</a></code>, <code><a href=./doc/classes/Fig31Rectangle.html>Fig31Rectangle</a></code>, <code><a href=./doc/classes/Fig31Circle.html>Fig31Circle</a></code>,
+	  <code><a href=./doc/classes/Fig31Ellipse.html>Fig31Ellipse</a></code>, <code><a href=./doc/classes/Fig31Open_BSpline.html>Fig31Open_BSpline</a></code>, <code><a href=./doc/classes/Fig31Closed_BSpline.html>Fig31Closed_BSpline</a></code>, <code><a href=./doc/classes/Fig31Polygon.html>Fig31Polygon</a></code>.  These were designed
+	  to mimic the basic Unidraw graphic objects, but there are no
+	  tools for drawing them; they are usually created programatically.
+	  </li>
+      </ul>
+<p>
+Glyphs are compiled with different options and namespace than Unidraw
+objects.  See the different rules used in the Imakefiles.  This can lead to
+conflicts but we have developed ways of integrating glyphs with Unidraw
+that work in our examples.
+<p>
+The layout model for glyphs is based on the <b>TeX</b> boxes and glue
+model. ...
+<p>
+
+<a href=./techinfo.html>back to ivtools technical info</a>
+<p>
+<!-- hhmts start -->
+Last modified: Fri Jan 15 14:31:51 PST 1999
+<!-- hhmts end -->
+  </body>
+</html>

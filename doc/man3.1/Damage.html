@@ -1,0 +1,178 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Damage - repairs damaged graphics
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/damage.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Damage objects store damaged areas of a graphic for subse-
+       quent incremental repair.  Areas of a  graphic  are  "dam-
+       aged"  if they need to be redrawn for any reason, e.g., if
+       their state has  been  modified  or  if  under/overlapping
+       graphics  change  their appearance.  Damage objects try to
+       minimize the  amount  of  redrawing  needed  to  repair  a
+       graphic.  They are most useful when the graphic is compli-
+       cated enough that it would be undesirable  to  redraw  the
+       entire  canvas  when  the  graphic  is  modified.   Damage
+       objects do <I>not</I> eliminate  the  need  for  an  interactor's
+       <I>Redraw</I>  member  function,  though  they  could  be used to
+       implement it.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Damage(Canvas*</B> <B>=</B> <B>nil,</B> <B>Painter*</B> <B>=</B> <B>nil,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Create a new Damage object for  a  graphic  on  the
+              given canvas.  The painter is used to erase damaged
+              areas using its ClearRect function prior to redraw-
+              ing them.
+
+       <B>virtual</B> <B>void</B> <B>Incur(Graphic*)</B>
+       <B>virtual</B> <B>void</B> <B>Incur(BoxObj&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Incur(</B>
+           <B>Coord</B> <B>left,</B> <B>Coord</B> <B>bottom,</B> <B>Coord</B> <B>right,</B> <B>Coord</B> <B>top</B>
+       <B>)</B>
+              Notify  the  damage  object that a rectangular area
+              has been damaged, either  by  passing  the  graphic
+              that contributed the area or the area itself.
+
+       <B>virtual</B> <B>void</B> <B>Added(Graphic*)</B>
+              Notify the damage object that the given graphic was
+              appended (<I>not</I> inserted) to the  graphic  but  never
+              drawn.   The  damage object can thus be responsible
+              for drawing newly added graphics as well.
+
+       <B>virtual</B> <B>void</B> <B>Repair()</B>
+              Repair all damage incurred since  the  last  Repair
+              (or  since the damage object was created if this is
+              the first Repair).
+
+       <B>virtual</B> <B>void</B> <B>Reset()</B>
+              Reset the damage object.  Any  damage  incurred  is
+              lost.
+
+       <B>virtual</B> <B>boolean</B> <B>Incurred()</B>
+              Returns true if any damage has been incurred.
+
+       <B>void</B> <B>SetPainter(Painter*)</B>
+       <B>void</B> <B>SetGraphic(Graphic*)</B>
+
+       <B>Canvas*</B> <B>GetCanvas()</B>
+       <B>Painter*</B> <B>GetPainter()</B>
+       <B>Graphic*</B> <B>GetGraphic()</B>
+              Set and get attributes of the damage object.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>int</B> <B>Area(BoxObj&amp;)</B>
+              A  helper  function that returns the area in square
+              pixels occupied by the given BoxObj.
+
+       <B>virtual</B> <B>void</B> <B>DrawAreas()</B>
+       <B>virtual</B> <B>void</B> <B>DrawAdditions()</B>
+              Explicitly draw the areas  of  incurred  and  added
+              damage, respectively.
+
+       <B>virtual</B> <B>void</B> <B>Merge(BoxObj&amp;)</B>
+              Merge  the given BoxObj into the list of incur-dam-
+              aged areas, coalescing it into an existing area  if
+              the number of non-overlapping areas exceeds 2.
+
+       <B>void</B> <B>FirstArea(Iterator&amp;)</B>
+       <B>void</B> <B>FirstAddition(Iterator&amp;)</B>
+       <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>boolean</B> <B>Done(Iterator)</B>
+       <B>BoxObj*</B> <B>GetArea(Iterator)</B>
+       <B>Graphic*</B> <B>GetAddition(Iterator)</B>
+              Operations  for iterating over the lists of damaged
+              areas (represented with BoxObj objects)  and  added
+              Graphics.   FirstArea  and FirstAddition initialize
+              the iterator to point to the first item on the cor-
+              responding  list,  Next  advances the iterator, and
+              Done returns true if the iterator points beyond the
+              end  of  the  list.  GetArea and GetAddition return
+              the BoxObj or Graphic to which the iterator points.
+
+       <B>UList*</B> <B>Elem(Iterator)</B>
+              A  helper function for returning the UList to which
+              an iterator points.  The <B>_</B><I>areas</I> protected member is
+              a  UList that stores the list of damaged areas, and
+              the <B>_</B><I>additions</I> protected stores the list  of  added
+              graphics.
+
+       <B>void</B> <B>DeleteArea(BoxObj*)</B>
+       <B>void</B> <B>DeleteAreas()</B>
+              DeleteArea  is  a  helper function for deleting the
+              storage associated with a damaged  area,  including
+              the area itself and the UList element.  DeleteAreas
+              is a helper function that deletes the list of  dam-
+              aged areas.
+
+       <B>Canvas(3I)</B>,    <B>Graphic(3U)</B>,   <B>Iterator(3U)</B>,   <B>Painter(3I)</B>,
+       <B>UList(3U)</B>, <B>geomobjs(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

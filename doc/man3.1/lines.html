@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Point, Line, MultiLine, S_MultiLine, SF_MultiLine - struc-
+       tured graphics classes for points, lines, and  open  poly-
+       gons
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/lines.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Point and Line are subclasses of Graphic that draw a point
+       and a line, respectively.  MultiLine is  a  Vertices  sub-
+       class that serves as an abstract base class for open poly-
+       gons: S_MultiLine is a MultiLine subclass for stroked open
+       polygons,  while  SF_MultiLine  is  a  stroked-filled open
+       polygon.  Point, Line, and S_MultiLine  store  a  PSBrush,
+       while SF_MultiLine also stores a PSPattern.
+
+
+</PRE>
+<H2>POINT PUBLIC OPERATIONS</H2><PRE>
+       <B>Point(Coord</B> <B>x,</B> <B>Cord</B> <B>y,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Construct  a  Point  object, optionally supplying a
+              graphic from which to  obtain  an  initial  set  of
+              graphics state.
+
+       <B>void</B> <B>GetOriginal(Coord&amp;,</B> <B>Coord&amp;)</B>
+              Return the coordinates supplied in the constructor.
+
+
+</PRE>
+<H2>LINE PUBLIC OPERATIONS</H2><PRE>
+       <B>Line(Coord</B> <B>x0,</B> <B>Cord</B> <B>y0,</B> <B>Coord</B> <B>x1,</B> <B>Coord</B> <B>y1,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+              Construct  a  Line  object,  optionally supplying a
+              graphic from which to  obtain  an  initial  set  of
+              graphics state.
+
+       <B>void</B> <B>GetOriginal(Coord&amp;</B> <B>x0,</B> <B>Coord&amp;</B> <B>y0,</B> <B>Coord&amp;</B> <B>x1,</B> <B>Coord&amp;</B>
+              <B>y1)</B>
+              Return the line's endpoints as supplied in the con-
+              structor.
+
+
+</PRE>
+<H2>MULTILINE PROTECTED OPERATIONS</H2><PRE>
+       <B>MultiLine(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              MultiLine's  constructor  is  protected  to prevent
+              instantiation of  the  abstract  base  class.   The
+              parameters are passed directly to the Vertices con-
+              structor.
+
+
+</PRE>
+<H2>S_MULTILINE PUBLIC OPERATIONS</H2><PRE>
+       <B>S_MultiLine(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Construct an S_MultiLine object, optionally supply-
+              ing a graphic from which to obtain an  initial  set
+              of graphics state.
+
+
+</PRE>
+<H2>SF_MULTILINE PUBLIC OPERATIONS</H2><PRE>
+       <B>SF_MultiLine(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              plying  a  graphic  from which to obtain an initial
+              set of graphics state.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>, <B>Vertices(3U)</B>, <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,176 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Tray  -  compose interactors into arbitrary or constrained
+       layouts
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/tray.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A tray is a scene of interactors that  overlap,  tile,  or
+       have other constraints on their alignment relative to each
+       other.  One of the interactors in a tray can  serve  as  a
+       background for the other interactors.
+
+       Constraints  on  the  layout  of  interactors  are made by
+       <I>aligning</I> interactors to each other.  Two  interactors  are
+       aligned  by specifying which edges coincide.  For example,
+       the lower left corner of one interactor may be aligned  to
+       the  upper right of another.  <B>TGlue</B> objects can be used to
+       introduce transparent space between  aligned  interactors.
+       TGlue  has a natural size, shrinkability, and stretchabil-
+       ity (though TGlue objects  are  <I>not</I>  interactors).   Trays
+       stretch  or shrink the TGlue along with the aligned inter-
+       actors to satisfy the alignment constraints.
+
+       The tray adopts the shape of the background interactor  if
+       there  is  one; otherwise, the tray's shape depends on the
+       shapes of its components and potentially on  their  align-
+       ments.  By default, a tray without a background takes on a
+       width and height equal to the largest of  the  widths  and
+       heights  of its components.  However, alignments involving
+       the tray can in effect override this default.
+
+       For example, if the left and right sides of  a  particular
+       component  are aligned to the tray's left and right sides,
+       respectively, then the tray's  sides  are  constrained  to
+       coincide  with  the component's sides.  Thus the tray will
+       adopt the width, horizontal shrinkability, and  horizontal
+       stretchability  of  that  component.   Another example: To
+       ensure that a tray circumscribes a collection of (mutually
+       aligned)  components,  align the outer edges of the compo-
+       nents on the periphery of  the  collection  to  the  outer
+       edges of the tray, thereby constraining the tray to assume
+       the shape of the collection.
+
+
+</PRE>
+<H2>TGLUE PUBLIC OPERATIONS</H2><PRE>
+       <B>TGlue(int</B> <B>w</B> <B>=</B> <B>0,</B> <B>int</B> <B>h</B> <B>=</B> <B>0,</B> <B>int</B> <B>hstretch</B> <B>=</B> <B>hfil,</B> <B>int</B>
+              <B>vstretch</B>  <B>=</B> <B>vfil);</B>
+              Define TGlue of a  minimum  size.   The  TGlue  can
+              stretch from the given size but cannot shrink.
+
+       <B>TGlue(int,</B>  <B>int,</B>  <B>int</B>  <B>hshrink,</B>  <B>int</B>  <B>hstretch,</B>  <B>int</B>
+              <B>vshrink,</B> <B>int</B> <B>vstretch);</B>
+              Define  general  TGlue  with  a  given natural size
+
+
+</PRE>
+<H2>TRAY PUBLIC OPERATIONS</H2><PRE>
+       <B>Tray(Interactor*</B> <B>background</B> <B>=</B> <B>nil)</B>
+              Create  a new tray, optionally having an interactor
+              as a background.
+
+       <B>void</B> <B>Align(Alignment,</B> <B>Interactor*,</B> <B>TGlue*</B> <B>=</B> <B>nil)</B>
+       <B>void</B> <B>Align(Alignment,</B> <B>Interactor*,</B> <B>Alignment,</B> <B>Interactor*,</B>
+              <B>TGlue*</B> <B>=</B> <B>nil)</B>
+              Align an interactor to another interactor (the tray
+              itself  by  default), optionally with TGlue between
+              them.  Align operations insert interactors into the
+              tray if they have not been inserted already.
+
+       <B>void</B> <B>Align(Alignment,</B> <B>Interactor*,</B> <B>...,</B> <B>Interactor*</B> <B>=</B> <B>nil)</B>
+              Apply an alignment to a set of  interactors.   This
+              operation is shorthand for aligning the interactors
+              to each other explicitly.  For example, Align(Left,
+              i1,  i2,  i3, i4) aligns the left sides of interac-
+              tors i1 through i4.  Two to seven  interactors  can
+              be aligned at once.
+
+       <B>void</B> <B>HBox(Interactor*,</B> <B>...,</B> <B>Interactor*</B> <B>=</B> <B>nil)</B>
+       <B>void</B> <B>VBox(Interactor*,</B> <B>...,</B> <B>Interactor*</B> <B>=</B> <B>nil)</B>
+              The  HBox  and  VBox operations align the specified
+              interactors such that they tile  left-to-right  and
+              top-to-bottom,   respectively.    These  operations
+              align in one dimension only.  Two to seven interac-
+              tors  can  be aligned at once.  If the first (last)
+              component is the tray or the background interactor,
+              then  the  leftmost  (rightmost)  component will be
+              aligned with the left (right) side of the tray.
+
+       <B>void</B> <B>Insert(Interactor*)</B>
+              Insert an  interactor  into  the  tray  without  an
+              alignment.  The interactor will appear in the lower
+              left corner of the tray.
+
+       <B>void</B> <B>Change(Interactor*)</B>
+              Notify the tray that the given  interactor's  shape
+              has changed.  The tray will recompute the layout of
+              its component interactors  to  satisfy  any  align-
+              ments.   If the tray does not contain a background,
+              then a change in the shape of one of its components
+              may  in  turn change the tray's shape.  If the tray
+              has a background, then the tray's shape will change
+              only if the shape of the background changes.
+
+       <B>void</B> <B>Remove(Interactor*)</B>
+              Take  an interactor out of a tray and eliminate any
+              alignments that have been made to it.
+
+       <B>Interactor(3I)</B>, <B>Scene(3I)</B>, <B>Shape(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

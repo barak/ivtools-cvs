@@ -1,0 +1,190 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       LineComp,  LineView, PSLine, MultiLineComp, MultiLineView,
+       PSMultiLine - line and multiline component subject,  view,
+       and PostScript external representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/line.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       LineComp is a GraphicComp that defines a line.  It uses an
+       Line graphic to store its graphical attributes.   LineView
+       is  a  GraphicView  for  displaying the line.  PSLine is a
+       PostScriptView that externalizes the subject's information
+       in  PostScript  form.  The MultiLine counterparts of these
+       classes define the component and  external  representation
+       for a contiguous set of line segments, i.e., an open poly-
+       gon.  MultiLineComp is derived from  VerticesComp,  Multi-
+       LineView  is  a  VerticesView, and PSMultiLine is a PSVer-
+       tices.
+
+
+</PRE>
+<H2>LINECOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>LineComp(Line*</B> <B>=</B> <B>nil)</B>
+              The constructor takes an optional line graphic that
+              defines the attributes of the line.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              LineComp redefines Interpret to ignore PatternCmds.
+
+       <B>Line*</B> <B>GetLine()</B>
+              Return the Line graphic  that  defines  the  line's
+              attributes.  GetLine is simply a more specific form
+              of the GetGraphic operation.
+
+
+</PRE>
+<H2>LINEVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>LineView(LineComp*</B> <B>=</B> <B>nil)</B>
+              Create an LineView, optionally supplying  the  sub-
+              ject.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              LineView  interprets  AlignToGridCmd  to  align its
+              first endpoint to the grid.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              LineView redefines  its  response  to  manipulation
+              with a GraphicCompTool.  The user clicks to specify
+              the first endpoint of the line and  then  drags  to
+              position remaining endpoint.  The endpoints will be
+              constrained by  gravity,  if  any.   LineView  also
+              defines a response to the ReshapeTool, allowing the
+              ReplaceCmd) with a new LineComp subject  reflecting
+              the  repositioned  endpoint.  Repositioning will be
+              influenced by gravity.
+
+       <B>virtual</B> <B>void</B> <B>GetEndpoints(Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;)</B>
+              Return the line's endpoints, in canvas coordinates.
+
+       <B>LineComp*</B> <B>GetLineComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>LINEVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>CreateHandles()</B>
+              LineView  redefines  CreateHandles to use a Rubber-
+              Handles object with two handles, one at  each  end-
+              point of the line.
+
+
+</PRE>
+<H2>PSLINE PUBLIC OPERATIONS</H2><PRE>
+       <B>PSLine(LineComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>MULTILINECOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>MultiLineComp(SF_MultiLine*</B> <B>=</B> <B>nil)</B>
+              The constructor takes  an  optional  stroked-filled
+              multiline  graphic  that  defines the attributes of
+              the multiline.
+
+       <B>SF_MultiLine*</B> <B>GetMultiLine()</B>
+              Return the MultiLine graphic that defines the  mul-
+              tiline's attributes.  GetMultiLine is simply a more
+              specific form of the GetGraphic operation.
+
+
+</PRE>
+<H2>MULTILINEVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>MultiLineView(MultiLineComp*</B> <B>=</B> <B>nil)</B>
+              Create an MultiLineView, optionally  supplying  the
+              subject.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              MultiLineView  redefines  its response to manipula-
+              tion with a GraphicCompTool.  The user  clicks  the
+              left mouse button to specify each vertex and clicks
+              with the middle mouse button to specify  the  final
+              vertex.   Vertex positioning will be constrained by
+              gravity, if  any.   MultiLineView  also  defines  a
+              response  to  the ReshapeTool, allowing the user to
+              click on one of its vertices to reposition it.  The
+              subject  is actually replaced (via ReplaceCmd) with
+              a new MultiLineComp subject reflecting the  reposi-
+
+       <B>MultiLineComp*</B> <B>GetMultiLineComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>PSMULTILINE PUBLIC OPERATIONS</H2><PRE>
+       <B>PSMultiLine(MultiLineComp*</B> <B>=</B> <B>nil)</B>
+              Construct a PostScript external  representation  of
+              the given subject, if any.
+
+
+</PRE>
+<H2>PSMULTILINE PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>const</B> <B>char*</B> <B>Name()</B>
+              PSMultiLine  identifies  itself  as  "MLine" in the
+              PostScript output.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>,  <B>GraphicComp(3U)</B>,  <B>GraphicCompTool(3U)</B>,  Graph-
+       <B>icView(3U)</B>,  <B>Grid(3U)</B>, <B>PatternCmd(3U)</B>, <B>PostScriptView(3U)</B>,
+       <B>ReshapeTool(3U)</B>,   <B>Rubband(3I)</B>,   <B>Transformer(3I)</B>,    Ver-
+       <B>ticesComp(3U)</B>, <B>Viewer(3U)</B>, <B>align(3U)</B>, <B>edit(3U)</B>, <B>lines(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,230 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       StringBrowser - browse and/or select items in a list
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/strbrowser.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       StringBrowser  is  an  interactor that provides a browsing
+       and selection interface to a  list  of  strings.   String-
+       Browsers  are  often  used in dialog boxes to let the user
+       browse  and  select  from  an  unbounded  set  of  textual
+       entries.  A StringBrowser displays the list of strings and
+       provides several  ways  to  scroll  the  list.   The  user
+       selects strings with either the mouse or the keyboard; the
+       StringBrowser can restrict selection to a single string or
+       allow  multiple  selections.  The  application queries the
+       StringBrowser for the selected string(s).
+
+       A StringBrowser contains no entries initially; strings are
+       appended consecutively or in random order, and they can be
+       removed in any order.  The strings  are  accessed  with  a
+       <B>string</B> <B>index</B> from 0 to <I>n</I>-1, where <I>n</I> is the total number of
+       strings.  The StringBrowser maintains a separate  list  of
+       strings   that  have  been  selected;  these  strings  are
+       accessed with a <B>selection</B> <B>index</B> from 0 to <I>m</I>-1, where m  is
+       the total number of selected strings.
+
+       Left-clicking  inside  the  StringBrowser  (or calling the
+       Browse function) makes it  interpret  subsequent  keyboard
+       events   as  scrolling  or  selection  operations  on  the
+       entries.   StringBrowser  relinquishes  control  when   it
+       detects  a  click outside its canvas or when it receives a
+       predetermined escape character.
+
+       Middle-clicking inside the  StringBrowser  lets  the  user
+       ``grab-scroll''  the  entries.  During grab-scrolling, the
+       StringBrowser scrolls the  entries  to  follow  the  mouse
+       position,  making it appear as though the user is dragging
+       the entries themselves.   Right-clicking  engages  ``rate-
+       scrolling,'' a joy-stick-like scrolling interface in which
+       the scrolling rate increases as the user drags  the  mouse
+       away  from the initial click point.  For example, dragging
+       the mouse downwards after the initial  click  scrolls  the
+       browser  downwards at an increasing rate; dragging upwards
+       thereafter reduces the rate until scrolling stops entirely
+       at the initial click point.  Dragging up beyond this point
+       makes the browser scroll in the reverse direction.
+
+
+</PRE>
+<H2>KEY BINDINGS</H2><PRE>
+       Below are the key bindings for browsing and selection com-
+       mands:
+
+       g      Go to the first string.
+
+
+       a      Select all.
+
+
+       DEL or BS
+              Unselect all.
+
+
+       p      Select previous string.
+
+
+       n      Select next string.
+
+
+       &lt;      Select topmost-visible string.
+
+
+       &gt;      Select bottommost-visible string.
+
+
+       j      Scroll down one string.
+
+
+       k      Scroll up one string.
+
+
+       SPACE  Scroll down one screenful.
+
+
+       b      Scroll up one screenful.
+
+
+       d      Scroll down one-half screenful.
+
+
+       u      Scroll up one-half screenful.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>StringBrowser(ButtonState*,</B>  <B>int</B>  <B>rows,</B> <B>int</B> <B>cols,</B> <B>boolean</B>
+              <B>unique-</B> <B>Sel,</B> <B>int</B> <B>highlight,</B> <B>const</B> <B>char*</B> <B>done)</B>
+       <B>StringBrowser(const</B>  <B>char*</B> <B>name,</B> <B>ButtonState*,</B> <B>int,</B> <B>int,</B>
+              <B>boolean,</B> <B>int,</B> <B>const</B> <B>char*)</B>
+              Create  a  new  StringBrowser  object.  The String-
+              Browser will use the ButtonState to communicate the
+              result  of  browsing operations.  The StringBrowser
+              bases its shape on the <I>rows</I>  and  <I>cols</I>  parameters:
+              the  height  equals  <I>rows</I>  multiplied  by  the font
+              height, and the width equals <I>cols</I> multiplied by the
+              width  of  an  average  character.   The  <I>uniqueSel</I>
+              parameter specifies whether  or  not  selection  is
+              limited  to one string (the default), and the <I>high-</I>
+              character in the string <I>done</I> will make the  String-
+              Browser stop interpreting keyboard events; the But-
+              tonState is set to this terminating character as  a
+              side-effect.    A   double  left-click  inside  the
+              StringBrowser is equivalent to a single  left-click
+              selection  followed  by  a key press that generates
+              the first character in <I>done</I>.  To be interpreted  as
+              a double-click, two clicks must occur not more than
+              <I>clickDelay</I> milliseconds apart.  The  default  click
+              delay is 250 ms; a different value can be specified
+              via the "clickDelay" user-preference attribute.
+
+       <B>void</B> <B>Browse()</B>
+              Initiate browsing.  Subsequent keypresses  will  be
+              interpreted  as  browsing  and  selection  commands
+              according to the key bindings listed above.
+
+       <B>void</B> <B>Insert(const</B> <B>char*</B> <B>string,</B> <B>int</B> <B>index)</B>
+              Insert <I>string</I>  at  position  <I>index</I>.   StringBrowser
+              makes a copy of the string for internal use.
+
+       <B>void</B> <B>Replace(const</B> <B>char*</B> <B>string,</B> <B>int</B> <B>index)</B>
+              Replace  the  string at position <I>index</I> with <I>string</I>.
+              StringBrowser makes a copy of the string for inter-
+              nal  use.  This operation does nothing if the index
+              supplied is not valid.
+
+       <B>void</B> <B>Append(const</B> <B>char*</B> <B>string)</B>
+              Insert a copy of <I>string</I> after the last string.
+
+       <B>void</B> <B>Remove(int</B> <B>index)</B>
+              Remove the string at position <I>index</I>, moving  subse-
+              quent strings up to fill the gap.
+
+       <B>int</B> <B>Index(const</B> <B>char*</B> <B>string)</B>
+              Return  the  index of the first string that matches
+              <I>string</I>.
+
+       <B>char*</B> <B>String(int</B> <B>index)</B>
+              Return the string at the given index.
+
+       <B>int</B> <B>Count()</B>
+              Return the total number of strings in  the  String-
+              Browser.
+
+       <B>void</B> <B>Clear()</B>
+              Remove all strings from the StringBrowser.
+
+       <B>void</B> <B>Select(int</B> <B>index)</B>
+       <B>void</B> <B>Unselect(int</B> <B>index)</B>
+              Select  (unselect)  the  string at the given index.
+              The string  will  be  redrawn  in  the  appropriate
+              selecting  a  new string will unselect the original
+              string.
+
+       <B>void</B> <B>SelectAll()</B>
+       <B>void</B> <B>UnselectAll()</B>
+              Select  (unselect)  all  strings.   SelectAll  does
+              nothing  if  multiple  selections  have been disal-
+              lowed.
+
+       <B>int</B> <B>Selection(int</B> <B>n)</B>
+              Return the string index of the <I>n</I>th selected string.
+
+       <B>int</B> <B>SelectionIndex(int</B> <B>n)</B>
+              Return the selection index of the <I>n</I>th string.
+
+       <B>int</B> <B>Selections()</B>
+              Return the total number of selected strings.
+
+       <B>boolean</B> <B>Selected(int</B> <B>n)</B>
+              Return whether the <I>n</I>th string has been selected.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(2I)</B>, <B>Button(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

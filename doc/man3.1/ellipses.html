@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Ellipse,   S_Ellipse,   F_Ellipse,  SF_Ellipse,  S_Circle,
+       F_Circle, SF_Circle - abstract base class  and  predefined
+       subclasses for elliptical structured graphics
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/ellipses.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Ellipse  is  an  abstract base class for elliptical struc-
+       tured graphics objects.  It stores  geometric  information
+       that  such  graphics require and provides helper functions
+       for calculating extents and for hit detection.  Predefined
+       subclasses  include  S_Ellipse, F_Ellipse, and SF_Ellipse,
+       which draw stroked, filled, and  stroked-filled  ellipses,
+       respectively; and S_Circle, F_Circle, and SF_Circle, which
+       draw stroked, filled, and stroked-filled circles,  respec-
+       tively.   The  stroked  subclasses  store  a  PSBrush, the
+       filled subclasses store  a  PSPattern,  and  the  stroked-
+       filled subclasses store one of each.
+
+
+</PRE>
+<H2>ELLIPSE PUBLIC OPERATIONS</H2><PRE>
+       <B>void</B> <B>GetOriginal(Coord&amp;</B> <B>x,</B> <B>Coord&amp;</B> <B>y,</B> <B>int&amp;</B> <B>rx,</B> <B>int&amp;</B> <B>ry)</B>
+              Return  the ellipse's geometry.  (<I>x,</I> <I>y</I>) defines the
+              ellipse's center, while <I>rx</I> and <I>ry</I> define its  hori-
+              zontal and vertical radii, respectively.
+
+
+</PRE>
+<H2>ELLIPSE PROTECTED OPERATIONS</H2><PRE>
+       <B>Ellipse(Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>int</B> <B>rx,</B> <B>int</B> <B>ry,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              The constructor is protected to disallow instantia-
+              tion of the  abstract  base  class.   An  ellipse's
+              geometry  is defined in terms of its center and its
+              horizontal and  vertical  radii.   The  constructor
+              also takes an optional graphic from which to obtain
+              an initial set of graphics state.
+
+       <B>void</B> <B>s_getExtent(</B>
+           <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>void</B> <B>f_getExtent(</B>
+           <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>boolean</B> <B>s_contains(PointObj&amp;,</B> <B>Graphic*)</B>
+       <B>boolean</B> <B>f_contains(PointObj&amp;,</B> <B>Graphic*)</B>
+       <B>boolean</B> <B>s_intersects(BoxObj&amp;,</B> <B>Graphic*)</B>
+       <B>boolean</B> <B>f_intersects(BoxObj&amp;,</B> <B>Graphic*)</B>
+              Helper functions that return extent and hit  detec-
+              tion information based on the bounding box that the
+              ellipse  defines.   s_getExtent,  s_contains,   and
+              s_intersects  return  information that accounts for
+              the width of a brush, as would be necessary if  the
+              filled.   Subclasses can use the operations to help
+              implement their getExtent, contains, and intersects
+              operations.
+
+
+</PRE>
+<H2>SUBCLASS PUBLIC OPERATIONS</H2><PRE>
+       <B>S_Ellipse(Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>int</B> <B>rx,</B> <B>int</B> <B>ry,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>F_Ellipse(Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>int</B> <B>rx,</B> <B>int</B> <B>ry,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>SF_Ellipse(Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>int</B> <B>rx,</B> <B>int</B> <B>ry,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>S_Circle(Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>int</B> <B>radius,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+       <B>F_Circle(Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>int</B> <B>radius,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+       <B>SF_Circle(Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>int</B> <B>radius,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Constructors for  the  various  predefined  Ellipse
+              subclasses.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>, <B>geomobjs(3U)</B>, <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

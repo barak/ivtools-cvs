@@ -1,0 +1,330 @@
+
+<html><head><TITLE>Description of Parser</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Parser</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="ComTerpModule.html" >ComTerpModule</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+C++ wrapper for ComUtil parser capability.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="ComTerpModule.html" >ComTerpModule</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Parser><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+ComTerp/parser.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Parser()">
+    <B>Parser</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Parser(constchar*path)">
+    <B>Parser</B> (const char* path) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Parser(istream&#38;)">
+    <B>Parser</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Parser(void*&#38;&#38;COMMchar*&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOchar*&#38;&#38;COMMint&#38;&#38;COMMvoid*&#38;&#38;BRAKC&#38;&#38;COMMint&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC&#38;&#38;COMMint&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC)">
+    <B>Parser</B> (void*, char*(*)(char*,int,void*), int(*)(void*), int(*)(void*)) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        see descriptions in <A HREF="ComTerp.html" >ComTerp</A> or <A HREF="ComTerpModule.html" >ComTerpModule</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>postfix_token* 
+    <A NAME="copy_postfix_tokens(int&#38;ntokens)">
+    <B>copy_postfix_tokens</B> (int&#38; ntokens) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        make a copy of current buffer of postfix tokens.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="print_next_expr()">
+    <B>print_next_expr</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_matched_parens()">
+    <B>skip_matched_parens</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        support for '()', '{}', and '[]'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="~Parser()">
+    <B>~Parser</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>postfix_token* 
+    <A NAME="_pfbuf">
+    <B>_pfbuf</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="_pfnum">
+    <B>_pfnum</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="_pfsiz">
+    <B>_pfsiz</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="init()">
+    <B>init</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="istream_feof(void*istreamptr)">
+    <B>istream_feof</B> (void* istreamptr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        signature like feof for passing on istream end-of-file.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="istream_ferror(void*istreamptr)">
+    <B>istream_ferror</B> (void* istreamptr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        signature like feof for passing on istream error info.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static char* 
+    <A NAME="istream_fgets(char*s&#38;&#38;COMMintn&#38;&#38;COMMvoid*istreamptr)">
+    <B>istream_fgets</B> (char* s, int n, void* istreamptr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        signature like fgets for reading from an istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

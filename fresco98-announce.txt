@@ -1,0 +1,124 @@
+Date: Tue, 10 Nov 1998 19:13:13 +0100 (MET)
+From: Thomas Hiller <hiller@tu-harburg.de>
+Subject: [fresco] Fresco98 is finally there
+To: fresco@merlin.iuk.tu-harburg.de
+MIME-Version: 1.0
+Content-Type: TEXT/plain; charset=us-ascii
+Content-MD5: m9HQGW0tlYXHejZ7IQbx3g==
+X-Mailer: dtmail 1.2.0 CDE Version 1.2 SunOS 5.6 sun4u sparc 
+Sender: fresco-request@merlin.iuk.tu-harburg.de
+Precedence: bulk
+Reply-To: fresco@merlin.iuk.tu-harburg.de
+
+======================================================
+Fresco98 is finally available from:
+ftp://ftp.iuk.tu-harburg.de/pub/Fresco/Fresco98.tar.gz
+======================================================
+
+Please test this version and report problems to the mailing list or 
+directly to me (hiller@tu-harburg.de).
+
+What's different from Fresco97:
+-------------------------------
+o new format for documentation (sgmltools 1.1.x)
+o updated reference manual
+o new classes for socket events
+o undo manager
+o fixes to memory leaks
+o changes to 'autoconf' configuration
+o better windows support
+o zoomed text is clipped to avoid excessive memory use
+o builds with native SGI compiler
+o builds with freebsd 2.2.x
+
+What is Fresco ?
+----------------
+Fresco is an object-oriented user interface system for development of
+window-based applications. It is a design evolution of the InterViews
+toolkit that was developed at Stanford University in the late `80s and
+early `90s. The Fresco architecture brings together objects that
+traditionally have not mixed. User interface objects such as sliders,
+buttons, and text editors - as well as the "layout" objects used to
+compose them - can mix arbitrarily in Fresco with graphical objects (those
+that perform graphical transformations.)
+
+Fresco uses the CORBA standard object model, provides resolution-
+independent windowing primitives, and supports a uniform architecture for
+graphical embedding. Using CORBA also allows the possibility of
+distributed embedding, where an embedded application runs on a different
+machine in the network.
+
+More Infos:
+-----------
+Visit the Fresco web site 'http://www.iuk.tu-harburg.de/fresco'.
+
+There is a mailing list 'fresco@mail.iuk.tu-harburg.de' to discuss all
+problems, enhancements, contributions. The mailing list is archived 
+at the main web site.
+
+There will be snapshots (for developpers and testers) in the future at
+'ftp://ftp.iuk.tu-harburg.de/pub/Fresco/snapshots'.
+
+Why Fresco?  
+-----------
+Why should your time be invested in Fresco?  Fresco provides a 
+portable GUI in native C++ that is free from license restrictions.
+It runs on both Windows and Unix.  There are other kits like this,
+for example Tcl/TK, however, Tcl/TK is not in native c++.  There are
+several other kits in c or c++, but I do not think that there is
+one with all of the features of Fresco.  
+
+- Structured graphics
+- Native c++ 
+- CORBA
+- Windows/Unix portability
+
+There is no AWT for C++ as in Java.  Fresco could be the AWT for
+C++.   Many man years have been expended on the development of
+Fresco.  It would be a great loss if no one were to pick up where
+Fujitsu left off.   Please give it a try, and join the effort.
+This is yet another "Cathedral" project turned into a "Bazaar" 
+project. [1]
+
+Fresco is currently being used as the interface for the 
+IUE http://www.aai.com/AAI/IUE/IUE.html, and soon for 
+TargetJr http://www.balltown.cma.com/TargetJr.
+
+
+What needs to be done:
+---------------------
+
+You can help to make Fresco better !!!  Join the Bazaar!
+
+Help is needed in nearly all areas.
+
+Some projects are (could be):
+- change the 'builtin' CORBA to a Corba2 compliant orb (like MICO)
+  (first steps taken)
+- add more widgets 
+- add html parsing to the text kit.  
+- more widgets, more widgets,
+
+[1] Eric S. Raymond,  ``The Cathedral and the Bazaar''.
+    http://locke.ccil.org/~esr/writings/cathedral.html
+
+
+Please contact me (or use the mailing list).
+
+Greetings
+	Thomas
+
+PLEASE SEND THIS TO ANYONE INTERESTED IN FRESCO
+
+
+--
+Thomas Hiller				email: hiller@tu-harburg.de
+TU Hamburg-Harburg
+Zentrallabor Informations- und Kommunikationstechnik
+Harburger Schloss-Str. 20		Tel.: +49-40-7718-3448
+D - 21071 Hamburg			Fax : +49-40-7718-2579
+
+
+--
+To unsubscribe, send email to fresco-request@mail.iuk.tu-harburg.de
+"unsubscribe fresco" in the body.

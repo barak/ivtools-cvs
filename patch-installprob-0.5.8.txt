@@ -1,0 +1,27 @@
+- fix problem with symbolic links in ivtools-0.5/lib/LINUX for 
+  a "make install" with InstallRelative set to YES.  Requires
+  a "make Makefiles" after applying.  Also you'll want to delete the
+  lib and bin directories before doing a "make install".
+
+Index: config_ivtools/site.def.LINUX
+diff -c config_ivtools/site.def.LINUX:1.2 config_ivtools/site.def.LINUX:1.3
+*** config_ivtools/site.def.LINUX:1.2	Fri Oct  3 16:56:24 1997
+--- config/site.def.LINUX	Wed Oct 15 11:11:24 1997
+***************
+*** 33,39 ****
+  	MakeDir(dest)							@@\
+  	$(INSTALL) -c $(INSTLIBFLAGS) Concat(lib,libname.so.rev) dest   @@\
+  	-@if [ -f dest/Concat(lib,libname.so) ]; then exit 0; else \    @@\
+! 	$(LN) dest/Concat(lib,libname.so.rev) dest/Concat(lib,libname.so); fi
+  #endif
+  
+  /* 
+--- 33,40 ----
+  	MakeDir(dest)							@@\
+  	$(INSTALL) -c $(INSTLIBFLAGS) Concat(lib,libname.so.rev) dest   @@\
+  	-@if [ -f dest/Concat(lib,libname.so) ]; then exit 0; else \    @@\
+! 	pushd dest; \                                                   @@\
+!         $(LN) Concat(lib,libname.so.rev) Concat(lib,libname.so); popd; fi
+  #endif
+  
+  /* 

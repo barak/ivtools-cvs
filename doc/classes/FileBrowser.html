@@ -1,0 +1,362 @@
+
+<html><head><TITLE>Description of FileBrowser</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>FileBrowser</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="StringBrowser.html" >StringBrowser</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+a <A HREF="StringBrowser.html" >StringBrowser</A> that displays file names (iv-2.6)<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="StringBrowser.html" >StringBrowser</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#FileBrowser><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+IV-2_6/InterViews/filebrowser.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/FileBrowser.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FileBrowser(constchar*name&#38;&#38;COMMButtonState*&#38;&#38;COMMconstchar*=&#38;&#38;QUOTD~&#38;&#38;QUOTD&#38;&#38;COMMint=10&#38;&#38;COMMint=24&#38;&#38;COMMboolean=true&#38;&#38;COMMint=Reversed&#38;&#38;COMMconstchar*=SBDone)">
+    <B>FileBrowser</B> ( const char* name, <A HREF="ButtonState.html" >ButtonState</A>*, const char* = "~", int = 10, int = 24, boolean = true, int = Reversed, const char* = SBDone ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FileBrowser(ButtonState*&#38;&#38;COMMconstchar*dir=&#38;&#38;QUOTD~&#38;&#38;QUOTD&#38;&#38;COMMintrows=10&#38;&#38;COMMintcols=24&#38;&#38;COMMbooleanuniqueSel=true&#38;&#38;COMMinthighlight=Reversed&#38;&#38;COMMconstchar*done=SBDone)">
+    <B>FileBrowser</B> ( <A HREF="ButtonState.html" >ButtonState</A>*, const char* dir = "~", int rows = 10, int cols = 24, boolean uniqueSel = true, int highlight = Reversed, const char* done = SBDone ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="GetDirectory()">
+    <B>GetDirectory</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="IsADirectory(constchar*)">
+    <B>IsADirectory</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="Normalize(constchar*)">
+    <B>Normalize</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="Path(intindex)">
+    <B>Path</B> (int index) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="RereadDirectory()">
+    <B>RereadDirectory</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="SetDirectory(constchar*)">
+    <B>SetDirectory</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetDirectoryModeFilter(int)">
+    <B>SetDirectoryModeFilter</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetDirectoryTextFilter(constchar*)">
+    <B>SetDirectoryTextFilter</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetModeFilter(int)">
+    <B>SetModeFilter</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetTextFilter(constchar*)">
+    <B>SetTextFilter</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="ValidDirectories(constchar*)">
+    <B>ValidDirectories</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~FileBrowser()">
+    <B>~FileBrowser</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Acceptable(constchar*)">
+    <B>Acceptable</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="UpdateStrings()">
+    <B>UpdateStrings</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

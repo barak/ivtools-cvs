@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       RpcPeer - support bi-directional RPC between two services
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/rpcpeer.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An  RpcPeer  (actually,  an  instance  of a derived class)
+       tries to open a connection to  another  RpcPeer.   If  the
+       other  RpcPeer is not yet running, the RpcPeer will create
+       its own port and wait for the other RpcPeer to open a con-
+       nection.   When  either  RpcPeer  opens a connection, each
+       RpcPeer will create both a reader and  a  writer  so  each
+       RpcPeer  can  send  RPC  requests to its opposite over the
+       same connection.
+
+
+</PRE>
+<H2>CONSTRUCTOR</H2><PRE>
+       <B>RpcPeer(const</B> <B>char*</B> <B>lPath,</B> <B>int</B> <B>lPort</B> <B>=</B> <B>0)</B>
+              Store the arguments for later use since a base con-
+              structor can't call a derived class's virtual func-
+              tion.  The derived class's constructor should  call
+              ``init'', described below.
+
+       <B>void</B> <B>init(const</B> <B>char*</B> <B>rPath)</B>
+              Find  the  host  name and port number registered by
+              the other RpcPeer and try to open a  connection  to
+              it.   If  it's not running, create our own port and
+              wait for the other RpcPeer to open a connection.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>void</B> <B>run()</B>
+       <B>void</B> <B>quitRunning()</B>
+              Read RPC  requests  continuously  until  ``quitRun-
+              ning()''  terminates  the  loop.   If  you're using
+              InterViews, you don't have to call ``run()''  since
+              the  InterViews  event-reading  code will also read
+              RPC requests.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B>  <B>boolean</B>  <B>createReaderAndWriter(const</B>  <B>char*</B>
+              <B>rHost,</B>  <B>int</B> <B>rPort)</B> <B>=</B> <B>0</B>
+       <B>virtual</B> <B>void</B> <B>createReaderAndWriter(int</B> <B>fd)</B> <B>=</B> <B>0</B>
+              You must define both functions in a  derived  class
+              in  order to start reading and writing RPC requests
+              over  the  connection.   Typically  both  functions
+              would  create  a  writer using the given parameters
+              and then attach a reader to the writer's rpcstream.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Dispatcher(3I)</B>,       <B>RpcReader(3I)</B>,      <B>RpcRegistry(3I)</B>,
+       <B>RpcWriter(3I)</B>
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,821 @@
+
+<html><head><TITLE>Description of Painter</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Painter</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Resource.html" >Resource</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+graphics rendering interface (iv-2.6)<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Resource.html" >Resource</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Painter><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+IV-2_6/InterViews/painter.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/Painter.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="BSpline(Canvas*&#38;&#38;COMMCoordx[]&#38;&#38;COMMCoordy[]&#38;&#38;COMMintn)">
+    <B>BSpline</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord x[], Coord y[], int n) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="BgFilled()">
+    <B>BgFilled</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Circle(Canvas*&#38;&#38;COMMCoordx&#38;&#38;COMMCoordy&#38;&#38;COMMintr)">
+    <B>Circle</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord x, Coord y, int r) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ClearRect(Canvas*&#38;&#38;COMMCoordx1&#38;&#38;COMMCoordy1&#38;&#38;COMMCoordx2&#38;&#38;COMMCoordy2)">
+    <B>ClearRect</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord x1, Coord y1, Coord x2, Coord y2) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Clip(Canvas*&#38;&#38;COMMCoordleft&#38;&#38;COMMCoordbottom&#38;&#38;COMMCoordright&#38;&#38;COMMCoordtop)">
+    <B>Clip</B> ( <A HREF="Canvas.html" >Canvas</A>*, Coord left, Coord bottom, Coord right, Coord top ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Copy(Canvas*src&#38;&#38;COMMCoordx1&#38;&#38;COMMCoordy1&#38;&#38;COMMCoordx2&#38;&#38;COMMCoordy2&#38;&#38;COMMCanvas*dst&#38;&#38;COMMCoordx0&#38;&#38;COMMCoordy0)">
+    <B>Copy</B> ( <A HREF="Canvas.html" >Canvas</A>* src, Coord x1, Coord y1, Coord x2, Coord y2, <A HREF="Canvas.html" >Canvas</A>* dst, Coord x0, Coord y0 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Curve(Canvas*&#38;&#38;COMMCoordx0&#38;&#38;COMMCoordy0&#38;&#38;COMMCoordx1&#38;&#38;COMMCoordy1&#38;&#38;COMMCoordx2&#38;&#38;COMMCoordy2&#38;&#38;COMMCoordx3&#38;&#38;COMMCoordy3)">
+    <B>Curve</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord x0, Coord y0, Coord x1, Coord y1, Coord x2, Coord y2, Coord x3, Coord y3 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="CurveTo(Canvas*&#38;&#38;COMMCoordx0&#38;&#38;COMMCoordy0&#38;&#38;COMMCoordx1&#38;&#38;COMMCoordy1&#38;&#38;COMMCoordx2&#38;&#38;COMMCoordy2)">
+    <B>CurveTo</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord x0, Coord y0, Coord x1, Coord y1, Coord x2, Coord y2 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="FillBg(boolean)">
+    <B>FillBg</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="FillCircle(Canvas*&#38;&#38;COMMCoordx&#38;&#38;COMMCoordy&#38;&#38;COMMintr)">
+    <B>FillCircle</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord x, Coord y, int r) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="FillRect(Canvas*&#38;&#38;COMMCoordx1&#38;&#38;COMMCoordy1&#38;&#38;COMMCoordx2&#38;&#38;COMMCoordy2)">
+    <B>FillRect</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord x1, Coord y1, Coord x2, Coord y2) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const <A HREF="Color.html" >Color</A>* 
+    <A NAME="GetBgColor()">
+    <B>GetBgColor</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const <A HREF="Brush.html" >Brush</A>* 
+    <A NAME="GetBrush()">
+    <B>GetBrush</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const <A HREF="Color.html" >Color</A>* 
+    <A NAME="GetFgColor()">
+    <B>GetFgColor</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const <A HREF="Font.html" >Font</A>* 
+    <A NAME="GetFont()">
+    <B>GetFont</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetOrigin(int&#38;x0&#38;&#38;COMMint&#38;y0)">
+    <B>GetOrigin</B> (int&#38; x0, int&#38; y0) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const <A HREF="Pattern.html" >Pattern</A>* 
+    <A NAME="GetPattern()">
+    <B>GetPattern</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetPosition(int&#38;x&#38;&#38;COMMint&#38;y)">
+    <B>GetPosition</B> (int&#38; x, int&#38; y) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="GetStyle()">
+    <B>GetStyle</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="GetTransformer()">
+    <B>GetTransformer</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="MoveTo(intx&#38;&#38;COMMinty)">
+    <B>MoveTo</B> (int x, int y) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="NoClip()">
+    <B>NoClip</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Painter()">
+    <B>Painter</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Painter(Painter*)">
+    <B>Painter</B> (<A HREF="Painter.html" >Painter</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="PainterRep.html" >PainterRep</A>* 
+    <A NAME="Rep()">
+    <B>Rep</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Rotate(floatangle)">
+    <B>Rotate</B> (float angle) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Scale(floatx&#38;&#38;COMMfloaty)">
+    <B>Scale</B> (float x, float y) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetBrush(constBrush*)">
+    <B>SetBrush</B> (const <A HREF="Brush.html" >Brush</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetColors(constColor*f&#38;&#38;COMMconstColor*b)">
+    <B>SetColors</B> (const <A HREF="Color.html" >Color</A>* f, const <A HREF="Color.html" >Color</A>* b) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetFont(constFont*)">
+    <B>SetFont</B> (const <A HREF="Font.html" >Font</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetOrigin(intx0&#38;&#38;COMMinty0)">
+    <B>SetOrigin</B> (int x0, int y0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetOverwrite(boolean)">
+    <B>SetOverwrite</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetPattern(constPattern*)">
+    <B>SetPattern</B> (const <A HREF="Pattern.html" >Pattern</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetPlaneMask(int)">
+    <B>SetPlaneMask</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetStyle(int)">
+    <B>SetStyle</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetTransformer(Transformer*)">
+    <B>SetTransformer</B> (<A HREF="Transformer.html" >Transformer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Stencil(Canvas*&#38;&#38;COMMCoordx&#38;&#38;COMMCoordy&#38;&#38;COMMBitmap*image&#38;&#38;COMMBitmap*mask=nil)">
+    <B>Stencil</B> ( <A HREF="Canvas.html" >Canvas</A>*, Coord x, Coord y, <A HREF="Bitmap.html" >Bitmap</A>* image, <A HREF="Bitmap.html" >Bitmap</A>* mask = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Text(Canvas*&#38;&#38;COMMconstchar*)">
+    <B>Text</B> (<A HREF="Canvas.html" >Canvas</A>*, const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Text(Canvas*&#38;&#38;COMMconstchar*&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>Text</B> (<A HREF="Canvas.html" >Canvas</A>*, const char*, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Text(Canvas*&#38;&#38;COMMconstchar*&#38;&#38;COMMint)">
+    <B>Text</B> (<A HREF="Canvas.html" >Canvas</A>*, const char*, int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Text(Canvas*&#38;&#38;COMMconstchar*&#38;&#38;COMMint&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>Text</B> (<A HREF="Canvas.html" >Canvas</A>*, const char*, int, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Translate(floatdx&#38;&#38;COMMfloatdy)">
+    <B>Translate</B> (float dx, float dy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="~Painter()">
+    <B>~Painter</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="Rubberband">
+    <B>Rubberband</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

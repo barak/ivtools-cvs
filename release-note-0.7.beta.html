@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Release notes for ivtools-0.7.beta</title>
+  </head>
+
+  <body>
+    <h3>Release notes for ivtools-0.7.beta</h3>
+
+<a href=./ivtools-0.7-CHANGES.txt>CHANGES</a> since ivtools-0.6.12<p>
+
+<b>*</b> ivtools-0.7 now supports the download and save/restore of graphic
+files by URL, a form of <a
+href=http://bourbon.cs.umd.edu:8001/tgif/hgviewer.html>hyper-structured-graphics</a>
+as first defined by William Chia-Wei Cheng, the author of 
+<a href=http://bourbon.cs.umd.edu:8001/tgif/>Tgif</a>.<p>
+
+	To try it out, acquire or build a copy of ivtools drawtool
+	from the 0.7 release, and launch like this:<p>
+
+	   <code> drawtool http://www.vectaport.com/ivtools/anteaters.drs </code>
+<p>
+There is also support for opening/importing any combination of
+gzip'ed, compress'ed, or uncompressed image files (JPEG, GIF, TIFF,
+PGM, PGM, PPM) and PostScript files (idraw format or the non-raster
+portion of arbitrary PostScript).  Beta testers wanted to try out the
+various combinations, and to write sample hyper-graphic documents.
+Forward any sample URL's you want pointed to by <a
+href=./index.html>ivtools</a> web pages.
+
+<p>
+<b>*</b> ivtools-0.7 now incorporates a new server that is an experiment in
+encapsulating the capabilities of the class libraries of the <a
+href=http://www.aai.com/AAI/IUE/IUE.html>Image Understanding
+Environment (IUE)</a> within the command language of <a
+href=./comterp.html>comterp</a>.  Use the <code>--with-iue</code> and
+<code>--with-iue-libs</code> arguments to configure to set up for it if
+you have a copy.  See <a href=./iueserv.README.txt>ivtools-0.7/src/iueserv/README</a> for further details.
+<p>
+<hr>
+
+back to <a href=./index.html>ivtools</a>
+
+
+  </body>
+</html>

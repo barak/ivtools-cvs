@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       VerticesComp,  VerticesView,  PSVertices  -  abstract base
+       classes for  vertexed  graphical  component  subjects  and
+       their views and PostScript external representations
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/vertices.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       VerticesComp  is an abstract base class for graphical com-
+       ponents whose geometry can be expressed as a list of coor-
+       dinate  pairs.   VerticesComp  uses  a Vertices graphic to
+       store  its  graphical  attributes.   VerticesView  is   an
+       abstract   GraphicView  subclass  for  displaying  a  Ver-
+       ticesComp. PSVertices is an  abstract  PostScriptView  for
+       subclasses  that  externalize  VerticesComp information in
+       PostScript form.
+
+
+</PRE>
+<H2>VERTICESCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>Vertices*</B> <B>GetVertices()</B>
+              Return the Vertices graphic that defines  the  ver-
+              tices's  attributes.   GetVertices is simply a more
+              specific form of the GetGraphic operation.
+
+
+</PRE>
+<H2>VERTICESCOMP PROTECTED OPERATIONS</H2><PRE>
+       <B>VerticesComp(Vertices*</B> <B>=</B> <B>nil)</B>
+              The constructor takes an optional vertices  graphic
+              that  defines the component's graphical attributes.
+
+
+</PRE>
+<H2>VERTICESVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              VerticesView interprets AlignToGridCmd to align its
+              first vertex to the grid.
+
+       <B>virtual</B> <B>void</B> <B>GetVertices(Coord*&amp;</B> <B>x,</B> <B>Coord*&amp;</B> <B>y,</B> <B>int&amp;</B> <B>count)</B>
+              Return the view's vertices in  canvas  coordinates.
+              GetVertices  allocates  new  arrays each time it is
+              called.
+
+       <B>VerticesComp*</B> <B>GetVerticesComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>VERTICESVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>VerticesView(VerticesComp*</B> <B>=</B> <B>nil)</B>
+              Initialize a VerticesView, optionally supplying the
+              subject.
+
+       <B>virtual</B> <B>void</B> <B>CreateHandles()</B>
+              VerticesView  redefines  CreateHandles  to create a
+              RubberHandles object that draws a handle coinciding
+              with each vertex.
+
+       <B>virtual</B> <B>boolean</B> <B>VertexChanged()</B>
+              in  the subject.  The Update function relies on the
+              result to determine whether to recreate the  view's
+              structured  graphic  based  on the subject's.  Ver-
+              ticesView::VertexChanged  (conservatively)  returns
+              <I>false</I>  by  default; subclasses should redefine this
+              function  to  make  a  more  discerning   decision,
+              thereby  increasing  the  efficiency  of the update
+              operation.
+
+
+</PRE>
+<H2>PSVERTICES PROTECTED OPERATIONS</H2><PRE>
+       <B>PSVertices(VerticesComp*</B> <B>=</B> <B>nil)</B>
+              Initialize a PostScript external representation  of
+              the given subject, if any.
+
+       <B>virtual</B> <B>const</B> <B>char*</B> <B>Name()</B>
+              Subclasses  should  redefine  Name  to  return  the
+              proper tag for the object in the PostScript  output
+              as required for idraw compatibility.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>GraphicComp(3U)</B>,     <B>GraphicView(3U)</B>,    <B>Grid(3U)</B>,    Pat-
+       <B>ternCmd(3U)</B>, <B>PostScriptView(3U)</B>, <B>Vertices(3U)</B>,  <B>align(3U)</B>,
+       <B>idraw(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,493 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Graphic,  FullGraphic  -  structured graphic abstract base
+       class and subclass that stores a complete set of  graphics
+       state attributes
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/graphic.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Graphic</B>  is an abstract base class for structured graphics
+       objects.  Graphic objects maintain graphics state and geo-
+       metric  information,  which  lets  them draw themselves on
+       demand and support hit detection.
+
+       Graphic subclasses can implement graphical objects such as
+       lines, rectangles, ellipses, and polygons.  Subclasses can
+       also   support   hierarchical   composition   of   Graphic
+       instances,  thus providing an object-oriented rendition of
+       traditional structured graphics functionality.
+
+
+</PRE>
+<H2>GRAPHIC PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Draw(Canvas*)</B>
+       <B>virtual</B> <B>void</B> <B>Draw(Canvas*,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord)</B>
+       <B>virtual</B> <B>void</B> <B>DrawClipped(Canvas*,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B>
+              <B>Coord)</B>
+
+       <B>virtual</B> <B>void</B> <B>Erase(Canvas*)</B>
+       <B>virtual</B> <B>void</B> <B>Erase(Canvas*,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord)</B>
+       <B>virtual</B> <B>void</B> <B>EraseClipped(Canvas*,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B>
+              <B>Coord)</B>
+              Draw or erase the graphic on the given canvas.  The
+              one-parameter  Draw  and  Erase operations draw and
+              erase the graphic in its entirety.  The five-param-
+              eter forms take four coordinates defining a rectan-
+              gular area with which to cull  drawing.   Composite
+              graphics  in particular can use this information to
+              avoid drawing children falling entirely outside the
+              given  area.  DrawClipped and EraseClipped draw the
+              graphic strictly within a  rectangular  area.   All
+              Coord parameters are in canvas coordinates.
+
+       <B>virtual</B> <B>void</B> <B>FillBg(boolean)</B>
+       <B>virtual</B> <B>void</B> <B>SetBrush(PSBrush*)</B>
+       <B>virtual</B> <B>void</B> <B>SetColors(PSColor*</B> <B>fg,</B> <B>PSColor*</B> <B>bg)</B>
+       <B>virtual</B> <B>void</B> <B>SetFont(PSFont*)</B>
+       <B>virtual</B> <B>void</B> <B>SetPattern(PSPattern*)</B>
+
+       <B>virtual</B> <B>int</B> <B>BgFilled()</B>
+       <B>virtual</B> <B>PSBrush*</B> <B>GetBrush()</B>
+       <B>virtual</B> <B>PSColor*</B> <B>GetFgColor()</B>
+       <B>virtual</B> <B>PSColor*</B> <B>GetBgColor()</B>
+       <B>virtual</B> <B>PSFont*</B> <B>GetFont()</B>
+       <B>virtual</B> <B>PSPattern*</B> <B>GetPattern()</B>
+              class  implements  the  operations  for setting and
+              getting the fill mode and colors; the other  opera-
+              tions  should  be redefined in subclasses that need
+              them.
+
+       <B>void</B> <B>Translate(float</B> <B>dx,</B> <B>float</B> <B>dy)</B>
+       <B>void</B> <B>Scale(float</B> <B>x,</B> <B>float</B> <B>y,</B> <B>float</B> <B>cx</B> <B>=</B> <B>0.0,</B> <B>float</B> <B>cy</B> <B>=</B>
+              <B>0.0)</B>
+       <B>void</B> <B>Rotate(float</B> <B>angle,</B> <B>float</B> <B>cx</B> <B>=</B> <B>0.0,</B> <B>float</B> <B>cy</B> <B>=</B> <B>0.0)</B>
+       <B>void</B> <B>SetTransformer(Transformer*)</B>
+       <B>Transformer*</B> <B>GetTransformer()</B>
+       <B>void</B> <B>TotalTransformation(Transformer&amp;</B> <B>t)</B>
+              Coordinates passed to drawing operations are trans-
+              formed according to the current translation,  rota-
+              tion,  and  scale  factor.  Optionally, scaling and
+              rotation can be performed relative to a point  (<I>cx</I>,
+              <I>cy</I>).   The  base class stores a transformer <B>_</B><I>t</I> that
+              can be directly set  and  accessed  with  SetTrans-
+              former and GetTransformer.  The default transformer
+              is nil, meaning no transformations  are  performed.
+              TotalTransformation      uses     concatTransformer
+              (described below) to  concatenate  <I>t</I>  (usually  the
+              identity  transformation)  and  the transformers of
+              the graphic's parents to obtain the graphic's total
+              transformation, which it then stores in <I>t</I>.
+
+              Unless  otherwise  noted,  input and output coordi-
+              nates are affected by the concatentation of  <I>this</I>'s
+              transformer, its parent's transformer, its parent's
+              parent's, and so on up to the root of  the  graphic
+              instance hierarchy.  Prior to transformation, coor-
+              dinates reflect the  <I>graphic's</I>  <I>coordinate</I>  <I>system</I>.
+              Following  transformation,  the coordinates reflect
+              the canvas coordinate system (i.e., they are canvas
+              coordinates).   The  coordinates  that Graphic sub-
+              class constructors require are normally in  graphic
+              coordinates,   while  operations  for  returning  a
+              graphic's bounding box (see below)  are  in  canvas
+              coordinates.
+
+       <B>void</B> <B>Align(Alignment,</B> <B>Graphic*,</B> <B>Alignment)</B>
+              Position  the given graphic relative to <I>this</I>, which
+              stays fixed, while  the  graphic  supplied  as  the
+              argument  is  translated  appropriately.  The first
+              Alignment parameter specifies  the  alignment  with
+              respect  to  <I>this</I>,  while  the second specifies the
+              alignment with respect to the given graphic.
+
+       <B>virtual</B> <B>void</B> <B>GetBounds(</B>
+           <B>float&amp;</B> <B>left,</B> <B>float&amp;</B> <B>bottom,</B> <B>float&amp;</B> <B>right,</B> <B>float&amp;</B> <B>top</B>
+       <B>)</B>
+              Return the exact coordinates of  the  smallest  box
+
+       <B>void</B> <B>GetBox(Coord&amp;</B> <B>left,</B> <B>Coord&amp;</B> <B>bottom,</B> <B>Coord&amp;</B> <B>right,</B>
+              <B>Coord&amp;</B> <B>top)</B>
+       <B>void</B> <B>GetBox(BoxObj&amp;)</B>
+              Return the smallest bounding box circumscribing the
+              graphic.   The  return values are in canvas coordi-
+              nates.  The <B>BoxObj</B> represents a  rectangle  defined
+              by lower left and upper right coordinates (see geo-
+              <B>mobjs(3U)</B> for details).
+
+       <B>virtual</B> <B>void</B> <B>GetCenter(float&amp;</B> <B>x,</B> <B>float&amp;</B> <B>y)</B>
+              Return the center point of the  graphic  in  canvas
+              coordinates.
+
+       <B>virtual</B> <B>boolean</B> <B>Contains(PointObj&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>Intersects(BoxObj&amp;)</B>
+              Return  whether  or  not  the  graphic contains the
+              given point or  intersects  the  given  rectangular
+              area  specified  in  canvas  coordinates.  <B>PointObj</B>
+              describes a point (see <B>geomobjs(3U)</B>).  These opera-
+              tions  are  used  most  often  for fine-grained hit
+              detection.
+
+       <B>void</B> <B>SetTag(void*)</B>
+       <B>void*</B> <B>GetTag()</B>
+              Set or return a tag associated with the graphic.
+
+       <B>Graphic*</B> <B>Parent()</B>
+              Return the graphic's parent, if any.
+
+       <B>virtual</B> <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Last(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>Done(Iterator)</B>
+              Operations for iterating over the  graphic's  chil-
+              dren,  if  any.   These  operations  do  nothing by
+              default.  Graphics  that  compose  other   graphics
+              should  redefine these operations to permit traver-
+              sal of their children.  First and  Last  initialize
+              an  iterator  to  point to the beginning and end of
+              the list of children,  respectively.   Next  incre-
+              ments the iterator to point to the following child,
+              while Prev decrements the iterator to point to  the
+              preceding  child.   Done returns whether or not the
+              iterator points beyond the first or last  child  in
+              the list.
+
+       <B>Graphic*</B> <B>GetGraphic(Iterator)</B>
+       <B>void</B> <B>SetGraphic(Graphic*,</B> <B>Iterator&amp;)</B>
+              These operations do nothing by default.  Subclasses
+              that contain children should redefine them as  fol-
+              the  iterator  to  point to a particular graphic in
+              the list of  children;  it  should  initialize  the
+              iterator  to  point  to a nil instance if the given
+              graphic is not a child.
+
+       <B>virtual</B> <B>void</B> <B>Bequeath()</B>
+              Bequeath  does  nothing  by   default.    Composite
+              graphic  subclasses  should  redefine it so that it
+              propagates to the children all the  graphics  state
+              in  <I>this</I> that can affect them.  This will prevent a
+              change in a child's appearance should it be removed
+              from  <I>this</I>.   Following  the call to Bequeath, <I>this</I>
+              should  no  longer  define   any   graphics   state
+              attributes.
+
+       <B>virtual</B> <B>Graphic*</B> <B>FirstGraphicContaining(PointObj&amp;)</B>
+       <B>virtual</B> <B>Graphic*</B> <B>LastGraphicContaining(PointObj&amp;)</B>
+       <B>virtual</B> <B>Graphic*</B> <B>FirstGraphicIntersecting(BoxObj&amp;)</B>
+       <B>virtual</B> <B>Graphic*</B> <B>LastGraphicIntersecting(BoxObj&amp;)</B>
+       <B>virtual</B> <B>Graphic*</B> <B>FirstGraphicWithin(BoxObj&amp;)</B>
+       <B>virtual</B> <B>Graphic*</B> <B>LastGraphicWithin(BoxObj&amp;)</B>
+              These  operation  do nothing by default.  Composite
+              graphic subclasses should  redefine  them  so  that
+              they return the first or last child that contains a
+              point, intersects a rectangular area, or  does  not
+              extend  beyond  the given rectangular area, respec-
+              tively.
+
+       <B>virtual</B> <B>Graphic&amp;</B> <B>operator</B> <B>=</B> <B>(Graphic&amp;)</B>
+              Assign   the   given   graphic's   graphics   state
+              attributes to <I>this</I>.
+
+       <B>virtual</B> <B>Graphic*</B> <B>Copy()</B>
+              Return  a  copy  of the graphic.  Subclasses should
+              redefine this operation to return  an  instance  of
+              their type.
+
+
+</PRE>
+<H2>GRAPHIC PROTECTED MEMBERS</H2><PRE>
+       <B>Graphic(Graphic*</B> <B>gr</B> <B>=</B> <B>nil)</B>
+              Initialize  the  graphics,  optionally  supplying a
+              graphic from which to  obtain  an  initial  set  of
+              graphics  state attributes.  Graphic is an abstract
+              base class.  Therefore its constructor is protected
+              to prevent instantiation.
+
+       <B>virtual</B> <B>void</B> <B>draw(Canvas*,</B> <B>Graphic*</B> <B>gs)</B>
+       <B>virtual</B> <B>void</B> <B>drawClipped(</B>
+           <B>Canvas*,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>erase(Canvas*,</B> <B>Graphic*)</B>
+       <B>virtual</B> <B>void</B> <B>eraseClipped(</B>
+       <B>)</B>
+              Graphic subclasses redefine these <I>stateless</I> <I>drawing</I>
+              <I>operations</I> to render themselves.  These  operations
+              are  called by the corresponding capitalized opera-
+              tions, which supply them with  the  extra  trailing
+              Graphic  parameter  <I>gs</I>.  This parameter defines the
+              graphics state with which to draw the graphic.  The
+              graphic state is normally computed using the <I>concat</I>
+              functions described below.  Subclasses normally use
+              the  graphics state passed to them without ignoring
+              or modifying it, though they may safely  do  so  if
+              they must override one or more attributes.
+
+       <B>void</B> <B>update(Graphic*</B> <B>gs)</B>
+              Graphics  ultimately  use  a  Painter to draw them-
+              selves.  The Graphic class  maintains  a  protected
+              static  painter  <B>_</B><I>p</I> that subclasses can use to draw
+              themselves.  The update operation sets <B>_</B><I>p</I>'s  graph-
+              ics  state  attributes  to match those of the given
+              graphic to ensure that the  painter  will  generate
+              graphics  with  the  proper color, font, etc.  Sub-
+              classes should call update in their stateless draw-
+              ing operations (normally supplying the graphic they
+              were passed) before they call  any  drawing  opera-
+              tions  on  <B>_</B><I>p</I>.   The  graphics  that  <B>_</B><I>p</I> generates,
+              therefore, will reflect the graphics state that was
+              passed to the stateless drawing operation.
+
+       <B>virtual</B> <B>void</B> <B>getExtent(</B>
+           <B>float&amp;</B> <B>left,</B> <B>float&amp;</B> <B>bottom,</B> <B>float&amp;</B> <B>cx,</B> <B>float&amp;</B> <B>cy,</B>
+           <B>float&amp;</B> <B>tol,</B> <B>Graphic*</B> <B>gs</B>
+       <B>)</B>
+
+       <B>void</B> <B>GetExtent(Extent&amp;)</B>
+              A graphic's <I>extent</I> defines its physical boundaries.
+              Subclasses redefine getExtent to return this bound-
+              ary  information  based  on the graphics state sup-
+              plied in <I>gs</I>.  The <I>left</I>, <I>bottom</I>, <I>cx</I>, and <I>cy</I>  parame-
+              ters  define  the  graphic's  lower left corner and
+              center, respectively, in canvas  coordinates.   The
+              <I>tol</I>  parameter  specifies  a  fixed amount of space
+              around the boundary to account  for  parts  of  the
+              graphic's  appearance  that  do  not scale linearly
+              (e.g.,  brush  width).   The  relationship  between
+              getExtent and GetExtent is the same as that between
+              draw and Draw: getExtent is the  stateless  version
+              of   GetExtent,  which  concatenates  the  parent's
+              graphics state and calls getExtent with the result.
+
+       <B>void</B> <B>getBounds(</B>
+           <B>float&amp;</B> <B>left,</B> <B>float&amp;</B> <B>bottom,</B> <B>float&amp;</B> <B>right,</B> <B>float&amp;</B> <B>top,</B>
+           <B>Graphic*</B> <B>gs</B>
+           <B>Coord&amp;</B> <B>left,</B> <B>Coord&amp;</B> <B>bottom,</B> <B>Coord&amp;</B> <B>right,</B> <B>Coord&amp;</B> <B>top,</B>
+           <B>Graphic*</B>
+       <B>)</B>
+
+       <B>void</B> <B>getBox(BoxObj&amp;,</B> <B>Graphic*)</B>
+              Stateless versions of the corresponding capitalized
+              bounding box operations, which call  the  stateless
+              versions  with  the  cumulative  graphics  state of
+              <I>this</I>'s ancestors.  These operations are defined  in
+              terms  of  getExtent  and  therefore  should not be
+              reimplemented by subclasses.
+
+       <B>virtual</B> <B>boolean</B> <B>contains(PointObj&amp;,</B> <B>Graphic*</B> <B>gs)</B>
+       <B>virtual</B> <B>boolean</B> <B>intersects(BoxObj&amp;,</B> <B>Graphic*)</B>
+              Stateless versions of the corresponding capitalized
+              operations  for  fine-grained  hit  detection.   By
+              default, these operations return true if the  argu-
+              ment  is contained in or intersects <I>this</I>'s bounding
+              box.  Subclasses can redefine these  operations  to
+              make a more discerning decision.
+
+       <B>Graphic*</B> <B>getRoot()</B>
+       <B>void</B> <B>totalGS(Graphic&amp;</B> <B>g)</B>
+       <B>void</B> <B>parentXform(Transformer&amp;</B> <B>t)</B>
+              Helper  functions  for  parent-related  operations.
+              getRoot returns the root graphic in <I>this</I>'s  hierar-
+              chy.  totalGS uses concat (described below) to con-
+              catenate the graphics state of  <I>this</I>  and  all  its
+              ancestors,  returning the result in <I>g</I>. Any graphics
+              state that <I>g</I> stored initially will  be  lost.   The
+              parentXform    operation    uses    concatTransform
+              (described below) to  concatenate  the  transforma-
+              tions  of  all  ancestors  of  <I>this</I>,  returning the
+              result in <I>t</I>.  Any  transformations  that  <I>t</I>  stored
+              initially will be lost.
+
+       <B>void</B> <B>setParent(Graphic*</B> <B>g,</B> <B>Graphic*</B> <B>parent)</B>
+       <B>void</B> <B>unsetParent(Graphic*</B> <B>g)</B>
+              Operations  for  setting  and  getting the value of
+              another graphic's (<I>g</I>'s) parent  as  stored  in  the
+              <B>_</B><I>parent</I>  protected  member variable.  Normally only
+              composite graphics change this attribute of another
+              graphic, usually a newly-acquired child.
+
+       <B>void</B> <B>cachingOn()</B>
+       <B>void</B> <B>cachingOff()</B>
+       <B>virtual</B> <B>boolean</B> <B>extentCached()</B>
+       <B>virtual</B> <B>void</B> <B>uncacheExtent()</B>
+       <B>virtual</B> <B>void</B> <B>uncacheParents()</B>
+       <B>virtual</B> <B>void</B> <B>uncacheChildren()</B>
+       <B>virtual</B> <B>void</B> <B>invalidateCaches()</B>
+              Operations   that  support  extent  caching.   Some
+              improving performance.   For  example,  it  may  be
+              expensive  to  compute  the  extent  for  composite
+              graphics that have many children; thus caching  the
+              extent  will improve performance if the extent does
+              not change often.
+
+              cachingOn  and  cachingOff  change  the  value   of
+              <B>_</B><I>caching</I>,  a  protected  static  boolean  member of
+              Graphic that indicates whether caching is active on
+              a  global  basis.  Extent-caching subclasses should
+              check this member  to  avoid  caching  when  it  is
+              <I>false</I>.   Caching subclasses should redefine extent-
+              Cached to return whether or not  they  have  cached
+              their  extent  (in  whatever  form  they store it).
+              They should redefine uncacheExtent to  discard  any
+              extent  information  they've  cached.   By default,
+              uncacheParents simply calls uncacheExtent  on  each
+              ancestor  of <I>this</I>, while uncacheChildren does noth-
+              ing  by  default.    Subclasses   should   redefine
+              uncacheChildren  to make any children uncache their
+              extents.
+
+       <B>virtual</B> <B>void</B> <B>concatGS(Graphic*</B> <B>a,</B> <B>Graphic*</B> <B>b,</B> <B>Graphic*</B>
+              <B>dest)</B>
+       <B>virtual</B> <B>void</B> <B>concatTransformer(</B>
+           <B>Transformer*</B> <B>a,</B> <B>Transformer*</B> <B>b,</B> <B>Transformer*</B> <B>dest</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>concat(Graphic*</B> <B>a,</B> <B>Graphic*</B> <B>b,</B> <B>Graphic*</B> <B>dest)</B>
+              Operations for concatenting graphics  state.   con-
+              catGS concatenates <I>a</I>'s graphics state (brush, font,
+              pattern, etc., but <I>not</I> transformation matrix)  with
+              <I>b</I>'s  and  assigns  the result to <I>dest</I>. According to
+              the  default  concatenation  semantics,  <I>dest</I>  will
+              receive  graphics  state  attributes  defined by <I>b</I>;
+              <I>dest</I> will receive only those attributes from <I>a</I> that
+              <I>b</I>  does not define (i.e., those for which <I>b</I> returns
+              <I>nil</I>).  By default, concatTransformer does a  matrix
+              multiply of <I>a</I> and <I>b</I> and assigns the result to <I>dest</I>.
+              The concat operation concatenates both the graphics
+              state  and transformation of its arguments, assign-
+              ing the results to <I>dest</I>.
+
+       <B>void</B> <B>transform(Coord&amp;,</B> <B>Coord&amp;,</B> <B>Graphic*)</B>
+       <B>void</B> <B>transform(Coord,</B> <B>Coord,</B> <B>Coord&amp;,</B> <B>Coord&amp;,</B> <B>Graphic*)</B>
+       <B>void</B> <B>transform(float,</B> <B>float,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*)</B>
+       <B>void</B> <B>transformList(</B>
+           <B>Coord[],</B> <B>Coord[],</B> <B>int,</B> <B>Coord[],</B> <B>Coord[],</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>void</B> <B>transformRect(</B>
+           <B>float,</B> <B>float,</B> <B>float,</B> <B>float,</B>
+
+       <B>)</B>
+
+       <B>void</B> <B>invTransform(Coord&amp;,</B> <B>Coord&amp;,</B> <B>Graphic*)</B>
+       <B>void</B> <B>invTransform(Coord,</B> <B>Coord,</B> <B>Coord&amp;,</B> <B>Coord&amp;,</B> <B>Graphic*)</B>
+       <B>void</B> <B>invTransform(float,</B> <B>float,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*)</B>
+       <B>void</B> <B>invTransformList(</B>
+           <B>Coord[],</B> <B>Coord[],</B> <B>int,</B> <B>Coord[],</B> <B>Coord[],</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>void</B> <B>invTransformRect(</B>
+           <B>float,</B> <B>float,</B> <B>float,</B> <B>float,</B>
+           <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*</B>
+       <B>)</B>
+              Convenience functions analogous to the  Transformer
+              operations of the same name.  These operations sim-
+              ply check if <B>_</B><I>t</I> is nil before  calling  the  corre-
+              sponding Transformer operation on it.
+
+       <B>virtual</B> <B>void</B> <B>drawGraphic(Graphic*</B> <B>g,</B> <B>Canvas*,</B> <B>Graphic*</B> <B>gs)</B>
+       <B>virtual</B> <B>void</B> <B>drawClippedGraphic(</B>
+           <B>Graphic*</B> <B>g,</B> <B>Canvas*,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B>
+              <B>Graphic*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>eraseGraphic(Graphic*</B> <B>g,</B> <B>Canvas*,</B> <B>Graphic*)</B>
+       <B>virtual</B> <B>void</B> <B>eraseClippedGraphic(</B>
+           <B>Graphic*</B> <B>g,</B> <B>Canvas*,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord,</B>
+              <B>Graphic*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>getExtentGraphic(</B>
+           <B>Graphic*</B> <B>g,</B> <B>float&amp;</B> <B>left,</B> <B>float&amp;</B> <B>bottom,</B> <B>float&amp;</B> <B>cx,</B>
+              <B>float&amp;</B> <B>cy,</B>
+           <B>float&amp;</B> <B>tol,</B> <B>Graphic*</B> <B>gs</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>boolean</B> <B>containsGraphic(</B>
+           <B>Graphic*</B> <B>g,</B> <B>PointObj&amp;,</B> <B>Graphic*</B> <B>gs</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>boolean</B> <B>intersectsGraphic(Graphic*</B> <B>g,</B> <B>BoxObj&amp;,</B>
+              <B>Graphic*)</B>
+
+       <B>virtual</B> <B>boolean</B> <B>extentCachedGraphic(Graphic*</B> <B>g)</B>
+       <B>virtual</B> <B>void</B> <B>uncacheExtentGraphic(Graphic*</B> <B>g)</B>
+       <B>virtual</B> <B>void</B> <B>uncacheParentsGraphic(Graphic*</B> <B>g)</B>
+       <B>virtual</B> <B>void</B> <B>uncacheChildrenGraphic(Graphic*</B> <B>g)</B>
+       <B>virtual</B> <B>void</B> <B>invalidateCachesGraphic(Graphic*</B> <B>g)</B>
+
+       <B>virtual</B> <B>void</B> <B>concatGSGraphic(</B>
+           <B>Graphic*</B> <B>g,</B> <B>Graphic*</B> <B>a,</B> <B>Graphic*</B> <B>b,</B> <B>Graphic*</B> <B>dest</B>
+       <B>)</B>
+           <B>Graphic*</B> <B>g,</B> <B>Transformer*</B> <B>a,</B> <B>Transformer*</B> <B>b,</B>
+           <B>Transformer*</B> <B>dest</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>concatGraphic(</B>
+           <B>Graphic*</B> <B>g,</B> <B>Graphic*</B> <B>a,</B> <B>Graphic*</B> <B>b,</B> <B>Graphic*</B> <B>dest</B>
+       <B>)</B>
+              Helper  functions  that let graphic subclasses call
+              the protected  member  functions  on  instances  of
+              other  subclasses  that  redefine  them.  All these
+              helper functions  take  the  affected  instance  as
+              their  first parameter.  All are semantically iden-
+              tical  to  the  corresponding  functions  described
+              above  (which  omit  the  "Graphic"  suffix and the
+              leading <I>g</I> parameter).  Composite graphics  are  the
+              most likely users of such helper functions, calling
+              them on their children.
+
+
+</PRE>
+<H2>FULLGRAPHIC PUBLIC OPERATIONS</H2><PRE>
+       <B>FullGraphic(Graphic*</B> <B>=</B> <B>nil)</B>
+              Construct  a  full  graphic,  optionally  supplying
+              another  graphic  from which to copy an initial set
+              of graphics state attributes.  FullGraphic  objects
+              store   a   full   complement   of  graphics  state
+              attributes; consequently, FullGraphic redefines all
+              the   operations  for  setting  and  getting  these
+              attributes.  The FullGraphic class can be used as a
+              base  class  from  which  to  derive  graphics that
+              require a complete set of graphics state and  store
+              such state.  It is also useful to instantiate Full-
+              Graphics and use them as graphics  state  reposito-
+              ries.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Canvas(3I)</B>,   <B>Iterator(3U)</B>,  <B>Painter(3I)</B>  <B>Transformer(3I)</B>,
+       <B>geomobjs(3U)</B>, <B>pspaint(3U)</B>
+
+       "Applying Object-Oriented Design to Structured  Graphics,"
+       John  M.  Vlissides  and Mark A. Linton, in <I>Proceedings</I> <I>of</I>
+       <I>the</I> <I>1988</I> <I>USENIX</I> <I>C++</I> <I>Conference</I>, Denver, CO, October  1988,
+       pp. 81-94.
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

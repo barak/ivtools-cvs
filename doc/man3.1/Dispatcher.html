@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Dispatcher  -  wait  on  multiple file descriptors until a
+       condition occurs
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/dispatcher.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Conceptually, the dispatcher plays the role  of  detecting
+       new  data on multiple input file descriptors and dispatch-
+       ing the data to  the  appropriate  iohandlers.   The  dis-
+       patcher also notifies iohandlers of expired timers.  Noti-
+       fication of either an I/O condition or  an  expired  timer
+       occurs by calling one of the iohandler's virtual functions
+       (see <B>IOHandler(3I)</B>).   Since  a  program  needs  only  one
+       instance  of  Dispatcher, a static member function is pro-
+       vided to create that instance if necessary and return  it.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>enum</B> <B>DispatcherMask</B> <B>{</B> <B>ReadMask,</B> <B>WriteMask,</B> <B>ExceptMask</B> <B>}</B>
+       <B>virtual</B> <B>IOHandler*</B> <B>handler(int</B> <B>fd,</B> <B>DispatcherMask)</B>
+       <B>virtual</B> <B>void</B> <B>link(int</B> <B>fd,</B> <B>DispatcherMask,</B> <B>IOHandler*)</B>
+       <B>virtual</B> <B>void</B> <B>unlink(int</B> <B>fd)</B>
+              Return  a  file descriptor's iohandler, link a file
+              descriptor  to  an  iohandler,  or  unlink  a  file
+              descriptor from its iohandlers.  The DispatcherMask
+              describes the I/O condition that the  iohandler  is
+              interested  in, such as whether the file descriptor
+              has new data available for  reading.   If  the  I/O
+              condition occurs, the iohandler will be expected to
+              read data from the file descriptor, write  data  to
+              the   file  descriptor,  or  handle  the  exception
+              depending on the I/O condition.
+
+       <B>virtual</B> <B>void</B> <B>startTimer(long</B> <B>sec,</B> <B>long</B> <B>usec,</B> <B>IOHandler*)</B>
+       <B>virtual</B> <B>void</B> <B>stopTimer(IOHandler*)</B>
+              Attach an iohandler to a timer or  remove  a  timer
+              before it expires.  A timer expires after the given
+              number of seconds and  microseconds  have  elapsed.
+              If  a timer expires, the dispatcher will notify the
+              attached iohandler.  Timers will not  expire  until
+              the   program   calls   either   variant   of  Dis-
+              patcher::dispatch.
+
+       <B>virtual</B> <B>void</B> <B>dispatch()</B>
+       <B>virtual</B> <B>boolean</B> <B>dispatch(long&amp;</B> <B>sec,</B> <B>long&amp;</B> <B>usec)</B>
+              With no arguments, block indefinitely until an  I/O
+              condition occurs or a timer expires and then notify
+              the attached iohandler.  With two arguments,  block
+              no  longer  than  the  given  number of seconds and
+              microseconds.  If both numbers are zero, the  func-
+              tion  will  return  immediately  after checking all
+              file descriptors and timers.  The return value will
+              timer  expired  or it exceeded the given poll time.
+              The function will decrease the given poll  time  by
+              the amount of time it spent blocking.
+
+       <B>static</B> <B>Dispatcher&amp;</B> <B>instance()</B>
+       <B>static</B> <B>void</B> <B>instance(Dispatcher*)</B>
+              With no arguments, create an instance of Dispatcher
+              if it doesn't already exist and return it.  With an
+              argument,  set the instance of Dispatcher that will
+              be used throughout the program.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>select(2)</B>, <B>IOHandler(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

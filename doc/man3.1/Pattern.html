@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Pattern - fill patterns
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/pattern.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A pattern defines how to fill areas during graphics opera-
+       tions.  A pattern is essentially a mask for  drawing  that
+       is replicated to fill the size of the destination.
+
+       N.B.: Patterns are relatively low-level objects, typically
+       used to implement an alpha value for a color.   Since  the
+       color object now supports an alpha value, there is no need
+       to use patterns.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Pattern()</B>
+              Create a solid pattern.
+
+       <B>Pattern(char*,</B> <B>unsigned</B> <B>int</B> <B>width,</B> <B>unsigned</B> <B>int</B> <B>height)</B>
+              Create a pattern with the given width  and  height,
+              using the bits described by the first parameter.
+
+       <B>Pattern(int)</B>
+              Create a 4x4 pattern determined from the least sig-
+              nificant 16 bits of the parameter.
+
+       <B>Pattern(int*)</B>
+              Construct a 16x16  pattern  from  the  given  data.
+              This  function is provided solely for backward com-
+              patibility and will be removed in the future.
+
+       <B>Pattern(Bitmap*)</B>
+              Construct a pattern from the bitmap.  If necessary,
+              the  bitmap  will  be tiled or truncated to satisfy
+              window system requirements for fill pattern  sizes.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Painter(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

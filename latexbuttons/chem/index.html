@@ -1,0 +1,123 @@
+
+<title>Chemistry with IVtools: Building complex chemical structures with a basic widget set and comdraw</title>
+
+<h1>
+ivtools Chem-widgets
+</h1>
+
+<b>ivtools Chem-widgets</b> is a set of chemical building blocks such as simple rings,
+polycyclic rings, and a porphoryn ring for building your own chemical structures
+to be used in LaTeX documents etc. Many of these structures such as benzene, c4, c5, c6,
+and c7 have removable angle vertexes making the contruction of heterocycles a snap.
+Below is an example showing how the build the complex molecule adenosine-triphosphate
+(ATP). The following examples were all done with comdraw.
+<p>
+We start with a ring system and create 2 colored, dashed lines and a bunch of required
+symbols. We then use the dashed lines to align the single bonds and symbols like so:
+<h1>
+<img align=middle src="./chem-fig1.jpeg" >
+</h1>
+When we have everything in its place, we then get rid of any extraneous symbols, lines,
+glyphs, etc. and select the completed structure by pressing the left mouse button
+(Mouse-1) and dragging across the structure diagonally. The selected chemical should
+similar to Fig. 2.
+<h1>
+<img align=middle src="./chem-fig2.jpeg" >
+</h1>
+<p>
+The last step, after selecting the completed structure, is to select Structure::Ungroup
+from the IVtools menu 2 or 3 times. You then reselect the completed structure and select
+Structure::Group from the IVtools menu. This will give you the result in Fig. 3 below.
+<h1>
+<img align=middle src="./chem-fig3.jpeg" >
+</h1>
+Since the structure is now treated as 1 large object, you can reposition it by selecting
+it, and then moving the mouse while holding the middle button down.
+
+<p>
+To include this structure in a technical paper or journal article, simply export it as
+encapsulated PostScript (EPS) by choosing File::Export Graphic. Click on "EPS", then
+click on "Export". Then insert the following before the \begin{document} line in your
+LaTeX document:<p>
+<code>
+\input psfig.sty<br>
+</code>
+<p>
+To display the graphic, insert the following in the body of your LaTeX code:<p>
+
+<code>
+ \begin{figure}[htbp] <br>
+     \psfig{file=file.ps,width=6in,height=3in} % see Kenneth Shultis, pp. 100-103<br>
+ \end{figure}
+</code>
+<p>
+Where file.ps is the name of your graphic; there cannot be any extraneous spaces inside
+the braces on the \psfig line. See Ken Shultis' book "LaTeX NOTES: Practical Tips for Preparing Technical Documents", ISBN: 0-13-120973-6
+
+<p>
+<b>IVtools does Curvey-arrows</b><br>
+"Curvey arrow notation" is an official notation used by chemists for specifiying
+chemical mechanisms by showing where the electrons go based on Lewis Acid-Base and 
+VSEPR (Valence Shell Electron Pair Repulsion) theories, and the Octet Rule.
+<p>
+A very simple example of this is the resonance structure of 4-nitrophenol:
+<h1>
+<img align=middle src="./nitrophenol1_2.jpeg" >
+</h1><h1>
+<img align=middle src="./nitrophenol2_2.jpeg">
+</h1>
+<p>
+
+<b>IVtools and heterocycles:</b>
+The cyclical structures cyclobutane, cyclopentane, cyclohexane, benzene, cycloheptane, and
+cyclooctane were designed with removable angle vertexes making construction of heterocycles a
+snap:
+<h1>
+<img align=middle src="./pyridine1.jpeg">
+<img align=middle src="./pyridine2.jpeg">
+</h1>
+<p>
+
+The <b>IVtools custom toolbar</b> allows one to load custom toolbar configurations for different
+typesetting projects. Instead of loading all of the possible chemical widgets, and believe me
+there are alot, only load the ones required for the project at hand, or the ones you find most useful.
+To build a custom toolbar, write a toolbar script similar to this:
+<p>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgets/c5-ring.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgets/c6-ring.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgets/phenyl.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgets/c7-ring.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgetsc/8-ring.idraw" :popen)
+
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgets/c6-boat.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgets/c6-chair.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Chem-Toolbar/widgets/t-butyl.idraw" :popen)
+<p>
+To load the desired toolbar click on Tools::Custom Tools. This will give a stripped down toolbar
+into which custom widgets can be inserted. To load the custom widgets, click into the Comdraw
+command window, and enter the following command:<p>
+run ("$PATH/file")
+<p>
+Where $PATH is the complete path to the custom toolbar script and "file" is the name of the script.
+<p>
+<b>The chemistry widgets must be in idraw format</b> to be added to the toolbar in this manner.
+To convert a widget to idraw format for use in the toolbar:<p>
+<ul>
+
+    <li>Import the desired graphic</li> <br>
+    <li>Select from the menu File::Export Graphic</li><br>
+    <li>Choose "idraw EPS"</li> <br>
+    <li>Click on the Export button </li><br>
+
+</ul>
+<p>
+Below is a shot of the comdraw GUI with chem widgets loaded:
+<p>
+<h1>
+<img align=middle src="./comdraw.jpeg">
+</h1>
+<p>
+<a href = ../index.html>up to LaTeX toolbutton page</a>
+
+
+

@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       RectComp,  RectView, PSRect - rectangle component subject,
+       view, and PostScript external representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/rect.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       RectComp is a GraphicComp that defines  a  rectangle.   It
+       uses an SF_Rect graphic to store its graphical attributes.
+       RectView is a GraphicView for  displaying  the  rectangle.
+       PSRect is a PostScriptView that externalizes the subject's
+       information in PostScript form.
+
+
+</PRE>
+<H2>RECTCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>RectComp(SF_Rect*</B> <B>=</B> <B>nil)</B>
+              The constructor takes  an  optional  stroked-filled
+              rectangle  that defines the attributes of the rect-
+              angle.
+
+       <B>SF_Rect*</B> <B>GetRect()</B>
+              Return the SF_Rect graphic that defines the rectan-
+              gle's  attributes.   GetRect  is simply a more spe-
+              cific form of the GetGraphic operation.
+
+
+</PRE>
+<H2>RECTVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>RectView(RectComp*</B> <B>=</B> <B>nil)</B>
+              Create an RectView, optionally supplying  the  sub-
+              ject.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              RectView  interprets  AlignToGridCmd  to  align its
+              lower-left to the grid.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              RectView redefines  its  response  to  manipulation
+              with  a  GraphicCompTool.  GraphicCompTool will let
+              the user sweep out a rectangle  that  reflects  the
+              RectComp's  size.   Creation  will be influenced by
+              gravity, if any. RectView also defines  a  response
+              to  the  ReshapeTool, allowing the user to click on
+              one of its corners to reposition it.   The  subject
+              is  actually replaced (via ReplaceCmd) with a Poly-
+              gonComp subject reflecting the repositioned corner.
+              Repositioning will be influenced by gravity.
+
+       <B>virtual</B> <B>void</B> <B>GetCorners(Coord*,</B> <B>Coord*)</B>
+              GetCorners  takes  two  arrays of four Coord values
+              and stores into them the coordinates  of  its  cor-
+              Return the subject.
+
+
+</PRE>
+<H2>RECTVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>CreateHandles()</B>
+              RectView  redefines  CreateHandles to use a Rubber-
+              Handles object with four handles, one at each  cor-
+              ner of the rectangle.
+
+
+</PRE>
+<H2>PSRECT PUBLIC OPERATIONS</H2><PRE>
+       <B>PSRect(RectComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>GraphicComp(3U)</B>,   <B>GraphicCompTool(3U)</B>,   <B>GraphicView(3U)</B>,
+       <B>Grid(3U)</B>,       <B>PolygonComp(3U)</B>,       <B>PostScriptView(3U)</B>,
+       <B>ReshapeTool(3U)</B>, <B>align(3U)</B>, <B>edit(3U)</B>, <B>polygons(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

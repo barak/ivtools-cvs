@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>PostScript and ivtools drawing editors</title>
+  </head>
+
+  <body>
+    <h3>PostScript and ivtools drawing editors</h3>
+
+
+<menu>
+<li>
+    When printing all the <a href=../editors.html>ivtools drawing editors</a>
+    can generate Enapsulated PostScript formatted in a way that can be later reloaded or imported (<a href=../idraw.html>idraw-format</a> EPS).
+<li>
+  All     <a href=../editors.html>ivtools drawing editors</a>
+(except <a href=../idraw.html>idraw</a>) can export any selected list of graphics in <a href=../idraw.html>idraw-format</a> EPS .
+<li>
+    <a href=../idraw.html>idraw-format</a> EPS can be loaded directly into idraw, and  loaded <i>or</i> 
+    imported into any other ivtools drawing editor.  
+
+<li>
+Other PostScript (and PDF) can be
+    converted with "pstoedit -f idraw" to be importable or loadable by all the drawing editors of ivtools.
+
+<i>This works for
+    embedded images as well since <a href=http://www.ivtools.org/ivtools/pstoedit.html>pstoedit</a> version 3.17.  For earlier versions of pstoedit apply this patch to 
+	<a href=http://www.vectaport.com/pub/src/pstoedit-idrawrast.patch.txt>
+add raster support to the idraw output format of pstoedit</a>.</i>
+<li>
+  All     <a href=../editors.html>ivtools drawing editors</a>
+(except <a href=../idraw.html>idraw</a>) can export directly to any Unix filter that accepts PostScript if "to command" is checked in the export dialog box, i.e. <i>ghostview</i>.
+<li>
+  All     <a href=../editors.html>ivtools drawing editors</a>
+(except <a href=../idraw.html>idraw</a>) can import directly from any Unix filter that generates PostScript if "from command" is checked in the export dialog box, i.e. <i>pstoedit</i>.
+</menu>
+    <hr>
+    For a more expanded discussion of this, see <a href="http://ivtools.org/ivtools/othertools.html">other tools that work with ivtools</a><p>
+    up to <a href=./thingstodo.html>things to do</a> with ivtools drawing editors<p>
+
+  </body>
+</html>

@@ -1,0 +1,264 @@
+
+<html><head><TITLE>Description of LexScan</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>LexScan</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="ComTerpModule.html" >ComTerpModule</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+Lexical scanner for C tokens, with C-style comment skipping.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="ComTerpModule.html" >ComTerpModule</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#LexScan><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Attribute/lexscan.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="LexScan()">
+    <B>LexScan</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct on stdin.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="LexScan(constchar*path)">
+    <B>LexScan</B> (const char* path) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct on 'path'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="LexScan(void*&#38;&#38;COMMchar*&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOchar*&#38;&#38;COMMint&#38;&#38;COMMvoid*&#38;&#38;BRAKC&#38;&#38;COMMint&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC&#38;&#38;COMMint&#38;&#38;BRAKO*&#38;&#38;BRAKC&#38;&#38;BRAKOvoid*&#38;&#38;BRAKC)">
+    <B>LexScan</B> (void*, char*(*)(char*,int,void*), int(*)(void*), int(*)(void*)) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct on arbitrary function pointers, with arbitrary void* 
+ pointer to pass to them.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="get_attr(char*buf&#38;&#38;COMMunsignedintbufsiz)">
+    <B>get_attr</B> (char* buf, unsigned int bufsiz) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return <A HREF="token.html" >token</A> in newly allocated <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="attr_value.html" >attr_value</A> 
+    <A NAME="get_next_token(unsignedint&#38;toktype)">
+    <B>get_next_token</B> (unsigned int&#38; toktype) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return <A HREF="token.html" >token</A> in structure ready for constructing an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="get_next_token_string(unsignedint&#38;toktype)">
+    <B>get_next_token_string</B> (unsigned int&#38; toktype) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to next <A HREF="token.html" >token</A> in internal buffer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="init()">
+    <B>init</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        intialize comment delimeters and internal <A HREF="token.html" >token</A> buffer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="~LexScan()">
+    <B>~LexScan</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_begcmt">
+    <B>_begcmt</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_endcmt">
+    <B>_endcmt</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_tokbuf">
+    <B>_tokbuf</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

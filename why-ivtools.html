@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Why try ivtools?</title>
+  </head>
+
+  <body>
+    <h3>Why try ivtools?</h3>
+
+    Why should a developer of commercial or free software applications
+    for Unix consider using <a href=./index.html>ivtools</a> for their work?
+
+    <menu>
+
+    <li><a href=#Mature name="MatureMenu">*</a> mature framework for direct-manipulation graphical editors</li>
+
+    <li><a href=#Lightweight name="LightweightMenu">*</a> lightweight glyphs for interactive structured document applications</li>
+
+    <li><a href=#Separation name="SeparationMenu">*</a> separation of structured graphic and structured document classes</li>
+    
+    <li><a href=#Integration name="IntegrationMenu">*</a> integration of an extendable and distributed command interpreter</li>
+    
+    <li><a href=#Freedom name="FreedomMenu">*</a> freedom to use the source in any fashion</li>
+
+    <li><a href=#Protection name="ProtectionMenu">*</a> protection from software patents</li>
+
+    <li><a href=#Continual name="ContinualMenu">*</a> continual commercial-quality development and support</li>
+
+    <li><a href=#Organized name="OrganizedMenu">*</a> organized leverage of other software frameworks</li>
+
+    <li><a href=#Open name="OpenMenu">*</a> open coordination of distributed development via patch</li>
+
+    </menu>
+    
+    <a href=#MatureMenu name="Mature">*</a> mature framework for direct-manipulation graphical editors<p>
+
+ivtools is a mature framework for  constructing custom drawing editors and  <a href=http://c2.com/cgi/wiki?DirectManipulation>direct manipulation</a> user interfaces.
+Starting with <a href=http://c2.com/cgi/wiki?JohnVlissides>John Vlissides'</a> 
+<a href=./unidrawinfo.html>Unidraw</a>, we've added <a href=./techinfo.html>layers</a> of 
+class libraries for graph and frame visualization, <a href=./largeimage.html>image</a> 
+display and <a href=./plotutils.html>plot</a> importing, as well as augmenting the original software with 
+support for alternate document formats, command interpreting, attribute (property-list) management, 
+and networking capabilities.<p>
+
+    <a href=#LightweightMenu name="Lightweight">*</a> lightweight glyphs for interactive structured document applications<p>
+
+The <a href=./interviews.html>InterViews</a> team was among the first
+to explore the concept of light-weight user interface objects, where
+pick and layout are managed on the client side. They used a single X window
+for a complex glyph layout, shifting more of the rendering logic to
+the client.  The client gets finer grained control and the X server is
+left to do what it does best, paint raster and vector graphics.  <p>
+
+This approach had been pioneered with the structured graphics
+capability of InterViews 2.6.  Now with glyphs the same performance
+advantages were brought to conventional widget objects (button,
+slider, menus, etc..).  The improvement relative to Motif for a
+complicated dialog box was quite noticeable, hence the term
+"flyweight".  In addition these glyphs were put to the test in
+creating doc, a document editor with TeX like capabilities where C++
+objects were used down to the single character level.  You can read
+more on this <a href=./ivtools-layers.html>here</a><p>
+
+    <a href=#SeparationMenu name>*</a> separation of structured graphic and structured document classes<p>
+
+ivtools (and InterViews 3.1) has separate sets of objects for
+structured graphics and structured douments.  Fresco has a single set
+of classes for structured graphics and structured documents.
+Unification of these two different fields of applications is
+interesting, but in our opinion unnecessarily complicates the API and
+the debugging process if all you really want is a custom drawing
+editor.  It seems either you're building a pure graphical interface,
+where no automated layout is required, or your building a
+boxes-and-glue interface where you want all the power of TeX under the
+hood.  In ivtools these classes are still separate, and different
+programmers can specialize in one or the other. <p>
+    
+    <a href=#IntegrationMenu name="Integration">*</a> integration of an extendable and distributed command interpreter<p>
+
+The command interpreter can be used within applications built on  ivtools as a calculator for computing arbitrary attribute values, for selecting objects in a drawing
+editor by evaluating an arbitrary attribute expression, for controlling the viewer mechanism of
+a drawing editor and the playback mechanism of a flipbook viewer, and even for scripted drawing of graphics
+as an alternate to manual interactive creation.  All of these are available for reuse in custom
+applications.<p>
+
+In their <a href=http://www.acm.org/pubs/toc/Abstracts/tois/98197.html>ACM paper on Unidraw</a>, Linton
+and Vlissides concluded with a discussion of what could be done to further extend the usefulness of
+the framework.  One thing they mentioned was the ability to interpret external formats, thus translating
+them into an internal representation that can be saved/restored, and exported to other formats.  
+You could almost already do this with ivtools, because 
+the language used to save/restore documents is the same one recognized by the 
+<a href=./comterp.html>command interpreter</a>.   A given interpreter, like that in <a href=./comdraw.html>comdraw</a> could be expanded with a new function
+for each object type in the specialized application document. <p>
+    
+    <a href=#FreedomMenu name="Freedom">*</a> freedom to use the source in any fashion<p>
+
+ivtools is <a href=http://www.opensource.org>open source</a> and 
+<a href="http://www.fsf.org/philosophy/categories.html#Non-CopyleftedFreeSoftware">non-copylefted</a> 
+X Consortium style free software.  This means you can use it for both free-software projects and
+commercial software development.  You can even GPL or LGPL your copy if you so desire, but we'll carry
+on with the license the way it is, the way it has always been <a href=./caveats.html>*</a>.  There is no document guaranteeing this,
+but the logic behind Vectaport's business should be self-evident.  We make money off of selling service,
+training, and CD-ROMs.  Our customers are in the business of making custom, often proprietary, 
+applications.  They understand the advantage of leveraging a freely available foundation of
+generic software with few strings attached. <i> Vectaport ceased existence as a corporation Dec 31st 2000, but continues as a web site and consulting venue for <a href="http://www.vectaport.com/johnston/">Scott Johnston</a></i><p>
+
+Ok, there is a string or two.  The <a href=../vectaport/copyrights.html>copyright notices</a> we used are
+derived from the X11 copyright, and require that you include the entire copyright and permission notice
+at least once, somewhere in the documentation, in any derivative work, and that at least the single 
+copyright line itself remain in the source code.  
+
+And that you not use the name of any copyright holder in any form of publicity or advertising without permission.  <p>
+
+    <a href=#ProtectionMenu name="Protection">*</a> protection from software patents<p>
+
+This is an interesting advantage of  ivtools (and InterViews 3.1).  All of the core mechanisms of the
+drawing editors, flyweight glyphs, and command interpreters were published in source or paper form in
+the late 1980s or early 1990s.  With a decade head-start on the forces of patent litigation, you
+can feel about as safe investing in this software technology as you can hope for.  Not only in your ability
+to win if taken to court, but in your ability to stay out of court and brush off nuisance licensors,
+by flooding them with a collection of long-time URL's that convincingly demonstrate prior art.  The
+original <a href=ftp://interviews.stanford.edu>interviews.stanford.edu</a> ftp site is still up and running, though nothing has changed on it 
+for years.<p>
+
+    <a href=#ContinualMenu name="Continual">*</a> continual commercial-quality development and support<p>
+
+At Vectaport we've been programming with InterViews 3.1  and derivative source code 
+since 1993.  Our experience with InterViews started with using InterViews 2.6 in 1990.  And the 
+initial development for the command interpreter embedded into ivtools was undertaken as early as
+1988.  <i> Vectaport ceased existence as a corporation Dec 31st 2000, but continues as a web site and consulting venue for <a href="http://www.vectaport.com/johnston/">Scott Johnston</a></i><p>
+
+Though some of the code is old, some of the code is always new.  We
+continually develop and release these frameworks, incrementally adding
+capability month after month, year after year.  We take care to make
+sure any changes to the API or implementation of existing classes are
+the kind that can safely be propogated by recompiling the C++ source.
+Unlike C API's, where people respect finished and unchanging libraries
+of code, these C++ frameworks are continually changing, continually
+growing, and continually being improved, all in a way that doesn't
+upset any particularily static use of the classes as they existed at
+some prior time.  To prove this we continually seek out static
+InterViews applications, like MixViews, and test that they can still
+be built on top of ivtools.<p>
+
+    <a href=#OrganizedMenu name="Organized">*</a> organized leverage of other software frameworks<p>
+
+Is a nice drawing editor not enough reason to consider using ivtools?
+Then what about a powerful middleware package for networking and
+system services, a collection of frameworks for image understanding, a
+sound-editing application, packages for geo-spatial map rendering in
+2d and 3d and vehicle simulation for navigating those maps?  All of
+these are software packages that work together with <a
+href=./index.html>ivtools</a>, software packages where we have done
+the initial interfacing or integration work, and published the results
+for others to use.  <p>
+
+    <a href=#OpenMenu name="Open">*</a> open coordination of distributed development via patch<p>
+
+You'll find no centralized use of cvs at vectaport.com, because we appreciate the right of any
+programmer to manage their own copies of the source they rely on, 
+and to incorporate the changes of third parties whenever they please.  We see no need to force them
+to upgrade with everyone elses latest changes as a pre-requisite for committing and
+distributing their own changes (the cvs model of coordinating development).   Instead we use cvs as
+a personal or  local-area tool for configuration management and for generating patches for sharing
+with remote sites.  The wizardry of patch is that it can allow disparate programmers to share
+improvements between source trees of similar lineage, without ever absolutely requiring the
+merging or unification of the source trees.  If and when this is done is up to the programmers,
+not the tool.  If a particular configuration of software is well-suited and well-tested for a 
+well-defined application, what is wrong with it never changing again, or only changing to incorporate
+necessary bug fixes while ignoring any unnecessary enhancements or extensions?<p>
+
+However, the converse question can also be asked.  What is wrong with incorporating unnecessary enhancements
+and extensions if the stable application still compiles, links, and works?  We've found a typical approach 
+of third party developers is to remain with a stable release of ivtools while building their own
+applications, incorporating only the patches they need for the particular bugs they find or new
+features they need.  Then, if and when they have the time, they upgrade to the latest version of ivtools.<p>
+
+
+
+</html>

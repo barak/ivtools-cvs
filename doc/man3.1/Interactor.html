@@ -1,0 +1,397 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Interactor - base class for interactive objects
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/interactor.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       In  2.6, <B>Interactor</B> was the base class for all interactive
+       objects.  It is currently provided for  backward  compati-
+       bility.
+
+       Every  interactor has a <I>shape</I> member variable that defines
+       the desired characteristics of screen space  in  terms  of
+       size, shrinkability, and stretchability.  This information
+       is used to allocate display space for the  interactor  and
+       the  interactor's  <I>canvas</I>  member  variable  is set to the
+       actual space obtained.  The lower left corner of the  can-
+       vas  is addressed by (0, 0); the upper right by the member
+       variables (<I>xmax</I>, <I>ymax</I>).
+
+       The <I>input</I> member variable is the normal sensor for reading
+       events.   The  <I>output</I>  member  variable  is  the  standard
+       painter for performing graphics  operations.   Interactors
+       generally  should not set <I>output</I>; it will either be inher-
+       ited (and shared) from the interactor's parent or  set  by
+       user customization attributes.
+
+       An interactor may optionally define the <I>perspective</I> member
+       variable to represent the portion of total area  that  the
+       interactor  is displaying.  Perspectives allow interactors
+       to coordinate with other interactors, such  as  scrollers,
+       that want to control the display area.
+
+       An  interactor also may specify certain characteristics of
+       the interactor's canvas, such as whether it  is  read-only
+       or  read/write,  whether its contents should be saved when
+       not visible.  Interactors also may specify the visual for-
+       mat and interpretation of the input pointing device (e.g.,
+       mouse cursor) when it is inside the interactor's canvas.
+
+       To be mapped to some portion of the display, an interactor
+       must  have  been inserted into a scene, called its <I>parent</I>.
+       The interactor will be mapped when its parent  is  mapped.
+       The  root  scene for the display can be accessed through a
+       <B>World(3I)</B> object.
+
+
+</PRE>
+<H2>CONSTRUCTORS</H2><PRE>
+       <B>Interactor()</B>
+              Construct an interactor.  The <I>input</I> sensor and <I>out-</I>
+              <I>put</I> painters are initialized to <I>nil</I>.
+
+       <B>Interactor(const</B> <B>char*</B> <B>name)</B>
+              Construct  an interactor associated with the string
+              Behavior can also  be  customized  on  a  per-class
+              basis   using  the  subclass  name.   Although  not
+              explicitly documented, an instance  of  any  object
+              inheriting  from interactor may be constructed with
+              an additional argument (appearing first) containing
+              the  string  name.  For example, both ``HGlue(natu-
+              ral, stretch)''  and  ``HGlue("somename",  natural,
+              stretch)'' are valid.
+
+       <B>~Interactor()</B>
+              The  base destructor automatically deletes the base
+              fields, including <I>shape</I>, <I>canvas</I>, <I>input</I>, and <I>output</I>.
+
+
+</PRE>
+<H2>CONFIGURATION</H2><PRE>
+       <B>void</B> <B>Align(Alignment,</B> <B>int</B> <B>w,</B> <B>int</B> <B>h,</B> <B>Coord&amp;</B> <B>l,</B> <B>Coord&amp;</B> <B>b)</B>
+              Return  the coordinates at which an object with the
+              given width and height will have the  given  align-
+              ment within the interactor's canvas.
+
+       <B>void</B> <B>SetClassName(const</B> <B>char*)</B>
+       <B>const</B> <B>char*</B> <B>GetClassName()</B>
+       <B>void</B> <B>SetInstance(const</B> <B>char*)</B>
+       <B>const</B> <B>char*</B> <B>GetInstance()</B>
+              Set/get  the class or instance name for an interac-
+              tor.  The names are used to  determine  user  style
+              preferences.  SetClassName and SetInstance can only
+              be performed by subclasses.
+
+       <B>void</B> <B>Config(Scene*</B> <B>s)</B>
+              Configure  this  interactor  and  its   descendants
+              according  to  user  preferences.   The  scene <I>s</I> is
+              assumed to be the interactor's parent and  is  used
+              to  inherit  attribute values.  This operation need
+              not be called explicitly; it  is  called  automati-
+              cally  when  the  ancestors of an interactor become
+              known (e.g., when the interactor or an ancestor  is
+              inserted into a world).
+
+       Configuration involves a traversal of the interactor hier-
+       archy.  For each interactor in the hierarchy,  the  <I>output</I>
+       painter is either inherited from its parent or copied from
+       its parent if there are user preferences specific  to  the
+       interactor  for  painter  attributes such as colors, font,
+       and brush.  For example, suppose the  user  preference  is
+       ``A*B*font:9x15''   and   the   interactor   hierarchy  is
+       ``A.B.C.D'' (each ``.'' representing a  nesting  level  in
+       the  hierarchy).   Interactors A and B will share the same
+       output painter, C will copy B's output and change the font
+       to ``9x15'', and D will share C's output.
+
+       After  assigning the output painter, configuration is per-
+       formed recursively on any children interactors.  The final
+
+       <B>virtual</B> <B>void</B> <B>Reconfig()</B>
+              Perform any configuration specific to a  particular
+              interactor.   This  operation should minimally com-
+              pute the interactor's shape based on the  shape  of
+              its children and/or the characteristics of its out-
+              put painter (e.g., font).   It  can  also  retrieve
+              user  preferences  specific  to  this  interactor's
+              class or instance name using GetAttribute.
+
+       <B>const</B> <B>char*</B> <B>GetAttribute(const</B> <B>char*)</B>
+              Retrieve the value of a user  preference  with  the
+              given  name.   GetAttribute  searches  for the most
+              specific match to the current context.
+
+       <B>virtual</B> <B>void</B> <B>Reshape(Shape&amp;)</B>
+       <B>Shape*</B> <B>GetShape()</B>
+              Set/get the shape of an interactor.  Reshape is a a
+              suggestion that an interactor's shape should change
+              to the given one.  The default operation  sets  the
+              interactor's  shape  to  the  new  shape  and calls
+              Scene::Change on  the  interactor's  parent.   Sug-
+              gested shape information may be lost when an inter-
+              actor is configured; thus, it is best to avoid  use
+              of   Reshape.   The  same  affect  can  usually  be
+              achieved by putting the interactor in a  box  along
+              with a particular shape of glue.
+
+       <B>void</B> <B>SetCursor(Cursor*)</B>
+       <B>Cursor*</B> <B>GetCursor()</B>
+              Set/get  the cursor that will be displayed when the
+              pointing device is inside the interactor's  canvas.
+              If  the interactor does not explicitly set its cur-
+              sor, it will use its  parent's  cursor.   GetCursor
+              returns nil in this case.
+
+
+</PRE>
+<H2>INTERACTOR HIERARCHY</H2><PRE>
+       <B>Scene*</B> <B>Parent()</B>
+              Return the interactor's parent or <I>nil</I> if the inter-
+              actor has not been inserted into a scene.
+
+       <B>World*</B> <B>GetWorld()</B>
+              Return a pointer to the world  the  interactor  has
+              been  inserted into or <I>nil</I> if the interactor's root
+              ancestor is not mapped.
+
+       <B>void</B> <B>GetRelative(Coord&amp;</B> <B>x,</B> <B>Coord&amp;</B> <B>y,</B> <B>Interactor*</B> <B>=</B> <B>nil)</B>
+              Map coordinates that are relative to this  interac-
+              tor's canvas to be relative to another interactor's
+              canvas.  If the other interactor is <I>nil</I>,  then  the
+              coordinates are made relative to the world.
+
+              <B>actor**&amp;,</B> <B>int&amp;)</B>
+              Construct  an  array of pointers to the interactors
+              contained within this interactor.   The  first  and
+              second  parameters  specify an array of interactors
+              that is already allocated.  This array is  used  if
+              it  is large enough, otherwise a new array is allo-
+              cated from free store.  The third and fourth param-
+              eters  return  the  which  array  was  used and the
+              actual number of  components.   This  operation  is
+              only  defined by scenes; the default operation sets
+              the number of elements to zero.
+
+
+</PRE>
+<H2>OUTPUT</H2><PRE>
+       <B>Canvas*</B> <B>GetCanvas()</B> <B>const</B>
+              Return the interactor's canvas, which may be <I>nil</I> if
+              the interactor is not mapped to a display.
+
+       <B>ManagedWindow*</B> <B>GetTopLevelWindow()</B> <B>const</B>
+              Return  the  top-level  window  associated with the
+              interactor, if it is mapped and top-level.
+
+       <B>virtual</B> <B>void</B> <B>Draw()</B>
+              Draw is used to display the contents of an interac-
+              tor,  including the contents of any interior inter-
+              actors.    The   default   Draw   operation   calls
+              Redraw(0, 0, <I>xmax</I>, <I>ymax</I>).     Interactors   usually
+              don't need to redefine  Draw  unless  they  contain
+              interior interactors (i.e., scene subclasses); most
+              simple interactors redefine only Redraw.
+
+       <B>virtual</B> <B>void</B> <B>Highlight(boolean)</B>
+              Turn highlighting on or off, depending  on  whether
+              the parameter is true or false.  The default opera-
+              tion is a nop.
+
+       <B>void</B> <B>SetCanvasType(CanvasType)</B>
+       <B>CanvasType</B> <B>GetCanvasType()</B>
+              Set/get the type of canvas desired for an  interac-
+              tor.   This  operation  must be performed before an
+              interactor is mapped.  The  possible  canvas  types
+              are  CanvasShapeOnly,  meaning  the interactor per-
+              forms no input or output (e.g., glue),  CanvasInpu-
+              tOnly,  meaning  the interactor performs no output,
+              CanvasInputOutput, which is  the  default,  Canvas-
+              SaveUnder,  which suggests that the interactor will
+              be mapped for a short time (e.g., a popup menu) and
+              that  the  information  under  the canvas should be
+              saved,  CanvasSaveContents,  which  suggests   that
+              Redraw calls are expensive and should be avoided by
+              caching  the  display,  and  CanvasSaveBoth,  which
+              requests  both  CanvasSaveUnder  and CanvasSaveCon-
+              tents.
+
+       <B>void</B> <B>Flush()</B>
+              Sync waits until any pending operations  have  com-
+              pleted.  Flush makes sure the local buffer of pend-
+              ing operations (if any) is sent to the display.  An
+              input  operation will do a Sync automatically if it
+              would block; thus, applications generally need  not
+              call Sync or Flush explicitly.
+
+
+</PRE>
+<H2>INPUT</H2><PRE>
+       <B>void</B> <B>Listen(Sensor*)</B>
+              When  an  interactor  is mapped onto a display, its
+              input interest is determined by its  <I>input</I>  sensor.
+              A different sensor can be specified with the Listen
+              operation.  To switch  back  to  <I>input</I>,  call  Lis-
+              ten(<I>input</I>).
+
+       <B>void</B> <B>Read(Event&amp;)</B>
+       <B>boolean</B> <B>Read(long</B> <B>sec,</B> <B>long</B> <B>usec,</B> <B>Event&amp;)</B>
+              Each  application  has  a  single  input  queue  of
+              events.  Any interactor can use Read  to  take  the
+              next event from the queue.  Redraw and Resize oper-
+              ations may be called as a side effect of a Read (or
+              any  input  operation).   The  <I>target</I>  field of the
+              event specifies the interactor for which the  event
+              is  intended,  which is not necessarily the same as
+              the interactor that performed the Read.  The target
+              is  normally  the  interactor whose canvas is under
+              the pointing  device.   The  second  form  of  Read
+              behaves  differently if there are no events to read
+              in that it times out after the given number of sec-
+              onds  and  microseconds  have  elapsed  and returns
+              false to the calling program.
+
+       <B>void</B> <B>UnRead(Event&amp;)</B>
+              UnRead puts an event back on the input queue as  if
+              it had never been read.
+
+       <B>virtual</B> <B>void</B> <B>Handle(Event&amp;)</B>
+              When  an  interactor  wishes  to  pass  an event to
+              another interactor, it calls the other interactor's
+              Handle  operation.  Thus, input flow control can be
+              either procedural with Read  or  event-driven  with
+              Handle.
+
+       <B>void</B> <B>Run()</B>
+              Run implements a simple event dispatching loop.  It
+              calls Read to get the next  event  and  passes  the
+              event  to  the  target  interactor via Handle.  The
+              loop terminates if the Handle  operation  sets  the
+              event's target to nil.
+
+       <B>void</B> <B>QuitRunning(Event&amp;)</B>
+              event dispatching loop.
+
+       <B>boolean</B> <B>Check()</B>
+              Check  determines  whether an event of interest has
+              occurred.
+
+       <B>void</B> <B>Poll(Event&amp;)</B>
+              Poll sets an event to  reflect  the  current  input
+              state.  Input polling can be wasteful of cycles and
+              should be avoided if possible.
+
+       <B>int</B> <B>CheckQueue()</B>
+              CheckQueue returns the number of input packets that
+              have been queued within the application.  The event
+              queue manager always reads as much  information  as
+              possible  from  input;  thus,  a  single Read might
+              store many events in a  local  buffer.   Subsequent
+              reads  can  simply  access the buffer.  This buffer
+              can include  out-of-band  packets,  such  as  those
+              requiring  a Redraw.  The number returned by Check-
+              Queue does not correspond, therefore, to the actual
+              number of input events.
+
+
+</PRE>
+<H2>VIEWS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Adjust(Perspective&amp;)</B>
+              Adjust  suggests to an interactor that its perspec-
+              tive should change to the  given  perspective;  the
+              interactor may choose to accept any part of the new
+              perspective and  must  ensure  that  the  parameter
+              matches  its  (new)  perspective  before returning.
+              Adjust can be used by another interactor to scroll,
+              pan, or zoom an interactor.
+
+       <B>Perspective*</B> <B>GetPerspective()</B>
+              GetPerspective  returns  the perspective associated
+              with an interactor or nil if the interactor has not
+              assigned one.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Change  the display to reflect some change in state
+              that the interactor depends on.  This operation  is
+              used  in  a  number of contexts.  One example is in
+              managing perspectives.  If  an  interactor  changes
+              its perspective (e.g., the total of size of what it
+              is displaying changes), it must notify its perspec-
+              tive, which in turn calls Update on the interactors
+              that access the perspective (such as a scroller).
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Redraw(Coord</B> <B>l,</B> <B>Coord</B> <B>b,</B> <B>Coord</B> <B>r,</B> <B>Coord</B> <B>t)</B>
+              The Redraw operation is called when some portion of
+              the  Interactor  needs  to  be  redrawn, presumably
+              the Interviews library or the Draw  operation  will
+              call  their  Redraw  operations automatically.  The
+              default Redraw operation does nothing.
+
+       <B>virtual</B> <B>void</B> <B>RedrawList(int</B> <B>n,</B> <B>Coord</B> <B>l[],</B> <B>Coord</B> <B>b[],</B>
+              <B>Coord</B>  <B>r[],</B> <B>Coord</B> <B>t[])</B>
+              RedrawList  notifies  an  interactor  that  several
+              areas  of its canvas need to be redrawn, presumably
+              because it was raised to the top of other canvases.
+              The  default RedrawList operation redraws each area
+              separately with Redraw.
+
+       <B>virtual</B> <B>void</B> <B>Resize()</B>
+              Resize notifies an interactor that its  canvas  has
+              been  created  or  modified.  Only scenes are typi-
+              cally concerned with Resize,  as  they  must  place
+              their  component  interactors  within  the  new  or
+              resized canvas.  The default Resize operation  does
+              nothing.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <I>InterViews</I>  <I>Reference</I>  <I>Manual</I>, <B>Perspective(3I)</B>, <B>Scene(3I)</B>,
+       <B>Sensor(3I)</B>, <B>Shape(3I)</B>, <B>World(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

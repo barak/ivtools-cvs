@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>How to export and import graphics over the net with ivtools drawing editors</title>
+  </head>
+
+  <body>
+    <h2>How to export and import graphics over the net with <a href=./index.html>ivtools</a> <a href=./editors.html>drawing editors</a></h2>
+<p>
+
+<b>Import</b>
+<p>
+<a name=config_sport> <a href=./index.html>ivtools</a> <a href=./drawtool.html>drawtool</a> and <a href=./flipbook.html>flipbook</a> drawing editors, when configured and
+built with <a
+href=http://www.cs.wustl.edu/%7Eschmidt/ACE.html>ACE</a>, have a
+"<code>-import portnum</code>" parameter (which defaults to 20001 for
+drawtool and 20003 for flipbook).  The editors accept connections on
+that port and import any data received into the drawing editor.
+Connections can be established in any manner.  Telnet works,
+i.e. "telnet localhost 20001".  To simply connect and transfer a data
+file to a host/port, you can use the <em>ivtools comterp</em> command
+like this:
+<p>
+<code> comterp telcat localhost 20001 filename</code>
+<p>
+
+<font size=3> Supported formats: builtin<br> 
+<menu>
+<li>idraw PostScript </li>
+<li> ivtools drawtool format</li>
+<li>PBM/PGM/PPM image formats</li>
+</menu>
+Supported formats: default extensions
+<menu>
+<li>regular PostScript via pstoedit</li>
+<li>JPEG via djpeg </li>
+<li> gif via giftopnm</li>
+<li>TIFF via tifftopnm</li>
+</menu>
+<font>
+<p>
+<b>Export</b>
+
+<p>
+All <a href=./editors.html>ivtools drawing editors</a> and most <a
+href=../vhclmaps/viewers.html>vhclmaps map viewers</a> can be used to
+export over the net by utilizing the "comterp telcat" command
+described above and the "to command" mode on the drawing editor
+export dialog box.  
+<p>
+Steps to export over the net:<p>
+<menu>
+<li>Launch an editor with an import port <a href=#config_sport>configured</a> </li>
+<li>Launch another editor and load or draw some graphics </li>
+<li>Select graphic(s) to be exported over the net with the Select tool</li>
+<li>Bring up the export dialog box (File/Export or ^X)</li>
+<li>click on the "to command" button</li>
+<li> enter this into the string editor:
+<p>
+<code> comterp telcat localhost 20001 %s</code><p></li>
+<li> Press the enter key or the Export button</li>
+
+</menu>
+
+The filename is supplied by the export dialog box (you can leave off
+the %s).
+Adjust hostname and portnumbers as needed.
+<p>
+<!-- hhmts end -->
+  </body>
+</html>

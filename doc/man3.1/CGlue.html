@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       CGlue - connector glue
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/cglue.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       CGlue  defines  a  natural  size,  elasticity (its rate of
+       stretching and shrinking relative  to  other  CGlue),  and
+       deformation  limits  (total  amount  it  can  stretch  and
+       shrink) in both the horizontal  and  vertical  dimensions.
+       CGlue  can  be interposed between two connected connectors
+       to augment their connectivity semantics; it acts like  two
+       non-linear  springs, one horizontal and one vertical, con-
+       necting the connectors' centers.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>CGlue(</B>
+
+           <B>float</B> <B>hnat</B> <B>=</B> <B>0,</B> <B>float</B> <B>vnat</B> <B>=</B> <B>0,</B>
+           <B>float</B> <B>hshr</B> <B>=</B> <B>0,</B> <B>float</B> <B>hstr</B> <B>=</B> <B>0,</B>
+           <B>float</B> <B>vshr</B> <B>=</B> <B>0,</B> <B>float</B> <B>vstr</B> <B>=</B> <B>0,</B>
+           <B>float</B> <B>hshrlim</B> <B>=</B> <B>0,</B> <B>float</B> <B>hstrlim</B> <B>=</B> <B>0,</B>
+           <B>float</B> <B>vshrlim</B> <B>=</B> <B>0,</B> <B>float</B> <B>vstrlim</B> <B>=</B> <B>0</B>
+       <B>)</B>
+
+       <B>CGlue(const</B> <B>Shape&amp;)</B>
+              Instantiate CGlue, providing the requisite  parame-
+              ters  explicitly  or  inferring  them  from a Shape
+              object.  If a shape is  supplied,  then  the  CGlue
+              adopts the shape's natural size, and it assigns the
+              shape's stretchability and shrinkability values  to
+              its   corresponding  CGlue  elasticity  members  to
+              obtain a proportionately equivalent elasticity.  It
+              also assigns the shape's stretchability and shrink-
+              ability values to its  deformation  limit  members.
+              The parameters are described below:
+
+              <I>hnat,</I>  <I>vnat</I>: horizontal and vertical natural sizes,
+              screen units
+
+              <I>hshr,</I> <I>vshr</I>: horizontal and vertical shrinking rate,
+              constant units
+
+              <I>hstr,</I>  <I>vstr</I>:  horizontal  and  vertical  stretching
+              rate, constant units
+
+              <I>hshrlim,</I> <I>vshrlim</I>: horizontal  and  vertical  shrink
+              limit, screen units
+
+              <I>hstrlim,</I>  <I>vstrlim</I>:  horizontal and vertical stretch
+              limit, screen units
+
+              Create a copy of this CGlue instance.
+
+       <B>void</B> <B>Rigid()</B>
+              Set all elasticity and deformation limits equal  to
+              zero.
+
+       <B>void</B> <B>Interpose(const</B> <B>CGlue*</B> <B>glue)</B>
+              Change  this  instance's  attributes to reflect the
+              series combination of <I>this</I> and <I>glue</I>.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Connector(3U)</B>, <B>Shape(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

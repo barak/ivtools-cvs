@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Panner - two-dimensional scrolling and zooming
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/panner.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A panner is an interactor that manipulates the perspective
+       of another interactor to provide two-dimensional scrolling
+       and zooming.  A panner is composed of a <I>slider</I> and several
+       adjusters, including two  zoomers  and  four  movers.  The
+       slider's  position  and  size  reflect the current origin,
+       size, and aspect ratio in  the  interactor's  perspective.
+       Dragging the slider around with the mouse changes the per-
+       spective's <I>curx</I> and <I>cury</I> members.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Panner(Interactor*,</B> <B>int</B> <B>size</B> <B>=</B> <B>0)</B>
+              Create a panner for the given  interactor,  option-
+              ally  with  the  given  width.  If the size is 0, a
+              reasonable default  size  is  used.   The  panner's
+              aspect ratio reflects that of the perspective.
+
+       <B>Slider(Interactor*)</B>
+       <B>Slider::Handle(Event&amp;)</B>
+       <B>Slider::Reshape(Shape&amp;)</B>
+       <B>Slider::Update()</B>
+              A  slider  reflects  and  lets the user specify the
+              visible portion of the view.   A  rectangle  repre-
+              sents  the visible area, while the area surrounding
+              it represents the total area.  Clicking and holding
+              down  any  mouse button on the rectangle allows you
+              to drag it to a different position within the total
+              area.   The perspective's current origin is shifted
+              to reflect the new  position  when  the  button  is
+              released.   Holding  down the shift key while drag-
+              ging the rectangle constrains its  motion  horizon-
+              tally  or vertically.  Clicking outside the rectan-
+              gle moves it in  the  corresponding  one  of  eight
+              directions;  for  example, clicking to the right of
+              the rectangle moves it to the right.  If  the  left
+              mouse button is used, the movement increment equals
+              the perspective's <I>sx</I> or <I>sy</I> member  variables.   The
+              middle mouse button increments by <I>lx</I> or <I>ly</I>, and the
+              right mouse button centers the rectangle around the
+              cursor.   The  Reshape  call  sets the width of the
+              slider to that of the passed Shape and calls Change
+              on  the  parent  interactor.  Update redisplays the
+              slider to reflect a change in the interactor's per-
+              spective.
+
+
+</PRE>
+<H2>X DEFAULTS</H2><PRE>
+       The  ``syncScroll''  resource specifies whether the slider
+       as the slider is dragged; otherwise the  slider's  outline
+       follows  the  mouse during dragging, and the interactor is
+       scrolled only after the user stops  dragging  the  slider.
+       Sliders  will  scroll  synchronously  if  their syncScroll
+       resource is set to ``on'' or ``true.''
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Adjuster(3I)</B>, <B>Interactor(3I)</B>, <B>Perspective(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

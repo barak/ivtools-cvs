@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       MacroCmd - a command that composes other commands
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/macro.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       MacroCmd  composes  other  commands  in  a linear fashion.
+       Executing a MacroCmd is equivalent to executing its  chil-
+       dren in preorder.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>MacroCmd(ControlInfo*)</B>
+       <B>MacroCmd(</B>
+           <B>Editor*</B> <B>=</B> <B>nil,</B>
+           <B>Command*</B> <B>first</B> <B>=</B> <B>nil,</B> <B>Command*</B> <B>second</B> <B>=</B> <B>nil,</B>
+           <B>Command*</B> <B>third</B> <B>=</B> <B>nil,</B> <B>Command*</B> <B>fourth</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+              Construct a MacroCmd instance, optionally supplying
+              up to four of its child commands.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              Execute simply executes each child, from  first  to
+              last.   Unexecute  calls  Unexecute  on each child,
+              from last to first.  The MacroCmd is reversible  if
+              any of its children are.
+
+       <B>virtual</B> <B>void</B> <B>SetEditor(Editor*)</B>
+              SetEditor  calls  SetEditor  on each child with the
+              given argument.
+
+       <B>Command*</B> <B>GetCommand(Iterator)</B>
+       <B>void</B> <B>SetCommand(Command*,</B> <B>Iterator&amp;)</B>
+              GetCommand returns the child Command  to  which  an
+              iterator points.  SetCommand initializes the itera-
+              tor to point to a particular child Command; it ini-
+              tializes the iterator to point to a nil instance if
+              the given Command is not a child.
+
+       <B>void</B> <B>Append(</B>
+           <B>Command*,</B> <B>Command*</B> <B>=</B> <B>nil,</B> <B>Command*</B> <B>=</B> <B>nil,</B> <B>Command*</B> <B>=</B>
+              <B>nil</B>
+       <B>)</B>
+
+       <B>void</B> <B>Prepend(</B>
+           <B>Command*,</B> <B>Command*</B> <B>=</B> <B>nil,</B> <B>Command*</B> <B>=</B> <B>nil,</B> <B>Command*</B> <B>=</B>
+              <B>nil</B>
+       <B>)</B>
+
+       <B>void</B> <B>InsertAfter(Iterator,</B> <B>Command*)</B>
+       <B>void</B> <B>InsertBefore(Iterator,</B> <B>Command*)</B>
+       <B>void</B> <B>Remove(Iterator&amp;)</B>
+              Operations that modify the MacroCmd's list of chil-
+              dren. Append and Prepend add up to four Commands to
+              the end and the  beginning  of  the  list,  respec-
+              tively.  InsertAfter and InsertBefore insert a Com-
+              mand after and before the Command pointed to by the
+              iterator,   respectively.   The  Remove  operations
+              remove a child from the list without  deleting  it.
+              You  can  remove a child by referring to it explic-
+              itly or by specifying an iterator.  If an  iterator
+              is supplied, the Remove operation should advance it
+              to point to the following child as a side effect.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Command*</B> <B>Cmd(UList*)</B>
+       <B>UList*</B> <B>Elem(Iterator)</B>
+              Convenience functions for extracting a Command from
+              a  UList  element a UList from an iterator, respec-
+              tively.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>, <B>Iterator(3U)</B>, <B>UList(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,947 @@
+
+<html><head><TITLE>Description of ComFunc</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ComFunc</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+command base class for extending <A HREF="ComTerp.html" >ComTerp</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Abstract
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#ComFunc><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+ComTerp/comfunc.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  class whose derived classes get constructed and added to a 
+ <A HREF="ComTerp.html" >ComTerp</A> command interpreter, one per command to be supported.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComFunc(ComTerp*)">
+    <B>ComFunc</B> (<A HREF="ComTerp.html" >ComTerp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="assign_symval(intid&#38;&#38;COMMComValue*)">
+    <B>assign_symval</B> (int id, <A HREF="ComValue.html" >ComValue</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="bincheck(constchar*name)">
+    <B>bincheck</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="bintest(constchar*name)">
+    <B>bintest</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerp.html" >ComTerp</A>* 
+    <A NAME="comterp()">
+    <B>comterp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return <A HREF="ComTerp.html" >ComTerp</A> this <A HREF="ComFunc.html" >ComFunc</A> is associated with.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="comterpserv()">
+    <B>comterpserv</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return <A HREF="ComTerpServ.html" >ComTerpServ</A> this <A HREF="ComFunc.html" >ComFunc</A> is associated with.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="docstring()">
+    <B>docstring</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="exec(intnargs&#38;&#38;COMMintnkeys&#38;&#38;COMMintpedepth=0&#38;&#38;COMMintcommand_symid=0)">
+    <B>exec</B> (int nargs, int nkeys, int pedepth=0, int command_symid=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        invokes push_funcstate, then plain execute, then pop_funcstate.
+ for use from the body of regular execute methods.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>pure virtual void 
+    <A NAME="execute()">
+    <B>execute</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method that needs to be filled in, that will take <A HREF="ComValue.html" >ComValue</A> arguments
+ off the stack, then compute and push a <A HREF="ComValue.html" >ComValue</A> result on the stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="funcid()">
+    <B>funcid</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get symbol id of name for func
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="funcid(intid)">
+    <B>funcid</B> (int id) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set symbol id of name for func
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComFuncState.html" >ComFuncState</A>* 
+    <A NAME="funcstate()">
+    <B>funcstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        current <A HREF="ComFuncState.html" >ComFuncState</A> for use of current <A HREF="ComFunc.html" >ComFunc</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="lookup_symval(ComValue&#38;)">
+    <B>lookup_symval</B> (<A HREF="ComValue.html" >ComValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        lookup variable value given a symbol <A HREF="ComValue.html" >ComValue</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="lookup_symval(intsymid)">
+    <B>lookup_symval</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        lookup variable value given a symbol id.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="nargs()">
+    <B>nargs</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of white space separated arguments inside parentheses
+ that are not keywords (keywords indicated by a ':' prefix 
+ on a symbol).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="nargsfixed()">
+    <B>nargsfixed</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments prior to any keyword. The ones that require a 
+ fixed order to determine their meaning (unlike the arguments that 
+ follow keywords, which can be in any order).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="nargskey()">
+    <B>nargskey</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments follow keywords, assumed to be less than
+ or equal to nkeys() (this requirement could be relaxed).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="nargspost()">
+    <B>nargspost</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments to a post-evaluating command 
+ that represent commands and arguments ready to be evaluated
+ by the post-eval methods: stack_arg_post_eval() and 
+ stack_key_post_eval().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="nargstotal()">
+    <B>nargstotal</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        nargs()+nkeys()
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="nkeys()">
+    <B>nkeys</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments inside parentheses that are keywords (keywords 
+ indicated by a ':' prefix on a symbol). Arguments that follow
+ keywords are counted by nargs(). That's why there is a need for
+ nargsfixed() and nargstotal() methods, to distinguish between
+ arguments associated with fixed arguments (the ones that
+ precede the keyword arguments), and the ones enmeshed with the
+ keywords. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="pop_funcstate()">
+    <B>pop_funcstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pop the top one off the <A HREF="ComFuncState.html" >ComFuncState</A> stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="pop_stack()">
+    <B>pop_stack</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pop top off the stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="pop_symbol()">
+    <B>pop_symbol</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pop top off the stack preserving symbol ids if <A HREF="ComValue.html" >ComValue</A> is a symbol type.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="post_eval()">
+    <B>post_eval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="push_funcstate(intnargs&#38;&#38;COMMintnkeys&#38;&#38;COMMintpedepth=0&#38;&#38;COMMintcommand_symid=0)">
+    <B>push_funcstate</B> (int nargs, int nkeys, int pedepth=0, int command_symid=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        push new <A HREF="ComFuncState.html" >ComFuncState</A> on a stack of them.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="push_stack(AttributeValue&#38;)">
+    <B>push_stack</B> (<A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        push <A HREF="AttributeValue.html" >AttributeValue</A> onto the stack, converting to a <A HREF="ComValue.html" >ComValue</A>
+ in the process.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="push_stack(ComValue&#38;)">
+    <B>push_stack</B> (<A HREF="ComValue.html" >ComValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        push <A HREF="ComValue.html" >ComValue</A> onto the stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="reset_stack()">
+    <B>reset_stack</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset the stack to its state before this <A HREF="ComFunc.html" >ComFunc</A> execute() method
+ was called. Needs to be called once and only once in each
+ derived execute() method. Save it to last if you're using references
+ to <A HREF="ComValue.html" >ComValue</A> objects directly on the stack. Otherwise, call it as
+ soon as all the arguments have been loaded into local copies.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_arg(intn&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::nullval&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>stack_arg</B> (int n, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::nullval()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return the nth argument on the stack for this <A HREF="ComFunc.html" >ComFunc</A> execute() call.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_arg_post_eval(intn&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::nullval&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>stack_arg_post_eval</B> (int n, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::nullval()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        evaluate the nth argument for this post-evaluating <A HREF="ComFunc.html" >ComFunc</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_dotname(intn)">
+    <B>stack_dotname</B> (int n) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        unused method to get at a dotted list of names, i.e. a.b.c
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_key(intid&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::trueval&#38;&#38;BRAKO&#38;&#38;BRAKC&#38;&#38;COMMbooleanuse_dflt_for_no_key=false)">
+    <B>stack_key</B> (int id, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::trueval(), boolean use_dflt_for_no_key=false ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return the value of an argument that follows a keyword,
+ optionally return the value of 'dflt' if no argument follows
+ the keyword. If 'use_dflt_for_no_key' is true, 'dflt' gets returned
+ as the value when a keyword is not found.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_key_post_eval(intid&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::trueval&#38;&#38;BRAKO&#38;&#38;BRAKC&#38;&#38;COMMbooleanuse_dflt_for_no_key=false)">
+    <B>stack_key_post_eval</B> (int id, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::trueval(), boolean use_dflt_for_no_key=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        evaluate the argument following a keyword for this post-evaluating <A HREF="ComFunc.html" >ComFunc</A>.
+ Optionally return the value of 'dflt' if no argument follows
+ the keyword. If 'use_dflt_for_no_key' is true, 'dflt' gets returned
+ as the value when a keyword is not found.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="stack_keys(booleansymbol=false&#38;&#38;COMMAttributeValue&#38;dflt=ComValue::trueval&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>stack_keys</B> (boolean symbol = false, <A HREF="AttributeValue.html" >AttributeValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::trueval()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return newly-constructed <A HREF="AttributeList.html" >AttributeList</A> (which needs referencing)
+ that contains a copy of each keyword/value pair in the arguments
+ to the invocation of this <A HREF="ComFunc.html" >ComFunc</A>. 'dflt' is used whenever a 
+ keyword has no matching argument.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~ComFunc()">
+    <B>~ComFunc</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDComFunc&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="ComFunc.html" >ComFunc</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComTerp.html" >ComTerp</A>* 
+    <A NAME="_comterp">
+    <B>_comterp</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_funcid">
+    <B>_funcid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="npops()">
+    <B>npops</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of calls to pop_stack() since execute method called.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="pedepth()">
+    <B>pedepth</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        depth of being embedded in blocks of post-evaluated ccommands 
+ (commands whose arguments are not pre-evaluated for them).
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_arg_in_expr(int&#38;topptr&#38;&#38;COMMint&#38;arglen)">
+    <B>skip_arg_in_expr</B> (int&#38; topptr, int&#38; arglen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        skip an argument in unevaluated <A HREF="ComValue.html" >ComValue</A> objects, 
+ decrementing an index into a buffer set up to hold the
+ currently interpreting expression.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_arg_on_stack(int&#38;stackptr&#38;&#38;COMMint&#38;arglen)">
+    <B>skip_arg_on_stack</B> (int&#38; stackptr, int&#38; arglen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        skip an argument going down the stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_key_in_expr(int&#38;topptr&#38;&#38;COMMint&#38;arglen)">
+    <B>skip_key_in_expr</B> (int&#38; topptr, int&#38; arglen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        skip a keyword in a buffer of unevaluated <A HREF="ComValue.html" >ComValue</A> objects,
+ decrementing an index into a buffer set up to hold the 
+ currently interpreting expression.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="skip_key_on_stack(int&#38;stackptr&#38;&#38;COMMint&#38;arglen)">
+    <B>skip_key_on_stack</B> (int&#38; stackptr, int&#38; arglen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        skip a keyword going down the stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_arg_post(intn&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::nullval&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>stack_arg_post</B> (int n, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::nullval()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        find the <A HREF="ComValue.html" >ComValue</A> object in the unevaluated input arguments 
+ of a post-eval <A HREF="ComFunc.html" >ComFunc</A> that represents the start of the
+ code for the nth argument (prior to any keywords).
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="stack_key_post(intid&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::trueval&#38;&#38;BRAKO&#38;&#38;BRAKC&#38;&#38;COMMbooleanuse_dflt_for_no_key=false)">
+    <B>stack_key_post</B> (int id, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::trueval(), boolean use_dflt_for_no_key=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        find the <A HREF="ComValue.html" >ComValue</A> object in the unevaluated input arguments 
+ of a post-eval <A HREF="ComFunc.html" >ComFunc</A> that represents the start of the
+ code for the argument that follows a keyword. If no argument
+ follows keyword, 'dflt' is returned, unless 'use_dflt_for_no_key'
+ is true, when 'dflt' gets returned when no matching keyword is found.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend ostream&#38; 
+    <A NAME="operator&#60;&#60;(ostream&#38;s&#38;&#38;COMMconstComFunc&#38;)">
+    <B>operator <<</B> (ostream&#38; s, const <A HREF="ComFunc.html" >ComFunc</A>&#38;)  </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print contents to ostream, brief or not depending on
+ associated <A HREF="ComTerp.html" >ComTerp</A> brief flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,110 @@
+Instructions for building Target Jr 3.1 on Linux with ivtools-0.6.*
+
+These directions assume an installed copy of ivtools already available
+in your environment.
+
+
+0. get lots of disk space freed up (~400Mb).  Acquire and unpack
+ftp://ftp.esat.kuleuven.ac.be/pub/ROBOT/TargetJr/iup_3.1.tgz into
+some directory (i.e. targetjr-3.1).
+
+
+1. follow the directions in the targetjr-3.1 INSTALL file to set up
+your environment variables.  After this step reset your CPU
+environment variable to LINUX instead of linux, and manually set
+IVINSTALLED to the either the base of the ivtools source tree (if
+ivtools was installed relative to the source tree) or the directory
+where ivtools was installed (i.e. /usr/local or /usr/X11R6).
+
+
+2. If your ivtools is configured with ACE, change line 224 of config/params.mk
+from
+
+IV_LIBS     := -lIVAdditions -lUnidraw -lIV
+
+to
+
+IV_LIBS     := -lIVAdditions -lUnidraw -lIV -L/proj/ACE_wrappers/ace -lACE
+
+Substitute the correct directory on your system for locating libACE.so.
+
+
+3. if you have a relatively installed copy of ivtools (i.e. InstallRelative
+is YES in ivtools-0.6/config/site.def.LINUX), configure like this:
+
+    ./configure --with-iv=/proj/ivtools-0.6
+
+Substitute the correct directory on your system for locating the
+ivtools source tree.
+
+If you have a non-relative installation of ivtools
+(i.e. InstallRelative is NO in ivtools-0.6/config/site.def.LINUX),
+configure like this:
+
+    ./configure --with-iv=/usr/local
+
+Substitute the correct directory on your system for locating the
+installed ivtools libraries and include files.
+
+
+4. if you are using ivtools-0.6.7 (and only ivtools-0.6.7 has this
+problem), apply the following diff to the ivtools source tree, and
+re-build and re-install.  This is a workaround to reconcile separate
+evolutions to the original InterViews xwindow.c file, and isn't (or
+won't be) needed for other versions of ivtools:
+
+Index: src_x11/xwindow.c
+diff -c src_x11/xwindow.c:1.4 src_x11/xwindow.c:1.5
+*** src_x11/xwindow.c:1.4	Wed Jul  1 15:15:04 1998
+--- src/IV-X11/xwindow.c	Tue Jul 28 12:47:04 1998
+***************
+*** 735,740 ****
+--- 735,746 ----
+  
+  /** class ApplicationWindow **/
+  
++ ApplicationWindow::ApplicationWindow(Glyph* g)
++ : ManagedWindow(g) 
++ { 
++   _otherdisplay = nil;
++  }
++ 
+  ApplicationWindow::ApplicationWindow(Glyph* g, const char* display) 
+  : ManagedWindow(g) 
+  { 
+Index: include_interviews/window.h
+diff -c include_interviews/window.h:1.2 include_interviews/window.h:1.3
+*** include_interviews/window.h:1.2	Tue Jun 30 15:34:40 1998
+--- src/include/InterViews/window.h	Tue Jul 28 12:47:30 1998
+***************
+*** 149,155 ****
+  
+  class ApplicationWindow : public ManagedWindow {
+  public:
+!     ApplicationWindow(Glyph*, const char* display = nil);
+      ~ApplicationWindow();
+  protected:
+      virtual void compute_geometry();
+--- 149,156 ----
+  
+  class ApplicationWindow : public ManagedWindow {
+  public:
+!     ApplicationWindow(Glyph*);
+!     ApplicationWindow(Glyph*, const char* display);
+      ~ApplicationWindow();
+  protected:
+      virtual void compute_geometry();
+
+
+5. run make:
+
+    make
+
+
+6. refer back to the INSTALL directions for other options on
+configuring and building targetjr-3.1
+
+
+July 1998
+Vectaport Inc.
+

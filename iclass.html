@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Locating code with iclass and other tools</title>
+  </head>
+
+  <body>
+      <h3>Locating code with iclass and other tools</h3>
+
+The <b>iclass</b> program provides an easy way to locate C++ classes and cruise their hierarchical structures.
+It is part of the <a href=./index.html>ivtools</a> source tree (borrowed from InterViews 3.1).
+<b>iclass</b> reads in a set of C++ header files, builds the class structure
+and displays several widgets containing the class information:
+<ul>
+<li> a string editor with the name of the current selected class</li>
+<li> a list of the current selected class' base classes (parents)</li>
+<li> a list of the current selected class' derived classes (children)</li>
+<li> a text display of the current selected class definition</li>
+<li> a list of all classes currently loaded into iclass</li>
+</ul>
+<p>
+You can display a class definition by typing it into the string editor or
+by clicking on any class name in a list widget.  It is a great way to
+quickly browse a class hierarchy and to explore the classes contained in
+any large C++ library.
+<p>
+To invoke <b>iclass</b> give it a list of header files to process, or use the
+<code>-r</code> (recursive) option and give it a directory name; it will
+descend recursively into the given directory structure loading all the
+<code>.h</code> header files it can find there.  Some libraries (like vtk)
+use <code>.hh</code> header filename extensions; we have modified iclass to make it recognize these files as well in recursive mode.
+
+<p>
+An alternative class browser is found in the 
+<a href=http://www.infodock.com/manuals/oo-browser_toc.html>OO-Browser</a> package, a part of <A HREF="http://www.xemacs.org/">XEmacs</a>, which also contains <b>xoobr</b>,
+an X Window tool that displays class trees graphically.
+  </body>
+</html>

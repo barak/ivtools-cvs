@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Path - record of connectors visited during dataflow
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/path.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A Path object stores a record of connectors that have been
+       visited during dataflow.  Transfer functions, state  vari-
+       ables, connectors, and other components can use the infor-
+       mation in the path to determine  whether  data  should  be
+       transmitted, for example, to avoid circular flow.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Path(Path*</B> <B>=</B> <B>nil)</B>
+              Instantiate a new path, optionally with a duplicate
+              of the information contained in the given path.
+
+       <B>virtual</B> <B>void</B> <B>Visit(Connector*)</B>
+              Register a connector as having been visited.
+
+       <B>virtual</B> <B>boolean</B> <B>Visited(Connector*)</B>
+              Return whether or not a connector has  been  regis-
+              tered previously with the path.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Connector(3U)</B>, <B>StateVar(3U)</B>, <B>TransferFunct(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

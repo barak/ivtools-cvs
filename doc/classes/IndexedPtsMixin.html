@@ -1,0 +1,190 @@
+
+<html><head><TITLE>Description of IndexedPtsMixin</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>IndexedPtsMixin</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+mixin for point-list indexing mechanism used by <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A>, etc..<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#IndexedPtsMixin><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/indexmixins.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  When a tree of graphical components is saved to disk (translated to ASCII), it is
+ possible to enable the output of point-lists first as 'pts' records, to allow
+ for compression of replicated point lists within a single document.  When reading 
+ these documents back in, the istream constructor of <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A> (and other 
+ top-level components) uses this mixin to manage a table of point lists, building 
+ it up as each 'pts' record is read, and accessing entries for each ":pts id" field 
+ found in subsequent records.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="IndexedPtsMixin()">
+    <B>IndexedPtsMixin</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="MultiLineObj.html" >MultiLineObj</A>* 
+    <A NAME="get_indexed_pts(intid)">
+    <B>get_indexed_pts</B> (int id) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        retrieve point list by 'id'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="grow_indexed_pts(MultiLineObj*)">
+    <B>grow_indexed_pts</B> (<A HREF="MultiLineObj.html" >MultiLineObj</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add point list to table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="reset_indexed_pts()">
+    <B>reset_indexed_pts</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset point list table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="MultiLineObj.html" >MultiLineObj</A>** 
+    <A NAME="_ptsbuf">
+    <B>_ptsbuf</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_ptslen">
+    <B>_ptslen</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_ptsnum">
+    <B>_ptsnum</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

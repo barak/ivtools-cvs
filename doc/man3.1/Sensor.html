@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Sensor - describe input interest
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/sensor.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A sensor specifies a set of input events to catch.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Sensor()</B>
+              Create  a  new sensor that initially will not catch
+              any events.
+
+       <B>virtual</B> <B>void</B> <B>motion(boolean)</B>
+              Specify the sensor should (parameter  is  true)  or
+              should  not  (parameter  is  false)  catch  pointer
+              motion events.
+
+       <B>virtual</B> <B>boolean</B> <B>motion()</B>
+              Return  whether  the  sensor  is  catching  pointer
+              motion events.
+
+       <B>virtual</B> <B>void</B> <B>key(boolean)</B>
+              Specify  the  sensor  should (parameter is true) or
+              should not  (parameter  is  false)  catch  keyboard
+              events.
+
+       <B>virtual</B> <B>boolean</B> <B>key()</B>
+              Return  whether  the  sensor  is  catching keyboard
+              events.
+
+       <B>virtual</B> <B>void</B> <B>button(boolean,</B> <B>PointerButton</B> <B>=</B> <B>Event::any)</B>
+              Specify the sensor should (parameter  is  true)  or
+              should   not  (parameter  is  false)  catch  button
+              events.  The pointer button may specify a  particu-
+              lar   button  or  Event::any  (meaning  all  button
+              events).
+
+       <B>virtual</B> <B>boolean</B> <B>button(PointerButton</B> <B>=</B> <B>Event::any)</B>
+              Return  whether  the  sensor  is  catching   button
+              events.   The pointer button may specify a particu-
+              lar button or Event::any (meaning any of  the  but-
+              tons).
+
+       <B>virtual</B> <B>boolean</B> <B>caught(Event&amp;)</B>
+              Return  whether  the  sensor  is catching the given
+              event.
+
+       <B>void</B> <B>Catch(EventType)</B>
+              Express interest in a  particular  type  of  event.
+              This  function is provided solely for backward com-
+              patibility and will be removed in a future version.
+              Express  interest  in  a  particular type of button
+              event for a specific button.  This function is pro-
+              vided solely for backward compatibility and will be
+              removed in a future version.
+
+       <B>void</B> <B>Ignore(EventType)</B>
+              Remove interest in  a  particular  type  of  event.
+              This  function is provided solely for backward com-
+              patibility and will be removed in a future version.
+
+       <B>void</B> <B>IgnoreButton(EventType,</B> <B>int)</B>
+              Remove  interest  in  a  particular  type of button
+              event for a specific button.  This function is pro-
+              vided solely for backward compatibility and will be
+              removed in a future version.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Dialog - popup dialog interactor
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/dialog.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  dialog is an interactor that handles input for a dialog
+       box.  The dialog layout is specified by a separate  inter-
+       actor  passed  to the dialog constructor.  The dialog com-
+       pletes when  the  value  of  an  associated  button  state
+       becomes  non-zero.   This button state is typically set by
+       one or more buttons in the component interactor.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Dialog(ButtonState*,</B> <B>Interactor*,</B> <B>Alignment</B> <B>=</B> <B>Center)</B>
+              Construct a new dialog with the given button  state
+              and interactor.  The alignment is used by the Popup
+              operation.
+
+       <B>virtual</B> <B>boolean</B> <B>Accept()</B>
+              Set the dialog button state to zero and loop  read-
+              ing  events  until the button state's value becomes
+              non-zero.  Each event is passed to is target's Han-
+              dle  operation.   Return  true if the value is one,
+              false otherwise.
+
+       <B>virtual</B> <B>boolean</B> <B>Popup(Event&amp;,</B> <B>boolean</B> <B>placed</B> <B>=</B> <B>true)</B>
+              Insert the dialog into the  world  associated  with
+              the given event.  If <I>placed</I> is true, align the dia-
+              log around the event's (<I>x</I>, <I>y</I>)  coordinate.   Other-
+              wise,  the  dialog is inserted without specifying a
+              position.  Popup then calls  the  Accept  operation
+              and returns its value.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Button(3I)</B>, <B>Interactor(3I)</B>, <B>World(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

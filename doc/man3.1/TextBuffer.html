@@ -1,0 +1,228 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       TextBuffer - operations on unstructured text
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/textbuffer.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       TextBuffer  defines  common  editing,  searching, and text
+       movement operations on  a  buffer  of  unstructured  text.
+       Text  positions  are specified by an index into the buffer
+       and logically refer to positions between characters.   For
+       example, the position referred to by the index <I>0</I> is before
+       the first character in the text.  Indices can be  compared
+       for  equality  or ordering, but they should not be used to
+       directly access the buffer because TextBuffer might  rear-
+       range  the  text  to improve the efficiency of some opera-
+       tions.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>TextBuffer(char*</B> <B>buffer,</B> <B>int</B> <B>length,</B> <B>int</B> <B>size)</B>
+       <B>~TextBuffer()</B>
+              Create or destroy an instance of  TextBuffer.   All
+              operations  on  the text contained in <I>buffer</I> should
+              be performed  through  TextBuffer  functions.   The
+              text  is  assumed  to  be of length <I>length</I>, and the
+              total available buffer size is <I>size</I>.
+
+       <B>int</B> <B>Search(Regexp*</B> <B>regexp,</B> <B>int</B> <B>index,</B> <B>int</B> <B>range,</B> <B>int</B> <B>stop)</B>
+       <B>int</B> <B>ForwardSearch(Regexp*</B> <B>regexp,</B> <B>int</B> <B>index)</B>
+       <B>int</B> <B>BackwardSearch(Regexp*</B> <B>regexp,</B> <B>int</B> <B>index)</B>
+              Search for a match with the regular expression <I>reg-</I>
+              <I>exp</I>, beginning at position <I>index</I>.  Search  searches
+              the  part of the buffer specified by <I>range</I> and <I>stop</I>
+              and returns the  index  of  the  beginning  of  the
+              matched  text.   Positive  values  of <I>range</I> specify
+              forward searches, and negative values specify back-
+              ward  searches.   In  either case, the matched text
+              will not extend beyond the position given by  <I>stop</I>.
+              ForwardSearch  searches  for  matches from <I>index</I> to
+              the end of the text and returns the  index  of  the
+              end  of  the  match.   BackwardSearch searches from
+              <I>index</I> to the start of  the  text  and  returns  the
+              index  of  the  beginning  of the match.  All three
+              functions return a negative number if there was  no
+              match.
+
+       <B>int</B> <B>Match(Regexp*</B> <B>regexp,</B> <B>int</B> <B>index,</B> <B>int</B> <B>stop)</B>
+       <B>boolean</B> <B>ForwardMatch(Regexp*</B> <B>regexp,</B> <B>int</B> <B>index)</B>
+       <B>boolean</B> <B>BackwardMatch(Regexp*</B> <B>regexp,</B> <B>int</B> <B>index)</B>
+              Attempt  to  match the regular expression <I>regexp</I> at
+              the position <I>index</I>.  Match returns  the  length  of
+              the  matching string, or a negative number if there
+              was no match.  Matching will not succeed beyond the
+              for a match that ends at <I>index</I>.
+
+       <B>int</B> <B>Insert(int</B> <B>index,</B> <B>const</B> <B>char*</B> <B>string,</B> <B>int</B> <B>count)</B>
+       <B>int</B> <B>Delete(int</B> <B>index,</B> <B>int</B> <B>count)</B>
+       <B>int</B> <B>Copy(int</B> <B>index,</B> <B>char*</B> <B>buffer,</B> <B>int</B> <B>count)</B>
+              Edit  the text in the buffer.  Insert inserts count
+              characters from <I>string</I> at the position  <I>index</I>.   It
+              returns  the  actual number of characters inserted,
+              which might be less than count if there is insuffi-
+              cient  space  in  the buffer.  Delete deletes <I>count</I>
+              characters  from  the  buffer.   A  positive  <I>count</I>
+              deletes  characters  after  <I>index</I>,  and  a negative
+              value  deletes  character  before  <I>index</I>.    Delete
+              returns  the  actual  number of characters deleted,
+              which might be less than <I>count</I> if index is near the
+              beginning  or  the  end  of  the text.  Copy copies
+              <I>count</I> characters into  <I>buffer</I>.   A  positive  <I>count</I>
+              copies  characters after <I>index</I> and a negative <I>count</I>
+              copies characters before <I>index</I>.  Count returns  the
+              actual  number  of  characters  copied.   It is the
+              caller's responsibility to ensure that <I>buffer</I>  con-
+              tains sufficient space for the copied text.
+
+       <B>int</B> <B>Height()</B>
+       <B>int</B> <B>Width()</B>
+       <B>int</B> <B>Length()</B>
+              Return  information about the text.  Height returns
+              the number of lines in the text, Width returns  the
+              number  of  characters  in  the  longest  line, and
+              Length returns the total number of characters.
+
+       <B>const</B> <B>char*</B> <B>Text()</B>
+       <B>const</B> <B>char*</B> <B>Text(int</B> <B>index)</B>
+       <B>const</B> <B>char*</B> <B>Text(int</B> <B>index1,</B> <B>int</B> <B>index2)</B>
+       <B>char</B> <B>Char</B> <B>(int</B> <B>index)</B>
+              Access the contents of the text.  Char returns  the
+              character  immediately  following <I>index</I>.  The three
+              Text calls return  pointers  to  character  strings
+              representing  the  text.  They make various guaran-
+              tees about the format of the returned string.  With
+              no  parameters,  Text returns a pointer to a string
+              that contains the entire text of the buffer.   With
+              a single parameter the string contains at least the
+              text from <I>index</I> to the end of the line.   With  two
+              parameters,  the  returned string contains at least
+              the text between <I>index1</I> and <I>index2</I>.  In  any  case,
+              the  returned string should be considered temporary
+              and its contents subject to  change.   To  maximize
+              efficiency,  you  should prefer the more restricted
+              forms of Text.
+
+       <B>int</B> <B>LineIndex(int</B> <B>line)</B>
+       <B>int</B> <B>LineNumber(int</B> <B>index)</B>
+       <B>int</B> <B>LineOffset</B> <B>(int</B> <B>index)</B>
+              Map between text indices and line and offset  posi-
+              tions.   LineIndex  returns the index of the begin-
+              ning of line <I>line</I>.  LineNumber returns  the  number
+              of   the  line  that  contains  <I>index</I>.   LineOffset
+              returns the offset of <I>index</I> from the  beginning  of
+              its containing line.  LinesBetween returns the dif-
+              ference between the numbers of the  lines  contain-
+              ings  <I>index1</I>  and  <I>index2</I>;  a  return value of zero
+              indicates that <I>index1</I> and <I>index2</I> are  on  the  same
+              line,  and a positive value indicates that the line
+              containing <I>index2</I>  is  after  the  line  containing
+              <I>index1</I>.  Lines are numbered starting from zero.
+
+       <B>int</B> <B>PreviousCharacter(int</B> <B>index)</B>
+       <B>int</B> <B>NextCharacter(int</B> <B>index)</B>
+              Return the index immediately following or preceding
+              <I>index</I>.  The returned  value  is  never  before  the
+              beginning or after the end of the text.
+
+       <B>boolean</B> <B>IsBeginningOfText(int</B> <B>index)</B>
+       <B>int</B> <B>BeginningOfText()</B>
+       <B>boolean</B> <B>IsEndOfText(int</B> <B>index)</B>
+       <B>int</B> <B>EndOfText()</B>
+              Return  the  index  of  the beginning or end of the
+              text, or query whether <I>index</I> is at the beginning or
+              end of the text.
+
+       <B>boolean</B> <B>IsBeginningOfLine(int</B> <B>index)</B>
+       <B>int</B> <B>BeginningOfLine(int</B> <B>index)</B>
+       <B>int</B> <B>BeginningOfNextLine(int</B> <B>index)</B>
+       <B>boolean</B> <B>IsEndOfLine(int</B> <B>index)</B>
+       <B>int</B> <B>EndOfLine(int</B> <B>index)</B>
+       <B>int</B> <B>EndOfPreviousLine(int</B> <B>index)</B>
+              Return  information about the line structure of the
+              text around  <I>index</I>.   BeginningOfLine  returns  the
+              index  of  the  beginning  of  the  line containing
+              <I>index</I>.  BeginningOfNextLine returns  the  index  of
+              the  beginning  of  the next line that begins after
+              <I>index</I>.  EndOfLine returns the index of the  end  of
+              the   line   containing  <I>index</I>.   EndOfPreviousLine
+              returns the index of the end of the last line  that
+              ends before <I>index</I>.  The beginning of a line is log-
+              ically immediately after a newline  character,  and
+              the end of a line is logically immediately before a
+              newline character.  The beginning and  end  of  the
+              text  are considered to be the beginning and end of
+              the first and last lines, respectively.
+
+       <B>boolean</B> <B>IsBeginningOfWord(int</B> <B>index)</B>
+       <B>int</B> <B>BeginningOfWord(int</B> <B>index)</B>
+       <B>boolean</B> <B>IsEndOfWord(int</B> <B>index)</B>
+       <B>int</B> <B>EndOfWord(int</B> <B>index)</B>
+       <B>int</B> <B>EndOfPreviousWord(int</B> <B>index)</B>
+              Return information about the word structure of  the
+              text  around  <I>index</I>.   BeginningOfWord  returns the
+              index of  the  beginning  of  the  word  containing
+              <I>index</I>.  BeginningOfNextWord return the index of the
+              beginning of the nest word that begins after <I>index</I>.
+              EndOfWord  returns the index of the end of the word
+              that contains <I>index</I>.  EndOfPreviousWord returns the
+              index  of the end of the last word that ends before
+              <I>index</I>.  A word is defined as a sequence  of  alpha-
+              numeric  characters.   The beginning and end of the
+              text are considered to be the beginning and end  of
+              the first and last words, respectively.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Regexp(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

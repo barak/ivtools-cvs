@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>ivtools comdraw:  drawing editor with command interpreter</title>
+  </head>
+
+  <body text="000000" links="ff0000">
+    <h1>ivtools comdraw</h1>
+<img src=../ivtools/comdraw-logo.gif><p>
+
+  <i>ivtools comdraw</i> is derived from <a href=./drawtool.html>ivtools drawtool</a>.  It has
+   extensions for command interpreting of drawing capability, using a 
+   simple yet fully programmable <a href=./comterp.html>scripting language</a>
+
+    Here is the <a href=comdraw.README.txt>man page</a> for ivtools comdraw.  The
+    set of pre-defined operators and commands of <a
+    href=./comterp.README.txt>comterp</a> are available in comdraw as
+    well.<p>
+
+<b>Sample Scripts</b>
+<hr>
+<p><i>Pseudo-spirograph</i>
+
+    To use comdraw like a Spirograph, start one up, and enter something like the following into stdin:<p>
+
+<code>for(i=0 i<100 i++ <br>
+:body x=300+cos(i)*100;y=300+sin(i)*100;ellipse(x,y,30,20);rotate(i);update<br>)</code><p>
+
+<p>
+which generates <a href=./spiro1.gif>this</a>
+
+<hr>
+<p><i>Random jelly-beans</i>
+
+To draw a collection of randomly positioned and colored ellipses (jelly beans), enter the following into a comdraw interpreter:<p>
+
+<code>for(x=0 x<100 x++ <br>
+:body ellipse(rand(0,ncols-1),rand(0,nrows-1),rand(20,30),rand(10,20));rotate(rand(1,180));update;colors(rand(1,ncolors) rand(1,ncolors));pattern(rand(1,npatterns))<br>)</code>
+<p>
+which generates <a href=./jellybeans.gif>this</a>
+<p> <i>in both above examples there is no need for the :body argument, because the <b>for</b>
+       defaults to using the fourth argument as the body of the for-loop</i>
+<hr>
+<p><i>Anti-aliased fonts</i>
+
+Want to play with anti-aliased fonts?  First acquire, build, and install the <a href=./pbmplus.html>Netpbm imaging utilities</a>, then use the "import" command with a :popen flag as follows:<p>
+
+<code>import("pbmtext \"TEST STRING\" | pnmalias" :popen)</code>
+<p>
+...or experiment with any other possible combination of Netbpm and Unix filters.  <p>
+<p>
+
+<hr>
+    To use the barplot command of comdraw you need these ivtools <a
+    href=./othertools.html>add-ons</a>: <a href=./plotmtv.html>plotmtv</a> and
+    <a href=./pstoedit.html>pstoedit</a>.<p>
+<hr>
+     
+<table border=1><tr><td>
+<b><a href=./index.html>ivtools</a> <a href=./editors.html>drawing editors</a></b>
+</td><td>
+<a href=./idraw.html>idraw</a>
+</td><td>
+<a href=./drawtool.html>drawtool</a>
+</td><td>
+comdraw
+</td><td>
+<a href=./flipbook.html>flipbook</a>
+</td><td>
+<a href=./graphdraw.html>graphdraw</a>
+</td></tr></table>
+
+
+  </body>
+</html>

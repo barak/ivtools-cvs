@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       CommandControl,  PanelControl,  HPanelControl,  VPanelCon-
+       trol,  CommandInteractor,  PanelInteractor  -   predefined
+       UControl and UControlInteractor subclasses for common con-
+       trols
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/uctrls.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       CommandControl is a UControl subclass that executes a Com-
+       mand.   CommandControl instances are most commonly used in
+       menus.  CommandInteractor is a UControlInteractor subclass
+       that CommandControls create to define their appearance.
+
+       PanelControl  is  a  subclass  of UControl that provides a
+       radiobutton-like interface to  selecting  from  a  set  of
+       mutually-exclusive  choices.   A PanelControl is passed an
+       interactor when it is created to  define  its  appearance.
+       PanelControls  are  often  used  to create ``palettes'' of
+       interactors that engage the current Tool instance.
+
+       PanelInteractor  is  a  UControlInteractor  subclass  that
+       defines an appearance that is often appropriate for Panel-
+       Controls.  HPanelControl and VPanelControl are  subclasses
+       of  PanelControl  that  use  PanelInteractor  instances by
+       default.
+
+
+</PRE>
+<H2>COMMANDCONTROL PUBLIC OPERATIONS</H2><PRE>
+       <B>CommandControl(ControlInfo*)</B>
+       <B>CommandControl(const</B> <B>char*,</B> <B>ControlInfo*)</B>
+              Create a CommandControl,  optionally  supplying  an
+              instance name.  The constructors automatically cre-
+              ate and insert a ControlInteractor  to  define  the
+              CommandControl's appearance.
+
+       <B>virtual</B> <B>void</B> <B>Do()</B>
+              If the ControlInfo's owner is a reversible command,
+              then Do will create a copy of the command,  execute
+              it,  and log it (if it remains reversible following
+              execution).  If the owner is an  irreversible  com-
+              mand,  then  Do  will execute it without copying or
+              logging it.
+
+
+</PRE>
+<H2>COMMANDINTERACTOR PUBLIC OPERATIONS</H2><PRE>
+       <B>CommandInteractor(ControlInfo*)</B>
+              Create a  CommandInteractor  with  the  given  Con-
+              trolInfo  object.   The  CommandInteractor displays
+              the ControlInfo's label and  keylabel  side-by-side
+              as would befit a menu entry.
+
+
+</PRE>
+<H2>PANELCONTROL PUBLIC OPERATIONS</H2><PRE>
+       <B>PanelControl(Interactor*,</B> <B>ControlInfo*,</B> <B>ControlState*</B> <B>=</B>
+           <B>const</B> <B>char*,</B> <B>Interactor*,</B> <B>ControlInfo*,</B>
+           <B>ControlState*</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+              Create a PanelControl, supplying an interactor that
+              defines  its  appearance, a ControlInfo object, and
+              optionally an instance  name  and  a  ControlState,
+              which  all  PanelControls in a palette should share
+              to ensure mutual exclusion.
+
+       <B>virtual</B> <B>void</B> <B>Do()</B>
+              Do simply calls Down.  Thus when  the  KeyMap  exe-
+              cutes the keyboard equivalent specified in the Con-
+              trolInfo, it has the same effect as clicking on the
+              PanelControl instance.
+
+
+</PRE>
+<H2>PANELCONTROL SUBCLASS PUBLIC OPERATIONS</H2><PRE>
+       <B>HPanelControl(ControlInfo*,</B> <B>ControlState*</B> <B>=</B> <B>nil)</B>
+       <B>HPanelControl(const</B> <B>char*,</B> <B>ControlInfo*,</B> <B>ControlState*</B> <B>=</B>
+              <B>nil)</B>
+
+       <B>VPanelControl(ControlInfo*,</B> <B>ControlState*</B> <B>=</B> <B>nil)</B>
+       <B>VPanelControl(const</B> <B>char*,</B> <B>ControlInfo*,</B> <B>ControlState*</B> <B>=</B>
+              <B>nil)</B>
+              HPanelControls  and VPanelControls simply create an
+              instance of PanelInteractor and pass it to the Pan-
+              elControl  constructor.   HPanelControls  should be
+              used in row-oriented palettes,  and  VPanelControls
+              should be used in column-oriented palettes.
+
+
+</PRE>
+<H2>PANELINTERACTOR PUBLIC OPERATIONS</H2><PRE>
+       <B>PanelInteractor(ControlInfo*,</B> <B>Orientation)</B>
+              Create a PanelInteractor with the given orientation
+              and ControlInfo object.  The  PanelInteractor  will
+              draw  the  ControlInfo's label in the center of its
+              canvas and the keylabel in the lower right.   Hori-
+              zontal  orientation is appropriate for row-oriented
+              instances, while Vertical orientation is  appropri-
+              ate for column-oriented instances.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>,  <B>ControlInfo(3U)</B>, <B>KeyMap(3U)</B>, <B>Tool(3U)</B>, UCon-
+       <B>trol(3U)</B>, <B>globals(3U)</B>
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

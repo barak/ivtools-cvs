@@ -1,0 +1,1213 @@
+
+<html><head><TITLE>Description of OvImportCmd</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OvImportCmd</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Command.html" >Command</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+command for importing arbitrary graphical files.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Command.html" >Command</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OvImportCmd><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovimport.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  command for importing arbitrary graphical files: a wide variety of raster files, 
+ idraw "PostScript" and regular "PostScript", compressed or not compressed, 
+ by URL or pathname.  Useful static methods for constructing components, as well
+ as full-on command for hooking into a file menu.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>static FILE* 
+    <A NAME="CheckCompression(FILE*file&#38;&#38;COMMconstchar*pathname&#38;&#38;COMMboolean&#38;compressed)">
+    <B>CheckCompression</B> ( FILE* file, const char *pathname, boolean&#38; compressed) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        check the compression status of a file specified by 'pathname'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Command.html" >Command</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="CreatePlaceImage()">
+    <B>CreatePlaceImage</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create placeholder image when doing asynchronous incremental downloads.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="Create_Tiled_File(constchar*ppmfile&#38;&#38;COMMconstchar*tilefile&#38;&#38;COMMinttwidth&#38;&#38;COMMinttheight)">
+    <B>Create_Tiled_File</B> ( const char* ppmfile, const char* tilefile, int twidth, int theight ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for creating an internally tiled PGM or PPM file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="DoImport(istream&#38;instrm&#38;&#38;COMMboolean&#38;empty&#38;&#38;COMMFileHelper&#38;helper&#38;&#38;COMMEditor*ed&#38;&#38;COMMbooleanis_strm&#38;&#38;COMMconstchar*pathname&#38;&#38;COMMint&#38;pnmfd)">
+    <B>DoImport</B> ( istream&#38; instrm, boolean&#38; empty, FileHelper&#38; helper, <A HREF="Editor.html" >Editor</A>* ed, boolean is_strm, const char* pathname, int&#38; pnmfd ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Execute()">
+    <B>Execute</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        check for non-empty selection, pop-up dialog box to specify input path
+ and other import parameters, then import and paste result.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="Import(constchar*)">
+    <B>Import</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        import from pathname.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="Import(istream&#38;)">
+    <B>Import</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        import from istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="Import(istream&#38;&#38;&#38;COMMboolean&#38;empty)">
+    <B>Import</B> (istream&#38;, boolean&#38; empty) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        import from istream, returning flag to indicate if anything happened.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(ImportChooser*)">
+    <B>Init</B> (<A HREF="ImportChooser.html" >ImportChooser</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OvImportCmd(ControlInfo*=nil&#38;&#38;COMMImportChooser*=nil)">
+    <B>OvImportCmd</B> (<A HREF="ControlInfo.html" >ControlInfo</A>* = nil, <A HREF="ImportChooser.html" >ImportChooser</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OvImportCmd(Editor*=nil&#38;&#38;COMMImportChooser*=nil)">
+    <B>OvImportCmd</B> (<A HREF="Editor.html" >Editor</A>* = nil, <A HREF="ImportChooser.html" >ImportChooser</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="Bitmap.html" >Bitmap</A>* 
+    <A NAME="PBM_Bitmap(constchar*)">
+    <B>PBM_Bitmap</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate bitmap from a PBM file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="Bitmap.html" >Bitmap</A>* 
+    <A NAME="PBM_Bitmap(istream&#38;)">
+    <B>PBM_Bitmap</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate bitmap from a PBM istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PBM_Image(constchar*)">
+    <B>PBM_Image</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="StencilOvComp.html" >StencilOvComp</A> from a PBM file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PBM_Image(istream&#38;)">
+    <B>PBM_Image</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="StencilOvComp.html" >StencilOvComp</A> from a PBM istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PGM_Image(constchar*)">
+    <B>PGM_Image</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="RasterOvComp.html" >RasterOvComp</A> from PGM file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PGM_Image(istream&#38;&#38;&#38;COMMbooleanascii=false)">
+    <B>PGM_Image</B> (istream&#38;, boolean ascii=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="RasterOvComp.html" >RasterOvComp</A> from PGM istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="PGM_Raster(constchar*&#38;&#38;COMMbooleandelayed=false&#38;&#38;COMMOverlayRaster*=nil&#38;&#38;COMMIntCoordxbeg=-1&#38;&#38;COMMIntCoordxend=-1&#38;&#38;COMMIntCoordybeg=-1&#38;&#38;COMMIntCoordyend=-1)">
+    <B>PGM_Raster</B> ( const char*, boolean delayed = false, <A HREF="OverlayRaster.html" >OverlayRaster</A>* = nil, IntCoord xbeg=-1, IntCoord xend=-1, IntCoord ybeg=-1, IntCoord yend=-1 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate raster from PGM file, with option to delay reading pixel data
+ until needed for display, and ability to specify a subimage. This method
+ supports pre-tiled rasters as well, indicated by a "# tile <width> <height>"
+ comment in the PGM header.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="PGM_Raster(istream&#38;&#38;&#38;COMMbooleanascii=false)">
+    <B>PGM_Raster</B> (istream&#38;, boolean ascii=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate raster from PGM istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PNM_Image(istream&#38;&#38;&#38;COMMconstchar*creator=nil)">
+    <B>PNM_Image</B> (istream&#38;, const char* creator = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="RasterOvComp.html" >RasterOvComp</A> from a PNM istream (PBM, PGM, or PPM).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PNM_Image_Filter(istream&#38;&#38;&#38;COMMbooleanreturn_fd&#38;&#38;COMMint&#38;fd&#38;&#38;COMMconstchar*filter=nil)">
+    <B>PNM_Image_Filter</B> (istream&#38;, boolean return_fd, int&#38; fd, const char* filter = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="RasterOvComp.html" >RasterOvComp</A> from a PNM istream (PBM, PGM, or PPM), using a 
+ specified filter to convert from another format to one of the PNM formats.
+ if 'return_fd' is true this method sets up and returns a file handle
+ to import a raw PPM image.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PPM_Image(constchar*)">
+    <B>PPM_Image</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="RasterOvComp.html" >RasterOvComp</A> from PPM file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PPM_Image(istream&#38;&#38;&#38;COMMbooleanascii=false)">
+    <B>PPM_Image</B> (istream&#38;, boolean ascii=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="RasterOvComp.html" >RasterOvComp</A> from PPM istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="PPM_Raster(constchar*&#38;&#38;COMMbooleandelayed=false&#38;&#38;COMMOverlayRaster*=nil&#38;&#38;COMMIntCoordxbeg=-1&#38;&#38;COMMIntCoordxend=-1&#38;&#38;COMMIntCoordybeg=-1&#38;&#38;COMMIntCoordyend=-1)">
+    <B>PPM_Raster</B> ( const char*, boolean delayed = false, <A HREF="OverlayRaster.html" >OverlayRaster</A>* = nil, IntCoord xbeg=-1, IntCoord xend=-1, IntCoord ybeg=-1, IntCoord yend=-1 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate raster from PPM file, with option to delay reading pixel data
+ until needed for display, and ability to specify a subimage. This method
+ supports pre-tiled rasters as well, indicated by a "# tile <width> <height>"
+ comment in the PPM header.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="PPM_Raster(istream&#38;in&#38;&#38;COMMbooleanascii=false)">
+    <B>PPM_Raster</B> (istream&#38; in, boolean ascii=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate raster from PPM istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="Pipe_Filter(istream&#38;in&#38;&#38;COMMconstchar*filter)">
+    <B>Pipe_Filter</B> (istream&#38; in, const char* filter) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        low-level mechanism to filter an istream using an arbitrary command line
+ filter. Uses a double-pipe/double-fork mechanism, where a child process
+ is set up to read the istream and pipe it to a grandchild process,
+ which reads the other end of the pipe, runs the data through the filter,
+ and writes the result to a pipe whose other end is indicated by the 
+ return value of this method. This double-pipe/double-fork architecture
+ avoids the deadlock possible in a double-pipe/single-fork architecture,
+ especially when decompressing the incoming istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static FILE* 
+    <A NAME="Portable_Raster_Open(PortableImageHelper*&#38;&#38;&#38;COMMconstchar*pathname&#38;&#38;COMMintppm&#38;&#38;COMMint&#38;ncols&#38;&#38;COMMint&#38;nrows&#38;&#38;COMMboolean&#38;compressed&#38;&#38;COMMboolean&#38;tiled&#38;&#38;COMMint&#38;twidth&#38;&#38;COMMint&#38;theight)">
+    <B>Portable_Raster_Open</B> ( <A HREF="PortableImageHelper.html" >PortableImageHelper</A>*&#38;, const char* pathname, int ppm, int&#38; ncols, int&#38; nrows, boolean&#38; compressed, boolean&#38; tiled, int&#38; twidth, int&#38; theight ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for tiled or untiled access of PGM and PPM disk files.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="PostDialog()">
+    <B>PostDialog</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method that pops-up the dialog box and constructs the imported component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="ReadCreator(constchar*pathname)">
+    <B>ReadCreator</B> (const char* pathname) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read creator from 'pathname', returning one of "COMPRESS", "GZIP",
+ "TIFF", "SUN", "PBM", "PGM", "PPM", "PBMA", "PGMA", "PPMA", "JPEG",
+ "BM", "ATK", "MP", "X11", "PCX", "IFF", "GIF", "RLE", "PNG", "idraw", 
+ or something else for arbitrary "PostScript".
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="ReadCreator(istream&#38;in&#38;&#38;COMMFileType&#38;type)">
+    <B>ReadCreator</B> (istream&#38; in, FileType&#38; type) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read creator from istream, returning one of "COMPRESS", "GZIP",
+ "TIFF", "SUN", "PBM", "PGM", "PPM", "PBMA", "PGMA", "PPMA", "JPEG",
+ "BM", "ATK", "MP", "X11", "PCX", "IFF", "GIF", "RLE", "PNG", "idraw", 
+ or something else for arbitrary "PostScript", plus a FileType enum.
+ The bytes read to determine the creator are pushed back onto
+ the istream.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Reversible()">
+    <B>Reversible</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns false.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="TIFF_Image(constchar*)">
+    <B>TIFF_Image</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="RasterOvComp.html" >RasterOvComp</A> from TIFF file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="TIFF_Raster(constchar*)">
+    <B>TIFF_Raster</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate raster from TIFF file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="Tiling(int&#38;width&#38;&#38;COMMint&#38;height)">
+    <B>Tiling</B> (int&#38; width, int&#38; height) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return on-the-fly tiling parameters from command line: -tile, -twidth w,
+ and -theight. When enabled this causes large PGM or PNM images to be
+ read in as a grid of sub-image components, and any subsequent export or 
+ save to disk will reflect this.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="Bitmap.html" >Bitmap</A>* 
+    <A NAME="XBitmap_Bitmap(constchar*)">
+    <B>XBitmap_Bitmap</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate bitmap from a X <A HREF="Bitmap.html" >Bitmap</A> file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="XBitmap_Image(constchar*)">
+    <B>XBitmap_Image</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate <A HREF="StencilOvComp.html" >StencilOvComp</A> from a X <A HREF="Bitmap.html" >Bitmap</A> file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="center_import(Editor*ed&#38;&#38;COMMGraphicComp*comp)">
+    <B>center_import</B> (<A HREF="Editor.html" >Editor</A>* ed, <A HREF="GraphicComp.html" >GraphicComp</A>* comp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        center imported component in the viewer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="changeComp(RasterOvComp*oldComp&#38;&#38;COMMRasterOvComp*newComp)">
+    <B>changeComp</B> (<A HREF="RasterOvComp.html" >RasterOvComp</A>* oldComp, <A HREF="RasterOvComp.html" >RasterOvComp</A>* newComp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Component.html" >Component</A>* 
+    <A NAME="component()">
+    <B>component</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to imported component. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="detach(RasterOvComp*)">
+    <B>detach</B> (<A HREF="RasterOvComp.html" >RasterOvComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="enumFileType">
+    <B>enum FileType</B>
+     { UnknownFile, RasterFile, PostScriptFile, IvtoolsFile, CompressedFile } 
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        types of files to be imported.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="instream(istream*)">
+    <B>instream</B> (istream*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set istream to import file from.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="is_popen()">
+    <B>is_popen</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="is_url()">
+    <B>is_url</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates import is from a URL.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="pathname()">
+    <B>pathname</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to pathname.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="pathname(constchar*&#38;&#38;COMMbooleanpopen=false)">
+    <B>pathname</B> (const char*, boolean popen=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set pathname to import file from; if 'popen' treat the path as a command. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="preserve_selection(boolean)">
+    <B>preserve_selection</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag to import without changing current selection in editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OvImportCmd()">
+    <B>~OvImportCmd</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="Create_Comp(PortableImageHelper*pih&#38;&#38;COMMFILE*&#38;&#38;COMMconstchar*pathname&#38;&#38;COMMintwidth&#38;&#38;COMMintheight&#38;&#38;COMMbooleancompressed&#38;&#38;COMMbooleantiled&#38;&#38;COMMinttwidth&#38;&#38;COMMinttheight)">
+    <B>Create_Comp</B> ( <A HREF="PortableImageHelper.html" >PortableImageHelper</A>* pih, FILE*, const char* pathname, int width, int height, boolean compressed, boolean tiled, int twidth, int theight ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for tiled or untiled access of PGM and PPM disk files.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="PI_Normal_Read(PortableImageHelper*&#38;&#38;COMMFILE*file&#38;&#38;COMMOverlayRaster*raster&#38;&#38;COMMintncols&#38;&#38;COMMintnrows&#38;&#38;COMMintxbeg&#38;&#38;COMMintxend&#38;&#38;COMMintybeg&#38;&#38;COMMintyend)">
+    <B>PI_Normal_Read</B> ( <A HREF="PortableImageHelper.html" >PortableImageHelper</A>*, FILE* file, <A HREF="OverlayRaster.html" >OverlayRaster</A>* raster, int ncols, int nrows, int xbeg, int xend, int ybeg, int yend ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for untiled access of PGM and PPM disk files.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="PI_Raster_Read(PortableImageHelper*&#38;&#38;COMMFILE*file&#38;&#38;COMMintncols&#38;&#38;COMMintnrows&#38;&#38;COMMbooleancompressed&#38;&#38;COMMbooleantiled&#38;&#38;COMMbooleandelayed&#38;&#38;COMMOverlayRaster*raster&#38;&#38;COMMIntCoordxbeg&#38;&#38;COMMIntCoordxend&#38;&#38;COMMIntCoordybeg&#38;&#38;COMMIntCoordyend)">
+    <B>PI_Raster_Read</B> ( <A HREF="PortableImageHelper.html" >PortableImageHelper</A>*, FILE* file, int ncols, int nrows, boolean compressed, boolean tiled, boolean delayed, <A HREF="OverlayRaster.html" >OverlayRaster</A>* raster, IntCoord xbeg, IntCoord xend, IntCoord ybeg, IntCoord yend ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for tiled or untiled access of PGM and PPM disk files.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="PI_Tiled_Read(PortableImageHelper*&#38;&#38;COMMFILE*file&#38;&#38;COMMOverlayRaster*raster&#38;&#38;COMMintncols&#38;&#38;COMMintnrows&#38;&#38;COMMintxbeg&#38;&#38;COMMintxend&#38;&#38;COMMintybeg&#38;&#38;COMMintyend)">
+    <B>PI_Tiled_Read</B> ( <A HREF="PortableImageHelper.html" >PortableImageHelper</A>*, FILE* file, <A HREF="OverlayRaster.html" >OverlayRaster</A>* raster, int ncols, int nrows, int xbeg, int xend, int ybeg, int yend ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for tiled access of PGM and PPM disk files.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="Portable_Image_Tiled(PortableImageHelper*&#38;&#38;COMMconstchar*pathname&#38;&#38;COMMinttwidth&#38;&#38;COMMinttheight&#38;&#38;COMMintwidth&#38;&#38;COMMintheight&#38;&#38;COMMbooleancompressed&#38;&#38;COMMbooleantiled)">
+    <B>Portable_Image_Tiled</B> ( <A HREF="PortableImageHelper.html" >PortableImageHelper</A>*, const char* pathname, int twidth, int theight, int width, int height, boolean compressed, boolean tiled ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for tiled access of PGM and PPM disk files.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ImportChooser.html" >ImportChooser</A>* 
+    <A NAME="chooser_">
+    <B>chooser_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Component.html" >Component</A>* 
+    <A NAME="comp_">
+    <B>comp_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>FileHelper* 
+    <A NAME="helper_">
+    <B>helper_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>istream* 
+    <A NAME="inptr_">
+    <B>inptr_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="path_">
+    <B>path_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="popen_">
+    <B>popen_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="preserve_selection_">
+    <B>preserve_selection_</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

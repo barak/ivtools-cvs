@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Deck - a stack of interactors on top of each other
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/deck.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  deck is a scene containing interactors that are concep-
+       tually stacked on top of each other.  Only one  interactor
+       is  visible  at  a  time.   A  deck is useful to implement
+       ``paging'' through a document, or where only one  of  sev-
+       eral similar components should be visible at a time, as in
+       applications using alternate tool pallets  or  menus  with
+       alternate entries.
+
+       A  deck will try to stretch or shrink the visible interac-
+       tor to fill the total space.  The natural size of  a  deck
+       is the maximum of its components.
+
+       A  deck uses its <I>perspective</I> to specify which component is
+       visible.  The components are  numbered  in  the  order  in
+       which  they are inserted into the deck, starting with one.
+       A scroller or other interactor which operates on the  per-
+       spective can be used to allow a user to specify the compo-
+       nent to view.  Either horizontal or vertical scrolling can
+       be used.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Deck()</B> Construct a new deck.
+
+       <B>void</B> <B>Insert(Interactor*)</B>
+              Add an interactor to the deck.
+
+       <B>void</B> <B>Change(Interactor*)</B>
+              Notify  the  deck  that  an  interactor's shape has
+              changed.  If propagation is on, the deck recomputes
+              its own shape and notifies its parent.
+
+       <B>void</B> <B>Remove(Interactor*)</B>
+              Take an interactor out of a deck.
+
+       <B>void</B> <B>Flip(int</B> <B>count</B> <B>=</B> <B>1)</B>
+       <B>void</B> <B>FlipTo(int</B> <B>position)</B>
+       <B>void</B> <B>Top()</B>
+       <B>void</B> <B>Bottom()</B>
+              Perform  operations  on  the perspective to specify
+              the component to view.  Flip specifies  the  compo-
+              nent relative to the current component.  A positive
+              value of <I>count</I> specifies a component nearer to  the
+              ``bottom''  of  the  deck  (the components inserted
+              last), and a negative value specifies  a  component
+              nearer  to  the ``top''.  FlipTo specifies a compo-
+              nent by its absolute position in the deck.  A posi-
+              a  position  from  the bottom, starting at -1.  Top
+              and  Bottom  are  equivalent   to   <B>FlipTo(1)</B>   and
+              FlipTo(-1) respectively.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(3I)</B>, <B>Scene(3I)</B>, <B>Shape(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

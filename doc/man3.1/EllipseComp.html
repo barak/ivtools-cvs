@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       EllipseComp,  EllipseView,  PSEllipse  - ellipse component
+       subject, view, and PostScript external representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/ellipse.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       EllipseComp is a GraphicComp that defines an ellipse.   It
+       uses an Ellipse graphic to store its graphical attributes.
+       EllipseView is a GraphicView for displaying  the  ellipse.
+       PSEllipse  is  a PostScriptView that externalizes the sub-
+       ject's information in PostScript form.
+
+
+</PRE>
+<H2>ELLIPSECOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>EllipseComp(SF_Ellipse*</B> <B>=</B> <B>nil)</B>
+              The constructor takes  an  optional  stroked-filled
+              ellipse that defines the attributes of the ellipse.
+
+       <B>SF_Ellipse*</B> <B>GetEllipse()</B>
+              Return the  SF_Ellipse  graphic  that  defines  the
+              ellipse's  attributes.  GetEllipse is simply a more
+              specific form of the GetGraphic operation.
+
+
+</PRE>
+<H2>ELLIPSEVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>EllipseView(EllipseComp*</B> <B>=</B> <B>nil)</B>
+              Create an  EllipseView,  optionally  supplying  the
+              subject.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              EllipseView  interprets AlignToGridCmd to align its
+              center to the grid.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              EllipseView redefines its response to  manipulation
+              with a GraphicCompTool.  The user clicks to specify
+              the center of the ellipse and then  drags  to  vary
+              its  axes.   The  center  and the axes will be con-
+              strained by gravity, if any.
+
+       <B>EllipseComp*</B> <B>GetEllipseComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>PSELLIPSE PUBLIC OPERATIONS</H2><PRE>
+       <B>PSEllipse(EllipseComp*</B> <B>=</B> <B>nil)</B>
+              Construct a PostScript external  representation  of
+              the given subject, if any.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

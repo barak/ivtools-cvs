@@ -1,0 +1,36 @@
+Begin3
+Title: ivtools
+Version: 0.6.10
+Entered-date: 29SEP98
+Description:  drawing editors and servers written in C++
+    - new auto-conf generated configure script
+    - full-featured multi-window drawing editors with rubberbands,
+      full undo/redo, arbitrary and precise pan/zoom/scale/rotate/stretch,
+      switch-selectable widget appearance:  Motif, OpenLook, Mac, SGI-Motif.
+    - incorporates alternate distribution of InterViews, Unidraw, and idraw.
+    - save/restore in readable text file format.
+    - import idraw Postscript, TIFF, pbm, pgm, ppm, xbitmap,
+      map features from ivmaps, and from other arbitrary filters
+      i.e. GNU plotting utilities).
+    - export idraw Postscript or readable text, and to other arbitrary 
+      filters or viewers (i.e. ghostview).
+    - support for X11 standard colormap and dithering with djpeg or ppmdither  
+    - node/graph editing and multi-frame editing.
+    - double-buffered graphics update with large raster and 
+      gray-level optimizations.
+    - remote drawing and import services via ACE.
+    - polygon clipping tools via clippoly.
+    - convex hull tool via qhull.
+    - built-in command interpreter
+Keywords:  structured graphics, object-oriented application framework, 
+	   InterViews, idraw, Unidraw, ACE, drawing editor, server,
+	   viewer, graph editing, flipbook animation, command interpreter
+Author: info@vectaport.com (Vectaport Inc.)
+Maintained-by:  info@vectaport.com (Vectaport Inc.)
+Primary-site:   http://www.vectaport.com 
+		1.4 MB /pub/src/ivtools-0.6.10.tgz
+		2.7 MB /pub/bin/ivtools-0.6.10-LINUX.tgz
+Alternate-site: ftp://sunsite.unc.edu/pub/Linux/apps/graphics/draw/
+WWW-site:  http://www.vectaport.com/ivtools/
+Copying-policy:  X Consortium
+End

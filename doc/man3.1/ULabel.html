@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ULabel - structured graphic displaying one line of text
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/label.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  ULabel is a Graphic that displays one line of text.  It
+       stores a PSFont to define  the  font  in  which  the  text
+       appears.   With  no transformation, the text will be drawn
+       with its bounding box's lower-left corner at the origin.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>ULabel(const</B> <B>char*</B> <B>text,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Construct  a  label,  supplying  a  null-terminated
+              string  in  <I>text</I> and an optional graphic from which
+              to obtain an initial set of graphics state.  ULabel
+              stores a copy <I>text</I> internally.
+
+       <B>const</B> <B>char*</B> <B>GetOriginal()</B>
+              Return  a pointer to the text that the label stores
+              internally.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>, <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ColorData, GSData, MobilityData, MoveData, VoidData - Data
+       subclasses for storing common undo information
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/datas.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The Unidraw library predefines several Data subclasses for
+       storing  common  undo  information:  ColorData  stores two
+       PSColors (usually representing foreground  and  background
+       colors),  while  GSData  stores a complete set of graphics
+       state in a FullGraphic object.   MobilityData  stores  the
+       mobility  and  graphics state information needed to undo a
+       change in mobility. MoveData stores a horizontal and  ver-
+       tical  distance.  VoidData stores a void pointer as a use-
+       ful alternative to deriving trivially from  Data  just  to
+       store one word of information.
+
+
+</PRE>
+<H2>COLORDATA PUBLIC OPERATIONS</H2><PRE>
+       <B>ColorData(PSColor*,</B> <B>PSColor*)</B>
+              Create  a ColorData instance, supplying the PSColor
+              objects it stores.
+
+
+</PRE>
+<H2>GSDATA PUBLIC OPERATIONS</H2><PRE>
+       <B>GSData(Graphic*)</B>
+              Create a GSData  instance,  supplying  the  Graphic
+              object  from which to copy a complete set of graph-
+              ics state.   The  GSData  constructor  copies  this
+              information into its <B>_</B><I>gs</I> member, from whence it can
+              be retrieved later.
+
+
+</PRE>
+<H2>MOBILITYDATA PUBLIC OPERATIONS</H2><PRE>
+       <B>MobilityData(Mobility,</B> <B>Graphic*)</B>
+              Create  a  MobilityData  instance,  supplying   the
+              mobility  and a Graphic object from which to copy a
+              complete set of graphics state.   The  MobilityData
+              constructor copies the graphic into its <B>_</B><I>gs</I> member,
+              from whence it can be retrieved later.
+
+
+</PRE>
+<H2>MOVEDATA PUBLIC OPERATIONS</H2><PRE>
+       <B>MoveData(float,</B> <B>float)</B>
+              Create a MoveData instance, supplying two  floating
+              point  numbers  that  normally represent horizontal
+              and vertical movement.
+
+
+</PRE>
+<H2>VOIDDATA PUBLIC OPERATIONS</H2><PRE>
+       <B>VoidData(void*)</B>
+              Create a VoidData instance, supplying a pointer  to
+              an object of unknown type.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Data(3U)</B>, <B>Graphic(3U)</B>, <B>globals(3U)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

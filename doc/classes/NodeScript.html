@@ -1,0 +1,263 @@
+
+<html><head><TITLE>Description of NodeScript</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>NodeScript</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayScript.html" >OverlayScript</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+serialized view of <A HREF="NodeComp.html" >NodeComp</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayScript.html" >OverlayScript</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#NodeScript><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+GraphUnidraw/nodecomp.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Attributes(ostream&#38;out)">
+    <B>Attributes</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        specialized output of property list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Definition(ostream&#38;)">
+    <B>Definition</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output variable-length ASCII record that defines the component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="EmitGS(ostream&#38;&#38;&#38;COMMClipboard*&#38;&#38;COMMboolean)">
+    <B>EmitGS</B> (ostream&#38;, <A HREF="Clipboard.html" >Clipboard</A>*, boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        specialized output of graphic states.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="NodeScript(NodeComp*=nil)">
+    <B>NodeScript</B> (<A HREF="NodeComp.html" >NodeComp</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadEllipse(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadEllipse</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read arguments of ellipse, and construct <A HREF="SF_Ellipse.html" >SF_Ellipse</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadEllipseTransform(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadEllipseTransform</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read transform for ellipse graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGraph(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGraph</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read sub-graph and construct internal <A HREF="GraphComp.html" >GraphComp</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadText(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadText</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read arguments of text, and construct <A HREF="TextGraphic.html" >TextGraphic</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadTextTransform(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadTextTransform</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read transform for text graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

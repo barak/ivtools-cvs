@@ -1,0 +1,19 @@
+*** drvidraw.cpp.org	Wed Mar 25 22:28:46 1998
+--- drvidraw.cpp	Wed Mar 25 22:29:16 1998
+***************
+*** 858,864 ****
+      numpoints = totalpoints==1 ? 1 : totalpoints-1;
+      print_header("Poly");               // Output a polygon
+      outf << "%I " << numpoints << endl;
+!     for (i=0; i<pathelts-1; i++) {
+        outf << iscale(pointlist[i]->x_) << ' ';
+        outf << iscale(pointlist[i]->y_) << endl;
+      }
+--- 858,864 ----
+      numpoints = totalpoints==1 ? 1 : totalpoints-1;
+      print_header("Poly");               // Output a polygon
+      outf << "%I " << numpoints << endl;
+!     for (i=0; i<totalpoints; i++) {
+        outf << iscale(pointlist[i]->x_) << ' ';
+        outf << iscale(pointlist[i]->y_) << endl;
+      }

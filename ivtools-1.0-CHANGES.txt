@@ -1,0 +1,41 @@
+November 2nd, 2001  ivtools-1.0
+
+See CHANGES-0.9 for recent major changes.
+
+Minor changes since Oct. 16th 2001 (ivtools-0.9.7):
+
+- revise MANIFEST.comterp to reflect current state of comterp.
+
+- fix comterp memcpy problem on 64 bit Alpha
+
+- fix gcc-3.0.* build without ACE
+
+- fix compilation of Time/Time.c on NETBSD.
+
+- add :posteval flag to comterp help command in order to see which
+commands are control constructs (post-evaluated, i.e. there arguments
+are passed to them in an unevaluated state.  The result is:
+
+  cond,for,help,if,list,next,posteval,postfix,stream,while
+
+There are some post-evaluated operators as well.
+
+- restore symid and symadd to be normal, non post-evaluated commands.
+Didn't seem to be necessary, and making this change makes them
+available for streaming.
+
+- make confirmbox command return nil if Cancel is pressed.
+
+- comterp operator streaming fixes, mostly along the lines of working
+out nil termination in different circumstances.
+
+- $ unary-prefix operator as a short-cut for stream command.  Useful
+when copying the same stream many times in one command.
+
+- each operator traverses a stream, exercising it until the end, and
+returns the length count.
+
+- make the AttributeValueList constructor that takes an
+AttributeValueList* a truly deep copy.
+
+- doc changes

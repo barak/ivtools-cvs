@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       BrushCmd - command for setting components' brush attribute
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/brushcmd.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       BrushCmd is a purely interpretive command for setting  the
+       brush attribute of selected components.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>BrushCmd(ControlInfo*,</B> <B>PSBrush*</B> <B>=</B> <B>nil)</B>
+       <B>BrushCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>PSBrush*</B> <B>=</B> <B>nil)</B>
+              Create   a   BrushCmd,  optionally  specifying  the
+              PSBrush that components should adopt.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              BrushCmd extends Execute to set the  value  of  the
+              affected  editor's BrushVar instance, if it defines
+              one.
+
+       <B>PSBrush*</B> <B>GetBrush()</B>
+              Return the PSBrush supplied in the constructor.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>, <B>pspaint(3U)</B>, <B>statevars(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

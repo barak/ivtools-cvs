@@ -1,0 +1,968 @@
+
+<html><head><TITLE>Description of Viewer</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Viewer</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="GraphicBlock.html" >GraphicBlock</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+displays a graphical component view hierarchy.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="GraphicBlock.html" >GraphicBlock</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Viewer><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/viewer.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/Viewer.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Adjust(Perspective&#38;)">
+    <B>Adjust</B> (<A HREF="Perspective.html" >Perspective</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Align(GraphicComp*&#38;&#38;COMMAlignment)">
+    <B>Align</B> (<A HREF="GraphicComp.html" >GraphicComp</A>*, Alignment) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="CenterOp()">
+    <B>CenterOp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="ComputeGravityRel()">
+    <B>ComputeGravityRel</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Constrain(Coord&#38;&#38;&#38;COMMCoord&#38;)">
+    <B>Constrain</B> (Coord&#38;, Coord&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Draw()">
+    <B>Draw</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Damage.html" >Damage</A>* 
+    <A NAME="GetDamage()">
+    <B>GetDamage</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Editor.html" >Editor</A>* 
+    <A NAME="GetEditor()">
+    <B>GetEditor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="GetGraphic()">
+    <B>GetGraphic</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicView.html" >GraphicView</A>* 
+    <A NAME="GetGraphicView()">
+    <B>GetGraphicView</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Grid.html" >Grid</A>* 
+    <A NAME="GetGrid()">
+    <B>GetGrid</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual Orientation 
+    <A NAME="GetOrientation()">
+    <B>GetOrientation</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="UPage.html" >UPage</A>* 
+    <A NAME="GetPage()">
+    <B>GetPage</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="GetRel()">
+    <B>GetRel</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="GetSelection()">
+    <B>GetSelection</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Handle(Event&#38;)">
+    <B>Handle</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="IncurTextDisplayDamage(TextDisplay*&#38;&#38;COMMPainter*)">
+    <B>IncurTextDisplayDamage</B> (<A HREF="TextDisplay.html" >TextDisplay</A>*, <A HREF="Painter.html" >Painter</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitRubberband(Rubberband*)">
+    <B>InitRubberband</B> (<A HREF="Rubberband.html" >Rubberband</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitTextDisplay(TextDisplay*&#38;&#38;COMMPainter*)">
+    <B>InitTextDisplay</B> (<A HREF="TextDisplay.html" >TextDisplay</A>*, <A HREF="Painter.html" >Painter</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Magnify(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>Magnify</B> (Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Reconfig()">
+    <B>Reconfig</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ReduceToFit()">
+    <B>ReduceToFit</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetGraphicView(GraphicView*)">
+    <B>SetGraphicView</B> (<A HREF="GraphicView.html" >GraphicView</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetGrid(Grid*)">
+    <B>SetGrid</B> (<A HREF="Grid.html" >Grid</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetMagnification(float)">
+    <B>SetMagnification</B> (float) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetOrientation(Orientation)">
+    <B>SetOrientation</B> (Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetPage(UPage*)">
+    <B>SetPage</B> (<A HREF="UPage.html" >UPage</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="UseTool(Tool*&#38;&#38;COMMEvent&#38;)">
+    <B>UseTool</B> (<A HREF="Tool.html" >Tool</A>*, <A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Viewer(Editor*&#38;&#38;COMMGraphicView*&#38;&#38;COMMUPage*&#38;&#38;COMMGrid*=nil&#38;&#38;COMMCoord=0&#38;&#38;COMMCoord=0&#38;&#38;COMMOrientation=Normal&#38;&#38;COMMAlignment=Center&#38;&#38;COMMZooming=Binary)">
+    <B>Viewer</B> ( <A HREF="Editor.html" >Editor</A>*, <A HREF="GraphicView.html" >GraphicView</A>*, <A HREF="UPage.html" >UPage</A>*, <A HREF="Grid.html" >Grid</A>* = nil, Coord = 0, Coord = 0, Orientation = Normal, Alignment = Center, Zooming = Binary ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Viewer(constchar*&#38;&#38;COMMEditor*&#38;&#38;COMMGraphicView*&#38;&#38;COMMUPage*&#38;&#38;COMMGrid*=nil&#38;&#38;COMMCoord=0&#38;&#38;COMMCoord=0&#38;&#38;COMMOrientation=Normal&#38;&#38;COMMAlignment=Center&#38;&#38;COMMZooming=Binary)">
+    <B>Viewer</B> ( const char*, <A HREF="Editor.html" >Editor</A>*, <A HREF="GraphicView.html" >GraphicView</A>*, <A HREF="UPage.html" >UPage</A>*, <A HREF="Grid.html" >Grid</A>* = nil, Coord = 0, Coord = 0, Orientation = Normal, Alignment = Center, Zooming = Binary ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Viewer()">
+    <B>~Viewer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Tool.html" >Tool</A>* 
+    <A NAME="CurTool()">
+    <B>CurTool</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GetGraphicBox(Coord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;)">
+    <B>GetGraphicBox</B> (Coord&#38;, Coord&#38;, Coord&#38;, Coord&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="GetTransformer()">
+    <B>GetTransformer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(Editor*&#38;&#38;COMMGraphicView*&#38;&#38;COMMUPage*&#38;&#38;COMMGrid*)">
+    <B>Init</B> (<A HREF="Editor.html" >Editor</A>*, <A HREF="GraphicView.html" >GraphicView</A>*, <A HREF="UPage.html" >UPage</A>*, <A HREF="Grid.html" >Grid</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(Editor*&#38;&#38;COMMGraphicView*&#38;&#38;COMMUPage*&#38;&#38;COMMGrid*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMOrientation)">
+    <B>Init</B> (<A HREF="Editor.html" >Editor</A>*, <A HREF="GraphicView.html" >GraphicView</A>*, <A HREF="UPage.html" >UPage</A>*, <A HREF="Grid.html" >Grid</A>*, Coord, Coord, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual float 
+    <A NAME="LimitMagnification(float)">
+    <B>LimitMagnification</B> (float) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Manipulate(Manipulator*&#38;&#38;COMMEvent&#38;)">
+    <B>Manipulate</B> (<A HREF="Manipulator.html" >Manipulator</A>*, <A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        direct manipulation loop
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="MomentaryUseTool(constchar*&#38;&#38;COMMEvent&#38;)">
+    <B>MomentaryUseTool</B> (const char*, <A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Redraw(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>Redraw</B> (Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Reorient()">
+    <B>Reorient</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Resize()">
+    <B>Resize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="UpdateMagnifVar()">
+    <B>UpdateMagnifVar</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="UseTool(Tool*&#38;&#38;COMMEvent&#38;)">
+    <B>UseTool</B> (<A HREF="Tool.html" >Tool</A>*, <A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="ViewCategory()">
+    <B>ViewCategory</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Damage.html" >Damage</A>* 
+    <A NAME="_damage">
+    <B>_damage</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Editor.html" >Editor</A>* 
+    <A NAME="_editor">
+    <B>_editor</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Grid.html" >Grid</A>* 
+    <A NAME="_grid">
+    <B>_grid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicView.html" >GraphicView</A>* 
+    <A NAME="_gview">
+    <B>_gview</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>Orientation 
+    <A NAME="_orientation">
+    <B>_orientation</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UPage.html" >UPage</A>* 
+    <A NAME="_page">
+    <B>_page</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ViewerView.html" >ViewerView</A>* 
+    <A NAME="_viewerView">
+    <B>_viewerView</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

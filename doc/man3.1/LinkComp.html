@@ -1,0 +1,182 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       LinkComp,  LinkView, PSLink - component subject, view, and
+       PostScript external representation  for  lines  with  con-
+       nectable endpoints
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/link.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       LinkComp is a GraphicComp defining a line with two pins on
+       each end.  The line's endpoints will always coincide  with
+       the  pins,  even  if they are moved, thereby maintaining a
+       graphical link between the objects to  which  it  is  con-
+       nected.   LinkComp uses an Line graphic to define its ini-
+       tial geometry and graphical  attributes.   LinkView  is  a
+       GraphicView   for   displaying  the  link.   PSLink  is  a
+       PostScriptView that externalizes the subject's information
+       in PostScript form.
+
+
+</PRE>
+<H2>LINKCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>LinkComp(Line*</B> <B>=</B> <B>nil)</B>
+              The  constructor  takes an optional line graphic to
+              define its initial appearance.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              In addition to (un)interpreting the commands Graph-
+              icComp (un)interprets, LinkComp also (un)interprets
+              DeleteCmd and CutCmd by passing these  commands  to
+              its pins for (un)interpretation.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              When  the  LinkComp's pins move to maintain connec-
+              tivity, LinkComp will reorient the line so that its
+              endpoints and the pins coincide.
+
+       <B>virtual</B> <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Last(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>Done(Iterator)</B>
+       <B>GraphicComp*</B> <B>GetComp(Iterator)</B>
+       <B>void</B> <B>SetComp(GraphicComp*,</B> <B>Iterator&amp;)</B>
+              LinkComp  redefines  GraphicComp's traversal opera-
+              tions to make its pins accessible  to  the  Unidraw
+              library.  Thus Unidraw can determine the connectors
+              that belong to the component and  call  its  Update
+              operation  only once for efficiency.  The traversal
+              does <I>not</I> include the line.
+
+       <B>Line*</B> <B>GetLine()</B>
+              Return the Line graphic  that  defines  the  link's
+              attributes.  GetLine is simply a more specific form
+              Return the LinkView's pins, which are stored in the
+              <B>_</B><I>conn1</I> and <B>_</B><I>conn2</I> protected members.
+
+
+</PRE>
+<H2>LINKVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>LinkView(LinkComp*</B> <B>=</B> <B>nil)</B>
+              Create  an  LinkView, optionally supplying the sub-
+              ject.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              LinkView redefines  its  response  to  manipulation
+              with a GraphicCompTool.  The user clicks to specify
+              the first endpoint of the link and  then  drags  to
+              position  the  remaining endpoint.  (Up)clicking on
+              an existing connector will establish  a  connection
+              between  it  and the LinkComp's first (second) pin.
+              LinkView uses a ConnectManip to produce a  gravita-
+              tional  attraction  between existing connectors and
+              the second pin as the user drags  to  position  it.
+              The  endpoints  will <I>not</I> be constrained by gravity.
+              LinkView will use ConnectCmds to connect the pin(s)
+              to  their  target(s).  Pin(s) connected in this way
+              will receive floating mobility; unconnected  pin(s)
+              will be fixed.
+
+       <B>virtual</B> <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Last(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>Done(Iterator)</B>
+       <B>GraphicView*</B> <B>GetView(Iterator)</B>
+       <B>void</B> <B>SetView(GraphicView*,</B> <B>Iterator&amp;)</B>
+              LinkView  redefines  GraphicView's traversal opera-
+              tions to make its pins accessible  to  the  Unidraw
+              library.  Thus Unidraw can determine the connectors
+              that belong to the component, for example, to  sup-
+              port    ConnectManip's   gravitational   attraction
+              effect.
+
+       <B>virtual</B> <B>void</B> <B>GetEndpoints(Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;)</B>
+              Return the link's endpoints, in canvas coordinates.
+
+       <B>LinkComp*</B> <B>GetLinkComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>LINKVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>CreateHandles()</B>
+              LinkView  redefines  CreateHandles to use a Rubber-
+              Handles object with two handles, one at  each  end-
+              Return  the  line  that  LinkView draws between its
+              pins.
+
+       <B>virtual</B> <B>LinkComp*</B> <B>NewSubject(Line*)</B>
+              A helper function that creates a  LinkComp  subject
+              with the given line graphic. This function produces
+              the  proper  subject  when  the   GraphicCompTool's
+              manipulator  is  interpreted.  Subclasses can rede-
+              fine this operation to return a LinkComp  subclass,
+              thus eliminating the need to reimplement Interpret-
+              Manipulator.
+
+       <B>Manipulator*</B> <B>CreateLinkCompManip(</B>
+           <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>Command*</B> <B>InterpretLinkCompManip(Manipulator*)</B>
+              Helper functions that CreateManipulator and  Inter-
+              pretManipulator  use  to  create  and interpret the
+              manipulator for GraphicCompTool.
+
+
+</PRE>
+<H2>PSLINK PUBLIC OPERATIONS</H2><PRE>
+       <B>PSLink(LinkComp*</B> <B>=</B> <B>nil)</B>
+              Construct a PostScript external  representation  of
+              the given subject, if any.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>,   <B>Graphic(3U)</B>,   <B>GraphicComp(3U)</B>,  GraphicComp-
+       <B>Tool(3U)</B>,    <B>GraphicView(3U)</B>,    <B>Grid(3U)</B>,    <B>PinComp(3U)</B>,
+       <B>PostScriptView(3U)</B>,  <B>Transformer(3I)</B>, <B>align(3U)</B>, <B>edit(3U)</B>,
+       <B>manips(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

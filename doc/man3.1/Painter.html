@@ -1,0 +1,231 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Painter - graphics output
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/painter.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Painter</B> is a class that provides ``immediate-mode'' graph-
+       ics operations for drawing on a canvas.  The  state  of  a
+       painter defines the graphics context for the drawing oper-
+       ations and includes a  brush,  foreground  and  background
+       colors,  a  fill  pattern  and  mode,  a text font, a text
+       style, an output origin and current position, and a trans-
+       formation matrix.
+
+
+</PRE>
+<H2>STATE OPERATIONS</H2><PRE>
+       <B>Painter(Painter*</B> <B>=</B> <B>stdpaint)</B>
+              Create  a  new  painter and copy its state from the
+              given painter.
+
+       <B>void</B> <B>SetBrush(Brush*)</B>
+       <B>Brush*</B> <B>GetBrush()</B>
+              Set or return the painter's brush.  Default is  the
+              predefined brush ``single''.
+
+       <B>void</B> <B>SetColors(Color*</B> <B>fg,</B> <B>Color*</B> <B>bg)</B>
+       <B>Color*</B> <B>GetFgColor()</B>
+       <B>Color*</B> <B>GetBgColor()</B>
+              Set  or  return  the  painter's  colors.  If either
+              argument to SetColors is nil, then the  correspond-
+              ing  color  is not changed.  Defaults are ``black''
+              for foreground and ``white'' for background.
+
+       <B>void</B> <B>SetFont(Font*)</B>
+       <B>Font*</B> <B>GetFont()</B>
+              Set or return the painter's text font.  Default  is
+              the predefined font ``stdfont''.
+
+       <B>void</B> <B>SetStyle(int</B> <B>style)</B>
+       <B>int</B> <B>GetStyle()</B>
+              Set  or get the painter's text style.  A text style
+              is a bit vector that can be assembled from the pre-
+              defined  constants <I>Plain</I>, <I>Boldface</I>, <I>Underlined</I>, and
+              <I>Reversed</I>.  Default is Plain.
+
+       <B>void</B> <B>SetPattern(Pattern*)</B>
+       <B>Pattern*</B> <B>GetPattern()</B>
+       <B>void</B> <B>FillBg(boolean</B> <B>mode)</B>
+       <B>boolean</B> <B>BgFilled()</B>
+              Set or return the painter's fill pattern and  mode.
+              If  the mode is <I>true</I>, fill operations will set pix-
+              els corresponding to ones in the current fill  pat-
+              tern to the foreground color and pixels correspond-
+              pattern is ``solid''; default mode is <I>true</I>.
+
+       <B>void</B> <B>SetOrigin(int</B> <B>x0,</B> <B>int</B> <B>y0)</B>
+       <B>void</B> <B>GetOrigin(int&amp;</B> <B>x0,</B> <B>int&amp;</B> <B>y0)</B>
+              Set or return the origin by which  all  coordinates
+              are offset.  Default is (0, 0).
+
+       <B>void</B> <B>Translate(float</B> <B>dx,</B> <B>float</B> <B>dy)</B>
+       <B>void</B> <B>Rotate(float</B> <B>angle)</B>
+       <B>void</B> <B>Scale(float</B> <B>x,</B> <B>float</B> <B>y)</B>
+       <B>void</B> <B>SetTransformer(Transformer*)</B>
+       <B>Transformer*</B> <B>GetTransformer()</B>
+              Coordinates passed to drawing operations are trans-
+              formed according to the current origin, translation
+              (cumulative),  rotation,  and scale factor.  Inter-
+              nally, a transformation matrix is stored  that  can
+              be  directly  set and accessed using SetTransformer
+              and GetTransformer.   The  default  transformer  is
+              nil, meaning no transformations are performed.
+
+       <B>void</B> <B>SetPlaneMask(int</B> <B>mask)</B>
+              Set which bit planes are affected by drawing opera-
+              tions.  If the Kth bit of <I>mask</I> is set, then display
+              operations will draw on plane K.
+
+       <B>void</B> <B>SetOverwrite(boolean)</B>
+              Set  whether  a painter is allowed to write in sub-
+              canvases.  If true, drawing operations will be able
+              to  write  over  the canvases of component interac-
+              tors.  If false, drawing operations will be clipped
+              by any subcanvases.  The default is false.
+
+       <B>void</B> <B>Clip(Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>Coord</B> <B>y1,</B> <B>Coord</B> <B>x2,</B> <B>Coord</B> <B>y2)</B>
+       <B>void</B> <B>NoClip()</B>
+              Clip restricts output operations to  the  specified
+              region  of the canvas.  NoClip removes the restric-
+              tion so that operations affect the  entire  canvas.
+              Only  one  clipping  region  may  be in effect at a
+              time.
+
+       <B>void</B> <B>MoveTo(Coord</B> <B>x,</B> <B>Coord</B> <B>y)</B>
+              Set the current output position.  The output  posi-
+              tion is used and updated by Text and CurveTo.
+
+
+</PRE>
+<H2>DRAWING OPERATIONS</H2><PRE>
+       <B>void</B> <B>Curve(Canvas*,</B> <B>Coord</B> <B>x0,</B> <B>y0,</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2,</B> <B>x3,</B> <B>y3)</B>
+       <B>void</B> <B>CurveTo(Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2,</B> <B>x3,</B> <B>y3)</B>
+              Paint  a  Bezier curve on the canvas from the first
+              point to the last point (but not going through  the
+              intermediate  control  points).  The curve will lie
+              within the  polygon  formed  by  the  four  points.
+              CurveTo  uses  the  current  position for the first
+
+       <B>void</B> <B>ClosedBSpline(Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n)</B>
+       <B>void</B> <B>FillBSpline(Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n)</B>
+              Draw the B-spline defined by  the  <I>n</I>  control  ver-
+              tices.  If closed or filled, the last point is con-
+              nected to the first point.
+
+       <B>void</B> <B>Circle(Canvas*,</B> <B>Coord</B> <B>x,</B> <B>y,</B> <B>int</B> <B>r)</B>
+       <B>void</B> <B>FillCircle(Canvas*,</B> <B>Coord</B> <B>x,</B> <B>y,</B> <B>int</B> <B>radius)</B>
+              Draw a circle with center (<I>x</I>, <I>y</I>) and radius <I>r</I>.
+
+       <B>void</B> <B>Ellipse(Canvas*,</B> <B>Coord</B> <B>x,</B> <B>y,</B> <B>int</B> <B>xr,</B> <B>int</B> <B>yr)</B>
+       <B>void</B> <B>FillEllipse(Canvas*,</B> <B>Coord</B> <B>x,</B> <B>y,</B> <B>int</B> <B>xr,</B> <B>int</B> <B>yr)</B>
+              Draw an  ellipse  with  center  (<I>x</I>, <I>y</I>),  horizontal
+              radius <I>xr</I>, and vertical radius <I>yr</I>.
+
+       <B>void</B> <B>Line(Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2)</B>
+       <B>void</B> <B>MultiLine(Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n)</B>
+       <B>void</B> <B>Polygon(Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n)</B>
+       <B>void</B> <B>FillPolygon(Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n)</B>
+              Draw  a  path  using  the current brush and colors.
+              The Line  operation  draws  a  vector  between  two
+              points  (inclusive);  MultiLine  draws  a number of
+              connected vectors; Polygon draws a  closed  set  of
+              vectors;  FillPolygon fills the area inside a poly-
+              gon using the current fill pattern and colors.
+
+       <B>void</B> <B>Point(Canvas*,</B> <B>Coord</B> <B>x,</B> <B>y)</B>
+       <B>void</B> <B>MultiPoint(Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n)</B>
+              Set a point or set of points to the  current  fore-
+              ground color.
+
+       <B>void</B> <B>Rect(Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2)</B>
+       <B>void</B> <B>FillRect(Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2)</B>
+       <B>void</B> <B>ClearRect(Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2)</B>
+              Draw  a rectangle with opposite corners specfied by
+              (<I>x1</I>, <I>y1</I>) and (<I>x2</I>, <I>y2</I>).  FillRect fills the  rectan-
+              gle using the current pattern and colors; ClearRect
+              fills the rectangle with the background color.
+
+       <B>void</B> <B>Text(Canvas*,</B> <B>const</B> <B>char*</B> <B>str,</B> <B>Coord</B> <B>x,</B> <B>Coord</B> <B>y)</B>
+       <B>void</B> <B>Text(Canvas*,</B> <B>const</B> <B>char*</B> <B>str,</B> <B>int</B> <B>n,</B> <B>Coord</B> <B>x,</B> <B>Coord</B>
+              <B>y)</B>
+       <B>void</B> <B>Text(Canvas*,</B> <B>const</B> <B>char*</B> <B>str)</B>
+       <B>void</B> <B>Text(Canvas*,</B> <B>const</B> <B>char*</B> <B>str,</B> <B>int</B> <B>n)</B>
+              Draw  a  string or substring of text using the cur-
+              rent Font and text style.  The  (<I>x</I>, <I>y</I>)  coordinates
+              specify  the  lower-left corner of the bounding box
+              of the text.  The width of the bounding box is  the
+              width  of the string as reported by the Font::Width
+              operation, and the height of the  bounding  box  is
+              the  Font height.  Most fonts will result in output
+              which only affects pixels within the bounding  box.
+              drawn.   If  the  matrix specifies a transformation
+              involving rotation or scaling, the resulting opera-
+              tion  may proceed much more slowly than normal.  If
+              background fill mode is on, then the characters are
+              drawn  in  the  foreground  color, and other pixels
+              within the bounding box are set to  the  background
+              color.   If  background  fill mode is off, only the
+              foreground pixels are set.  If no  coordinates  are
+              specified,  then  the  current position (defined by
+              MoveTo) is used and updated to reflect  the  lower-
+              right corner of the bounding box.
+
+       <B>void</B>  <B>Stencil(Canvas*,</B>  <B>Coord</B>  <B>x,</B> <B>Coord</B> <B>y,</B> <B>Bitmap*</B> <B>image,</B>
+              <B>Bitmap*</B> <B>mask</B> <B>=</B> <B>nil)</B>
+              Paint  foreground  and  background colors through a
+              stencil formed by positioning the  image  and  mask
+              Bitmaps  with  their  origins  at the point (<I>x</I>, <I>y</I>).
+              Foreground color is painted where the <I>image</I>  Bitmap
+              has  a  true value and background color where image
+              is false.  However, only pixels corresponding to  a
+              true  value in the mask Bitmap are affected.  A nil
+              <I>mask</I> is equivalent to a mask of the same  size  and
+              shape as image and containing all true values.  The
+              current transformation matrix is  applied  to  both
+              the  image  and mask Bitmaps.  If the matrix speci-
+              fies a transformation involving rotation  or  scal-
+              ing,  the resulting operation may proceed much more
+              slowly than normal.
+
+       <B>void</B> <B>RasterRect(Canvas*,</B> <B>Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>Raster*)</B>
+              Render the Raster with its lower-left corner at the
+              position (<I>x</I>, <I>y</I>).  The current transformation matrix
+              is applied to the Raster.  If the matrix  specifies
+              a transformation involving rotation or scaling, the
+              resulting operation may proceed  much  more  slowly
+              than normal.
+
+       <B>void</B> <B>Read(Canvas*,</B> <B>void*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2)</B>
+       <B>void</B> <B>Write(Canvas*,</B> <B>const</B> <B>void*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2)</B>
+       <B>void</B>  <B>Copy(Canvas*</B>  <B>src,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2,</B> <B>Canvas*</B>
+              <B>dst,</B> <B>Coord</B> <B>x0,</B> <B>y0)</B>
+              Read  copies  a  region  of  a  canvas into memory.
+              Write copies data from memory to a region of a can-
+              vas.   Copy reads a region of one canvas and writes
+              the data into a region of another canvas (or within
+              a  canvas  if <I>src</I> and <I>dst</I> are the same).  The point
+              (<I>x0</I>, <I>y0</I>) is the lower-left corner of  the  destina-
+              tion   region.    Note  that  <I>Read</I>  and  <I>Write</I>  are
+              superceded by operations that use Rasters.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Bitmap(3I)</B>, <B>Brush(3I)</B>,  <B>Canvas(3I)</B>,  <B>Color(3I)</B>,  <B>Font(3I)</B>,
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

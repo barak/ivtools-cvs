@@ -1,0 +1,54 @@
+ivtools-0.7.4 now available.  Highlights:
+
+	(by Rick Kissh)
+	- shared memory support for loading rasters into the X server
+
+	(by Rick Kissh)
+	- asynchronous incremental download of rasters by URL.  Now
+	you can pan and zoom the viewer, and draw/scale/rotate/move
+	any graphic, all while watching the incremental progress of 
+	the ongoing raster downloads.  Then for kicks, undo all your
+	changes and get back to an unmodified fully downloaded
+	drawing.  See this web page for an example:
+
+		http://www.vectaport.com/ivtools/anteater-art.html
+
+	- fairly complete HTML documentation, both online and in
+	the tar file -- see
+
+		http://www.vectaport.com/ivtools/doc/
+
+				* or *
+
+		ivtools-0.7/src/html
+
+	- Version 12 idraw format PostScript completes the support
+	for floating point line width.  If a non-integer line width is
+	used the resultant PostScript is not backward compatible.
+	Versions of idraw since ivtools-0.6.7 will correctly detect
+	and warn about this.  Prior versions will print a warning
+	message like this:
+
+		warning: drawing version 0 newer than idraw version 0
+
+	which isn't very helpful.  See the FAQ for more info:
+
+		http://www.vectaport.com/ivtools/faq.html#idrawversions
+
+	
+	- this release also re-incorporates most of the legacy glyph
+	examples from the original InterViews 3.1 tar file and adds a
+	test program to demonstrate that the ivtools Date class can
+	handle the Y2K and Y2.038K problem.
+
+	- lots of config changes for building on Solaris and Alpha
+	(thanks to Dan DeJohn, Bruno DelFosse, and M. Rasit
+	Eskicioglu).  See the ivtools FAQ for more hints on how to 
+	build on any closed-source variant of Unix:
+
+		http://www.vectaport.com/ivtools/faq.html#notlinuxbsd
+
+
+Scott Johnston
+Vectaport Inc.
+http://www.vectaport.com

@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       RpcService - support RPC between a service and its clients
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/rpcservice.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An RpcService (actually, an instance of a  derived  class)
+       creates  a  port  and  listens  to it for connections from
+       clients.  When a client opens a connection, the RpcService
+       will  create a reader to handle RPC requests from the con-
+       nection.
+
+
+</PRE>
+<H2>CONSTRUCTORS</H2><PRE>
+       <B>RpcService(int</B> <B>port)</B>
+       <B>RpcService(const</B> <B>char*</B> <B>path,</B> <B>int</B> <B>port</B> <B>=</B> <B>0)</B>
+              Start up an RPC service.  If a filename  is  given,
+              record  the  RPC service's hostname and port number
+              in it so  clients  can  contact  the  service.   If
+              ``port'' is zero, the next free port number will be
+              used.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>void</B> <B>run()</B>
+       <B>void</B> <B>quitRunning()</B>
+              Read RPC  requests  continuously  until  ``quitRun-
+              ning()''  terminates  the  loop.   If  you're using
+              InterViews, you don't have to call ``run()''  since
+              the  InterViews  event-reading  code will also read
+              RPC requests.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>createReader(int</B> <B>fd)</B> <B>=</B> <B>0</B>
+              You must define this function in a derived class in
+              order  to  start  servicing RPC requests from a new
+              client.  Typically all you have to do  is  to  con-
+              struct  a  reader  using the passed file descriptor
+              and make the reader responsible for deleting itself
+              when it notices that the connection has been closed
+              by the client.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Dispatcher(3I)</B>, <B>RpcReader(3I)</B>, <B>RpcRegistry(3I)</B>
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

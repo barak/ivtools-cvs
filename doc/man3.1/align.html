@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       AlignCmd,  AlignToGridCmd - commands for aligning interac-
+       tors to each other and to a grid
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/align.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       AlignCmd is a purely  interpretive  command  for  aligning
+       selected components with respect to one another. For exam-
+       ple, it can align the left sides of selected components so
+       that  they  coincide.   AlignToGridCmd  is  interpreted by
+       selected GraphicView objects to align  themselves  to  the
+       grid  (if  any)  associated  with the viewer in which they
+       appear.  Each component can thus define what it  means  to
+       align itself to the grid.
+
+
+</PRE>
+<H2>ALIGNCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>AlignCmd(</B>
+           <B>ControlInfo*,</B>
+           <B>Alignment</B> <B>reference</B> <B>=</B> <B>Left,</B> <B>Alignment</B> <B>affected</B> <B>=</B> <B>Left</B>
+       <B>)</B>
+
+       <B>AlignCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Alignment</B> <B>=</B> <B>Left,</B> <B>Alignment</B> <B>=</B>
+              <B>Left)</B>
+              The constructor takes optional arguments for speci-
+              fying  the alignment desired. The <I>reference</I> parame-
+              ter specifies a point on a fixed  reference  compo-
+              nent.   The <I>affected</I> parameter specifies a point on
+              components that will move to realize the alignment.
+              The  defaults for these parameters specify that all
+              affected components should align their  left  sides
+              to reference's left side.
+
+       <B>void</B> <B>GetAlignment(Alignment&amp;,</B> <B>Alignment&amp;)</B>
+              Return  the  alignment  parameters specified in the
+              constructor.
+
+       <B>GraphicComp*</B> <B>GetReference(GraphicComp*</B> <B>affected)</B>
+              Return the reference component given a  potentially
+              affected  component.   If  <I>affected</I>  appears in the
+              AlignCmd's clipboard, then GetReference returns the
+              GraphicComp  preceding  it  in  the  clipboard.  If
+              <I>affected</I> is the first component in the clipboard or
+              if  it  is  not on the clipboard, then GetReference
+              returns the first component on the clipboard.
+
+
+</PRE>
+<H2>ALIGNTOGRIDCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>AlignToGridCmd(ControlInfo*)</B>
+       <B>AlignToGridCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct an AlignToGridCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              AlignToGridCmd  redefines  Execute   to   let   the
+              selected  GraphicView objects interpret the command
+              the first time.  This lets the components determine
+              the  proper grid with which to align themselves and
+              the amount of movement required.   Execute  assumes
+              that  GraphicView objects will use the Align opera-
+              tion (described below) to  compute  the  amount  of
+              movement,  store  it  in  a  MoveData  object,  and
+              finally issue a MoveCmd to the subject  for  inter-
+              pretation.     Unexecute    simply   calls   Unmove
+              (described below) to reverse the Align's effects.
+
+       <B>virtual</B> <B>void</B> <B>Align(GraphicView*,</B> <B>float,</B> <B>float)</B>
+       <B>virtual</B> <B>void</B> <B>Unalign(GraphicView*)</B>
+              GraphicView objects interpreting the AlignToGridCmd
+              should  use  the Align operation to specify a point
+              to align to the grid that affects them.  Align will
+              effectively  move  the  component so that the given
+              point falls on the grid.  It will  also  store  the
+              amount  of movement in <I>this</I> by calling Store with a
+              MoveData  object.   Finally,   Align   calls   Move
+              (described  below)  to  actually move the component
+              that amount.  Unalign provides a  public  interface
+              to reversing the effects of Align by simply calling
+              Unmove with its argument's subject.
+
+
+</PRE>
+<H2>ALIGNTOGRIDCMD PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>Move(GraphicComp*)</B>
+       <B>void</B> <B>Unmove(GraphicComp*)</B>
+              Move produces  a  MoveCmd  based  on  the  MoveData
+              stored  for  the  given  GraphicComp  and tells the
+              GraphicComp to interpret the MoveCmd.   Conversely,
+              Unmove  produces  a  MoveCmd  based on the the same
+              information and tells the GraphicComp  to  uninter-
+              pret it.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>,  <B>GraphicComp(3U)</B>,  <B>GraphicView(3U)</B>, <B>Grid(3U)</B>,
+       <B>Viewer(3U)</B>, <B>datas(3U)</B>, <B>transforms(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

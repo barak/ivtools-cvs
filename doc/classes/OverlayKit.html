@@ -1,0 +1,1520 @@
+
+<html><head><TITLE>Description of OverlayKit</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayKit</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+helper class for constructing an <A HREF="OverlayEditor.html" >OverlayEditor</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#OverlayKit><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovkit.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  this class (or something derived from it) is supplied to the constructor
+ of an <A HREF="OverlayEditor.html" >OverlayEditor</A> (or any class derived from an <A HREF="OverlayEditor.html" >OverlayEditor</A>).
+ The idea behind <A HREF="OverlayKit.html" >OverlayKit</A> is it facilitates a much more flexible construction
+ of an <A HREF="OverlayEditor.html" >OverlayEditor</A>, the central object in any ivtools drawing editor, by
+ allow the use of virtual functions during the construction.  Normally
+ virtual functions can't be used by a constructor, but virtual functions on
+ a pre-constructed helper class, like <A HREF="OverlayKit.html" >OverlayKit</A>, can be used.
+ <p>
+ In this way other classes can be derived from <A HREF="OverlayKit.html" >OverlayKit</A> with different
+ virtual methods for initializing the pull-down menus and toolbars, and can
+ completely change the appearance and functionality of essentially the same
+ <A HREF="OverlayEditor.html" >OverlayEditor</A>.
+ <p>
+ Another feature of the <A HREF="OverlayKit.html" >OverlayKit</A> idea is it solves the problem of what to
+ do when a particular vertical application wants to use the features of two
+ different derivations of an <A HREF="OverlayEditor.html" >OverlayEditor</A>.  Prior to <A HREF="OverlayKit.html" >OverlayKit</A> you would need
+ to use multiple-inheritance, which can have problems, or permanently decide
+ on the ordering of one derived editor relative to the other, which may be
+ undesirable in future circumstances.  With an <A HREF="OverlayKit.html" >OverlayKit</A> it is easier to mix
+ and match the desirable features of one lineage of derived <A HREF="OverlayEditor.html" >OverlayEditor</A> classes
+ with the features of another lineage, pushing capability as needed from the 
+ editor to the kit.
+ <p>
+ There is support for a default <A HREF="OverlayKit.html" >OverlayKit</A> for use when constructing an
+ <A HREF="OverlayEditor.html" >OverlayEditor</A>.  In general any editor-specific state should reside in
+ the editor, not the kit, but this is not a hard-and-fast rule.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Annotate(OverlayComp*)">
+    <B>Annotate</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for popping an annotation dialog box.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AttrEdit(OverlayComp*)">
+    <B>AttrEdit</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for popping an attribute editing dialog box.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayEditor.html" >OverlayEditor</A>* 
+    <A NAME="GetEditor()">
+    <B>GetEditor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to editor currently associated with this kit.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Init(OverlayComp*comp&#38;&#38;COMMconstchar*name)">
+    <B>Init</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* comp, const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize the editor, then the associated viewer, using an optional 'comp'. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="InitLayout(OverlayKit*kit&#38;&#38;COMMconstchar*name)">
+    <B>InitLayout</B> (<A HREF="OverlayKit.html" >OverlayKit</A>* kit, const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method that implements virtual method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitLayout(constchar*name)">
+    <B>InitLayout</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize chrome that goes around the viewer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitMembers(OverlayComp*)">
+    <B>InitMembers</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize member variables of the editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitViewer()">
+    <B>InitViewer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize viewer to go with the editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayKit.html" >OverlayKit</A>* 
+    <A NAME="Instance()">
+    <B>Instance</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        default instance of <A HREF="OverlayKit.html" >OverlayKit</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Interactor.html" >Interactor</A>* 
+    <A NAME="Interior()">
+    <B>Interior</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct the <A HREF="Interactor.html" >Interactor</A> based interior of an editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeAlignMenu()">
+    <B>MakeAlignMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeBgColorMenu()">
+    <B>MakeBgColorMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeBrushMenu()">
+    <B>MakeBrushMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeEditMenu()">
+    <B>MakeEditMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeFgColorMenu()">
+    <B>MakeFgColorMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeFileMenu()">
+    <B>MakeFileMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeFontMenu()">
+    <B>MakeFontMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeFrameMenu()">
+    <B>MakeFrameMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="MakeMenus()">
+    <B>MakeMenus</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        make all the pull-down menus and their menu bar.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakePatternMenu()">
+    <B>MakePatternMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="MakeStates()">
+    <B>MakeStates</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        make state views in the chrome.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeStructureMenu()">
+    <B>MakeStructureMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="MakeToolbar()">
+    <B>MakeToolbar</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        make tool pallette.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeToolsMenu()">
+    <B>MakeToolsMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeViewMenu()">
+    <B>MakeViewMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MenuItem.html" >MenuItem</A>* 
+    <A NAME="MakeViewersMenu()">
+    <B>MakeViewersMenu</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="MouseDoc(constchar*)">
+    <B>MouseDoc</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set current mouse documentation string on the editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayKit()">
+    <B>OverlayKit</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetEditor(OverlayEditor*)">
+    <B>SetEditor</B> (<A HREF="OverlayEditor.html" >OverlayEditor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set editor currently associated with this kit.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="add_tool_button(constchar*path&#38;&#38;COMMOverlayComp*comp=nil)">
+    <B>add_tool_button</B> (const char* path, <A HREF="OverlayComp.html" >OverlayComp</A>* comp=nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        low-level routine used by ::add_custom_tool and others
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="appicon()">
+    <B>appicon</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        glyph to use for application icon.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="appname()">
+    <B>appname</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get name of application.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="appname(constchar*name)">
+    <B>appname</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set name of application.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="bincheck(constchar*name)">
+    <B>bincheck</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method for testing for URL prefix on pathname. Returns true if found.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="bintest(constchar*name)">
+    <B>bintest</B> (const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method for testing for URL prefix on pathname. 0 if found, otherwise -1.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean&#38; 
+    <A NAME="clr_button_flag()">
+    <B>clr_button_flag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to add clear button to text editor
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_alt">
+    <B>mouse_alt</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_anno">
+    <B>mouse_anno</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_attr">
+    <B>mouse_attr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_cspl">
+    <B>mouse_cspl</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_custom">
+    <B>mouse_custom</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_ellp">
+    <B>mouse_ellp</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_grloc">
+    <B>mouse_grloc</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_imgscale">
+    <B>mouse_imgscale</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_lin">
+    <B>mouse_lin</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_logscale">
+    <B>mouse_logscale</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_mag">
+    <B>mouse_mag</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_mlin">
+    <B>mouse_mlin</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_mov">
+    <B>mouse_mov</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_ospl">
+    <B>mouse_ospl</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_poly">
+    <B>mouse_poly</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_pseudocolor">
+    <B>mouse_pseudocolor</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_rect">
+    <B>mouse_rect</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_rot">
+    <B>mouse_rot</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_scl">
+    <B>mouse_scl</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_sel">
+    <B>mouse_sel</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_str">
+    <B>mouse_str</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_tack">
+    <B>mouse_tack</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="mouse_txt">
+    <B>mouse_txt</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="otherdisplay(constchar*display)">
+    <B>otherdisplay</B> (const char* display) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set possible alternate X display string for constructing viewer. 
+ Not yet working.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean&#38; 
+    <A NAME="set_button_flag()">
+    <B>set_button_flag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to add setr button to text editor
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlayKit()">
+    <B>~OverlayKit</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="MakeMenu(MenuItem*&#38;&#38;COMMCommand*&#38;&#38;COMMGlyph*)">
+    <B>MakeMenu</B> (<A HREF="MenuItem.html" >MenuItem</A>*, <A HREF="Command.html" >Command</A>*, <A HREF="Glyph.html" >Glyph</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        helper method for making a pull-down menu entry.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="MakeMenu(MenuItem*&#38;&#38;COMMCommand*&#38;&#38;COMMconstchar*)">
+    <B>MakeMenu</B> (<A HREF="MenuItem.html" >MenuItem</A>*, <A HREF="Command.html" >Command</A>*, const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        helper method for making a pull-down menu entry.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ToolButton.html" >ToolButton</A>* 
+    <A NAME="MakeTool(Tool*&#38;&#38;COMMGlyph*&#38;&#38;COMMTelltaleGroup*&#38;&#38;COMMObservableText*mousedoc=nil&#38;&#38;COMMconstchar*doc=&#38;&#38;QUOTD&#38;&#38;QUOTD)">
+    <B>MakeTool</B> (<A HREF="Tool.html" >Tool</A>*, <A HREF="Glyph.html" >Glyph</A>*, <A HREF="TelltaleGroup.html" >TelltaleGroup</A>*, <A HREF="ObservableText.html" >ObservableText</A>* mousedoc = nil, const char* doc = "") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        helper method for making a tool for the toolbar.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="MenuArrowLine(booleantail&#38;&#38;COMMbooleanhead)">
+    <B>MenuArrowLine</B> (boolean tail, boolean head) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create arrow line to put in a pulldown menu.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="MenuLine(PSBrush*)">
+    <B>MenuLine</B> (<A HREF="PSBrush.html" >PSBrush</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create line to put in a pulldown menu.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="MenuPatRect(PSPattern*)">
+    <B>MenuPatRect</B> (<A HREF="PSPattern.html" >PSPattern</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create patterned rectangle to put in a pulldown menu.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="MenuRect(Color*)">
+    <B>MenuRect</B> (<A HREF="Color.html" >Color</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        create color rectangle to put in a pulldown menu.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="_appname">
+    <B>_appname</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_clr_button_flag">
+    <B>_clr_button_flag</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayEditor.html" >OverlayEditor</A>* 
+    <A NAME="_ed">
+    <B>_ed</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>FloatCoord 
+    <A NAME="_maxwidth">
+    <B>_maxwidth</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_otherdisplay">
+    <B>_otherdisplay</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayKit.html" >OverlayKit</A>* 
+    <A NAME="_overlaykit">
+    <B>_overlaykit</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_set_button_flag">
+    <B>_set_button_flag</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="TelltaleGroup.html" >TelltaleGroup</A>* 
+    <A NAME="_tg">
+    <B>_tg</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Patch.html" >Patch</A>* 
+    <A NAME="_toolbar">
+    <B>_toolbar</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Glyph.html" >Glyph</A>** 
+    <A NAME="_toolbar_vbox">
+    <B>_toolbar_vbox</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Deck.html" >Deck</A>* 
+    <A NAME="_toolbars">
+    <B>_toolbars</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_custom_tool()">
+    <B>add_custom_tool</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        import idraw-format tool button
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="otherdisplay()">
+    <B>otherdisplay</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns string that might specify an alternate X display.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="toolbar0()">
+    <B>toolbar0</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        switch to default toolbar
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="toolbar1()">
+    <B>toolbar1</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        switch to alternate toolbar
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

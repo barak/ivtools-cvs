@@ -1,0 +1,6564 @@
+Index: src_iv/Imakefile
+diff -c src_iv/Imakefile:1.1 src_iv/Imakefile:1.2
+*** src_iv/Imakefile:1.1	Tue Mar 17 15:53:11 1998
+--- src/IV/Imakefile	Tue Mar 24 09:01:23 1998
+***************
+*** 20,25 ****
+--- 20,30 ----
+      $(DISPATCH)/iohandler.$(CCSUFFIX)
+  #endif
+  
++ #ifdef SharedCCFlags
++ #undef SharedCCFlags
++ #define SharedCCFlags -fPIC -fshared-data
++ #endif
++ 
+  INTERVIEWS = $(SRC)/../InterViews
+  IV_2_6	   = $(SRC)/../IV-2_6
+  IV_X11	   = $(SRC)/../IV-X11
+***************
+*** 112,117 ****
+--- 117,123 ----
+  InterViewsObjFlags(tiff,$(OPTIMIZE_CCFLAGS))
+  InterViewsObj(tformsetter)
+  InterViewsObj(xymarker)
++ InterViewsObj(clthandler)
+  
+  #if BuildIV_2_6
+  
+***************
+*** 187,192 ****
+--- 193,201 ----
+  IV_X11Obj(xreqerr)
+  IV_X11Obj(xselection)
+  IV_X11ObjFlags(xwindow,$(OPTIMIZE_CCFLAGS))
++ IV_X11ObjFlags(xjivfunc,$(OPTIMIZE_CCFLAGS))
++ IV_X11ObjFlags(kinput,$(OPTIMIZE_CCFLAGS))
++ IV_X11ObjFlags(convert,-DKANJI)
+  
+  #define DispatchObj(file) DispatchObjFlags(file,NullParameter)
+  #define DispatchObjFlags(file,f) MakeObjectRule(file,$(DISPATCH)/file,f -xc++)
+Index: src_interviews/clthandler.c
+diff -c /dev/null src_interviews/clthandler.c:1.1
+*** /dev/null	Tue Mar 24 09:01:30 1998
+--- src/InterViews/clthandler.c	Tue Mar 24 09:01:26 1998
+***************
+*** 0 ****
+--- 1,43 ----
++ /*
++  * Copyright (c) 1991, 1992 Fujitsu Oita Software Laboratory Limited
++  *
++  * Permission to use, copy, modify, and distribute this software and its
++  * documentation for any purpose is hereby granted without fee, provided
++  * that the above copyright notice and this permission notice appear in
++  * all copies of the software and related documentation, and the name of
++  * Fujitsu Oita Software Laboratory may not be used in any advertising or
++  * publicity relating to the software without specific, prior written
++  * prior permission of Fujitsu Oita Software Laboratory. 
++  * 
++  * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND, 
++  * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY 
++  * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  
++  *
++  * IN NO EVENT SHALL FUJITSU OITA SOFTWARE LABORATORY BE LIABLE FOR ANY
++  * SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR
++  * ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
++  * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY
++  * OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++  * PERFORMANCE OF THIS SOFTWARE.
++  *
++  * Author:  Toshihisa Eto, Fujitsu Oita Software Laboratory Limited, Japan
++  * 	E-Mail: eto@ai.cs.fujitsu.co.jp
++  * 	Nifty:	HBG02665
++  */
++ 
++ /*
++  * ClientMessageHandler - event handler
++  */
++ 
++ #ifdef JIV
++ 
++ #include <InterViews/clthandler.h>
++ 
++ ClientMessageHandler::ClientMessageHandler() { }
++ ClientMessageHandler::~ClientMessageHandler() { }
++ 
++ boolean ClientMessageHandler::handle_p(const Event&) {
++     return false;
++ }
++ 
++ #endif	/* JIV */
+Index: src_interviews/label.c
+diff -c src_interviews/label.c:1.1 src_interviews/label.c:1.2
+*** src_interviews/label.c:1.1	Tue Mar 17 15:53:17 1998
+--- src/InterViews/label.c	Tue Mar 24 09:01:26 1998
+***************
+*** 110,117 ****
+--- 110,130 ----
+      const char* q = &p[text_->length()];
+      Coord* cw = &char_widths_[0];
+      for (; p < q; p++, cw++) {
++ #ifdef JIV
++ 	    Coord width;
++ 	    if (*p & 0x80) {
++ 		long ch = ((*p << 8) & 0xff00) | (*(p+1) & 0x00ff);
++ 		width = f->width(ch);
++ 		c->character(f, ch, width, color, x, y);
++ 		p++;
++ 	    } else {
++ 		width = f->width(*p);
++ 		c->character(f, *p, width, color, x, y);
++ 	    }
++ #else	    
+  	Coord width = *cw;
+  	c->character(f, *p, width, color, x, y);
++ #endif /* JIV */	    
+  	x += width;
+      }
+  }
+Index: src_interviews/style.c
+diff -c src_interviews/style.c:1.1 src_interviews/style.c:1.2
+*** src_interviews/style.c:1.1	Tue Mar 17 15:53:20 1998
+--- src/InterViews/style.c	Tue Mar 24 09:01:27 1998
+***************
+*** 40,45 ****
+--- 40,48 ----
+  #include <OS/string.h>
+  #include <OS/ustring.h>
+  #include <ctype.h>
++ #ifdef JIV
++ #include <libc.h>
++ #endif /* JIV */
+  
+  declarePtrList(StyleList,Style)
+  implementPtrList(StyleList,Style)
+***************
+*** 1032,1037 ****
+--- 1035,1146 ----
+      }
+      return v.case_insensitive_equal("on") || v.case_insensitive_equal("true");
+  }
++ 
++ #ifdef JIV
++ const char PSPreambleDefault[] = "";
++ 
++ struct pscmpfdata {
++     const char* fn;
++     const char* fa;
++     const char* fk;
++ } PSCmpfDefault[] = {
++     {"Courier-Bold-Gothic", "Courier-Bold", "GothicBBB-Medium-EUC-H"},
++     {"Courier-Ryumin", "Courier", "Ryumin-Light-EUC-H"},
++     {"Courier-Gothic", "Courier", "GothicBBB-Medium-EUC-H"},
++     {"Times-Ryumin", "Times-Roman", "Ryumin-Light-EUC-H"},
++     {"Times-Gothic", "Times-Roman", "GothicBBB-Medium-EUC-H"},
++     {"Helvetica-Gothic", "Helvetica", "GothicBBB-Medium-EUC-H"},
++     {"Times-Ryumin-Italic", "Times-Italic", "Ryumin-Light-EUC-H-Slant"},
++     {"Times-Bold-Gothic-Italic", "Times-BoldItalic",
++      "GothicBBB-Medium-EUC-H-Slant"},
++     {0, 0, 0}
++ };
++     
++ struct pssfdata {
++     const char* fn;
++     const char* fo;
++ } PSSfDefault[] = {
++     {"Ryumin-Light-EUC-H-Slant", "Ryumin-Light-EUC-H"},
++     {"GothicBBB-Medium-EUC-H-Slant", "GothicBBB-Medium-EUC-H"},
++     {0, 0}
++ };
++     
++ 
++ void Style::initCompositeFont() const {
++     String value;
++ 
++     /// Initialize for InterViews-Composite-Font
++     char str[64], compfontname[256], truefontname1[256],
++ 	 truefontname2[256], fontstyle[256];
++     int i = 1;
++     sprintf(str ,"compositeFont%d", i);
++     while (find_attribute(String(str), value)) {
++ 	switch(sscanf(value.string(), "%s%s%s%s", compfontname,
++ 		      truefontname1, truefontname2, fontstyle)) {
++ 	  case 3:	// Composite Font description without style
++ 	    new CompositeFont(compfontname, truefontname1, truefontname2);
++ 	    break;
++ 	  case 4:	// Composite Font description without style
++ 	    new CompositeFont(compfontname, truefontname1,
++ 			      truefontname2, fontstyle);
++ 	    break;
++ 	  default:
++ 	    // Error description
++ 	    break;
++ 	}
++ 	sprintf(str, "compositeFont%d", ++i);
++     }
++ 
++     /// Initialize for Unidraw-PostScript-Composite-Font
++     if (find_attribute(String("PSCompositeFontPreamble"), value)) {
++ 	PSCompositeFont::setPreamble(value.string());
++     } else {
++ 	PSCompositeFont::setPreamble(PSPreambleDefault);
++     }
++     i = 1;
++     sprintf(str ,"PSCompositeFont%d", i);
++     while (find_attribute(String(str), value)) {
++ 	switch(sscanf(value.string(), "%s%s%s", compfontname,
++ 		      truefontname1, truefontname2)) {
++ 	  case 3:	// Composite Font description without style
++ 	    new PSCompositeFont(compfontname, truefontname1, truefontname2);
++ 	    break;
++ 	  default:
++ 	    // Error description
++ 	    break;
++ 	}
++ 	sprintf(str, "PSCompositeFont%d", ++i);
++     }
++     if (i == 1) {
++ 	for (i = 0; PSCmpfDefault[i].fn != 0; i++) {
++ 	    new PSCompositeFont(PSCmpfDefault[i].fn,
++ 				PSCmpfDefault[i].fa,
++ 				PSCmpfDefault[i].fk);
++ 	}
++     }
++ 
++     /// Initialize for Unidraw-PostScript-Slant-Font
++     char slantfontname[256], truefontname[256];
++     i = 1;
++     sprintf(str ,"PSSlantFont%d", i);
++     while (find_attribute(String(str), value)) {
++ 	switch(sscanf(value.string(), "%s%s", slantfontname, truefontname)) {
++ 	  case 2:	// Slant Font description without style
++ 	    new PSSlantFont(slantfontname, truefontname);
++ 	    break;
++ 	  default:
++ 	    // Error description
++ 	    break;
++ 	}
++ 	sprintf(str, "PSSlantFont%d", ++i);
++     }
++     if (i == 1) {
++ 	for (i = 0; PSSfDefault[i].fn != 0; i++) {
++ 	    new PSSlantFont(PSSfDefault[i].fn, PSSfDefault[i].fo);
++ 	}
++     }
++ }
++ #endif /* JIV */
+  
+  boolean Style::value_is_on(const char* s) const {
+      return value_is_on(String(s));
+Index: src_iv-2_6/filechooser.c
+diff -c src_iv-2_6/filechooser.c:1.1 src_iv-2_6/filechooser.c:1.2
+*** src_iv-2_6/filechooser.c:1.1	Tue Mar 17 15:53:27 1998
+--- src/IV-2_6/filechooser.c	Tue Mar 24 09:01:32 1998
+***************
+*** 23,28 ****
+--- 23,31 ----
+   */
+  
+  #include <InterViews/event.h>
++ #ifdef JIV_EXTEND
++ #include <IV-2_6/InterViews/world.h>			// for getLabel
++ #endif
+  #include <IV-2_6/InterViews/adjuster.h>
+  #include <IV-2_6/InterViews/border.h>
+  #include <IV-2_6/InterViews/button.h>
+***************
+*** 43,48 ****
+--- 46,59 ----
+  #undef FileChooser
+  #define FileChooser _lib_iv2_6(FileChooser)
+  
++ #ifdef JIV_EXTEND
++ static const char* tmpLabel;
++ 
++ #define getLabel(attr, default) \
++     (((tmpLabel = World::current()->GetAttribute(attr)) != NULL) ? \
++      tmpLabel : default)
++ #endif
++ 
+  FileChooser::FileChooser(
+      const char* t, const char* subt, const char* d, 
+      int r, int c, const char* acceptLabel, Alignment a
+***************
+*** 175,181 ****
+--- 186,196 ----
+              new HBox(
+                  new VGlue(space, 0),
+                  new HGlue,
++ #ifndef JIV_EXTEND
+                  new PushButton("Cancel", state, '\007'),
++ #else
++                 new PushButton(getLabel("BCancel", "Cancel"), state, '\007'),
++ #endif
+                  new HGlue(space, 0),
+                  new PushButton(acptLbl, state, '\r')
+              )
+Index: src_iv-2_6/interactor.c
+diff -c src_iv-2_6/interactor.c:1.1 src_iv-2_6/interactor.c:1.2
+*** src_iv-2_6/interactor.c:1.1	Tue Mar 17 15:53:28 1998
+--- src/IV-2_6/interactor.c	Tue Mar 24 09:01:32 1998
+***************
+*** 74,79 ****
+--- 74,82 ----
+      managed_window = nil;
+      cursor_ = nil;
+      canvas_type_ = CanvasInputOutput;
++ #ifdef JIV		/* eto@ai.cs.fujitsu.co.jp 12 Jan 1992 */
++     cmhandler = nil;
++ #endif
+      handler_ = new InteractorHandler(this);
+      Resource::ref(handler_);
+      ref();
+***************
+*** 584,586 ****
+--- 587,601 ----
+  CanvasType Interactor::GetCanvasType() const { return canvas_type_; }
+  
+  ManagedWindow* Interactor::GetTopLevelWindow() const { return managed_window; }
++ 
++ #ifdef JIV		/* eto@ai.cs.fujitsu.co.jp 12 Jan 1992 */
++ void Interactor::SetClientMessageHandler(ClientMessageHandler* h) {
++     cmhandler = h;
++ }
++ 
++ void Interactor::ResetClientMessageHandler(ClientMessageHandler* h) {
++     if (cmhandler == h) {
++ 	cmhandler = nil;
++     }
++ }
++ #endif
+Index: src_iv-2_6/sensor.c
+diff -c src_iv-2_6/sensor.c:1.1 src_iv-2_6/sensor.c:1.2
+*** src_iv-2_6/sensor.c:1.1	Tue Mar 17 15:53:29 1998
+--- src/IV-2_6/sensor.c	Tue Mar 24 09:01:32 1998
+***************
+*** 30,35 ****
+--- 30,38 ----
+  
+  extern unsigned long
+      motionmask, keymask, entermask, leavemask, focusmask,
++ #ifdef JIV
++     propmask,
++ #endif /* JIV */
+      upmask, downmask, initmask;
+  
+  Sensor::Sensor() {
+***************
+*** 75,80 ****
+--- 78,86 ----
+      allEvents->Catch(KeyEvent);
+      allEvents->Catch(EnterEvent);
+      allEvents->Catch(LeaveEvent);
++ #ifdef JIV
++     allEvents->Catch(PropertyEvent);
++ #endif /* JIV */
+      onoffEvents = new Sensor;
+      onoffEvents->Catch(EnterEvent);
+      onoffEvents->Catch(LeaveEvent);
+***************
+*** 116,121 ****
+--- 122,132 ----
+  	case FocusOutEvent:
+  	    mask |= focusmask;
+  	    break;
++ #ifdef JIV
++ 	  case PropertyEvent:
++ 	    mask |= propmask;
++ 	    break;
++ #endif /* JIV */
+      }
+  }
+  
+***************
+*** 175,180 ****
+--- 186,196 ----
+  	case FocusOutEvent:
+  	    mask &= ~focusmask;
+  	    break;
++ #ifdef JIV
++ 	  case PropertyEvent:
++ 	    mask &= ~propmask;
++ 	    break;
++ #endif /* JIV */
+      }
+  }
+  
+Index: src_iv-2_6/textdisplay.c
+diff -c src_iv-2_6/textdisplay.c:1.1 src_iv-2_6/textdisplay.c:1.2
+*** src_iv-2_6/textdisplay.c:1.1	Tue Mar 17 15:53:29 1998
+--- src/IV-2_6/textdisplay.c	Tue Mar 24 09:01:32 1998
+***************
+*** 50,55 ****
+--- 50,58 ----
+      void Replace(TextDisplay*, int line, const char*, int count);
+  
+      void Draw(TextDisplay*, int line, int first, int last);
++ #ifdef JIV
++     void DrawBeforeCharacter(TextDisplay*, int line, int next);
++ #endif
+  
+      int Index(TextDisplay*, IntCoord x, boolean between);
+      IntCoord Offset(TextDisplay*, int index);
+***************
+*** 456,462 ****
+--- 459,469 ----
+  	caretline >= topline && caretline <= bottomline
+      ) {
+          TextLine* l = Line(caretline, true);
++ #ifndef JIV
+          l->Draw(this, caretline, caretindex-1, caretindex);
++ #else	/* JIV */
++         l->DrawBeforeCharacter(this, caretline, caretindex);
++ #endif	/* JIV */
+      }
+  }
+  
+***************
+*** 550,555 ****
+--- 557,577 ----
+      }
+  }
+  
++ #ifdef JIV
++ void TextDisplay::CaretPoint (
++   int&	x,
++   int&	y
++ ) {
++     IntCoord l = Left(caretline, caretindex);
++     IntCoord b = Base(caretline);
++     IntCoord nx, ny;
++ 
++     painter->MapCoord(canvas, l, b, nx, ny);
++     x = nx;
++     y = ny;
++ }
++ #endif
++ 
+  TextLine::TextLine () {
+      size = 0;
+      text = nil;
+***************
+*** 580,588 ****
+--- 602,623 ----
+                      cw = 0;
+                  }
+              } else {
++ #ifndef JIV
+                  cw = f->Width(text+i, 1);
++ #else
++ 		if ((unsigned char)text[i] < 0xa1) {
++ 		    cw = f->Width(text+i, 1);
++ 		} else {
++ 		    cw = f->Width(text+i, 2);
++ 		}
++ #endif
+              }
+              w += cw;
++ #ifdef JIV
++ 	    if ((unsigned char)text[i] >= 0xa1) {
++ 		i++;
++ 	    }
++ #endif
+              ++i;
+          }
+          return w;
+***************
+*** 611,626 ****
+--- 646,682 ----
+                      cw = 0;
+                  }
+              } else {
++ #ifndef JIV
+                  cw = f->Width(text+i, 1);
++ #else
++ 		if ((unsigned char)text[i] < 0xa1) {
++ 		    cw = f->Width(text+i, 1);
++ 		} else {
++ 		    cw = f->Width(text+i, 2);
++ 		}
++ #endif
+              }
+              w += cw;
+              if (w > x) {
+                  break;
+              }
++ #ifdef JIV
++ 	    if ((unsigned char)text[i] >= 0xa1) {
++ 		i++;
++ 	    }
++ #endif
+              ++i;
+          }
+          if (between && i <= lastchar && x > w - cw/2 || !between && x > w) {
++ #ifndef JIV
+              return i+1;
++ #else
++ 	    if ((unsigned char)text[i] < 0xa1) {
++ 		return i+1;
++ 	    } else {
++ 		return i + 2;
++ 	    }
++ #endif
+          } else {
+              return i;
+          }
+***************
+*** 676,681 ****
+--- 732,746 ----
+      int l = Math::min(last, lastchar);
+      for (int i = f; i <= l; ++i) {
+          attr[i] = attr[i] | style;
++ #ifdef JIV
++ 	if ((unsigned char)(text[i]) >= 0xa1) {
++ 	    if (i == last) {
++ 		last++;
++ 	    }
++ 	    i++;
++ 	    attr[i] = attr[i] | style;
++ 	}	    
++ #endif
+      }
+      Draw(display, line, first, last);
+  }
+***************
+*** 693,698 ****
+--- 758,772 ----
+      int l = Math::min(last, lastchar);
+      for (int i = f; i <= l; ++i) {
+          attr[i] = attr[i] & ~st;
++ #ifdef JIV
++ 	if ((unsigned char)(text[i]) >= 0xa1) {
++ 	    if (i == last) {
++ 		last++;
++ 	    }
++ 	    i++;
++ 	    attr[i] = attr[i] & ~st;
++ 	}	    
++ #endif
+      }
+      Draw(display, line, first, last);
+  }
+***************
+*** 793,798 ****
+--- 867,884 ----
+      Draw(display, line, -1, lastchar+1);
+  }
+  
++ #ifdef JIV
++ void TextLine::DrawBeforeCharacter (
++     TextDisplay* display, int line, int next
++ ) {
++     if ((unsigned char)(text[next - 1]) < 0xa1) {
++ 	Draw(display, line, next - 1, next);
++     } else {
++ 	Draw(display, line, next - 2, next);
++     }
++ }
++ #endif JIV
++ 
+  void TextLine::Draw (
+      TextDisplay* display, int line, int first, int last
+  ) {
+***************
+*** 831,839 ****
+                  }
+              }
+              int done = start;
+              display->painter->MoveTo(left, bottom);
+!             for (int i = start; i <= finish+1; ++i) {
+!                 if (i==finish+1 || attr[i]!=attr[done] || text[i]=='\t') {
+                      if (done != i && text[done] == '\t') {
+                          IntCoord l, r, y;
+                          display->painter->GetPosition(l, y);
+--- 917,951 ----
+                  }
+              }
+              int done = start;
++ #ifdef JIV
++ 	    boolean afterEuc = false;
++ 	    int tmpfinish = ((unsigned char)text[finish] < 0xa1 ?
++ 			     finish : finish + 1);
++ #endif
+              display->painter->MoveTo(left, bottom);
+!             for (int i = start;
+! #ifndef JIV
+! 		 i <= finish+1;
+! #else
+! 		 i <= tmpfinish+1;
+! #endif
+! 		 ++i) {
+! #ifdef JIV
+! 		if (afterEuc) {
+! 		    afterEuc = false;
+! 		    continue;
+! 		}
+! 		if ((unsigned char)text[i] >= 0xa1) {
+! 		    afterEuc = true;
+! 		}
+! #endif
+!                 if (
+! #ifndef JIV
+! 		    i==finish+1
+! #else
+! 		    i==tmpfinish+1
+! #endif
+! 		    || attr[i]!=attr[done] || text[i]=='\t') {
+                      if (done != i && text[done] == '\t') {
+                          IntCoord l, r, y;
+                          display->painter->GetPosition(l, y);
+Index: src_iv-2_6/xevent2_6.c
+diff -c src_iv-2_6/xevent2_6.c:1.1 src_iv-2_6/xevent2_6.c:1.2
+*** src_iv-2_6/xevent2_6.c:1.1	Tue Mar 17 15:53:30 1998
+--- src/IV-2_6/xevent2_6.c	Tue Mar 24 09:01:32 1998
+***************
+*** 45,50 ****
+--- 45,53 ----
+  Mask upmask = ButtonReleaseMask|OwnerGrabButtonMask;
+  Mask downmask = ButtonPressMask|OwnerGrabButtonMask;
+  Mask initmask = PointerMotionHintMask;
++ #ifdef JIV
++ Mask propmask = PropertyChangeMask;
++ #endif /* JIV */
+  
+  boolean Sensor::Caught(const Event& e) const {
+      XEvent& xe = e.rep()->xevent_;
+***************
+*** 65,70 ****
+--- 68,78 ----
+      case LeaveNotify:
+  	return (mask & leavemask) != 0 &&
+  	    e.rep()->xevent_.xcrossing.detail != NotifyInferior;
++ #ifdef JIV
++       case ClientMessage:
++       case PropertyNotify:
++ 	return (mask & propmask) != 0;
++ #endif /* JIV */
+      }
+      return false;
+  }
+***************
+*** 99,104 ****
+--- 107,120 ----
+      case LeaveNotify:
+  	GetCrossingInfo(LeaveEvent);
+  	break;
++ #ifdef JIV
++       case ClientMessage:
++ 	eventType = ClientEvent;
++ 	break;
++       case PropertyNotify:
++ 	eventType = PropertyEvent;
++ 	break;
++ #endif JIV
+      }
+  }
+  
+Index: src_iv-2_6/xinter.c
+diff -c src_iv-2_6/xinter.c:1.1 src_iv-2_6/xinter.c:1.2
+*** src_iv-2_6/xinter.c:1.1	Tue Mar 17 15:53:30 1998
+--- src/IV-2_6/xinter.c	Tue Mar 24 09:01:33 1998
+***************
+*** 33,38 ****
+--- 33,42 ----
+  #include <InterViews/event.h>
+  #include <InterViews/font.h>
+  #include <InterViews/handler.h>
++ #ifdef JIV
++ /* patch for ClientMessage	12 Jan 1992 eto@ai.cs.fujitsu.co.jp */
++ #include <InterViews/clthandler.h>
++ #endif
+  #include <InterViews/hit.h>
+  #include <InterViews/style.h>
+  #include <IV-2_6/InterViews/ihandler.h>
+***************
+*** 205,210 ****
+--- 209,228 ----
+   */
+  
+  Handler* InteractorWindow::target(const Event& e) const {
++ #ifdef JIV
++     /* patch for ClientMessage	10 Jan 1992 eto@ai.cs.fujitsu.co.jp */
++     int eventType = e.rep()->xevent_.type;
++     if ((eventType == ClientMessage) || (eventType == PropertyNotify)) {
++ 	ClientMessageHandler* h;
++ 	if ((h = interactor_->cmhandler) != nil) {
++ 	    if (h->handle_p(e)) {
++ 		return h;
++ 	    }
++ 	}
++ 	return nil;
++     }
++ #endif
++ 
+      if (!e.rep()->has_pointer_location()) {
+  	return nil;
+      }
+Index: src_iv-2_6/xpainter.c
+diff -c src_iv-2_6/xpainter.c:1.1 src_iv-2_6/xpainter.c:1.2
+*** src_iv-2_6/xpainter.c:1.1	Tue Mar 17 15:53:30 1998
+--- src/IV-2_6/xpainter.c	Tue Mar 24 09:01:33 1998
+***************
+*** 52,57 ****
+--- 52,60 ----
+  #include <IV-X11/xpainter.h>
+  #include <IV-X11/xpattern.h>
+  #include <IV-X11/xraster.h>
++ #ifdef JIV
++ #include <IV-X11/xjivfunc.h>
++ #endif JIV
+  #include <OS/list.h>
+  #include <OS/math.h>
+  #include <OS/string.h>
+***************
+*** 521,531 ****
+--- 524,547 ----
+      const Font* f, int c, int k, const Transformer& t
+  ) {
+      if (btable_ == nil) {
++ #ifndef JIV
+          btable_ = new BitmapTable(256);
++ #else
++ 	btable_ = new BitmapTable(256 * 256);
++ #endif
+          txtable_ = new BitmapTable(1024);
+      }
+      Bitmap* basic;
++ #ifndef JIV
+      XFont fid = f->rep(display_)->font_->fid;
++ #else
++     XFont fid;
++     if (f->isComposite() && ((unsigned char)c > 0xff)) {
++ 	fid = f->rep2byte(display_)->font_->fid;
++     } else {
++ 	fid = f->rep(display_)->font_->fid;
++     }
++ #endif
+      if (!btable_->find(basic, fid, c)) {
+          basic = new Bitmap(f, c);
+  	Resource::ref(basic);
+***************
+*** 817,834 ****
+--- 833,883 ----
+      if (txstring == 0) {
+          Map(c, x, ybase - 1, x0, y0);
+          if (rep->fillbg) {
++ #ifndef JIV
+              XDrawImageString(
+                  d, xid, rep->fillgc, x0, y0, s, len
+              );
++ #else
++ 	    if (font->isComposite()) {
++ 		JIVDrawImageString(d, xid, rep->fillgc, font, x0, y0,
++ 			      (unsigned char*)s, len, Rep()->display);
++ 	    } else {
++ 		XDrawImageString(
++ 				 d, xid, rep->fillgc, x0, y0, s, len
++                 );
++ 	    }
++ #endif
+          } else {
++ #ifndef JIV
+              XDrawString(
+                  d, xid, rep->fillgc, x0, y0, s, len
+              );
++ #else
++ 	    if (font->isComposite()) {
++ 		JIVDrawString(d, xid, rep->fillgc, font, x0, y0,
++ 			      (unsigned char*)s, len, Rep()->display);
++ 	    } else {
++ 		XDrawString(
++ 			    d, xid, rep->fillgc, x0, y0, s, len
++ 		);
++ 	    }
++ #endif
+          }
+          if (style & Boldface) {
++ #ifndef JIV
+              XDrawString(
+                  d, xid, rep->fillgc, x0-1, y0, s, len
+              );
++ #else
++ 	    if (font->isComposite()) {
++ 		JIVDrawString(d, xid, rep->fillgc, font, x0-1, y0,
++ 			      (unsigned char*)s, len, Rep()->display);
++ 	    } else {
++ 		XDrawString(
++ 			    d, xid, rep->fillgc, x0-1, y0, s, len
++ 		);
++ 	    }
++ #endif
+          }
+      } else {
+          IntCoord curx = x;
+***************
+*** 848,853 ****
+--- 897,903 ----
+              switch (p.txfonts) {
+              case PainterDpyInfo::TxFontsOff:
+                  Map(c, curx, ybase - 1, x0, y0);
++ #ifndef JIV
+                  XDrawString(
+                      d, xid, rep->fillgc, x0, y0, s+i, 1
+                  );
+***************
+*** 856,864 ****
+--- 906,958 ----
+                          d, xid, rep->fillgc, x0-1, y0, s+i, 1
+                      );
+                  }
++ #else
++ 		if (!font->isComposite()) {
++ 		    XDrawString(
++ 				d, xid, rep->fillgc, x0, y0, s + i, 1
++ 		    );
++ 		    if (style & Boldface) {
++ 			XDrawString(
++ 				    d, xid, rep->fillgc, x0-1, y0, s + i, 1
++ 			);
++ 		    }
++ 		} else if ((unsigned char)(*(s + i)) > 0x80) {
++ 		    JIVDrawString(d, xid, rep->fillgc, font, x0, y0,
++ 				  (unsigned char*)s + i, 2,
++ 				  Rep()->display);
++ 		    if (style & Boldface) {
++ 			JIVDrawString(d, xid, rep->fillgc, font,
++ 				      x0-1, y0,
++ 				      (unsigned char*)s + i, 2,
++ 				      Rep()->display);
++ 		    }
++ 		    i++;
++ 		} else {
++ 		    JIVDrawString(d, xid, rep->fillgc, font, x0, y0,
++ 				  (unsigned char*)s + i, 1,
++ 				  Rep()->display);
++ 		    if (style & Boldface) {
++ 			JIVDrawString(d, xid, rep->fillgc, font,
++ 				      x0-1, y0,
++ 				      (unsigned char*)s + i, 1,
++ 				      Rep()->display);
++ 		    }
++ 		}
++ #endif
+                  break;
+              case PainterDpyInfo::TxFontsOn:
++ #ifndef JIV
+                  bits = new Bitmap(font, s[i]);
++ #else
++ 		if (font->isComposite() && ((unsigned char)(s[i]) >= 0xa1)) {
++ 		    int lc;
++ 		    lc = s[i] * 256 + s[i + 1];
++ 		    bits = new Bitmap(font, lc);
++ 		    i++;
++ 		} else {
++ 		    bits = new Bitmap(font, s[i]);
++ 		}
++ #endif
+                  Stencil(c, curx, ybase, bits, bits);
+                  if (style & Boldface) {
+                      Stencil(c, curx-1, ybase, bits, bits);
+***************
+*** 866,872 ****
+--- 960,978 ----
+                  break;
+              case PainterDpyInfo::TxFontsCache:
+              case PainterDpyInfo::TxFontsDefault:
++ #ifndef JIV
+                  bits = p.get_char_bitmap(font, s[i], txchar, notrans);
++ #else
++ 		if (font->isComposite() && ((unsigned char)(s[i]) >= 0xa1)) {
++ 		    unsigned int lc;
++ 		    lc = (unsigned char)s[i];
++ 		    lc = (lc << 8) | (unsigned char)s[i + 1];
++ 		    bits = p.get_char_bitmap(font, (int)lc, txchar, notrans);
++ 		    i++;
++ 		} else {
++ 		    bits = p.get_char_bitmap(font, s[i], txchar, notrans);
++ 		}
++ #endif
+                  oldmatrix = matrix;
+                  matrix = nil;
+                  oldmatrix->Transform(curx, ybase, x0, y0);
+***************
+*** 1262,1267 ****
+--- 1368,1392 ----
+          XFreeGC(dpy, copygc);
+      }
+  }
++ 
++ #ifdef JIV
++ void Painter::MapCoord (
++   Canvas*	c,
++   IntCoord	x,
++   IntCoord	y,
++   IntCoord&	nx,
++   IntCoord&	ny
++ ) {
++     if (c == nil) {
++ 	return;
++     }
++     CanvasRep* cr = c->rep();
++     if (cr->xdrawable_ == CanvasRep::unbound) {
++ 	return;
++     }
++     Map(c, x, y, nx, ny);
++ }
++ #endif	/* JIV */
+  
+  /* anachronism */
+  void CanvasRep::wait_for_copy() {
+Index: src_x11/convert.c
+diff -c /dev/null src_x11/convert.c:1.1
+*** /dev/null	Tue Mar 24 09:01:41 1998
+--- src/IV-X11/convert.c	Tue Mar 24 09:01:38 1998
+***************
+*** 0 ****
+--- 1,316 ----
++ /*
++  *	convert.c -- code converters for kterm
++  */
++ 
++ /*
++  * Copyright (c) 1989  Software Research Associates, Inc.
++  *
++  * Permission to use, copy, modify, and distribute this software and its
++  * documentation for any purpose and without fee is hereby granted, provided
++  * that the above copyright notice appear in all copies and that both that
++  * copyright notice and this permission notice appear in supporting
++  * documentation, and that the name of Software Research Associates not be
++  * used in advertising or publicity pertaining to distribution of the
++  * software without specific, written prior permission.  Software Research
++  * Associates makes no representations about the suitability of this software
++  * for any purpose.  It is provided "as is" without express or implied
++  * warranty.
++  *
++  * Author:  Makoto Ishisone, Software Research Associates, Inc., Japan
++  */
++ 
++ #ifdef JIV
++ 
++ #include <string.h>
++ 
++ #if defined(linux) && !defined(NULL)
++ #define NULL	0
++ #endif
++ 
++ #define SS2 0x8e
++ #define SS3 0x8f
++ 
++ static unsigned char* getesc(
++   unsigned char* str,
++   int len
++ ) {
++     register int	c;
++     
++     /* Find intermediate characters and final character
++      * following the escape character in an escape sequence.
++      */
++     /* The intermediate character is 02/00 to 02/15 */
++     while (len > 0) {
++ 	c = *str;
++ 	if (c < 0x20 || 0x2f < c)
++ 	    break;
++ 	len--, str++;
++     }
++     /* The final character is 03/00 to 07/14 */
++     if (--len < 0 || (c = *str++) < 0x30 || 0x7e < c)
++ 	return (unsigned char *)NULL;
++     
++     return str;
++ }
++ 
++ static unsigned char* getcsi(
++   unsigned char* str,
++   int len
++ ) {
++     register int	c;
++     
++     /* Find parameter characters, intermediate characters
++      * and final character following the CSI character
++      * in a CSI sequence.
++      */
++     /* The parameter characters is 03/00 to 03/15 */
++     while (len > 0) {
++ 	c = *str;
++ 	if (c < 0x30 || 0x3f < c)
++ 	    break;
++ 	len--, str++;
++     }
++     /* The intermediate character is 02/00 to 02/15 */
++     while (len > 0) {
++ 	c = *str;
++ 	if (c < 0x20 || 0x2f < c)
++ 	    break;
++ 	len--, str++;
++     }
++     /* The final character is 04/00 to 07/14 */
++     if (--len < 0 || (c = *str++) < 0x40 || 0x7e < c)
++ 	return (unsigned char *)NULL;
++     
++     return str;
++ }
++ 
++ /******************************************************************************
++ COMPOUND_TEXT Summary
++   (based on Comopund Text Encoding Version 1 -- MIT X Consortium Standard)
++ (1) Only G0 and G1 are used. G2 and G3 are not.
++ (2) G0 is invoked into GL and G1 into GR. These invocation are not changed.
++ 	(In other words, Locking Shift and Single Shift are not used)
++ (3) In initial state, ISO Latin-1 is designated into G0/G1.
++ (4) To designate MBCS into G0, ESC-$-F is not used but ESC-$-(-F.
++ (5) In C0, only HT, NL, and ESC are used.
++ (6) In C1, only CSI is used.
++ (7) Text direction can be indecated.
++ 	begin left-to-right string
++ 	begin right-to-left string
++ 	end of string
++ ******************************************************************************/
++ 
++ #define CS96	0x100	/* 96chars CS */
++ #define MBCS	0x200	/* Multibyte CS */
++ 
++ /* convCTtoEUC -- COMPOUND_TEXT -> Japanese EUC Character String */
++ int convCTtoEUC(
++   register unsigned char* xstr,
++   int len,
++   unsigned char* eucstr
++ /* Convert COMPOUND_TEXT xstr to EUC Character String wstr, return
++  * length of eucstr in characters (not including the terminating null
++  * character). If eucstr is NULL, no conversion is done, but return
++  * length of eucstr.
++  */
++ ) {
++     register int	c;
++     int	nskip;
++     int	n = 0;
++     int	g0, g1, gs;
++     unsigned char	*xstr1;
++     
++     /*
++      * Compound Text can include null octet. Therefore the length
++      * of xstr is able to be specified by parameter len.
++      * But if len is zero or negative, get length by strlen() assuming
++      * that no null octet exists.
++      */
++     if (len <= 0) {
++ 	len = strlen((char *)xstr);
++     }
++     
++     /* In initial state, ISO 8859/1 is designated into G0/G1 */
++     g0 = 'B';			/* ASCII -> G0 */
++     g1 = CS96|'A';		/* Latin/1 right hand part -> G1 */
++     
++     while (len-- > 0) {
++ 	switch (c = *xstr++) {
++ 	  case '\n':		/* NEWLINE */
++ 	  case '\t':		/* TAB */
++ 	    if (eucstr) *eucstr++ = c;
++ 	    n++;
++ 	    break;
++ 	  case 0x9b:		/* CSI */
++ 	    /*
++ 	     * CSI sequence is generally in following form:
++ 	     *	CSI {P} {I} F
++ 	     *        P : 03/00 to 03/15
++ 	     *        I : 02/00 to 02/15
++ 	     *        F : 04/00 to 07/14
++ 	     */
++ 	    /*
++ 	     * Currently only directionality is definde
++ 	     * as following:
++ 	     *	CSI-1-]		begin left-to-right text
++ 	     *	CSI-2-]		begin right-to-left text
++ 	     *	CSI-]		end of string
++ 	     * But this implementation ignores them.
++ 	     */
++ 	    xstr1 = getcsi(xstr, len);
++ 	    if (xstr1 == NULL)
++ 		return -1;
++ 	    len -= xstr1 - xstr;
++ 	    xstr = xstr1;
++ 	    break;
++ 	  case '\033':		/* ESC */
++ 	    /*
++ 	     * ESC sequence is generally in following form:
++ 	     *	ESC {I} F
++ 	     *        I : 02/00 to 02/15
++ 	     *        F : 03/00 to 07/14
++ 	     */
++ 	    /*
++ 	     * Currently, following functions are defined:
++ 	     *   Standard character set
++ 	     *	ESC-(-F
++ 	     *	ESC-$-(-F
++ 	     *	ESC-)-F
++ 	     *	ESC---F
++ 	     *	ESC-$-)-F
++ 	     *   Non standard character set
++ 	     *	ESC-%-/-[0123]
++ 	     * Standard character set must be accepted correctly.
++ 	     * Non standard one is ignored but must be parsed
++ 	     * for skipping data.
++ 	     */
++ 	    xstr1 = getesc(xstr, len);
++ 	    if (xstr1 == NULL)
++ 		return -1;
++ 	    len -= xstr1 - xstr;
++ 	    switch (xstr1 - xstr) {
++ 	      case 2:		/* ESC - I - F */
++ 		switch (*xstr++) {
++ 		  case '(':	/* 94chars CS -> G0 */
++ 		    g0 = *xstr;
++ 		    break;
++ 		  case ')':	/* 94chars CS -> G1 */
++ 		    g1 = *xstr;
++ 		    break;
++ 		  case '-':	/* 96chars CS -> G1 */
++ 		    g1 = *xstr | CS96;
++ 		    break;
++ 		  default:	/* ignore */
++ 		    break;
++ 		}
++ 		break;
++ 	      case 3:		/* ESC - I - I - F */
++ 		switch (*xstr++) {
++ 		  case '$':
++ 		    switch (*xstr++) {
++ 		      case '(':	/* 94chars MBCS -> G0 */
++ 			g0 = *xstr | MBCS;
++ 			break;
++ 		      case ')':	/* 94chars MBCS -> G1 */
++ 			g1 = *xstr | MBCS;
++ 			break;
++ 		      case '-':	/* 96chars MBCS -> G1 */
++ 			g1 = *xstr | CS96 | MBCS;
++ 			break;
++ 		      default:	/* ignore */
++ 			break;
++ 		    }
++ 		    break;
++ 		  case '%':
++ 		    if (*xstr++ != '/') {
++ 			/* unknown sequence */
++ 			break;
++ 		    }
++ 		    /*
++ 		     * Private encoding is ignored.
++ 		     * But following data must be skipped.
++ 		     *	ESC-%-/-F-M-L
++ 		     */
++ 		    len -= 2;
++ 		    if (len < 0)
++ 			return -1;
++ 		    nskip = (*xstr1 & 0x7f) * 128 +
++ 			(*(xstr1 + 1) & 0x7f);
++ 		    if ((len -= nskip) < 0)
++ 			return -1;
++ 		    xstr1 += nskip + 2;
++ 		    break;
++ 		  default:
++ 		    break;
++ 		}
++ 		break;
++ 	      default:
++ 		break;
++ 	    }
++ 	    xstr = xstr1;
++ 	    break;
++ 	  default:
++ 	    if (!(c & 0x60)) {
++ 		/*
++ 		 * Non NL/TAB/ESC/CSI character in C0 or C1
++ 		 * is an obvious error.
++ 		 */
++ 		return -1;
++ 	    }
++ 	    gs = (c & 0x80) ? g1 : g0;
++ 	    c &= 0x7f;
++ 	    if (gs & MBCS) {
++ 		switch (gs & 0x70) {
++ 		  case 0x70:	/* 4byte/char */
++ 		    if (--len < 0) return -1;
++ 		    c = (c << 8) | (*xstr++ & 0x7f);
++ 		  case 0x60:	/* 3byte/char */
++ 		    if (--len < 0) return -1;
++ 		    c = (c << 8) | (*xstr++ & 0x7f);
++ 		  case 0x50:	/* 2byte/char */
++ 		  case 0x40:	/* 2byte/char */
++ 		    if (--len < 0) return -1;
++ 		    c = (c << 8) | (*xstr++ & 0x7f);
++ 		    break;
++ 		  default:
++ 		    return -1;
++ 		}
++ 	    }
++ 	    if (eucstr) {
++ 		switch (gs) {
++ 		  case 'B':
++ 		  case 'J':
++ 		    *eucstr++ = c;
++ 		    n++;
++ 		    break;
++ 		  case 'I':
++ 		    *eucstr++ = SS2;
++ 		    *eucstr++ = c;
++ 		    n += 2;
++ 		    break;
++ 		  case MBCS|'B':
++ 		    *eucstr++ = (c >> 8) | 0x80;
++ 		    *eucstr++ = (c & 0xff) | 0x80;
++ 		    n += 2;
++ 		    break;
++ 		}
++ 	    } else {
++ 		switch (gs) {
++ 		  case 'B':
++ 		  case 'J':
++ 		    n++;
++ 		    break;
++ 		  case 'I':
++ 		  case MBCS|'B':
++ 		    n += 2;
++ 		    break;
++ 		}
++ 	    }
++ 	    break;
++ 	}
++     }
++     if (eucstr) *eucstr = 0;
++     return n;
++ }
++ 
++ #endif /* JIV */
+Index: src_x11/kinput.c
+diff -c /dev/null src_x11/kinput.c:1.1
+*** /dev/null	Tue Mar 24 09:01:42 1998
+--- src/IV-X11/kinput.c	Tue Mar 24 09:01:38 1998
+***************
+*** 0 ****
+--- 1,509 ----
++ /*
++  * Copyright (c) 1991, 1992 Fujitsu Oita Software Laboratory Limited
++  *
++  * Permission to use, copy, modify, and distribute this software and its
++  * documentation for any purpose is hereby granted without fee, provided
++  * that the above copyright notice and this permission notice appear in
++  * all copies of the software and related documentation, and the name of
++  * Fujitsu Oita Software Laboratory may not be used in any advertising or
++  * publicity relating to the software without specific, prior written
++  * prior permission of Fujitsu Oita Software Laboratory. 
++  * 
++  * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND, 
++  * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY 
++  * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  
++  *
++  * IN NO EVENT SHALL FUJITSU OITA SOFTWARE LABORATORY BE LIABLE FOR ANY
++  * SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR
++  * ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
++  * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY
++  * OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++  * PERFORMANCE OF THIS SOFTWARE.
++  *
++  * Author:  Toshihisa Eto, Fujitsu Oita Software Laboratory Limited, Japan
++  * 	E-Mail: eto@ai.cs.fujitsu.co.jp
++  * 	Nifty:	HBG02665
++  */
++ 
++ #ifdef JIV
++ 
++ #include <stdio.h>
++ 
++ #include <IV-X11/Xlib.h>
++ #include <IV-X11/xdisplay.h>
++ 
++ #include <IV-2_6/InterViews/world.h>
++ #include <InterViews/window.h>
++ #include <IV-X11/xwindow.h>
++ #include <InterViews/event.h>
++ #include <IV-X11/xevent.h>
++ 
++ #include <InterViews/kinput.h>
++ 
++ #define CONVBUFSIZE	1024
++ 
++ 
++ // following line's code is copy from kinput2/include/ConvProto.h
++ #define CONV_ATTR(code,len)	((unsigned long)((code)<<16)+(len))
++ 
++ #define UPPER16U(data)		(((data)>>16)&0xffff)
++ #define UPPER16S(data)		((short)(((data)>>16)&0xffff))
++ #define LOWER16U(data)		((data)&0xffff)
++ #define LOWER16S(data)		((short)((data)&0xffff))
++ 
++ #define CODE_OF_ATTR(head)	UPPER16U(head)
++ #define LENGTH_OF_ATTR(head)	LOWER16U(head)
++ 
++ #define CONVPROF_PROTOCOL_VERSION	1
++ 
++ /*
++  * Standard Conversion Attribute Codes (0-255)
++  */
++ 
++ /* 0-127: can be specified at any time (startup and during conversion) */
++ #define CONVATTR_NONE			0
++ #define CONVATTR_INDIRECT		1
++ #define CONVATTR_FOCUS_WINDOW		2
++ #define CONVATTR_SPOT_LOCATION		3
++ #define CONVATTR_CLIENT_AREA		4
++ #define CONVATTR_STATUS_AREA		5
++ #define CONVATTR_COLORMAP		6
++ #define CONVATTR_COLOR			7
++ #define CONVATTR_BACKGROUND_PIXMAP	8
++ #define CONVATTR_LINE_SPACING		9
++ #define CONVATTR_FONT_ATOMS		10
++ #define CONVATTR_CURSOR			11
++ 
++ /* 128-255: can be specified only at startup time */
++ #define CONVATTR_INPUT_STYLE		128
++ #define CONVATTR_EVENT_CAPTURE_METHOD	129
++ #define CONVATTR_USE_EXTENSION		255
++ 
++ /* argument for CONVATTR_INPUT_STYLE and CONVPROP_SUPPORTED_STYLES */
++ #define CONVARG_ROOTWINDOW		1L
++ #define CONVARG_OFFTHESPOT		2L
++ #define CONVARG_OVERTHESPOT		4L
++ 
++ /* argument for CONVATTR_EVENT_CAPTURE_METHOD */
++ #define CONVARG_NONE			0L
++ #define CONVARG_CREATE_INPUTONLY	1L
++ #define CONVARG_SELECT_FOCUS_WINDOW	2L
++ // to here
++ 
++ extern int	convCTtoEUC(unsigned char*, int, unsigned char*);
++ 
++ class ConvAtoms {
++   public:
++     ConvAtoms(XDisplay*);
++     ~ConvAtoms();
++ 
++     Atom	owner;		// _JAPANESE_CONVERSION
++     Atom	version;	// PROTOCOL-2.0
++     Atom	text;		// COMPOUND_TEXT
++     Atom	profile;	// _CONVERSION_PROFILE
++     Atom	type;		// _CONVERSION_ATTRIBUTE_TYPE
++     Atom	request;	// CONVERSION_REQUEST
++     Atom	notify;		// CONVERSION_NOTIFY
++     Atom	end;		// CONVERSION_END
++     Atom	endRequest;	// CONVERSION_END_REQUEST
++     Atom	attribute;	// CONVERSION_ATTRIBUTE
++     Atom	attrnotify;	// CONVERSION_ATTRIBUTE_NOTIFY
++ };
++ 
++ ConvAtoms::ConvAtoms(XDisplay* disp)
++ {
++     owner	= XInternAtom(disp, "JAPANESE_CONVERSION",	False);
++     version	= XInternAtom(disp, "PROTOCOL-2.0",		False);
++     text	= XInternAtom(disp, "COMPOUND_TEXT",		False);
++     profile	= XInternAtom(disp, "_CONVERSION_PROFILE",	False);
++     type	= XInternAtom(disp, "_CONVERSION_ATTRIBUTE_TYPE",False);
++     request	= XInternAtom(disp, "CONVERSION_REQUEST",	False);
++     notify	= XInternAtom(disp, "CONVERSION_NOTIFY",	False);
++     end		= XInternAtom(disp, "CONVERSION_END",		False);
++     endRequest	= XInternAtom(disp, "CONVERSION_END_REQUEST",	False);
++     attribute	= XInternAtom(disp, "CONVERSION_ATTRIBUTE",	False);
++     attrnotify	= XInternAtom(disp, "CONVERSION_ATTRIBUTE_NOTIFY", False);
++ }
++ 
++ ConvAtoms::~ConvAtoms()
++ {
++ }
++ 
++ class KinputRep {
++   public:
++     KinputRep(XWindow);
++     ~KinputRep();
++ 
++     static ConvAtoms*	convatoms;
++ 
++     // X Window properties
++     XDisplay*	display_;
++     XWindow	window;
++     XWindow	convowner;
++     Atom	property;
++     char	convertedString[CONVBUFSIZE];
++ 
++     boolean	isKinput2;
++     boolean	active;
++ 
++     // private method for communicate with kinput
++     boolean	CheckProtocols();
++     void	SendConversionRequest();
++     void	SendConversionEnd();
++     void	RecieveNotify(Event& ev);
++     boolean	RecieveText(Event& ev);
++ 
++     // public method for setting conversion style
++     void	SetInputStyle(long);
++     void	SetConversionSpot(int, int);
++ };
++ ConvAtoms*	KinputRep::convatoms;
++ 
++ // Kinput instance constructer
++ Kinput::Kinput(Window* win)
++ {
++     rep = new KinputRep(win->rep()->xwindow_);
++ }
++ 
++ Kinput::~Kinput()
++ {
++     delete rep;
++ }
++ 
++ // Conversion request to kinput
++ void Kinput::BeginConversion()
++ {
++     rep->SendConversionRequest();
++ }
++ 
++ void Kinput::BeginConversion(int x, int y)
++ {
++     rep->SendConversionRequest();
++ 
++     // Set conversion spot
++     rep->SetConversionSpot(x, y);
++ }
++ 
++ // Conversion end request to kinput
++ void Kinput::EndConversion()
++ {
++     rep->SendConversionEnd();
++ }
++ 
++ boolean Kinput::IsActive()
++ {
++     return rep->active;
++ }
++ 
++ // Event handling method
++ 
++ // Check event
++ boolean Kinput::IsKinputEvent(const Event& ev)
++ {
++     if ((ev.eventType == ClientEvent) ||
++ 	(ev.rep()->xevent_.type == ClientMessage)) {
++ 	// ClientMessage
++ 	XClientMessageEvent	*cev = &(ev.Rep()->xevent_.xclient);
++ 
++ 	if ((cev->window == rep->window) &&
++ 	    (cev->message_type == rep->convatoms->notify) &&
++ 	    (cev->data.l[0] == rep->convatoms->owner)) {
++ 
++ 	    // Catch Conversion Notify
++ 	    return true;
++ 	} else if ((cev->format == 32) &&
++ 		   (cev->message_type == rep->convatoms->end) &&
++ 		   (cev->data.l[0] == rep->convatoms->owner)) {
++ 
++ 	    // Catch End Notify
++ 	    return true;
++ 	}
++     } else if ((ev.eventType == PropertyEvent) ||
++ 	       (ev.rep()->xevent_.type == PropertyNotify)) {
++ 	// Catch Property Event
++ 	XPropertyEvent	*pev = &(ev.Rep()->xevent_.xproperty);
++ 
++ 	if ((rep->property != None)		&&
++ 	    (pev->window == rep->window)	&&
++ 	    (pev->atom == rep->property) 	&&
++ 	    (pev->state == PropertyNewValue)) {
++ 	    // Catch Convert Notify
++ 	    return true;
++ 	}
++     }
++     return false;
++ }
++ 
++ // Kinput event handling
++ boolean Kinput::Handle(Event& ev)
++ {
++     rep->convertedString[0] = '\0';
++ 
++     if ((ev.eventType == ClientEvent) ||
++ 	(ev.rep()->xevent_.type == ClientMessage)) {
++ 	// ClientMessage
++ 	XClientMessageEvent	*cev = &(ev.Rep()->xevent_.xclient);
++ 
++ 	if ((cev->window == rep->window) &&
++ 	    (cev->message_type == rep->convatoms->notify) &&
++ 	    (cev->data.l[0] == rep->convatoms->owner)) {
++ 	    rep->RecieveNotify(ev);
++ 	    return false;
++ 	} else if ((cev->format == 32) &&
++ 		   (cev->message_type == rep->convatoms->end) &&
++ 		   (cev->data.l[0] == rep->convatoms->owner)) {
++ 	    rep->active = false;
++ 	    EndConversion();
++ 	    return false;
++ 	}
++     } else if ((ev.eventType == PropertyEvent) ||
++ 	       (ev.rep()->xevent_.type == PropertyNotify)) {
++ 	// PropertyNotify
++ 	XPropertyEvent	*pev = &(ev.Rep()->xevent_.xproperty);
++ 
++ 	if ((rep->property != None)		&&
++ 	    (pev->window == rep->window)	&&
++ 	    (pev->atom == rep->property)	&&
++ 	    (pev->state == PropertyNewValue)) {
++ 	    return rep->RecieveText(ev);
++ 	}
++     }
++ }
++ 
++ const char* Kinput::GetConvertedString()
++ {
++     if (rep->convertedString[0] == '\0') {
++ 	return NULL;
++     }
++     return rep->convertedString;
++ }
++ 
++ void Kinput::SetConversionSpot(
++   int	spotx,
++   int	spoty
++ ) {
++     rep->SetConversionSpot(spotx, spoty);
++ }
++ 
++ 
++ 
++ KinputRep::KinputRep(XWindow win)
++ {
++     // create kinputRep instance
++     // set instance variable
++     display_ = World::current()->display()->rep()->display_;
++     window  = win;
++ 
++     active = false;
++     
++     if (convatoms == NULL) {
++ 	convatoms = new ConvAtoms(display_);
++     }
++ }
++ 
++ KinputRep::~KinputRep()
++ {
++     if (active == true) {
++ 	// disconnect Kinput
++ 	SendConversionEnd();
++     }
++ }
++ 
++ // Kinput communication method
++ 
++ // Send conversion start request
++ void KinputRep::SendConversionRequest()
++ {
++     XWindow	owner;
++     XEvent	event;
++ 
++     if (active) {
++ 	return;
++     }
++ 
++     // check kinput is active.
++     if ((owner = XGetSelectionOwner(display_, convatoms->owner)) == None) {
++ 	// not found
++ 	active = false;
++ 	return;
++     }
++     
++     convowner = owner;
++     property = None;
++     active = true;
++     
++     isKinput2 = false;
++     if (CheckProtocols()) {
++ 	// Running conversion server is kinput2
++ 	isKinput2 = true;
++ 	SetInputStyle(CONVARG_OVERTHESPOT);
++     }
++ 
++     // request conversion by sending ClientMessage event
++     event.xclient.type = ClientMessage;
++     event.xclient.window = owner;
++     event.xclient.message_type = convatoms->request;
++     event.xclient.format = 32;
++     event.xclient.data.l[0] = convatoms->owner;
++     event.xclient.data.l[1] = window;
++     event.xclient.data.l[2] = convatoms->text;
++     event.xclient.data.l[3] = convatoms->owner;
++     event.xclient.data.l[4] = (isKinput2 ? convatoms->attribute : None);
++     XSendEvent(display_, owner, False, NoEventMask, &event);
++ }
++ 
++ // Send conversion end request
++ void KinputRep::SendConversionEnd()
++ {
++     XEvent	event;
++ 
++     if (!active) {
++ 	return;
++     }
++ 
++     if (convatoms->owner == None) {
++ 	return;
++     }
++ 
++     if (XGetSelectionOwner(display_, convatoms->owner) != convowner) {
++ 	return;
++     }
++ 
++     event.xclient.type		= ClientMessage;
++     event.xclient.window	= convowner;
++     event.xclient.message_type	= convatoms->endRequest;
++     event.xclient.format	= 32;
++     event.xclient.data.l[0]     = convatoms->owner;
++     event.xclient.data.l[1]     = window;
++     XSendEvent(display_, convowner, False, NoEventMask, &event);
++     active = false;
++ }
++ 
++ void KinputRep::RecieveNotify(Event& ev)
++ {
++     if (ev.Rep()->xevent_.xclient.data.l[2] == None) {
++ 	fprintf(stderr, "selection request failed\n");
++ 	active = false;
++ 	return;
++     }
++     
++     property = ev.Rep()->xevent_.xclient.data.l[2];
++     active = true;
++ }
++ 
++ boolean KinputRep::RecieveText(Event&)
++ {
++     Atom		proptype;
++     int			propformat;
++     unsigned long	propsize, rest;
++     unsigned char	*propvalue;
++ 
++     // get conveted string from property
++     XGetWindowProperty(display_, window, property, 0, 100000,
++ 		       True, AnyPropertyType, &proptype, &propformat,
++ 		       &propsize, &rest, &propvalue);
++     
++     if (proptype == None) {
++ 	// property not exist -- but it's not an error
++ 	return false;
++     }
++     
++     convCTtoEUC((unsigned char*)propvalue,
++ 		(int)propsize,
++ 		(unsigned char*)convertedString);
++     return true;
++ }
++ 
++ boolean KinputRep::CheckProtocols(
++ ) {
++     Atom type;
++     int format;
++     unsigned long nitems;
++     unsigned long bytesafter;
++     unsigned long *data, *saveddata;
++     boolean	ret;
++ 
++     data = NULL;
++     if (XGetWindowProperty(display_, convowner, convatoms->profile,
++ 			   0L, 100L, False,
++ 			   convatoms->type,
++ 			   &type, &format, &nitems,
++ 			   &bytesafter, (unsigned char **)&data)) {
++ 	// Conversion Profile not found
++ 	return false;
++     };
++     if ((format != 32) || (type != convatoms->type)) {
++ 	if (data != NULL) {
++ 	    XFree((char *)data);
++ 	};
++ 	return false;
++     }
++ 
++     ret = false;
++     saveddata = data;
++     while (nitems > 0) {
++ 	unsigned long code = CODE_OF_ATTR(*data);
++ 	unsigned long len  = LENGTH_OF_ATTR(*data);
++ 
++ 	data++;
++ 	nitems--;
++ 	if (nitems < len) {
++ 	    break;
++ 	}
++ 
++ 	switch (code) {
++ 	  case CONVPROF_PROTOCOL_VERSION:
++ 	    if (*data == convatoms->version) {
++ 		ret = true;
++ 	    }
++ 	    break;
++ 	  default:
++ 	    break;
++ 	}
++ 	data += len;
++ 	nitems -= len;
++     }
++     XFree((char *)saveddata);
++ 
++     return ret;
++ }
++ 
++ void KinputRep::SetInputStyle(
++   long	style
++ ) {
++     if (!isKinput2) {
++ 	return;
++     }
++ 
++     unsigned long data[2];
++ 
++     data[0] = CONV_ATTR(CONVATTR_INPUT_STYLE, 1);
++     data[1] = style;
++ 
++     XChangeProperty(display_, window, convatoms->attribute,
++ 		    convatoms->attribute, 32,
++ 		    PropModeReplace, (unsigned char *)data, 2);
++ }
++ 
++ void KinputRep::SetConversionSpot(
++   int	spotx,
++   int	spoty
++ ) {
++     if (!isKinput2) {
++ 	return;
++     }
++ 
++     XEvent	event;
++ 
++     event.xclient.type = ClientMessage;
++     event.xclient.window = convowner;
++     event.xclient.message_type = convatoms->attrnotify;
++     event.xclient.format = 32;
++     event.xclient.data.l[0] = convatoms->owner;
++     event.xclient.data.l[1] = window;
++     event.xclient.data.l[2] = CONV_ATTR(CONVATTR_SPOT_LOCATION, 1);
++     event.xclient.data.l[3] = (spotx << 16) | (spoty & 0xffff);
++     XSendEvent(display_, convowner, False, NoEventMask, &event);
++ }
++ 
++ #endif /* JIV */
+Index: src_x11/xbitmap.c
+diff -c src_x11/xbitmap.c:1.1 src_x11/xbitmap.c:1.2
+*** src_x11/xbitmap.c:1.1	Tue Mar 17 15:53:35 1998
+--- src/IV-X11/xbitmap.c	Tue Mar 24 09:01:38 1998
+***************
+*** 122,128 ****
+--- 122,140 ----
+      rep_ = b;
+      int w, h;
+      int x, y;
++ #ifndef JIV
+      XFontStruct* info = f->rep(d)->font_;
++ #else /* JIV */
++     XFontStruct* info;
++     boolean isEuc;
++     if (f->isComposite() && ((unsigned long)c > 0xff)) {
++ 	info= f->rep2byte(d)->font_;
++ 	isEuc = ((info->min_byte1 > 128) ? true : false);
++     } else {
++ 	info= f->rep(d)->font_;
++     }
++ #endif /* JIV */
++ 
+      if (
+          c >= info->min_char_or_byte2 && c <= info->max_char_or_byte2 &&
+          info->per_char != nil
+***************
+*** 150,157 ****
+--- 162,189 ----
+      XSetForeground(dpy, gc, 0);
+      XFillRectangle(dpy, map, gc, 0, 0, pw, ph);
+      XSetForeground(dpy, gc, 1);
++ #ifndef JIV
+      char ch = char(c);
+      XDrawString(dpy, map, gc, -x, y, &ch, 1);
++ #else /* JIV */
++     if (f->isComposite() && ((unsigned long)c > 0xff)) {
++ 	const CompositeFont* cmpf = f->getCompositeFont();
++ 	unsigned char s[2];
++ 	s[0] = (unsigned char)((unsigned long)c >> 8);
++ 	s[1] = (unsigned char)((unsigned long)c & 0xff);
++ 	if (!isEuc) {
++ 	    s[0] &= 0x7f;
++ 	    s[1] &= 0x7f;
++ 	}
++ 	XDrawString16(dpy, map, gc, -x, y, (XChar2b*)s, 2);
++ 	if (cmpf->displayBold()) {
++ 	    XDrawString16(dpy, map, gc, -x, y - 1, (XChar2b*)s, 2);
++ 	}
++     } else {
++ 	char ch = char(c);
++ 	XDrawString(dpy, map, gc, -x, y, &ch, 1);
++     }
++ #endif /* JIV */
+      if (scale != 1.0) {
+          XImage* source = XGetImage(dpy, map, 0, 0, w, h, 0x01, ZPixmap);
+          XFreePixmap(dpy, map);
+Index: src_x11/xcanvas.c
+diff -c src_x11/xcanvas.c:1.1 src_x11/xcanvas.c:1.2
+*** src_x11/xcanvas.c:1.1	Tue Mar 17 15:53:35 1998
+--- src/IV-X11/xcanvas.c	Tue Mar 24 09:01:38 1998
+***************
+*** 41,46 ****
+--- 41,49 ----
+  #include <IV-X11/xdisplay.h>
+  #include <IV-X11/xfont.h>
+  #include <IV-X11/xraster.h>
++ #ifdef JIV
++ #include <IV-X11/xjivfunc.h>
++ #endif /* JIV */
+  #include <OS/math.h>
+  #include <OS/list.h>
+  #include <OS/table2.h>
+***************
+*** 652,658 ****
+--- 655,665 ----
+          tr->width_ += width;
+          tr->curx_ = x + width;
+          tr->cury_ = y;
++ #ifdef JIV	
++         if (c->text_twobyte_ || ((ch & 0xff00) && f->isComposite())) {
++ #else
+          if (c->text_twobyte_) {
++ #endif /* JIV */	    
+              *cp++ = char((ch & 0xff00) >> 8);
+  	    *cp++ = char(ch & 0xff);
+  	} else if (c->text_reencode_) {
+***************
+*** 1215,1220 ****
+--- 1222,1233 ----
+                  XDrawString16(
+                      dpy, d, gc, t->x0_, t->y0_, (XChar2b*)t->text_, nchars/2
+                  );
++ #ifdef JIV
++             } else if (c.font_->isComposite()) {
++ 		JIVDrawString(dpy, d, gc, c.font_, t->x0_, t->y0_,
++ 			      (unsigned char*)t->text_, nchars,
++ 			      display_);
++ #endif /* JIV */
+              } else {
+                  XDrawString(dpy, d, gc, t->x0_, t->y0_, t->text_, nchars);
+              }
+***************
+*** 1241,1246 ****
+--- 1254,1262 ----
+                  ++count;
+              }
+              t->items_[item].nchars = count;
++ #ifdef JIV
++ 	    XSetFont(dpy, gc, c.xfont_->fid);
++ #endif	    
+              XDrawText(
+                  dpy, d, gc, t->x0_, t->y0_, t->items_, item + 1
+              );
+Index: src_x11/xfont.c
+diff -c src_x11/xfont.c:1.1 src_x11/xfont.c:1.2
+*** src_x11/xfont.c:1.1	Tue Mar 17 15:53:35 1998
+--- src/IV-X11/xfont.c	Tue Mar 24 09:01:38 1998
+***************
+*** 32,37 ****
+--- 32,40 ----
+  #include <IV-X11/Xlib.h>
+  #include <IV-X11/xdisplay.h>
+  #include <IV-X11/xfont.h>
++ #ifdef JIV
++ #include <IV-X11/xjivfunc.h>
++ #endif /* JIV */
+  #include <OS/list.h>
+  #include <OS/math.h>
+  #include <OS/string.h>
+***************
+*** 88,93 ****
+--- 91,100 ----
+      static FontRep* find_rep(FontRepList&, Display*, float);
+      static FontRep* create(Display*, const String&, float);
+      static const Font* new_font(const String&, float, KnownFonts*, FontRep*);
++ #ifdef JIV
++     static const Font* new_font(const String&, float, KnownFonts*,
++ 				FontRep*, FontRep*);
++ #endif /* JIV */
+      static KnownFonts* known(KnownFonts*, const UniqueString&);
+  
+      UniqueString* name_;
+***************
+*** 194,199 ****
+--- 201,210 ----
+      FontRep* r;
+      KnownFonts* k = nil;
+      UniqueString uname(name);
++ #ifdef JIV
++     NullTerminatedString nname(uname);
++     const CompositeFont* cf;
++ #endif /* JIV */
+      if (fonts()->find(k, uname)) {
+  	for (ListItr(FontList) i(k->fonts); i.more(); i.next()) {
+  	    f = i.cur();
+***************
+*** 202,213 ****
+--- 213,251 ----
+  	    }
+  	}
+  
++ #ifndef JIV
+  	r = find_rep(k->fontreps, d, scale);
+  	if (r != nil) {
+  	    return new_font(uname, scale, k, r);
+  	}
++ #else /* JIV */
++ 	if ((cf = CompositeFont::findCompositeFont(nname.string())) == nil) {
++ 	    r = find_rep(k->fontreps, d, scale);
++ 	    if (r != nil) {
++ 		return new_font(uname, scale, k, r);
++ 	    }
++ 	}
++ #endif /* JIV */
+      }
+  
++ #ifdef JIV
++     if ((cf = CompositeFont::findCompositeFont(nname.string())) != nil) {
++ 	const Font* f1;
++ 	const Font* f2;
++ 
++ 	f1 = FontImpl::lookup(d, String(cf->get1ByteFontName()), scale);
++ 	if (f1 == nil) {
++ 	    return nil;
++ 	}
++ 	f2 = FontImpl::lookup(d, String(cf->get2ByteFontName()), scale);
++ 	if (f2 == nil) {
++ 	    return nil;
++ 	}
++ 	k = known(k, uname);
++ 	f = new_font(uname, scale, k, f1->rep(d), f2->rep(d));
++ 	return f;
++     }
++ #endif /* JIV */
+      r = create(d, uname, scale);
+      if (r == nil) {
+  	return nil;
+***************
+*** 280,285 ****
+--- 318,334 ----
+      return f;
+  }
+  
++ #ifdef JIV
++ const Font* FontImpl::new_font(
++     const String& name, float scale, KnownFonts* k,
++     FontRep*, FontRep*
++ ) {
++     Font* f = new Font(name, scale);
++     k->fonts.append(f);
++     return f;
++ }
++ #endif /* JIV */
++ 
+  KnownFonts* FontImpl::known(KnownFonts* old_k, const UniqueString& name) {
+      if (old_k != nil) {
+  	return old_k;
+***************
+*** 314,332 ****
+--- 363,417 ----
+  /** class Font **/
+  
+  Font::Font(const String& name, float scale) {
++ #ifdef JIV
++     const CompositeFont* cf;
++     NullTerminatedString s(name);
++ 
++     if ((cf = CompositeFont::findCompositeFont(s.string())) != nil) {
++ 	cfont = cf;
++ 	impl_ = new FontImpl(String(cf->get1ByteFontName()), scale);
++ 	impl2byte_ = new FontImpl(String(cf->get2ByteFontName()), scale);
++ 	isCompositeFlag = true;
++ 	return;
++     }
++     isCompositeFlag = false;
++     impl2byte_ = nil;
++ #endif /* JIV */
+      impl_ = new FontImpl(name, scale);
+  }
+  
+  Font::Font(const char* name, float scale) {
++ #ifdef JIV
++     const CompositeFont* cf;
++ 
++     if ((cf = CompositeFont::findCompositeFont(name)) != nil) {
++ 	cfont = cf;
++ 	impl_ = new FontImpl(String(cf->get1ByteFontName()), scale);
++ 	impl2byte_ = new FontImpl(String(cf->get2ByteFontName()), scale);
++ 	isCompositeFlag = true;
++ 	return;
++     }
++     impl2byte_ = nil;
++     isCompositeFlag = false;
++ #endif /* JIV */
++ 
+      impl_ = new FontImpl(String(name), scale);
+  }
+  
+  Font::Font(FontImpl* i) {
+      impl_ = i;
++ #ifdef JIV
++     isCompositeFlag = false;
++     impl2byte_ = nil;
++ #endif /* JIV */
+  }
+  
+  Font::~Font() {
+      delete impl_;
++ #ifdef JIV
++     isCompositeFlag = false;
++     impl2byte_ = nil;
++ #endif /* JIV */
+  }
+  
+  void Font::cleanup() {
+***************
+*** 357,363 ****
+--- 442,462 ----
+      return impl_->rep(d);
+  }
+  
++ #ifdef JIV
++ FontRep* Font::rep2byte(Display* d) const {
++     if (!isComposite()) {
++ 	return nil;
++     }
++     return impl2byte_->rep(d);
++ }
++ #endif JIV
++ 
+  const char* Font::name() const {
++ #ifdef JIV
++     if (isComposite()) {
++ 	return cfont->getFontName();
++     }
++ #endif /* JIV */
+      FontRep* f = impl_->default_rep();
+      return f->name_->string();
+  }
+***************
+*** 376,381 ****
+--- 475,502 ----
+      float scale = f->scale_;
+      XFontStruct* xf = f->font_;
+      Display* d = f->display_;
++ #ifdef	JIV
++     if (isComposite()) {
++ 	FontRep* f2 = impl2byte_->default_rep();
++ 	XFontStruct* xf2 = f2->font_;
++ 	b.left_bearing_ = scale *
++ 	    d->to_coord(Math::max(xf->max_bounds.lbearing,
++ 				  xf2->max_bounds.lbearing));
++ 	b.right_bearing_ = scale *
++ 	    d->to_coord(Math::max(xf->max_bounds.rbearing,
++ 				  xf2->max_bounds.rbearing));
++ 	b.width_ = scale *
++ 	    d->to_coord(Math::max(xf->max_bounds.width,
++ 				  xf2->max_bounds.width));
++ 	b.ascent_ = scale * d->to_coord(Math::max(xf->ascent,
++ 						  xf2->ascent));
++ 	b.descent_ = scale * d->to_coord(Math::max(xf->descent,
++ 						   xf2->descent));
++ 	b.font_ascent_ = b.ascent_;
++ 	b.font_descent_ = b.descent_;
++ 	return;
++     }
++ #endif	JIV
+      b.left_bearing_ = scale * d->to_coord(xf->max_bounds.lbearing);
+      b.right_bearing_ = scale * d->to_coord(xf->max_bounds.rbearing);
+      b.width_ = scale * d->to_coord(xf->max_bounds.width);
+***************
+*** 397,402 ****
+--- 518,528 ----
+  	return;
+      }
+      FontRep* f = impl_->default_rep();
++ #ifdef JIV
++     if ((c & 0xff00) && isComposite()) {
++ 	f = impl2byte_->default_rep();
++     }
++ #endif /* JIV */
+      float scale = f->scale_;
+      XFontStruct* xf = f->font_;
+      Display* d = f->display_;
+***************
+*** 422,433 ****
+--- 548,581 ----
+      Display* d = f->display_;
+      XCharStruct c;
+      int dir, asc, des;
++ #ifdef JIV
++     if (isComposite()) {
++ 	c.lbearing = JIVGetLeftBearing(s, len, f, impl2byte_->default_rep());
++ 	c.rbearing = JIVGetRightBearing(s, len, f, impl2byte_->default_rep());
++ 	c.descent = JIVGetDescent(s, len, f, impl2byte_->default_rep());
++ 	c.ascent = JIVGetAscent(s, len, f, impl2byte_->default_rep());
++     } else {
++ #endif JIV
+      XTextExtents(xf, s, len, &dir, &asc, &des, &c);
++ #ifdef JIV
++     }
++ #endif JIV
+      b.left_bearing_ = scale * d->to_coord(-c.lbearing);
+      b.right_bearing_ = scale * d->to_coord(c.rbearing);
+      b.width_ = width(s, len);
+      b.ascent_ = scale * d->to_coord(c.ascent);
+      b.descent_ = scale * d->to_coord(c.descent);
++ #ifdef JIV
++     if (isComposite()) {
++ 	FontRep* f2 = impl2byte_->default_rep();
++ 	XFontStruct* xf2 = f2->font_;
++ 	b.font_ascent_ = scale * d->to_coord(Math::max(xf->ascent,
++ 						       xf2->ascent));
++ 	b.font_descent_ = scale * d->to_coord(Math::max(xf->descent,
++ 							xf2->descent));
++ 	return;
++     }
++ #endif JIV
+      b.font_ascent_ = scale * d->to_coord(xf->ascent);
+      b.font_descent_ = scale * d->to_coord(xf->descent);
+  }
+***************
+*** 437,442 ****
+--- 585,595 ----
+  	return 0;
+      }
+      FontRep* f = impl_->default_rep();
++ #ifdef JIV
++     if ((c & 0xff00) && isComposite()) {
++ 	f = impl2byte_->default_rep();
++     }
++ #endif /* JIV */
+      XChar2b xc2b;
+      xc2b.byte1 = (unsigned char)((c & 0xff00) >> 8);
+      xc2b.byte2 = (unsigned char)(c & 0xff);
+***************
+*** 445,450 ****
+--- 598,609 ----
+  
+  Coord Font::width(const char* s, int len) const {
+      FontRep* f = impl_->default_rep();
++ #ifdef JIV
++     if (isComposite()) {
++ 	short w = JIVGetWidth(s, len, f, impl2byte_->default_rep());
++ 	return f->display_->to_coord(w) * f->scale_;
++     }	
++ #endif /* JIV */
+      return f->scale_ * f->display_->to_coord(XTextWidth(f->font_, s, len));
+  }
+  
+***************
+*** 458,465 ****
+      }
+      FontRep* f = impl_->default_rep();
+      XFontStruct* xf = f->font_;
+      int xoffset = f->display_->to_pixels(Coord(offset * f->scale_));
+!     if (xf->min_bounds.width == xf->max_bounds.width) {
+          cw = xf->min_bounds.width;
+          n = xoffset / cw;
+          coff = xoffset % cw;
+--- 617,634 ----
+      }
+      FontRep* f = impl_->default_rep();
+      XFontStruct* xf = f->font_;
++ #ifdef JIV
++     XFontStruct* xf2 = nil;
++     if (isComposite()) {
++ 	xf2 = impl2byte_->default_rep()->font_;
++     }
++ #endif /* JIV */
+      int xoffset = f->display_->to_pixels(Coord(offset * f->scale_));
+!     if ((xf->min_bounds.width == xf->max_bounds.width)
+! #ifdef JIV
+! 	&& (xf2 == nil)
+! #endif /* JIV */
+! 	) {
+          cw = xf->min_bounds.width;
+          n = xoffset / cw;
+          coff = xoffset % cw;
+***************
+*** 467,473 ****
+--- 636,652 ----
+          w = 0;
+          cw = 0;
+          for (p = s, n = 0; *p != '\0' && n < len; ++p, ++n) {
++ #ifndef JIV
+              cw = XTextWidth(xf, p, 1);
++ #else /* JIV */
++ 	    if (((const unsigned char)(*p) < 0xa1) || (xf2 == nil)) {
++ 		cw = XTextWidth(xf, p, 1);
++ 	    } else {
++ 		cw = XTextWidth16(xf2, (XChar2b*)p, 1);
++ 		p++;
++ 		n++;
++ 	    }
++ #endif /* JIV */
+              w += cw;
+              if (w > xoffset) {
+                  break;
+***************
+*** 749,751 ****
+--- 928,1194 ----
+      scale = (size == best_size) ? 1.0 : float(size)/float(best_size);
+      return true;
+  }
++ 
++ #ifdef JIV
++ /** class CompositeFont **/
++ 
++ declarePtrList(CompositeFontList,CompositeFont);
++ implementPtrList(CompositeFontList,CompositeFont);
++ 
++ static CompositeFontList cflist;
++ 
++ CompositeFont::CompositeFont(const char* fc, const char* f1,
++ 			     const char* f2, const char* style)
++ {
++     CompositeFont*	cf;
++ 
++     compositeFontName = new char[strlen(fc) + 1];
++     strcpy(compositeFontName, fc);
++     fontName1 = new char[strlen(f1) + 1];
++     strcpy(fontName1, f1);
++     fontName2 = new char[strlen(f2) + 1];
++     strcpy(fontName2, f2);
++     displayBoldFlag = false;
++     displayItalicFlag = false;
++     if (style != 0) {
++ 	if (strchr(style, 'b')) {
++ 	    displayBoldFlag = true;
++ 	}
++ 	if (strchr(style, 'i')) {
++ 	    displayItalicFlag = true;
++ 	}
++     }
++ 
++     cf = this;
++     cflist.append(cf);
++ }
++ 
++ CompositeFont::~CompositeFont()
++ {
++     delete compositeFontName;
++     delete fontName1;
++     delete fontName2;
++ 
++     for (long i = 0; i < cflist.count(); i++) {
++ 	CompositeFont* cf = cflist.item(i);
++ 	if (cf == this) {
++ 	    cflist.remove(i);
++ 	    break;
++ 	}
++     }
++ }
++ 
++ const CompositeFont* CompositeFont::findCompositeFont(const char* cfname)
++ {
++     for (long i = 0; i < cflist.count(); i++) {
++ 	CompositeFont* cf = cflist.item(i);
++ 	if (!strcmp(cf->compositeFontName, cfname)) {
++ 	    return cf;
++ 	}
++     }
++     return nil;
++ }
++ 
++ /** class PSCompositeFont **/
++ 
++ class PSCompositeFontRep {
++   public:
++     PSCompositeFontRep(char*, char*, char*);
++     ~PSCompositeFontRep();
++ 
++     static char* preamble;
++ 
++     char* fontname;
++     char* asciiFontname;
++     char* kanjiFontname;
++ };
++ 
++ char* PSCompositeFontRep::preamble;
++ 
++ PSCompositeFontRep::PSCompositeFontRep(
++   char* fn, char* f1, char* f2
++ ) {
++     fontname = fn;
++     asciiFontname = f1;
++     kanjiFontname = f2;
++ }
++ 
++ PSCompositeFontRep::~PSCompositeFontRep()
++ {
++     delete fontname;
++     delete asciiFontname;
++     delete kanjiFontname;
++ }
++ 
++ declarePtrList(PSCompositeFontList,PSCompositeFont);
++ implementPtrList(PSCompositeFontList,PSCompositeFont);
++ 
++ static PSCompositeFontList pscflist;
++ 
++ void PSCompositeFont::setPreamble(const char* p) {
++     if (PSCompositeFontRep::preamble != 0) {
++ 	delete PSCompositeFontRep::preamble;
++     }
++     PSCompositeFontRep::preamble = new char[strlen(p) + 1];
++     strcpy(PSCompositeFontRep::preamble, p);
++ }
++ 
++ const char* PSCompositeFont::getPreamble() {
++     return PSCompositeFontRep::preamble;
++ }
++ 
++ PSCompositeFont::PSCompositeFont(
++   const char* fc, const char* f1, const char* f2
++ ) {
++     PSCompositeFont*	cf;
++     char*	fn;
++     char*	fa;
++     char*	fk;
++ 
++     fn = new char[strlen(fc) + 1];
++     strcpy(fn, fc);
++     fa = new char[strlen(f1) + 1];
++     strcpy(fa, f1);
++     fk = new char[strlen(f2) + 1];
++     strcpy(fk, f2);
++ 
++     rep_ = new PSCompositeFontRep(fn, fa, fk);
++ 
++     cf = this;
++     pscflist.append(cf);
++ }
++ 
++ PSCompositeFont::~PSCompositeFont()
++ {
++     delete rep_;
++ 
++     for (long i = 0; i < pscflist.count(); i++) {
++ 	PSCompositeFont* cf = pscflist.item(i);
++ 	if (cf == this) {
++ 	    pscflist.remove(i);
++ 	    break;
++ 	}
++     }
++ }
++ 
++ const PSCompositeFont* PSCompositeFont::findFont(const char* cfname)
++ {
++     for (long i = 0; i < pscflist.count(); i++) {
++ 	PSCompositeFont* cf = pscflist.item(i);
++ 	if (!strcmp(cf->rep_->fontname, cfname)) {
++ 	    return cf;
++ 	}
++     }
++     return nil;
++ }
++ 
++ const char* PSCompositeFont::getFontName() const {
++     return rep_->fontname;
++ }
++ 
++ const char* PSCompositeFont::getAsciiFontName() const {
++     return rep_->asciiFontname;
++ }
++ 
++ const char* PSCompositeFont::getKanjiFontName() const {
++     return rep_->kanjiFontname;
++ }
++ 
++ /** class PSSlantFont **/
++ 
++ class PSSlantFontRep {
++   public:
++     PSSlantFontRep(char*, char*);
++     ~PSSlantFontRep();
++ 
++     char*	fontname;
++     char*	originalFontname;
++     boolean	printFlag;
++ };
++ 
++ PSSlantFontRep::PSSlantFontRep(
++   char* fn, char* fo
++ ) {
++     fontname = fn;
++     originalFontname = fo;
++     printFlag = false;
++ }
++ 
++ PSSlantFontRep::~PSSlantFontRep()
++ {
++     delete fontname;
++     delete originalFontname;
++ }
++ 
++ declarePtrList(PSSlantFontList,PSSlantFont);
++ implementPtrList(PSSlantFontList,PSSlantFont);
++ 
++ static PSSlantFontList pssflist;
++ 
++ PSSlantFont::PSSlantFont(
++   const char* fc, const char* f1
++ ) {
++     PSSlantFont*	sf;
++     char*	fn;
++     char*	fo;
++ 
++     fn = new char[strlen(fc) + 1];
++     strcpy(fn, fc);
++     fo = new char[strlen(f1) + 1];
++     strcpy(fo, f1);
++ 
++     rep_ = new PSSlantFontRep(fn, fo);
++ 
++     sf = this;
++     pssflist.append(sf);
++ }
++ 
++ PSSlantFont::~PSSlantFont()
++ {
++     delete rep_;
++ 
++     for (long i = 0; i < pssflist.count(); i++) {
++ 	PSSlantFont* sf = pssflist.item(i);
++ 	if (sf == this) {
++ 	    pssflist.remove(i);
++ 	    break;
++ 	}
++     }
++ }
++ 
++ PSSlantFont* PSSlantFont::findFont(const char* sfname)
++ {
++     for (long i = 0; i < pssflist.count(); i++) {
++ 	PSSlantFont* sf = pssflist.item(i);
++ 	if (!strcmp(sf->rep_->fontname, sfname)) {
++ 	    return sf;
++ 	}
++     }
++     return nil;
++ }
++ 
++ void PSSlantFont::resetPrintFlag()
++ {
++     for (long i = 0; i < pssflist.count(); i++) {
++ 	PSSlantFont* sf = pssflist.item(i);
++ 	sf->rep_->printFlag = false;
++     }
++ }
++ 
++ const char* PSSlantFont::getFontName() const {
++     return rep_->fontname;
++ }
++ 
++ const char* PSSlantFont::getOriginalFontName() const {
++     return rep_->originalFontname;
++ }
++ 
++ boolean PSSlantFont::printFlag() {
++     return rep_->printFlag;
++ }
++ 
++ void PSSlantFont::printFlag(boolean t) {
++     rep_->printFlag = t;
++ }
++ 
++ #endif JIV
+Index: src_x11/xjivfunc.c
+diff -c /dev/null src_x11/xjivfunc.c:1.1
+*** /dev/null	Tue Mar 24 09:01:42 1998
+--- src/IV-X11/xjivfunc.c	Tue Mar 24 09:01:38 1998
+***************
+*** 0 ****
+--- 1,492 ----
++ /*
++  * Copyright (c) 1991, 1992 Fujitsu Oita Software Laboratory Limited
++  *
++  * Permission to use, copy, modify, and distribute this software and its
++  * documentation for any purpose is hereby granted without fee, provided
++  * that the above copyright notice and this permission notice appear in
++  * all copies of the software and related documentation, and the name of
++  * Fujitsu Oita Software Laboratory may not be used in any advertising or
++  * publicity relating to the software without specific, prior written
++  * prior permission of Fujitsu Oita Software Laboratory. 
++  * 
++  * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND, 
++  * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY 
++  * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  
++  *
++  * IN NO EVENT SHALL FUJITSU OITA SOFTWARE LABORATORY BE LIABLE FOR ANY
++  * SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR
++  * ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
++  * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY
++  * OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++  * PERFORMANCE OF THIS SOFTWARE.
++  *
++  * Author:  Toshihisa Eto, Fujitsu Oita Software Laboratory Limited, Japan
++  * 	E-Mail: eto@ai.cs.fujitsu.co.jp
++  * 	Nifty:	HBG02665
++  */
++ 
++ #ifdef JIV
++ 
++ #include <InterViews/font.h>
++ #include <IV-X11/Xlib.h>
++ #include <IV-X11/xfont.h>
++ #include <IV-X11/xjivfunc.h>
++ #include <stdio.h>
++ #include <stream.h>
++ 
++ extern short JIVGetLeftBearing(const char* s, int len, FontRep* f1,
++ 			       FontRep* f2)
++ {
++     XCharStruct c;
++     int dir, asc, des;
++     if ((const unsigned char)(*s) < 0x80) {
++ 	XTextExtents(f1->font_, s, len, &dir, &asc, &des, &c);
++     } else {
++ 	XTextExtents16(f2->font_, (XChar2b*)s, len / 2, &dir, &asc, &des, &c);
++     }
++     return c.lbearing;
++ }
++ 
++ 
++ extern short JIVGetRightBearing(const char* s, int len, FontRep* f1,
++ 				FontRep* f2)
++ {
++     XCharStruct c;
++     int dir, asc, des;
++     const unsigned char* p = (const unsigned char*)s;
++     int n;
++     short rb = 0;
++     boolean in2bytechar = false;
++     unsigned char* ss = new unsigned char[len + 1];
++     unsigned char* ssp = ss;
++     int sl = 0;
++ 
++     for (n = 0; n < len; n++) {
++ 	if (*p < 0x80) {
++ 	    /* in one-byte character */
++ 	    if (in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 				   &dir, &asc, &des, &c);
++ 		    rb += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = false;
++ 	    }
++ 	    *ssp = *p;
++ 	    ssp++, sl++, p++;
++ 	} else {
++ 	    /* in two-byte character */
++ 	    if (!in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents(f1->font_, (const char*)ss, sl,
++ 				 &dir, &asc, &des, &c);
++ 		    rb += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = true;
++ 	    }
++ 	    *ssp = *p;
++ 	    *(ssp + 1) = *(p + 1);
++ 	    ssp +=2, sl += 2, p += 2, n++;
++ 	}
++     }
++     if (in2bytechar) {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 			   &dir, &asc, &des, &c);
++ 	    rb += c.rbearing;
++ 	}
++     } else {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents(f1->font_, (const char*)ss, sl,
++ 			 &dir, &asc, &des, &c);
++ 	    rb += c.rbearing;
++ 	}
++     }
++     return rb;
++ }
++ 
++ extern short JIVGetWidth(const char* s, int len, FontRep* f1,
++ 			 FontRep* f2)
++ {
++     XCharStruct c;
++     int dir, asc, des;
++     const unsigned char* p = (const unsigned char*)s;
++     int n;
++     short w = 0;
++     boolean in2bytechar = false;
++     unsigned char* ss = new unsigned char[len + 1];
++     unsigned char* ssp = ss;
++     int sl = 0;
++ 
++     for (n = 0; n < len; n++) {
++ 	if (*p < 0x80) {
++ 	    /* in one-byte character */
++ 	    if (in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 				   &dir, &asc, &des, &c);
++ 		    w += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = false;
++ 	    }
++ 	    *ssp = *p;
++ 	    ssp++, sl++, p++;
++ 	} else {
++ 	    /* in two-byte character */
++ 	    if (!in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents(f1->font_, (const char*)ss, sl,
++ 				 &dir, &asc, &des, &c);
++ 		    w += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = true;
++ 	    }
++ 	    *ssp = *p;
++ 	    *(ssp + 1) = *(p + 1);
++ 	    ssp +=2, sl += 2, p += 2, n++;
++ 	}
++     }
++     if (in2bytechar) {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 			   &dir, &asc, &des, &c);
++ 	    w += c.width;
++ 	}
++     } else {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents(f1->font_, (const char*)ss, sl,
++ 			 &dir, &asc, &des, &c);
++ 	    w += c.width;
++ 	}
++     }
++     return w;
++ }
++ 
++ extern short JIVGetAscent(const char* s, int len, FontRep* f1,
++ 			  FontRep* f2)
++ {
++     XCharStruct c;
++     int dir, asc, des;
++     const unsigned char* p = (const unsigned char*)s;
++     int n;
++     short a = 0;
++     boolean in2bytechar = false;
++     unsigned char* ss = new unsigned char[len + 1];
++     unsigned char* ssp = ss;
++     int sl = 0;
++ 
++     for (n = 0; n < len; n++) {
++ 	if (*p < 0x80) {
++ 	    /* in one-byte character */
++ 	    if (in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 				   &dir, &asc, &des, &c);
++ 		    if (c.ascent > a) {
++ 			a = c.ascent;
++ 		    }
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = false;
++ 	    }
++ 	    *ssp = *p;
++ 	    ssp++, sl++, p++;
++ 	} else {
++ 	    /* in two-byte character */
++ 	    if (!in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents(f1->font_, (const char*)ss, sl,
++ 				 &dir, &asc, &des, &c);
++ 		    if (c.ascent > a) {
++ 			a = c.ascent;
++ 		    }
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = true;
++ 	    }
++ 	    *ssp = *p;
++ 	    *(ssp + 1) = *(p + 1);
++ 	    ssp +=2, sl += 2, p += 2, n++;
++ 	}
++     }
++     if (in2bytechar) {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 			   &dir, &asc, &des, &c);
++ 	    if (c.ascent > a) {
++ 		a = c.ascent;
++ 	    }
++ 	}
++     } else {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents(f1->font_, (const char*)ss, sl,
++ 			 &dir, &asc, &des, &c);
++ 	    if (c.ascent > a) {
++ 		a = c.ascent;
++ 	    }
++ 	}
++     }
++     return a;
++ }
++ 
++ extern short JIVGetDescent(const char* s, int len, FontRep* f1,
++ 			   FontRep* f2)
++ {
++     XCharStruct c;
++     int dir, asc, des;
++     const unsigned char* p = (const unsigned char*)s;
++     int n;
++     short d = 0;
++     boolean in2bytechar = false;
++     unsigned char* ss = new unsigned char[len + 1];
++     unsigned char* ssp = ss;
++     int sl = 0;
++     
++     for (n = 0; n < len; n++) {
++ 	if (*p < 0x80) {
++ 	    /* in one-byte character */
++ 	    if (in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 				   &dir, &asc, &des, &c);
++ 		    if (c.ascent > d) {
++ 			d = c.descent;
++ 		    }
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = false;
++ 	    }
++ 	    *ssp = *p;
++ 	    ssp++, sl++, p++;
++ 	} else {
++ 	    /* in two-byte character */
++ 	    if (!in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XTextExtents(f1->font_, (const char*)ss, sl,
++ 				 &dir, &asc, &des, &c);
++ 		    if (c.ascent > d) {
++ 			d = c.descent;
++ 		    }
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = true;
++ 	    }
++ 	    *ssp = *p;
++ 	    *(ssp + 1) = *(p + 1);
++ 	    ssp +=2, sl += 2, p += 2, n++;
++ 	}
++     }
++     if (in2bytechar) {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 			   &dir, &asc, &des, &c);
++ 	    if (c.ascent > d) {
++ 		d = c.descent;
++ 	    }
++ 	}
++     } else {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XTextExtents(f1->font_, (const char*)ss, sl,
++ 			 &dir, &asc, &des, &c);
++ 	    if (c.ascent > d) {
++ 		d = c.descent;
++ 	    }
++ 	}
++     }
++     return d;
++ }
++ 
++ void JIVDrawString(XDisplay *dpy, XDrawable d, GC gc, const Font* f,
++ 		   int x, int y, unsigned char* text, int index,
++ 		   Display* ivd)
++ {
++     XCharStruct c;
++     int dir, asc, des;
++     const unsigned char* p = (const unsigned char*)text;
++     int n;
++     boolean in2bytechar = false;
++     unsigned char* ss = new unsigned char[index + 1];
++     unsigned char* ssp = ss;
++     int sl = 0;
++     FontRep* f1 = f->rep(ivd);
++     FontRep* f2 = f->rep2byte(ivd);
++     boolean isEuc = ((f2->font_->min_byte1 > 128) ? true : false);
++     const CompositeFont* cmpf = f->getCompositeFont();
++ 
++     for (n = 0; n < index; n++) {
++ 	if (*p < 0x80) {
++ 	    /* in one-byte character */
++ 	    if (in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XSetFont(dpy, gc, f2->font_->fid);
++ 		    XDrawString16(dpy, d, gc, x, y, (XChar2b*)ss, sl / 2);
++ 		    if (cmpf->displayBold()) {
++ 			XDrawString16(dpy, d, gc, x, y - 1,
++ 				      (XChar2b*)ss, sl / 2);
++ 		    }
++ 		    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 				   &dir, &asc, &des, &c);
++ 		    x += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = false;
++ 	    }
++ 	    *ssp = *p;
++ 	    ssp++, sl++, p++;
++ 	} else {
++ 	    /* in two-byte character */
++ 	    if (!in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XSetFont(dpy, gc, f1->font_->fid);
++ 		    XDrawString(dpy, d, gc, x, y, (const char*)ss, sl);
++ 		    XTextExtents(f1->font_, (const char*)ss, sl,
++ 				 &dir, &asc, &des, &c);
++ 		    x += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = true;
++ 	    }
++ 	    if (isEuc) {
++ 		*ssp = *p;
++ 		*(ssp + 1) = *(p + 1);
++ 	    } else {
++ 		*ssp = *p & 0x7f;
++ 		*(ssp + 1) = *(p + 1) & 0x7f;
++ 	    }
++ 	    ssp +=2, sl += 2, p += 2, n++;
++ 	}
++     }
++     if (in2bytechar) {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XSetFont(dpy, gc, f2->font_->fid);
++ 	    XDrawString16(dpy, d, gc, x, y, (XChar2b*)ss, sl / 2);
++ 	    if (cmpf->displayBold()) {
++ 		XDrawString16(dpy, d, gc, x, y - 1, (XChar2b*)ss, sl / 2);
++ 	    }
++ 	}
++     } else {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XSetFont(dpy, gc, f1->font_->fid);
++ 	    XDrawString(dpy, d, gc, x, y, (const char*)ss, sl);
++ 	}
++     }
++ }
++ 
++ void JIVDrawImageString(XDisplay *dpy, XDrawable d, GC gc, const Font* f,
++ 		   int x, int y, unsigned char* text, int index,
++ 		   Display* ivd)
++ {
++     XCharStruct c;
++     int dir, asc, des;
++     const unsigned char* p = (const unsigned char*)text;
++     int n;
++     boolean in2bytechar = false;
++     unsigned char* ss = new unsigned char[index + 1];
++     unsigned char* ssp = ss;
++     int sl = 0;
++     FontRep* f1 = f->rep(ivd);
++     FontRep* f2 = f->rep2byte(ivd);
++     boolean isEuc = ((f2->font_->min_byte1 > 128) ? true : false);
++     const CompositeFont* cmpf = f->getCompositeFont();
++ 
++     for (n = 0; n < index; n++) {
++ 	if (*p < 0x80) {
++ 	    /* in one-byte character */
++ 	    if (in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XSetFont(dpy, gc, f2->font_->fid);
++ 		    XDrawImageString16(dpy, d, gc, x, y, (XChar2b*)ss, sl / 2);
++ 		    if (cmpf->displayBold()) {
++ 			XDrawImageString16(dpy, d, gc, x, y - 1,
++ 					   (XChar2b*)ss, sl / 2);
++ 		    }
++ 		    XTextExtents16(f2->font_, (XChar2b*)ss, sl / 2,
++ 				   &dir, &asc, &des, &c);
++ 		    x += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = false;
++ 	    }
++ 	    *ssp = *p;
++ 	    ssp++, sl++, p++;
++ 	} else {
++ 	    /* in two-byte character */
++ 	    if (!in2bytechar) {
++ 		if (sl > 0) {
++ 		    *ssp = '\0';
++ 		    XSetFont(dpy, gc, f1->font_->fid);
++ 		    XDrawImageString(dpy, d, gc, x, y, (const char*)ss, sl);
++ 		    XTextExtents(f1->font_, (const char*)ss, sl,
++ 				 &dir, &asc, &des, &c);
++ 		    x += c.width;
++ 		    ssp = ss;
++ 		    sl = 0;
++ 		}
++ 		in2bytechar = true;
++ 	    }
++ 	    if (isEuc) {
++ 		*ssp = *p;
++ 		*(ssp + 1) = *(p + 1);
++ 	    } else {
++ 		*ssp = *p & 0x7f;
++ 		*(ssp + 1) = *(p + 1) & 0x7f;
++ 	    }
++ 	    ssp +=2, sl += 2, p += 2, n++;
++ 	}
++     }
++     if (in2bytechar) {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XSetFont(dpy, gc, f2->font_->fid);
++ 	    XDrawImageString16(dpy, d, gc, x, y, (XChar2b*)ss, sl / 2);
++ 	    if (cmpf->displayBold()) {
++ 		XDrawImageString16(dpy, d, gc, x, y - 1,
++ 				   (XChar2b*)ss, sl / 2);
++ 	    }
++ 	}
++     } else {
++ 	if (sl > 0) {
++ 	    *ssp = '\0';
++ 	    XSetFont(dpy, gc, f1->font_->fid);
++ 	    XDrawImageString(dpy, d, gc, x, y, (const char*)ss, sl);
++ 	}
++     }
++ }
++ 
++ #endif /* JIV */
+Index: src_x11/xwindow.c
+diff -c src_x11/xwindow.c:1.1 src_x11/xwindow.c:1.2
+*** src_x11/xwindow.c:1.1	Tue Mar 17 15:53:36 1998
+--- src/IV-X11/xwindow.c	Tue Mar 24 09:01:39 1998
+***************
+*** 1805,1810 ****
+--- 1805,1813 ----
+      if (s->value_is_on("synchronous")) {
+  	XSynchronize(d.display_, True);
+      }
++ #ifdef JIV
++     s->initCompositeFont();
++ #endif /* JIV */
+  }
+      
+  Style* Display::style() const { return rep()->style_; }
+***************
+*** 1950,1955 ****
+--- 1953,1961 ----
+  	return false;
+      }
+      XNextEvent(dpy, &xe);
++ #ifdef JIV			/* 12 Jan 1992 eto@ai.cs.fujitsu.co.jp */
++     event.eventType = NullEvent;
++ #endif /* JIV */
+      e.clear();
+      e.window_ = WindowRep::find(xe.xany.window, d->wtable_);
+      if (e.window_ != nil) {
+Index: Unidraw/catcmds.c
+diff -c Unidraw/catcmds.c:1.1 Unidraw/catcmds.c:1.2
+*** Unidraw/catcmds.c:1.1	Tue Mar 17 15:54:48 1998
+--- src/Unidraw/catcmds.c	Tue Mar 24 09:01:56 1998
+***************
+*** 48,53 ****
+--- 48,61 ----
+  #include <stream.h>
+  #include <string.h>
+  
++ #ifdef JIV_EXTEND
++ static const char* tmpLabel;
++ 
++ #define getLabel(attr, default) \
++     (((tmpLabel = unidraw->GetCatalog()->GetAttribute(attr)) != NULL) ? \
++      tmpLabel : default)
++ #endif
++ 
+  /*****************************************************************************/
+  
+  static void UpdateCompNameVars () {
+***************
+*** 85,91 ****
+--- 93,103 ----
+      ModifStatusVar* mv = (ModifStatusVar*) ed->GetState("ModifStatusVar");
+  
+      if (mv != nil && Writable(mv->GetComponent()) && mv->GetModifStatus()) {
++ #ifndef JIV_EXTEND
+          ConfirmDialog dialog("Save changes?");
++ #else
++         ConfirmDialog dialog(getLabel("MEndConfirm", "Save changes?"));
++ #endif
+  
+          ed->InsertDialog(&dialog);
+          char resp = dialog.Confirm();
+***************
+*** 216,224 ****
+                  delete root;
+  
+              } else {
+                  ConfirmDialog dialog(
+!                     "Couldn't revert! (File nonexistent?)", "Save changes?"
+                  );
+                  ed->InsertDialog(&dialog);
+                  char confirmation = dialog.Confirm();
+                  ed->RemoveDialog(&dialog);
+--- 228,244 ----
+                  delete root;
+  
+              } else {
++ #ifndef JIV_EXTEND
++                 ConfirmDialog dialog(
++                     "Couldn't revert! (File nonexistent?)",
++ 		    "Save changes?"
++                 );
++ #else
+                  ConfirmDialog dialog(
+!                     "Couldn't revert! (File nonexistent?)",
+! 		    getLabel("MEndConfirm", "Save changes?")
+                  );
++ #endif
+                  ed->InsertDialog(&dialog);
+                  char confirmation = dialog.Confirm();
+                  ed->RemoveDialog(&dialog);
+***************
+*** 281,287 ****
+  	char buf[CHARBUFSIZE];
+  	const char* domain = unidraw->GetCatalog()->GetAttribute("domain");
+  	domain = (domain == nil) ? "component" : domain;
+! 	sprintf(buf, "Select a %s to open:", domain);
+  	style->attribute("caption", "");
+  	style->attribute("subcaption", buf);
+      } else {
+--- 301,311 ----
+  	char buf[CHARBUFSIZE];
+  	const char* domain = unidraw->GetCatalog()->GetAttribute("domain");
+  	domain = (domain == nil) ? "component" : domain;
+! #ifndef JIV_EXTEND
+!         sprintf(buf, "Select a %s to open:", domain);
+! #else
+!         sprintf(buf, getLabel("MOpen", "Select a %s to open:"), domain);
+! #endif
+  	style->attribute("caption", "");
+  	style->attribute("subcaption", buf);
+      } else {
+***************
+*** 368,374 ****
+--- 392,403 ----
+              char subtitle[CHARBUFSIZE];
+              const char* domain = unidraw->GetCatalog()->GetAttribute("domain");
+              domain = (domain == nil) ? "component" : domain;
++ #ifndef JIV_EXTEND
+              sprintf(subtitle, "Save this %s as:", domain);
++ #else
++             sprintf(subtitle, getLabel("MSaveAs", "Save this %s as:"),
++ 		    domain);
++ #endif
+  
+  	    Style* s = new Style(Session::instance()->style());
+  	    s->attribute("caption", title);
+***************
+*** 417,423 ****
+--- 446,456 ----
+      char buf[CHARBUFSIZE];
+      const char* domain = unidraw->GetCatalog()->GetAttribute("domain");
+      domain = (domain == nil) ? "component" : domain;
++ #ifndef JIV_EXTEND
+      sprintf(buf, "Save this %s as:", domain);
++ #else
++     sprintf(buf, getLabel("MSaveAs", "Save this %s as:"), domain);
++ #endif
+  
+      boolean reset_caption = false;
+      Style* style = new Style(Session::instance()->style());
+Index: Unidraw/dialogs.c
+diff -c Unidraw/dialogs.c:1.1 Unidraw/dialogs.c:1.2
+*** Unidraw/dialogs.c:1.1	Tue Mar 17 15:54:50 1998
+--- src/Unidraw/dialogs.c	Tue Mar 24 09:01:57 1998
+***************
+*** 27,32 ****
+--- 27,36 ----
+  #include <Unidraw/dialogs.h>
+  #include <Unidraw/globals.h>
+  #include <Unidraw/iterator.h>
++ #ifdef JIV_EXTEND
++ #include <Unidraw/unidraw.h>
++ #include <Unidraw/catalog.h>
++ #endif
+  
+  #include <IV-2_6/InterViews/adjuster.h>
+  #include <IV-2_6/InterViews/border.h>
+***************
+*** 48,53 ****
+--- 52,65 ----
+  #include <stdlib.h>
+  #include <string.h>
+  
++ #ifdef JIV_EXTEND
++ static const char* tmpLabel;
++ 
++ #define getLabel(attr, default) \
++     (((tmpLabel = unidraw->GetCatalog()->GetAttribute(attr)) != NULL) ? \
++      tmpLabel : default)
++ #endif
++ 
+  /*****************************************************************************/
+  
+  static void ChangeMsg (const char* name, MarginFrame* frame) {
+***************
+*** 148,154 ****
+              new VGlue(space),
+              new HBox(
+                  new HGlue,
+!                 new PushButton("  OK  ", state, 1),
+                  new HGlue
+              )
+          ), space, space/2, 0
+--- 160,172 ----
+              new VGlue(space),
+              new HBox(
+                  new HGlue,
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "  OK  ",
+! #else
+! 			       getLabel("BOK", "  OK  "),
+! #endif
+! 			       state, 1),
+                  new HGlue
+              )
+          ), space, space/2, 0
+***************
+*** 197,207 ****
+              new VGlue(space),
+              new HBox(
+                  new HGlue,
+!                 new PushButton("  Yes  ", state, 'y'),
+                  new HGlue(space, 0),
+!                 new PushButton("  No  ", state, 'n'),
+                  new HGlue(space, 0), 
+!                 new PushButton("Cancel", state, '\007'),
+                  new HGlue
+              )
+          ), space, space/2, 0
+--- 215,243 ----
+              new VGlue(space),
+              new HBox(
+                  new HGlue,
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "  Yes  ",
+! #else
+! 			       getLabel("BYes", "  Yes  "),
+! #endif
+! 			       state, 'y'),
+                  new HGlue(space, 0),
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "  No  ",
+! #else
+! 			       getLabel("BNo", "  No  "),
+! #endif
+! 			       state, 'n'),
+                  new HGlue(space, 0), 
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "Cancel",
+! #else
+! 			       getLabel("BCancel", "Cancel"),
+! #endif
+! 			       state, '\007'),
+                  new HGlue
+              )
+          ), space, space/2, 0
+***************
+*** 301,307 ****
+              new HBox(
+                  new VGlue(space, 0),
+                  new HGlue,
+!                 new PushButton("Cancel", state, '\007'),
+                  new HGlue(space, 0),
+                  new PushButton(acptlbl, state, '\r')
+              )
+--- 337,349 ----
+              new HBox(
+                  new VGlue(space, 0),
+                  new HGlue,
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "Cancel",
+! #else
+! 			       getLabel("BCancel", "Cancel"),
+! #endif
+! 			       state, '\007'),
+                  new HGlue(space, 0),
+                  new PushButton(acptlbl, state, '\r')
+              )
+***************
+*** 337,347 ****
+--- 379,397 ----
+      if (print_cmd == nil) {
+          const char* printer_name = getenv("PRINTER");
+  
++ #ifndef IV_FIX
+          if (printer_name == nil) {
+              printer_name = "<printer name>";
+          }
+  
+          sprintf(buf, "lpr -P%s", printer_name);
++ #else
++         if (printer_name != nil) {
++ 	    sprintf(buf, "lpr -P%s", printer_name);
++         } else {
++ 	    sprintf(buf, "lpr");
++ 	}
++ #endif
+          print_cmd = buf;
+      }
+      return print_cmd;
+***************
+*** 355,361 ****
+--- 405,415 ----
+      _to_printer = -1;
+      _dest = new PrintBS(this, to_printer);
+  
++ #ifndef JIV_EXTEND
+      FileChooser::Init("", "Generate PostScript and");
++ #else
++     FileChooser::Init("", getLabel("MPrint1", "Generate PostScript and"));
++ #endif
+      Insert(Interior());
+  
+      ToPrinter(to_printer);
+***************
+*** 416,425 ****
+--- 470,487 ----
+                  new HGlue(space, 0),
+                  new VBox(
+                      new VGlue(space/3, 0),
++ #ifndef JIV_EXTEND
+                      new RadioButton(
+                          "send to printer via a command, or ", _dest, true
+                      ),
+                      new VGlue(space/3, 0),
++ #else
++                     new RadioButton(
++                         getLabel("MPrint2",
++ 				 "send to printer via a command, or "),
++ 			_dest, true
++                     ),
++ #endif
+                      new RadioButton("save in file:", _dest, int(false))
+                  )
+              ),
+***************
+*** 432,440 ****
+              ),
+              new HBox(
+                  new HGlue,
+!                 new PushButton("Cancel", state, '\007'),
+!                 new HGlue(space, 0),
+!                 new PushButton("  OK  ", state, '\r')
+              )
+          ), space, space/2, 0
+      );
+--- 494,514 ----
+              ),
+              new HBox(
+                  new HGlue,
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "Cancel",
+! #else
+! 			       getLabel("BCancel", "Cancel"),
+! #endif
+! 			       state, '\007'),
+! 		new HGlue(space, 0),
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "  OK  ",
+! #else
+! 			       getLabel("BOK", "  OK  "),
+! #endif
+! 			       state, '\r')
+              )
+          ), space, space/2, 0
+      );
+***************
+*** 443,449 ****
+  /*****************************************************************************/
+  
+  GridDialog::GridDialog () : BasicDialog(
+!     new ButtonState, "", "Enter X and Y grid spacing:"
+  ) {
+      _medit = new MatchEditor(state, "9999999999999999999");
+      _medit->Message("");
+--- 517,528 ----
+  /*****************************************************************************/
+  
+  GridDialog::GridDialog () : BasicDialog(
+!     new ButtonState, "",
+! #ifndef JIV_EXTEND
+!     "Enter X and Y grid spacing:"
+! #else
+!     getLabel("MGridSpacing", "Enter X and Y grid spacing:")
+! #endif
+  ) {
+      _medit = new MatchEditor(state, "9999999999999999999");
+      _medit->Message("");
+***************
+*** 513,521 ****
+              new VGlue(space),
+              new HBox(
+                  new HGlue,
+!                 new PushButton("Cancel", state, '\007'),
+  		new HGlue(space, 0),
+!                 new PushButton("  OK  ", state, '\r')
+              )
+          ), space, space/2, 0
+      );
+--- 592,612 ----
+              new VGlue(space),
+              new HBox(
+                  new HGlue,
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "Cancel",
+! #else
+! 			       getLabel("BCancel", "Cancel"),
+! #endif
+! 			       state, '\007'),
+  		new HGlue(space, 0),
+!                 new PushButton(
+! #ifndef JIV_EXTEND
+! 			       "  OK  ",
+! #else
+! 			       getLabel("BOK", "  OK  "),
+! #endif
+! 			       state, '\r')
+              )
+          ), space, space/2, 0
+      );
+Index: Unidraw/import.c
+diff -c Unidraw/import.c:1.1 Unidraw/import.c:1.2
+*** Unidraw/import.c:1.1	Tue Mar 17 15:54:51 1998
+--- src/Unidraw/import.c	Tue Mar 24 09:01:57 1998
+***************
+*** 57,62 ****
+--- 57,70 ----
+  #include <stdio.h>
+  #include <string.h>
+  
++ #ifdef JIV_EXTEND
++ static const char* tmpLabel;
++ 
++ #define getLabel(attr, default) \
++     (((tmpLabel = unidraw->GetCatalog()->GetAttribute(attr)) != NULL) ? \
++      tmpLabel : default)
++ #endif
++ 
+  /*****************************************************************************/
+  
+  static int hexmap[] = {
+***************
+*** 236,242 ****
+--- 244,255 ----
+      boolean reset_caption = false;
+      if (chooser_ == nil) {
+  	style = new Style(Session::instance()->style());
++ #ifndef JIV_EXTEND
+  	style->attribute("subcaption", "Import graphic from file:");
++ #else
++ 	style->attribute("subcaption",
++ 			 getLabel("MImport", "Import graphic from file:"));
++ #endif
+  	style->attribute("open", "Import");
+  	chooser_ = DialogKit::instance()->file_chooser(".", style);
+  	Resource::ref(chooser_);
+Index: Unidraw/manips.c
+diff -c Unidraw/manips.c:1.1 Unidraw/manips.c:1.2
+*** Unidraw/manips.c:1.1	Tue Mar 17 15:54:52 1998
+--- src/Unidraw/manips.c	Tue Mar 24 09:01:57 1998
+***************
+*** 43,48 ****
+--- 43,55 ----
+  
+  #include <IV-2_6/_enter.h>
+  
++ #ifdef JIV
++ #include <InterViews/canvas.h>
++ #include <InterViews/kinput.h>
++ #undef Coord
++ #define Coord _lib_iv2_6(Coord)
++ #endif /* JIV */
++ 
+  #include <ctype.h>
+  #include <math.h>
+  #include <stdlib.h>
+***************
+*** 64,71 ****
+  inline boolean ManipList::manipulating () { return _manipulating; }
+  inline void ManipList::manipulating (boolean m) { _manipulating = m; }
+  
+! /****************************************************************************/
+  
+  ManipGroup::ManipGroup (Viewer* v, Tool* t) {
+      _kids = new ManipList;
+      _viewer = v;
+--- 71,110 ----
+  inline boolean ManipList::manipulating () { return _manipulating; }
+  inline void ManipList::manipulating (boolean m) { _manipulating = m; }
+  
+! #ifdef JIV		/* 12 Jan 1992 eto@ai.cs.fujitsu.co.jp */
+! #include <InterViews/clthandler.h>
+! class KinputHandler : public ClientMessageHandler {
+!   public:
+!     KinputHandler(Kinput*, TextManip*);
+!     ~KinputHandler(){;};
+! 
+!     boolean event(Event&);
+!     boolean handle_p(const Event&);
+!   private:
+!     Kinput* kinput;
+!     TextManip* textmanip;
+! };
+! 
+! KinputHandler::KinputHandler(Kinput* k, TextManip* t) {
+!     kinput = k;
+!     textmanip = t;
+! }
+! 
+! boolean KinputHandler::handle_p(const Event& ev) {
+!     return kinput->IsKinputEvent(ev);
+! }
+! 
+! boolean KinputHandler::event(Event& ev) {
+!     if (kinput->Handle(ev)) {
+! 	/* Hundle converted string */
+! 	const char* convString;
+! 	convString = kinput->GetConvertedString();
+! 	textmanip->InsertText(convString, strlen(convString));
+!     }
+! }
+! #endif /* JIV */
+  
++ /****************************************************************************/
+  ManipGroup::ManipGroup (Viewer* v, Tool* t) {
+      _kids = new ManipList;
+      _viewer = v;
+***************
+*** 487,492 ****
+--- 526,535 ----
+      _multiline = multiline;
+      _tool = t;
+      _dot = _mark = 0;
++ #ifdef JIV
++     kinput = nil;
++     khandler = nil;
++ #endif /* JIV */
+      InitTextDisplay(sample, samplen);
+  }
+  
+***************
+*** 509,514 ****
+--- 552,564 ----
+  TextManip::~TextManip () { 
+      delete _text;
+      delete _display;
++ #ifdef JIV
++     if (kinput != nil) {
++ 	delete kinput;
++ 	GetViewer()->ResetClientMessageHandler(khandler);
++ 	delete khandler;
++     }
++ #endif JIV
+      Unref(_painter);
+  }
+  
+***************
+*** 609,614 ****
+--- 659,670 ----
+  
+      } else if (e.eventType == UpEvent) {
+          _selecting = false;
++ #ifdef JIV			/* patch by eto@ai.cs.fujitsu.co.jp */
++     } else if (e.eventType == ClientEvent) {
++ 	khandler->event(e);
++     } else if (e.eventType == PropertyEvent) {
++ 	khandler->event(e);
++ #endif /* JIV */
+      }
+      return manipulating;
+  }
+***************
+*** 643,649 ****
+--- 699,711 ----
+          case '\177':  DeleteCharacter(-1); break;
+          case '\011':  InsertCharacter('\t'); break;
+          case '\015':  if (_multiline) InsertCharacter('\n'); break;
++ #ifdef JIV
++         case '\012':  if (_multiline) InsertCharacter('\n'); break;
++ #endif /* JIV */
+          case '\033':  manipulating = false; break;
++ #ifdef JIV
++         case '\034':  BeginConversion(); break;		/* ^\ */
++ #endif /* JIV */
+          default:
+              if (!iscntrl(c & 0x7f)) {
+                  InsertCharacter(c);
+***************
+*** 683,693 ****
+--- 745,760 ----
+          }
+      }
+      Select(_dot + count);
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::DeleteText (int count) {
+      int d = _dot;
+      int c = count;
++ #ifndef JIV
+      while (c > 0) {
+          d = _text->NextCharacter(d);
+          --c;
+***************
+*** 696,701 ****
+--- 763,789 ----
+          _dot = _text->PreviousCharacter(_dot);
+          ++c;
+      }
++ #else /* JIV */
++     if (c > 0) {
++ 	while (c > 0) {
++ 	    if ((unsigned char)(*(_text->Text(d))) >= 0xa1) {
++ 		d = _text->NextCharacter(d);
++ 		--c;
++ 	    }
++ 	    d = _text->NextCharacter(d);
++ 	    --c;
++ 	}
++     } else {
++ 	while (c < 0) {
++ 	    _dot = _text->PreviousCharacter(_dot);
++ 	    ++c;
++ 	    if ((unsigned char)(*(_text->Text(_dot))) >= 0xa1) {
++ 		_dot = _text->PreviousCharacter(_dot);
++ 		++c;
++ 	    }
++ 	}
++     }
++ #endif /* JIV */
+      count = d - _dot;
+      int sline = _text->LineNumber(_dot);
+      int fline = _text->LineNumber(d);
+***************
+*** 710,734 ****
+--- 798,842 ----
+          _display->ReplaceText(sline, _text->Text(bol, eol), eol-bol);
+      }
+      Select(_dot);
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::DeleteLine () {
+      Select(_text->BeginningOfLine(_mark), _text->BeginningOfNextLine(_mark));
+      DeleteSelection();
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::DeleteSelection () {
+      if (_mark != _dot) {
+          DeleteText(_mark - _dot);
+      }
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::BeginningOfSelection () {
+      Select(min(_mark, _dot));
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::EndOfSelection () {
+      Select(max(_mark, _dot));
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::BeginningOfWord () {
+***************
+*** 737,742 ****
+--- 845,854 ----
+      } else {
+          Select(_text->BeginningOfWord(_dot));
+      }
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::EndOfWord () {
+***************
+*** 745,750 ****
+--- 857,866 ----
+      } else {
+          Select(_text->EndOfWord(_dot));
+      }
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::BeginningOfLine () {
+***************
+*** 753,758 ****
+--- 869,878 ----
+      } else {
+          Select(_text->BeginningOfLine(_dot));
+      }
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::EndOfLine () {
+***************
+*** 761,774 ****
+--- 881,906 ----
+      } else {
+          Select(_text->EndOfLine(_dot));
+      }
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::BeginningOfText () {
+      Select(_text->BeginningOfText());
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::EndOfText () {
+      Select(_text->EndOfText());
++ 
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::ForwardCharacter (int count) {
+***************
+*** 777,787 ****
+--- 909,928 ----
+      } else {
+          int d = _dot;
+          while (count > 0) {
++ #ifdef JIV
++ 	    if ((unsigned char)(*(_text->Text(d))) >= 0xa1) {
++ 		d = _text->NextCharacter(d);
++ 		--count;
++ 	    }
++ #endif /* JIV */
+              d = _text->NextCharacter(d);
+              --count;
+          }
+          Select(d);
+      }
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::BackwardCharacter (int count) {
+***************
+*** 792,800 ****
+--- 933,950 ----
+          while (count > 0) {
+              d = _text->PreviousCharacter(d);
+              --count;
++ #ifdef JIV
++ 	    if ((unsigned char)(*(_text->Text(d))) >= 0xa1) {
++ 		d = _text->PreviousCharacter(d);
++ 		--count;
++ 	    }
++ #endif /* JIV */
+          }
+          Select(d);
+      }
++ #ifdef JIV
++     SetConversionSpot();
++ #endif /* JIV */
+  }
+  
+  void TextManip::ForwardLine (int count) {
+***************
+*** 808,813 ****
+--- 958,966 ----
+          }
+          Select(d);
+      }
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::BackwardLine (int count) {
+***************
+*** 821,826 ****
+--- 974,982 ----
+          }
+          Select(d);
+      }
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::ForwardWord (int count) {
+***************
+*** 834,839 ****
+--- 990,998 ----
+          }
+          Select(d);
+      }
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
+  }
+  
+  void TextManip::BackwardWord (int count) {
+***************
+*** 847,853 ****
+--- 1006,1040 ----
+          }
+          Select(d);
+      }
++ #ifdef JIV
++     SetConversionSpot();
++ #endif	/* JIV */
++ }
++ 
++ #ifdef JIV
++ void TextManip::BeginConversion () {
++     if (kinput == nil) {
++ 	kinput = new Kinput(GetViewer()->GetCanvas()->window());
++ 	khandler = new KinputHandler(kinput, this);
++ 	GetViewer()->SetClientMessageHandler(khandler);
++     }
++ 
++     if (kinput) {
++ 	int spotx, spoty;
++ 
++ 	_display->CaretPoint(spotx, spoty);
++ 	kinput->BeginConversion(spotx, spoty);
++     }
++ }
++ 
++ void TextManip::SetConversionSpot () {
++     if (kinput && kinput->IsActive()) {
++ 	int spotx, spoty;
++ 	_display->CaretPoint(spotx, spoty);
++ 	kinput->SetConversionSpot(spotx, spoty);
++     }
+  }
++ #endif	/* JIV */
+  
+  void TextManip::Select (int d) {
+      Select(d, d);
+***************
+*** 947,952 ****
+--- 1134,1145 ----
+      int l = _text->LineIndex(line);
+      int i = 0;
+      while (i < index) {
++ #ifdef JIV
++ 	if ((unsigned char)(*(_text->Text(l))) >= 0xa1) {
++ 	    l = _text->NextCharacter(l);
++ 	    i++;
++ 	}
++ #endif /* JIV */
+          l = _text->NextCharacter(l);
+          i += 1;
+      }
+Index: Unidraw/psview.c
+diff -c Unidraw/psview.c:1.1 Unidraw/psview.c:1.2
+*** Unidraw/psview.c:1.1	Tue Mar 17 15:54:54 1998
+--- src/Unidraw/psview.c	Tue Mar 24 09:01:57 1998
+***************
+*** 47,52 ****
+--- 47,53 ----
+  
+  static const int MAXLINELEN = 256;
+  
++ #ifndef JIV
+  static char* reencodeISO[] = {
+      "/reencodeISO {",
+      "dup dup findfont dup length dict begin",
+***************
+*** 88,93 ****
+--- 89,159 ----
+      "] def",
+      nil
+  };
++ #else /* JIV */
++ /* Composite Font patch's PS part is written by */
++ /* Shigeru Chiba (chiba@is.s.u-tokyo.ac.jp) */
++ static char* reencodeISO[] = {
++     "% reencodeISO was modified to deal with a composite font correctly.",
++     "% Modifier: Shigeru Chiba (chiba@is.s.u-tokyo.ac.jp)",
++     "%           Kazuhiro Kazama (kazama@expert-sun.ntt.jp)",
++     "/reencodeISOa {		% CompFontName font reencodeISOb font' ",
++     "dup length dict begin",
++     "{ 1 index /FID ne { def }{ pop pop } ifelse } forall",
++     "/Encoding ISOLatin1Encoding def",
++     "currentdict end definefont",
++     "} def",
++     "",
++     "/reencodeISO {		% FontName reencodeISO font",
++     "    dup dup findfont dup /FontType get 0 ne {",
++     "    reencodeISOa",
++     "}{",
++     "    dup length dict begin {",
++     "    1 index dup /FID eq {",
++     "	pop pop pop",
++     "    }{ /FDepVector eq {",
++     "	dup length array copy",
++     "	dup dup 0 get 4 index exch reencodeISOa	0 exch put def",
++     "    }{",
++     "	def",
++     "    } ifelse } ifelse } forall",
++     "    currentdict end definefont",
++     "} ifelse } def",
++     "",
++     "/ISOLatin1Encoding [",
++     "/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef",
++     "/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef",
++     "/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef",
++     "/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef",
++     "/space/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright",
++     "/parenleft/parenright/asterisk/plus/comma/minus/period/slash",
++     "/zero/one/two/three/four/five/six/seven/eight/nine/colon/semicolon",
++     "/less/equal/greater/question/at/A/B/C/D/E/F/G/H/I/J/K/L/M/N",
++     "/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash/bracketright",
++     "/asciicircum/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m",
++     "/n/o/p/q/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/asciitilde",
++     "/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef",
++     "/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef",
++     "/.notdef/dotlessi/grave/acute/circumflex/tilde/macron/breve",
++     "/dotaccent/dieresis/.notdef/ring/cedilla/.notdef/hungarumlaut",
++     "/ogonek/caron/space/exclamdown/cent/sterling/currency/yen/brokenbar",
++     "/section/dieresis/copyright/ordfeminine/guillemotleft/logicalnot",
++     "/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior",
++     "/acute/mu/paragraph/periodcentered/cedilla/onesuperior/ordmasculine",
++     "/guillemotright/onequarter/onehalf/threequarters/questiondown",
++     "/Agrave/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE/Ccedilla",
++     "/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex",
++     "/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis",
++     "/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute",
++     "/Thorn/germandbls/agrave/aacute/acircumflex/atilde/adieresis",
++     "/aring/ae/ccedilla/egrave/eacute/ecircumflex/edieresis/igrave",
++     "/iacute/icircumflex/idieresis/eth/ntilde/ograve/oacute/ocircumflex",
++     "/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex/udieresis",
++     "/yacute/thorn/ydieresis",
++     "] def",
++     nil
++ };
++ #endif /* JIV */
++ 
+  
+  /*****************************************************************************/
+  
+***************
+*** 138,143 ****
+--- 204,249 ----
+  
+      Comments(out);
+      Prologue(out);
++ #ifdef PS_FIX
++     out << "%%EndProlog\n\n";
++     out << "%%BeginSetup\n";
++     out << "IdrawDict begin\n";
++     /// Out composite font information
++     UList* fonts = GetPSFonts();
++     out << PSCompositeFont::getPreamble() << "\n";
++     for (UList* u = fonts->First(); u != fonts->End(); u = u->Next()) {
++ 	PSFont* font = GetFont(u);
++ 
++ 	if (font->isComposite()) {
++ 	    const PSCompositeFont* pscmpf;
++ 	    pscmpf= PSCompositeFont::findFont(font->GetPrintFont());
++ 	    if (pscmpf != NULL) {
++ 		PSSlantFont* sf = 
++ 		    PSSlantFont::findFont(pscmpf->getKanjiFontName());
++ 		if (sf && (sf->printFlag() == false)) {
++ 		    out << "/" << sf->getFontName() << "\n";
++ 		    out << "    /" << sf->getOriginalFontName();
++ 		    out << " .2 slantfont definefont pop\n";
++ 		    sf->printFlag(true);
++ 		}
++ 
++ 		out << "/" << font->GetPrintFont() << "\n";
++ 		out << "    /" << pscmpf->getAsciiFontName();
++ 		out << " /" << pscmpf->getKanjiFontName();
++ 		out << " compositefont definefont pop\n";
++ 	    }
++ 	}
++ 	// No way to check if the X font's encoding is iso8859-1, so...
++ 	if (strncmp(font->GetPrintFont(), "Symbol", 6) != 0) {
++ 	    out << "/" << font->GetPrintFont() << " reencodeISO def\n";
++ 	} else {
++ 	    out << "/" << font->GetPrintFont() << " dup findfont def\n";
++ 	}
++     }
++     PSSlantFont::resetPrintFlag();
++ 
++     out << "%%EndSetup\n\n";
++ #endif
+      Version(out);
+      GridSpacing(out);
+  
+***************
+*** 186,191 ****
+--- 292,300 ----
+  }
+  
+  void PostScriptView::Prologue (ostream& out) {
++ #ifdef JIV
++     CmpFontProcs(out);
++ #endif
+      ConstProcs(out);
+      BeginProc(out);
+      EndProc(out);
+***************
+*** 193,199 ****
+--- 302,310 ----
+      ObjectProcs(out);
+      MiscProcs(out);
+  
++ #ifndef PS_FIX
+      out << "%%EndProlog\n\n";
++ #endif
+  }
+  
+  static int Count (UList* list) {
+***************
+*** 205,210 ****
+--- 316,385 ----
+      return i;
+  }
+  
++ #ifdef JIV
++ void PostScriptView::CmpFontProcs (ostream& out) {
++     out << "%%BeginProcSet: cmpfont.ps 1 2\n";
++     out << "% composite fonts for ASCII-EUC mixed string\n";
++     out << "% Version 1.2 1/31/1990\n";
++     out << "% Author Ken'ichi HANDA (handa@etl.go.jp)\n";
++     out << "% Anyone can freely copy, modify, distribute this program.\n";
++     out << "/copyfont {	% font-dic extra-entry-count  copyfont  font-dic\n";
++     out << "	1 index maxlength add dict begin\n";
++     out << "	{	1 index /FID ne 2 index /UniqueID ne and\n";
++     out << "		{def} {pop pop} ifelse\n";
++     out << "	} forall\n";
++     out << "	currentdict\n";
++     out << "	end\n";
++     out << "} bind def\n";
++     out << "\n";
++     out << "/compositefont {	% ASCIIFontName EUCFontName  compositefont  font'\n";
++     out << "    findfont dup /FontType get 0 eq {\n";
++     out << "	12 dict begin\n";
++     out << "	    1 copyfont dup begin\n";
++     out << "		/Encoding Encoding\n";
++     out << "		FMapType dup 2 eq {\n";
++     out << "		    pop 128 128\n";
++     out << "		}{\n";
++     out << "		    5 eq {\n";
++     out << "			256 256\n";
++     out << "		    }{\n";
++     out << "			/compositefont errordict /invalidfont get exec\n";
++     out << "		    } ifelse\n";
++     out << "		} ifelse\n";
++     out << "		getinterval def\n";
++     out << "	    end\n";
++     out << "	    /eucfont exch definefont\n";
++     out << "	    exch\n";
++     out << "	    findfont 1 copyfont dup begin\n";
++     out << "		/FontMatrix FontMatrix [1 0 0 1 0 0.05] matrix concatmatrix def\n";
++     out << "	    end\n";
++     out << "	    /asciifont exch definefont\n";
++     out << "	    exch\n";
++     out << "	    /FDepVector [ 4 2 roll ] def\n";
++     out << "	    /FontType 0 def\n";
++     out << "	    /WMode 0 def\n";
++     out << "	    /FMapType 4 def\n";
++     out << "	    /FontMatrix matrix def\n";
++     out << "	    /Encoding [0 1] def\n";
++     out << "	    /FontBBox {0 0 0 0} def\n";
++     out << "	    currentdict\n";
++     out << "	end\n";
++     out << "    }{\n";
++     out << "	pop findfont 0 copyfont\n";
++     out << "    } ifelse\n";
++     out << "} def	\n";
++     out << "\n";
++     out << "/slantfont {	% FontName slant-degree  slantfont  font'\n";
++     out << "    exch findfont 1 copyfont begin\n";
++     out << "    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix\n";
++     out << "    /FontMatrix exch def\n";
++     out << "    currentdict\n";
++     out << "    end\n";
++     out << "} def\n";
++     out << "%%EndProcSet\n\n";
++ }
++ #endif /* JIV */
++ 
+  void PostScriptView::ConstProcs (ostream& out) {
+      UList* fonts = GetPSFonts();
+      int nfonts = Count(fonts);
+***************
+*** 212,222 ****
+--- 387,402 ----
+      out << "/IdrawDict " << (50 + nfonts) << " dict def\n";
+      out << "IdrawDict begin\n\n";
+  
++ #ifdef PS_FIX
++     IdrawDictPreamble(out);
++ #endif
++ 
+      if (nfonts > 0) {
+  	for (char** line = reencodeISO; *line != nil; ++line) {
+  	    out << *line << "\n";
+  	}
+  
++ #ifndef PS_FIX
+  	for (UList* u = fonts->First(); u != fonts->End(); u = u->Next()) {
+  	    PSFont* font = GetFont(u);
+  
+***************
+*** 227,232 ****
+--- 407,413 ----
+  		out << "/" << font->GetPrintFont() << " dup findfont def\n";
+  	    }
+  	}
++ #endif
+  	out << "\n";
+      }
+  
+***************
+*** 925,930 ****
+--- 1106,1146 ----
+      for (UList* u = fonts->First(); u != fonts->End(); u = u->Next()) {
+  	PSFont* font = GetFont(u);
+  
++ #ifdef JIV
++ 	const PSCompositeFont* pscmpf;
++ 
++ 	if (font->isComposite() &&
++ 	    (pscmpf =
++ 	     PSCompositeFont::findFont(font->GetPrintFont()))) {
++ 
++ 	    const char* fa = pscmpf->getAsciiFontName();
++ 	    const char* fk = pscmpf->getKanjiFontName();
++ 	    PSSlantFont* sf = PSSlantFont::findFont(fk);
++ 	    if (sf) {
++ 		fk = sf->getOriginalFontName();
++ 	    }
++ 
++ 	    if (linelen + strlen(fa) + 2 <= MAXLINELEN) {
++ 		out << " ";
++ 		++linelen;
++ 	    } else {
++ 		out << "\n%%+ ";
++ 		linelen = strlen("%%+ ");
++ 	    }
++ 	    out << fa;
++ 	    linelen += strlen(fa);
++ 
++ 	    if (linelen + strlen(fk) + 2 <= MAXLINELEN) {
++ 		out << " ";
++ 		++linelen;
++ 	    } else {
++ 		out << "\n%%+ ";
++ 		linelen = strlen("%%+ ");
++ 	    }
++ 	    out << fk;
++ 	    linelen += strlen(fk);
++ 	} else {
++ #endif /* JIV */
+  	if (linelen + strlen(font->GetPrintFont()) + 2 <= MAXLINELEN) {
+  	    out << " ";
+  	    ++linelen;
+***************
+*** 934,940 ****
+--- 1150,1162 ----
+  	}
+  	out << font->GetPrintFont();
+  	linelen += strlen(font->GetPrintFont());
++ #ifdef JIV
++ 	}
++ #endif /* JIV */
+      }
++ #ifdef JIV
++     PSSlantFont::resetPrintFlag();
++ #endif
+      out << "\n";
+  }
+  
+***************
+*** 986,991 ****
+--- 1208,1253 ----
+  
+      Comments(out);
+      Prologue(out);
++ #ifdef PS_FIX
++     out << "%%EndProlog\n\n";
++     out << "%%BeginSetup\n";
++     out << "IdrawDict begin\n";
++     /// Out composite font information
++     UList* fonts = GetPSFonts();
++     out << PSCompositeFont::getPreamble() << "\n";
++     for (UList* u = fonts->First(); u != fonts->End(); u = u->Next()) {
++ 	PSFont* font = GetFont(u);
++ 
++ 	if (font->isComposite()) {
++ 	    const PSCompositeFont* pscmpf;
++ 	    pscmpf= PSCompositeFont::findFont(font->GetPrintFont());
++ 	    if (pscmpf != NULL) {
++ 		PSSlantFont* sf = 
++ 		    PSSlantFont::findFont(pscmpf->getKanjiFontName());
++ 		if (sf && (sf->printFlag() == false)) {
++ 		    out << "/" << sf->getFontName() << "\n";
++ 		    out << "    /" << sf->getOriginalFontName();
++ 		    out << " .2 slantfont definefont pop\n";
++ 		    sf->printFlag(true);
++ 		}
++ 
++ 		out << "/" << font->GetPrintFont() << "\n";
++ 		out << "    /" << pscmpf->getAsciiFontName();
++ 		out << " /" << pscmpf->getKanjiFontName();
++ 		out << " compositefont definefont pop\n";
++ 	    }
++ 	}
++ 	// No way to check if the X font's encoding is iso8859-1, so...
++ 	if (strncmp(font->GetPrintFont(), "Symbol", 6) != 0) {
++ 	    out << "/" << font->GetPrintFont() << " reencodeISO def\n";
++ 	} else {
++ 	    out << "/" << font->GetPrintFont() << " dup findfont def\n";
++ 	}
++     }
++     PSSlantFont::resetPrintFlag();
++ 
++     out << "%%EndSetup\n\n";
++ #endif
+      Version(out);
+      GridSpacing(out);
+  
+Index: Unidraw/stateviews.c
+diff -c Unidraw/stateviews.c:1.1 Unidraw/stateviews.c:1.2
+*** Unidraw/stateviews.c:1.1	Tue Mar 17 15:54:55 1998
+--- src/Unidraw/stateviews.c	Tue Mar 24 09:01:57 1998
+***************
+*** 55,60 ****
+--- 55,68 ----
+  static const char* NONE = "None";
+  static const char* UNNAMED = "[unnamed]";
+  
++ #ifdef JIV_EXTEND
++ static const char* tmpLabel;
++ 
++ #define getLabel(attr, default) \
++     (((tmpLabel = unidraw->GetCatalog()->GetAttribute(attr)) != NULL) ? \
++      tmpLabel : default)
++ #endif
++ 
+  /*****************************************************************************/
+  
+  class TextInteractor : public Interactor {
+***************
+*** 138,144 ****
+      const char* text = ((TextInteractor*) interior())->GetText();
+  
+      return 
+!         (name == nil && strcmp(text, UNNAMED) != 0) ||
+          (name != nil && strcmp(text, name) != 0);
+  }
+  
+--- 146,158 ----
+      const char* text = ((TextInteractor*) interior())->GetText();
+  
+      return 
+!         (name == nil && strcmp(text,
+! #ifndef JIV_EXTEND
+! 			       UNNAMED
+! #else
+! 			       getLabel("LUnnamedMark", UNNAMED)
+! #endif
+! 			       ) != 0) ||
+          (name != nil && strcmp(text, name) != 0);
+  }
+  
+***************
+*** 147,153 ****
+      TextInteractor* t = (TextInteractor*) interior();
+      
+      if (name == nil) {
+!         t->SetText(UNNAMED);
+      } else {
+          t->SetText(name);
+      }
+--- 161,173 ----
+      TextInteractor* t = (TextInteractor*) interior();
+      
+      if (name == nil) {
+!         t->SetText(
+! #ifndef JIV_EXTEND
+! 		   UNNAMED
+! #else
+! 		   getLabel("LUnnamedMark", UNNAMED)
+! #endif
+! 		   );
+      } else {
+          t->SetText(name);
+      }
+***************
+*** 169,175 ****
+      TextInteractor* t = (TextInteractor*) interior();
+      
+      if (name == nil) {
+!         t->SetText(UNNAMED);
+  
+      } else if (_relative) {
+          const char* relname = strrchr(name, '/');
+--- 189,201 ----
+      TextInteractor* t = (TextInteractor*) interior();
+      
+      if (name == nil) {
+!         t->SetText(
+! #ifndef JIV_EXTEND
+! 		   UNNAMED
+! #else
+! 		   getLabel("LUnnamedMark", UNNAMED)
+! #endif
+! 		   );
+  
+      } else if (_relative) {
+          const char* relname = strrchr(name, '/');
+***************
+*** 201,207 ****
+      TextInteractor* t = (TextInteractor*) interior();
+      
+      if (name == nil) {
+!         t->SetText(UNNAMED);
+  
+      } else {
+          char buf[CHARBUFSIZE];
+--- 227,239 ----
+      TextInteractor* t = (TextInteractor*) interior();
+      
+      if (name == nil) {
+!         t->SetText(
+! #ifndef JIV_EXTEND
+! 		   UNNAMED
+! #else
+! 		   getLabel("LUnnamedMark", UNNAMED)
+! #endif
+! 		   );
+  
+      } else {
+          char buf[CHARBUFSIZE];
+***************
+*** 287,300 ****
+      char buf[32];
+  
+      _prevVal = mag;
+      sprintf(buf, "mag %gx", mag);
+      t->SetText(buf);
+  }
+  
+  /*****************************************************************************/
+  
+  GravityVarView::GravityVarView (GravityVar* m, Alignment a) : StateVarView(m) {
+!     TextInteractor* t = new TextInteractor(GRAVITY_ON, a);
+      Insert(t);
+  }
+  
+--- 319,343 ----
+      char buf[32];
+  
+      _prevVal = mag;
++ #ifndef JIV_EXTEND
+      sprintf(buf, "mag %gx", mag);
++ #else
++     sprintf(buf, "%s %gx", getLabel("LMagMark", "mag"), mag);
++ #endif
+      t->SetText(buf);
+  }
+  
+  /*****************************************************************************/
+  
+  GravityVarView::GravityVarView (GravityVar* m, Alignment a) : StateVarView(m) {
+!     TextInteractor* t = new TextInteractor(
+! #ifndef JIV_EXTEND
+! 					   GRAVITY_ON,
+! #else
+! 					   getLabel("LGravityOnMark",
+! 						    GRAVITY_ON),
+! #endif
+! 					   a);
+      Insert(t);
+  }
+  
+***************
+*** 305,311 ****
+  void GravityVarView::Init() {
+      boolean active = ((GravityVar*) _subject)->IsActive();
+      TextInteractor* t = (TextInteractor*) interior();
+!     const char* string = active ? GRAVITY_ON : "";
+  
+      _prevVal = active;
+      t->SetText(string);
+--- 348,361 ----
+  void GravityVarView::Init() {
+      boolean active = ((GravityVar*) _subject)->IsActive();
+      TextInteractor* t = (TextInteractor*) interior();
+!     const char* string = active ?
+! #ifndef JIV_EXTEND
+! 			   GRAVITY_ON :
+! #else
+! 			   getLabel("LGravityOnMark",
+! 				    GRAVITY_ON) :
+! #endif
+! 			   "";
+  
+      _prevVal = active;
+      t->SetText(string);
+***************
+*** 411,417 ****
+      Unref(tmp);
+  
+      const Font* f = output->GetFont();
+!     shape->width = max(f->Width(NONE) + 2*HPAD, VIEW_WIDTH);
+      shape->height = max(f->Height() + 2*VPAD, VIEW_HEIGHT);
+  
+      shape->Rigid(shape->width/2, shape->width, shape->height/2, shape->height);
+--- 461,473 ----
+      Unref(tmp);
+  
+      const Font* f = output->GetFont();
+!     shape->width = max(f->Width(
+! #ifndef JIV_EXTEND
+! 				NONE
+! #else
+! 				getLabel("LNone", NONE)
+! #endif
+! 				) + 2*HPAD, VIEW_WIDTH);
+      shape->height = max(f->Height() + 2*VPAD, VIEW_HEIGHT);
+  
+      shape->Rigid(shape->width/2, shape->width, shape->height/2, shape->height);
+***************
+*** 422,429 ****
+--- 478,490 ----
+  	output->ClearRect(canvas, 0, 0, xmax, ymax);
+  
+  	if (_brush->None()) {
++ #ifndef JIV_EXTEND
+  	    CenterText(NONE, output, xmax, ymax);
+  	    output->Text(canvas, NONE);
++ #else
++ 	    CenterText(getLabel("LNone", NONE), output, xmax, ymax);
++ 	    output->Text(canvas, getLabel("LNone", NONE));
++ #endif
+  
+  	} else {
+              const Color* origfg = output->GetFgColor();
+***************
+*** 564,570 ****
+      Unref(tmp);
+  
+      const Font* f = output->GetFont();
+!     shape->width = max(f->Width(NONE) + 2*HPAD, VIEW_WIDTH);
+      shape->height = max(f->Height() + 2*VPAD, VIEW_HEIGHT);
+  
+      shape->Rigid(shape->width/2, shape->width, shape->height/2, shape->height);
+--- 625,637 ----
+      Unref(tmp);
+  
+      const Font* f = output->GetFont();
+!     shape->width = max(f->Width(
+! #ifndef JIV_EXTEND
+! 				NONE
+! #else
+! 				getLabel("LNone", NONE)
+! #endif
+! 				) + 2*HPAD, VIEW_WIDTH);
+      shape->height = max(f->Height() + 2*VPAD, VIEW_HEIGHT);
+  
+      shape->Rigid(shape->width/2, shape->width, shape->height/2, shape->height);
+***************
+*** 575,582 ****
+--- 642,654 ----
+  	output->ClearRect(canvas, 0, 0, xmax, ymax);
+  
+  	if (_pattern->None()) {
++ #ifndef JIV_EXTEND
+  	    CenterText(NONE, output, xmax, ymax);
+  	    output->Text(canvas, NONE);
++ #else
++ 	    CenterText(getLabel("LNone", NONE), output, xmax, ymax);
++ 	    output->Text(canvas, getLabel("LNone", NONE));
++ #endif
+  
+  	} else {
+              const Color* origfg = output->GetFgColor();
+Index: Unidraw/viewcmds.c
+diff -c Unidraw/viewcmds.c:1.1 Unidraw/viewcmds.c:1.2
+*** Unidraw/viewcmds.c:1.1	Tue Mar 17 15:54:57 1998
+--- src/Unidraw/viewcmds.c	Tue Mar 24 09:01:57 1998
+***************
+*** 32,43 ****
+--- 32,55 ----
+  #include <Unidraw/statevars.h>
+  #include <Unidraw/unidraw.h>
+  #include <Unidraw/viewer.h>
++ #ifdef JIV_EXTEND
++ #include <Unidraw/catalog.h>
++ #include <stdio.h>
++ #endif
+  
+  #include <Unidraw/Commands/catcmds.h>
+  #include <Unidraw/Commands/viewcmds.h>
+  
+  #include <Unidraw/Components/component.h>
+  
++ #ifdef JIV_EXTEND
++ static const char* tmpLabel;
++ 
++ #define getLabel(attr, default) \
++     (((tmpLabel = unidraw->GetCatalog()->GetAttribute(attr)) != NULL) ? \
++      tmpLabel : default)
++ #endif
++ 
+  /*****************************************************************************/
+  
+  ClassId NormSizeCmd::GetClassId () { return NORMSIZE_CMD; }
+***************
+*** 298,304 ****
+--- 310,320 ----
+  	ModifStatusVar* mv = (ModifStatusVar*) ed->GetState("ModifStatusVar");
+  
+  	if (mv != nil && mv->GetModifStatus() && !FoundAnyExcept(ed)) {
++ #ifndef JIV_EXTEND
+              ConfirmDialog dialog("Save changes?");
++ #else
++             ConfirmDialog dialog(getLabel("MEndConfirm", "Save changes?"));
++ #endif
+  
+  	    ed->InsertDialog(&dialog);
+  	    char resp = dialog.Confirm();
+Index: UniIdraw/idcatalog.c
+diff -c UniIdraw/idcatalog.c:1.1 UniIdraw/idcatalog.c:1.2
+*** UniIdraw/idcatalog.c:1.1	Tue Mar 17 15:55:05 1998
+--- src/UniIdraw/idcatalog.c	Tue Mar 24 09:02:03 1998
+***************
+*** 200,206 ****
+--- 200,210 ----
+      if (_psversion < PSV_NONROTATED && t != nil && t->Rotated90()) {
+          Transformer identity;
+          *t = identity;
++ #ifndef JIV_EXTEND
+          g->Translate(0.0, -8.5*ivinches);
++ #else
++ 	g->Translate(0.0, -8.27*ivinches);
++ #endif
+          g->Rotate(90.0, 0.0, 0.0);
+          comp->Bequeath();
+      }
+Index: UniIdraw/idcomp.c
+diff -c UniIdraw/idcomp.c:1.1 UniIdraw/idcomp.c:1.2
+*** UniIdraw/idcomp.c:1.1	Tue Mar 17 15:55:05 1998
+--- src/UniIdraw/idcomp.c	Tue Mar 24 09:02:03 1998
+***************
+*** 87,97 ****
+  }
+  
+  void PSIdraw::Prologue (ostream& out) {
+      out << "%%BeginIdrawPrologue\n";
+      ArrowHeader(out);
+      out << "%%EndIdrawPrologue\n\n";
+! 
+!     PostScriptView::Prologue(out);
+  }
+  
+  void PSIdraw::GridSpacing (ostream& out) {
+--- 87,103 ----
+  }
+  
+  void PSIdraw::Prologue (ostream& out) {
++     PostScriptView::Prologue(out);
++ #ifndef PS_FIX
+      out << "%%BeginIdrawPrologue\n";
++ #endif
+      ArrowHeader(out);
++ #ifndef PS_FIX
+      out << "%%EndIdrawPrologue\n\n";
+! #else
+!     out << "end\n";
+!     out << "%%EndProcSet\n";
+! #endif
+  }
+  
+  void PSIdraw::GridSpacing (ostream& out) {
+***************
+*** 103,116 ****
+--- 109,140 ----
+  }
+  
+  void PSIdraw::ConstProcs (ostream& out) {
++ #ifndef PS_FIX
+      int arrowWidth = round(ARROWWIDTH*ivpoints);
+      int arrowHeight = round(ARROWHEIGHT*ivpoints);
++ #endif
+  
++ #ifdef PS_FIX
++     out << "%%BeginProcSet: idraw 3 0\n";
++ #endif
++ 
++ #ifndef PS_FIX
+      out << "/arrowHeight " << arrowHeight << " def\n";
+      out << "/arrowWidth " << arrowWidth << " def\n\n";
++ #endif
+  
+      PostScriptViews::ConstProcs(out);
+  }
++ 
++ #ifdef PS_FIX
++ void PSIdraw::IdrawDictPreamble (ostream& out) {
++     int arrowWidth = round(ARROWWIDTH*points);
++     int arrowHeight = round(ARROWHEIGHT*points);
++ 
++     out << "/arrowHeight " << arrowHeight << " def\n";
++     out << "/arrowWidth " << arrowWidth << " def\n\n";
++ }
++ #endif
+  
+  void PSIdraw::LineProc (ostream& out) {
+      out << "/Line {\n";
+Index: UniIdraw/idcomp.h
+diff -c UniIdraw/idcomp.h:1.1 UniIdraw/idcomp.h:1.2
+*** UniIdraw/idcomp.h:1.1	Tue Mar 17 15:55:05 1998
+--- src/UniIdraw/idcomp.h	Tue Mar 24 09:02:03 1998
+***************
+*** 61,66 ****
+--- 61,69 ----
+  
+      virtual void ArrowHeader(ostream&);
+      virtual void ConstProcs(ostream&);
++ #ifdef PS_FIX
++     virtual void IdrawDictPreamble(ostream&);
++ #endif
+      virtual void GridSpacing(ostream&);
+      virtual void LineProc(ostream&);
+      virtual void MultiLineProc(ostream&);
+Index: UniIdraw/ided.c
+diff -c UniIdraw/ided.c:1.1 UniIdraw/ided.c:1.2
+*** UniIdraw/ided.c:1.1	Tue Mar 17 15:55:06 1998
+--- src/UniIdraw/ided.c	Tue Mar 24 09:02:04 1998
+***************
+*** 119,124 ****
+--- 119,131 ----
+  static const char* grid_x_incr = "gridxincr";
+  static const char* grid_y_incr = "gridyincr";
+  
++ #ifdef JIV_EXTEND
++ static const char* tmpLabel;
++ 
++ #define getLabel(attr, default) \
++     (((tmpLabel = unidraw->GetCatalog()->GetAttribute(attr)) != NULL) ? \
++      tmpLabel : default)
++ #endif
+  /*****************************************************************************/
+  
+  inline void InsertSeparator (PulldownMenu* pdm) {
+***************
+*** 347,354 ****
+--- 354,366 ----
+      commands->Include(FontMenu());
+      commands->Include(BrushMenu());
+      commands->Include(PatternMenu());
++ #ifndef JIV_EXTEND
+      commands->Include(ColorMenu("FgColor", fgAttrib));
+      commands->Include(ColorMenu("BgColor", bgAttrib));
++ #else
++     commands->Include(ColorMenu(getLabel("LFgColor", "FgColor"), fgAttrib));
++     commands->Include(ColorMenu(getLabel("LBgColor", "BgColor"), bgAttrib));
++ #endif
+      commands->Include(AlignMenu());
+      commands->Include(ViewMenu());
+  
+***************
+*** 369,399 ****
+      VBox* tools = new VBox;
+  
+      Include(
+!         new SelectTool(new ControlInfo("Select", KLBL_SELECT, CODE_SELECT)),
+          tools
+      );
+      Include(
+!         new MoveTool(new ControlInfo("Move", KLBL_MOVE, CODE_MOVE)),
+          tools
+      );
+      Include(
+!         new ScaleTool(new ControlInfo("Scale", KLBL_SCALE, CODE_SCALE)),
+          tools
+      );
+      Include(
+!         new StretchTool(new ControlInfo("Stretch", KLBL_STRETCH,CODE_STRETCH)),
+          tools
+      );
+      Include(
+!         new RotateTool(new ControlInfo("Rotate", KLBL_ROTATE, CODE_ROTATE)),
+          tools
+      );
+      Include(
+!         new ReshapeTool(new ControlInfo("Alter", KLBL_RESHAPE, CODE_RESHAPE)),
+          tools
+      );
+      Include(
+!         new MagnifyTool(new ControlInfo("Magnify", KLBL_MAGNIFY,CODE_MAGNIFY)),
+          tools
+      );
+  
+--- 381,453 ----
+      VBox* tools = new VBox;
+  
+      Include(
+!         new SelectTool(new ControlInfo(
+! #ifndef JIV_EXTEND
+! 				       "Select",
+! #else
+! 				       getLabel("LSelect", "Select"),
+! #endif
+! 				       KLBL_SELECT, CODE_SELECT)),
+          tools
+      );
+      Include(
+!         new MoveTool(new ControlInfo(
+! #ifndef JIV_EXTEND
+! 				     "Move",
+! #else
+! 				     getLabel("LMove", "Move"),
+! #endif
+! 				     KLBL_MOVE, CODE_MOVE)),
+          tools
+      );
+      Include(
+!         new ScaleTool(new ControlInfo(
+! #ifndef JIV_EXTEND
+! 				      "Scale",
+! #else
+! 				      getLabel("LScale", "Scale"),
+! #endif
+! 				      KLBL_SCALE, CODE_SCALE)),
+          tools
+      );
+      Include(
+!         new StretchTool(new ControlInfo(
+! #ifndef JIV_EXTEND
+! 					"Stretch",
+! #else
+! 					getLabel("LStretch", "Stretch"),
+! #endif
+! 					KLBL_STRETCH,CODE_STRETCH)),
+          tools
+      );
+      Include(
+!         new RotateTool(new ControlInfo(
+! #ifndef JIV_EXTEND
+! 				       "Rotate",
+! #else
+! 				       getLabel("LRotate", "Rotate"),
+! #endif
+! 				       KLBL_ROTATE, CODE_ROTATE)),
+          tools
+      );
+      Include(
+!         new ReshapeTool(new ControlInfo(
+! #ifndef JIV_EXTEND
+! 					"Alter",
+! #else
+! 					getLabel("LAlter", "Alter"),
+! #endif
+! 					KLBL_RESHAPE, CODE_RESHAPE)),
+          tools
+      );
+      Include(
+!         new MagnifyTool(new ControlInfo(
+! #ifndef JIV_EXTEND
+! 					"Magnify",
+! #else
+! 					getLabel("LMagnify", "Magnify"),
+! #endif
+! 					KLBL_MAGNIFY,CODE_MAGNIFY)),
+          tools
+      );
+  
+***************
+*** 401,407 ****
+      TextComp* textComp = new TextComp(text);
+      Include(
+          new GraphicCompTool(
+!             new ControlInfo("Text", KLBL_TEXT, CODE_TEXT), textComp
+          ), tools
+      );
+  
+--- 455,467 ----
+      TextComp* textComp = new TextComp(text);
+      Include(
+          new GraphicCompTool(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Text",
+! #else
+! 			    getLabel("LText", "Text"),
+! #endif
+! 			    KLBL_TEXT, CODE_TEXT), textComp
+          ), tools
+      );
+  
+***************
+*** 520,567 ****
+  }
+  
+  PulldownMenu* IdrawEditor::FileMenu () {
+!     PulldownMenu* pdm = MakePulldown("File");
+  
+      Include(
+          new NewCompCmd(
+!             new ControlInfo("New", KLBL_NEWCOMP, CODE_NEWCOMP), new IdrawComp
+          ),
+          pdm
+      );
+      Include(
+!         new RevertCmd(new ControlInfo("Revert", KLBL_REVERT, CODE_REVERT)),
+          pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new OpenCmd(
+!             new ControlInfo("Open...", KLBL_VIEWCOMP, CODE_VIEWCOMP)
+          ),
+          pdm
+      );
+      Include(
+!         new SaveCompCmd(new ControlInfo("Save", KLBL_SAVECOMP, CODE_SAVECOMP)),
+          pdm
+      );
+      Include(
+!         new SaveCompAsCmd(
+!             new ControlInfo("Save As...", KLBL_SAVECOMPAS, CODE_SAVECOMPAS)
+          ), pdm
+      );
+      Include(
+          new PrintCmd(
+!             new ControlInfo("Print...", KLBL_PRINT, CODE_PRINT)
+          ), pdm
+      );
+      Include(
+          new ImportCmd(
+!             new ControlInfo("Import Graphic...", KLBL_IMPORT, CODE_IMPORT)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new QuitCmd(
+!             new ControlInfo("Quit", KLBL_QUIT, CODE_QUIT)
+          ), pdm
+      );
+  
+--- 580,680 ----
+  }
+  
+  PulldownMenu* IdrawEditor::FileMenu () {
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "File"
+! #else
+! 				     getLabel("LFile", "File")
+! #endif
+! 				     );
+  
+      Include(
+          new NewCompCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+!             		    "New", 
+! #else
+! 			    getLabel("LNew", "New"),
+! #endif
+!             		    KLBL_NEWCOMP, CODE_NEWCOMP), new IdrawComp
+          ),
+          pdm
+      );
+      Include(
+!         new RevertCmd(new ControlInfo(
+! #ifndef JIV_EXTEND
+!         			      "Revert",
+! #else
+! 				      getLabel("LRevert", "Revert"),
+! #endif
+!         			      KLBL_REVERT, CODE_REVERT)),
+          pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new OpenCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+!             		    "Open...",
+! #else
+! 			    getLabel("LOpen", "Open..."),
+! #endif
+!             		    KLBL_VIEWCOMP, CODE_VIEWCOMP)
+          ),
+          pdm
+      );
+      Include(
+!         new SaveCompCmd(new ControlInfo(
+! #ifndef JIV_EXTEND
+!         				"Save",
+! #else
+! 					getLabel("LSave", "Save"),
+! #endif
+!        				KLBL_SAVECOMP, CODE_SAVECOMP)),
+          pdm
+      );
+      Include(
+!         new SaveCompAsCmd( new ControlInfo(
+! #ifndef JIV_EXTEND
+!             		    "Save As...",
+! #else
+! 			    getLabel("LSaveAs", "Save As..."),
+! #endif
+!             		    KLBL_SAVECOMPAS, CODE_SAVECOMPAS)
+          ), pdm
+      );
+      Include(
+          new PrintCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+!             		    "Print...",
+! #else
+! 			    getLabel("LPrint", "Print..."),
+! #endif
+!             		    KLBL_PRINT, CODE_PRINT)
+          ), pdm
+      );
+      Include(
+          new ImportCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+!             		    "Import Graphic...",
+! #else
+! 			    getLabel("LImport", "Import Graphic..."),
+! #endif
+!             		    KLBL_IMPORT, CODE_IMPORT)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new QuitCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+!             		    "Quit",
+! #else
+! 			    getLabel("LQuit", "Quit"),
+! #endif
+!             		    KLBL_QUIT, CODE_QUIT)
+          ), pdm
+      );
+  
+***************
+*** 569,654 ****
+  }
+  
+  PulldownMenu* IdrawEditor::EditMenu () {
+!     PulldownMenu* pdm = MakePulldown("Edit");
+  
+      Include(
+          new UndoCmd(
+!             new ControlInfo("Undo", KLBL_UNDO, CODE_UNDO)
+          ), pdm
+      );
+      Include(
+          new RedoCmd(
+!             new ControlInfo("Redo", KLBL_REDO, CODE_REDO)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new CutCmd(
+!             new ControlInfo("Cut", KLBL_CUT, CODE_CUT)
+          ), pdm
+      );
+      Include(
+          new CopyCmd(
+!             new ControlInfo("Copy", KLBL_COPY, CODE_COPY)
+          ), pdm
+      );
+      Include(
+          new PasteCmd(
+!             new ControlInfo("Paste", KLBL_PASTE,CODE_PASTE)
+          ), pdm
+      );
+      Include(
+          new DupCmd(
+!             new ControlInfo("Duplicate", KLBL_DUP, CODE_DUP)
+          ), pdm
+      );
+      Include(
+          new DeleteCmd(
+!             new ControlInfo("Delete", KLBL_DEL, CODE_DEL)
+          ), pdm
+      );
+      Include(
+          new SlctAllCmd(
+!             new ControlInfo("Select All", KLBL_SLCTALL, CODE_SLCTALL)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new ScaleCmd(
+!             new ControlInfo("Flip Horizontal", KLBL_HFLIP, CODE_HFLIP),
+              -1.0, 1.0
+          ), pdm
+      );
+      Include(
+          new ScaleCmd(
+!             new ControlInfo("Flip Vertical", KLBL_VFLIP, CODE_VFLIP),
+              1.0, -1.0
+          ), pdm
+      );
+      Include(
+          new RotateCmd(
+!             new ControlInfo("90 Clockwise", KLBL_CW90, CODE_CW90), -90.0
+          ), pdm
+      );
+      Include(
+          new RotateCmd(
+!             new ControlInfo("90 CounterCW", KLBL_CCW90, CODE_CCW90), 90.0
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new PreciseMoveCmd(
+!             new ControlInfo("Precise Move", KLBL_PMOVE, CODE_PMOVE)
+          ), pdm
+      );
+      Include(
+          new PreciseScaleCmd(
+!             new ControlInfo("Precise Scale", KLBL_PSCALE, CODE_PSCALE)
+          ), pdm
+      );
+      Include(
+          new PreciseRotateCmd(
+!             new ControlInfo("Precise Rotate", KLBL_PROTATE, CODE_PROTATE)
+          ), pdm
+      );
+  
+--- 682,863 ----
+  }
+  
+  PulldownMenu* IdrawEditor::EditMenu () {
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "Edit"
+! #else
+! 				     getLabel("LEdit", "Edit")
+! #endif
+! 				     );
+  
+      Include(
+          new UndoCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Undo",
+! #else
+! 			    getLabel("LUndo", "Undo"),
+! #endif
+! 			    KLBL_UNDO, CODE_UNDO)
+          ), pdm
+      );
+      Include(
+          new RedoCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Redo",
+! #else
+! 			    getLabel("LRedo", "Redo"),
+! #endif
+! 			    KLBL_REDO, CODE_REDO)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new CutCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Cut",
+! #else
+! 			    getLabel("LCut", "Cut"),
+! #endif
+! 			    KLBL_CUT, CODE_CUT)
+          ), pdm
+      );
+      Include(
+          new CopyCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Copy",
+! #else
+! 			    getLabel("LCopy", "Copy"),
+! #endif
+! 			    KLBL_COPY, CODE_COPY)
+          ), pdm
+      );
+      Include(
+          new PasteCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Paste",
+! #else
+! 			    getLabel("LPaste", "Paste"),
+! #endif
+! 			    KLBL_PASTE,CODE_PASTE)
+          ), pdm
+      );
+      Include(
+          new DupCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Duplicate",
+! #else
+! 			    getLabel("LDuplicate", "Duplicate"),
+! #endif
+! 			    KLBL_DUP, CODE_DUP)
+          ), pdm
+      );
+      Include(
+          new DeleteCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Delete",
+! #else
+! 			    getLabel("LDelete", "Delete"),
+! #endif
+! 			    KLBL_DEL, CODE_DEL)
+          ), pdm
+      );
+      Include(
+          new SlctAllCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Select All",
+! #else
+! 			    getLabel("LSelectAll", "Select All"),
+! #endif
+! 			    KLBL_SLCTALL, CODE_SLCTALL)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new ScaleCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Flip Horizontal",
+! #else
+! 			    getLabel("LFlipH", "Flip Horizontal"),
+! #endif
+! 			    KLBL_HFLIP, CODE_HFLIP),
+              -1.0, 1.0
+          ), pdm
+      );
+      Include(
+          new ScaleCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Flip Vertical",
+! #else
+! 			    getLabel("LFlipV", "Flip Vertical"),
+! #endif
+! 			    KLBL_VFLIP, CODE_VFLIP),
+              1.0, -1.0
+          ), pdm
+      );
+      Include(
+          new RotateCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "90 Clockwise",
+! #else
+! 			    getLabel("L90CW", "90 Clockwise"),
+! #endif
+! 			    KLBL_CW90, CODE_CW90), -90.0
+          ), pdm
+      );
+      Include(
+          new RotateCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "90 CounterCW",
+! #else
+! 			    getLabel("L90CCW", "90 CounterCW"),
+! #endif
+! 			    KLBL_CCW90, CODE_CCW90), 90.0
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new PreciseMoveCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Precise Move",
+! #else
+! 			    getLabel("LPMove", "Precise Move"),
+! #endif
+! 	 KLBL_PMOVE, CODE_PMOVE)
+          ), pdm
+      );
+      Include(
+          new PreciseScaleCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Precise Scale",
+! #else
+! 			    getLabel("LPScale", "Precise Scale"),
+! #endif
+! 			    KLBL_PSCALE, CODE_PSCALE)
+          ), pdm
+      );
+      Include(
+          new PreciseRotateCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Precise Rotate",
+! #else
+! 			    getLabel("LPRotate", "Precise Rotate"),
+! #endif
+! 	 KLBL_PROTATE, CODE_PROTATE)
+          ), pdm
+      );
+  
+***************
+*** 656,681 ****
+  }
+  
+  PulldownMenu* IdrawEditor::StructureMenu () {
+!     PulldownMenu* pdm = MakePulldown("Structure");
+  
+      Include(
+          new GroupCmd(
+!             new ControlInfo("Group", KLBL_GROUP, CODE_GROUP)
+          ), pdm
+      );
+      Include(
+          new UngroupCmd(
+!             new ControlInfo("Ungroup", KLBL_UNGROUP, CODE_UNGROUP)
+          ), pdm
+      );
+      Include(
+          new FrontCmd(
+!             new ControlInfo("Bring to Front", KLBL_FRONT, CODE_FRONT)
+          ), pdm
+      );
+      Include(
+          new BackCmd(
+!             new ControlInfo("Send to Back", KLBL_BACK, CODE_BACK)
+          ), pdm
+      );
+  
+--- 865,920 ----
+  }
+  
+  PulldownMenu* IdrawEditor::StructureMenu () {
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "Structure"
+! #else
+! 				     getLabel("LStructure", "Structure")
+! #endif
+! 				     );
+  
+      Include(
+          new GroupCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Group",
+! #else
+! 			    getLabel("LGroup", "Group"),
+! #endif
+! 			    KLBL_GROUP, CODE_GROUP)
+          ), pdm
+      );
+      Include(
+          new UngroupCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Ungroup",
+! #else
+! 			    getLabel("LUngroup", "Ungroup"),
+! #endif
+! 			    KLBL_UNGROUP, CODE_UNGROUP)
+          ), pdm
+      );
+      Include(
+          new FrontCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Bring to Front",
+! #else
+! 			    getLabel("LFront", "Bring to Front"),
+! #endif
+! 			    KLBL_FRONT, CODE_FRONT)
+          ), pdm
+      );
+      Include(
+          new BackCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Send to Back",
+! #else
+! 			    getLabel("LBack", "Send to Back"),
+! #endif
+! 			    KLBL_BACK, CODE_BACK)
+          ), pdm
+      );
+  
+***************
+*** 684,690 ****
+  
+  PulldownMenu* IdrawEditor::FontMenu () {
+      Catalog* catalog = unidraw->GetCatalog();
+!     PulldownMenu* pdm = MakePulldown("Font");
+  
+      int i = 1;
+      PSFont* font = catalog->ReadFont(fontAttrib, i);
+--- 923,935 ----
+  
+  PulldownMenu* IdrawEditor::FontMenu () {
+      Catalog* catalog = unidraw->GetCatalog();
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "Font"
+! #else
+! 				     getLabel("LFont", "Font")
+! #endif
+! 	);
+  
+      int i = 1;
+      PSFont* font = catalog->ReadFont(fontAttrib, i);
+***************
+*** 713,719 ****
+      ControlInfo* ctrlInfo;
+      ArrowLine* line;
+      Catalog* catalog = unidraw->GetCatalog();
+!     PulldownMenu* pdm = MakePulldown("Brush");
+  
+      int i = 1;
+      PSBrush* br = catalog->ReadBrush(brAttrib, i);
+--- 958,970 ----
+      ControlInfo* ctrlInfo;
+      ArrowLine* line;
+      Catalog* catalog = unidraw->GetCatalog();
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "Brush"
+! #else
+! 				     getLabel("LBrush", "Brush")
+! #endif
+! 				     );
+  
+      int i = 1;
+      PSBrush* br = catalog->ReadBrush(brAttrib, i);
+***************
+*** 721,728 ****
+      while (br != nil) {
+  
+          if (br->None()) {
+!             ctrlInfo = new ControlInfo("None");
+! 
+          } else {
+              line = new ArrowLine(
+  		0, 0, round(MENU_WIDTH*ivcm), 0, false, false, 1., stdgraphic
+--- 972,984 ----
+      while (br != nil) {
+  
+          if (br->None()) {
+!             ctrlInfo = new ControlInfo(
+! #ifndef JIV_EXTEND
+! 				       "None"
+! #else
+! 				       getLabel("LNone", "None")
+! #endif
+! 				       );
+          } else {
+              line = new ArrowLine(
+  		0, 0, round(MENU_WIDTH*ivcm), 0, false, false, 1., stdgraphic
+***************
+*** 764,770 ****
+  
+  PulldownMenu* IdrawEditor::PatternMenu () {
+      Catalog* catalog = unidraw->GetCatalog();
+!     PulldownMenu* pdm = MakePulldown("Pattern");
+  
+      int i = 1;
+      PSPattern* pat = catalog->ReadPattern(patAttrib, i);
+--- 1020,1032 ----
+  
+  PulldownMenu* IdrawEditor::PatternMenu () {
+      Catalog* catalog = unidraw->GetCatalog();
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "Pattern"
+! #else
+! 				     getLabel("LPattern", "Pattern")
+! #endif
+! 				     );
+  
+      int i = 1;
+      PSPattern* pat = catalog->ReadPattern(patAttrib, i);
+***************
+*** 773,779 ****
+          ControlInfo* ctrlInfo;
+  
+          if (pat->None()) {
+!             ctrlInfo = new ControlInfo("None");
+  
+          } else {
+              SF_Rect* sfr = new SF_Rect(
+--- 1035,1047 ----
+          ControlInfo* ctrlInfo;
+  
+          if (pat->None()) {
+!             ctrlInfo = new ControlInfo(
+! #ifndef JIV_EXTEND
+! 				       "None"
+! #else
+! 				       getLabel("LNone", "None")
+! #endif
+! 				       );
+  
+          } else {
+              SF_Rect* sfr = new SF_Rect(
+***************
+*** 817,893 ****
+  }
+  
+  PulldownMenu* IdrawEditor::AlignMenu () {
+!     PulldownMenu* pdm = MakePulldown("Align");
+  
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Left Sides", KLBL_ALGNLEFT, CODE_ALGNLEFT), 
+              Left, Left
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Right Sides", KLBL_ALGNRIGHT, CODE_ALGNRIGHT),
+              Right, Right
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Tops", KLBL_ALGNTOP, CODE_ALGNTOP), Top, Top
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Bottoms", KLBL_ALGNBOT, CODE_ALGNBOT),	
+              Bottom, Bottom
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Horiz Centers", KLBL_ALGNHCTR, CODE_ALGNHCTR),
+              HorizCenter, HorizCenter
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Vert Centers", KLBL_ALGNVCTR, CODE_ALGNVCTR),
+              VertCenter, VertCenter
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Centers", KLBL_ALGNCTR, CODE_ALGNCTR),	
+              Center, Center
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Abut Left", KLBL_ABUTLEFT, CODE_ABUTLEFT), 
+              Left, Right
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Abut Right", KLBL_ABUTRIGHT, CODE_ABUTRIGHT),
+              Right, Left
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Abut Up", KLBL_ABUTUP, CODE_ABUTUP),
+              Top, Bottom
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo("Abut Down", KLBL_ABUTDOWN, CODE_ABUTDOWN),
+              Bottom, Top
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new AlignToGridCmd(
+!             new ControlInfo("Align to Grid", KLBL_ALGNTOGRID, CODE_ALGNTOGRID)
+          ), pdm
+      );
+  
+--- 1085,1239 ----
+  }
+  
+  PulldownMenu* IdrawEditor::AlignMenu () {
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "Align"
+! #else
+! 				     getLabel("LAlign", "Align")
+! #endif
+! 				     );
+  
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Left Sides",
+! #else
+! 			    getLabel("LAlignLeft", "Left Sides"),
+! #endif
+! 			    KLBL_ALGNLEFT, CODE_ALGNLEFT), 
+              Left, Left
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Right Sides",
+! #else
+! 			    getLabel("LAlignRight", "Right Sides"),
+! #endif
+! 			    KLBL_ALGNRIGHT, CODE_ALGNRIGHT),
+              Right, Right
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Tops",
+! #else
+! 			    getLabel("LAlignTop", "Tops"),
+! #endif
+! 			    KLBL_ALGNTOP, CODE_ALGNTOP), Top, Top
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Bottoms",
+! #else
+! 			    getLabel("LAlignBottom", "Bottoms"),
+! #endif
+! 			    KLBL_ALGNBOT, CODE_ALGNBOT),	
+              Bottom, Bottom
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Horiz Centers",
+! #else
+! 			    getLabel("LAlignHCenter", "Horiz Centers"),
+! #endif
+! 			    KLBL_ALGNHCTR, CODE_ALGNHCTR),
+              HorizCenter, HorizCenter
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Vert Centers",
+! #else
+! 			    getLabel("LAlignVCenter", "Vert Centers"),
+! #endif
+! 			    KLBL_ALGNVCTR, CODE_ALGNVCTR),
+              VertCenter, VertCenter
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Centers",
+! #else
+! 			    getLabel("LAlignCenter", "Centers"),
+! #endif
+! 			    KLBL_ALGNCTR, CODE_ALGNCTR),	
+              Center, Center
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Abut Left",
+! #else
+! 			    getLabel("LAbutLeft", "Abut Left"),
+! #endif
+! 			    KLBL_ABUTLEFT, CODE_ABUTLEFT), 
+              Left, Right
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Abut Right",
+! #else
+! 			    getLabel("LAbutRight", "Abut Right"),
+! #endif
+! 			    KLBL_ABUTRIGHT, CODE_ABUTRIGHT),
+              Right, Left
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Abut Up",
+! #else
+! 			    getLabel("LAbutUp", "Abut Up"),
+! #endif
+! 			    KLBL_ABUTUP, CODE_ABUTUP),
+              Top, Bottom
+          ), pdm
+      );
+      Include(
+          new AlignCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Abut Down",
+! #else
+! 			    getLabel("LAbutDown", "Abut Down"),
+! #endif
+! 			    KLBL_ABUTDOWN, CODE_ABUTDOWN),
+              Bottom, Top
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new AlignToGridCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Align to Grid",
+! #else
+! 			    getLabel("LAlignToGrid", "Align to Grid"),
+! #endif
+! 			    KLBL_ALGNTOGRID, CODE_ALGNTOGRID)
+          ), pdm
+      );
+  
+***************
+*** 895,947 ****
+  }
+  
+  PulldownMenu* IdrawEditor::ViewMenu () {
+!     PulldownMenu* pdm = MakePulldown("View");
+  
+      Include(
+          new NewViewCmd(
+!             new ControlInfo("New View", KLBL_NEWVIEW, CODE_NEWVIEW)
+          ), pdm
+      );
+      Include(
+          new CloseEditorCmd(
+!             new ControlInfo("Close View", KLBL_CLOSEEDITOR, CODE_CLOSEEDITOR)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new NormSizeCmd(
+!             new ControlInfo("Normal Size", KLBL_NORMSIZE, CODE_NORMSIZE)
+          ), pdm
+      );
+      Include(
+          new RedToFitCmd(
+!             new ControlInfo("Reduce to Fit", KLBL_REDTOFIT, CODE_REDTOFIT)
+          ), pdm
+      );
+      Include(
+          new CenterCmd(
+!             new ControlInfo("Center Page", KLBL_CENTER, CODE_CENTER)
+          ), pdm
+      );
+      Include(
+          new OrientationCmd(
+!             new ControlInfo("Orientation", KLBL_ORIENTATION, CODE_ORIENTATION)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new GridCmd(
+!             new ControlInfo("Grid on/off", KLBL_GRID, CODE_GRID)
+          ), pdm
+      );
+      Include(
+          new IGridSpacingCmd(
+!             new ControlInfo("Grid Spacing...", KLBL_GRIDSPC, CODE_GRIDSPC)
+          ), pdm
+      );
+      Include(
+          new GravityCmd(
+!             new ControlInfo("Gravity on/off", KLBL_GRAVITY, CODE_GRAVITY)
+          ), pdm
+      );
+  
+--- 1241,1353 ----
+  }
+  
+  PulldownMenu* IdrawEditor::ViewMenu () {
+!     PulldownMenu* pdm = MakePulldown(
+! #ifndef JIV_EXTEND
+! 				     "View"
+! #else
+! 				     getLabel("LView", "View")
+! #endif
+! 				     );
+  
+      Include(
+          new NewViewCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "New View",
+! #else
+! 			    getLabel("LNewView", "New View"),
+! #endif
+! 			    KLBL_NEWVIEW, CODE_NEWVIEW)
+          ), pdm
+      );
+      Include(
+          new CloseEditorCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Close View",
+! #else
+! 			    getLabel("LCloseView", "Close View"),
+! #endif
+! 			    KLBL_CLOSEEDITOR, CODE_CLOSEEDITOR)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new NormSizeCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Normal Size",
+! #else
+! 			    getLabel("LNormalSize", "Normal Size"),
+! #endif
+! 	 KLBL_NORMSIZE, CODE_NORMSIZE)
+          ), pdm
+      );
+      Include(
+          new RedToFitCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Reduce to Fit",
+! #else
+! 			    getLabel("LReduceToFit", "Reduce to Fit"),
+! #endif
+! 	 KLBL_REDTOFIT, CODE_REDTOFIT)
+          ), pdm
+      );
+      Include(
+          new CenterCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Center Page",
+! #else
+! 			    getLabel("LCenterPage", "Center Page"),
+! #endif
+! 			    KLBL_CENTER, CODE_CENTER)
+          ), pdm
+      );
+      Include(
+          new OrientationCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Orientation",
+! #else
+! 			    getLabel("LOrientation", "Orientation"),
+! #endif
+! 			    KLBL_ORIENTATION, CODE_ORIENTATION)
+          ), pdm
+      );
+      InsertSeparator(pdm);
+      Include(
+          new GridCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Grid on/off",
+! #else
+! 			    getLabel("LGrid", "Grid on/off"),
+! #endif
+! 			    KLBL_GRID, CODE_GRID)
+          ), pdm
+      );
+      Include(
+          new IGridSpacingCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Grid Spacing...",
+! #else
+! 			    getLabel("LGridSpacing", "Grid Spacing..."),
+! #endif
+! 			    KLBL_GRIDSPC, CODE_GRIDSPC)
+          ), pdm
+      );
+      Include(
+          new GravityCmd(
+!             new ControlInfo(
+! #ifndef JIV_EXTEND
+! 			    "Gravity on/off",
+! #else
+! 			    getLabel("LGravity", "Gravity on/off"),
+! #endif
+! 			    KLBL_GRAVITY, CODE_GRAVITY)
+          ), pdm
+      );
+  
+Index: idraw/main.c
+diff -c idraw/main.c:1.1 idraw/main.c:1.2
+*** idraw/main.c:1.1	Tue Mar 17 15:55:08 1998
+--- src/idraw/main.c	Tue Mar 24 09:02:08 1998
+***************
+*** 46,53 ****
+--- 46,58 ----
+      { "*initialfont",   "4" },
+      { "*initialpattern","1" },
+      { "*initialarrow", "none" },
++ #ifndef JIV_EXTEND
+      { "*pagewidth", "8.5" },
+      { "*pageheight", "11" },
++ #else
++     { "*pagewidth", "8.27" },
++     { "*pageheight", "11.69" },
++ #endif
+      { "*gridxincr", "8" },
+      { "*gridyincr", "8" },
+      { "*font1", "-*-courier-medium-r-normal-*-8-*-*-*-*-*-*-* Courier 8" },
+Index: OverlayUnidraw/grayraster.c
+diff -c OverlayUnidraw/grayraster.c:1.1 OverlayUnidraw/grayraster.c:1.2
+*** OverlayUnidraw/grayraster.c:1.1	Tue Mar 17 15:55:20 1998
+--- src/OverlayUnidraw/grayraster.c	Tue Mar 24 09:02:12 1998
+***************
+*** 29,35 ****
+  
+  #include <OS/math.h>
+  #include <math.h>
+! #ifdef __svr4__ 
+  #include <nan.h>
+  #endif
+  
+--- 29,35 ----
+  
+  #include <OS/math.h>
+  #include <math.h>
+! #if defined(__svr4__) || defined(linux) 
+  #include <nan.h>
+  #endif
+  
+Index: include_iviv-2_6/box.h
+diff -c include_iviv-2_6/box.h:1.1 include_iviv-2_6/box.h:1.2
+*** include_iviv-2_6/box.h:1.1	Tue Mar 17 15:56:17 1998
+--- src/include/IV-2_6/InterViews/box.h	Tue Mar 24 09:02:23 1998
+***************
+*** 33,38 ****
+--- 33,44 ----
+  
+  #include <IV-2_6/_enter.h>
+  
++ #ifdef USE_SUNCxx2
++ # undef	major
++ # undef	minor
++ #endif USE_SUNCxx2
++ 
++ 
+  class BoxElement;
+  class BoxCanonical;
+  
+Index: include_iviv-2_6/interactor.h
+diff -c include_iviv-2_6/interactor.h:1.1 include_iviv-2_6/interactor.h:1.2
+*** include_iviv-2_6/interactor.h:1.1	Tue Mar 17 15:56:17 1998
+--- src/include/IV-2_6/InterViews/interactor.h	Tue Mar 24 09:02:23 1998
+***************
+*** 54,59 ****
+--- 54,62 ----
+  class Style;
+  class Window;
+  class World;
++ #ifdef JIV			/* eto@ai.cs.fujitsu.co.jp 12 Jan 1992 */
++ class ClientMessageHandler;
++ #endif /* JIV */
+  
+  enum CanvasType {
+      CanvasShapeOnly, CanvasInputOnly, CanvasInputOutput,
+***************
+*** 108,113 ****
+--- 111,120 ----
+      void Run();
+      void QuitRunning(Event&);
+      virtual void Handle(Event&);
++ #ifdef JIV			/* eto@ai.cs.fujitsu.co.jp 12 Jan 1992 */
++     void SetClientMessageHandler(ClientMessageHandler*);
++     void ResetClientMessageHandler(ClientMessageHandler*);
++ #endif /* JIV */
+  
+      /* subject-view communication */
+      virtual void Adjust(Perspective&);
+***************
+*** 169,174 ****
+--- 176,185 ----
+      void DoConfig(boolean);
+  
+      virtual void Orphan();
++ 
++ #ifdef JIV			/* eto@ai.cs.fujitsu.co.jp 12 Jan 1992 */
++     ClientMessageHandler* cmhandler;
++ #endif
+  };
+  
+  inline Scene* Interactor::Parent() const { return parent; }
+Index: include_iviv-2_6/painter.h
+diff -c include_iviv-2_6/painter.h:1.1 include_iviv-2_6/painter.h:1.2
+*** include_iviv-2_6/painter.h:1.1	Tue Mar 17 15:56:18 1998
+--- src/include/IV-2_6/InterViews/painter.h	Tue Mar 24 09:02:23 1998
+***************
+*** 161,166 ****
+--- 161,169 ----
+  	Canvas* src, Coord x1, Coord y1, Coord x2, Coord y2,
+  	Canvas* dst, Coord x0, Coord y0
+      );
++ #ifdef JIV
++     virtual void MapCoord(Canvas*, Coord x, Coord y, Coord& nx, Coord& ny);
++ #endif	/* JIV */
+  
+      PainterRep* Rep() const;
+  private:
+Index: include_iviv-2_6/textdisplay.h
+diff -c include_iviv-2_6/textdisplay.h:1.1 include_iviv-2_6/textdisplay.h:1.2
+*** include_iviv-2_6/textdisplay.h:1.1	Tue Mar 17 15:56:19 1998
+--- src/include/IV-2_6/InterViews/textdisplay.h	Tue Mar 24 09:02:23 1998
+***************
+*** 86,91 ****
+--- 86,96 ----
+      IntCoord Top(int line);
+      IntCoord Left(int line, int index);
+      IntCoord Right(int line, int index);
++ 
++ #ifdef JIV
++     void TextDisplay::CaretPoint(int&, int&);
++ #endif	/* JIV */
++ 
+  private:
+  friend class TextLine;
+  
+Index: include_x11/xjivfunc.h
+diff -c /dev/null include_x11/xjivfunc.h:1.1
+*** /dev/null	Tue Mar 24 09:02:28 1998
+--- src/include/IV-X11/xjivfunc.h	Tue Mar 24 09:02:27 1998
+***************
+*** 0 ****
+--- 1,38 ----
++ /*
++  * Copyright (c) 1991, 1992 Fujitsu Oita Software Laboratory Limited
++  *
++  * Permission to use, copy, modify, and distribute this software and its
++  * documentation for any purpose is hereby granted without fee, provided
++  * that the above copyright notice and this permission notice appear in
++  * all copies of the software and related documentation, and the name of
++  * Fujitsu Oita Software Laboratory may not be used in any advertising or
++  * publicity relating to the software without specific, prior written
++  * prior permission of Fujitsu Oita Software Laboratory. 
++  * 
++  * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND, 
++  * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY 
++  * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  
++  *
++  * IN NO EVENT SHALL FUJITSU OITA SOFTWARE LABORATORY BE LIABLE FOR ANY
++  * SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR
++  * ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
++  * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY
++  * OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++  * PERFORMANCE OF THIS SOFTWARE.
++  *
++  * Author:  Toshihisa Eto, Fujitsu Oita Software Laboratory Limited, Japan
++  * 	E-Mail: eto@ai.cs.fujitsu.co.jp
++  * 	Nifty:	HBG02665
++  */
++ 
++ #ifdef JIV
++ extern short JIVGetLeftBearing(const char*, int, FontRep*, FontRep*);
++ extern short JIVGetRightBearing(const char*, int, FontRep*, FontRep*);
++ extern short JIVGetWidth(const char*, int, FontRep*, FontRep*);
++ extern short JIVGetAscent(const char*, int, FontRep*, FontRep*);
++ extern short JIVGetDescent(const char*, int, FontRep*, FontRep*);
++ extern void JIVDrawString(XDisplay*, XDrawable, GC, const Font*,
++ 		   int, int, unsigned char*, int, Display*);
++ extern void JIVDrawImageString(XDisplay *, XDrawable, GC, const Font*,
++ 			       int, int, unsigned char*, int, Display*);
++ #endif /* JIV */
+Index: include_interviews/clthandler.h
+diff -c /dev/null include_interviews/clthandler.h:1.1
+*** /dev/null	Tue Mar 24 09:02:33 1998
+--- src/include/InterViews/clthandler.h	Tue Mar 24 09:02:30 1998
+***************
+*** 0 ****
+--- 1,55 ----
++ /*
++  * Copyright (c) 1991, 1992 Fujitsu Oita Software Laboratory Limited
++  *
++  * Permission to use, copy, modify, and distribute this software and its
++  * documentation for any purpose is hereby granted without fee, provided
++  * that the above copyright notice and this permission notice appear in
++  * all copies of the software and related documentation, and the name of
++  * Fujitsu Oita Software Laboratory may not be used in any advertising or
++  * publicity relating to the software without specific, prior written
++  * prior permission of Fujitsu Oita Software Laboratory. 
++  * 
++  * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND, 
++  * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY 
++  * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  
++  *
++  * IN NO EVENT SHALL FUJITSU OITA SOFTWARE LABORATORY BE LIABLE FOR ANY
++  * SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR
++  * ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
++  * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY
++  * OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++  * PERFORMANCE OF THIS SOFTWARE.
++  *
++  * Author:  Toshihisa Eto, Fujitsu Oita Software Laboratory Limited, Japan
++  * 	E-Mail: eto@ai.cs.fujitsu.co.jp
++  * 	Nifty:	HBG02665
++  */
++ 
++ #ifdef JIV
++ 
++ #ifndef iv_clthandler_h
++ #define iv_clthandler_h
++ 
++ #include <InterViews/boolean.h>
++ #include <InterViews/handler.h>
++ 
++ #include <InterViews/_enter.h>
++ 
++ class Event;
++ 
++ class ClientMessageHandler : public Handler {
++ protected:
++     ClientMessageHandler();
++ public:
++     virtual ~ClientMessageHandler();
++ 
++     virtual boolean event(Event&) = 0;
++ 
++     virtual boolean handle_p(const Event&);
++ };
++ 
++ #include <InterViews/_leave.h>
++ 
++ #endif
++ 
++ #endif	/* JIV */
+Index: include_interviews/event.h
+diff -c include_interviews/event.h:1.1 include_interviews/event.h:1.2
+*** include_interviews/event.h:1.1	Tue Mar 17 15:56:34 1998
+--- src/include/InterViews/event.h	Tue Mar 24 09:02:31 1998
+***************
+*** 52,58 ****
+--- 52,65 ----
+      EnterEvent,		/* mouse enters canvas */
+      LeaveEvent,		/* mouse leaves canvas */
+      FocusInEvent,	/* focus for keyboard events */
++ #ifndef JIV			/* patch by eto@ai.cs.fujitsu.co.jp */
+      FocusOutEvent 	/* lose keyboard focus */
++ #else /* JIV */
++     FocusOutEvent, 	/* lose keyboard focus */
++     ClientEvent,	/* message from other client */
++     PropertyEvent, 	/* get property change */
++     NullEvent		/* init value for Event::eventType */
++ #endif /* JIV */		/* patch end */
+  };
+  
+  /* mouse button anachronisms */
+***************
+*** 62,68 ****
+--- 69,79 ----
+  
+  class Event {
+  public:
++ #ifndef JIV			/* patch by eto@ai.cs.fujitsu.co.jp */
+      enum { undefined, motion, down, up, key, other_event };
++ #else	/* JIV */
++     enum { undefined, motion, down, up, key, property, other_event };
++ #endif	/* JIV */		/* patch end */
+      enum { none, any, left, middle, right, other_button };
+  
+      Event();
+Index: include_interviews/font.h
+diff -c include_interviews/font.h:1.1 include_interviews/font.h:1.2
+*** include_interviews/font.h:1.1	Tue Mar 17 15:56:34 1998
+--- src/include/InterViews/font.h	Tue Mar 24 09:02:31 1998
+***************
+*** 41,46 ****
+--- 41,49 ----
+  class FontImpl;
+  class FontRep;
+  class String;
++ #ifdef JIV
++ class CompositeFont;
++ #endif /* JIV */
+  
+  /*
+   * FontFamily - manages related fonts
+***************
+*** 122,134 ****
+--- 125,150 ----
+  
+      virtual int index(const char*, int, float offset, boolean between) const;
+  
++ #ifdef JIV
++     boolean isComposite() const;
++     const CompositeFont* getCompositeFont() const;
++ #endif /* JIV */
++ 
+      FontRep* rep(Display*) const;
++ #ifdef JIV
++     FontRep* rep2byte(Display*) const;
++ #endif /* JIV */
+  protected:
+      Font(FontImpl*);
+  private:
+      friend class FontImpl;
+  
+      FontImpl* impl_;
++ #ifdef JIV
++     FontImpl* impl2byte_;
++     boolean isCompositeFlag;
++     const CompositeFont* cfont;
++ #endif /* JIV */
+  
+      /* anachronisms */
+  public:
+***************
+*** 140,145 ****
+--- 156,248 ----
+      int Width(const char*) const;
+      int Width(const char*, int) const;
+  };
++ #ifdef JIV
++ inline boolean Font::isComposite() const {return isCompositeFlag;}
++ inline const CompositeFont* Font::getCompositeFont() const {
++     return cfont;
++ }
++ 
++ class CompositeFont {
++   public:
++     CompositeFont(const char*, const char*, const char*,
++ 		  const char* = 0);
++     ~CompositeFont();
++ 
++     static const CompositeFont* findCompositeFont(const char*);
++ 
++     const char* getFontName() const;
++     const char* get1ByteFontName() const;
++     const char* get2ByteFontName() const;
++ 
++     boolean displayBold() const;
++     boolean displayItalic() const;
++ 
++   private:
++     char* compositeFontName;
++     char* fontName1;
++     char* fontName2;
++     boolean displayBoldFlag;
++     boolean displayItalicFlag;
++ };
++ 
++ inline const char* CompositeFont::getFontName() const {
++     return compositeFontName;
++ }
++ 
++ inline const char* CompositeFont::get1ByteFontName() const {
++     return fontName1;
++ }
++ 
++ inline const char* CompositeFont::get2ByteFontName() const {
++     return fontName2;
++ }
++ 
++ inline boolean CompositeFont::displayBold() const {
++     return displayBoldFlag;
++ }
++ 
++ inline boolean CompositeFont::displayItalic() const {
++     return displayItalicFlag;
++ }
++ 
++ class PSCompositeFontRep;
++ 
++ class PSCompositeFont {
++   public:
++     PSCompositeFont(const char*, const char*, const char*);
++     ~PSCompositeFont();
++ 
++     static const PSCompositeFont* findFont(const char*);
++     static const char* getPreamble();
++     static void setPreamble(const char*);
++ 
++     const char* getFontName() const;
++     const char* getAsciiFontName() const;
++     const char* getKanjiFontName() const;
++ 
++   private:
++     PSCompositeFontRep*	rep_;
++ };
++ 
++ class PSSlantFontRep;
++ 
++ class PSSlantFont {
++   public:
++     PSSlantFont(const char*, const char*);
++     ~PSSlantFont();
++ 
++     static PSSlantFont* findFont(const char*);
++     static void resetPrintFlag();
++ 
++     const char* getFontName() const;
++     const char* getOriginalFontName() const;
++     boolean printFlag();
++     void printFlag(boolean);
++ 
++   private:
++     PSSlantFontRep*	rep_;
++ };
++ #endif JIV
+  
+  #include <InterViews/_leave.h>
+  
+Index: include_interviews/kinput.h
+diff -c /dev/null include_interviews/kinput.h:1.1
+*** /dev/null	Tue Mar 24 09:02:33 1998
+--- src/include/InterViews/kinput.h	Tue Mar 24 09:02:31 1998
+***************
+*** 0 ****
+--- 1,65 ----
++ /*
++  * Copyright (c) 1991, 1992 Fujitsu Oita Software Laboratory Limited
++  *
++  * Permission to use, copy, modify, and distribute this software and its
++  * documentation for any purpose is hereby granted without fee, provided
++  * that the above copyright notice and this permission notice appear in
++  * all copies of the software and related documentation, and the name of
++  * Fujitsu Oita Software Laboratory may not be used in any advertising or
++  * publicity relating to the software without specific, prior written
++  * prior permission of Fujitsu Oita Software Laboratory. 
++  * 
++  * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND, 
++  * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY 
++  * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  
++  *
++  * IN NO EVENT SHALL FUJITSU OITA SOFTWARE LABORATORY BE LIABLE FOR ANY
++  * SPECIAL, INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR
++  * ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
++  * WHETHER OR NOT ADVISED OF THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY
++  * OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
++  * PERFORMANCE OF THIS SOFTWARE.
++  *
++  * Author:  Toshihisa Eto, Fujitsu Oita Software Laboratory Limited, Japan
++  * 	E-Mail: eto@ai.cs.fujitsu.co.jp
++  * 	Nifty:	HBG02665
++  */
++ 
++ #ifdef JIV
++ 
++ class KinputRep;
++ class Window;
++ class Font;
++ 
++ class Kinput {
++   public:
++     // Instance handling method
++     Kinput(Window*);
++     ~Kinput();
++ 
++     // method for communicate with kinput
++     void BeginConversion();
++     void BeginConversion(int, int);
++     void EndConversion();
++ 
++     // method for kinput event handling
++     boolean IsKinputEvent(const Event& ev);
++     boolean Handle(Event& ev);
++ 
++     // get result string
++     const char* GetConvertedString();
++ 
++     // set property for over-the-spot conversion (not implemented yet)
++     void	SetFont(Font*);
++     void	SetColor(const char*);
++     void	SetConversionSpot(int, int);
++ 
++ 
++     // Public method for search current status
++     boolean IsActive();
++ 
++   private:
++     KinputRep*	rep;
++ };
++ 
++ #endif	/* JIV */
+Index: include_interviews/style.h
+diff -c include_interviews/style.h:1.1 include_interviews/style.h:1.2
+*** include_interviews/style.h:1.1	Tue Mar 17 15:56:37 1998
+--- src/include/InterViews/style.h	Tue Mar 24 09:02:31 1998
+***************
+*** 92,97 ****
+--- 92,101 ----
+      boolean find_attribute(const char* name, Coord&) const;
+      boolean value_is_on(const String& name) const;
+      boolean value_is_on(const char* name) const;
++ 
++ #ifdef JIV
++     virtual void initCompositeFont() const;
++ #endif /* JIV */
+  private:
+      friend class StyleRep;
+  
+Index: include_unidraw/manips.h
+diff -c include_unidraw/manips.h:1.1 include_unidraw/manips.h:1.2
+*** include_unidraw/manips.h:1.1	Tue Mar 17 15:56:50 1998
+--- src/include/Unidraw/manips.h	Tue Mar 24 09:02:36 1998
+***************
+*** 47,52 ****
+--- 47,56 ----
+  class TextDisplay;
+  class Transformer;
+  class UList;
++ #ifdef JIV
++ class Kinput;
++ class KinputHandler;
++ #endif /* JIV */
+  
+  class ManipGroup : public Manipulator {
+  public:
+***************
+*** 232,237 ****
+--- 236,247 ----
+  
+      boolean Contains(Coord, Coord);
+      int Locate(Coord, Coord);
++ 
++ #ifdef JIV
++     void BeginConversion();
++     void SetConversionSpot();
++ #endif /* JIV */
++ 
+  protected:
+      void Init(
+          Viewer*, Painter*, Coord, Coord, Tool*, boolean,const char* =nil,int =0
+***************
+*** 256,261 ****
+--- 266,275 ----
+      int _bufsize;
+      int _dot, _mark;
+      Event _grasp_e;
++ #ifdef JIV
++     Kinput* kinput;
++     KinputHandler* khandler;
++ #endif /* JIV */
+  };
+  
+  inline int TextManip::Dot () { return _dot; }
+Index: include_components/psview.h
+diff -c include_components/psview.h:1.1 include_components/psview.h:1.2
+*** include_components/psview.h:1.1	Tue Mar 17 15:56:59 1998
+--- src/include/Unidraw/Components/psview.h	Tue Mar 24 09:02:39 1998
+***************
+*** 71,77 ****
+--- 71,83 ----
+      virtual void GetBox(Coord&, Coord&, Coord&, Coord&);
+      virtual void GetGridSpacing(float&, float&);
+  
++ #ifdef JIV
++     virtual void CmpFontProcs(ostream&);
++ #endif /* JIV */
+      virtual void ConstProcs(ostream&);
++ #ifdef PS_FIX
++     virtual void IdrawDictPreamble(ostream&);
++ #endif
+      virtual void BeginProc(ostream&);
+      virtual void EndProc(ostream&);
+  
+***************
+*** 111,116 ****
+--- 117,127 ----
+  protected:
+      UList* _fonts;
+  };
++ 
++ #ifdef PS_FIX
++ inline void PostScriptView::IdrawDictPreamble(ostream&) {
++ }
++ #endif
+  
+  class PostScriptViews : public PostScriptView {
+  public:
+Index: config_ivtools/params.def
+diff -c config_ivtools/params.def:1.1 config_ivtools/params.def:1.2
+*** config_ivtools/params.def:1.1	Tue Mar 17 15:57:15 1998
+--- config/params.def	Tue Mar 24 09:02:45 1998
+***************
+*** 385,391 ****
+  #endif
+  
+  #ifndef IvCCDefines
+! #define IvCCDefines $(LANGUAGE_CCDEFINES) $(BACKWARD_CCDEFINES)
+  #endif
+  
+  #ifndef LanguageCCDefines
+--- 385,391 ----
+  #endif
+  
+  #ifndef IvCCDefines
+! #define IvCCDefines $(LANGUAGE_CCDEFINES) $(BACKWARD_CCDEFINES) $(JIV_CCDEFINES)
+  #endif
+  
+  #ifndef LanguageCCDefines
+***************
+*** 396,401 ****
+--- 396,405 ----
+  #define BackwardCompatibilityCCDefines -Div2_6_compatible
+  #endif
+  
++ #ifndef JIVCCDefines
++ #define JapaneseIVCCDefines -DJIV -DPS_FIX -DJIV_EXTEND -DIV_FIX
++ #endif
++ 
+  #ifndef ExtraCCDefines
+  #if SystemV
+  #define ExtraCCDefines -DSYSV
+***************
+*** 432,437 ****
+--- 436,442 ----
+         IV_CCDEFINES = IvCCDefines
+   LANGUAGE_CCDEFINES = LanguageCCDefines
+   BACKWARD_CCDEFINES = /* defined when Use_2_6() is used in Imakefile */
++       JIV_CCDEFINES = JapaneseIVCCDefines
+      EXTRA_CCDEFINES = ExtraCCDefines
+      OTHER_CCDEFINES = OtherCCDefines
+  
+Index: config_ivtools/site.def.LINUX
+diff -c config_ivtools/site.def.LINUX:1.1 config_ivtools/site.def.LINUX:1.2
+*** config_ivtools/site.def.LINUX:1.1	Tue Mar 17 15:57:15 1998
+--- config/site.def.LINUX	Tue Mar 24 09:02:45 1998
+***************
+*** 38,53 ****
+   * Enable/disable relative InterViews-style installation of binaries
+   */
+  #undef InstallRelative
+! #define InstallRelative YES
+  
+  /* 
+  /* 
+   * Where to put binaries, libraries, and data files when InstallRelative is NO
+   */ 
+  #if 1
+! #define BinDir /usr/local/bin
+! #define LibDir /usr/local/lib
+! #define LibAllDir /usr/local/lib/ivtools
+  #else
+  #define InstalledRoot $(DESTDIR)/usr/X11R6 // for Debian
+  #endif
+--- 38,56 ----
+   * Enable/disable relative InterViews-style installation of binaries
+   */
+  #undef InstallRelative
+! #define InstallRelative NO
+  
+  /* 
+  /* 
+   * Where to put binaries, libraries, and data files when InstallRelative is NO
+   */ 
+  #if 1
+! #define BinDir /usr/local/ivtools/bin
+! #define LibDir /usr/local/ivtools/lib
+! #define IncDir /usr/local/ivtools/include
+! #define ManDir /usr/local/ivtools/man
+! #define ConfigDir /usr/local/ivtools/config
+! #define LibAllDir /usr/local/ivtools/share
+  #else
+  #define InstalledRoot $(DESTDIR)/usr/X11R6 // for Debian
+  #endif
+Index: config_iv/iv-linux.cf
+diff -c config_iv/iv-linux.cf:1.1 config_iv/iv-linux.cf:1.2
+*** config_iv/iv-linux.cf:1.1	Tue Mar 17 15:57:19 1998
+--- config/InterViews/iv-linux.cf	Tue Mar 24 09:02:48 1998
+***************
+*** 1,15 ****
+! /* 
+!  * This is the Linux configuration file for Interviews 3.1
+!  * Set up to use gcc in local.def
+!  */
+  
+! #define OptimizeCCFlags -O6
+! #define TIFFOptimizeCFlags -O
+  
+! #if 0 
+! #define ExtraCCDefines -DLINUX 
+! #endif
+  
+! #define ExtraCCLdFlags /**/
+  
+! #include <InterViews/xparams.cf>
+--- 1,27 ----
+! /* Configuration for Linux				*/
+! /*	Thanks to noti@ssel.toshiba.co.jp		*/
+! /* $Id$ */
+! #define OSDefines -Dlinux -D_POSIX_SOURCE \
+! 		-D_BSD_SOURCE -D_SVID_SOURCE -DX_LOCALE
+! #define OSRelease
+  
+! #include <x386.cf>
+! #include <InterViews/xparams.cf>
+  
+! /*** if bug then dis-comment optimize(-O2) */
+! #undef  OptimizeCCFlags
+! #define OptimizeCCFlags -O
+  
+! #undef  DebugCCFlags
+! #define DebugCCFlags
+  
+! #ifndef TIFFCDriver
+! #define TIFFCDriver cc
+! #endif 
+! 
+! #ifndef TIFFOptimizeCFlags
+! #define TIFFOptimizeCFlags -O
+! #endif 
+! 
+! #undef SharedCCFlags
+! #define SharedCCFlags -fPIC -fshared-data
+Index: config_iv/iv-sun.cf
+diff -c config_iv/iv-sun.cf:1.1 config_iv/iv-sun.cf:1.2
+*** config_iv/iv-sun.cf:1.1	Tue Mar 17 15:57:20 1998
+--- config/InterViews/iv-sun.cf	Tue Mar 24 09:02:48 1998
+***************
+*** 17,22 ****
+--- 17,27 ----
+  
+  /*
+   * A bug in SunOS 4.1 causes dbx to crash if it tries to load an
++ 
++ /*
++  * if you use Sun C++ 2.1, define bellow
++  */
++ #define USE_SUNCxx2
+   * application which uses a debuggable shared library, so we can't
+   * have both debuggable and shareable libraries.
+   */

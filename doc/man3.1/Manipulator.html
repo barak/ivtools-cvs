@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Manipulator  - base class for defining direct-manipulation
+       semantics
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/manip.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Tools use manipulator objects to encapsulate the mechanics
+       of  direct  manipulation.   Manipulators  turn  user input
+       events into an animation sequence  that  characterize  the
+       manipulation.  Manipulators abstract the manipulation into
+       three phases: the <I>grasping</I>  phase,  which  occurs  at  the
+       start  of  the  manipulation and lets the manipulator ini-
+       tialize state it will need in later phases; the <I>manipulat-</I>
+       <I>ing</I>  phase,  during  which  the  manipulator accepts input
+       events and generates graphical output  that  characterizes
+       successive frames of the animation; and finally the <I>effect</I>
+       phase, which occurs at the end  of  the  manipulation  and
+       lets  the  manipulator finalize its state.  Manipulator is
+       an abstract  base  class.   Subclasses  support  different
+       manipulation semantics.
+
+
+</PRE>
+<H2>MANIPULATOR PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Grasp(Event&amp;)</B>
+              Grasp  is  called  once  at the beginning of direct
+              manipulation to allow the manipulator to initialize
+              its internal state based on the initiating event.
+
+       <B>virtual</B> <B>boolean</B> <B>Manipulating(Event&amp;)</B>
+              Manipulating is called repeatedly during the manip-
+              ulation whenever a  new  event  arrives,  until  it
+              returns  false.   Each  call to Manipulating should
+              produce a new frame of the animation  that  charac-
+              terizes the manipulation.
+
+       <B>virtual</B> <B>void</B> <B>Effect(Event&amp;)</B>
+              Effect  is called once at the end of direct manipu-
+              lation to allow the  manipulator  to  finalize  its
+              internal  state based on the last event supplied to
+              the Manipulating operation.
+
+       <B>virtual</B> <B>void</B> <B>SetViewer(Viewer*)</B>
+       <B>virtual</B> <B>Viewer*</B> <B>GetViewer()</B>
+       <B>virtual</B> <B>void</B> <B>SetTool(Tool*)</B>
+       <B>virtual</B> <B>Tool*</B> <B>GetTool()</B>
+              Get and set the viewer, in  which  the  manipulator
+              generates  graphical output, and the tool that cre-
+              ated the manipulator.  These operations do  nothing
+              by  default;  subclasses that require this informa-
+              tion must redefine these operations to  assign  and
+              retrieve the state they require.
+
+       <B>Manipulator()</B>
+              The constructor is protected to disallow instantia-
+              tion of abstract base class objects.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>, <B>Tool(3U)</B>, <B>Viewer(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

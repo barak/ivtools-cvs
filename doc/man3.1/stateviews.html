@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       BrushVarView,   CompNameVarView,   FileNameVarView,  Font-
+       VarView,   GravityVarView,   MagnifVarView,   ModifStatus-
+       VarView, NameVarView, PatternVarView - various state vari-
+       able view subclasses
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/stateviews.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Unidraw predefines several state variable view  subclasses
+       for  the  the  state  variable  subjects it predefines, as
+       described below.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>BrushVarView(BrushVar*,</B> <B>ColorVar*</B> <B>=</B> <B>nil)</B>
+       <B>FontVarView(FontVar*,</B> <B>Alignment</B> <B>=</B> <B>Center)</B>
+       <B>PatternVarView(PatternVar*,</B> <B>ColorVar*</B> <B>=</B> <B>nil)</B>
+              Views of graphics state  state  variable  subjects.
+              BrushVarView  displays  a  short  line drawn in the
+              subject's brush and in a  color  specified  by  the
+              given  ColorVar (black if no ColorVar is supplied).
+              The BrushVarView displays ``None''  if  the  Brush-
+              Var's  brush  is  invisible.   Similarly,  Pattern-
+              VarView displays a filled rectangle  drawn  in  the
+              subject's  pattern  and in a color specified by the
+              given ColorVar (black if no ColorVar is  supplied).
+              The  PatternVarView  displays  ``None'' if the Pat-
+              ternVar's pattern is invisible.   FontVarView  dis-
+              plays  the  name  of its subject's font, aligned as
+              specified in its canvas.
+
+       <B>GravityVarView(GravityVar*,</B> <B>Alignment</B> <B>=</B> <B>Center)</B>
+              Displays either ``gravity on'' or a blank,  depend-
+              ing  on  whether the subject indicates that gravity
+              is on or not.
+
+       <B>MagnifVarView(MagnifVar*,</B> <B>Alignment</B> <B>=</B> <B>Center)</B>
+              Displays ``mag <I>x</I>x'', where <I>x</I> is the current modifi-
+              cation factor recorded in the subject.
+
+       <B>ModifStateVarView(ModifStateVar*,</B> <B>Alignment</B> <B>=</B> <B>Center)</B>
+              Displays  either  an asterisk or a blank, depending
+              on whether the subject records that  its  component
+              is modified.
+
+       <B>NameVarView(</B>
+           <B>NameVar*,</B> <B>Alignment</B> <B>=</B> <B>Center,</B> <B>const</B> <B>char*</B> <B>sample</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+
+       <B>FileNameVarView(</B>
+           <B>NameVar*,</B> <B>Alignment</B> <B>=</B> <B>Center,</B>
+           <B>boolean</B> <B>relative</B> <B>=</B> <B>true,</B> <B>const</B> <B>char*</B> <B>sample</B> <B>=</B> <B>nil</B>
+           <B>CompNameVarView*,</B> <B>Alignment</B> <B>=</B> <B>Center,</B>
+           <B>boolean</B> <B>relative</B> <B>=</B> <B>true,</B> <B>const</B> <B>char*</B> <B>sample</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+              Display the subject's string aligned  as  specified
+              with respect to the canvas.  Each constructor takes
+              an optional sample string that defines  the  view's
+              natural  size.  FileNameVarView provides a special-
+              ized view of a NameVar for displaying  file  names.
+              It adds a <I>relative</I> argument for displaying the file
+              name either as a  relative  or  full  path.   Comp-
+              NameVarView   provides  similar  functionality  for
+              CompNameVar subjects, except it precedes  its  sub-
+              ject's component's name with ``[part of]'' for com-
+              ponents that have a named parent but that  are  not
+              named themselves.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>statevars(3U)</B>, <B>StateVarView(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

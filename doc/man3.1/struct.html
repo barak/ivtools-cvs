@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       BackCmd,  FrontCmd,  GroupCmd,  UngroupCmd  - commands for
+       modifying components structurally
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/struct.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       BackCmd, FrontCmd, GroupCmd,  and  UngroupCmd  are  purely
+       interpretive  commands for altering the structure of their
+       editor's component.  All redefine their Execute and Unexe-
+       cute  operations  to  let the editor's component interpret
+       them as it wishes.
+
+
+</PRE>
+<H2>BACKCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>BackCmd(ControlInfo*)</B>
+       <B>BackCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new BackCmd.
+
+
+</PRE>
+<H2>FRONTCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>FrontCmd(ControlInfo*)</B>
+       <B>FrontCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new FrontCmd.
+
+
+</PRE>
+<H2>GROUPCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>GroupCmd(ControlInfo*,</B> <B>GraphicComp*</B> <B>=</B> <B>nil)</B>
+       <B>GroupCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>GraphicComp*</B> <B>=</B> <B>nil)</B>
+              Create a new GroupCmd,  optionally  specifying  the
+              component into which components will be grouped.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+              Execute  will  set  the value of the <B>_</B><I>executed</I> pro-
+              tected member variable to <I>true</I> as a side effect  if
+              anything  was  grouped.   Similarly, Unexecute will
+              set reset the value to <I>false</I> as a side  effect  the
+              operation was undone.
+
+       <B>GraphicComp*</B> <B>GetGroup()</B>
+       <B>void</B> <B>SetGroup(GraphicComp*)</B>
+              Get or set the component into which components will
+              be grouped.   SetGroup  will  <I>not</I>  delete  the  old
+              value.
+
+
+</PRE>
+<H2>UNGROUPCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>UngroupCmd(ControlInfo*)</B>
+       <B>UngroupCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new UngroupCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+              Execute  will  set  the value of the <B>_</B><I>executed</I> pro-
+              tected member variable to <I>true</I> as a side effect  if
+              operation was undone.
+
+       <B>Clipboard*</B> <B>GetKids()</B>
+       <B>void</B> <B>SetKids(Clipboard*)</B>
+              Explicitly  set  and get a clipboard containing the
+              child components  that  were  ungrouped,  which  is
+              stored  in  the <B>_</B><I>kids</I> protected member.  UngroupCmd
+              does not initialize this member; it merely provides
+              the  storage  as  a  convenience to components that
+              interpret the command and need a place to store the
+              ungrouped  children  to  support reverse execution.
+              However, UngroupCmd deletes the  clipboard  (if  it
+              exists) in ~UngroupCmd. SetKids will <I>not</I> delete the
+              old value.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>, <B>GraphicComp(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

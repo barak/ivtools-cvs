@@ -1,0 +1,412 @@
+
+<html><head><TITLE>Description of Glyph</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Glyph</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Resource.html" >Resource</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+InterViews 3.1 lightweight glyphs<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Resource.html" >Resource</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Glyph><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+InterViews/glyph.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../refman3.1/refman.html#PAGE14>in reference manual</a>.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="allocate(Canvas*&#38;&#38;COMMconstAllocation&#38;&#38;&#38;COMMExtension&#38;)">
+    <B>allocate</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;, <A HREF="Extension.html" >Extension</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="allotment(GlyphIndexindex&#38;&#38;COMMDimensionName&#38;&#38;COMMAllotment&#38;)">
+    <B>allotment</B> (GlyphIndex index, DimensionName, <A HREF="Allotment.html" >Allotment</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="append(Glyph*)">
+    <B>append</B> (<A HREF="Glyph.html" >Glyph</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="change(GlyphIndex)">
+    <B>change</B> (GlyphIndex) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="clone()">
+    <B>clone</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="component(GlyphIndex)">
+    <B>component</B> (GlyphIndex) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Glyph.html" >Glyph</A>* 
+    <A NAME="compose(GlyphBreakType)">
+    <B>compose</B> (GlyphBreakType) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual GlyphIndex 
+    <A NAME="count()">
+    <B>count</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="draw(Canvas*&#38;&#38;COMMconstAllocation&#38;)">
+    <B>draw</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="enum&#38;21">
+    <B>enum</B>
+     { no_break, pre_break, in_break, post_break } 
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="insert(GlyphIndex&#38;&#38;COMMGlyph*)">
+    <B>insert</B> (GlyphIndex, <A HREF="Glyph.html" >Glyph</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="pick(Canvas*&#38;&#38;COMMconstAllocation&#38;&#38;&#38;COMMintdepth&#38;&#38;COMMHit&#38;)">
+    <B>pick</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;, int depth, <A HREF="Hit.html" >Hit</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="prepend(Glyph*)">
+    <B>prepend</B> (<A HREF="Glyph.html" >Glyph</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="print(Printer*&#38;&#38;COMMconstAllocation&#38;)">
+    <B>print</B> (<A HREF="Printer.html" >Printer</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="remove(GlyphIndex)">
+    <B>remove</B> (GlyphIndex) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="replace(GlyphIndex&#38;&#38;COMMGlyph*)">
+    <B>replace</B> (GlyphIndex, <A HREF="Glyph.html" >Glyph</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="request(Requisition&#38;)">
+    <B>request</B> (<A HREF="Requisition.html" >Requisition</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="undraw()">
+    <B>undraw</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Glyph()">
+    <B>~Glyph</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Glyph()">
+    <B>Glyph</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

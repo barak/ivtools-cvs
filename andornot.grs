@@ -1,0 +1,14 @@
+graphdraw(5,5
+    gs( :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :font "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*","Helvetica",12 :graypat 1),
+    gs( :fillbg 1 :brush 65535,0 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :graypat 0),
+    node( :reqlabel 1 :ellipse 300,458,35,20 :ellipsetrans 1,0,0,1,15,36 :text 12,"NOT" :texttrans 1,0,0,1,302.5,487 :gs 0 :valexpr "if(in1=='I'||in1=='N' :then in1 :else !in1) /* NOT */" :val N),
+    node( :reqlabel 1 :ellipse 300,458,35,20 :ellipsetrans 1,0,0,1,-102,-33 :text 12,"AND" :texttrans 1,0,0,1,185,418 :gs 0 :valexpr "if(in1=='I'||in2=='I' :then 'I' :else if(in1=='N'||in2=='N' :then if(in1=='N'&&in2=='N' :then 'N' :else 'I') :else in1&&in2)) /* OR */" :val 'N'),
+    node( :reqlabel 1 :ellipse 300,458,35,20 :ellipsetrans 1,0,0,1,151,-34 :text 12,"OR" :texttrans 1,0,0,1,442.5,418 :gs 0 :transform 1,0,0,1,0,1 :valexpr "if(in1=='I'||in2=='I' :then 'I' :else if(in1=='N'||in2=='N' :then if(in1=='N'&&in2=='N' :then 'N' :else 'I') :else in1||in2)) /* OR */" :val 'N'),
+    node( :reqlabel 0 :ellipse 178,503,35,20 :ellipsetrans 1,0,0,1,-118,-3 :text 16,"" :texttrans 1,0,0,1,60,485 :gs 0 :val 'N'),
+    node( :reqlabel 0 :ellipse 172,341,35,20 :ellipsetrans 1,0,0,1,-116,15 :text 16,"" :texttrans 1,0,0,1,56,341 :gs 0 :val 'N'),
+    edge(85,486,173,439 :arrowscale 1.5 :tail :startnode 3 :endnode 1 :gs 1),
+    edge(82,369,172,412 :arrowscale 1.5 :tail :startnode 4 :endnode 1 :gs 1),
+    edge(222,439,291,480 :arrowscale 1.5 :tail :startnode 1 :endnode 0 :gs 1),
+    edge(341,481,425,438 :arrowscale 1.5 :tail :startnode 0 :endnode 2 :gs 1),
+    edge(233,425,416,424 :arrowscale 1.5 :tail :startnode 1 :endnode 2 :gs 1)
+)

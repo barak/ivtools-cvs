@@ -1,0 +1,283 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Unidraw  -  one-of-a-kind object for coordinating and con-
+       trolling a Unidraw application
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/unidraw.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Unidraw applications create a single instance of a Unidraw
+       object,  which  does  several things.  It creates a World,
+       establishing the connection to the underlying window  sys-
+       tem.   It  initializes the catalog and other objects, man-
+       ages editor instances, and defines  the  application  main
+       loop.   It  also maintains histories of commands that have
+       be executed and reverse-executed for each component  hier-
+       archy  being edited.  Finally, it cleans up internal state
+       when it is deleted to ensure orderly program  termination.
+
+       The Unidraw object must be created before opening any edi-
+       tors but after creating a catalog.  Below is the main pro-
+       gram for a typical Unidraw application:
+
+       int main (int argc, char** argv) {
+           AppSpecificCreator creator;
+           Unidraw* unidraw = new Unidraw(
+               new Catalog("appName", &amp;creator),
+               argc, argv, options, properties
+           );
+
+           unidraw-&gt;Open(new AppSpecificEditor);
+           unidraw-&gt;Run();
+           delete unidraw;
+           return 0;
+       }
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Unidraw(</B>
+           <B>Catalog*,</B> <B>int</B> <B>argc,</B> <B>char**</B> <B>argv,</B>
+           <B>OptionDesc*</B> <B>=</B> <B>nil,</B> <B>PropertyData*</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+
+       <B>Unidraw(Catalog*,</B> <B>World*)</B>
+              The  first  constructor  form  requires  a  catalog
+              object  and  command  line  argument   information.
+              Other  arguments  include  pointers to PropertyData
+              and OptionDesc arrays.  This constructor creates  a
+              World  instance,  passing  whichever of these argu-
+              ments are supplied (except the catalog).  To  spec-
+              ify  a  World  instance  explicitly, use the second
+              constructor form.
+
+       <B>virtual</B> <B>void</B> <B>Run()</B>
+       <B>virtual</B> <B>void</B> <B>Quit()</B>
+
+       <B>virtual</B> <B>void</B> <B>Update(boolean</B> <B>immedate</B> <B>=</B> <B>false)</B>
+              Bring  the  screen up to date with the state of the
+              application's objects.  By default,  this  involves
+              moving  connectors  to  their  proper positions (by
+              calling Solve on the  global  csolver  object)  and
+              telling  editors  to  update themselves (by calling
+              their Update functions).  Because Update may  carry
+              out potentially lengthy operations, Unidraw batches
+              Update calls by default.  This ensures that  multi-
+              ple  consecutive calls do not induce redundant com-
+              putations.  To force an  immediate  update,  simply
+              call Update(<I>true</I>).
+
+       <B>virtual</B> <B>void</B> <B>Open(Editor*)</B>
+       <B>virtual</B> <B>boolean</B> <B>Opened(Editor*)</B>
+              Open  inserts  an  editor into the world, making it
+              visible on the display.   The  user  positions  the
+              editor's window by default.  Opened returns whether
+              an editor has been opened already.
+
+       <B>virtual</B> <B>void</B> <B>Close(Editor*)</B>
+       <B>virtual</B> <B>void</B> <B>CloseDependents(Component*)</B>
+       <B>virtual</B> <B>void</B> <B>CloseAll()</B>
+              Close closes a specified editor, removing  it  from
+              the  user's  view <I>and</I> <I>deleting</I> <I>it</I>.  CloseDependents
+              closes those editors that report  a  dependence  on
+              the  given component via their DependsOn operation.
+              CloseAll closes all open editors.   ~Unidraw  calls
+              CloseAll.
+
+       <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>boolean</B> <B>Done(Iterator)</B>
+              Operations  for iterating over the Unidraw object's
+              list of open editors.  First initializes an  itera-
+              tor  to  point  to  the beginning of the list, Next
+              increments the iterator to point to  the  following
+              editor,  and Done returns whether or not the itera-
+              tor points beyond the first or last editor  in  the
+              list.
+
+       <B>Editor*</B> <B>GetEditor(Iterator)</B>
+              Return the editor to which an iterator points.
+
+       <B>Editor*</B> <B>Find(Component*)</B>
+       <B>Editor*</B> <B>FindAny(Component*)</B>
+              Operations  for  finding an (or the) editor associ-
+              ated with a given  component.   Find  searches  the
+              list  of  editors  for  the  one whose GetComponent
+              operation returns  the  given  component.   FindAny
+              returns  the first editor in the list whose GetCom-
+
+       <B>Catalog*</B> <B>GetCatalog()</B>
+              Return the catalog passed to the constructor.
+
+       <B>World*</B> <B>GetWorld()</B>
+              Return  the  world object, which the Unidraw object
+              creates when it is instantiated.
+
+       <B>void</B> <B>Log(Command*)</B>
+       <B>void</B> <B>Undo(Component*,</B> <B>int</B> <B>i</B> <B>=</B> <B>1)</B>
+       <B>void</B> <B>Redo(Component*,</B> <B>int</B> <B>i</B> <B>=</B> <B>1)</B>
+              The Unidraw object maintains histories of  commands
+              associated with a given component hierarchy.  There
+              are two command histories per hierarchy:  the  <I>past</I>
+              history  and  the  <I>future</I> history.  These histories
+              normally contain commands that have  been  executed
+              and  unexecuted to support arbitrary level undo and
+              redo.  For example, after  a  viewer  executes  the
+              command  that  a  tool  generates by interpreting a
+              manipulator, it will record that command in a  past
+              history for possible undoing in the future.
+
+              The Log operation logs a command, placing it on the
+              past history  for  the  component  hierarchy  being
+              edited.  Log determines the past that is approprate
+              from the command's editor, which specifies the com-
+              ponent  (hence  the  hierarchy) that it is editing.
+              Undo reverse-executes the last <I>i</I> commands that were
+              logged  for a given component's hierarchy and moves
+              them from their past history to  the  corresponding
+              future history.  Redo re-executes the future <I>i</I> com-
+              mands and moves them to the past.  Note that  call-
+              ing  Redo  without a preceding Undo is meaningless;
+              thus calling Log  will  clear  the  future  history
+              associated with the affected component hierarchy.
+
+       <B>void</B> <B>SetHistoryLength(int)</B>
+       <B>int</B> <B>GetHistoryLength()</B>
+              Assign  and  retrieve  the  maximum command history
+              length.  No more than this  many  commands  can  be
+              undone  and  redone.   The  default  length  is 20.
+              Older commands are  deleted  automatically  as  new
+              commands are logged.
+
+       <B>void</B> <B>ClearHistory(Component*</B> <B>=</B> <B>nil)</B>
+              Clear  the  past  and  future for a given component
+              hierarchy,  deleting  the  corresponding  commands.
+              All histories are cleared if no component is speci-
+              fied.
+
+       <B>void</B> <B>ClearHistory(Editor*)</B>
+              Clear the history associated with  the  given  edi-
+              this  operation  to avoid clearing histories when a
+              component hierarchy is  being  edited  in  multiple
+              editors.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Process()</B>
+              Process  is called once in the main loop defined by
+              the Run operation.  It  does  nothing  by  default.
+              Subclasses  may  redefine  Process to carry out any
+              processing that should be done in each pass through
+              the main loop.
+
+       <B>boolean</B> <B>IsClean(Editor*)</B>
+              This  convenience function queries the given editor
+              for a ModifStatusVar instance.  If it has one, then
+              it  returns  its  status  (modified or unmodified);
+              otherwise it returns <I>false</I>.
+
+       <B>void</B> <B>Mark(Editor*)</B>
+       <B>void</B> <B>Sweep(Editor*)</B>
+              These operations support deferred editor  deletion,
+              a  mechanism to avoid deleting editors prematurely.
+              For example, if a command to close  the  editor  is
+              invoked  from  a  pull-down  menu, then the command
+              must not delete the editor, since that will  delete
+              the pull-down menu before it has a chance to close.
+              Thus Close and similar  operations  do  not  delete
+              editors  directly; instead, they call Mark to indi-
+              cate that an editor should be deleted  sometime  in
+              the  future.   Sweep  actually  deletes the editors
+              that have been marked.   By  default,  Unidraw::Run
+              calls Sweep each time an event is handled.
+
+       <B>void</B> <B>DoUpdate()</B>
+              A helper function that performs an immediate update
+              independent of the batching mechanism.
+
+       <B>void</B> <B>GetHistory(Component*,</B> <B>UList*&amp;</B> <B>past,</B> <B>UList*&amp;</B> <B>future)</B>
+       <B>void</B> <B>ClearHistory(UList*,</B> <B>int</B> <B>i</B> <B>=</B> <B>1)</B>
+              Command histories  are  stored  as  ULists.   These
+              operations  provide  a  low-level  interface to the
+              lists themselves; the corresponding  public  opera-
+              tions  are  built  on  top.  GetHistory returns the
+              past and future lists for a given component,  while
+              ClearHistory  deletes  the  first <I>i</I> commands on the
+              given list.
+
+       <B>UList*</B> <B>elem(Iterator)</B>
+       <B>Command*</B> <B>command(UList*)</B>
+              Convenience functions for extracting the list  ele-
+              ment in an iterator and the command object from the
+              list element.  These are useful in conjunction with
+
+       <B>void</B> <B>updated(boolean)</B>
+              The  first  form  of  this function returns <I>true</I> if
+              there are pending Update(s) to be  performed.   The
+              second form sets this value explicitly.
+
+       <B>boolean</B> <B>alive()</B>
+       <B>void</B> <B>alive(boolean)</B>
+              The first form of this function returns <I>true</I> if the
+              program is in the run loop  defined  by  Run.   The
+              second form sets this value explicitly.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>,   <B>Creator(3U)</B>,   <B>Editor(3U)</B>,  <B>Interactor(3U)</B>,
+       <B>Iterator(3U)</B>,  <B>Viewer(3I)</B>,  <B>UList(3U)</B>,  <B>World(3I)</B>,  state-
+       <B>vars(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,178 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Control, ControlState - select and execute an action
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/control.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  control  is  a  monoscene  that  allows an action to be
+       selected and executed.  The component of a control  deter-
+       mines  the appearance associated with the control.  A con-
+       trol state is  a  subject  that  coordinates  a  group  of
+       related controls.  The control state contains a pointer to
+       the currently selected control (if any).
+
+       Controls are useful for grabbing  input  and  moving  over
+       potentially   selectable   items.   Examples  of  controls
+       include popup menus, pull-down menus, and menu items.   It
+       is generally not necessary to call functions directly on a
+       control.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Control(Interactor*)</B>
+              Construct a new control with the  given  interactor
+              as the component.
+
+       <B>~Control</B>
+              Destruct   a  control.   Because  a  control  is  a
+              monoscene, deleting it implies deleting its  compo-
+              nent interactor.
+
+       <B>ControlState*</B> <B>State()</B>
+       <B>void</B> <B>SetState(ControlState*)</B>
+              Get or set the control state associated with a con-
+              trol.
+
+       <B>virtual</B> <B>void</B> <B>Handle(Event&amp;)</B>
+              Controls  are  initially  inactive.   A   DownEvent
+              causes  a  control  to become active.  If an active
+              control receives an EnterEvent,  it  will  set  the
+              current  selection to itself.  If an active control
+              receives a LeaveEvent,  it  will  set  the  current
+              selection to <I>nil</I>.
+
+       <B>virtual</B> <B>void</B> <B>Enable(boolean)</B>
+       <B>boolean</B> <B>Enabled()</B>
+              Depending on the argument, Enable enables (<I>true</I>) or
+              disables (<I>false</I>) the control.   Control  subclasses
+              can  check  whether the control is enabled with the
+              Enabled operation and then take whatever action  is
+              appropriate.
+
+       <B>virtual</B> <B>void</B> <B>Select()</B>
+              Highlight  the  control and call the protected vir-
+              Call the protected virtual function Close and  then
+              unhighlight the control.
+
+       <B>virtual</B> <B>void</B> <B>Do()</B>
+              Implement  a  selected action.  When a control sees
+              an UpEvent, it calls Do on the current selection.
+
+       <B>Control*</B> <B>ParentControl()</B>
+       <B>Control*</B> <B>RootControl()</B>
+              The control hierarchy does not  necessarily  corre-
+              spond  to  the  interactor hierarchy.  These opera-
+              tions return the control's parent  control  or  the
+              root  of  the control hierarchy, if any, as defined
+              by control subclasses.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Down()</B>
+       <B>virtual</B> <B>void</B> <B>Up()</B>
+              Down and Up are called when the control receives  a
+              DownEvent   and   an   UpEvent,  respectively.   By
+              default,  Down  activates  the  control  if  it  is
+              enabled,  and  Up deactivates the control and calls
+              Do on the current selection.
+
+       <B>virtual</B> <B>void</B> <B>Enter()</B>
+       <B>virtual</B> <B>void</B> <B>Leave()</B>
+              Enter makes the control the current selection if it
+              is  enabled  and  active, while Leave nullifies the
+              current selection if the  control  is  enabled  and
+              active.
+
+       <B>virtual</B> <B>void</B> <B>Open()</B>
+       <B>virtual</B> <B>void</B> <B>Close()</B>
+              The  base class Open and Close do nothing, but sub-
+              classes may insert and remove an  interactor,  such
+              as a pull-down menu.
+
+       <B>virtual</B> <B>void</B> <B>Grab()</B>
+              Grab  reads  input and only passes through an event
+              if its target is an active control.
+
+       <B>virtual</B> <B>void</B> <B>Skip()</B>
+              Skip reads and discards input events until it reads
+              an  event targetted for a control that is currently
+              grabbing input, as  indicated  by  IsGrabbing  (see
+              below).
+
+       <B>virtual</B> <B>void</B> <B>Busy()</B>
+       <B>virtual</B> <B>void</B> <B>Done()</B>
+              The Up operation calls Busy just before it calls Do
+              on the target, and it calls Done immediately after-
+              wards.   These  operations  do  nothing by default;
+
+       <B>virtual</B> <B>boolean</B> <B>IsGrabbing(Interactor*)</B>
+              IsGrabbing returns true if the given interactor  is
+              grabbing control.
+
+       <B>void</B> <B>Reparent(Control*</B> <B>target,</B> <B>Control*</B> <B>parent)</B>
+              Set  <I>target</I>'s parent to <I>parent</I>.  Controls that com-
+              pose child controls should call this  operation  on
+              their children.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>, <B>Interactor(3I)</B>, <B>Menu(3I)</B>, <B>Scene(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

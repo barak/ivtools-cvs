@@ -1,0 +1,137 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       NewCompCmd,  PrintCmd,  QuitCmd,  RevertCmd,  SaveCompCmd,
+       SaveCompAsCmd, ViewCompCmd - catalog-oriented commands
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/catcmds.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The Unidraw library predefines a set  of  non-interpretive
+       commands that let a user specify components to open, view,
+       and save, plus commands for generating a PostScript exter-
+       nal representation and for quitting the application.  New-
+       CompCmd re-initializes its editor's component to  let  the
+       user  start  editing afresh.  If the existing component is
+       modified, NewCompCmd prompts the user to save it.   Print-
+       Cmd  generates  a PostScriptView of the editor's component
+       and lets the user send it to  a  file  or  to  a  printer.
+       QuitCmd  quits the application, prompting the user to save
+       modified components.  RevertCmd lets the user re-open  the
+       current  component,  discarding  changes since it was last
+       saved.  SaveCompAsCmd lets the user save a component under
+       a  particular  name,  while  SaveCompCmd saves a component
+       named previously.   Finally,  ViewCompCmd  lets  the  user
+       specify another component to view in its editor.
+
+
+</PRE>
+<H2>NEWCOMPCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>NewCompCmd(ControlInfo*,</B> <B>Component*</B> <B>prototype</B> <B>=</B> <B>nil)</B>
+       <B>NewCompCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Component*</B> <B>=</B> <B>nil)</B>
+              Create  a  new NewCompCmd instance, optionally sup-
+              plying a prototype component.  When executed,  New-
+              CompCmd  will  make  its  editor edit a copy of the
+              prototype.  The editor's original component will be
+              deleted if no other editor refers to it.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              NewCompCmd is not reversible.
+
+       <B>Component*</B> <B>GetPrototype()</B>
+              Return  the  prototype  component  specified in the
+              constructor.
+
+
+</PRE>
+<H2>PRINTCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>PrintCmd(ControlInfo*,</B> <B>PrintDialog*</B> <B>=</B> <B>nil)</B>
+       <B>PrintCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>PrintDialog*</B> <B>=</B> <B>nil)</B>
+              Create a new PrintCmd instance, optionally  supply-
+              ing the PrintDialog to display when executed.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              PrintCmd is not reversible.
+
+
+</PRE>
+<H2>PRINTCMD PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>print(const</B> <B>char*</B> <B>print_cmd,</B> <B>const</B> <B>char*</B> <B>file)</B>
+              Concatenates <I>print</I><B>_</B><I>cmd</I> and <I>file</I> and calls <B>system(3)</B>
+
+       <B>QuitCmd(ControlInfo*)</B>
+       <B>QuitCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Create a new QuitCmd instance.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              QuitCmd is not reversible.
+
+
+</PRE>
+<H2>REVERTCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>RevertCmd(ControlInfo*)</B>
+       <B>RevertCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Create a new RevertCmd instance.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              RevertCmd is not reversible.
+
+
+</PRE>
+<H2>SAVECOMPCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>SaveCompCmd(ControlInfo*)</B>
+       <B>SaveCompCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Create a new SaveCompCmd instance.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              SaveCompCmd is not reversible.
+
+
+</PRE>
+<H2>SAVECOMPASCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>SaveCompAsCmd(ControlInfo*,</B> <B>FileChooser*</B> <B>=</B> <B>nil)</B>
+       <B>SaveCompAsCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>FileChooser*</B> <B>=</B> <B>nil)</B>
+              Create a  new  SaveCompAsCmd  instance,  optionally
+              supplying the FileChooser that will prompt the user
+              to name the component.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              SaveCompAsCmd is not reversible.
+
+
+</PRE>
+<H2>VIEWCOMPCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>ViewCompCmd(ControlInfo*,</B> <B>FileChooser*</B> <B>=</B> <B>nil)</B>
+       <B>ViewCompCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>FileChooser*</B> <B>=</B> <B>nil)</B>
+              Create a new ViewCompCmd instance, optionally  sup-
+              plying the FileChooser that will prompt the user to
+              specify the component to view.  After the new  com-
+              ponent  is opened successfully, the editor's origi-
+              nal component will be deleted if  no  other  editor
+              refers to it.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              ViewCompCmd is not reversible.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>BasicDialog(3U)</B>,  <B>Command(3U)</B>,  <B>Component(3U)</B>, <B>Editor(3U)</B>,
+       <B>PostScriptView(3U)</B>, <B>lpr(1)</B>.
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

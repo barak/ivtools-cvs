@@ -1,0 +1,134 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       TextComp,  TextView,  TextGraphic, PSText - multiline text
+       component   subject,   view,   structured   graphic,   and
+       PostScript external representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/text.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       TextComp  is  a GraphicComp that defines a piece of multi-
+       line text.  It uses a TextGraphic (a subclass of Label) to
+       store its graphical attributes.  TextView is a GraphicView
+       for displaying the text.  PSText is a PostScriptView  that
+       externalizes the subject's information in PostScript form.
+
+
+</PRE>
+<H2>TEXTCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>TextComp(TextGraphic*</B> <B>=</B> <B>nil)</B>
+              The constructor takes an optional TextGraphic  that
+              defines the attributes of the text.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              TextComp redefines (Un)interpret to ignore BrushCmd
+              and PatternCmd and to (un)interpret FontCmd.
+
+       <B>TextGraphic*</B> <B>GetText()</B>
+              Return the TextGraphic that defines the text compo-
+              nent's  attributes.   GetText is simply a more spe-
+              cific form of the GetGraphic operation.
+
+
+</PRE>
+<H2>TEXTVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>TextView(TextComp*</B> <B>=</B> <B>nil)</B>
+              Create an TextView, optionally supplying  the  sub-
+              ject.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              TextView  interprets  AlignToGridCmd  to  align its
+              lower-left to the grid.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              TextView redefines  its  response  to  manipulation
+              with  a  GraphicCompTool.  GraphicCompTool will let
+              the user position and type out the component's text
+              using  TextManip.  Positioning  of the text will be
+              influenced  by  gravity,  if  any.  TextView   also
+              defines  a  response  to the ReshapeTool to let the
+              user  edit  the  text.   The  subject  is  actually
+              replaced  (via ReplaceCmd) with a new TextComp sub-
+              ject positioned at the original TextComp's location
+              Return the subject.
+
+
+</PRE>
+<H2>TEXTVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>boolean</B> <B>TextChanged()</B>
+              Return  whether the text in the subject is any dif-
+              ferent from that in the view.
+
+
+</PRE>
+<H2>TEXTGRAPHIC PUBLIC OPERATIONS</H2><PRE>
+       <B>TextGraphic(const</B> <B>char*,</B> <B>int</B> <B>h,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+       <B>TextGraphic(const</B> <B>char*,</B> <B>Graphic*)</B>
+              Create a TextGraphic, specifying its text, optional
+              inter-line spacing, and optional graphic from which
+              to obtain default graphics attributes.  TextGraphic
+              stores  a  copy  of  the  given string (behavior it
+              inherits from Label).  If inter-line spacing is not
+              specified,  then lines will be separated to reflect
+              the font height reported by PSFont.
+
+       <B>void</B> <B>SetLineHeight(int)</B>
+       <B>int</B> <B>GetLineHeight()</B>
+              Explicitly set and get the inter-line spacing.
+
+       <B>virtual</B> <B>boolean</B> <B>operator</B> <B>==</B> <B>(TextGraphic&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>operator</B> <B>!=</B> <B>(TextGraphic&amp;)</B>
+              Report whether the given graphic contains  or  does
+              not contain an identical copy of the text in <I>this</I>
+
+
+</PRE>
+<H2>PSTEXT PUBLIC OPERATIONS</H2><PRE>
+       <B>PSText(TextComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>PSTEXT PROTECTED OPERATIONS</H2><PRE>
+       <B>const</B> <B>char*</B> <B>Filter(const</B> <B>char*</B> <B>string,</B> <B>int</B> <B>length)</B>
+              Filter excapes embedded control  or  other  special
+              characters  that  would  cause syntax errors in the
+              PostScript output.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>FontCmd(3U)</B>, <B>GraphicComp(3U)</B>, <B>GraphicCompTool(3U)</B>,  Graph-
+       <B>icView(3U)</B>,   <B>Grid(3U)</B>,   <B>Label(3U)</B>,   <B>PostScriptView(3U)</B>,
+       <B>ReshapeTool(3U)</B>,    <B>align(3U)</B>,    <B>edit(3U)</B>,    <B>manips(3U)</B>,
+       <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       StencilComp,  StencilView,  PSStencil  -  bitmap component
+       subject, view, and PostScript external representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/stencilcomp.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       StencilComp is a GraphicComp that represents  a  bitmapped
+       image.   It  uses a Stencil graphic to store its graphical
+       attributes.  StencilView is a GraphicView  for  displaying
+       the  bitmapped  image.  PSStencil is a PostScriptView that
+       externalizes the subject's information in PostScript form.
+
+
+</PRE>
+<H2>STENCILCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>StencilComp(Stencil*</B> <B>=</B> <B>nil,</B> <B>const</B> <B>char*</B> <B>filename</B> <B>=</B> <B>nil)</B>
+              The  constructor  takes  an optional Stencil struc-
+              tured graphic that defines the  attributes  of  the
+              bitmapped  image.   You can also supply an optional
+              file name to associate the component  with  a  file
+              containing the (copious) image data.
+
+       <B>Stencil*</B> <B>GetStencil()</B>
+              Return  the  Stencil graphic that defines the sten-
+              cil's attributes.  GetStencil is simply a more spe-
+              cific form of the GetGraphic operation.
+
+       <B>const</B> <B>char*</B> <B>GetFileName()</B>
+              Return  the file name specified in the constructor,
+              if any.
+
+
+</PRE>
+<H2>STENCILVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>StencilView(StencilComp*</B> <B>=</B> <B>nil)</B>
+              Create an  StencilView,  optionally  supplying  the
+              subject.
+
+       <B>StencilComp*</B> <B>GetStencilComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>PSSTENCIL PUBLIC OPERATIONS</H2><PRE>
+       <B>PSStencil(StencilComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>GraphicComp(3U)</B>,   <B>GraphicView(3U)</B>,    <B>PostScriptView(3U)</B>,
+       <B>Stencil(3U)</B>
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       UMap - maintains a mapping between two sets of pointers
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/umap.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       UMap  is an abstract class for objects that store an arbi-
+       trary number of pointer  pairs  and  can  search  to  find
+       either  member  of  a  pair  given  the other.  A UMapElem
+       object stores each pointer pair in the UMap.  UMapElem  is
+       an  abstract  class  that  defines  virtuals for returning
+       either member of the pair, referred to as the <I>id</I>  and  the
+       <I>tag</I>.   Subclasses  of  UMapElem redefine these virtuals to
+       return either member of the pair they store.
+
+
+</PRE>
+<H2>UMAPELEM PUBLIC OPERATIONS</H2><PRE>
+       <B>UMapElem()</B>
+              The base class constructor does nothing by default.
+
+       <B>virtual</B> <B>void*</B> <B>id()</B>
+       <B>virtual</B> <B>void*</B> <B>tag()</B>
+              Return  the id or the tag that the UMapElem stores.
+              Subclasses typically define  two  member  variables
+              that  store pair's values and redefine these opera-
+              tions to return them.
+
+
+</PRE>
+<H2>UMAP PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>~UMap()</B>
+              The destructor deletes all UMapElem objects in  the
+              UMap.
+
+       <B>int</B> <B>Count()</B>
+              Return  the  number of mappings in the UMap, corre-
+              sponding to the number of UMapElems that have  been
+              registered.
+
+       <B>void</B> <B>Clear()</B>
+              Delete  all the UMapElem mappings in the UMap with-
+              out destroying the UMap.
+
+
+</PRE>
+<H2>UMAP PROTECTED OPERATIONS</H2><PRE>
+       <B>UMap()</B> The base class constructor does nothing by default.
+
+       <B>void</B> <B>Register(UMapElem*)</B>
+       <B>void</B> <B>Unregister(UMapElem*)</B>
+              Register or remove a UMapElem from the UMap.
+
+       <B>int</B> <B>Index(UMapElem*)</B>
+       <B>UMapElem*</B> <B>Elem(int</B> <B>index)</B>
+              A  UMap  stores  its  UMapElem in its <B>_</B><I>elems</I> UArray
+              protected member variable.   The  Index  operations
+              returns the index of the given UMapElem in the UAr-
+              sponding operations on the UArray.
+
+       <B>virtual</B> <B>UMapElem*</B> <B>FindId(void*</B> <B>id)</B>
+       <B>virtual</B> <B>UMapElem*</B> <B>FindTag(void*</B> <B>tag)</B>
+              FindId searches the UMap for the  UMapElem  element
+              containing the given id, while FindTag searches for
+              the one with the given tag.  These operations  per-
+              form  linear  searches  by default, comparing their
+              arguments against the values that the UMapElems' id
+              and tag operations return.  The comparison is based
+              on the  pointer  values;  subclasses  can  redefine
+              these operations to make more sophisticated compar-
+              isons based on the id or  tags  actual  type.   For
+              example,  if either the id is a string, then FindId
+              might do a string comparison to detect a match.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>UArray(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

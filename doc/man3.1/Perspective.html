@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Perspective - visible portion of an interactor
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/perspective.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  perspective  object describes which part of an interac-
+       tor's total display area is visible  in  the  interactor's
+       canvas.   The  main  use of perspectives is for scrolling,
+       panning, and zooming interactors.   The  member  variables
+       (<I>x0</I>, <I>y0</I>)  define  the  origin  of the interactor's display
+       area; <I>width</I> and <I>height</I> define  the  total  height  of  the
+       area.  The member variables (<I>curx</I>, <I>cury</I>) define the lower-
+       left corner of the interactor's  canvas  relative  to  the
+       total  area; <I>curwidth</I> and <I>curheight</I> define how much of the
+       total area is displayed in the canvas.
+
+       The member variables <I>sx</I>, <I>sy</I>, <I>lx</I>, and <I>ly</I> specify small  and
+       large  increments in each dimension.  These increments are
+       used by a scroller to implement line and page scrolling.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Perspective()</B>
+              Define a new perspective with all member  variables
+              initialized to zero.
+
+       <B>void</B> <B>Attach(Interactor*)</B>
+              Add  to the list of interactors that are interested
+              in updates to the perspective.   These  interactors
+              reflect  the perspective visually; examples include
+              scrollers and sliders.
+
+       <B>void</B> <B>Detach(Interactor*)</B>
+              Remove an interactor from the list of those  inter-
+              ested  in updates.  This operation should be called
+              from the interactor's destructor.
+
+       <B>void</B> <B>Init(Coord</B> <B>x0,</B> <B>Coord</B> <B>y0,</B> <B>Coord</B> <B>width,</B> <B>Coord</B> <B>height)</B>
+              Initialize the perspective display area.
+
+       <B>void</B> <B>Update()</B>
+              Notify all the interactors interested in  the  per-
+              spective  that  it  has changed.  The perspective's
+              interactor should call Update after  modifying  its
+              perspective.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Adjuster(3I)</B>, <B>Interactor(3I)</B>, <B>Panner(3I)</B>, <B>Scroller(3I)</B>
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

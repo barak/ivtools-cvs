@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       IOCallback  - generic callback class for readers, writers,
+       or I/O exception handlers
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/iocallback.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       For convenience, the macros defined in iocallback.h  allow
+       the  user  to  define an iohandler which does nothing more
+       than call an  arbitrary  object's  member  function.   The
+       actual  code  to  read  data from a file descriptor, write
+       data to a file descriptor, handle an I/O  exception  on  a
+       file descriptor, or handle a timer's expiration can reside
+       in any arbitrary class rather than in the iohandler.
+
+
+</PRE>
+<H2>MACROS</H2><PRE>
+       <B>declareIOCallback(T)</B>
+              Declare an iocallback type for the given class type
+              T.
+
+       <B>implementIOCallback(T)</B>
+              Emit  code  at  this point to implement the iocall-
+              back's member functions.
+
+       <B>IOCallback(T)*</B> <B>instance</B> <B>=</B> <B>new</B> <B>IOCallback(T)(...)</B>
+              Define an instance of the iocallback type  for  the
+              given class type T.
+
+
+</PRE>
+<H2>CONSTRUCTORS</H2><PRE>
+       <B>typedef</B> <B>int</B> <B>T::IOReady(T)(int</B> <B>fd)</B>
+       <B>typedef</B> <B>void</B> <B>T::IOTimer(T)(long</B> <B>sec,</B> <B>long</B> <B>usec)</B>
+
+       <B>IOCallback(T)(T*,</B>  <B>IOReady(T)*</B>  <B>in,</B>  <B>IOReady(T)*</B> <B>out</B> <B>=</B>
+              <B>nil,</B> <B>IORe-</B> <B>ady(T)*</B> <B>ex</B> <B>=</B> <B>nil)</B>
+       <B>IOCallback(T)(T*,</B>  <B>IOTimer(T)*,</B> <B>IOReady(T)*</B> <B>in</B> <B>=</B> <B>nil,</B>
+              <B>IOReady(T)*</B> <B>out</B> <B>=</B> <B>nil,</B> <B>IOReady(T)*</B> <B>ex</B> <B>=</B> <B>nil)</B>
+              Construct  an  instance of the iocallback type that
+              will call the given member functions of  the  given
+              class type T's instance.  Note that you do not have
+              to use the IOReady(T) or IOTimer(T) macros; rather,
+              you  only  have  to  pass the address of a T member
+              function, such as &amp;T::inputReady.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Dispatcher(3I)</B>, <B>IOHandler(3I)</B>
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,190 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       CenterCmd,  CloseEditorCmd, GravityCmd, GridCmd, GridSpac-
+       ingCmd, NormSizeCmd, OrientationCmd,  RedToFitCmd  -  com-
+       mands for modifying editor attributes
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/viewcmds.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The Unidraw library predefines several commands for alter-
+       ing the attributes of editors and their viewers.   Center-
+       Cmd  centers each of the editor's viewers.  CloseEditorCmd
+       closes the editor, removing it from the screen.   Gravity-
+       Cmd  turns  gravity on by activating the editor's Gravity-
+       Var, if it defines one.  GridCmd toggles the visibility of
+       each  viewer's  grid,  while  GridSpacingCmd lets the user
+       specify the grid spacing for all  grids.   Finally,  Norm-
+       SizeCmd  sets  each  viewer's magnification to a factor of
+       one,  OrientationCmd  toggles  each  viewer's  orientation
+       between  landscape mode and portrait mode, and RedToFitCmd
+       changes each viewer's magnification so that its  component
+       view is fully visible.
+
+
+</PRE>
+<H2>CENTERCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>CenterCmd(ControlInfo*)</B>
+       <B>CenterCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new CenterCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute  simply  calls CenterOp on each of the edi-
+              tor's viewers.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              CenterCmd is not reversible.
+
+
+</PRE>
+<H2>CLOSEEDITORCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>CloseEditorCmd(ControlInfo*)</B>
+       <B>CloseEditorCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new CloseEditorCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute calls Close on the  global  unidraw  object
+              with  the  CloseEditorCmd's editor as its argument.
+              Execute prompts the use to save the component if it
+              does  not  appear in any other open editors.  If no
+              other editors are open at all, Execute creates  and
+              executes a QuitCmd.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              CloseEditorCmd is not reversible.
+
+
+</PRE>
+<H2>GRAVITYCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>GravityCmd(ControlInfo*)</B>
+              Construct a new GravityCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute  calls  Activate on the editor's GravityVar
+              (if it defines one) with the inverse of  the  value
+              returned by GravityVar's IsActive operation.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              GravityCmd is not reversible.
+
+
+</PRE>
+<H2>GRIDCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>GridCmd(ControlInfo*)</B>
+       <B>GridCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new GridCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute  calls the Visibility operation on the grid
+              from each of the editor's  viewers,  supplying  the
+              inverse  of  the value returned by Grid's IsVisible
+              oepation.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              GridCmd is not reversible.
+
+
+</PRE>
+<H2>GRIDSPACINGCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>GridSpacingCmd(ControlInfo*)</B>
+       <B>GridSpacingCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new GridSpacingCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute prompts the user to  specify  grid  spacing
+              information through a GridDialog.  If the user does
+              not cancel the dialog, then Execute will  pass  the
+              specified grid spacing to a SetSpacing call on each
+              viewer's grid.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              GridSpacingCmd is not reversible.
+
+
+</PRE>
+<H2>NORMSIZECMD PUBLIC OPERATIONS</H2><PRE>
+       <B>NormSizeCmd(ControlInfo*)</B>
+       <B>NormSizeCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new NormSizeCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute simply calls SetMagnification with an argu-
+              ment of 1 on each of the editor's viewers.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              NormSizeCmd is not reversible.
+
+
+</PRE>
+<H2>ORIENTATIONCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>OrientationCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new OrientationCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute  switches  the  orientation  of each of the
+              editor's viewers via  their  SetOrientation  opera-
+              tion.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              OrientationCmd is not reversible.
+
+
+</PRE>
+<H2>REDTOFITCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>RedToFitCmd(ControlInfo*)</B>
+       <B>RedToFitCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new RedToFitCmd.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute  simply  calls  ReduceToFit  on each of the
+              editor's viewers.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              RedToFitCmd is not reversible.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>BasicDialog(3U)</B>,   <B>Command(3U)</B>,   <B>Grid(3U)</B>,   <B>Unidraw(3U)</B>,
+       <B>Viewer(3U)</B>, <B>catcmds(3U)</B>, <B>globals(3U)</B>, <B>statevars(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,178 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Editor  -  base class for top-level windows in an applica-
+       tion
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/editor.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An editor provides a complete user interface for editing a
+       component  subject.   It  unites  one or more viewers with
+       commands and tools that act upon  the  component  and  its
+       subcomponents.   Editor  is an abstract class derived from
+       MonoScene; the Editor class adds the protocol for  associ-
+       ating  tools,  commands, and viewers with the component(s)
+       they affect.  A programmer normally derives  one  or  more
+       application-specific  editors  from  the Editor base class
+       and defines their appearance with a composition of  inter-
+       actors.   Each  window of a Unidraw application is usually
+       an instance of an editor subclass designed for the editing
+       domain,  and  it is these windows that the user recognizes
+       as the application program.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>~Editor()</B>
+              Editors should not be  deleted  explicitly  if  the
+              Unidraw  object  is  used  to  open and close them.
+              Moreover, Editor subclasses should  not  explicitly
+              delete the component they edit.  The Unidraw object
+              will delete the editor's component after the editor
+              is  closed, provided no other editor references the
+              component (or its relatives) and the  component  is
+              not known to the catalog.
+
+       <B>virtual</B> <B>void</B> <B>Open()</B>
+       <B>virtual</B> <B>void</B> <B>Close()</B>
+              Open  informs  the  editor  that it has just become
+              visible and accessible to  the  user,  in  case  it
+              needs to know, and Close signals the editor that it
+              is no longer needed and should  perform  any  final
+              housekeeping  operations.   For example, the editor
+              may display a copyright message when  it  is  first
+              opened, or it make take the opportunity when closed
+              to warn the user  to  save  a  modified  component.
+              These operations simply notify the editor of a con-
+              dition and are not usually called by  the  applica-
+              tion; instead, the application makes editors appear
+              and disappear with the Unidraw object, which  calls
+              these operations as appropriate.
+
+       <B>virtual</B> <B>void</B> <B>Handle(Event&amp;)</B>
+              Editor  redefines Handle to interpret key events as
+              keyboard equivalents via  the  HandleKey  operation
+              (described below).  This is appropriate in the com-
+              keyboard events.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              By default, the  editor's  Update  operation  calls
+              Update on its viewer(s).
+
+       <B>virtual</B> <B>void</B> <B>SetComponent(Component*)</B>
+       <B>virtual</B> <B>void</B> <B>SetViewer(Viewer*,</B> <B>int</B> <B>=</B> <B>0)</B>
+       <B>virtual</B> <B>void</B> <B>SetSelection(Selection*)</B>
+       <B>virtual</B> <B>void</B> <B>SetKeyMap(Viewer*,</B> <B>int</B> <B>=</B> <B>0)</B>
+       <B>virtual</B> <B>void</B> <B>SetCurTool(Tool*)</B>
+
+       <B>virtual</B> <B>Component*</B> <B>GetComponent()</B>
+       <B>virtual</B> <B>Viewer*</B> <B>GetViewer(int</B> <B>=</B> <B>0)</B>
+       <B>virtual</B> <B>KeyMap*</B> <B>GetKeyMap()</B>
+       <B>virtual</B> <B>Selection*</B> <B>GetSelection()</B>
+       <B>virtual</B> <B>Tool*</B> <B>GetCurTool()</B>
+              Assign  and  return  various objects managed by the
+              editor.  These operations are undefined by default.
+
+              The  component  is  the  object that the user edits
+              through the editor.  The editor can have any number
+              of  viewers,  identified  serially.   An editor can
+              maintain a key map for  defining  keyboard  equiva-
+              lents  and  a selection object for keeping track of
+              selected components (typically subcomponents of the
+              component  being  edited).   The  editor also has a
+              notion of the tool that is currently engaged,  that
+              is, the tool that would be used if the user clicked
+              in a viewer.  The SetCurTool and GetCurTool  opera-
+              tions assign and return this tool, respectively.
+
+       <B>virtual</B> <B>StateVar*</B> <B>GetState(const</B> <B>char*)</B>
+              The  editor may maintain a string-to-state variable
+              mapping to provide external  access  to  any  state
+              variables   it  defines.   The  GetState  operation
+              returns  a  state  variable  given  an  identifying
+              string.   Defining  such  a mapping lets components
+              query the  editor  for  state  variables  that  may
+              affect  them without extending the editor protocol,
+              potentially allowing interchange of components from
+              different applications.  This operation returns nil
+              by default.
+
+       <B>virtual</B> <B>void</B> <B>InsertDialog(Interactor*)</B>
+       <B>virtual</B> <B>void</B> <B>RemoveDialog(Interactor*)</B>
+              Insert or remove  an  interactor  that  provides  a
+              modal interface, such as a dialog box.  By default,
+              these operations insert the dialog into  the  world
+              as  a  transient  window centered atop the editor's
+              canvas.  Subclasses can redefine them to insert and
+              remove  an  interactor (suitably embellished with a
+              will always be separated by a  RemoveDialog  opera-
+              tion; that is, multiple dialogs might be visible at
+              once.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Editor()</B>
+              You cannot create instances of  the  Editor  class;
+              rather, you define subclasses that suit your appli-
+              cation.  The constructor is thus protected to  dis-
+              allow instantiation.
+
+       <B>virtual</B> <B>void</B> <B>HandleKey(Event&amp;)</B>
+              Executes  a command given a valid keyboard event as
+              defined by the key-to-command mapping in the KeyMap
+              object.
+
+       <B>virtual</B> <B>boolean</B> <B>DependsOn(Component*)</B>
+              Return whether the editor depends on the given com-
+              ponent in any way.  Unidraw may destroy the  compo-
+              nent if no editor depends on it.
+
+       <B>void</B> <B>SetWindow(ManagedWindow*)</B>
+       <B>ManagedWindow*</B> <B>GetWindow()</B>
+              Get  and set the window associated with the editor.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>, <B>Command(3U)</B>,  <B>Component(3U)</B>,  <B>Interactor(3I)</B>,
+       <B>KeyMap(3U)</B>,  <B>MonoScene(3I)</B>,  <B>Selection(3U)</B>,  <B>StateVar(3U)</B>,
+       <B>Tool(3U)</B>, <B>Unidraw(3U)</B>, <B>Viewer(3U)</B>, <B>Window(3I)</B>, <B>World(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

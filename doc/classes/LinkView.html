@@ -1,0 +1,462 @@
+
+<html><head><TITLE>Description of LinkView</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>LinkView</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="GraphicView.html" >GraphicView</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="GraphicView.html" >GraphicView</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#LinkView><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/Components/link.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Manipulator.html" >Manipulator</A>* 
+    <A NAME="CreateManipulator(Viewer*&#38;&#38;COMMEvent&#38;&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*)">
+    <B>CreateManipulator</B> (<A HREF="Viewer.html" >Viewer</A>*,<A HREF="Event.html" >Event</A>&#38;,<A HREF="Transformer.html" >Transformer</A>*,<A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Done(Iterator)">
+    <B>Done</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="First(Iterator&#38;)">
+    <B>First</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GetEndpoints(Coord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;)">
+    <B>GetEndpoints</B> (Coord&#38;, Coord&#38;, Coord&#38;, Coord&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="GetGraphic()">
+    <B>GetGraphic</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="LinkComp.html" >LinkComp</A>* 
+    <A NAME="GetLinkComp()">
+    <B>GetLinkComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicView.html" >GraphicView</A>* 
+    <A NAME="GetView(Iterator)">
+    <B>GetView</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Command.html" >Command</A>* 
+    <A NAME="InterpretManipulator(Manipulator*)">
+    <B>InterpretManipulator</B> (<A HREF="Manipulator.html" >Manipulator</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Last(Iterator&#38;)">
+    <B>Last</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="LinkView(LinkComp*=nil)">
+    <B>LinkView</B> (<A HREF="LinkComp.html" >LinkComp</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Next(Iterator&#38;)">
+    <B>Next</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Prev(Iterator&#38;)">
+    <B>Prev</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetView(GraphicView*&#38;&#38;COMMIterator&#38;)">
+    <B>SetView</B> (<A HREF="GraphicView.html" >GraphicView</A>*, <A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~LinkView()">
+    <B>~LinkView</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="CreateHandles()">
+    <B>CreateHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Manipulator.html" >Manipulator</A>* 
+    <A NAME="CreateLinkCompManip(Viewer*&#38;&#38;COMMEvent&#38;&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*)">
+    <B>CreateLinkCompManip</B> (<A HREF="Viewer.html" >Viewer</A>*, <A HREF="Event.html" >Event</A>&#38;, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Line.html" >Line</A>* 
+    <A NAME="GetLine()">
+    <B>GetLine</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Command.html" >Command</A>* 
+    <A NAME="InterpLinkCompManip(Manipulator*)">
+    <B>InterpLinkCompManip</B> (<A HREF="Manipulator.html" >Manipulator</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="LinkComp.html" >LinkComp</A>* 
+    <A NAME="NewSubject(Line*)">
+    <B>NewSubject</B> (<A HREF="Line.html" >Line</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ConnectorView.html" >ConnectorView</A>* 
+    <A NAME="_connView1,*_connView2">
+    <B>_connView1, *_connView2</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,160 @@
+
+<html><head><TITLE>Description of GraphCatalog</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>GraphCatalog</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayCatalog.html" >OverlayCatalog</A> </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+catalog for read/write of graphdraw documents.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayCatalog.html" >OverlayCatalog</A>
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#GraphCatalog><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+GraphUnidraw/graphcatalog.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="GraphCatalog(constchar*&#38;&#38;COMMCreator*)">
+    <B>GraphCatalog</B> (const char*, <A HREF="Creator.html" >Creator</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Retrieve(constchar*path&#38;&#38;COMMComponent*&#38;)">
+    <B>Retrieve</B> (const char* path, <A HREF="Component.html" >Component</A>*&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read component tree from 'path', saving node and edge connectivity
+ information in tables until done, then reconnect graph.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Save(Component*&#38;&#38;COMMconstchar*)">
+    <B>Save</B> (<A HREF="Component.html" >Component</A>*, const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pass to <A HREF="OverlayCatalog.html" >OverlayCatalog</A>::Save.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetImport(boolean)">
+    <B>SetImport</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates read is for import instead of an open.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_import">
+    <B>_import</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

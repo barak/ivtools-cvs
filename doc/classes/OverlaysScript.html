@@ -1,0 +1,591 @@
+
+<html><head><TITLE>Description of OverlaysScript</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlaysScript</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayScript.html" >OverlayScript</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+composite version of <A HREF="OverlayScript.html" >OverlayScript</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayScript.html" >OverlayScript</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlaysScript><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/scriptview.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  a serialized view of <A HREF="OverlaysComp.html" >OverlaysComp</A>.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Definition(ostream&#38;)">
+    <B>Definition</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output variable-length ASCII record that defines the component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Done(Iterator)">
+    <B>Done</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if <A HREF="Iterator.html" >Iterator</A> points off the front or end of list of sub-views.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="EmitGS(ostream&#38;&#38;&#38;COMMClipboard*&#38;&#38;COMMboolean)">
+    <B>EmitGS</B> (ostream&#38;, <A HREF="Clipboard.html" >Clipboard</A>*, boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        iterate over sub-views, outputting decriptions of each unique graphic state.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="EmitPic(ostream&#38;&#38;&#38;COMMClipboard*&#38;&#38;COMMClipboard*&#38;&#38;COMMboolean)">
+    <B>EmitPic</B> (ostream&#38;, <A HREF="Clipboard.html" >Clipboard</A>*, <A HREF="Clipboard.html" >Clipboard</A>*, boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        iterate over sub-views, outputting decriptions of each unique 
+ composite graphic. This is not yet fully generalized, because there are
+ questions as to what that would mean.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="EmitPts(ostream&#38;&#38;&#38;COMMClipboard*&#38;&#38;COMMboolean)">
+    <B>EmitPts</B> (ostream&#38;, <A HREF="Clipboard.html" >Clipboard</A>*, boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        iterate over sub-views, outputting decriptions of each unique point list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="First(Iterator&#38;)">
+    <B>First</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="Iterator.html" >Iterator</A> to point to first sub-view.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlaysComp.html" >OverlaysComp</A>* 
+    <A NAME="GetOverlaysComp()">
+    <B>GetOverlaysComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to associated component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayScript.html" >OverlayScript</A>* 
+    <A NAME="GetScript(Iterator)">
+    <B>GetScript</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get sub-view pointed to by the <A HREF="Iterator.html" >Iterator</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ExternView.html" >ExternView</A>* 
+    <A NAME="GetView(Iterator)">
+    <B>GetView</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get sub-view pointed to by the <A HREF="Iterator.html" >Iterator</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Last(Iterator&#38;)">
+    <B>Last</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="Iterator.html" >Iterator</A> to point to last sub-view.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Next(Iterator&#38;)">
+    <B>Next</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="Iterator.html" >Iterator</A> to point to next sub-view.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlaysScript(OverlaysComp*=nil)">
+    <B>OverlaysScript</B> (<A HREF="OverlaysComp.html" >OverlaysComp</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Prev(Iterator&#38;)">
+    <B>Prev</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="Iterator.html" >Iterator</A> to point to prev sub-view.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadChildren(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadChildren</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method to read a list of arbitrary objects when de-serializing.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadPic(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadPic</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method to read a composite graphic id (a pic), and substitute
+ the corresponding component from a list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetCompactions(booleangs=false&#38;&#38;COMMbooleanpts=false&#38;&#38;COMMbooleanpic=false)">
+    <B>SetCompactions</B> (boolean gs = false, boolean pts = false, boolean pic=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flags to indicate what should be compacted when serialized,
+ graphic state ('gs'), point lists ('pts'), or composite graphics ('pic').
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetScript(OverlayScript*&#38;&#38;COMMIterator&#38;)">
+    <B>SetScript</B> (<A HREF="OverlayScript.html" >OverlayScript</A>*, <A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set sub-view pointed to by the <A HREF="Iterator.html" >Iterator</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetView(ExternView*&#38;&#38;COMMIterator&#38;)">
+    <B>SetView</B> (<A HREF="ExternView.html" >ExternView</A>*, <A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set sub-view pointed to by the <A HREF="Iterator.html" >Iterator</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct all sub-views.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_gsptspic(constchar*name&#38;&#38;COMMistream&#38;&#38;&#38;COMMOverlaysComp*comps)">
+    <B>read_gsptspic</B> (const char* name, istream&#38;, <A HREF="OverlaysComp.html" >OverlaysComp</A>* comps) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method to read either a graphic state, a point list, or a
+ compound graphic when de-serializing.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="read_name(istream&#38;&#38;&#38;COMMchar*buf&#38;&#38;COMMintbufsiz)">
+    <B>read_name</B> (istream&#38;, char* buf, int bufsiz) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method to read the name of an object when de-serializing.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="read_obj(constchar*name&#38;&#38;COMMistream&#38;&#38;&#38;COMMOverlaysComp*comps)">
+    <B>read_obj</B> (const char* name, istream&#38;, <A HREF="OverlaysComp.html" >OverlaysComp</A>* comps) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static method to read an arbitrary object when de-serializing.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlaysScript()">
+    <B>~OverlaysScript</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DeleteView(Iterator&#38;)">
+    <B>DeleteView</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DeleteViews()">
+    <B>DeleteViews</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UList.html" >UList</A>* 
+    <A NAME="Elem(Iterator)">
+    <B>Elem</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UList.html" >UList</A>* 
+    <A NAME="_views">
+    <B>_views</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

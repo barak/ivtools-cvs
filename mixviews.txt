@@ -1,0 +1,38 @@
+Instructions for building MixViews on Linux with a default-configured
+ivtools-0.6.10 or greater:
+
+0. acquire and unpack the latest version of MixViews in a new directory:
+
+  ftp://ftp.ccmrc.ucsb.edu/pub/MixViews/source/mxv-current-source.tar.gz
+
+1. comment out the definition of APP_CCINCLUDES in MixView's Imakefile
+(line 194) and change the ARCH_CCLDLIBS at line 135 to use -lg++ and
+not use -lieee.
+
+2. add an "int MAIN__;" near the top of main.C to work around a global
+symbol required by libf2c.
+
+3. change line 78 of ivtools-0.6/config/local.def from:
+
+#definition IvToolsSrcRoot $(TOP)
+
+to:
+
+#definition IvToolsSrcRoot ProjectDir/ivtools-0.6
+
+and make sure ProjectDir in site.def.LINUX is the directory in which
+sits ivtools-0.6.  Then regenerate the ivmkmf script file by cd'ing to
+ivtools-0.6/src/scripts, deleting ivmkmf, and doing a "make install".
+
+4. Then run the ivtools ivmkmf with -a from that MixViews source
+directory (make sure your CPU environment variable is set to LINUX --
+ignore the make depend errors):
+
+  ivmkmf -a
+
+5. then do a make, ignoring the warnings from gcc:
+
+  make -k
+
+See http://www.create.ucsb.edu/~doug/htmls/MiXViews.html for more
+information on obtaining and building MixViews.

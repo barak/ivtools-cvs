@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>tools that work together with ivtools drawing editors</title>
+  </head>
+
+  <body>
+    <h3>tools that work together with ivtools drawing editors</h3>
+
+
+    This is a list of tools we've tried that work together with 
+    <a href=./index.html>ivtools</a> 
+    <a href=./editors.html>drawing editors</a>:<p>
+
+<hr>
+<b>from the import dialog box</b>
+<p>
+
+
+      <menu>
+      <li> djpeg from the <a href=http://www.ijg.org>Independent JPEG Group</a> --  for converting JPEG to PNM</li>
+      <li> <a href=./plotutils.html>plotutils</a> --  generates line and scatter plots in idraw format</li>
+      <li> <a href=./pstoedit.html>pstoedit</a> --  converts arbitrary PostScript and PDF to idraw format</li>
+      <li> <a href=./plotmtv.html>plotmtv</a> --  generates PostScript bar plots</li>
+      <li> <a href=./pbmplus.html>pbmplus (netpbm)</a> --  set of command-line filters for image processing</li>
+      <li> <a href=http://www.oasis.leo.org/perl/scripts/graphics/xfig-tgif-to-idraw.dsc.html>xfig2idraw, tgif2idraw</a> -- <a href=http://www.perl.org>Perl</a> scripts for converting from <a href=http://duke.usask.ca/~macphed/soft/fig/>xfig</a> and <a href=http://bourbon.cs.umd.edu:8001/tgif/>tgif</a> formats.
+      <a href=ftp://ftp.ie.u-ryukyu.ac.jp/pub/software/kono/xfig-tgif-to-idraw.shar>(alternate copy)</a>
+      <li> <a href=http://www.foolabs.com/xpdf/>xpdf (pdftops)</a> --  be sure to specify "-" as second argument.
+      <li>  <a href=http://www.agocg.ac.uk/train/cgm/ralcgm.htm>ralcgm</a> -- convert CGM, or Computer Graphics Metafiles, to PostScript.
+      </menu>
+
+<b>At present (ivtools-0.7.10), many of the above generate PostScript
+that requires further processing by manually adding <code>" | pstoedit -f
+idraw"</code> to the import command line.  Although the import should work without this, it doesn't.</b><p>
+
+<i>Bring up the import dialog box with "Import Graphic" under the File menu (or Ctrl-I), then click on the "from command" checkbox and enter a command to generate
+an importable graphic file.  For example "pdftops test.pdf -" would convert a PDF
+file to PostScript, which can then be read by the drawing editor (if
+<a href=./pstoedit.html>pstoedit</a> can be found, which is relied on for
+converting from regular PostScript to <a href=./idraw.html>idraw PostScript</a>.)</i>
+<p>
+<hr>
+<b>from the export dialog box</b>
+      <menu>
+      <li> <a href=./ghostscript.html>ghostscript</a> --  PostScript renderer to printers, rasters, and windows</li>
+      <li> <a href=./ghostview.html>ghostview</a> --  X11 viewer for ghostscriptr</li>
+      <li> mkgif89a, mkgif89ac --  bash scripts for generating gif89a from ivtools <a href=./flipbook.html>flipbook</a></li>
+      <li> pstoepsi, ps2epsi -- convert idraw format to Encapsulated PostScript</li>
+      <li> <a href=./pstoedit.html>pstoedit</a> -- convert to tgif, xfig, pdf, FrameMaker, gnuplot, DXF, etc..</li>
+      <li> <a href=http://www.trilon.com/xv>xv</a> is capable of reading idraw PostScript via <a href=./ghostscript.html>ghostscript</a>.</li>
+      </menu>
+<p>
+<i>Bring up the export dialog box with "Export Graphic" under the File menu (or Ctrl-X).  Something must be selected in the drawing editor for it to work.  Click on the "to command" checkbox and enter a command to accept a temporary
+output file, either as a pathname argument to replace a "%s" in the 
+command string, or appended as the last argument on the invoked command line.<p>
+For example, <code>"ghostview %s"</code> and <code>"ghostview"</code> both work when the idraw format radiobutton is pressed, and <code>"drawtool %s"</code> and <code>"drawtool"</code> both work when 
+ivtools drawtool format is selected.  The "%s" is more useful when embedding
+the pathname in the middle of a command line, i.e. </i> <p>
+&nbsp;&nbsp;<code>cat %s >/dev/lp1</code>.
+
+<p>
+<hr>
+<b>via the import service</b> -- if built with <a href=http://www.cs.wustl.edu/%7Eschmidt/ACE.html>ACE</a>
+      <menu>
+      <li> <a href=./ivgetjpg.bash>ivgetjpg</a> -- for downloading and exporting JPEG images using the 
+           <a href=http://www.w3c.org/ComLine/>w3c</a> command line utility and djpeg. Distributed with <a href=./index.html>ivtools</a>.</li> 
+      <li> <a href=./comterp.html>comterp</a> <a href=./comterp.README.txt>telcat</a> -- utility for exporting graphics files to drawing editors.</li>
+      </menu>
+
+<p>
+<hr>
+<b>separate binary used by optional tools and commands</b>
+      <menu>
+      <li> <a href=./qhull.html>qhull</a> --  generates convex hulls</li>
+      </menu>
+
+<p><hr>
+<a href=./index.html>up to ivtools home page</a><p>
+
+  </body>
+</html>

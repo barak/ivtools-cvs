@@ -1,0 +1,282 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Command - base class for command objects
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/command.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Command  is an abstract base class for objects that define
+       operations on components and other objects.  Commands  are
+       similar to messages in traditional object-oriented systems
+       in that components can receive and respond to them.   Com-
+       mands  can  also be executed in isolation to perform arbi-
+       trary computation, and they can  reverse  the  effects  of
+       such execution to support undo.
+
+       Some  commands  (termed  <I>purely</I> <I>interpretive</I> commands) are
+       interpreted by components but never executed in isolation,
+       some  are executed but never interpreted (<I>non-interpretive</I>
+       commands), and some are used in both ways.  Some  commands
+       may  be  directly  accessible  to  the user through menus,
+       while others are internal to the application.  In general,
+       an  undoable  operation should be carried out by a command
+       object.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              Execute performs computation to carry out the  com-
+              mand's  semantics.   Unexecute performs computation
+              to reverse the effects of a previous Execute, based
+              on  whatever  internal state the command maintains.
+              A command is  responsible  for  maintaining  enough
+              state  to  reverse  one Execute operation; repeated
+              Unexecute operations will not undo the  effects  of
+              more than one Execute.
+
+              By  default, Execute examines the current selection
+              maintained in the  command's  editor  (see  below).
+              Execute  will do nothing if the nothing is selected
+              and the command's clipboard (see below) is empty or
+              non-existent.   Otherwise, if something is selected
+              and the command's clipboard is  non-existent,  then
+              Execute creates a clipboard containing the selected
+              component subjects.   Finally,  Execute  will  tell
+              each component on the command's clipboard to inter-
+              pret <I>this</I>.  Conversely, Unexecute tells each compo-
+              nent  on the clipboard (if any) to Uninterpret <I>this</I>
+              this.  Thus, commands are  purely  interpretive  by
+              default.
+
+              It  may  not be meaningful or appropriate, however,
+              for some commands to  reverse  their  effect.   For
+              The Reversible operation returns whether or not the
+              command is unexecutable  and  uninterpretable.   If
+              the  command  is  irreversible,  then it is ignored
+              during the undo process.   By  default,  Reversible
+              examines  the  command's  clipboard; if the command
+              doesn't have one, then the command is reversible if
+              the  user has at least one component view selected.
+              If the command has a non-empty clipboard,  then  it
+              is  deemed  reversible.   Subclasses  may  redefine
+              Reversible to base the command's  reversibility  on
+              their own criteria.
+
+       <B>virtual</B> <B>void</B> <B>Store(Component*,</B> <B>Data*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>Data*</B> <B>Recall(Component*)</B>
+              Since a command can affect more than one component,
+              commands must let components  that  interpret  them
+              store  undo  information  somewhere.   The commands
+              must also let  components  recall  the  information
+              during  uninterpretation.   Store  lets a component
+              store a Data object in the command itself  as  part
+              of  the  component's  interpretation  process.  The
+              component can later  retrieve  the  data  with  the
+              Recall  operation.  Store and Recall require a Com-
+              ponent argument to distinguish requests from poten-
+              tially many components.
+
+       <B>virtual</B> <B>void</B> <B>Log()</B>
+              A  convenience  function for calling the equivalent
+              function on the global unidraw object.
+
+       <B>virtual</B> <B>void</B> <B>SetControlInfo(ControlInfo*)</B>
+       <B>virtual</B> <B>void</B> <B>SetEditor(Editor*)</B>
+       <B>virtual</B> <B>void</B> <B>SetClipboard(Clipboard*)</B>
+
+       <B>virtual</B> <B>ControlInfo*</B> <B>GetControlInfo()</B>
+       <B>virtual</B> <B>Editor*</B> <B>GetEditor()</B>
+       <B>virtual</B> <B>Clipboard*</B> <B>GetClipboard()</B>
+              Operations for  setting  and  getting  constructor-
+              specified  state  stored  in the command.  Commands
+              use a ControlInfo object to store information  from
+              which  to  build a user interface for executing the
+              command.  Commands keep a  pointer  to  the  Editor
+              instance  they potentially affect.  Finally, a com-
+              mand uses a clipboard to store  the  components  it
+              affects  or  affected.   A clipboard containing the
+              components to be affected can be  supplied  in  the
+              constructor, but more often the command itself cre-
+              ates and primes a clipboard based on  the  editor's
+              selected  components.  The Set... operations do <I>not</I>
+              delete the object being replaced.
+
+       <B>virtual</B> <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>Done(Iterator)</B>
+              Operations for iterating over the  command's  chil-
+              dren,  if  any.   These  operations  do  nothing by
+              default.  Commands  that  compose  other   commands
+              should  redefine these operations to permit traver-
+              sal of their children.  First and  Last  initialize
+              an  iterator  to  point to the beginning and end of
+              the list of children,  respectively.   Next  incre-
+              ments the iterator to point to the following child,
+              while Prev decrements the iterator to point to  the
+              preceding  child.   Done returns whether or not the
+              iterator points beyond the first or last  child  in
+              the list.
+
+       <B>virtual</B> <B>Component*</B> <B>Copy()</B>
+              Return  a  copy  of the command.  Subclasses should
+              redefine this operation to return  an  instance  of
+              their type.
+
+       <B>virtual</B> <B>void</B> <B>Read(istream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Write(ostream&amp;)</B>
+              Read  and  write the command's contents to a stream
+              to support catalog operations.  Read and write typ-
+              ically  call  first  the  corresponding  operations
+              defined by their parent class, and then  they  read
+              or write their class-specific state.  Note that you
+              must ensure that the objects are read in  the  same
+              order they are written.
+
+       <B>virtual</B> <B>ClassId</B> <B>GetClassId()</B>
+       <B>virtual</B> <B>boolean</B> <B>IsA(ClassId)</B>
+              GetClassId  returns the unique class identifier for
+              the Command subclass, while IsA returns whether the
+              instance is of a class or subclass corresponding to
+              the given identifier.   IsA  typically  checks  the
+              given  identifier  against  the  instance's own (as
+              defined by its GetClassId operation)  and,  failing
+              that, calls its parent classes' IsA operation.  All
+              subclasses must  redefine  GetClassId  and  IsA  to
+              ensure  that  their identifiers are unique and that
+              instances are written and read properly.
+
+       <B>virtual</B> <B>ClassId</B> <B>GetSubstId(const</B> <B>char*&amp;</B> <B>delim)</B>
+              A Command subclasses  can  redefine  GetSubstId  to
+              specify a command that can substitute for it.  This
+              lets applications that do not define  a  particular
+              command subclass still read in a substitute that is
+              compatible with the subclass.  The substitute class
+              should  be  one  of  the predefined commands in the
+              Unidraw library.  This guarantees that all applica-
+              substitute.  When an another Unidraw  application's
+              catalog   reads  this  object,  it  can  create  an
+              instance of the substitute (which it is  guaranteed
+              to  define)  instead  of the original (which it may
+              not define).
+
+              The original should read and write  a  superset  of
+              the  substitute's  data.   The catalog will read to
+              the end of the substitute's data and  then  advance
+              the  stream  to the point following the sequence of
+              characters specified by  <I>delim</I>,  saving  the  extra
+              characters  between  the  two points in the stream.
+              When the substitute object is  saved  subsequently,
+              the original class identifier will be written along
+              with the substitute's data plus the  extra  charac-
+              ters saved previously.  Thus information needn't be
+              lost as a result of being read and  written  by  an
+              unsophisticated application.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Command(ControlInfo*,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+       <B>Command(Editor*</B> <B>=</B> <B>nil,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+              The constructors are protected to prevent instatia-
+              tion of the abstract base class.  You can supply  a
+              ControlInfo  or  Editor  and an optional clipboard.
+              Only commands that will be accessible to  the  user
+              need  a ControlInfo object.  All commands should be
+              given an editor object before they are used.
+
+       <B>void</B> <B>InitCopy(Command*)</B>
+       <B>ControlInfo*</B> <B>CopyControlInfo()</B>
+       <B>Clipboard*</B> <B>CopyClipboard()</B>
+       <B>Clipboard*</B> <B>DeepCopyClipboard()</B>
+              Convenience functions  for  use  by  subclasses  in
+              their  Copy  operation.  InitCopy gives <I>this</I> a copy
+              of  the  given  command's  editor,  clipboard,  and
+              interpretation  data  stored by the components that
+              interpreted it, if any. CopyControlInfo  and  Copy-
+              Clipboard  return  copies  of  the  command's  Con-
+              trolInfo and Clipboard  objects,  respectively,  if
+              they  are  non-nil.  Both CopyControlInfo and Copy-
+              Clipboard simply check for a  nil  argument  before
+              calling  the  corresponding  Copy operations on the
+              objects.  DeepCopyClipboard checks for a nil  clip-
+              board  before  calling  DeepCopy  on  the command's
+              clipboard and returning the result.
+
+       <B>GraphicComp*</B> <B>GetGraphicComp()</B>
+              A convenience function that returns the GraphicComp
+              in the editor that the command affects.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>classes(3U)</B>, <B>globals(3U)</B>, istream(3C++), ostream(3C++)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,594 @@
+This patch contains the source changes to get GroupKit1.0 compiled on
+top of ivtools-0.6 with gcc-2.7.2.1 on Linux.  I was able to get
+registrar and startup built, but both the server (registrar) and the
+client (startup) segfault in an ostream::put when the client connects
+to the server.  The server appears to be doing some low-level
+manipulations of a binary iostream (iostreamb from the InterViews
+Dispatch library), which include trying to force a zero into the
+underlying buffer using ostream::put.  It is possible that this
+software could be retrofitted to work with a modern version of
+iostreams, and perhaps an interesting project to compare and contrast
+this use of iostreams for controlling networked communications against
+approaches supported by the ACE toolkit and used in the ivtools
+drawing editors.
+
+This patch also represents a somewhat interesting example of what it
+takes to rebuild a significant library of C++ code written prior to
+1993 with a modern C++ compiler.
+
+*** ./include/gk/straction.h~	Wed Oct 28 15:09:26 1992
+--- ./include/gk/straction.h	Thu Jun 11 09:53:17 1998
+***************
+*** 65,83 ****
+  #endif
+  
+  #define declareStrActionCallback(T) \
+! typedef void T::StrActionMemberFunction(T)(char *); \
+  class StrActionCallback(T) : public StrAction { \
+  public: \
+!     StrActionCallback(T)(T*, StrActionMemberFunction(T)*); \
+  \
+      virtual void execute(char *); \
+  private: \
+      T* obj_; \
+!     StrActionMemberFunction(T)* func_; \
+  };
+  
+  #define implementStrActionCallback(T) \
+! StrActionCallback(T)::StrActionCallback(T)(T* obj, StrActionMemberFunction(T)* func) { \
+      obj_ = obj; \
+      func_ = func; \
+  } \
+--- 65,83 ----
+  #endif
+  
+  #define declareStrActionCallback(T) \
+! typedef void (T::*StrActionMemberFunction(T))(char *); \
+  class StrActionCallback(T) : public StrAction { \
+  public: \
+!     StrActionCallback(T)(T*, StrActionMemberFunction(T)); \
+  \
+      virtual void execute(char *); \
+  private: \
+      T* obj_; \
+!     StrActionMemberFunction(T) func_; \
+  };
+  
+  #define implementStrActionCallback(T) \
+! StrActionCallback(T)::StrActionCallback(T)(T* obj, StrActionMemberFunction(T) func) { \
+      obj_ = obj; \
+      func_ = func; \
+  } \
+*** ./include/gk/connaction.h~	Wed Oct 28 15:09:25 1992
+--- ./include/gk/connaction.h	Thu Jun 11 09:53:35 1998
+***************
+*** 66,84 ****
+  #endif
+  
+  #define declareConnActionCallback(T) \
+! typedef void T::ConnActionMemberFunction(T)(char *, class Connection*); \
+  class ConnActionCallback(T) : public ConnAction { \
+  public: \
+!     ConnActionCallback(T)(T*, ConnActionMemberFunction(T)*); \
+  \
+      virtual void execute(char *, class Connection*); \
+  private: \
+      T* obj_; \
+!     ConnActionMemberFunction(T)* func_; \
+  };
+  
+  #define implementConnActionCallback(T) \
+! ConnActionCallback(T)::ConnActionCallback(T)(T* obj, ConnActionMemberFunction(T)* func) { \
+      obj_ = obj; \
+      func_ = func; \
+  } \
+--- 66,84 ----
+  #endif
+  
+  #define declareConnActionCallback(T) \
+! typedef void (T::*ConnActionMemberFunction(T))(char *, class Connection*); \
+  class ConnActionCallback(T) : public ConnAction { \
+  public: \
+!     ConnActionCallback(T)(T*, ConnActionMemberFunction(T)); \
+  \
+      virtual void execute(char *, class Connection*); \
+  private: \
+      T* obj_; \
+!     ConnActionMemberFunction(T) func_; \
+  };
+  
+  #define implementConnActionCallback(T) \
+! ConnActionCallback(T)::ConnActionCallback(T)(T* obj, ConnActionMemberFunction(T) func) { \
+      obj_ = obj; \
+      func_ = func; \
+  } \
+*** ./include/gk/rpcaction.h~	Wed Oct 28 15:09:26 1992
+--- ./include/gk/rpcaction.h	Thu Jun 11 09:53:39 1998
+***************
+*** 65,83 ****
+  #endif
+  
+  #define declareRpcActionCallback(T) \
+! typedef void T::RpcActionMemberFunction(T)(class CallbackRpcReader*, int); \
+  class RpcActionCallback(T) : public RpcAction { \
+  public: \
+!     RpcActionCallback(T)(T*, RpcActionMemberFunction(T)*); \
+  \
+      virtual void execute(class CallbackRpcReader*, int); \
+  private: \
+      T* obj_; \
+!     RpcActionMemberFunction(T)* func_; \
+  };
+  
+  #define implementRpcActionCallback(T) \
+! RpcActionCallback(T)::RpcActionCallback(T)(T* obj, RpcActionMemberFunction(T)* func) { \
+      obj_ = obj; \
+      func_ = func; \
+  } \
+--- 65,83 ----
+  #endif
+  
+  #define declareRpcActionCallback(T) \
+! typedef void (T::*RpcActionMemberFunction(T))(class CallbackRpcReader*, int); \
+  class RpcActionCallback(T) : public RpcAction { \
+  public: \
+!     RpcActionCallback(T)(T*, RpcActionMemberFunction(T)); \
+  \
+      virtual void execute(class CallbackRpcReader*, int); \
+  private: \
+      T* obj_; \
+!     RpcActionMemberFunction(T) func_; \
+  };
+  
+  #define implementRpcActionCallback(T) \
+! RpcActionCallback(T)::RpcActionCallback(T)(T* obj, RpcActionMemberFunction(T) func) { \
+      obj_ = obj; \
+      func_ = func; \
+  } \
+*** ./include/gk-reg/coordinator.h~	Wed Oct 28 15:09:26 1992
+--- ./include/gk-reg/coordinator.h	Thu Jun 11 10:21:18 1998
+***************
+*** 69,74 ****
+--- 69,77 ----
+    class RegistrarClient* rc_;
+  
+  protected:
++   virtual boolean createReaderAndWriter(const char* rHost, int rPort) 
++     {return false;}
++     
+    class ConfTbl* confs_;
+    class MsgQTbl* pending_;
+    class UIDTbl* uids_;
+*** ./src/gk/conference.c~	Wed Oct 28 15:09:38 1992
+--- ./src/gk/conference.c	Thu Jun 11 09:55:29 1998
+***************
+*** 57,62 ****
+--- 57,63 ----
+  
+  #include <iostream.h>
+  #include <stdio.h>
++ #include <string.h>
+  #include <strings.h>
+  #include <osfcn.h>
+  #include <stdlib.h>
+***************
+*** 229,235 ****
+    char port[80];
+    our_attributes_ = AttributeList::read(s);
+    our_attributes_->attribute("host", GroupSession::host_name());
+!   our_attributes_->attribute("port", sprintf(port, "%d", _lPort));
+    char t[1000];
+    our_attributes_->write(t);
+    newUser( our_attributes_);
+--- 230,237 ----
+    char port[80];
+    our_attributes_ = AttributeList::read(s);
+    our_attributes_->attribute("host", GroupSession::host_name());
+!   sprintf(port, "%d", _lPort);
+!   our_attributes_->attribute("port", port); 
+    char t[1000];
+    our_attributes_->write(t);
+    newUser( our_attributes_);
+*** ./src/gk-reg/regclient.c~	Wed Oct 28 15:09:44 1992
+--- ./src/gk-reg/regclient.c	Thu Jun 11 10:01:04 1998
+***************
+*** 42,47 ****
+--- 42,48 ----
+  #include <malloc.h>
+  #include <stdio.h>
+  #include <string.h>
++ #include <unistd.h>
+  #include <Dispatch/rpcstream.h>
+  #include <Dispatch/dispatcher.h>
+  #include <gk/straction.h>
+***************
+*** 203,209 ****
+   ****************************************************************************/
+  
+  char* cvt_gecos(char* gecos, char* uid) {
+!   char *s = malloc(80), *t = s, *x;
+    while (*gecos) {
+      if(*gecos=='&') {
+        x = uid;
+--- 204,212 ----
+   ****************************************************************************/
+  
+  char* cvt_gecos(char* gecos, char* uid) {
+!   char *s = (char*) malloc(80);
+!   char *t = s;
+!   char *x;
+    while (*gecos) {
+      if(*gecos=='&') {
+        x = uid;
+***************
+*** 231,242 ****
+    char s[500];
+  
+    AttributeList al;
+!   al.attribute("confnum", sprintf(s, "%d", conference));
+    al.attribute("userid", cuserid(0));
+    al.attribute("username", cvt_gecos(getpwnam(cuserid(0))->pw_gecos, 
+  				     cuserid(0)));
+    al.attribute("host", GroupSession::host_name());
+!   al.attribute("port", sprintf(s, "%d", lPort()));
+    al.write(s);
+    writer_->sendMsg(ADDUSER, s);
+    PollUsers(conference);
+--- 234,247 ----
+    char s[500];
+  
+    AttributeList al;
+!   sprintf(s, "%d", conference);
+!   al.attribute("confnum", s);
+    al.attribute("userid", cuserid(0));
+    al.attribute("username", cvt_gecos(getpwnam(cuserid(0))->pw_gecos, 
+  				     cuserid(0)));
+    al.attribute("host", GroupSession::host_name());
+!   sprintf(s, "%d", lPort());
+!   al.attribute("port", s);
+    al.write(s);
+    writer_->sendMsg(ADDUSER, s);
+    PollUsers(conference);
+*** ./src/gk-ui/open_pty.c~	Wed Oct 28 15:09:48 1992
+--- ./src/gk-ui/open_pty.c	Thu Jun 11 10:09:43 1998
+***************
+*** 45,50 ****
+--- 45,51 ----
+  
+  #include <stdio.h>
+  #include <strings.h>
++ #include <bsd/sgtty.h>
+  #include <sys/time.h>
+  #include <sys/termios.h>
+  #include <sys/ioctl.h>
+***************
+*** 53,60 ****
+  #include <ctype.h>
+  #include <osfcn.h>
+  
+! /* Global Variables */
+  
+  static int  pty_master;
+  static char pty_slave_filename[50], pty_master_filename[50];
+  struct termios oldterm = {  /* initialized structure for the pty */
+--- 54,85 ----
+  #include <ctype.h>
+  #include <osfcn.h>
+  
+! #define CTRL(ch)	((ch)&0x1F)
+! #define	IBSHIFT		16
+! 
+! #define CNUL	0
+! #define CDEL	0177
+! #define CESC	'\\'
+! #define CINTR	0177
+! #define CQUIT	034
+! #define CERASE	'#'
+! #define CKILL	'@'
+! #define CEOT	04
+! #define CEOL	0
+! #define CEOL2	0
+! #define CEOF	4
+! #define CSTART	021
+! #define CSTOP	023
+! #define CSWTCH	032
+! #define NSWTCH	0
+! #define CSUSP	CTRL('Z')
+! #define CDSUSP	CTRL('Y')
+! #define CRPRNT	CTRL('R')
+! #define CFLUSH	CTRL('O')
+! #define CWERASE	CTRL('W')
+! #define CLNEXT	CTRL('V')
+  
++ /* Global Variables */
+  static int  pty_master;
+  static char pty_slave_filename[50], pty_master_filename[50];
+  struct termios oldterm = {  /* initialized structure for the pty */
+*** ./src/gk-ui/shell.c~	Wed Oct 28 15:09:48 1992
+--- ./src/gk-ui/shell.c	Thu Jun 11 10:12:31 1998
+***************
+*** 56,62 ****
+    if ((tmp = open_pty_channel("/bin/csh", &in_file, &out_file)) == -1) 
+      printf("oops on open_pty_channel\n");
+    else 
+!     Dispatcher::instance().link(in_file->_file, Dispatcher::ReadMask, this);
+    body(tb);
+  }
+  
+--- 56,62 ----
+    if ((tmp = open_pty_channel("/bin/csh", &in_file, &out_file)) == -1) 
+      printf("oops on open_pty_channel\n");
+    else 
+!     Dispatcher::instance().link(fileno(in_file), Dispatcher::ReadMask, this);
+    body(tb);
+  }
+  
+***************
+*** 73,79 ****
+    char s[1024];
+    int num;
+    
+!   num = read(in_file->_file, s, 1024);	
+    if((num>0) && (*s != 0)) {
+      em_->Write(s,num);
+    }
+--- 73,79 ----
+    char s[1024];
+    int num;
+    
+!   num = read(fileno(in_file), s, 1024);	
+    if((num>0) && (*s != 0)) {
+      em_->Write(s,num);
+    }
+*** ./src/gk-ui/DialogMgr.c~	Wed Oct 28 15:09:47 1992
+--- ./src/gk-ui/DialogMgr.c	Thu Jun 11 10:39:42 1998
+***************
+*** 108,114 ****
+      Window* window, const char* prompt, const char* filter
+  ) {
+      long count = _chooser->count();
+!     for (long i = 0; i < count; ++i) {
+          ChooserInfo& info = _chooser->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+--- 108,115 ----
+      Window* window, const char* prompt, const char* filter
+  ) {
+      long count = _chooser->count();
+!     long i;
+!     for (i = 0; i < count; ++i) {
+          ChooserInfo& info = _chooser->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+***************
+*** 128,134 ****
+      Window* window, const char* prompt, const char* initial
+  ) {
+      long count = _asker->count();
+!     for (long i = 0; i < count; ++i) {
+          AskerInfo& info = _asker->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+--- 129,136 ----
+      Window* window, const char* prompt, const char* initial
+  ) {
+      long count = _asker->count();
+!     long i;
+!     for (i = 0; i < count; ++i) {
+          AskerInfo& info = _asker->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+***************
+*** 146,152 ****
+  
+  int DialogManager::confirm (Window* window, const char* prompt) {
+      long count = _confirmer->count();
+!     for (long i = 0; i < count; ++i) {
+          ConfirmerInfo& info = _confirmer->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+--- 148,155 ----
+  
+  int DialogManager::confirm (Window* window, const char* prompt) {
+      long count = _confirmer->count();
+!     long i;
+!     for (i = 0; i < count; ++i) {
+          ConfirmerInfo& info = _confirmer->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+***************
+*** 164,170 ****
+  
+  void DialogManager::report (Window* window, const char* prompt) {
+      long count = _reporter->count();
+!     for (long i = 0; i < count; ++i) {
+          ReporterInfo& info = _reporter->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+--- 167,174 ----
+  
+  void DialogManager::report (Window* window, const char* prompt) {
+      long count = _reporter->count();
+!     long i;
+!     for (i = 0; i < count; ++i) {
+          ReporterInfo& info = _reporter->item_ref(i);
+          if (strcmp(info._prompt, prompt) == 0) {
+              break;
+*** ./src/examples/registrar/registrar.c~	Wed Oct 28 15:09:51 1992
+--- ./src/examples/registrar/registrar.c	Thu Jun 11 10:32:52 1998
+***************
+*** 22,27 ****
+--- 22,28 ----
+  #include <gk/reader.h>     // for ReaderCallbackTable
+  #include <gk/connection.h>
+  #include <stdio.h>
++ #include <stdlib.h>
+  #include <string.h>
+  
+  declareStrActionCallback(Registrar);
+*** ./src/examples/registrar/LINUX/Makefile~	Thu Jun 11 10:37:53 1998
+--- ./src/examples/registrar/LINUX/Makefile	Thu Jun 11 10:41:17 1998
+***************
+*** 83,89 ****
+                 ARCH = $(ARCHORCPU)$(SPECIAL_ARCH)
+         SPECIAL_ARCH =
+  
+!            CCDRIVER = gcc -xc++ -O
+             CCSUFFIX = c
+                  SRC = /home/johnston/gk1.0/src/examples/registrar/LINUX/..
+                SLASH = /
+--- 83,89 ----
+                 ARCH = $(ARCHORCPU)$(SPECIAL_ARCH)
+         SPECIAL_ARCH =
+  
+!            CCDRIVER = gcc -O
+             CCSUFFIX = c
+                  SRC = /home/johnston/gk1.0/src/examples/registrar/LINUX/..
+                SLASH = /
+*** ./src/examples/registrar/registrar.h~	Wed Oct 28 15:09:51 1992
+--- ./src/examples/registrar/registrar.h	Thu Jun 11 10:17:15 1998
+***************
+*** 41,52 ****
+--- 41,56 ----
+    Registrar(int port);
+    virtual ~Registrar();
+  
++ 
+  protected:
+    
+    AttrListTable* conference_tbl_;
+    UserListTbl* users_tbl_;
+    int lastID_;
+    
++   virtual boolean createReaderAndWriter(const char* rHost, int rPort) 
++     {return false;}
++     
+    virtual void createReaderAndWriter(int fd);
+    void closeCallback(class CallbackRpcReader*, int);
+    class ConnectionList* connlist_;
+*** ./src/examples/reg-open/openregclient.c~	Wed Oct 28 15:09:52 1992
+--- ./src/examples/reg-open/openregclient.c	Thu Jun 11 10:18:55 1998
+***************
+*** 180,186 ****
+    if ( conference_tbl_->find( cl, conf) ) {
+      cl->find_attribute( "name", name);   al.attribute("name", name);
+      cl->find_attribute( "type", type);   al.attribute("type", type);
+!     al.attribute("confnum", sprintf(s, "%d", conf));
+      coord_->createConference( &al );
+      
+      AttrListTable* users;
+--- 180,187 ----
+    if ( conference_tbl_->find( cl, conf) ) {
+      cl->find_attribute( "name", name);   al.attribute("name", name);
+      cl->find_attribute( "type", type);   al.attribute("type", type);
+!     sprintf(s, "%d", conf);
+!     al.attribute("confnum", s);
+      coord_->createConference( &al );
+      
+      AttrListTable* users;
+*** ./src/examples/reg-open/rcdisplay.c~	Wed Oct 28 15:09:52 1992
+--- ./src/examples/reg-open/rcdisplay.c	Thu Jun 11 10:19:30 1998
+***************
+*** 39,44 ****
+--- 39,45 ----
+  #include <InterViews/box.h>
+  #include <IV-look/button.h>
+  #include <stdio.h>
++ #include <stdlib.h>
+  #include "openregclient.h"
+  #include "rcdisplay.h"
+  #include <InterViews/window.h>
+*** ./src/examples/reg-master/intaction.h~	Wed Oct 28 15:09:55 1992
+--- ./src/examples/reg-master/intaction.h	Thu Jun 11 10:23:06 1998
+***************
+*** 50,68 ****
+  #endif
+  
+  #define declareIntActionCallback(T) \
+! typedef void T::IntActionMemberFunction(T)(int,int); \
+  class IntActionCallback(T) : public IntAction { \
+  public: \
+!     IntActionCallback(T)(T*, IntActionMemberFunction(T)*, int, int); \
+  \
+      virtual void execute(); \
+  private: \
+      T* obj_; \
+!     IntActionMemberFunction(T)* func_; \
+  };
+  
+  #define implementIntActionCallback(T) \
+! IntActionCallback(T)::IntActionCallback(T)(T* obj, IntActionMemberFunction(T)* func, int p1_, int p2_) { \
+      obj_ = obj; \
+      func_ = func; \
+      p1 = p1_; \
+--- 50,68 ----
+  #endif
+  
+  #define declareIntActionCallback(T) \
+! typedef void (T::*IntActionMemberFunction(T))(int,int); \
+  class IntActionCallback(T) : public IntAction { \
+  public: \
+!     IntActionCallback(T)(T*, IntActionMemberFunction(T), int, int); \
+  \
+      virtual void execute(); \
+  private: \
+      T* obj_; \
+!     IntActionMemberFunction(T) func_; \
+  };
+  
+  #define implementIntActionCallback(T) \
+! IntActionCallback(T)::IntActionCallback(T)(T* obj, IntActionMemberFunction(T) func, int p1_, int p2_) { \
+      obj_ = obj; \
+      func_ = func; \
+      p1 = p1_; \
+*** ./include/gk/writer.h~	Wed Oct 28 15:09:26 1992
+--- ./include/gk/writer.h	Fri Jun 12 08:22:24 1998
+***************
+*** 48,53 ****
+--- 48,55 ----
+    ** send a message
+    */
+    void sendMsg(int msg_id_num, char *msg);
++ 
++   rpcstream* server_ptr() { return _server; }
+  };
+  
+  #endif
+*** ./src/gk/connection.c~	Wed Oct 28 15:09:39 1992
+--- ./src/gk/connection.c	Fri Jun 12 08:21:26 1998
+***************
+*** 64,70 ****
+    if( callbacks_ == nil) 
+      callbacks_ = new ReaderCallbackTable(FUNCTBLSIZE);
+    writer_ = new Writer( fd );
+!   if(writer_->server()) 
+      reader_ = new CallbackRpcReader(&writer_->server(), callbacks_, id_);
+  }
+  
+--- 64,70 ----
+    if( callbacks_ == nil) 
+      callbacks_ = new ReaderCallbackTable(FUNCTBLSIZE);
+    writer_ = new Writer( fd );
+!   if(writer_->server_ptr()) 
+      reader_ = new CallbackRpcReader(&writer_->server(), callbacks_, id_);
+  }
+  
+*** ./src/gk-reg/regclient.c~	Thu Jun 11 10:01:04 1998
+--- ./src/gk-reg/regclient.c	Fri Jun 12 09:09:31 1998
+***************
+*** 341,347 ****
+  
+  boolean RegistrarClient::createReaderAndWriter(const char* rHost, int rPort) {
+    writer_ = new Writer(rHost, rPort);
+!   if (writer_->server()) {
+      reader_ = new CallbackRpcReader(&writer_->server());
+      reader_->registerCallback( new StrActionCallback(RegistrarClient)
+  		  (this, &RegistrarClient::UpdateConferenceList), CONFLIST);
+--- 341,347 ----
+  
+  boolean RegistrarClient::createReaderAndWriter(const char* rHost, int rPort) {
+    writer_ = new Writer(rHost, rPort);
+!   if (writer_->server_ptr()) {
+      reader_ = new CallbackRpcReader(&writer_->server());
+      reader_->registerCallback( new StrActionCallback(RegistrarClient)
+  		  (this, &RegistrarClient::UpdateConferenceList), CONFLIST);

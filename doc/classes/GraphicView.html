@@ -1,0 +1,874 @@
+
+<html><head><TITLE>Description of GraphicView</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>GraphicView</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="ComponentView.html" >ComponentView</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+base classes for graphical component views.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="ComponentView.html" >ComponentView</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#GraphicView><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/Components/grview.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/GraphicView.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ConnectorView.html" >ConnectorView</A>* 
+    <A NAME="ConnectorIntersecting(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>ConnectorIntersecting</B> (Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Manipulator.html" >Manipulator</A>* 
+    <A NAME="CreateManipulator(Viewer*&#38;&#38;COMMEvent&#38;&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*)">
+    <B>CreateManipulator</B> (<A HREF="Viewer.html" >Viewer</A>*,<A HREF="Event.html" >Event</A>&#38;,<A HREF="Transformer.html" >Transformer</A>*,<A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DrawHandles()">
+    <B>DrawHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="EraseHandles()">
+    <B>EraseHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="GetGraphic()">
+    <B>GetGraphic</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="GetGraphicComp()">
+    <B>GetGraphicComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicView.html" >GraphicView</A>* 
+    <A NAME="GetGraphicView(Component*)">
+    <B>GetGraphicView</B> (<A HREF="Component.html" >Component</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComponentView.html" >ComponentView</A>* 
+    <A NAME="GetParent()">
+    <B>GetParent</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicView.html" >GraphicView</A>* 
+    <A NAME="GetView(Iterator)">
+    <B>GetView</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Viewer.html" >Viewer</A>* 
+    <A NAME="GetViewer()">
+    <B>GetViewer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Includes(GraphicView*)">
+    <B>Includes</B> (<A HREF="GraphicView.html" >GraphicView</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitHandles()">
+    <B>InitHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Interpret(Command*)">
+    <B>Interpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Command.html" >Command</A>* 
+    <A NAME="InterpretManipulator(Manipulator*)">
+    <B>InterpretManipulator</B> (<A HREF="Manipulator.html" >Manipulator</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="RedrawHandles()">
+    <B>RedrawHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="SelectAll()">
+    <B>SelectAll</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetView(GraphicView*&#38;&#38;COMMIterator&#38;)">
+    <B>SetView</B> (<A HREF="GraphicView.html" >GraphicView</A>*, <A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Uninterpret(Command*)">
+    <B>Uninterpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="ViewContaining(Coord&#38;&#38;COMMCoord)">
+    <B>ViewContaining</B> (Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="ViewIntersecting(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>ViewIntersecting</B> (Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="ViewsContaining(Coord&#38;&#38;COMMCoord)">
+    <B>ViewsContaining</B> (Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="ViewsIntersecting(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>ViewsIntersecting</B> (Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Selection.html" >Selection</A>* 
+    <A NAME="ViewsWithin(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>ViewsWithin</B> (Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~GraphicView()">
+    <B>~GraphicView</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Add(GraphicView*)">
+    <B>Add</B> (<A HREF="GraphicView.html" >GraphicView</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="AddDamage(Graphic*)">
+    <B>AddDamage</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Append(GraphicView*)">
+    <B>Append</B> (<A HREF="GraphicView.html" >GraphicView</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="ClosestPoint(Coordx[]&#38;&#38;COMMCoordy[]&#38;&#38;COMMintn&#38;&#38;COMMCoordpx&#38;&#38;COMMCoordpy)">
+    <B>ClosestPoint</B> (Coord x[], Coord y[], int n, Coord px, Coord py) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Manipulator.html" >Manipulator</A>* 
+    <A NAME="CreateGraphicCompManip(Viewer*&#38;&#38;COMMEvent&#38;&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*)">
+    <B>CreateGraphicCompManip</B> (<A HREF="Viewer.html" >Viewer</A>*, <A HREF="Event.html" >Event</A>&#38;, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="CreateHandles()">
+    <B>CreateHandles</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Manipulator.html" >Manipulator</A>* 
+    <A NAME="CreateStretchManip(Viewer*&#38;&#38;COMMEvent&#38;&#38;&#38;COMMTransformer*&#38;&#38;COMMTool*)">
+    <B>CreateStretchManip</B> (<A HREF="Viewer.html" >Viewer</A>*, <A HREF="Event.html" >Event</A>&#38;, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DeleteView(Iterator&#38;)">
+    <B>DeleteView</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicView.html" >GraphicView</A>* 
+    <A NAME="GetGraphicView(Graphic*)">
+    <B>GetGraphicView</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="GraphicView(GraphicComp*=nil)">
+    <B>GraphicView</B> (<A HREF="GraphicComp.html" >GraphicComp</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="IncurDamage(Graphic*)">
+    <B>IncurDamage</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InsertBefore(Iterator&#38;&#38;COMMGraphicView*)">
+    <B>InsertBefore</B> (<A HREF="Iterator.html" >Iterator</A>, <A HREF="GraphicView.html" >GraphicView</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Command.html" >Command</A>* 
+    <A NAME="InterpretGraphicCompManip(Manipulator*)">
+    <B>InterpretGraphicCompManip</B> (<A HREF="Manipulator.html" >Manipulator</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Command.html" >Command</A>* 
+    <A NAME="InterpretStretchManip(Manipulator*)">
+    <B>InterpretStretchManip</B> (<A HREF="Manipulator.html" >Manipulator</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Remove(Iterator&#38;)">
+    <B>Remove</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetGraphic(Graphic*)">
+    <B>SetGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Unselect(GraphicView*)">
+    <B>Unselect</B> (<A HREF="GraphicView.html" >GraphicView</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicView.html" >GraphicView</A>* 
+    <A NAME="View(UList*)">
+    <B>View</B> (<A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="_gr">
+    <B>_gr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Rubberband.html" >Rubberband</A>* 
+    <A NAME="_handles">
+    <B>_handles</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="GVUpdater">
+    <B>GVUpdater</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

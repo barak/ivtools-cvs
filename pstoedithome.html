@@ -1,0 +1,154 @@
+<HTML>
+<HEAD>
+<TITLE>pstoedit</TITLE>
+</HEAD>
+<BODY>
+<H1>pstoedit</H1>
+
+pstoedit translates PostScript and PDF graphics into other vector formats. 
+Currently pstoedit can generate the following formats:
+
+<UL>
+<LI>    Tgif .obj format (for tgif version &gt;= 3)
+<LI>    (Frame)Maker Intermediate Format
+<LI>    .fig format for xfig
+<LI>    pdf - Adobe's Portable Document Format
+<LI>    gnuplot format
+<LI>    Flattened PostScript
+<LI>    OS/2 meta files (under OS/2 only)
+<LI>    Windows meta files (WMF) (under DOS/Windows only)
+<LI>    DXF - CAD exchange format
+<LI>    CGM Format binary and textual
+<LI>    LWO - LightWave 3D
+<LI>	RIB - RenderMan
+<LI>	RPL - Real3D
+<LI>	Java applet
+<LI>	Idraw format
+</UL>
+Implementing support for other formats should be very easy. 
+
+The architecture of pstoedit consists of a PostScript frontend which
+needs to call a PostScript interpreter like Ghostscript and the
+individual backends which are pugged into a kind of framework.
+
+This framework can be used independently from the PostScript frontend
+from any other program. The framework provides a uniform interface to
+all different backends.
+
+You need a C++ compiler to install and GhostScript to run pstoedit.
+pstoedit should run on all Un*x like systems and has also been ported
+to OS/2, DOS/Windows, and RiscOS.
+
+You can download pstoedit (source code) from:
+<UL>
+<LI>the canonical archive at
+<A HREF="ftp://ftp.x.org/contrib/applications/pstoedit/pstoedit.2.60.tar.gz">ftp://ftp.x.org/contrib/applications/pstoedit/pstoedit.2.60.tar.gz</A>
+<LI>any mirror (there are lots of) of ftp.x.org
+<LI>if you are reading this page from a mirror site already, just try <A HREF="pstoedit.2.60.tar.gz">pstoedit.2.60.tar.gz</A>.
+</UL>
+
+You can more information from 
+<UL>
+<LI>the manual <A HREF="pstoedit.2.60.manual.html">(relative link)</A>, 
+<A HREF="ftp://ftp.x.org/contrib/applications/pstoedit/pstoedit.2.60.manual.html">
+(at the canonical site)</A>.
+<LI>the readme file<A HREF="pstoedit.2.60.README.txt">(relative link)</A>.
+<A HREF="ftp://ftp.x.org/contrib/applications/pstoedit/pstoedit.2.60.README.txt">
+(at the canonical site)</A>.
+</UL>
+
+<H2>New or changed in 2.60:</H2>
+<LI> 	New backend for idraw contributed by Scott Pakin <pakin@cs.uiuc.edu>
+<LI>	Internal redesign in order to support the usage of the drivers from 
+	other programs, not just from pstoedit. 
+<LI>	Full implementation of kshow, xshow, yshow, xyshow
+<LI>	Added -psargs option and removed -rnnxnn option
+<LI>	Added -include option
+<LI>	Fixed the linecap and linejoin problem for MIF
+<LI>	Port to RiscOS done by Rob Warner <rcw2@ukc.ac.uk>
+<LI>	winp2eap.def missing in distribution
+<LI>	Fixed a problem with .ps files that redefined showpage themselves
+<LI>	Fixed some problems related to the 'string' operator. Some
+	PostScript programs used to redefine 'string'.
+<LI>	Fixed a portabiltiy problem for DecAlpha
+<LI>	Fixed some OS/2 compilation problems
+<LI>	Fixed some DEC compilation problems
+<LI>	Fixed a problem that caused pstoedit to 'draw' each character when running gs3.5x
+<LI>	Added support for Frame-specific encoding of special characters
+<LI>	Fixed an encoding bug for PDF (minus was defined twice)
+
+<H2>New or changed in 2.50:</H2>
+
+<UL>
+<LI>	New backend for WMF, contributed by Jens Weber (wr@lzh1.lzh.de)
+<LI>	Windows GUI, contributed by Jens Weber (wr@lzh1.lzh.de)
+<LI>	direct handling of .pdf files (as input) (Thanks to ghostscript
+	and the -dNOBIND option !!)
+
+<LI>	fixed a bug caused by ignoring the textmatrix
+<LI>	changed the pdf output so that xpdf accepts it
+<LI>	Fonts not supported by the selected backend, are now "drawn"
+	automatically, as if the option -dt was given for them.
+<LI>	implemented the different show's for pdf
+<LI>	handling of reencoded fonts.
+<LI>	support for dashed lines (so far for cgm, xfig, and pdf only)
+<LI>	added workaround for bug in libg++ on some linux systems
+	(Thanks to derekn@vw.ece.cmu.edu (Derek B. Noonburg)
+	 and rd@berlepsch.wohnheim.uni-ulm.de (Rainer Dorsch)
+	 for taking care of this linux specific problem and the workaround)
+<LI>	fixed a bug with ordering of text and lines
+<LI>	replaced usage of tmpnam by tempnam so the user can
+	control the place where temp files are allocated. 
+	(via TMPDIR under *nix, TMP or TEMP under DOS/Win)
+<LI>	Bold was not treated correctly in MIF backend
+<LI>	Gnuplot backend could not be called
+<LI>	zero length text caused problems with some backends
+<LI>	^M caused problems with some backends.
+<LI>	handling filenames containing \
+<LI>	fixed compile errors with some compilers in drvjava.cc
+<LI>	added support for linecaps in PDF backend
+</UL>
+
+<H2>New or changed in 2.41:</H2>
+
+<UL>
+<LI>	changed makefile for DOS
+<LI>	fixed problem in pdf backend with '\' characters
+<LI>	fixed a problem with linewidth (all backends)
+<LI>	three new backends from Glenn Lewis <http://www.c2.net/~glewis/>
+<UL>
+<LI>        	LWO (LightWave 3D)
+<LI>		RIB (RenderMan)
+<LI>		RPL (Real3D)
+</UL>
+<LI>	Piet van Oostrum <piet@cs.ruu.nl> fixed two problems in the pdf backend.
+<LI>	Added -f "pdf:-e encoding" as a temporary fix to the problem of 
+	different font encodings. See also pstoedit.man.
+<LI>	Added some heuristic to calculate the MediaBox for PDF.
+<LI>	Removed writing of comments to PDF because of problems with xpdf.
+<LI>	Integrated some new features of the cd1.2 library for the CGM backend.
+<LI>	Added a backend to generate a Java(tm) applet
+<LI>	Some changes to compile without warnings
+</UL>
+
+
+<H2>New or changed in 2.40:</H2>
+
+<UL>
+<LI> 	a GNUplot backend contributed by Carsten Hammer
+<LI> 	a first DXF backend contributed by Carsten Hammer
+  	( a  more complete version will be available
+	in one of the next release. If you have urgent
+	need for it contact Wolfgang.Glunz@mchp.siemens.de )
+<LI> 	a OS/2 Metafile backend contributed by Christoph Jaeschke
+<LI> 	a PDF backend
+<LI> 	no shell script anymore. Pure C++ programm. 
+<LI> 	also runs on DOS, OS/2.
+<LI> 	tgif backend extended to support rotated text. 
+	(needs tgif version &gt;= 3.0 pl 7 )
+<LI> 	some bug fixes
+</UL>
+
+<ADDRESS>Wolfgang Glunz	email: <A HREF="mailto:Wolfgang.Glunz@mchp.siemens.de">Wolfgang.Glunz@mchp.siemens.de</A></ADDRESS>
+</BODY>
+</HTML>

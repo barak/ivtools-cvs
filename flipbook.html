@@ -1,0 +1,98 @@
+
+<title>ivtools flipbook: multiframe animation drawing editor and viewer</title>
+
+<h1>
+ivtools flipbook
+</h1>
+
+<img src=../ivtools/flipbook-logo.gif alt="[flipbook logo]"> 
+<p>
+
+<code>ivtools flipbook</code></a> is a multi-frame animation tool
+from the 
+<code><a href=../ivtools/>ivtools</a></code>
+software package.  It allows you to draw your own simple animations
+ and flip through them, forwards and backwards, 
+and to replay at different pans, zooms, and croppings.  
+<p>
+Here is what the <a href=./flipbook-1.html> user interface </a> for
+flipbook looks like.  It shows the 
+first frame of a 
+<a href=../ivtools/fullaaron.gif>flipbook animation</a>
+featuring
+<a href=./aaron.html>Aaron the flying anteater</a>, the mascot of 
+<a href=../ivtools/index.html>ivtools</a>.
+<p>
+<hr>
+<b>Usage</b>
+<p>
+
+<a href=./flipbook-README.txt>man page</a>
+<p>
+
+<li><i>Play flipbooks forward and backward by keyboard, Ctrl-f moves forward a frame, Ctrl-b moves backward.</i>
+<li><i>Enable looping under the Frame menu.</i>
+<li><i>Create new frames for modification with the Copy-Forward (Ctrl-X) or Copy-Backward (Ctrl-Y) command under the Frame menu.</i>
+<li><i>See the previous frame while drawing the current frame by using Show-Prev-Frame
+under the Frame menu.</i>
+<li><i>Read below to see how to generate animated gifs.</i>
+<p>
+<i>Most of the mechanism of <a href=drawtool.html>ivtools drawtool</a> available
+as well.</i>
+
+<hr>
+<p>
+Download an 
+<a href=http://www.ivtools.org/ivtools/download.html>ivtools flipbook binary</a>, add the following
+to your <b>~/.mailcap file:</b><p>
+
+<code>
+
+application/frame-idraw; flipbook -bookgeom %s
+
+</code>
+<p>
+
+and then click on a <a href=../flipbooks/aaron.gz.frs>flipbook file</a> to test launching the ivtools flipbook editor.  Try the 
+<a href=http://www.vectaport.com/flipbooks/aaron.gz.frs>online</a> if the 
+<a href=../cdroms/browserconfig.html>local version doesn't work</a> with your browser
+<p>
+<center><a href=./forestdrive.frs>Another sample</a> (change Orientation before playing)</center>
+<p>
+Then try it out in these <a href=http://www.vectaport.com/flipbooks/index.html> <img src=http://www.vectaport.com/flipbooks/fullfishie.gif align=middle alt="flipbooks_button"> sample flipbook galleries</a>.
+<p>
+<i>Note these flipbooks are <b>gzip</b> compressed so you
+will also need a <b>gunzip</b> in your search path 
+(to be utilized by the viewer).</i>
+
+<p>
+To <b>render GIF89A Animated GIF's</b> from the ivtools flipbook editor use this 
+<a href=./mkgif89a.bash>bash script</a> in the Print dialog box (select 
+"to command" and enter something like "mkgif89a s r" where s is a floating point scale factor and r is rotation in degrees). <p>
+
+A more flexible script <a href=./mkgif89ac.bash>mkgif89ac</a> takes clipping arguments and a time between frames argument (in hundredths of a second). <p>
+
+<p>
+Since <a href=./index.html>ivtools-0.7.2</a>, you can download and run <a href=./slideshow.html>continuously looping slideshows</a> in ivtools flipbook.
+
+<hr>
+<p>
+<table border=1><tr><td>
+<b><a href=./index.html>ivtools</a> <a href=./editors.html>drawing editors</a></b>
+</td><td>
+<a href=./idraw.html>idraw</a>
+</td><td>
+<a href=./drawtool.html>drawtool</a>
+</td><td>
+<a href=./comdraw.html>comdraw</a>
+</td><td>
+flipbook
+</td><td>
+<a href=./graphdraw.html>graphdraw</a>
+</td></tr></table>
+
+<p>
+
+<a href=../ivtools/index.html><img src=../ivtools/ivtools-logo.gif align=middle alt="ivtools_button"></a>
+<a href=../ivtools/index.html><code>ivtools home page</code></a>
+

@@ -1,0 +1,36 @@
+flipbook(
+    frame(
+        rectangle(12,105,659,648 :fillbg 1 :brush 65535,0 :fgcolor "LtGray",0.762951,0.762951,0.762951 :bgcolor "White",1,1,1 :graypat 0 :transform 2,-0,-0,2,-344,-251)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo1.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo2.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo3.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo4.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo5.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo6.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo7.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo8.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo9.jpg" :transform 1,0,0,1,120.5,271)
+        ),
+    frame(
+        raster("http://www.nps.gov/apis/photo10.jpg" :transform 1,0,0,1,120.5,271)
+        )
+	:slideshow 5
+)

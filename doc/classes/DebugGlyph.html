@@ -1,0 +1,254 @@
+
+<html><head><TITLE>Description of DebugGlyph</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>DebugGlyph</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="MonoGlyph.html" >MonoGlyph</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="MonoGlyph.html" >MonoGlyph</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#DebugGlyph><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+InterViews/debug.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="DebugGlyph(Glyph*g&#38;&#38;COMMconstchar*msg&#38;&#38;COMMunsignedinttrace_flags)">
+    <B>DebugGlyph</B> (<A HREF="Glyph.html" >Glyph</A>* g, const char* msg, unsigned int trace_flags) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="allocate(Canvas*&#38;&#38;COMMconstAllocation&#38;&#38;&#38;COMMExtension&#38;)">
+    <B>allocate</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;, <A HREF="Extension.html" >Extension</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="draw(Canvas*&#38;&#38;COMMconstAllocation&#38;)">
+    <B>draw</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="enum&#38;17">
+    <B>enum</B>
+     { trace_none = 0x0, trace_request = 0x1, trace_allocate = 0x2, trace_draw = 0x4, trace_print = 0x8, trace_pick = 0x10, trace_undraw = 0x20, trace_request_allocate = 0x3, trace_request_draw = 0x5, trace_allocate_draw = 0x6, trace_request_allocate_draw = 0x7, trace_request_pick = 0x11, trace_allocate_pick = 0x12, trace_request_allocate_pick = 0x13, trace_draw_pick = 0x14, trace_request_draw_pick = 0x15, trace_request_undraw = 0x21, trace_allocate_undraw = 0x22, trace_request_allocate_undraw = 0x23, trace_draw_undraw = 0x24, trace_request_draw_undraw = 0x25, trace_allocate_draw_undraw = 0x26, trace_request_allocate_draw_undraw = 0x27, trace_pick_undraw = 0x30, trace_request_pick_undraw = 0x31, trace_allocate_pick_undraw = 0x32, trace_request_allocate_pick_undraw = 0x33, trace_draw_pick_undraw = 0x34, trace_request_draw_pick_undraw = 0x35, trace_allocate_draw_pick_undraw = 0x36, trace_request_allocate_draw_pick_undraw = 0x37, trace_all = 0x3f } 
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="pick(Canvas*&#38;&#38;COMMconstAllocation&#38;&#38;&#38;COMMintdepth&#38;&#38;COMMHit&#38;)">
+    <B>pick</B> (<A HREF="Canvas.html" >Canvas</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;, int depth, <A HREF="Hit.html" >Hit</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="print(Printer*&#38;&#38;COMMconstAllocation&#38;)">
+    <B>print</B> (<A HREF="Printer.html" >Printer</A>*, const <A HREF="Allocation.html" >Allocation</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="print_allotment(constAllotment&#38;)">
+    <B>print_allotment</B> (const <A HREF="Allotment.html" >Allotment</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="print_requirement(constRequirement&#38;)">
+    <B>print_requirement</B> (const <A HREF="Requirement.html" >Requirement</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="request(Requisition&#38;)">
+    <B>request</B> (<A HREF="Requisition.html" >Requisition</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="undraw()">
+    <B>undraw</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~DebugGlyph()">
+    <B>~DebugGlyph</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

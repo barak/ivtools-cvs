@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>extra release notes for ivtools-0.7</title>
+  </head>
+
+  <body>
+    <h3>extra release notes for ivtools-0.7</h3>
+
+<a href=./ivtools-0.7-CHANGES.txt>CHANGES</a> &nbsp;
+<a href=./ivtools-0.7-README.txt>README</a> &nbsp;
+<a href=./ivtools-0.7-INSTALL.txt>INSTALL</a><p>
+
+<b>Dec. 2, 1998</b>: line 33 of ivtools-0.7/src/utils/Imakefile should
+use $(CCDRIVER) instead of $(CDRIVER), since ivdl.c is C++ code.  Some versions of gcc seem able to auto-detect C++ code by themselves, some versions could have handled it with a -xc++ argument, but this makes it work for all of them.<p>
+
+<b>Nov. 20, 1998</b>:  Section 2.b of the <a href=./ivtools-0.7-INSTALL.txt>INSTALL</a> should read as follows:
+<p>
+<code>
+2.b. Compile it with a "make World" command.  It needs the following<br>
+variable definitions:<br>
+<br>
+&nbsp;&nbsp;XCONFIGDIR&nbsp;	The location of your X11 config files.<br>
+&nbsp;&nbsp;PWD&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	
+	If you're using a shell without this pre-defined<br>
+&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	
+&nbsp;&nbsp;&nbsp;&nbsp;				(i.e. Solaris)<br>
+<br>
+Sample Linux command line: <br>
+&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+	make World XCONFIGDIR=/usr/X11R6/lib/X11/config <br>
+Sample SunOS command line:<br>
+&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+	make World XCONFIGDIR=/usr/local/lib/X11/config <br>
+Sample Solaris command line:<br>
+&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+	make World XCONFIGDIR=/usr/X/lib/X11/config PWD=`pwd`<br>
+Sample Irix command line:<br>
+&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+	make World XCONFIGDIR=/usr/lib/X11/config<br>
+<br>
+<br>
+This command generates Makefiles hierarchically and builds everything.<br>
+</code>
+
+<p>
+
+In the tar file this section does not refer to the need to supply XCONFIGDIR argument on the "make World" command line.<p>
+
+
+<b>Nov. 18, 1998</b>:  For Solaris, you need to change line 124 of <code>ivtools-0.7/config/site.def.SUN4</code> to be a <code>#ifdef</code> instead of a <code>#ifndef</code><p>
+
+<hr>
+back to &nbsp;
+<a href=./index.html>ivtools home</a> &nbsp;
+<a href=./download.html>ivtools download</a> &nbsp; 
+<a href=../pub/src/index.html>source download</a>
+
+
+  </body>
+</html>

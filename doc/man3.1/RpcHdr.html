@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       RpcHdr - header for remote procedure calls
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/rpchdr.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An  RpcHdr  enables an RPC request to be sent or received.
+       To send an RPC request, you would insert an RpcHdr into an
+       rpcstream  followed  by  any  arguments and then flush the
+       rpcstream if you wanted the request  to  be  sent  immedi-
+       ately.   The  rpcstream  automatically  fills  in each RPC
+       request's length field.  To receive an  RPC  request,  you
+       would  extract an RpcHdr from an rpcstream and examine the
+       ``request()'' member to determine which  additional  argu-
+       ments  need  to be extracted as well.  You can examine the
+       ``ndata()'' member too if you need to  estimate  how  much
+       space to allocate.
+
+
+</PRE>
+<H2>CONSTRUCTORS</H2><PRE>
+       <B>RpcHdr(void*</B> <B>writer,</B> <B>int</B> <B>request)</B>
+       <B>RpcHdr(int</B> <B>request)</B>
+       <B>RpcHdr()</B>
+              Construct an initialized header for an outgoing RPC
+              request (first two constructors)  or  construct  an
+              uninitialized  header  for  an incoming RPC request
+              (third constructor).   To  initialize  the  header,
+              you'll have to store the request's protocol number.
+              You can also store the address of the writer  send-
+              ing  the  RPC  request if you want to route the RPC
+              request to a specific reader on the peer's side.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>unsigned</B> <B>long</B> <B>reader()</B>
+       <B>int</B> <B>request()</B>
+       <B>unsigned</B> <B>int</B> <B>ndata()</B>
+              Get   information   about    the    RPC    request.
+              ``reader()''  identifies  the  reader  which should
+              handle the RPC request.   ``request()''  identifies
+              the  action  that should be performed.  ``ndata()''
+              gives  the  number  of  data  bytes  following  the
+              header,  which  may  be  useful  for estimating the
+              amount of space that must be allocated to store  an
+              argument.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>RpcReader(3I)</B>, <B>RpcWriter(3I)</B>, <B>rpcstream(3I)</B>
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

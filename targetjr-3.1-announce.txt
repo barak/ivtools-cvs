@@ -1,0 +1,26 @@
+targetjr-3.1 has successfully been built with ivtools substituted for
+InterViews on Linux.  Instructions can be found at
+http://www.vectaport.com/ivtools/targetjr-3.1.txt.  It is almost as
+simple as substituting a different pathname for the --with-iv argument
+of the configure script.  ivtools can be obtained via
+http://www.vectaport.com/ivtools/ or as part of the recently announced
+Debian 2.0 Linux distribution.
+
+ivtools contains alternate backward-compatible copies of the original
+InterViews and Unidraw libraries from Stanford University, and
+augments them with layered frameworks for Motif look-and-feel,
+large-scale imagery, and multi-frame and graph-network edit and
+display.  It builds in support for arbitrary numeric rasters (char,
+short, int, long, float, double) and a variety of image enhancement
+operators (for display purposes) to the Unidraw application framework.
+It has been used on a variety of US government funded projects (NASA,
+ARPA), and is constantly maintained and upgraded by Vectaport Inc..
+Documentation for ivtools is available online and via CD-ROM.  With a
+free software copyright identical to InterViews and similar to Target
+Jr, ivtools may be worth considering for the IU developer working on
+large-scale custom applications with a focus on Unix and 2D imaging.
+
+Scott Johnston
+Vectaport Inc.
+http://www.vectaport.com
+

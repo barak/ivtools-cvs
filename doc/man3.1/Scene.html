@@ -1,0 +1,178 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Scene, MonoScene - composite interactors
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/scene.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Scene</B>  is  the  base  class  for  all interactors that are
+       defined in terms of one or more instances of other  inter-
+       actors.  <B>MonoScene</B> is a subclass for scenes that contain a
+       single instance.  A monoscene's shape is copied  from  its
+       component  and  the  component's  canvas is given the same
+       size and location as the monoscene's canvas.
+
+       When a scene is deleted, it should delete all  its  compo-
+       nent interactors.  A monoscene deletes its existing compo-
+       nent if a new component is inserted.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>void</B> <B>Insert(Interactor*)</B>
+       <B>void</B> <B>Insert(Interactor*,</B> <B>Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B>  <B>Alignment</B>  <B>=</B>
+              <B>Bottom-</B> <B>Left)</B>
+       <B>virtual</B> <B>Interactor*</B> <B>Wrap(Interactor*)</B>
+       <B>virtual</B> <B>void</B> <B>DoInsert(Interactor*,</B> <B>boolean,</B> <B>Coord&amp;</B> <B>x,</B>
+              <B>Coord&amp;</B>  <B>y,</B> <B>Shape*)</B>
+              Add an interactor to the scene, optionally  aligned
+              with respect to a specific position relative to the
+              lower-left corner of the  scene.   Valid  alignment
+              types are TopLeft, TopCenter, TopRight, CenterLeft,
+              Center, CenterRight, BottomLeft, BottomCenter, Bot-
+              tomRight,  Left,  Right,  Top, Bottom, HorizCenter,
+              and VertCenter.  The scene  uses  the  interactor's
+              desired  shape,  if  it has non-zero width, to size
+              the interactor.  The base scene class always  calls
+              Wrap and DoInsert from Insert; thus subclasses only
+              implement DoInsert (and Wrap if they want  to  wrap
+              additional interactors around the inserted interac-
+              tor) and users only call Insert.  In the case of  a
+              monoscene,  the current interior interactor, if not
+              nil, is deleted and replaced by the given  interac-
+              tor.   If  an  interactor  is inserted into a scene
+              that is already  mapped,  the  interactor  and  its
+              descendants  will  be configured before DoInsert is
+              called.
+
+       <B>void</B> <B>Propagate(boolean)</B>
+       <B>void</B> <B>Change(Interactor*)</B>
+       <B>virtual</B> <B>void</B> <B>DoChange(Interactor*,</B> <B>Shape*)</B>
+              Change notifies a scene that a given interactor has
+              changed  its  desired shape.  If the propagate flag
+              associated with the scene is true, Change will call
+              DoChange  and then Change(this) on the scene's par-
+              ent.  If the propagate flag is false,  Resize  will
+              tion.
+
+       <B>void</B> <B>Move(Interactor*,</B> <B>Coord</B> <B>x,</B> <B>Coord</B> <B>y,</B> <B>Alignment</B> <B>=</B> <B>Bot-</B>
+              <B>tomLeft)</B>
+       <B>virtual</B> <B>void</B> <B>DoMove(Interactor*,</B> <B>Coord&amp;</B> <B>x,</B> <B>Coord&amp;</B> <B>y)</B>
+              Request that an interactor be moved  to  the  given
+              coordinates  using  the  given  alignment.  As with
+              Insert and Change, users call Move  and  subclasses
+              implement DoMove.
+
+       <B>void</B> <B>Remove(Interactor*)</B>
+       <B>virtual</B> <B>void</B> <B>DoRemove(Interactor*)</B>
+              Remove  an  interactor  from  a  scene.  Users call
+              Remove and subclasses implement DoRemove.
+
+       <B>void</B> <B>Lower(Interactor*)</B>
+       <B>virtual</B> <B>void</B> <B>DoLower(Interactor*)</B>
+              Put the interactor's canvas below all others in the
+              scene,  potentially obscuring it.  Users call Lower
+              and subclasses implement DoLower.
+
+       <B>void</B> <B>Raise(Interactor*)</B>
+       <B>virtual</B> <B>void</B> <B>DoRaise(Interactor*)</B>
+              Put the interactor's canvas above all others in the
+              scene,  making  it fully visible.  Users call Raise
+              and subclasses implement DoRaise.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Scene()</B>
+       <B>MonoScene()</B>
+              Construct a new scene  or  monoscene.   Scenes  and
+              monoscenes  are  abstract  classes;  thus, the con-
+              structors should only be called implicitly by  sub-
+              class constructors.
+
+       <B>void</B>  <B>Place(Interactor*,</B>  <B>Coord</B> <B>x1,</B> <B>Coord</B> <B>y1,</B> <B>Coord</B> <B>x2,</B>
+              <B>Coord</B> <B>y2,</B> <B>boolean</B> <B>=</B> <B>true)</B>
+              Assign  an interactor's canvas to be a given region
+              of the scene's canvas.  Unless the  optional  sixth
+              parameter  is false, the interactor will be mapped.
+              If the interactor is  already  assigned  the  given
+              position and size, then this operation will have no
+              effect.  This optimization means that a  scene  can
+              place  all  of its elements in response to a Change
+              and be assured that only those elements  that  have
+              really changed will be redrawn.
+
+       <B>void</B> <B>Map(Interactor*,</B> <B>boolean</B> <B>=</B> <B>true)</B>
+              Make  the  interactor visible on the display if and
+              when the scene is  visible.   Unless  the  optional
+              second  parameter  is false, the interactor will be
+              raised to the top of the scene.
+              Make the interactor not be visible on  the  display
+              if and when the scene is visible.
+
+       <B>void</B> <B>UserPlace(Interactor*,</B> <B>int</B> <B>w,</B> <B>int</B> <B>h)</B>
+              Let  the  user  interact with the window manager to
+              specify the size and location of  the  interactor's
+              canvas, whose default width and height must also be
+              supplied by the program.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Canvas(3I)</B>, <B>Interactor(3I)</B>, <B>Shape(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

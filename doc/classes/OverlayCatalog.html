@@ -1,0 +1,628 @@
+
+<html><head><TITLE>Description of OverlayCatalog</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayCatalog</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="IdrawCatalog.html" >IdrawCatalog</A> </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+catalog for read/write of "PostScript" and ASCII script documents<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="IdrawCatalog.html" >IdrawCatalog</A>
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayCatalog><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovcatalog.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  One of these is used by the editor to save and restore drawing editor
+ documents in idraw "PostScript" format or in an ASCII variable-length
+ record format (each record enclosed in parenthesis separated by commas,
+ with nesting for hierarchical objects).  Reading in "PostScript" is done
+ with the balance of "Read" methods below.  Reading in the ASCII script 
+ files is done with the istream constructors of classes derived from <A HREF="OverlayComp.html" >OverlayComp</A>.
+ Only writing in script is supported by this class.  Writing in idraw "PostScript"
+ is handled by <A HREF="IdrawCatalog.html" >IdrawCatalog</A>.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Editor.html" >Editor</A>* 
+    <A NAME="GetEditor()">
+    <B>GetEditor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayCatalog.html" >OverlayCatalog</A>* 
+    <A NAME="Instance()">
+    <B>Instance</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return default instance.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="Instance(OverlayCatalog*)">
+    <B>Instance</B> (<A HREF="OverlayCatalog.html" >OverlayCatalog</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set default instance.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayCatalog(constchar*name&#38;&#38;COMMCreator*creator)">
+    <B>OverlayCatalog</B> (const char* name, <A HREF="Creator.html" >Creator</A>* creator) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        'creator' used to construct objects as they are read in.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="PSReadChildren(istream&#38;&#38;&#38;COMMGraphicComp*)">
+    <B>PSReadChildren</B> (istream&#38;, <A HREF="GraphicComp.html" >GraphicComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read individual graphics (and composite-graphics) from an idraw
+ "PostScript" file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadBSpline(istream&#38;)">
+    <B>ReadBSpline</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadCircle(istream&#38;)">
+    <B>ReadCircle</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadClosedBSpline(istream&#38;)">
+    <B>ReadClosedBSpline</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="ReadComp(constchar*&#38;&#38;COMMistream&#38;&#38;&#38;COMMOverlayComp*=nil)">
+    <B>ReadComp</B> (const char*, istream&#38;, <A HREF="OverlayComp.html" >OverlayComp</A>* =nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read an arbitrary graphic in ASCII script form.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadEllipse(istream&#38;)">
+    <B>ReadEllipse</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadFStencil(istream&#38;)">
+    <B>ReadFStencil</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadLine(istream&#38;)">
+    <B>ReadLine</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadMultiLine(istream&#38;)">
+    <B>ReadMultiLine</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadPict(istream&#38;)">
+    <B>ReadPict</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadPolygon(istream&#38;)">
+    <B>ReadPolygon</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadPostScript(istream&#38;)">
+    <B>ReadPostScript</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read body of an idraw format "PostScript" document.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadRaster(istream&#38;)">
+    <B>ReadRaster</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadRect(istream&#38;)">
+    <B>ReadRect</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadSStencil(istream&#38;)">
+    <B>ReadSStencil</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="ReadText(istream&#38;)">
+    <B>ReadText</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Retrieve(constchar*path&#38;&#38;COMMComponent*&#38;comp)">
+    <B>Retrieve</B> (const char* path, <A HREF="Component.html" >Component</A>*&#38; comp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        retrieve 'comp' from 'path'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Save(Component*comp&#38;&#38;COMMconstchar*path)">
+    <B>Save</B> (<A HREF="Component.html" >Component</A>* comp, const char* path) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        save 'comp' to 'path'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetCompactions(booleangs=false&#38;&#38;COMMbooleanpts=false&#38;&#38;COMMbooleanpic=false)">
+    <B>SetCompactions</B> (boolean gs = false, boolean pts = false, boolean pic=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set compaction flags used for writing ASCII script files.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetEditor(Editor*ed)">
+    <B>SetEditor</B> (<A HREF="Editor.html" >Editor</A>* ed) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetParent(OverlayComp*)">
+    <B>SetParent</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set parent component to pass to <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A> istream constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Editor.html" >Editor</A>* 
+    <A NAME="_ed">
+    <B>_ed</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_failed">
+    <B>_failed</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_gs_compacted">
+    <B>_gs_compacted</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="OverlayCatalog.html" >OverlayCatalog</A>* 
+    <A NAME="_instance">
+    <B>_instance</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="_parent">
+    <B>_parent</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_pic_compacted">
+    <B>_pic_compacted</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_pts_compacted">
+    <B>_pts_compacted</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

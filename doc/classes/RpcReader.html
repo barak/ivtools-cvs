@@ -1,0 +1,310 @@
+
+<html><head><TITLE>Description of RpcReader</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>RpcReader</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="IOHandler.html" >IOHandler</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+read RPC requests from a client<br><br>
+
+<B>Type:</B><br>
+<UL>
+Abstract
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="IOHandler.html" >IOHandler</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#RpcReader><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Dispatch/rpcreader.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  Read RPC requests from a client.  Derived classes initialize the
+ function array with addresses of static member functions to
+ unmarshall RPC requests and implement the virtual function called
+ when the client closes the connection.
+ <p><a href=../man3.1/RpcReader.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~RpcReader()">
+    <B>~RpcReader</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>typedef void 
+    <A NAME="(*PF)(RpcReader*&#38;&#38;COMMRpcHdr&#38;&#38;&#38;COMMrpcstream&#38;)">
+    <B>(*PF)</B> (<A HREF="RpcReader.html" >RpcReader</A>*, <A HREF="RpcHdr.html" >RpcHdr</A>&#38;, <A HREF="rpcstream.html" >rpcstream</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="RpcReader(intfd&#38;&#38;COMMintnfcns&#38;&#38;COMMbooleanbinary)">
+    <B>RpcReader</B> (int fd, int nfcns, boolean binary) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="RpcReader(rpcstream*client&#38;&#38;COMMintnfcns)">
+    <B>RpcReader</B> (<A HREF="rpcstream.html" >rpcstream</A>* client, int nfcns) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="rpcstream.html" >rpcstream</A>* 
+    <A NAME="_client">
+    <B>_client</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_delete">
+    <B>_delete</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_fd">
+    <B>_fd</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>PF* 
+    <A NAME="_function">
+    <B>_function</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nfcns">
+    <B>_nfcns</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="rpcstream.html" >rpcstream</A>&#38; 
+    <A NAME="client()">
+    <B>client</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>pure virtual void 
+    <A NAME="connectionClosed(intfd)">
+    <B>connectionClosed</B> (int fd) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="execute(RpcReader*&#38;&#38;COMMRpcHdr&#38;)">
+    <B>execute</B> (<A HREF="RpcReader.html" >RpcReader</A>*, <A HREF="RpcHdr.html" >RpcHdr</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="inputReady(int)">
+    <B>inputReady</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="RpcReader.html" >RpcReader</A>* 
+    <A NAME="map(unsignedlong)">
+    <B>map</B> (unsigned long) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FontCmd - command for setting components' font attribute
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/font.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       FontCmd  is  a purely interpretive command for setting the
+       font attribute of selected components.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>FontCmd(ControlInfo*,</B> <B>PSFont*</B> <B>=</B> <B>nil)</B>
+       <B>FontCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>PSFont*</B> <B>=</B> <B>nil)</B>
+              Create a FontCmd, optionally specifying the  PSFont
+              that components should adopt.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              FontCmd  extends  Execute  to  set the value of the
+              affected editor's FontVar instance, if  it  defines
+              one.
+
+       <B>PSFont*</B> <B>GetFont()</B>
+              Return the PSFont supplied in the constructor.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>, <B>pspaint(3U)</B>, <B>statevars(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

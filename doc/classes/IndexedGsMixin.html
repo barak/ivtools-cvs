@@ -1,0 +1,158 @@
+
+<html><head><TITLE>Description of IndexedGsMixin</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>IndexedGsMixin</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+mixin for graphic-state indexing mechanism used by <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A>, etc..<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#IndexedGsMixin><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/indexmixins.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  When a tree of graphical components is saved to disk (translated to ASCII), the 
+ graphic states are output first as 'gs' records, to allow for replicated graphic
+ states to appear only once in a file.  When reading these documents back in,
+ the istream constructor of <A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A> (and other top-level components) uses 
+ this mixin to manage a table of graphic states, building it up as each 'gs'
+ record is read, and accessing entries for each ":gs id" field found in subsequent
+ records.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="IndexedGsMixin()">
+    <B>IndexedGsMixin</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="get_indexed_gs(intid)">
+    <B>get_indexed_gs</B> (int id) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        retrieve graphic state by 'id'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="grow_indexed_gs(Graphic*)">
+    <B>grow_indexed_gs</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add graphic state to table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="reset_indexed_gs()">
+    <B>reset_indexed_gs</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset graphic state table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Picture.html" >Picture</A>* 
+    <A NAME="_gslist">
+    <B>_gslist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

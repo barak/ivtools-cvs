@@ -1,0 +1,123 @@
+
+<title>Feynman Diagrams with IVtools: Doing particle physics with a basic widget set and comdraw</title>
+
+<h1>
+ivtools Feynman-widgets
+</h1>
+
+
+Feynman diagrams are used in many branches of physics, to show how to organize the various
+calculational contributions of various elementary processes. The <b>ivtools Feynman-widgets</b> 
+is a set of graphical widgets that allow one to build these diagrams in a GUI environment
+such as <b>Comdraw</b> and then export the finished diagram as PostScript for inclusion
+into a technical paper via LaTeX and <b>psfig</b> macro.
+<P>
+The basic set of widgets used to build Feynman diagrams is listed in <i>The LaTeX Graphics
+Companion, p. 233</i> by Goosens, et al. (ISBN: 0-201-85469-4) . Below is an example of a 
+Feynman diagram:
+<h1>
+<img align=middle src="./feynman-fig1.jpeg" >
+</h1>
+
+<p>
+You start by first constructing an enlarged version of the middle wavy line. You use a 
+large colored line to keep both wave pieces even. Then you disclose the wave using
+Structure::Ungroup several times, the resulting wave should look like this:
+<h1>
+<img align=middle src="./feynman-fig2.jpeg" >
+</h1>
+<p>
+Then use scale to shrink the wave; adding arrows, and vectors and symbols like
+so:
+<h1>
+<img align=middle src="./feynman-fig3.jpeg" >
+</h1>
+
+<p>
+The last step, after selecting the completed structure, is to select Structure::Ungroup
+from the IVtools menu 2 or 3 times. You then reselect the completed structure and select
+Structure::Group from the IVtools menu. This will give you the result in Fig. 3 above.
+
+Since the structure is now treated as 1 large object, you can reposition it by selecting
+it, and then moving the mouse while holding the middle button down.
+
+<p>
+Here ia a more complex, finished example:
+<h1>
+<img align=middle src="./feynman-fig4.jpeg" >
+</h1>
+<p>
+To include this structure in a technical paper or journal article, simply export it as
+encapsulated PostScript (EPS) by choosing File::Export Graphic. Click on "EPS", then
+click on "Export". Then insert the following before the \begin{document} line in your
+LaTeX document:<p>
+<code>
+\input psfig.sty<br>
+</code>
+<p>
+To display the graphic, insert the following in the body of your LaTeX code:<p>
+
+<code>
+ \begin{figure}[htbp] <br>
+     \psfig{file=file.ps,width=6in,height=3in} % see Kenneth Shultis, pp. 100-103<br>
+ \end{figure}
+</code>
+<p>
+Where file.ps is the name of your graphic; there cannot be any extraneous spaces inside
+the braces on the \psfig line. See Ken Shultis' book "LaTeX NOTES: Practical Tips for Preparing Technical Documents", ISBN: 0-13-120973-6
+
+<p>
+
+The <b>IVtools custom toolbar</b> allows one to load custom toolbar configurations for different
+typesetting projects. Instead of loading all of the possible chemical widgets, and believe me
+there are alot, only load the ones required for the project at hand, or the ones you find most useful.
+To build a custom toolbar, write a toolbar script similar to this:
+<p>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/wiggly.idraw")
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/zigzag.idraw")
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/dbl_wiggly.idraw")
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/dbl_zigzag.idraw")
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/arrow.idraw")
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/circle.idraw")
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/FEYNMAN/widgets/tetragram.idraw")
+<p>
+To load the desired toolbar click on Tools::Custom Tools. This will give a stripped down Comdraw
+toolbar into which custom widgets can be inserted. To load the custom widgets, click into the 
+Comdraw command window, and enter the following command:<p>
+run ("$PATH/file")
+<p>
+Where $PATH is the complete path to the custom toolbar script and "file" is the name of the script.
+<p>
+<b>The Feynman widgets must be in idraw format</b> to be added to the toolbar in this manner.
+To convert a widget to idraw format for use in the toolbar:<p>
+<ul>
+
+    <li>Import the desired graphic</li> <br>
+    <li>Select from the menu File::Export Graphic</li><br>
+    <li>Choose "idraw EPS"</li> <br>
+    <li>Click on the Export button </li><br>
+
+</ul>
+<p>
+<b>Adding Fonts to IVtools for technical Typesetting: </b>
+As you can see from the complex example, Fig. 4, it would be useful to add Greek chars to
+the Idraw/Comdraw/Drawserv Font menus. The best example I have found of this is given in
+<a name=fonthelp href=http://cns-web.bu.edu/pub/paolo/arvo-titles/idraw-help.html name=minimal>Minimal
+idraw help</a> (also listed at the bottom of the idraw page). The basic process:
+ <ol>
+ <li> Edit your .Xresources or .Xdefaults file by adding:
+comdraw.font12:-adobe-symbol-*-*-*-*-*-100-*-*-*-*-*-* Symbol 10
+comdraw.font13:-adobe-symbol-*-*-*-*-*-120-*-*-*-*-*-* Symbol 12
+comdraw.font14:-adobe-symbol-*-*-*-*-*-140-*-*-*-*-*-* Symbol 14
+comdraw.font15:-adobe-symbol-*-*-*-*-*-180-*-*-*-*-*-* Symbol 18
+ </li>
+ <li> Save the file and execute:
+  xrdb -load ~/.Xresources        (or if you are using .Xdefaults, xrdb -load ~/.Xdefaults)
+      </li>
+ <li> Shutdown and restart the X server and restart Comdraw/Idraw
+ </li>
+ </ol>
+
+
+<p>
+<a href = ../index.html>up to LaTeX toolbutton page</a>

@@ -1,0 +1,226 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       World - control a display
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/world.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  world  was  an application's connection to a particular
+       display.  It is currently provided for  backward  compati-
+       bility.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>World(</B>
+
+           <B>const</B> <B>char*</B> <B>classname,</B> <B>int&amp;</B> <B>argc,</B> <B>char**</B> <B>argv</B>
+           <B>OptionDesc*</B> <B>=</B> <B>nil,</B> <B>PropertyData*</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+              Construct  the  world  object  for  a display.  The
+              world's instance name comes from the  -name  option
+              if  it was given; otherwise the instance name comes
+              from the environment variable RESOURCE_NAME  if  it
+              is nonnil.  If the name has still not been defined,
+              then argv[0] with all leading directories  stripped
+              is  used.   The following arguments are interpreted
+              automatically and are removed from <I>argv</I>:
+
+              -background    next argument sets the background color
+              -bg            same as -background
+              -display       next argument specifies the target workstation display
+              -foreground    next argument sets the foreground color
+              -fg            same as -foreground
+              -fn            same as -font
+              -font          next argument sets the text font
+              -geometry      next argument sets the first top-level interactor's position and size
+              -iconic        starts up the first top-level interactor in iconic form
+              -name          next argument sets the instance name of all top-level interactors
+                             that don't have their own instance names
+              -reverse       swaps default foreground and background colors
+              -rv            same as -reverse
+              -synchronous   force synchronous operation with the window system
+              -title         next argument sets the first top-level interactor's title bar name
+              -xrm           next argument sets an ``attribute: value'' property
+       The    geometry     specification     has     the     form
+       ``=WxH+XOFF+YOFF''.   A negative XOFF (YOFF) specifies the
+       offset of the interactor's right (bottom)  edge  from  the
+       right  (bottom)  side of the screen.  The constructor sets
+       <I>argc</I> to the number of uninterpreted arguments that remain.
+
+       If  non-nil,  the  OptionDesc*  parameter  is  an array of
+       option  descriptors  used  to  parse  application-specific
+       attributes.   OptionDesc contains four fields: a <I>name</I> used
+       on the command line, a <I>path</I> specifying  the  attribute,  a
+       <I>style</I>  specifying where the value is, and a default <I>value</I>.
+       <I>ueNext</I> (use next argument as  value),  <I>OptionValueImplicit</I>
+       (use  default  value),  <I>OptionValueIsArg</I>  (use argument as
+       value), and <I>OptionValueAfter</I> (use remainder of argument as
+       value).   If  non-nil,  the  PropertyData* parameter is an
+       array of structures that each contain three string fields:
+       a  <I>path</I>  specifying  the attribute, a <I>value</I> specifying the
+       value, and a <I>type</I> specifying the  type  name.   Attributes
+       are  entered in the following order: first any application
+       defaults  (specified  by  the  PropertyData  array),  then
+       application defaults from /usr/lib/X11/app-defaults/<I>class-</I>
+       <I>name</I>, then user defaults  (usually  in  $HOME/.Xdefaults),
+       and  finally  command-line  arguments.  Thus, command-line
+       arguments override user defaults, and both override appli-
+       cation defaults.
+
+       <B>const</B> <B>char*</B> <B>name()</B>
+              Return the instance name associated with the world.
+
+       <B>const</B> <B>char*</B> <B>classname()</B>
+              Return the class name associated with the world.
+
+       <B>int</B> <B>argc()</B>
+              Return the number of arguments passed to the  world
+              (not  counting  those  that were interpreted by the
+              constructor).
+
+       <B>char**</B> <B>argv()</B>
+              Return the argument vector passed to the world.
+
+       <B>Font*</B> <B>font()</B>
+              Return the default font associated  with  the  dis-
+              play.   If  a  value for ``font'' is defined at the
+              top-level of the property sheet, then it  is  used.
+              Otherwise, a system default is used.
+
+       <B>Color*</B> <B>foreground()</B>
+              Return the default foreground color associated with
+              the display.  If  a  value  for  ``foreground''  is
+              defined  at  the  top-level  of the property sheet,
+              then it is used.  Otherwise, a  system  default  is
+              used.
+
+       <B>Color*</B> <B>background()</B>
+              Return the default background color associated with
+              the display.  If  a  value  for  ``background''  is
+              defined  at  the  top-level  of the property sheet,
+              then it is used.  Otherwise, a  system  default  is
+              used.
+
+       <B>boolean</B> <B>shaped_windows()</B>
+              Return whether the display supports non-rectangular
+              windows.
+              Return whether windows on  the  display  should  by
+              default be double-buffered.
+
+       <B>virtual</B> <B>void</B> <B>flush()</B>
+              Repair  all damaged windows on the display and then
+              send any pending requests to the window system.
+
+       <B>virtual</B> <B>void</B> <B>sync()</B>
+              Repair all damaged windows on the display, send any
+              pending requests to the window system, and wait for
+              an acknowledgement from the window system.
+
+       <B>Coord</B> <B>width()</B>
+              Return the width  in  coordinates  of  the  current
+              screen associated with the display.
+
+       <B>Coord</B> <B>height()</B>
+              Return  the  height  in  coordinates of the current
+              screen associated with the display.
+
+       <B>virtual</B> <B>void</B> <B>run()</B>
+              Read events from the display, handling them as they
+              arrive, and stopping when quit is called.
+
+       <B>virtual</B> <B>void</B> <B>quit()</B>
+              Terminate the run loop.
+
+       <B>virtual</B> <B>boolean</B> <B>pending()</B>
+              Return whether any events are waiting to be read.
+
+       <B>virtual</B> <B>void</B> <B>read(Event&amp;)</B>
+              Read  the next event from the world associated with
+              the event.
+
+       <B>virtual</B> <B>boolean</B> <B>read(long</B> <B>sec,</B> <B>long</B> <B>usec,</B> <B>Event&amp;)</B>
+              Read the next event from the world associated  with
+              the  event,  but  do not wait more than <I>sec</I> seconds
+              and <I>usec</I> microseconds.  Return whether an event was
+              found in the given time.
+
+       <B>virtual</B> <B>void</B> <B>unread(Event&amp;)</B>
+              Put the event back on the input queue for the world
+              associated with the event.
+
+       <B>virtual</B> <B>void</B> <B>poll(Event&amp;)</B>
+              Set the event to an artificial motion  event  based
+              on  the  current  pointer position and the state of
+              the   buttons   and   meta-keys.    <B>virtual</B>    <B>void</B>
+              <B>SetScreen(int</B> <B>s)</B> Set the current screen to <I>s</I>.
+
+       <B>static</B> <B>World*</B> <B>current()</B>
+              Return the current world.  The current world is set
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

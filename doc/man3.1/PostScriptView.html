@@ -1,0 +1,236 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       PostScriptView,  PostScriptViews - base classes for exter-
+       nal representation objects that generate PostScript code
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/psview.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       PostScriptView  is  a  PreorderView  that  serves  as  the
+       abstract  base  class  for external representation objects
+       for emitting PostScript code.  A PostScriptView's  subject
+       is  normally a GraphicComp subclass.  PostScriptViews is a
+       subclass of PostScriptView for composite PostScript exter-
+       nal views.
+
+
+</PRE>
+<H2>POSTSCRIPTVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>boolean</B> <B>Emit(ostream&amp;)</B>
+              PostScriptView  redefines  Emit  to generate header
+              information.   Thus  you  can  call  Emit  on   any
+              PostScriptView  subclass  to  generate encapsulated
+              PostScript.  Subclasses redefine Definition to gen-
+              erate  the  PostScript  fragment that defines their
+              basic attributes.
+
+       <B>GraphicComp*</B> <B>GetGraphicComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>POSTSCRIPTVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>PostScriptView(GraphicComp*</B> <B>=</B> <B>nil)</B>
+              Initialize  a  PostScriptView,  optionally  of  the
+              given GraphicComp.  The constructor is protected to
+              disallow instantiation.
+
+
+</PRE>
+<H2>PostScriptView defines numerous  protected  helper  functions  to</H2><PRE>
+       <B>make</B> <B>it</B>
+       easier  for  subclasses  to  generate  the PostScript that
+       describes their appearance.  The output  conforms  to  the
+       original idraw PostScript format.
+
+       <B>virtual</B> <B>void</B> <B>Comments(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>PSVersion(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Creator(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>FontNames(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Pages(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>BoundingBox(ostream&amp;)</B>
+              The   Comments   operation   generates  a  standard
+              PostScript  comments  block.   Comments  calls  the
+              other operations to generate a complete set of com-
+              ments.
+
+       <B>virtual</B> <B>void</B> <B>Prologue(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Version(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>GridSpacing(ostream&amp;)</B>
+              Operations that generate global  data,  procedures,
+              and idraw-format-specific information.
+
+       <B>virtual</B> <B>void</B> <B>MinGS(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>FullGS(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>TextGS(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Brush(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>FgColor(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>BgColor(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Font(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Pattern(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Transformation(ostream&amp;)</B>
+              Operations  that  generate  graphics state informa-
+              tion.  All output the graphics state attribute that
+              their  name  suggests, with three exceptions: MinGS
+              outputs a minimal set of graphics state defined  by
+              practical  graphic  objects,  namely a brush, fore-
+              ground and background  colors,  a  pattern,  and  a
+              transformation  matrix. TextGS outputs the graphics
+              state required by  textual  graphics,  including  a
+              foreground  color,  a  font,  and  a transformation
+              matrix.  FullGS generates a full  set  of  graphics
+              state.
+
+       <B>virtual</B> <B>void</B> <B>SetPSFonts(UList*)</B>
+       <B>virtual</B> <B>UList*</B> <B>GetPSFonts()</B>
+              Get  and  set the list of all PostScript font names
+              required by the PostScriptView.  This set of  names
+              appears in a comment near the beginning of the gen-
+              erated output as required  by  standard  PostScript
+              conventions.
+
+       <B>virtual</B> <B>void</B> <B>GetBox(Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;)</B>
+              Return  the  bounding  box of the graphic for which
+              PostScript is being generated.  These  values  also
+              appear in a standard PostScript comment.
+
+       <B>virtual</B> <B>void</B> <B>GridSpacing(float&amp;,</B> <B>float&amp;)</B>
+              Return  the  grid  spacing,  if  applicable.  Idraw
+              requires this information, and it is  buried  in  a
+              comment.
+
+       <B>virtual</B> <B>void</B> <B>BeginProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>EndProc(ostream&amp;)</B>
+              Begin  and  end  a  scope  for defining a graphical
+              object.
+
+       <B>virtual</B> <B>void</B> <B>ConstProcs(ostream&amp;)</B>
+              Generate PostScript procedures containing  constant
+              information, such as the character encoding dictio-
+              nary, string length limit, etc.
+
+       <B>virtual</B> <B>void</B> <B>SetBrushProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>SetFgColorProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>SetBgColorProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>SetFontProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>SetPatternProc(ostream&amp;)</B>
+              Generate PostScript procedures for setting graphics
+              state attributes.
+
+       <B>virtual</B> <B>void</B> <B>ObjectProcs(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>BSplineProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>CircleProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>ClosedBSplineProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>EllipseProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>LineProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>MultiLineProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>PolygonProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>RectangleProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>TextProc(ostream&amp;)</B>
+              Generate  PostScript  procedures  for instantiating
+              basic graphical objects.
+
+       <B>virtual</B> <B>void</B> <B>MiscProcs(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>DefinitionProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>FillProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>StrokeProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>ShowProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>PatternProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>MinMaxProcs(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>MidpointProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>ThirdpointProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>SubsplineProc(ostream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>StoreVerticesProc(ostream&amp;)</B>
+              MiscProcs  encapsulates  calls  to  the  subsequent
+              PostScript  procedure-generating  operations  shown
+              above.  DefinitionProc  generates  PostScript  code
+              that  declares a procedure. FillProc and StrokeProc
+              fill and stroke the path that  a  graphical  object
+              defines.  ShowProc fine-tunes a text object's posi-
+              tion.  PatternProc creates a  PostScript  rendition
+              of a pattern.  MinMaxProcs define min and max func-
+              tions.  MidpointProc and  ThirdpointProc  calculate
+              the  point midway and one-third the way between two
+              points,  respectively.   SubsplineProc  breaks  the
+              vertices  defining  a spline into smaller pieces to
+              allow approximating the spline with Bezier  curves.
+              Finally, StoreVerticesProc stores a set of vertices
+              in arrays.
+
+       <B>PSFont*</B> <B>GetFont(UList*)</B>
+       <B>PostScriptView*</B> <B>View(UList*)</B>
+              Convenience functions that return  the  PSFont  and
+              PostScriptView in UList elements, respectively.
+              Create  the appropriate PostScriptView subclass for
+              the given GraphicComp.   The  relationship  between
+              subjects,  views, and view categories is encoded in
+              their class identifiers.  See <B>classes(3U)</B> for  more
+              information  on  class  identifiers  and view cate-
+              gories.
+
+
+</PRE>
+<H2>POSTSCRIPTVIEWS PUBLIC OPERATIONS</H2><PRE>
+       <B>PostScriptViews(GraphicComps*</B> <B>=</B> <B>nil)~</B>
+              The constructor takes the subject  as  an  optional
+              argument.
+
+       <B>virtual</B> <B>boolean</B> <B>Update()</B>
+              For   simplicity,  PostScriptViews  reconciles  its
+              state with its subject's by destroying its children
+              and reconstructing them from scratch.
+
+
+</PRE>
+<H2>POSTSCRIPTVIEWS PROTECTED OPERATIONS</H2><PRE>
+       <B>UList*</B> <B>Elem(Iterator)</B>
+              A  convenience function for extracting a UList from
+              an iterator.
+
+       <B>void</B> <B>DeleteView(Iterator&amp;)</B>
+       <B>void</B> <B>DeleteViews()</B>
+              DeleteView removes a child and  deletes  it,  while
+              DeleteViews removes and deletes all children.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ExternView(3U)</B>,      <B>GraphicComp(3U)</B>,     <B>GraphicView(3U)</B>,
+       <B>UList(3U)</B>, <B>classes(3U)</B>, <B>idraw(1I)</B>, <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

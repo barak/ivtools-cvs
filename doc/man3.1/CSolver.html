@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       CSolver - enforces connector semantics
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/csolver.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A CSolver object defines and implements a model for speci-
+       fying connectivity semantics that connector subclasses can
+       build upon to implement their specialized semantics.  Nor-
+       mally, only one CSolver instance is used per  application,
+       and only connector subclasses need access it.  The Unidraw
+       class constructor initializes the <I>csolver</I> global to  point
+       to  a  CSolver  instance  it  creates.   Thus applications
+       should not instantiate CSolver directly.
+
+       CSolver  models  a  connection  between   two   connectors
+       (regardless  of their particular subclass or semantics) as
+       a pair of generic connectors with a piece of CGlue  inter-
+       posed.   The  CGlue characterizes the relationship between
+       the connectors' centers in terms of a natural size  (which
+       corresponds to the distance between the centers), elastic-
+       ity, and deformation limits.  Connector subclasses specify
+       their connectivity behavior with a CGlue instance and sub-
+       sequently rely on the CSolver to reorient them to  conform
+       to that behavior.  For example, when a pin is told to con-
+       nect itself to another pin, it registers with  the  global
+       csolver  a  connection  containing the two connectors (the
+       pins themselves) and a piece of CGlue having zero  natural
+       size, elasticity, and deformation limits.  This specifica-
+       tion effectively constrains  the  connectors'  centers  to
+       coincide.   The  connectivity semantics of other connector
+       combinations, including those  involving  application-spe-
+       cific connectors, must be specified using CGlue.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>CSolver()</B>
+              Create a new instance.  Application programs do not
+              normally instantiate CSolver explicitly.
+
+       <B>virtual</B> <B>void</B> <B>Connect(Connector*,</B> <B>Connector*,</B> <B>CGlue*</B> <B>=</B> <B>nil)</B>
+              Specify   a   connection  between  two  connectors,
+              optionally with a piece of CGlue interposed.  Omit-
+              ting  the CGlue parameter is equivalent to specify-
+              ing a connection with  CGlue  having  zero  natural
+              size, elasticity, and deformation limits.
+
+       <B>void</B> <B>Disconnect(Connector*,</B> <B>Connector*)</B>
+       <B>void</B> <B>Disconnect(Connector*)</B>
+              Destroy  the  connection(s) established between two
+              connectors (the two-parameter form), or destroy all
+              connections to a given connector (the one-parameter
+              form).
+              Solve instructs the CSolver to  reorient  connected
+              connectors  to conform to their connectivity seman-
+              tics as reflected by its connection specifications.
+              Normally  this function is called automatically and
+              only in response to Unidraw::Update.
+
+       <B>CSolverState*</B> <B>GetState(Connector*)</B>
+       <B>void</B> <B>SetState(CSolverState*)</B>
+              CSolverState is a class that encapsulates  all  the
+              information  about  the connections in which a con-
+              nector participates.  Only CSolver can create or do
+              anything  with  a  CSolverState  instance. GetState
+              initializes and returns a CSolverState instance for
+              the  given  connector, and SetState establishes the
+              connections that a CSolverState instance  specifies
+              without  disturbing  existing  connections.   These
+              operations are  useful  when  it  is  necessary  to
+              reestablish  a  connector's  connections after they
+              have been lost, for example, by removing  the  con-
+              nector from the component hierarchy (as caused by a
+              command to delete the component).
+
+       <B>void</B> <B>Read(istream&amp;)</B>
+       <B>void</B> <B>Write(ostream&amp;)</B>
+              Explicitly  read/write   the   csolver's   contents
+              from/to  disk.  Normally only a catalog calls these
+              operations.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>, <B>GGlue(3U)</B>, <B>Connector(3U)</B>, <B>globals(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       PolygonComp,  PolygonView,  PSPolygon  - polygon component
+       subject, view, and PostScript external representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/polygon.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       PolygonComp is a VerticesComp that defines a polygon.   It
+       uses   an   SF_Polygon  graphic  to  store  its  graphical
+       attributes.  PolygonView is a VerticesView for  displaying
+       the  polygon.  PSPolygon is a PSVertices that externalizes
+       the subject's information in PostScript form.
+
+
+</PRE>
+<H2>POLYGONCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>PolygonComp(SF_Polygon*</B> <B>=</B> <B>nil)</B>
+              The constructor takes  an  optional  stroked-filled
+              polygon  graphic that defines the attributes of the
+              polygon.
+
+       <B>SF_Polygon*</B> <B>GetPolygon()</B>
+              Return the Polygon graphic that defines  the  poly-
+              gon's attributes.  GetPolygon is simply a more spe-
+              cific form of the GetGraphic operation.
+
+
+</PRE>
+<H2>POLYGONVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>PolygonView(PolygonComp*</B> <B>=</B> <B>nil)</B>
+              Create an  PolygonView,  optionally  supplying  the
+              subject.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              PolygonView  redefines its response to manipulation
+              with a GraphicCompTool.  The user clicks  the  left
+              mouse button to specify each vertex and clicks with
+              the middle mouse button to specify the  final  ver-
+              tex.   Vertex  positioning  will  be constrained by
+              gravity,  if  any.   PolygonView  also  defines   a
+              response  to  the ReshapeTool, allowing the user to
+              click on one of its vertices to reposition it.  The
+              subject  is actually replaced (via ReplaceCmd) with
+              a new PolygonComp subject  reflecting  the  reposi-
+              tioned vertex.  Repositioning will be influenced by
+              gravity.
+
+       <B>PolygonComp*</B> <B>GetPolygonComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>PSPOLYGON PUBLIC OPERATIONS</H2><PRE>
+       <B>PSPolygon(PolygonComp*</B> <B>=</B> <B>nil)</B>
+
+
+</PRE>
+<H2>PSPOLYGON PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>const</B> <B>char*</B> <B>Name()</B>
+              PSPolygon   identifies  itself  as  "Poly"  in  the
+              PostScript output.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>,  <B>GraphicComp(3U)</B>,  <B>GraphicCompTool(3U)</B>,  Graph-
+       <B>icView(3U)</B>,  <B>Grid(3U)</B>, <B>PatternCmd(3U)</B>, <B>PostScriptView(3U)</B>,
+       <B>ReshapeTool(3U)</B>,   <B>Rubband(3I)</B>,   <B>Transformer(3I)</B>,    Ver-
+       <B>ticesComp(3U)</B>,   <B>Viewer(3U)</B>,  <B>align(3U)</B>,  <B>edit(3U)</B>,  poly-
+       <B>gons(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

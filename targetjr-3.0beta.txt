@@ -1,0 +1,64 @@
+Instructions for building Target Jr 3.0beta on Linux with ivtools-0.5.10 or
+later
+
+0. get lots of disk space freed up (~300Mb).  Acquire and unpack
+iup_3.0beta.tar.gz (from http://www.balltown.cma.com/TargetJr) into some
+directory (i.e. targetjr/iup_3.0beta).
+
+
+1. setup these environment variables (adjust pathnames for your system):
+
+    export BASEDIR=/proj
+    export SYS_IUPACKAGES=$BASEDIR/targetjr/iup_3.0beta
+    export IUPACKAGEHOME=$SYS_IUPACKAGES
+    export COOLHOME=$SYS_IUPACKAGES/COOL
+    export BITMAP_PATH=$SYS_IUPACKAGES/bitmaps
+    export PATH=$SYS_IUPACKAGES/Scripts/Shell:$SYS_IUPACKAGES/Scripts/Perl:$PATH
+
+
+2. If your ivtools is configured with ACE, change line 224 of config/params.mk
+from
+
+IV_LIBS     := -lIVAdditions -lUnidraw -lIV
+
+to
+
+IV_LIBS     := -lIVAdditions -lUnidraw -lIV -L/proj/ACE_wrappers/ace -lACE
+
+
+3. If using Mesa for OpenGL, change line 235 of config/params.mk from
+
+    OPENGL_LIBS     := -lGLU -lGL
+
+to
+
+    OPENGL_LIBS     := -lMesaGLU -lMesaGL
+
+and line 240 of config/rules.mk from
+
+  STDLIBS += $(link-static) $(OPENGL_LIBS) $(link-dynamic)
+
+to
+
+  STDLIBS += $(OPENGL_LIBS)
+
+
+4. Add this as line 9 of config/linux-gcc.mk:
+
+    lib_c := -lc
+
+
+5. invoke configure with the correct pathnames of other components like this:
+
+    ./configure --with-x --with-iv=/proj/ivtools-0.5 \
+	--with-fresco=/proj/Fresco97 \
+	--with-fresco-libs=/proj/Fresco97/Build/lib \
+	--with-opengl=/proj/Mesa-2.5 \
+	--with-tcl=/usr
+
+
+6. run make:
+
+    make -k all
+
+morse will link, but tjrun still has a link error related to COOL templates

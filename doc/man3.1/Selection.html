@@ -1,0 +1,179 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Selection  - maintains a list of selected graphical compo-
+       nent views
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/selection.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A Selection manages a set of distinguished graphical  com-
+       ponent   views,  usually  those  in  which  the  user  has
+       expressed interest by selecting them with a tool  or  com-
+       mand.  Each selection object maintains a list of graphical
+       component views  and  provides  operations  for  iterating
+       through  and manipulating the list.  Components, commands,
+       tools, and editors often rely on  one  or  more  selection
+       objects to supply the components on which they operate.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Selection(Selection*</B> <B>=</B> <B>nil)</B>
+              Create  a new selection object, optionally contain-
+              ing references to  the  same  views  as  the  given
+              selection object.
+
+       <B>virtual</B> <B>~Selection()</B>
+              Destroy  a selection instance.  Deleting the selec-
+              tion does <I>not</I> in turn delete the view instances  it
+              maintains.
+
+       <B>void</B> <B>Show(Viewer*</B> <B>=</B> <B>nil)</B>
+       <B>void</B> <B>Update(Viewer*</B> <B>=</B> <B>nil)</B>
+       <B>void</B> <B>Hide(Viewer*</B> <B>=</B> <B>nil)</B>
+       <B>void</B> <B>Init(Viewer*</B> <B>=</B> <B>nil)</B>
+              These operations affect how the selection is repre-
+              sented visually in the viewer.  Show instructs  the
+              views to initialize and draw their handles to high-
+              light themselves, thus  indicating  that  they  are
+              selected.  To do so, it calls RedrawHandles on each
+              view.   Update  makes  handles  of  newly-selected,
+              unhighlighted  views  appear by calling DrawHandles
+              on all its views.  Hide unhighlights the  views  by
+              calling  their  EraseHandles  operation.   Finally,
+              Init initializes each view's handles without  draw-
+              ing  them (in case the handles' appearance may have
+              changed) by calling InitHandles on each.
+
+       <B>void</B> <B>Clear(Viewer*</B> <B>=</B> <B>nil)</B>
+              Remove all views from the Selection object,  hiding
+              their handles in the process.
+
+       <B>void</B> <B>Append(GraphicView*)</B>
+       <B>void</B> <B>Prepend(GraphicView*)</B>
+       <B>void</B> <B>InsertAfter(Iterator,</B> <B>GraphicView*)</B>
+       <B>void</B> <B>InsertBefore(Iterator,</B> <B>GraphicView*)</B>
+       <B>void</B> <B>Remove(Iterator&amp;)</B>
+              Operations  for  modifying  the selection's list of
+              views.  Append and Prepend add a GraphicView to the
+              end  and  the  beginning of the list, respectively.
+              InsertAfter and InsertBefore insert  a  GraphicView
+              after  and before the GraphicView pointed to by the
+              iterator,  respectively.   The  Remove   operations
+              remove  a view from the list (without deleting it).
+              You can remove a view instance by referring  to  it
+              explicitly  or  by  specifying  an iterator.  If an
+              iterator is supplied,  the  Remove  operation  will
+              advance it to point to the following view as a side
+              effect.
+
+       <B>GraphicView*</B> <B>GetView(Iterator)</B>
+       <B>void</B> <B>SetView(GraphicView*,</B> <B>Iterator&amp;)</B>
+              GetView returns  the  view  to  which  an  iterator
+              points.   SetView  initializes an iterator to point
+              to a particular view in the  list;  it  initializes
+              the  iterator  to  point  to  a nil instance if the
+              given GraphicView is not in the selection list.
+
+       <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>void</B> <B>Last(Iterator&amp;)</B>
+       <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>boolean</B> <B>Done(Iterator)</B>
+              Operations for iterating over the  selection  list.
+              First  and  Last initialize an iterator to point to
+              the beginning and end of  the  list,  respectively.
+              Next  increments  the iterator to point to the fol-
+              lowing view, while Prev decrements the iterator  to
+              point  to the preceding view.  Done returns whether
+              or not the iterator points beyond the first or last
+              view in the list.
+
+       <B>boolean</B> <B>IsEmpty()</B>
+       <B>boolean</B> <B>Includes(GraphicView*)</B>
+       <B>int</B> <B>Number()</B>
+              Operations that return information about the selec-
+              tion object's contents.   IsEmpty  returns  whether
+              the  selection  list  is  empty,  Includes  returns
+              whether the list contains the given view, and  Num-
+              ber returns the number of views in the list.
+
+       <B>void</B> <B>Sort(GraphicView*)</B>
+              Sort  the views in the selection list to conform to
+              their order in  the  given  GraphicView's  list  of
+              children.    The  selection  list's  order  usually
+              reflects the order in which the user  selected  the
+              objects,  not  their order in their parent. Sort is
+              useful in operations that modify or depend  on  the
+
+       <B>void</B> <B>Exclusive(Selection*)</B>
+              Operations  that change the selection object's con-
+              tents based on another selection's.  Merge adds the
+              views  in  the  given selection to those already in
+              the selection object (the union of the  two  sets),
+              while  Exclusive  adds  those  views not already in
+              this object and removes those common to  both  (the
+              union  minus  the  intersection  of  the two sets).
+              Neither of these operations change the contents  of
+              their argument.
+
+       <B>void</B> <B>GetBox(Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;)</B>
+              Return the bounding box circumscribing the views in
+              the selection list.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>UList*</B> <B>Elem(Iterator)</B>
+       <B>GraphicView*</B> <B>View(UList*)</B>
+              Selection stores its views on  a  UList,  which  is
+              accessible  via  the  <B>_</B><I>ulist</I> protected member.  The
+              Selection's iteration operations  store  the  UList
+              containing  the  current  view  in  their iterator.
+              Elem is a convenience function  for  returning  the
+              UList   to  which  an  iterator  points,  and  View
+              extracts the GraphicView that a UList element  con-
+              tains.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>GraphicView(3U)</B>, <B>Iterator(3U)</B>, <B>UList(3U)</B>, <B>Viewer(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       StateVarView - state variable view base class
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/stateview.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       StateVarView  is  the base class for state variable views.
+       State variable views  provide  a  graphical  interface  to
+       examining  and potentially modifying a state variable sub-
+       ject.  The StateVarView base class is  an  abstract  class
+       derived  from MonoScene.  Like MonoScene, the StateVarView
+       class is not instantiated; instead, subclasses  add  state
+       and  behavior appropriate for displaying and editing their
+       subject.  Like other  MonoScene  subclasses,  StateVarView
+       subclasses  use  an interactor composition to define their
+       appearance.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Update the state variable view  in  response  to  a
+              change  in  state it depends on (typically the sub-
+              ject's).  This operation  does  not  normally  need
+              redefinition  if  Init  and Stale (described below)
+              are redefined.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>StateVarView(StateVar*)</B>
+              Subclass constructors normally take an instance  of
+              the corresponding subject as an argument.  The base
+              class constructor automatically attaches  the  view
+              to the subject.
+
+       <B>virtual</B> <B>void</B> <B>Init()</B>
+              Initialize  the  view  based  on information in the
+              subject.   Subclasses   redefine   this   operation
+              according  to  their  semantics; it does nothing by
+              default.
+
+       <B>virtual</B> <B>boolean</B> <B>Stale()</B>
+              Return whether the view is in any way  inconsistent
+              with  its  subject.   This operation always returns
+              <I>true</I> by default; subclasses can redefine it to make
+              a more discerning decision.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>MonoScene(3I)</B>, <B>StateVar(3U)</B>
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

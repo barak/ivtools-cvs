@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>GraphUnidraw</title>
+  </head>
+
+  <body>
+      <h1>GraphUnidraw</h1>
+<p>
+<a href=./graphdraw.html>example application</a>
+<p>
+
+GraphUnidraw is a library that extends <a
+href=comunidrawinfo.html>ComUnidraw</a> with graph (or network) editing
+capabilities.  TopoFace is a library of objects for representing
+spatial graphs (<a href=./doc/classes/TopoEdge.html>edge</a>, 
+<a href=./doc/classes/TopoNode.html>node</a>, <a href=./doc/classes/TopoFace.html>face</a>) used by GraphUnidraw.
+
+<p><b>overall framework objects</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/GraphEditor.html>GraphEditor</a>/<a href=./doc/classes/GraphKit.html>GraphKit</a>:</code> editor with graph extensions
+	<li> <code><a href=./doc/classes/GraphCreator.html>GraphCreator</a>/<a href=./doc/classes/GraphCatalog.html>GraphCatalog</a>:</code> save/restore mechanism with graph extensions
+      </ul>
+
+<p><b>specialized graphic objects</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/EdgeComp.html>EdgeComp</a> (<a href=./doc/classes/EdgeView.html>EdgeView</a>/<a href=./doc/classes/EdgePS.html>EdgePS</a>/<a href=./doc/classes/EdgeScript.html>EdgeScript</a>):</code> edge component and views
+	<li> <code><a href=./doc/classes/NodeComp.html>NodeComp</a> (<a href=./doc/classes/NodeView.html>NodeView</a>/<a href=./doc/classes/NodePS.html>NodePS</a>/<a href=./doc/classes/NodeScript.html>NodeScript</a>):</code> node component and views
+	<li> <code><a href=./doc/classes/GraphComp.html>GraphComp</a>: </code> graph component
+        <li> <code><a href=./doc/classes/GraphIdrawComp.html>GraphIdrawComp</a> (<a href=./doc/classes/GraphIdrawView.html>GraphIdrawView</a>/<a href=./doc/classes/GraphIdrawScript.html>GraphIdrawScript</a>): </code> top-level graph component and views
+      </ul>
+
+<p><b>tools and dialog boxes</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/NodeDialog.html>NodeDialog</a>:</code> dialog box for changings node's label</li>
+      </ul>
+
+<p><b>graph editing commands</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/EdgeConnectCmd.html>EdgeConnectCmd</a>: </code> graphically connect nodes
+	<li> <code><a href=./doc/classes/EdgeUpdateCmd.html>EdgeUpdateCmd</a>: </code> topologically connect nodes (used by <code>EdgeConnectCmd</code>)
+	<li> <code><a href=./doc/classes/NodeTextCmd.html>NodeTextCmd</a>: </code> change node's text string
+	<li> <code><a href=./doc/classes/GraphDeleteCmd.html>GraphDeleteCmd</a>/<a href=./doc/classes/GraphCutCmd.html>GraphCutCmd</a>/<a href=./doc/classes/GraphPasteCmd.html>GraphPasteCmd</a>/<a href=./doc/classes/GraphDupCmd.html>GraphDupCmd</a>: </code> general editing commands specialized for graphs
+	<li> <code><a href=./doc/classes/GraphNewViewCmd.html>GraphNewViewCmd</a>: </code> create new viewer
+	<li> <code><a href=./doc/classes/GraphImportCmd.html>GraphImportCmd</a>: </code> import a graph fragment
+      </ul>
+
+
+
+
+<a href=./techinfo.html>back to ivtools technical info</a>
+<p>
+  </body>
+</html>

@@ -1,0 +1,283 @@
+
+<html><head><TITLE>Description of ProcessingCmd</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ProcessingCmd</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="MacroCmd.html" >MacroCmd</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+base class for image processing commands.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="MacroCmd.html" >MacroCmd</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#ProcessingCmd><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovipcmds.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  The classes derived from <A HREF="ProcessingCmd.html" >ProcessingCmd</A> (<A HREF="ScaleGrayCmd.html" >ScaleGrayCmd</A>, <A HREF="PseudocolorCmd.html" >PseudocolorCmd</A>, 
+ <A HREF="LogScaleCmd.html" >LogScaleCmd</A>, <A HREF="GrayRampCmd.html" >GrayRampCmd</A>) are image processing operators useful for controlling 
+ the appearance of an image in a drawing editor or similar display.  They are 
+ not necessarily intended for use in computational imaging algorithms.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Execute()">
+    <B>Execute</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        take selected raster, or foremost raster if none is selected,
+ wrap up the image processing command with necessary cut/paste commands,
+ and invoke the whole thing.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetResult(Clipboard&#38;)">
+    <B>GetResult</B> (<A HREF="Clipboard.html" >Clipboard</A>&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        load clipboard with results.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="PrepareToExecute(GraphicComp*)">
+    <B>PrepareToExecute</B> (<A HREF="GraphicComp.html" >GraphicComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        wrapping the image processing command with necessary cut/paste commands.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
+    <A NAME="Process(OverlayRaster*&#38;&#38;COMMCopyString&#38;scmd)">
+    <B>Process</B> (<A HREF="OverlayRaster.html" >OverlayRaster</A>*, <A HREF="CopyString.html" >CopyString</A>&#38; scmd) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        do the actual processing in derived classes.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ProcessingCmd(ControlInfo*)">
+    <B>ProcessingCmd</B> (<A HREF="ControlInfo.html" >ControlInfo</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ProcessingCmd(Editor*)">
+    <B>ProcessingCmd</B> (<A HREF="Editor.html" >Editor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Reversible()">
+    <B>Reversible</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        conditional.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="~ProcessingCmd()">
+    <B>~ProcessingCmd</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="Clipboard.html" >Clipboard</A>* 
+    <A NAME="_comps">
+    <B>_comps</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_ed_constructor">
+    <B>_ed_constructor</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_prepared">
+    <B>_prepared</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_reversible">
+    <B>_reversible</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

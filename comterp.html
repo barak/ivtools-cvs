@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>comterp:  a command interpreter and server written in C and C++</title>
+  </head>
+
+  <body>
+    <h3>comterp: a command interpreter and server written in C and C++</h3>
+
+
+<b>comterp</b> is a command interpreter written in C and C++ patterned
+after Fischer and LeBlanc's "Crafting a Compiler with C".  Here is the
+<a href=../ivtools/comterp.README.txt>man page</a> for comterp.
+<p>
+When built with <a href=http://www.cs.wustl.edu/%7Eschmidt/ACE.html>ACE</a>, 
+comterp turns into a server that can listen for connection on a specified
+portnum and interpret command strings remotely.
+
+The C++ classes of the ComTerp library:
+<p>
+<b>Compiler/Interpreter Modules</b>
+<menu>
+<li><code><a href=./doc/classes/Scanner.html>Scanner</a></code>: lexical scanner module
+<li><code><a href=./doc/classes/Parser.html>Parser</a></code>: parser module
+<li><code><a href=./doc/classes/ComTerp.html>ComTerp</a></code>: command interpreter module
+<li><code><a href=./doc/classes/ComTerpServ.html>ComTerpServ</a></code>: command interpreter with server extensions
+</menu>
+
+<p> 
+<b>Other Objects</b>
+
+<menu>
+<li><code><a href=./doc/classes/ComFunc.html>ComFunc</a></code>: command primitive base class
+<li><code><a href=./doc/classes/ComValue.html>ComValue</a></code>: general interpreter value object
+</menu>
+
+A starter kit for building your own custom comterp server is
+incorporated into ivtools within a tar file, comtop.tgz, that can be
+unpacked somewhere else and be built and ready with:<br>&nbsp;&nbsp;<code> "ivmkmf -a;make"</code>.<p>
+Here is the <a href=./comtop-README.txt>README</a> for that
+distribution.  Here is an annotated <a href=./newfunc.cc>sample
+derived class</a> from the comtop distribution that illustrates how to
+create a new function for use within the comterp interpreter.<p>
+
+<b><a href=./comdraw.html>comdraw</a></b> is an evolved idraw with an embedded comterp with <a href=./comdraw.README.txt name="comdraw">drawing editor commands</a>. 
+<p>
+<a href=./index.html>up to ivtools</a>
+  </body>
+</html>

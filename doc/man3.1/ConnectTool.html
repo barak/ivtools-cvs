@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ConnectTool - tool for connecting connectors
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Tools/connect.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       ConnectTool  lets  the user establish a connection between
+       two connectors by direct manipulation.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>ConnectTool(ControlInfo*</B> <B>=</B> <B>nil)</B>
+              Create a new ConnectTool.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              CreateManipulator detects whether the user  clicked
+              on  a  connector.   If so, it delegates manipulator
+              creation to that connector, and  InterpretManipula-
+              tor  in  turn  delegates interpretation to the same
+              connector.  CreateManipulator clears  the  editor's
+              selection  and  returns a nil value if the user did
+              not click on a connector.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Connector(3U)</B>, <B>Tool(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

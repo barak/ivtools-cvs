@@ -1,0 +1,650 @@
+
+<html><head><TITLE>Description of FrameEditor</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>FrameEditor</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="ComEditor.html" >ComEditor</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+<A HREF="ComEditor.html" >ComEditor</A> specialized for multi-frame use.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="ComEditor.html" >ComEditor</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#FrameEditor><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+FrameUnidraw/frameeditor.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AddCommands(ComTerp*)">
+    <B>AddCommands</B> (<A HREF="ComTerp.html" >ComTerp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add interpreter commands to <A HREF="ComTerp.html" >ComTerp</A> associated with this <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="AutoNewFrame()">
+    <B>AutoNewFrame</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag which indicates a new frame should be automatically
+ created whenever anything is imported.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoAutoNewFrame()">
+    <B>DoAutoNewFrame</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual method which does the work of creating a new frame
+ if flag is set.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FrameEditor(OverlayComp*&#38;&#38;COMMOverlayKit*=FrameKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>FrameEditor</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="FrameKit.html" >FrameKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct based on pre-existing <A HREF="FrameIdrawComp.html" >FrameIdrawComp</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FrameEditor(booleaninitflag&#38;&#38;COMMOverlayKit*=FrameKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>FrameEditor</B> (boolean initflag, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="FrameKit.html" >FrameKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        constructor for use of derived classes.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FrameEditor(constchar*&#38;&#38;COMMOverlayKit*=FrameKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>FrameEditor</B> (const char*, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="FrameKit.html" >FrameKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct from pathname of a flipbook document.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlaysView.html" >OverlaysView</A>* 
+    <A NAME="GetFrame(intindex=-1)">
+    <B>GetFrame</B> (int index=-1) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return current frame.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(OverlayComp*=nil&#38;&#38;COMMconstchar*=&#38;&#38;QUOTDFrameEditor&#38;&#38;QUOTD)">
+    <B>Init</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* = nil, const char* = "<A HREF="FrameEditor.html" >FrameEditor</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitCommands()">
+    <B>InitCommands</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        execute <A HREF="Unidraw.html" >Unidraw</A> commands as needed after <A HREF="FrameEditor.html" >FrameEditor</A> is constructed.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitFrame()">
+    <B>InitFrame</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize multi-frame display mechanism.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="NumFrames()">
+    <B>NumFrames</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of frames not counting background frame
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="OtherFrame()">
+    <B>OtherFrame</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of previous (or secondary) frame.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="OtherFrame(intother_frame)">
+    <B>OtherFrame</B> (int other_frame) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set index of previous (or secondary) frame.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int* 
+    <A NAME="OtherFrames()">
+    <B>OtherFrames</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of previous (or secondary) frames.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="OtherFrames(int*other_frames&#38;&#38;COMMintnum_others)">
+    <B>OtherFrames</B> (int* other_frames, int num_others) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set index of previous (or secondary) frames.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetFrame(FrameView*f)">
+    <B>SetFrame</B> (<A HREF="FrameView.html" >FrameView</A>* f) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set current frame.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ToggleAutoNewFrame()">
+    <B>ToggleAutoNewFrame</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        toggle flag which indicates a new frame should be automatically
+ created whenever anything is imported.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pass to <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="UpdateFrame(booleantxtupdate=true)">
+    <B>UpdateFrame</B> (boolean txtupdate =true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        update state variables and text-editor display for current frame.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="FrameListState.html" >FrameListState</A>*&#38; 
+    <A NAME="frameliststate()">
+    <B>frameliststate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return reference to pointer to current-frame-count state variable
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="FrameNumberState.html" >FrameNumberState</A>*&#38; 
+    <A NAME="framenumstate()">
+    <B>framenumstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return reference to pointer to current-frame-number state variable
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~FrameEditor()">
+    <B>~FrameEditor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_autonewframe">
+    <B>_autonewframe</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="TelltaleState.html" >TelltaleState</A>* 
+    <A NAME="_autonewframe_tts">
+    <B>_autonewframe_tts</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int* 
+    <A NAME="_curr_others">
+    <B>_curr_others</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="FrameView.html" >FrameView</A>* 
+    <A NAME="_currframe">
+    <B>_currframe</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="FrameListState.html" >FrameListState</A>* 
+    <A NAME="_frameliststate">
+    <B>_frameliststate</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="FrameNumberState.html" >FrameNumberState</A>* 
+    <A NAME="_framenumstate">
+    <B>_framenumstate</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_num_curr_others">
+    <B>_num_curr_others</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_num_prev_others">
+    <B>_num_prev_others</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int* 
+    <A NAME="_prev_others">
+    <B>_prev_others</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="FrameView.html" >FrameView</A>* 
+    <A NAME="_prevframe">
+    <B>_prevframe</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="FrameKit">
+    <B>FrameKit</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

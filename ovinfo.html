@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>OverlayUnidraw</title>
+  </head>
+
+  <body>
+      <h1>OverlayUnidraw</h1>
+
+<a href=./drawtool.html>example application</a>
+<p>
+OverlayUnidraw is a library that extends the <a
+href=unidrawinfo.html>Unidraw</a> framework in several ways --
+double-buffered rendering, a spatial object save/restore mechanism
+(with attributes), improved export/import, multiple-views with
+optional pan/zoom chaining, fixed size graphics, etc.. <p>
+ 
+<i><a href=./doc/classes/OverlayComp.html>OverlayComp</a> extends the <a
+href=./doc/classes/GraphicComp.html>GraphicComp</a> class of <a
+href=./unidrawinfo.html>Unidraw</a> with  extra mechanisms for 
+serialization and graphics rendering.<p></i>
+
+Here is a list
+of the more important derived classes and what they do:
+
+<p><b>overall framework objects</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/OverlayEditor.html>OverlayEditor</a>/<a href=./doc/classes/OverlayKit.html>OverlayKit</a>:</code> editor uses kit with virtual functions to construct itself
+	<li> <code><a href=./doc/classes/OverlayViewer.html>OverlayViewer</a>:</code> double-buffered viewer
+	<li> <code><a href=./doc/classes/OverlayDamage.html>OverlayDamage</a>:</code> double-buffered damage repair
+	<li> <code><a href=./doc/classes/OverlayCreator.html>OverlayCreator</a>/<a href=./doc/classes/OverlayCatalog.html>OverlayCatalog</a>:</code> specialized save/restore mechanism
+      </ul>
+
+<p><b>generic graphic objects</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/OverlayComp.html>OverlayComp</a> (<a href=./doc/classes/OverlayView.html>OverlayView</a>/<a href=./doc/classes/OverlayScript.html>OverlayScript</a>/<a href=./doc/classes/OverlayPS.html>OverlayPS</a>):</code> specialized versions of GraphicComp, GraphicView, and PostScriptView
+	<li> <code><a href=./doc/classes/OverlaysComp.html>OverlaysComp</a> (<a href=./doc/classes/OverlaysView.html>OverlaysView</a>/<a href=./doc/classes/OverlaysScript.html>OverlaysScript</a>/<a href=./doc/classes/OverlaysPS.html>OverlaysPS</a>):</code> composite graphic mechanism
+	<li> <code><a href=./doc/classes/OverlayIdrawComp.html>OverlayIdrawComp</a> (<a href=./doc/classes/OverlayIdrawView.html>OverlayIdrawView</a>/<a href=./doc/classes/OverlayIdrawScript.html>OverlayIdrawScript</a>/<a href=./doc/classes/OverlayIdrawPS.html>OverlayIdrawPS</a>):</code> top level graphic
+	<li> <code><a href=./doc/classes/OverlayFileComp.html>OverlayFileComp</a> (<a href=./doc/classes/OverlayFileView.html>OverlayFileView</a>/<a href=./doc/classes/OverlayFileScript.html>OverlayFileScript</a>/<a href=./doc/classes/OverlaysPS.html>OverlaysPS</a>):</code> mechanism for creating hierarchical drawings
+	<li> <code><a href=./doc/classes/VerticesOvComp.html>VerticesOvComp</a> (<a href=./doc/classes/VerticesOvView.html>VerticesOvView</a>/<a href=./doc/classes/VerticesScript.html>VerticesScript</a>/<a href=./doc/classes/VerticesPS.html>VerticesPS</a>):</code> graphics with arbitrary number of vertices
+      </ul>
+
+<p><b>specific graphic objects</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/ClosedSplineOvComp.html>ClosedSplineOvComp</a> (<a href=./doc/classes/ClosedSplineOvView.html>ClosedSplineOvView</a>/<a href=./doc/classes/ClosedSplineScript.html>ClosedSplineScript</a>/<a href=./doc/classes/ClosedSplinePS.html>ClosedSplinePS</a>)</code>: closed B-splines
+	<li> <code><a href=./doc/classes/EllipseOvComp.html>EllipseOvComp</a> (<a href=./doc/classes/EllipseOvView.html>EllipseOvView</a>/<a href=./doc/classes/EllipseScript.html>EllipseScript</a>/<a href=./doc/classes/EllipsePS.html>EllipsePS</a>)</code>: ellipses
+	<li> <code><a href=./doc/classes/LineOvComp.html>LineOvComp</a> (<a href=./doc/classes/LineOvView.html>LineOvView</a>/<a href=./doc/classes/LineScript.html>LineScript</a>/<a href=./doc/classes/LinePS.html>LinePS</a>)</code>: lines
+	<li> <code><a href=./doc/classes/MultiLineOvComp.html>MultiLineOvComp</a> (<a href=./doc/classes/MultiLineOvView.html>MultiLineOvView</a>/<a href=./doc/classes/MultiLineScript.html>MultiLineScript</a>/<a href=./doc/classes/MultiLinePS.html>MultiLinePS</a>)</code>: multilines
+	<li> <code><a href=./doc/classes/PolygonOvComp.html>PolygonOvComp</a> (<a href=./doc/classes/PolygonOvView.html>PolygonOvView</a>/<a href=./doc/classes/PolygonScript.html>PolygonScript</a>/<a href=./doc/classes/PolygonPS.html>PolygonPS</a>)</code>: polygons
+	<li> <code><a href=./doc/classes/RasterOvComp.html>RasterOvComp</a> (<a href=./doc/classes/RasterOvView.html>RasterOvView</a>/<a href=./doc/classes/RasterScript.html>RasterScript</a>/<a href=./doc/classes/RasterPS.html>RasterPS</a>)</code>: TIFF, PGM, or PPM images
+	<li> <code><a href=./doc/classes/RectOvComp.html>RectOvComp</a> (<a href=./doc/classes/RectOvView.html>RectOvView</a>/<a href=./doc/classes/RectScript.html>RectScript</a>/<a href=./doc/classes/RectPS.html>RectPS</a>)</code>: rectangles
+	<li> <code><a href=./doc/classes/SplineOvComp.html>SplineOvComp</a> (<a href=./doc/classes/SplineOvView.html>SplineOvView</a>/<a href=./doc/classes/SplineScript.html>SplineScript</a>/<a href=./doc/classes/SplinePS.html>SplinePS</a>)</code>: open B-splines
+	<li> <code><a href=./doc/classes/StencilOvComp.html>StencilOvComp</a> (<a href=./doc/classes/StencilOvView.html>StencilOvView</a>/<a href=./doc/classes/StencilScript.html>StencilScript</a>/<a href=./doc/classes/StencilPS.html>StencilPS</a>)</code>: XBM or PBM bitmaps
+	<li> <code><a href=./doc/classes/TextFileComp.html>TextFileComp</a> (<a href=./doc/classes/TextFileView.html>TextFileView</a>/<a href=./doc/classes/TextFileScript.html>TextFileScript</a>/<a href=./doc/classes/TextPS.html>TextPS</a>)</code>: text from a file
+	<li> <code><a href=./doc/classes/TextOvComp.html>TextOvComp</a> (<a href=./doc/classes/TextOvView.html>TextOvView</a>/<a href=./doc/classes/TextScript.html>TextScript</a>/<a href=./doc/classes/TextPS.html>TextPS</a>)</code>: text strings
+      </ul>
+
+<p><b>specific graphic objects with arrowheads</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/ArrowLineOvComp.html>ArrowLineOvComp</a> (<a href=./doc/classes/ArrowLineOvView.html>ArrowLineOvView</a>/<a href=./doc/classes/ArrowLineScript.html>ArrowLineScript</a>/<a href=./doc/classes/ArrowLinePS.html>ArrowLinePS</a>):</code> lines with arrowheads
+	<li> <code><a href=./doc/classes/ArrowMultiLineOvComp.html>ArrowMultiLineOvComp</a> (<a href=./doc/classes/ArrowMultiLineOvView.html>ArrowMultiLineOvView</a>/<a href=./doc/classes/ArrowMultiLineScript.html>ArrowMultiLineScript</a>/<a href=./doc/classes/ArrowMultiLinePS.html>ArrowMultiLinePS</a>):</code> multilines with arrowheads
+	<li> <code><a href=./doc/classes/ArrowSplineOvComp.html>ArrowSplineOvComp</a> (<a href=./doc/classes/ArrowSplineOvView.html>ArrowSplineOvView</a>/<a href=./doc/classes/ArrowSplineScript.html>ArrowSplineScript</a>/<a href=./doc/classes/ArrowSplinePS.html>ArrowSplinePS</a>):</code> open B-splines with arrowheads
+      </ul>
+
+<p><b>tools and dialog boxes</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/AnnotateTool.html>AnnotateTool</a>/<a href=./doc/classes/AnnotateDialog.html>AnnotateDialog</a>:</code> mechanism for annotating objects</li>
+	<li> <code><a href=./doc/classes/AttributeTool.html>AttributeTool</a>/<a href=./doc/classes/AttributeDialog.html>AttributeDialog</a>:</code> mechanism for editing an objects attribute list</li>
+	<li> <code><a href=./doc/classes/PageDialog.html>PageDialog</a>, <a href=./doc/classes/PanDialog.html>PanDialog</a>, <a href=./doc/classes/ZoomDialog.html>ZoomDialog</a>:</code> dialog boxes for precise page-sizing, panning, and zooming</li>
+      </ul>
+
+<p><b>viewer commands</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/CameraMotionCmd.html>CameraMotionCmd</a> (<a href=./doc/classes/PanCmd.html>PanCmd</a>, <a href=./doc/classes/FixedPanCmd.html>FixedPanCmd</a>, <a href=./doc/classes/PrecisePanCmd.html>PrecisePanCmd</a>, <a href=./doc/classes/ZoomCmd.html>ZoomCmd</a>, <a href=./doc/classes/PreciseZoomCmd.html>PreciseZoomCmd</a>):</code> pan and zoom commands for the viewer</li>
+	<li> <code><a href=./doc/classes/ChainViewerCmd.html>ChainViewerCmd</a>, <a href=./doc/classes/UnchainViewerCmd.html>UnchainViewerCmd</a>:</code> commands to chain up pan/zoom of this viewers</li>
+	<li> <code><a href=./doc/classes/ChainViewersCmd.html>ChainViewersCmd</a>, <a href=./doc/classes/UnchainViewersCmd.html>UnchainViewersCmd</a>:</code> commands to chain up pan/zoom of all viewers</li>
+	<li> <code><a href=./doc/classes/OvAboutCmd.html>OvAboutCmd</a>:</code> command to display "about" dialog box</li>
+	<li> <code><a href=./doc/classes/OvExportCmd.html>OvExportCmd</a>, <a href=./doc/classes/OvImportCmd.html>OvImportCmd</a>, <a href=./doc/classes/OvPrintCmd.html>OvPrintCmd</a>:</code> commands to invoke export/import/print dialog boxes</li>
+	<li> <code><a href=./doc/classes/OvNewCompCmd.html>OvNewCompCmd</a>, <a href=./doc/classes/OvRevertCmd.html>OvRevertCmd</a>, <a href=./doc/classes/OvViewCompCmd.html>OvViewCompCmd</a>, <a href=./doc/classes/OvOpenCmd.html>OvOpenCmd</a>, <a href=./doc/classes/OvSaveCompCmd.html>OvSaveCompCmd</a>, <a href=./doc/classes/OvSaveAsCompCmd.html>OvSaveAsCompCmd</a>, <a href=./doc/classes/OvQuitCmd.html>OvQuitCmd</a>, <a href=./doc/classes/OvSlctAllCmd.html>OvSlctAllCmd</a>, <a href=./doc/classes/OvGroupCmd.html>OvGroupCmd</a>, <a href=./doc/classes/OvCloseEditorCmd.html>OvCloseEditorCmd</a>:</code> commands specialized for OverlayUnidraw framework
+	<li> <code><a href=./doc/classes/PageCmd.html>PageCmd</a>, <a href=./doc/classes/PrecisePageCmd.html>PrecisePageCmd</a>:</code> commands to resize the drawing</li>
+      </ul>
+
+<p><b>graphic commands</b>
+
+      <ul>
+	<li> <code><a href=./doc/classes/ClipPolyAAndBCmd.html>ClipPolyAAndBCmd</a>, <a href=./doc/classes/ClipPolyAMinusBCmd.html>ClipPolyAMinusBCmd</a>, <a href=./doc/classes/ClipPolyBMinusACmd.html>ClipPolyBMinusACmd</a>:</code> commands to interface to the <a href="http://www.ph.tn.tudelft.nl/People/klamer/clippoly_entry.html">clippoly</a> library</li>
+	<li> <code><a href=./doc/classes/FixViewCmd.html>FixViewCmd</a>, <a href=./doc/classes/UnfixViewCmd.html>UnfixViewCmd</a>:</code> commands to fix size and location of a graphic</li>
+	<li> <code><a href=./doc/classes/HideViewCmd.html>HideViewCmd</a>, <a href=./doc/classes/UnhideViewsCmd.html>UnhideViewsCmd</a>:</code> commands to hide/show graphic</li>
+      </ul>
+
+<a href=./techinfo.html>back to ivtools technical info</a>
+<p>
+
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       UStencil - structured graphic displaying a bitmap
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/stencil.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  UStencil  is a Graphic that displays a bitmapped image.
+       Two Bitmap objects, an <I>image</I> and a <I>mask</I>,  define  a  sten-
+       cil's  appearance.   The  stencil potentially paints fore-
+       ground color where <I>image</I> has a <I>true</I> value  and  background
+       color  where  <I>image</I>  is <I>false</I>, but only pixels that have a
+       corresponding <I>true</I> value in <I>mask</I> are thus  affected.   The
+       stencil's  origin  coincides with the origins of the <I>image</I>
+       and <I>mask</I> bitmaps. The  <I>mask</I>'s  bounding  box  defines  the
+       stencil's extent.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>UStencil(Bitmap*</B> <B>image,</B> <B>Bitmap*</B> <B>mask</B> <B>=</B> <B>nil,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+              Construct a UStencil, supplying  an  <I>image</I>  and  an
+              optional  <I>mask</I>  bitmap and an optional graphic from
+              which to obtain an initial set of  graphics  state.
+              Specifying  <I>nil</I> for <I>mask</I> is equivalent to supplying
+              a mask of the same size and  shape  as  <I>image</I>  that
+              contains all <I>true</I> values.
+
+       <B>void</B> <B>GetOriginal(Bitamp*&amp;,</B> <B>Bitmap*&amp;)</B>
+              Return  the  bitmap parameters supplied in the con-
+              structor.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Bitmap(3I)</B>, <B>Graphic(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,349 @@
+
+<html><head><TITLE>Description of RpcPeer</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>RpcPeer</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="IOHandler.html" >IOHandler</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+support bi-directional RPC between two services<br><br>
+
+<B>Type:</B><br>
+<UL>
+Abstract
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="IOHandler.html" >IOHandler</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#RpcPeer><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Dispatch/rpcpeer.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  Support bi-directional RPC between two peers.  Derived classes
+ create both a reader and a writer so each peer can send RPC
+ requests to its opposite over the same connection.
+ <p><a href=../man3.1/RpcPeer.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="quitRunning()">
+    <B>quitRunning</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="run()">
+    <B>run</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~RpcPeer()">
+    <B>~RpcPeer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="RpcPeer(constchar*lPath&#38;&#38;COMMintlPort=0)">
+    <B>RpcPeer</B> ( const char* lPath, int lPort = 0 ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="_lPath">
+    <B>_lPath</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        my registration's path
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_lPort">
+    <B>_lPort</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        my port's address
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_rHost">
+    <B>_rHost</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        dynamically allocated storage to be freed
+ deny access since unimplemented and member-wise won't work
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_remote">
+    <B>_remote</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        am I connected to a remote RPC service?
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_running">
+    <B>_running</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        am I running my dispatch loop?
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="rpcbuf.html" >rpcbuf</A>* 
+    <A NAME="_service">
+    <B>_service</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        my network socket
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>pure virtual boolean 
+    <A NAME="createReaderAndWriter(constchar*rHost&#38;&#38;COMMintrPort)">
+    <B>createReaderAndWriter</B> (const char* rHost, int rPort) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>pure virtual void 
+    <A NAME="createReaderAndWriter(intfd)">
+    <B>createReaderAndWriter</B> (int fd) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="init(constchar*rPath)">
+    <B>init</B> (const char* rPath) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="inputReady(int)">
+    <B>inputReady</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="startListening()">
+    <B>startListening</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="stopListening()">
+    <B>stopListening</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

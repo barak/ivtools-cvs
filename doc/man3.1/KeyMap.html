@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       KeyMap  -  activates controls given their keyboard equiva-
+       lents
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/keymap.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       KeyMap supports keyboard equivalents, which allow the user
+       of  a  Unidraw  application  to  execute  menu commands or
+       select from a palette of controls by  typing  rather  than
+       pointing and clicking with the mouse. The KeyMap can acti-
+       vate a control given its key code as defined by  its  Con-
+       trolInfo  object.  Only those controls registered with the
+       KeyMap can be activated through the KeyMap.   By  default,
+       the  Editor  base  class  handles key events by having its
+       KeyMap execute the key code.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>KeyMap()</B>
+              Construct a new keymap, initially  with  no  regis-
+              trants.
+
+       <B>void</B> <B>Register(UControl*)</B>
+       <B>void</B> <B>Register(KeyMap*)</B>
+       <B>void</B> <B>Unregister(UControl*)</B>
+       <B>void</B> <B>Unregister(KeyMap*)</B>
+              Register   and  unregister  a  control  or  another
+              KeyMap.  Registering a KeyMap is equivalent to reg-
+              istering  all its registered controls individually.
+
+       <B>void</B> <B>Execute(const</B> <B>char*</B> <B>keyCode)</B>
+              Execute the given key code by activating the corre-
+              sponding  control.   Each  UControl contains a Con-
+              trolInfo object that specifies its key  code;  thus
+              the  mapping  between  key  codes  and  controls is
+              defined by the  ControlInfo  objects  collectively.
+              Key  codes  among  registered  controls  should  be
+              unique.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ControlInfo(3U)</B>, <B>KeyMap(3U)</B>, <B>UControl(3U)</B>, <B>kybd(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

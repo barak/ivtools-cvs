@@ -1,0 +1,953 @@
+
+<html><head><TITLE>Description of OverlaysComp</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlaysComp</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayComp.html" >OverlayComp</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+composite component, clone of <A HREF="GraphicComps.html" >GraphicComps</A> derived from <A HREF="OverlayComp.html" >OverlayComp</A><br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayComp.html" >OverlayComp</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlaysComp><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovcomps.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  composite component that manages a list of sub-components.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AdjustBaseDir(constchar*oldpath&#38;&#38;COMMconstchar*newpath)">
+    <B>AdjustBaseDir</B> (const char* oldpath, const char* newpath) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        adjust base directory used for generating pathnames when saving
+ components to disk (serialization).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Append(GraphicComp*)">
+    <B>Append</B> (<A HREF="GraphicComp.html" >GraphicComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        append component to the end of the list, which is foremost when rendered.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Bequeath()">
+    <B>Bequeath</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pass graphic state of this component's graphic to children.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Component.html" >Component</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Done(Iterator)">
+    <B>Done</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test <A HREF="Iterator.html" >Iterator</A> to see if off the end of the list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="FindValue(constchar*name&#38;&#38;COMMbooleanlast=false&#38;&#38;COMMbooleanbreadth=false&#38;&#38;COMMbooleandown=true&#38;&#38;COMMbooleanup=false)">
+    <B>FindValue</B> (const char* name, boolean last = false, boolean breadth = false, boolean down = true, boolean up = false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        search component tree for specified attribute value by 'name'. Only
+ default argument mode implemented so far -- return first occurence found
+ with a downward depth-first search.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="FindValue(intsymid&#38;&#38;COMMbooleanlast=false&#38;&#38;COMMbooleanbreadth=false&#38;&#38;COMMbooleandown=true&#38;&#38;COMMbooleanup=false)">
+    <B>FindValue</B> (int symid, boolean last = false, boolean breadth = false, boolean down = true, boolean up = false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        search component tree for specified attribute value by 'symid'. Only
+ default argument mode implemented so far -- return first occurence found
+ with a downward depth-first search.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="First(Iterator&#38;)">
+    <B>First</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="Iterator.html" >Iterator</A> to first element in the list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="GraphicComp.html" >GraphicComp</A>* 
+    <A NAME="GetComp(Iterator)">
+    <B>GetComp</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to component within the current element of the list
+ as pointed to by the <A HREF="Iterator.html" >Iterator</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedGS(Graphic*)">
+    <B>GrowIndexedGS</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        grow table of graphic states (gs) managed by <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedPic(OverlaysComp*)">
+    <B>GrowIndexedPic</B> (<A HREF="OverlaysComp.html" >OverlaysComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        grow table of composite graphics (pic) managed by <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedPts(MultiLineObj*)">
+    <B>GrowIndexedPts</B> (<A HREF="MultiLineObj.html" >MultiLineObj</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        grow table of point lists (pts) managed by <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InsertAfter(Iterator&#38;&#38;COMMGraphicComp*)">
+    <B>InsertAfter</B> (<A HREF="Iterator.html" >Iterator</A>, <A HREF="GraphicComp.html" >GraphicComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        insert component after current position indicated by the <A HREF="Iterator.html" >Iterator</A>,
+ which means to the fore in screen ordering.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InsertBefore(Iterator&#38;&#38;COMMGraphicComp*)">
+    <B>InsertBefore</B> (<A HREF="Iterator.html" >Iterator</A>, <A HREF="GraphicComp.html" >GraphicComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        insert component before current position indicated by the <A HREF="Iterator.html" >Iterator</A>,
+ which means to the rear in screen ordering.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Interpret(Command*)">
+    <B>Interpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        interpret command, possibly across sub-components.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Last(Iterator&#38;)">
+    <B>Last</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="Iterator.html" >Iterator</A> to last element in the list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Next(Iterator&#38;)">
+    <B>Next</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        move <A HREF="Iterator.html" >Iterator</A> to the next element in the list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlaysComp(Graphic*&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>OverlaysComp</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlaysComp(OverlayComp*parent=nil)">
+    <B>OverlaysComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlaysComp(istream&#38;&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>OverlaysComp</B> (istream&#38;, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Prepend(GraphicComp*)">
+    <B>Prepend</B> (<A HREF="GraphicComp.html" >GraphicComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        append component to beginning of the list, which is rearmost when rendered.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Prev(Iterator&#38;)">
+    <B>Prev</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        move <A HREF="Iterator.html" >Iterator</A> to the previous element in the list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Remove(GraphicComp*)">
+    <B>Remove</B> (<A HREF="GraphicComp.html" >GraphicComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        search for and remove component from list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Remove(Iterator&#38;)">
+    <B>Remove</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        remove component indicated by <A HREF="Iterator.html" >Iterator</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetIndexedGS()">
+    <B>ResetIndexedGS</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset table of graphic states (gs) managed by <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetIndexedPic()">
+    <B>ResetIndexedPic</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset table of composite graphics (pic) managed by <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetIndexedPts()">
+    <B>ResetIndexedPts</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset table of point lists (pts) managed by <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="SamePicture(OverlaysComp*)">
+    <B>SamePicture</B> (<A HREF="OverlaysComp.html" >OverlaysComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compares two composite components, to see if sub-components are identical.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetComp(GraphicComp*&#38;&#38;COMMIterator&#38;)">
+    <B>SetComp</B> (<A HREF="GraphicComp.html" >GraphicComp</A>*, <A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="Iterator.html" >Iterator</A> to point to the element of the list that contains the
+ given component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetMobility(Mobility)">
+    <B>SetMobility</B> (Mobility) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        unused mechanism to restrain motion of component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Uninterpret(Command*)">
+    <B>Uninterpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        uninterpret command, possibly across sub-components.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="operator==(OverlayComp&#38;)">
+    <B>operator ==</B> (<A HREF="OverlayComp.html" >OverlayComp</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        checks for equality of this component and sub-components.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlaysComp()">
+    <B>~OverlaysComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDOverlaysComp&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="OverlaysComp.html" >OverlaysComp</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="Comp(UList*)">
+    <B>Comp</B> (<A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UList.html" >UList</A>* 
+    <A NAME="Elem(Iterator)">
+    <B>Elem</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get at individual element of composite component list mechanism.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="GetParamList()">
+    <B>GetParamList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Group(Clipboard*&#38;&#38;COMMOverlayComp*&#38;&#38;COMMCommand*)">
+    <B>Group</B> (<A HREF="Clipboard.html" >Clipboard</A>*, <A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        group everything in the clipboard into a new <A HREF="OverlaysComp.html" >OverlaysComp</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GrowParamList(ParamList*)">
+    <B>GrowParamList</B> (<A HREF="ParamList.html" >ParamList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="RestorePosition(OverlayComp*&#38;&#38;COMMCommand*)">
+    <B>RestorePosition</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        restore position of this component in composite list from command.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SelectClipboard(Clipboard*&#38;&#38;COMMEditor*)">
+    <B>SelectClipboard</B> (<A HREF="Clipboard.html" >Clipboard</A>*, <A HREF="Editor.html" >Editor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add views of components in clipboard to selection list in this editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SelectViewsOf(OverlayComp*&#38;&#38;COMMEditor*)">
+    <B>SelectViewsOf</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="Editor.html" >Editor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add views of this component to selection list in this editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="StorePosition(OverlayComp*&#38;&#38;COMMCommand*)">
+    <B>StorePosition</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        store position of this component in composite list for later reference
+ by a command.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Ungroup(OverlayComp*&#38;&#38;COMMClipboard*&#38;&#38;COMMCommand*)">
+    <B>Ungroup</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="Clipboard.html" >Clipboard</A>*, <A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        ungroup everything in an <A HREF="OverlaysComp.html" >OverlaysComp</A> into the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UList.html" >UList</A>* 
+    <A NAME="_comps">
+    <B>_comps</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="_overlay_comps_params">
+    <B>_overlay_comps_params</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="OverlaysScript">
+    <B>OverlaysScript</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,785 @@
+
+<html><head><TITLE>Description of OverlayViewer</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayViewer</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Viewer.html" >Viewer</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+specialized <A HREF="Viewer.html" >Viewer</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Viewer.html" >Viewer</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayViewer><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovviewer.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Adjust(Perspective&#38;)">
+    <B>Adjust</B> (<A HREF="Perspective.html" >Perspective</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="CenterToScreen(intsx&#38;&#38;COMMintsy)">
+    <B>CenterToScreen</B> (int sx, int sy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pan xo that 'sx','sy' is at the center of the screen.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Chain(booleanpan=true&#38;&#38;COMMbooleanzoom=true)">
+    <B>Chain</B> (boolean pan = true, boolean zoom = true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        chain the panning or zooming of this viewer to other chained viewers.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Chained()">
+    <B>Chained</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if panning or zooming chained.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="ChainedPan()">
+    <B>ChainedPan</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if panning chained.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="ChainedZoom()">
+    <B>ChainedZoom</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if zooming chained.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Draw()">
+    <B>Draw</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        double-buffered drawing of entire screen.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DrawingToScreen(floatxdraw&#38;&#38;COMMfloatydraw&#38;&#38;COMMCoord&#38;xscreen&#38;&#38;COMMCoord&#38;yscreen)">
+    <B>DrawingToScreen</B> (float xdraw, float ydraw, Coord&#38; xscreen, Coord&#38; yscreen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting drawing coordinates to screen coordinates.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DrawingToScreen(floatxdraw&#38;&#38;COMMfloatydraw&#38;&#38;COMMfloat&#38;xscreen&#38;&#38;COMMfloat&#38;yscreen)">
+    <B>DrawingToScreen</B> (float xdraw, float ydraw, float&#38; xscreen, float&#38; yscreen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting drawing coordinates to screen coordinates.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ExecuteCmd(Command*cmd)">
+    <B>ExecuteCmd</B> (<A HREF="Command.html" >Command</A>* cmd) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        indirect command execution for distributed whiteboard mechanism.
+ bulk of mechanism implemented in <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="FinishBuffering(boolean)">
+    <B>FinishBuffering</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        finish up double buffering, and copy modified part of buffer to the screen.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayView.html" >OverlayView</A>* 
+    <A NAME="GetCurrent()">
+    <B>GetCurrent</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayView.html" >OverlayView</A>* 
+    <A NAME="GetOverlayView()">
+    <B>GetOverlayView</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GraphicToScreen(Graphic*gr&#38;&#38;COMMfloatxgr&#38;&#38;COMMfloatygr&#38;&#38;COMMfloat&#38;xscreen&#38;&#38;COMMfloat&#38;yscreen)">
+    <B>GraphicToScreen</B> (<A HREF="Graphic.html" >Graphic</A>* gr, float xgr, float ygr, float &#38;xscreen, float&#38; yscreen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting graphic relative coordinates to screen
+ coordinates. The graphic coordinates are relative to the origin of the 
+ screen when the graphic was originally drawn , expect for rasters, stencils, 
+ and text which use their own origin instead.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GraphicToScreen(Graphic*gr&#38;&#38;COMMfloatxgr&#38;&#38;COMMfloatygr&#38;&#38;COMMint&#38;xscreen&#38;&#38;COMMint&#38;yscreen)">
+    <B>GraphicToScreen</B> (<A HREF="Graphic.html" >Graphic</A>* gr, float xgr, float ygr, int &#38;xscreen, int&#38; yscreen) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting graphic relative coordinates to screen
+ coordinates. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayViewer(Editor*&#38;&#38;COMMGraphicView*&#38;&#38;COMMUPage*&#38;&#38;COMMGrid*=nil&#38;&#38;COMMCoord=0&#38;&#38;COMMCoord=0&#38;&#38;COMMOrientation=Normal&#38;&#38;COMMAlignment=Center&#38;&#38;COMMZooming=Continuous)">
+    <B>OverlayViewer</B> ( <A HREF="Editor.html" >Editor</A>*, <A HREF="GraphicView.html" >GraphicView</A>*, <A HREF="UPage.html" >UPage</A>*, <A HREF="Grid.html" >Grid</A>* = nil, Coord = 0, Coord = 0, Orientation = Normal, Alignment = Center, Zooming = Continuous ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Redraw(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>Redraw</B> (Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        double-buffered drawing of sub-screen.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Resize()">
+    <B>Resize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        called after screen canvas is allocated. From here the ::Configure
+ method is called on any components, and the <A HREF="OverlayEditor.html" >OverlayEditor</A>::InitCommands
+ is called as well.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ScreenToDrawing(Coordxscreen&#38;&#38;COMMCoordyscreen&#38;&#38;COMMfloat&#38;xdraw&#38;&#38;COMMfloat&#38;ydraw)">
+    <B>ScreenToDrawing</B> (Coord xscreen, Coord yscreen, float&#38; xdraw, float&#38; ydraw) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting screen coordinates to drawing coordinates.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ScreenToDrawing(floatxscreen&#38;&#38;COMMfloatyscreen&#38;&#38;COMMfloat&#38;xdraw&#38;&#38;COMMfloat&#38;ydraw)">
+    <B>ScreenToDrawing</B> (float xscreen, float yscreen, float&#38; xdraw, float&#38; ydraw) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting screen coordinates to drawing coordinates.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ScreenToGraphic(Coordxscreen&#38;&#38;COMMCoordyscreen&#38;&#38;COMMGraphic*gr&#38;&#38;COMMfloat&#38;xgr&#38;&#38;COMMfloat&#38;ygr)">
+    <B>ScreenToGraphic</B> (Coord xscreen, Coord yscreen, <A HREF="Graphic.html" >Graphic</A>* gr, float&#38; xgr, float&#38; ygr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting screen coordinates to graphic relative
+ coordinates. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ScreenToGraphic(floatxscreen&#38;&#38;COMMfloatyscreen&#38;&#38;COMMGraphic*gr&#38;&#38;COMMfloat&#38;xgr&#38;&#38;COMMfloat&#38;ygr)">
+    <B>ScreenToGraphic</B> (float xscreen, float yscreen, <A HREF="Graphic.html" >Graphic</A>* gr, float&#38; xgr, float&#38; ygr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        utility method for converting screen coordinates to graphic relative 
+ coordinates. The graphic coordinates are relative to the origin of the 
+ screen when the graphic was originally drawn , expect for rasters, stencils, 
+ and text which use their own origin instead.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetColorMap()">
+    <B>SetColorMap</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        handle these command line arguments: -color6, -color5, -gray7, -gray6, -gray5.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetMagnification(float)">
+    <B>SetMagnification</B> (float) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="StartBuffering()">
+    <B>StartBuffering</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        start up double buffering. All subsequent draws go to an offscreen buffer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Unchain(booleanpan=true&#38;&#38;COMMbooleanzoom=true)">
+    <B>Unchain</B> (boolean pan = true, boolean zoom = true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        unchain the panning or zooming of this viewer from the other chained viewers.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        double-buffered damage repair.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="UseTool(Tool*&#38;&#38;COMMEvent&#38;)">
+    <B>UseTool</B> (<A HREF="Tool.html" >Tool</A>*, <A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="scribble_pointer()">
+    <B>scribble_pointer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates whether the mouse is in continuous mode,
+ for smooth drawing of polygons and other multi-point graphics.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="scribble_pointer(booleanflag)">
+    <B>scribble_pointer</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates whether the mouse is in continuous mode,
+ for smooth drawing of polygons and other multi-point graphics.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlayViewer()">
+    <B>~OverlayViewer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Manipulate(Manipulator*&#38;&#38;COMMEvent&#38;)">
+    <B>Manipulate</B> (<A HREF="Manipulator.html" >Manipulator</A>*, <A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        direct manipulation loop
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="PrepareDoubleBuf()">
+    <B>PrepareDoubleBuf</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Scroll(Perspective&#38;)">
+    <B>Scroll</B> (<A HREF="Perspective.html" >Perspective</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Zoom(Perspective&#38;)">
+    <B>Zoom</B> (<A HREF="Perspective.html" >Perspective</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_needs_resize">
+    <B>_needs_resize</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_pan_chain">
+    <B>_pan_chain</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_scribble_pointer">
+    <B>_scribble_pointer</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_zoom_chain">
+    <B>_zoom_chain</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="Painter.html" >Painter</A>* 
+    <A NAME="xorPainter">
+    <B>xorPainter</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       PointObj,  LineObj,  BoxObj, MultiLineObj, FillPolygonObj,
+       Extent - helper classes that manage geometric  information
+       for structured graphics
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/geomobjs.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Unidraw defines several helper classes that store and man-
+       age geometric information.   Structured  graphics  objects
+       may  use  these helper classes to support their semantics.
+       PointObj stores a point, LineObj stores  two  points,  and
+       MultiLineObj  stores  any  number  of  points.  BoxObj and
+       FillPolygonObj define  rectangular  and  polygonal  areas,
+       respectively.   Extent stores extent information, that is,
+       the lower left corner and center of a bounding box plus  a
+       fixed  amount of extra space around the bounding box.  All
+       these classes provide operations for  computing  geometric
+       information.
+
+
+</PRE>
+<H2>POINTOBJ PUBLIC OPERATIONS</H2><PRE>
+       <B>PointObj(Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0)</B>
+       <B>PointObj(PointObj*)</B>
+              Construct  a  PointObj, supplying either two Coords
+              or another PointObj to specify the instance's coor-
+              dinates,  which  are stored in its <B>_</B><I>x</I> and <B>_</B><I>y</I> public
+              members.
+
+       <B>float</B> <B>Distance(PointObj&amp;)</B>
+              Return the distance  between  <I>this</I>  and  the  given
+              PointObj.
+
+
+</PRE>
+<H2>LINEOBJ PUBLIC OPERATIONS</H2><PRE>
+       <B>LineObj(Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0)</B>
+       <B>LineObj(LineObj*)</B>
+              Construct  a  LineObj, supplying either two coordi-
+              nate  pairs  or  another  LineObj  to  specify  the
+              instance's  endpoints,  which are stored in its <B>_</B><I>p1</I>
+              and <B>_</B><I>p2</I> public members.
+
+       <B>boolean</B> <B>Contains(PointObj&amp;)</B>
+       <B>boolean</B> <B>Intersects(LineObj&amp;)</B>
+              Return whether <I>this</I> contains the  given  point  and
+              intersects the given line, respectively.
+
+       <B>int</B> <B>Same(PointObj&amp;</B> <B>p1,</B> <B>PointObj&amp;</B> <B>p2)</B>
+              A  helper function used in Intersects. Same returns
+              a positive value if <I>p1</I> and <I>p2</I> fall on the same side
+              of  the line, 0 if both points fall on the line, or
+              a negative value if  the  points  are  on  opposite
+              sides of the line.
+
+       <B>BoxObj(Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0)</B>
+       <B>BoxObj(BoxObj*)</B>
+              Construct a BoxObj, supplying either two coordinate
+              pairs or another BoxObj to specify  the  instance's
+              bottom-left and top-right corners, which are stored
+              in its <B>_</B><I>left</I>, <B>_</B><I>bottom</I>, <B>_</B><I>right</I>, and <B>_</B><I>top</I> public mem-
+              bers.
+
+       <B>boolean</B> <B>Contains(PointObj&amp;)</B>
+       <B>boolean</B> <B>Intersects(BoxObj&amp;)</B>
+       <B>boolean</B> <B>Intersects(LineObj&amp;)</B>
+              Return  whether  <I>this</I>  contains the given point and
+              intersects the given box or line, respectively.
+
+       <B>BoxObj</B> <B>operator</B> <B>-</B> <B>(BoxObj&amp;)</B>
+       <B>BoxObj</B> <B>operator</B> <B>+</B> <B>(BoxObj&amp;)</B>
+              Compute the intersection (-) or union (+)  of  <I>this</I>
+              and  the  given  box,  returning the result.  These
+              operations do not affect <I>this</I> or their argument.
+
+       <B>boolean</B> <B>Within(BoxObj&amp;)</B>
+              Return <I>true</I> if <I>this</I>  falls  completely  within  the
+              given  box.   Within  will  also return <I>true</I> if the
+              boxes are identical.
+
+
+</PRE>
+<H2>MULTILINEOBJ PUBLIC OPERATIONS</H2><PRE>
+       <B>MultiLineObj(Coord*</B> <B>=</B> <B>nil,</B> <B>Coord*</B> <B>=</B> <B>nil,</B> <B>int</B> <B>=</B> <B>0)</B>
+              Create a MultiLineObj, optionally supplying coordi-
+              nate  arrays  (and their size) that define the ver-
+              tices of the multiline. The MultiLineObj  does  <I>not</I>
+              copy  these  arrays  but  stores them directly. The
+              MultiLineObj stores this information in its <B>_</B><I>x</I>, <B>_</B><I>y</I>,
+              and <B>_</B><I>count</I> public members.
+
+       <B>void</B> <B>GetBox(BoxObj&amp;)</B>
+              Calculate  the bounding box circumscribing the Mul-
+              tiLineObj's vertices and store it in the  argument.
+
+       <B>boolean</B> <B>Contains(PointObj&amp;)</B>
+       <B>boolean</B> <B>Intersects(BoxObj&amp;)</B>
+       <B>boolean</B> <B>Intersects(LineObj&amp;)</B>
+              Return  whether  <I>this</I>  contains the given point and
+              intersects the given box or line, respectively.
+
+       <B>boolean</B> <B>Within(BoxObj&amp;)</B>
+              Return <I>true</I> if <I>this</I>  falls  completely  within  the
+              MultiLineObj's   bounding  box.  Within  will  also
+              return <I>true</I> if the boxes are identical.
+
+       <B>void</B> <B>SplineToMultiLine(Coord*</B> <B>cpx,</B> <B>Coord*</B> <B>cpy,</B> <B>int</B> <B>count)</B>
+       <B>void</B> <B>ClosedSplineToMultiLine(Coord*</B> <B>cpx,</B> <B>Coord*</B> <B>cpy,</B> <B>int</B>
+              <B>count)</B>
+              result  in  <I>this</I>.   These operations store the lin-
+              earized result in internal buffers and  assign  the
+              addresses  of  these  buffers to <B>_</B><I>x</I> and <B>_</B><I>y</I>; they do
+              <I>not</I> delete <B>_</B><I>x</I> and <B>_</B><I>y</I> if they are non-nil  prior  to
+              assignment.
+
+
+</PRE>
+<H2>MULTILINEOBJ PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>GrowBuf()</B>
+              Increase  the  size of the internal buffers used to
+              store linearized splines.
+
+       <B>boolean</B> <B>CanApproxWithLine(</B>
+           <B>double</B> <B>x0,</B> <B>double,</B> <B>y0,</B>
+           <B>double</B> <B>x1,</B> <B>double</B> <B>y1,</B>
+           <B>double</B> <B>x2,</B> <B>double</B> <B>y2</B>
+       <B>)</B>
+              Return whether two connected line segments  defined
+              by the given three points can be approximated visu-
+              ally with a single line between the endpoints.
+
+       <B>void</B> <B>AddLine(double</B> <B>x0,</B> <B>double</B> <B>y0,</B> <B>double</B> <B>x1,</B> <B>double</B> <B>y1)</B>
+              Add a line to the internal buffer of vertices.
+
+       <B>void</B> <B>AddBezierArc(</B>
+           <B>double</B> <B>x0,</B> <B>double</B> <B>y0,</B> <B>double</B> <B>x1,</B> <B>double</B> <B>y1,</B>
+           <B>double</B> <B>x2,</B> <B>double</B> <B>y2,</B> <B>double</B> <B>x3,</B> <B>double</B> <B>y3</B>
+       <B>)</B>
+              Add lines approximating the appearance of a  Bezier
+              arc  defined  by  the  given points to the internal
+              buffer of vertices.
+
+       <B>void</B> <B>CalcSection(</B>
+           <B>Coord</B> <B>cminus1x,</B> <B>Coord</B> <B>cminus1y,</B> <B>Coord</B> <B>cx,</B> <B>Coord</B> <B>cy,</B>
+           <B>Coord</B> <B>cplus1x,</B> <B>Coord</B> <B>cplus1y,</B> <B>Coord</B> <B>cplus2x,</B> <B>Coord</B>
+              <B>cplus2y</B>
+       <B>)</B>
+              Add a Bezier arc to the internal buffer of vertices
+              based on a series of four B-spline control  points,
+              the one before and the two after (<I>cx,</I> <I>cy</I>).
+
+
+</PRE>
+<H2>FILLPOLYGONOBJ PUBLIC OPERATIONS</H2><PRE>
+       <B>FillPolygonObj(Coord*</B> <B>=</B> <B>nil,</B> <B>Coord*</B> <B>=</B> <B>nil,</B> <B>int</B> <B>=</B> <B>0)</B>
+              Create  a new FillPolygonObj, optionally specifying
+              its vertices.  If vertices are supplied,  then  the
+              constructor  uses  Normalize  (described  below) to
+              store a normalized set of vertices in the FillPoly-
+              gonObj's <B>_</B><I>normx</I>, <B>_</B><I>normy</I>, and <B>_</B><I>normCount</I> public mem-
+              bers.  FillPolygonObj is  a  subclass  of  MultiLi-
+              neObj;  thus it stores the constructor arguments in
+              its <B>_</B><I>x</I>, <B>_</B><I>y</I>, and <B>_</B><I>count</I> public members.
+
+       <B>virtual</B> <B>~FillPolygonObj()</B>
+
+       <B>boolean</B> <B>Contains(PointObj&amp;)</B>
+       <B>boolean</B> <B>Intersects(BoxObj&amp;)</B>
+       <B>boolean</B> <B>Intersects(LineObj&amp;)</B>
+              Return  whether  <I>this</I>  contains the given point and
+              intersects the given box or line, respectively.
+
+
+</PRE>
+<H2>FILLPOLYGONOBJ PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>Normalize()</B>
+              Copy the vertices defined by  <B>_</B><I>x</I>,  <B>_</B><I>y</I>,  and  <B>_</B><I>count</I>
+              into  <B>_</B><I>normx</I>,  <B>_</B><I>normy</I>,  and  <B>_</B><I>normCount</I>  such  that
+              (<B>_</B><I>normx[0],</I> <B>_</B><I>normy[0]</I>) is the lower-leftmost vertex
+              and there are no redundant vertices.
+
+
+</PRE>
+<H2>EXTENT PUBLIC OPERATIONS</H2><PRE>
+       <B>Extent(</B>
+           <B>float</B> <B>left</B> <B>=</B> <B>0,</B> <B>float</B> <B>bottom</B> <B>=</B> <B>0,</B>
+           <B>float</B> <B>cx</B> <B>=</B> <B>0,</B> <B>float</B> <B>cy</B> <B>=</B> <B>0,</B> <B>float</B> <B>tol</B> <B>=</B> <B>0</B>
+       <B>)</B>
+
+       <B>Extent(Extent&amp;)</B>
+              Construct  a  new  Extent, optionally supplying its
+              parameters  explicitly  or  providing  a   existing
+              Extent  to  copy.  The parameters are stored in the
+              Extent's <B>_</B><I>left</I>, <B>_</B><I>bottom</I>, <B>_</B><I>cx</I>, <B>_</B><I>cy</I>, and <B>_</B><I>tol</I>  public
+              members.
+
+       <B>boolean</B> <B>Undefined()</B>
+              Return whether the extent is undefined, that is, if
+              (<B>_</B><I>left,</I> <B>_</B><I>bottom</I>) and (<B>_</B><I>cx,</I> <B>_</B><I>cy</I>) are the same point.
+
+       <B>boolean</B> <B>Within(Extent&amp;)</B>
+              Return <I>true</I> if the given extent circumscribes <I>this</I>.
+              Within will also return <I>true</I>  if  the  extents  are
+              identical.
+
+       <B>void</B> <B>Merge(Extent&amp;)</B>
+              Enlarge  this  extent  to subsume area of the given
+              extent.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

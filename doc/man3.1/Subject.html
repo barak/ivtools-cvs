@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Subject - object with views
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/subject.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  subject is an object that has one or more views that it
+       wishes to notify when it  changes.   The  SubjectIteractor
+       class  can  be  used if it is necessary to iterate through
+       the views of a subject explicitly.
+
+       Because subjects are shared,  Subject  is  a  subclass  of
+       Resource.  To allow for the possibility of multiple inher-
+       itance, in which case  only  a  single  copy  of  resource
+       information  should  be  maintained, Resource is a virtual
+       base class.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>enum</B> <B>UpdateHint</B> <B>{</B>
+           <B>attaching,</B> <B>detaching,</B> <B>setting,</B> <B>changing</B>
+       <B>}</B>
+              This type enumerates possible hints when a  subject
+              is  notifying  a  view  that  it  has changed.  The
+              attaching hint indicates that a view  has  attached
+              to  the subject.  The detaching hint means that the
+              subject is being deleted and the view  should  con-
+              sider itself detached.  The setting hint means that
+              the subject's value has been set,  though  possibly
+              to  the same value as it already has.  The changing
+              hint means that the value is set to something  dif-
+              ferent than it was previously.
+
+       <B>virtual</B> <B>void</B> <B>attach(View*)</B>
+              Add a view to the subject's list.
+
+       <B>virtual</B> <B>void</B> <B>detach(View*)</B>
+              Remove a view from the subject's list.
+
+       <B>virtual</B> <B>void</B> <B>notify(UpdateHint</B> <B>=</B> <B>changing)</B>
+              Notify  all the views of a subject that it has been
+              updated.
+
+       <B>virtual</B> <B>boolean</B> <B>viewed_by(View*)</B>
+              Return whether a given view  is  on  the  subject's
+              list of views.
+
+       <B>virtual</B> <B>void</B> <B>Attach(Interactor*)</B>
+              This  function  is equivalent to attach and is pro-
+              vided solely for backward compatibility.   It  will
+              be removed in a future version.
+
+       <B>virtual</B> <B>void</B> <B>Detach(Interactor*)</B>
+              will be removed in a future version.
+
+       <B>virtual</B> <B>void</B> <B>Notify()</B>
+              This function is equivalent to notify(changing) and
+              is provided solely for backward compatibility.   It
+              will be removed in a future version.
+
+       <B>boolean</B> <B>IsView(Interactor*)</B>
+              This  function  is  equivalent  to viewed_by and is
+              provided solely  for  backward  compatibility.   It
+              will be removed in a future version.
+
+
+</PRE>
+<H2>SUBJECTITERATOR OPERATIONS</H2><PRE>
+       A  subject  iterator  can  be  used to iterate through the
+       views in a subject.
+
+       <B>SubjectIterator(Subject*)</B>
+              Create a subject iterator for  the  given  subject.
+              The  iterator  is only valid as long as the subject
+              exists.
+
+       <B>virtual</B> <B>void</B> <B>init()</B>
+              Reset the iteration to start at  the  beginning  of
+              the  list.   This  operation  is called by the con-
+              structor.
+
+       <B>virtual</B> <B>boolean</B> <B>more()</B>
+              Return whether there are more views in the list.
+
+       <B>virtual</B> <B>View*</B> <B>cur()</B>
+              Return the current view.
+
+       <B>virtual</B> <B>void</B> <B>remove()</B>
+              Remove the current view from the list.
+
+       <B>virtual</B> <B>void</B> <B>next()</B>
+              Move the iteration to the next view in the list.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>View(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

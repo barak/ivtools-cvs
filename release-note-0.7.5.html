@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>extra release notes for ivtools-0.7.5</title>
+  </head>
+
+  <body>
+    <h3>extra release notes for ivtools-0.7.5</h3>
+
+<a href=./ivtools-0.7-CHANGES.txt>CHANGES</a> &nbsp;
+<a href=./ivtools-0.7-README.txt>README</a> &nbsp;
+<a href=./ivtools-0.7-INSTALL.txt>INSTALL</a><p>
+
+<b>April 9th 1999</b>: If building on Solaris 2.6 using gcc-2.8.1 you
+need to disable optimization for the following files:<p>
+<dd><i> from libIV </i>: <code>alloctbl.c, input.c, kit.c, mf_kit.c, mono_kit.c, smf_kit.c, deck2_6.c, xfont.c, xwindow.c</code><p>
+<dd><i> from libIVGlyph </i>: <code>ofilechooser.c</code><p>
+<dd><i> from libOverlayUnidraw </i>: <code>ovimport.c</code><p>
+
+<b>April 8th 1999</b>: Looks like you still really need the CPU
+environment variable (set with "CPU='make CPU';export CPU"), because
+things were set up to always take the CPU value from an external environment variable.  Here's a <a
+href=./ivtools-0.7.5-CPUprob.patch.txt>fix</a> you can apply to
+ivtools-0.7.5.<p>
+
+<b>March 29th 1999</b>: it looks like the mechanism for asynchronous
+incremental download of rasters by URL, first
+published in ivtools-0.7.4,  has disabled the <a
+href=./slideshow.html>automated slideshow mechanism</a> .  To use this, either revert to an earlier
+versions of ivtools (0.7.2 or 0.7.3), or upgrade to a newer version
+whenever available.  Sorry for the inconvenience.<p>
+
+<b>March 25th, 1999</b>: if using an sh that is really sh (and not
+bash), change line 1635 of the configure script to read:  &nbsp; &nbsp; 
+<code>PWD=`pwd`;export PWD</code>
+
+
+<hr>
+back to &nbsp;
+<a href=./index.html>ivtools home</a> &nbsp;
+<a href=./download.html>ivtools download</a> &nbsp; 
+<a href=../pub/src/index.html>source download</a>
+
+
+  </body>
+</html>

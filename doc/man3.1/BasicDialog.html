@@ -1,0 +1,243 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       AcknowledgeDialog, BasicDialog, ConfirmDialog, GridDialog,
+       PrintDialog, UChooser - an  assortment  of  useful  dialog
+       boxes
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/dialogs.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       BasicDialog  is  the base class for subclasses that imple-
+       ment simple but common  dialog  boxes.   AcknowledgeDialog
+       simply  displays a one or two line message with a PushBut-
+       ton for dismissing the dialog.  ConfirmDialog displays one
+       or  two  lines  of descriptive text with three pushbuttons
+       marked ``Yes,'' ``No,'' and ``Cancel'', all of which  dis-
+       miss  the dialog. ConfirmDialog also provides an interface
+       for retrieving the button  pushed.   GridDialog  lets  the
+       user specify the resolution of a cartesian grid. PrintDia-
+       log is a FileChooser for specifying the name of a file  or
+       a  printer.   Finally,  UChooser extends the StringChooser
+       protocol to provide additional useful features,  including
+       support for alphabetizing its StringBrowser's contents and
+       for embellishing the dialog with descriptive text.
+
+
+</PRE>
+<H2>BASICDIALOG PUBLIC OPERATIONS</H2><PRE>
+       <B>void</B> <B>SetTitle(const</B> <B>char*)</B>
+       <B>void</B> <B>SetSubtitle(const</B> <B>char*)</B>
+              BasicDialogs  can  display  one  or  two  lines  of
+              descriptive  text.  These functions change the text
+              appearing in these lines.  The change appears imme-
+              diately if the dialog is visible.
+
+
+</PRE>
+<H2>BASICDIALOG PROTECTED OPERATIONS</H2><PRE>
+       <B>BasicDialog(</B>
+           <B>ButtonState*,</B> <B>const</B> <B>char*</B> <B>title</B> <B>=</B> <B>``'',</B>
+           <B>const</B> <B>char*</B> <B>subtitle</B> <B>=</B> <B>``'',</B> <B>Alignment</B> <B>=</B> <B>Center</B>
+       <B>)</B>
+
+       <B>BasicDialog(</B>
+           <B>const</B> <B>char*,</B> <B>ButtonState*,</B> <B>const</B> <B>char*</B> <B>title</B> <B>=</B> <B>``'',</B>
+           <B>const</B> <B>char*</B> <B>subtitle</B> <B>=</B> <B>``'',</B> <B>Alignment</B> <B>=</B> <B>Center</B>
+       <B>)</B>
+              Instantiate  a  BasicDialog,  supplying an optional
+              instance name, a button state, title  and  subtitle
+              strings,  and the dialog's alignment, which is used
+              by its Popup operation.  These operations will ini-
+              tialize two protected MarginFrame member variables,
+              <B>_</B><I>title</I> and <B>_</B><I>subtitle</I>, which will contain  either  a
+              Message  instance  with  the  specified string or a
+              piece of glue if the string is null.  These Margin-
+              Frames  will  be  composed vertically at the top of
+              the dialog, and no vertical space will be taken  up
+              by a null title or subtitle string.
+
+       <B>boolean</B> <B>IsAChild(Interactor*)</B>
+              These  functions  are useful for rejecting spurious
+              events while the  dialog  is  visible,  effectively
+              locking  out  the rest of the application.  If For-
+              ward's event argument has <I>x</I> and <I>y</I> coordinates  that
+              fall within the dialog's canvas, then Forward calls
+              Handle on the event's target.  Otherwise the Basic-
+              Dialog's  Handle  is called.  IsAChild returns true
+              if the given interactor is a child of the dialog.
+
+
+</PRE>
+<H2>ACKNOWLEDGEDIALOG PUBLIC OPERATIONS</H2><PRE>
+       <B>AcknowledgeDialog(const</B> <B>char*</B> <B>title,</B> <B>const</B> <B>char*</B> <B>subtitle)</B>
+              Construct  an  AcknowledgeDialog  instance with the
+              given title and subtitle.
+
+       <B>virtual</B> <B>void</B> <B>Acknowledge()</B>
+              Call this function when the application should wait
+              for the user to acknowledge the dialog.  It returns
+              when the user has pressed and released the dialog's
+              push  button.   This  function  does <I>not</I> pop up the
+              dialog.
+
+
+</PRE>
+<H2>CONFIRMDIALOG PUBLIC OPERATIONS</H2><PRE>
+       <B>ConfirmDialog(const</B> <B>char*</B> <B>title,</B> <B>const</B> <B>char*</B> <B>subtitle)</B>
+              Construct a ConfirmDialog instance with  the  given
+              title and subtitle.
+
+       <B>virtual</B> <B>char</B> <B>Confirm()</B>
+              Call this function when the application should wait
+              for the user to confirm  the  dialog.   It  returns
+              'y',  'n',  or '^G' ('\007'), depending whether the
+              ``Yes,'' ``No,''  or  ``Cancel''  push  button  was
+              pressed,  respectively.  This function does <I>not</I> pop
+              up the dialog.
+
+
+</PRE>
+<H2>GRIDDIALOG PUBLIC OPERATIONS</H2><PRE>
+       <B>GridDialog()</B>
+              Construct a GridDialog  instance.   The  GridDialog
+              contains  a MatchEditor instance for specifying the
+              size of the grid's graduations in the <I>x</I> and <I>y</I> axes.
+              The  user  can  specify  these  values  in  pixels,
+              points, centimeters, or inches by clicking  on  the
+              appropriate radio button.
+
+       <B>virtual</B> <B>void</B> <B>GetValues(float&amp;</B> <B>xincr,</B> <B>float&amp;</B> <B>yincr)</B>
+              Return  the  user-specified  values for the size of
+              the grid's graduations, in pixel units.
+
+       <B>void</B> <B>SelectMessage()</B>
+              Highlight the values in the dialog's MatchEditor.
+
+
+</PRE>
+<H2>PRINTDIALOG PUBLIC OPERATIONS</H2><PRE>
+              Construct a PrintDialog instance, optionally speci-
+              fying  whether  the  dialog  should  prompt  for  a
+              printer name or a file name.
+
+       <B>void</B> <B>ToPrinter(boolean)</B>
+       <B>boolean</B> <B>ToPrinter()</B>
+              Specify and Return whether or not the string speci-
+              fied in the PrintDialog refers to a printer name.
+
+
+</PRE>
+<H2>UCHOOSER PUBLIC OPERATIONS</H2><PRE>
+       <B>UChooser(</B>
+           <B>const</B> <B>char*</B> <B>title,</B> <B>const</B> <B>char*</B> <B>subtitle,</B>
+           <B>const</B> <B>char*</B> <B>acceptLabel,</B> <B>const</B> <B>char*</B> <B>sample</B>
+       <B>)</B>
+              Construct  a UChooser instance.  The <I>title</I> and <I>sub-</I>
+              <I>title</I> parameters specify the  descriptive  text  at
+              the  top  of the dialog box.  This constructor ini-
+              tializes two protected MarginFrame member variables
+              <B>_</B><I>title</I> and <B>_</B><I>subtitle</I> that are analogous to the cor-
+              responding BasicDialog members described above.
+
+       <B>void</B> <B>Clear()</B>
+              Removes all  strings  from  the  UChooser's  string
+              browser.
+
+       <B>void</B> <B>Include(const</B> <B>char*)</B>
+       <B>void</B> <B>Exclude(const</B> <B>char*)</B>
+              Include inserts a string into the string browser at
+              a position defined by the UChooser's Position func-
+              tion,  described  below.  Exclude removes the given
+              string from the  string  browser.   If  the  string
+              browser  contains more than one copy of the string,
+              then Exclude removes  the  one  with  the  smallest
+              index.
+
+       <B>void</B> <B>SetTitle(const</B> <B>char*)</B>
+       <B>void</B> <B>SetSubtitle(const</B> <B>char*)</B>
+              These   functions  change  the  text  appearing  in
+              UChooser's title or subtitle.  The  change  appears
+              immediately if the dialog is visible.
+
+
+</PRE>
+<H2>UCHOOSER PROTECTED OPERATIONS</H2><PRE>
+       <B>UChooser(ButtonState*,</B> <B>int</B> <B>rows,</B> <B>int</B> <B>cols,</B> <B>Alignment)</B>
+              Direct  the  UChooser  to  initialize itself with a
+              string browser of the given size <I>without</I> initializ-
+              ing   the  MarginFrame  members.   Subclasses  that
+              require a different look-and-feel can use this con-
+              structor to avoid creating MarginFrames or Messages
+              they  don't  need.    The   Init,   Interior,   and
+              AddScroller  functions (described below) factor out
+              different parts  of  the  default  look  and  feel,
+              allowing subclasses to use parts of it.
+              Explicitly  initialize  the  MarginFrame members to
+              display the given title and/or subtitle strings.
+
+       <B>Interactor*</B> <B>Interior(const</B> <B>char*</B> <B>acceptLabel)</B>
+              Return an interactor that composes  the  UChooser's
+              default look and feel.
+
+       <B>Interactor*</B> <B>AddScroller(Interactor*)</B>
+              Return  a composition containing the given interac-
+              tor with a vertical scroll bar and adjusters  along
+              its  right  side,  initializing  them to scroll the
+              interactor.  The Interior function uses this opera-
+              tion  to  provide  the  string browser's  scrolling
+              interface.
+
+       <B>virtual</B> <B>int</B> <B>Position(const</B> <B>char*)</B>
+              Return an appropriate string browser index for  the
+              given  string.   By  default, this function returns
+              the index that will place the string in  alphabeti-
+              cal order among those in the string browser.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Button(3I)</B>,    <B>Dialog(3I)</B>,   <B>Event(3I)</B>,   <B>FileChooser(3I)</B>,
+       <B>Frame(3I)</B>,    <B>MatchEditor(3I)</B>,    <B>Message(3I)</B>,     String-
+       <B>Browser(3I)</B>, <B>StringChooser(3I)</B>, <B>StringEditor(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

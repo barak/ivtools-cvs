@@ -1,0 +1,123 @@
+
+<html><head><TITLE>Description of FrameCatalog</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>FrameCatalog</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayCatalog.html" >OverlayCatalog</A> </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+catalog for retrieving flipbook documents<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayCatalog.html" >OverlayCatalog</A>
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#FrameCatalog><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+FrameUnidraw/framecatalog.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="FrameCatalog(constchar*&#38;&#38;COMMCreator*)">
+    <B>FrameCatalog</B> (const char*, <A HREF="Creator.html" >Creator</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="ReadComp(constchar*&#38;&#38;COMMistream&#38;&#38;&#38;COMMOverlayComp*=nil)">
+    <B>ReadComp</B> (const char*, istream&#38;, <A HREF="OverlayComp.html" >OverlayComp</A>* =nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        specialized method to ensure a <A HREF="FrameOverlaysComp.html" >FrameOverlaysComp</A> gets constructed
+ whenever a composite-graphic is de-serialized (as opposed to
+ just a plain <A HREF="OverlaysComp.html" >OverlaysComp</A>).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Retrieve(constchar*path&#38;&#38;COMMComponent*&#38;)">
+    <B>Retrieve</B> (const char* path, <A HREF="Component.html" >Component</A>*&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct a <A HREF="FrameIdrawComp.html" >FrameIdrawComp</A> from 'path'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

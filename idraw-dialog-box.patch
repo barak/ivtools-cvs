@@ -1,0 +1,142 @@
+This patch fixes a bug in the idraw of InterViews 3.1 (and InterViews
+3.2a).  When a non-existent pathname is entered into the Open or
+Import dialog box, the TransientWindow is first unmapped and deleted,
+then the glyph tree of the dialog box is reconstructed with an extra
+error message label.  The problem occurs when the rebuilding of the
+dialog box triggers an undraw of the previous glyphs, which is ok
+until it gets down to the string (field) editor, which, because it is
+an Interactor, tries to check the bound status of the TransientWindow,
+which no longer exists.  This bug might only evidence itself on
+systems that use a version of malloc that aggressively recycles freed
+memory, which seems to be the behavior of the latest GNU version of
+malloc.
+
+The work-around of this patch is to clear the body of the FileChooser
+(the object used by the Open and Import dialog boxes) before
+rebuilding its glyph tree.  The pointer to the string editor
+(FieldEditor) had to be cleared as well.  This required diffs to
+InterViews/fchooser.c, InterViews/monoglyph.c (because _body was
+private), Unidraw/catcmds.c (for the Open command), and
+Unidraw/import.c (for the Import command).
+
+The rebuilding of the dialog box from scratch when adding only an
+error message label is not ideal.  In fact, each dialog box gets
+constructed from scratch 3 times over before its get used, once as
+expected, and two more times as side-effects of establishing the
+button actions.  Not a big problem, but it made it compelling to come
+up with (quite a while ago) an evolved version of FileChooser, called
+OpenFileChooser (part of the IVGlyph library in the ivtools
+distribution - http://www.vectaport.com/ivtools/), which builds the
+glyph tree of these dialog boxes only once.  This new object was used
+for all the dialog boxes in the rest of the ivtools drawing editors
+(http://www.vectaport.com/ivtools/editors.html).
+
+Scott Johnston
+Vectaport Inc.
+August 1998
+
+Index: src_interviews/fchooser.c
+diff -c src_interviews/fchooser.c:1.1 src_interviews/fchooser.c:1.2
+*** src_interviews/fchooser.c:1.1	Wed Jan 28 09:47:50 1998
+--- src/lib/InterViews/fchooser.c	Wed Aug  5 11:14:46 1998
+***************
+*** 121,126 ****
+--- 121,132 ----
+      }
+  }
+  
++ void FileChooser::bodyclear() {
++     MonoGlyph::bodyclear();
++     FileChooserImpl& fc = *impl_;
++     fc.editor_ = nil;
++ }
++ 
+  /** class FileChooserImpl **/
+  
+  void FileChooserImpl::init(
+Index: src_interviews/monoglyph.c
+diff -c src_interviews/monoglyph.c:1.1 src_interviews/monoglyph.c:1.2
+*** src_interviews/monoglyph.c:1.1	Wed Jan 28 09:47:51 1998
+--- src/lib/InterViews/monoglyph.c	Wed Aug  5 11:14:46 1998
+***************
+*** 44,49 ****
+--- 44,54 ----
+  
+  Glyph* MonoGlyph::body() const { return body_; }
+  
++ void MonoGlyph::bodyclear() {
++     Resource::unref(body_);
++     body_ = nil;
++ }
++ 
+  void MonoGlyph::request(Requisition& requisition) const {
+      if (body_ != nil) {
+          body_->request(requisition);
+Index: Unidraw/catcmds.c
+diff -c Unidraw/catcmds.c:1.1 Unidraw/catcmds.c:1.2
+*** Unidraw/catcmds.c:1.1	Wed Jan 28 09:48:32 1998
+--- src/lib/Unidraw/catcmds.c	Wed Aug  5 11:15:12 1998
+***************
+*** 314,324 ****
+--- 314,326 ----
+              }
+  	    break;
+          } else {
++ 	    chooser_->bodyclear();
+  	    style->attribute("caption", "Open failed!");
+  	    reset_caption = true;
+          }
+      }
+      if (reset_caption) {
++       chooser_->bodyclear();
+  	style->attribute("caption", "");
+      }
+  }
+Index: Unidraw/import.c
+diff -c Unidraw/import.c:1.1 Unidraw/import.c:1.2
+*** Unidraw/import.c:1.1	Wed Jan 28 09:48:35 1998
+--- src/lib/Unidraw/import.c	Wed Aug  5 11:15:12 1998
+***************
+*** 251,261 ****
+--- 251,263 ----
+  	    if (comp != nil) {
+  		break;
+  	    }
++ 	    chooser_->bodyclear();
+  	    style->attribute("caption", "Import failed!");
+  	    reset_caption = true;
+  	}
+      }
+      if (reset_caption) {
++         chooser_->bodyclear();
+  	style->attribute("caption", "");
+      }
+      return comp;
+Index: include_look/fchooser.h
+diff -c include_look/fchooser.h:1.1 include_look/fchooser.h:1.2
+*** include_look/fchooser.h:1.1	Wed Jan 28 09:51:02 1998
+--- src/include/IV-look/fchooser.h	Wed Aug  5 11:15:30 1998
+***************
+*** 93,98 ****
+--- 93,99 ----
+      virtual const String* selected() const;
+      virtual void reread();
+      virtual void dismiss(boolean);
++     void bodyclear();
+  private:
+      FileChooserImpl* impl_;
+  };
+Index: include_interviews/monoglyph.h
+diff -c include_interviews/monoglyph.h:1.1 include_interviews/monoglyph.h:1.2
+*** include_interviews/monoglyph.h:1.1	Wed Jan 28 09:51:10 1998
+--- src/include/InterViews/monoglyph.h	Wed Aug  5 11:15:34 1998
+***************
+*** 39,44 ****
+--- 39,45 ----
+  
+      virtual void body(Glyph*);
+      virtual Glyph* body() const;
++     void bodyclear();
+  
+      virtual void request(Requisition&) const;
+      virtual void allocate(Canvas*, const Allocation&, Extension&);

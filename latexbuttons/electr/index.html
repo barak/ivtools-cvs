@@ -1,0 +1,62 @@
+
+<title>Electronics with IVtools: Building complex electrical circuits with a basic widget set and comdraw</title>
+
+<h1>
+ivtools Circ-widgets
+</h1>
+<b>ivtools Circ-widgets</b> is a set of electrical building blocks such as resistors, inductors,
+capacitors, and/or, nan/nor gates, etc for building both analog and digital electrical
+circuits.
+<h1>
+<img align=middle src="./circuit-fig1.jpeg" >
+</h1>
+<p>
+The symbols can be lined up with dashed lines as in the chemical example (see Chem-widgets).
+To draw in the wire, simply use 2 dashed colored lines, and follow as closely with a multi-
+segment line.
+<h1>
+<img align=middle src="./circuit-fig2.jpeg" >
+</h1>
+<b>LaTeX:</b> To include the graphic in a LaTeX document, simply export it as encapsulated 
+PostScript (EPS) by choosing File::Export Graphic. Click on "EPS", then click on "Export".
+Then insert the following before the \begin{document} line in your
+LaTeX document:<p>
+<code>
+\input psfig.sty<br>
+</code>
+<p>
+
+To display the graphic, insert the following in the body of your LaTeX code:<p>
+
+<code>
+\begin{figure}[htbp] <br>
+     \psfig{file=file.ps,width=6in,height=3in} % see Kenneth Shultis, pp. 100-103<br>
+ \end{figure}
+</code>
+<p>
+Where file.ps is the name of your graphic; there cannot be any extraneous spaces inside
+the braces on the \psfig line. See Ken Shultis' book "LaTeX NOTES: Practical Tips for Preparing Technical Documents", ISBN: 0-13-120973-6
+<p>
+The <b>IVtools custom toolbar</b> allows one to load custom toolbar configurations for different
+typesetting projects. Instead of loading all of the possible electrical widgets, and believe me
+there are alot, only load the ones required for the project at hand, or the ones you find most useful.
+One could even have 2 toolbars: one analog and one digital.
+To build a custom toolbar, write a toolbar script similar to this:
+<p>
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Electrical-toolbar/widgets/meter.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Electrical-toolbar/widgets/resistor.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Electrical-toolbar/widgets/inductor.idraw" :popen)
+addtool("/usr/guest/todd/graphics/IVTOOLS/ToolBars/Electrical-toolbar/widgets/switch.idraw" :popen)
+<p>
+
+<b> NOTE:</b> To be as flexible as possible I deliberately left the letter out of the meter widget.
+To get an ammeter, click on the meter icon, do Structure::Ungroup, and then modify it by adding
+an "A", and then do Structure::Group to regroup the new widget. You can now stick the ammeter in the
+diagram where desired. The same procedure is used to create a galvanometer and voltmeter :-) .
+<p>
+Below is a screendump of IVtools with electrical widgets loaded.
+<h1>
+<img align=middle src="./comdraw2.jpeg" >
+</h1>
+<p>
+<a href = ../index.html>up to LaTeX toolbutton page</a>

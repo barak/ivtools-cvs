@@ -1,0 +1,800 @@
+<html>
+<head>
+<title>ivtools faq</title>
+</head>
+<body bgcolor="ffffff" text=black link=blue alink=red vlink=purple>
+<h1>
+<a href=./index.html>ivtools</a> FAQ
+</h1>
+
+<menu>
+<li><a href=#Binary>binary tar file questions</a></li>
+<li><a href=#DrawingEditor>drawing editor questions</a></li>
+<li><a href=#SourceBuild>source building questions</a></li>
+<li><a href=#ProgramDebug>programming and debugging questions</a></li>
+<li><a href=#Miscellaneous>miscellaneous questions</a></li>
+</menu>
+
+<hr>
+<p>	
+<a name=Binary></a>
+<h2>binary tar file questions</h2>
+
+<menu>
+<li><a href=#runexecutables>How do I run the executables?  I get an unresolved library reference when I try.</a></li>
+<li><a href=#lddresolves>ldd resolves all shared libraries, yet idraw either a) segfaults without warning, or b) can't save/restore a simple drawing</a></li>
+</menu>
+
+
+<p><a name=runexecutables><b>How do I run the executables?  I get an unresolved library reference when I try.</b><p>
+
+Add the appropriate ivtools-0.7/lib sub-directory to your
+LD_LIBRARY_PATH (or LD_ELF_LIBRARY_PATH) environment variable
+(i.e. ivtools-0.7/lib/LINUX) to let the shared library runtime system
+know where they are.  Test with <code>ldd -r</code>. 
+Make sure that you are using only the shared libraries from the binary
+distribution tar file.  If this is inconvenient, consider building from source.
+
+<p><a name=lddresolves><b>ldd resolves all shared libraries, yet idraw either a) segfaults without warning, or b) can't save/restore a simple drawing</b><p>
+
+You may also want to check if the shared libraries listed by ldd are
+actually there, not just bad symbolic links: relative pathnames that
+point to nowhere or absolute pathnames that don't work on your system.
+
+<p>
+Check if the version of libstdc++ displayed by ldd is
+libstdc++.so.27.1.4.  This would be evidence that libraries other than
+those distributed in the tar file are getting used, which can be
+troublesome. <p>
+You also probably want to ensure that the shared
+libraries in the binary tar file do not get used by your other
+executables, unless you happen to be running RedHat 4.1.<p>
+
+Any feedback on how the binary tar files
+worked for you would be appreciated.  You can send e-mail to 
+<a href=mailto:ivtools-info@vectaport.com>ivtools-info@vectaport.com</a>.  Include any information we might find useful, i.e. Linux distribution, kernel version, shared library versions, etc..  
+
+<p>
+<hr>
+<p>	
+<a name=DrawingEditor></a>
+<h2>drawing editor questions</h2>
+
+<menu>
+<li><a href=#importpostscript>When I try importing (or opening) a postscript or an eps file in idraw it segfaults without warning.</a></li>
+<li><a href=#exportgraphics>I tried exporting (or printing) graphics to a filter (by selecting the "export to filter" checkbox on the dialog box), but when I type in something like "xv -" it doesn't work.</a></li>
+<li><a href=#otherdrawingeditors>What other drawing editors are available like idraw and ivtools drawtool?</a></li>
+<li><a href=#idrawfixes>What bugs have been fixed in idraw?</a></li>
+<li><a href=#idrawversions>Others see "<code>warning: drawing version 0 newer than idraw version 0</code>" when they load my drawing into their copy of idraw.</a></li>
+<li><a href=#segvidrawversions>Others see "<code>warning: drawing version 0 newer than idraw version 0</code>" followed by a segfault when they load my drawing into their copy of idraw</a></li>
+</menu>
+
+<p><a name=importpostscript><b>When I try importing (or opening) a postscript or an eps file in idraw it
+segfaults without warning.</b><p>
+
+idraw can't handle general PostScript or EPS files, only those
+specially formatted in the way that idraw writes out its own drawings.  And since we strive to
+preserve idraw pretty much as it is (was), these segfaults have not been fixed (yet).<p>
+
+However, you can convert arbitrary PostScript to idraw's editable
+format with <a href=./pstoedit.html>pstoedit</a>. See <a
+href=http://www.ivtools.org.com/ivtools/idrawthings.html>http://www.ivtools.org/ivtools/idrawthings.html</a>
+for other things you can do with idraw and the idraw PostScript
+format.<p>
+
+<i>Since ivtools-0.6.12, ivtools <a href=./drawtool.html>drawtool</a> 
+(and the rest of the ivtools <a href=./editors.html>drawing editors</a>)
+automatically detect an attempt to open or import arbitrary PostScript, and
+invoke <a href=./pstoedit.html>pstoedit</a> (if it can be found) to filter the input.</i>
+
+<p><a name=exportgraphics><b>I tried exporting (or printing) graphics to a filter (by selecting the "to command" checkbox on the dialog box), but when I type in something like "xv -" it doesn't work.</b><p>
+
+The way the export mechanism works is the exported or printed graphics are
+written to a temporary file, and the pathname of that temporary file
+is appended to the command line entered into the field editor at the
+top of the dialog box.  So in this example, "xv" would work, but not
+"xv -".<p>
+
+Since ivtools-0.7.1, to be more explicit about this mechanism, the
+dialog boxes search for an embedded "%s" in the command line, and
+replace it with the temporary file name.  If an actual stdin-accepting
+filter is what you want to use, a "<%s" would be required at the end
+of the command line.  If no "%s" is found in the command line the
+temporary filename is appended to the end of the line like before.
+
+
+<p><a name=otherdrawingeditors><a name=OtherDrawingEditors><b>What other drawing editors are available like <a
+href=./idraw.html>idraw</a> and ivtools <a href=./drawtool.html>drawtool</a>?</b>
+<menu>
+<li><a href=http://www.lysator.liu.se/~alla/dia/dia.html>Dia</a></li>
+<li><a href=http://gaztelan.bi.ehu.es/~inigo/gcad/>gCAD</a></li>
+<li><a href=http://www.levien.com/svg/>Gill</a>, Gnome illustration app</li>
+<li><a href=http://k332.feld.cvut.cz/~lemming/projects/gtkfig.html>GTKFIG</a>, figure editor built on <a href=http://www.gtk.org>gtk+</a></li>
+<li><a href=http://www.maru.cs.ritsumei.ac.jp/~sanchan/gyve/>GYVE (GNU Yellow Vector Editor)</a>, GNU project drawing editor</li>
+<li><a href=http://www.ntlug.org/~ccox/impress/index.html>ImPress</a>, a drawing editor implemented in Tcl/Tk</li>
+<li><a href=http://www.cs.ust.hk/~otfried/Ipe/>Ipe</a>, a drawing editor extendable via plugins</li>
+<li><a href=http://wwwiti.cs.uni-magdeburg.de/~sattler/killustrator.html>Killustrator</a>, a drawing editor built on <a href=http://www.kde.org>KDE</a> </li>
+<li><a href=ftp://zenon.inria.fr/pub/tk/>picasso</a></li>
+<li><a href=http://www.online.de/home/sketch/>Sketch</a>, a drawing editor written in Python</li>
+<li><a href=http://www.ariman.ee/linux/sodipodi/>Sodipodi</a>, another GNOME vector graphic  drawing editor</li>
+<li><a href=http://bourbon.cs.umd.edu:8001/tgif/>Tgif</a>, the other web-enabled drawing editor with hyper-structured-graphics</li>
+<li><a href=http://www-epb.lbl.gov/xfig/>Xfig</a>, feature-full CAD-like drawing editor</li>
+</menu>
+<p>
+<b>See Also:</b> <a href=http://vectorgraphics.sourceforge.net/editors.php>Vector Graphic Foundry Editor Page</a>
+
+<p>
+
+<p><a name=idrawfixes><b>What bugs have been fixed in idraw?</b><p>
+
+<li><i>with ivtools-0.7.9</i> now backing out past the first vertex (left-click) will terminate the polygon drawing in all the <a href=./editors.html>ivtools drawing editors</a>.
+
+<li>a long-standing problem in graphics staying on the grid when drawn
+with gravity on.  The integer nature of the mouse coordinates were not
+fully taken into consideration when constructing graphics after
+arbitrary panning and zooming of the viewer.
+
+<li>a recently revealed problem in the maintenance of arrowhead
+graphics, that hadn't been a problem until recent compilers cleared up
+the semantics of an overloaded assignment operator.
+
+<li>a bug in the management of the filechooser dialog box glyphs (the
+ones used for Open/Save/SaveAs), that caused a segfault with some
+compiler setups.
+
+<li>a bug in the handling of un-openable files that caused a segfault
+with some compiler setups.
+
+<li>a bug in generating the idraw format version warning message (see below).
+
+<p><a name=idrawversions><b>Others see "<code>warning: drawing version 0 newer than idraw version 0</code>" when they load my drawing into their copy of idraw.</b><p>
+
+The idraw version format number was incremented from 10 to 11 with
+ivtools-0.6.7.  The intent of this new version number was to add
+support for more of the features of PostScript (and X11) that can be
+generated by utilities like <a href=./plotutils.html>plotutils</a>:
+floating-point line width, cap-styles, join-styles.<p>
+
+From ivtools-0.6.7 to ivtools-0.7.2 the only change in the
+idraw format was the addition of some calls to <code>closepath</code>
+in the PostScript, to ensure ellipses and circles are closed.  This
+change was embedded in the PostScript prologue of the idraw document,
+and the result can still be read by older versions of idraw.<p>
+
+But the change in version number is detected by older versions of
+idraw, and a warning is printed out.  Problem is, there has always
+been a bug in the warning message output (floats were treated as
+ints), so you see the not-so-helpful message of "<code>warning:
+drawing version 0 newer than idraw version 0</code>".  This problem
+has been fixed since ivtools-0.6.7.  This <a
+href=./idrawversionwarningpatch.txt>patch</a> could be applied to any
+other distribution of InterViews to alleviate the problem in those
+copies of idraw.<p>
+
+
+<p><a name=segvidrawversions><b>Others see "<code>warning: drawing version 0 newer than idraw version 0</code>" then a segfault when they load my drawing into their copy of idraw.</b><p>
+
+First off, read the previous FAQ entry to understand why the warning message isn't more helpful.<p>
+
+Secondly, the document you gave them has more than just a different
+version number.  It probably makes use of some sort of
+backward-incompatible extension to the format.  From its inception the
+idraw format versioning system was designed to be forward- if not
+backward-compatible.  Which means you can always read older documents
+with newer versions of idraw, but the opposite is not guaranteed
+(hence the warning message).  Sometimes it works, sometimes it
+doesn't.<p>
+
+The idraw format version 11 introduced by ivtools-0.6.7 is the first
+new version number since the InterViews 3.1 tar file was published in
+1993.  But up until ivtools-0.7.3 nothing of a backward-incompatible
+nature had been done with the new format number.  And with
+ivtools-0.7.3 most all uses of the format are still 100% backward
+compatible.  <p>
+
+But now there is a chance that you might generate, using a yet-to-be
+released copy of <a href=./plotutils.html>plotutils</a> or some other
+approach, a version 11 idraw PostScript document with non-integer
+floating point line widths.  This is handled smoothly by the idraw of
+ivtools-0.7.3 (and will be handled smoothly by the rest of the drawing
+editors of ivtools come 0.7.4), but presenting a version 11 idraw
+format with non-integer line widths to any version of idraw prior to
+ivtools-0.6.7 will cause the above warning message to be printed,
+possibly followed by a segfault.  Presenting a version 11 idraw format
+with non-integer line widths to any version of idraw from
+ivtools-0.6.7 to ivtools-0.7.2 will not generate a warning message or
+cause a segfault, but neither will the document be read in.<p>
+
+To clear up all this confusion, the forthcoming version of ivtools
+(0.7.4) will increment the idraw format version number once again,
+from 11 to 12, and it will be recommended that non-integer line widths
+not be used in conjunction with format version 11 (although there is
+some support for it).  In that way users of an idraw from
+ivtools-0.6.7 (i.e. users of Debian 2.1) will be warned of a version
+incompatibility if there is one, given a hint why their document did
+not open in idraw.
+
+
+
+<p>
+<hr>
+<p>	
+<a name=SourceBuild></a>
+<h2>source building questions</h2>
+
+<menu>
+<li><a href=#gcc296>I can't build ivtools with gcc-2.96.  What gives?</a></li>
+<li><a href=#cpumissing>I run "make World" or "make Makefiles", and see an error message like this...</a></li>
+<li><a href=#cpuforsolaris>How should I set the CPU environment variable for Solaris?</a></li>
+<li><a href=#notlinuxbsd>I just can't get ivtools built on anything but Linux or FreeBSD.  What do I do?</a></li>
+<li><a href=#configurescript>When are you going to have a configure script?</a></li>
+<li><a href=#restoremakefile>Do I need to restore the top-level Makefile from the tar file after a faulty start at configuring things?</a></li>
+<li><a href=#gcc-O>I'm getting compiler errors with gcc-2.7.* when I use -O.</a></li>
+<li><a href=#iostream-missing>I get an "iostream.h: No such file or directory" when compiling ivtools.</a></li>
+<li><a href=#nodynamiclibs>I set "HasDynamicSharedLibraries" to NO (in config/gcc.def), and it didn't seem to work.</a></li>
+<li><a href=#looking-in-proj>The makefiles are looking for source code under /proj/ivtools-0.7, but that is not where I put the source tree on my system.</a></li>
+<li><a href=#solaris-rpath>What if I want to configure with --enable-use-rpath, but my copy of gcc is setup to use the Solaris linker, which expects -R instead of -rpath?</a></li>
+<li><a href=#make-not-gnu>The GNU version of make doesn't understand a -w argument.  What do we do?</a></li>
+<li><a href=#make-no-shell>Our version of make doesn't understand the $(shell pwd) construct.  What do we do?</a></li>
+<li><a href=#gcc281-prob>With gcc-2.8.* I get internal compiler errors with optimization enabled (-O) on InterViews/alloctbl.c, IV-X11/xfont.c, and IV-X11/xwindow.c.</a></li>
+<li><a href=#imakecppprob>"make World XCONFIGDIR=..." doesn't work because cpp can't find a file included from site.def.$CPU.</a></li>
+<li><a href=#gcc280-prob>I get everything built with gcc-2.8.0, but drawtool segfaults (at line 244 of strchooser.c).</a></li>
+<li><a href=#libstdc++2811needed>I just installed gcc-2.8.1, and when I rebuild ivtools I see this: <br><code>/usr/include/g++/streambuf.h:392: warning: invalid type `void *' for default argument to `ios *'</code>
+</a></li>
+<li><a href=#optimizeneeded>I just installed gcc-2.8.1, and when I rebuild ivtools I see this: <br><code>/tmp/cca09221.s: Assembler messages:<br>
+/tmp/cca09221.s:193: Error: invalid character (0x8) before first operand
+</code>
+</a></li>
+<li><a href=#installnonrelativeprob>I supplied a --prefix argument to configure, but "make install" does not use this prefix consistently?</a></li>
+<li><a href=#installUnidrawprob>"make install" does not install the Unidraw include files.</a></li>
+
+</menu>
+
+<p><a name=gcc296><b>I can't build ivtools with gcc-2.96.  What gives?</p></b><p>
+
+gcc-2.96 is a variant of gcc put out by RedHat/Cygnus which was never
+approved by the gcc steering committee.  ivtools should compile much
+easier with any earlier version (gcc-2.95.3 or less), and any later
+version (gcc-3.0 or greater).  If you are committed to using gcc-2.96, here is a patch submitted by Murray Jensen that attempts to do this on Solaris:
+
+<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=400986&group_id=275&atid=300275">http://sourceforge.net/tracker/index.php?func=detail&aid=400986&group_id=275&atid=300275</a>
+
+<p><a name=cpumissing><b>I run "make World" or "make Makefiles", and see an error message like this</p></b><p>
+
+<code>	
+        Making Makefiles for  in <br>
+	/proj/ivtools-0.7/src/IV-common/ <br>
+	/bin/sh: test: argument expected <br>
+</code> 
+<p>
+Looks like you need set the value of CPU in config/config.mk.  The configure
+script should have written the value of "make CPU" in that file,
+i.e. "CPU = LINUX".  Run "make CPU" again by hand to see what it
+should be.  "grep ArchitectureName config/arch.defs" to get a complete
+list of supported operating systems.
+
+<p><a name=cpuforsolaris><b>How should CPU be set in config.mk for Solaris?</b><p>
+
+The CPU make variable should be set to SUN4 in config/config.mk by the configure script.  
+
+<p><a name=notlinuxbsd><b>I just can't get ivtools built on anything but Linux or FreeBSD.  What do I do?</b><p>
+
+Unique challenges are present for building ivtools on any commercial
+version of Unix, problems that just don't exist with open-source free
+software Unix'es.  But don't despair, read through the following list
+of pointers and try again.  It's only the build process that's
+frustrating.  Once you get it built you'll find most of the code is
+very old and very stable on a wide variety of platforms.<p>
+
+<i> Even before reading this list, see if you have CPU defined in
+config/config.mk.  If you have no config/config.mk, do a ./configure.  If it is undefined in config/config.mk, test what the value should be with "make CPU".</i>
+<p>
+
+<li> First, after any problem with the build process, be aware that
+you might have to restore the state of the source tree in one of three ways: <br>
+<dl> 1) restore the top-level Makefile from either Makefile.bak or the tar file</dl>
+<dl> 2) do a "make clean" to remove the effects of previous compiles</dl>
+<dl> 3) completely erase and restore the source tree from the tar file, to be absolutely sure of starting from a known state.</dl>
+</li>
+<p>
+<li> Second, be aware that the "make World" might need both XCONFIGDIR and PWD arguments.  This is often the case
+for users of Solaris or DEC Alpha, where the default shells do not support a PWD environment variable.  See other workarounds for the PWD problem
+<a href=./faq.html#make-no-shell>here</a>.
+</li>
+<p>
+<li> Third, be aware that the "make World" is relying on configuration
+files that are outside of the scope of ivtools, that are part of the
+commercial X distribution delivered on your system (i.e "sun.cf").
+This can cause problems, especially with Solaris, when you are using /usr/ccs/bin/make instead of GNU make (read more <a href=./faq.html#make-not-gnu>here</a>).
+You also might want to peruse these recently updated instructions specific to <a href=../vectaport/solaris-2.6-build.txt>
+building Vectaport software on Solaris-2.6</a>
+</li>
+<p>
+<li> Fourth, be aware the imake works best (in this context) with the gcc version of cpp (the C preprocessor), and has problems with
+the default cpp available on commercial Unix'es.  Read how to work around this <a href=./faq.html#imakecppprob>here</a>.
+</li>
+<p>
+<li> Finally, if you are going to be doing a lot of source based development with C++ and gcc,
+you might want to consider partitioning your hard disk and installing some variant of an open-source Unix
+available for your processor.  The more-inclusive approach of the open-source Unix'es avoids a lot of problems
+and headaches, because there is no single company filtering what goes into the environment, and things that have built once somewhere tend to keep compiling on a free Unix.
+</li>
+<p><a name=configurescript><b>When are you going to have a configure script?</b><p>
+
+Since release 0.6.10 there is a configure script for ivtools tested on
+at least Linux, Solaris, and OSF-Alpha.  Since there is no
+extensive use yet made of any machine specific information, this
+configure script should work for other OS'es with the creation of an
+appropriately named, empty config/$os-gcc.mk file (a whole set of
+these are incorporated since 0.6.11).  Supported flags include:<p>
+
+<menu>
+<li> --with-clippoly=<i>path</i></li>
+<li> --with-clippoly-libs=<i>path</i></li>
+<li> --with-ace=<i>path</i></li>
+<li> --with-ace-libs=<i>path</i></li>
+<li> --with-iue=<i>path</i></li>
+<li> --with-iue-libs=<i>path</i></li>
+<li> --x-includes=<i>dir</i></li>
+<li> --x-libraries=<i>dir</i></li>
+<li> --enable-install-relative[=ARG]</li>
+<li> --enable-use-rpath[=ARG]</li>
+</menu>
+
+The configure script might also use the PWD environment variable to
+fix the base directory of the ivtools source tree for use in the
+ivmkmf script.  You may have to set this manually prior to running
+the configure script if your shell does not support it.  For more details see the <a href=./ivtools-0.7-INSTALL.txt>INSTALL</a> directions.<p>
+
+<p><a name=restoremakefile><b>Do I need to restore the top-level Makefile from the tar file after a faulty start at configuring things?</b><p>
+
+Yes.
+
+<p><a name=gcc-O><b>I'm getting compiler errors with gcc-2.7.* when I use -O.</b><p>
+
+There were unresolved problems with gcc optimization for Linux Elf and
+ivtools with gcc-2.7.2.
+
+<p><a name=iostream-missing><b>I get an "iostream.h: No such file or directory" when compiling ivtools</b><p>
+
+Make sure you have a copy of libstdc++ installed, like described in the
+ivtools <a href=./ivtools-0.6-INSTALL.txt>INSTALL</a>.  This is a
+separate package from gcc.  See if it exists on your system by looking
+for a directory like<code>/usr/include/g++</code>,
+<code>/usr/lib/g++-include</code> or
+<code>/usr/local/lib/g++-include</code>.
+
+<p><a name=nodynamiclibs><b>I set "HasDynamicSharedLibraries" to NO (in config/gcc.def), and
+it didn't seem to work</b><p>
+
+Try adding APP_CCLDFLAGS = -static to each main.c's Imakefile that
+your are trying to static link.  But if you are static linking more
+than a few you might want to stay with shared libraries because of the
+savings in disk, memory, and runtime.
+
+<p><a name=looking-in-proj><b>The makefiles are looking for source code under /proj/ivtools-0.7,
+but that is not where I put the source tree on my system.</b><p>
+
+IvToolsSrcRoot (in config/local.def) needs to be set to $(TOP) instead of
+/proj/ivtools-0.7 (or the absolute pathname where you installed the
+source tree).
+
+<p><a name=solaris-rpath><b>What if I want to configure with --enable-use-rpath, but my copy of gcc is setup to use the Solaris linker, which expects -R instead of -rpath?</b><p>
+
+Before running configure, manually edit config/local.def and  config/params.def to change all uses of -rpath to -R.
+
+<p><a name=make-not-gnu><b>The GNU version of make doesn't understand a -w argument.  What do we do?</b><p>
+
+It would seem that the Solaris configuration files for X Windows
+(openwindows) assumes the Solaris version of make, hence the incompatible -w.  You can get by using the Solaris version of make, 
+but need to be aware of the <a href=./faq.html#make-no-shell>following FAQ entry</a>.
+
+<i>Pointed out by M. Rasit Eskicioglu of the University of Alberta.</i>
+
+<p><a name=make-no-shell><b>Our version of make doesn't understand the $(shell pwd) construct.  What do we do?</b><p>
+
+ In the top level Makefile you can define a symbol, PWDX, for the pwd command and change all
+occurrences of (shell pwd) to (PWDX:sh). Do this BEFORE running make
+World (or make Makefile).  You need only to change the top-level Makefile. <i>Submitted by Dan DeJohn of Digicomp.</i>
+
+<p><a name=gcc281-prob><b>With gcc-2.8.* I get internal compiler errors with optimization enabled (-O) on InterViews/alloctbl.c, IV-X11/xfont.c, and IV-X11/xwindow.c.</b><p>
+
+Manually disable optimization for these modules by removing the "$(OPTIMIZE_CCFLAGS)" from the corresponding macro call in src/IV/Imakefile 
+(then doing a "make Makefiles" and "make").  Leave the comma before "$(OPTIMIZE_CCFLAGS)"
+
+<p><a name=imakecppprob><b>"make World XCONFIGDIR=..." doesn't work because cpp can't find a file included from site.def.$CPU.</b><p>
+
+imake is fragile when used with other than gcc's version of cpp.
+Three suggestions:<p>
+
+First, after having any problem with "make World" be sure to restore
+the top-level Makefile from the tar file.  Subsequent problems could
+be due to a corrupt top-level Makefile.  You can verify this by
+looking at that Makefile directly.  
+<p>
+Second, try and setup your environment so that your imake uses a
+GNU version of cpp.  If you do a "gcc -v"
+you'll see the directory where the gcc specs are read from.  The cpp
+you want is in the directory immediately above the specs directory.
+<p>
+Finally, if you have further problems, please forward copies of the
+afflicted files (the top-level Makefile, config/config-hpux-gcc.mk,
+etc..) to <a href=mailto:ivtools-info@vectaport.com>ivtools-info@vectaport.com</a>, as well as complete logs of the
+build process, and we'll do our best to help you resolve this problem.
+
+<p><a name=gcc280-prob><b>I get everything built with gcc-2.8.0, but drawtool segfaults (at line 244 of strchooser.c).</b><p>
+
+Upgrade to gcc-2.8.1.  Be sure to do a "make clean".<p>
+
+<p><a name=libstdc++2811needed><b>I just installed gcc-2.8.1, and when I rebuild ivtools I see this: <br><code>/usr/include/g++/streambuf.h:392: warning: invalid type `void *' for default argument to `ios *'</code>
+</b><p>
+
+You need to upgrade to libstdc++-2.8.1.* as well.  After installing you may have to do some of these steps:<br>
+<li> Change the definition of GPlusPlusIncludeDir in config/site.def.$CPU to point to
+where the include files were installed
+(i.e. "/usr/local/include/g++").  
+<li> Move any older version of libg++
+or libstdc++ include directory out of the way (i.e "mv
+/usr/include/g++ /usr/include/g++.old").  
+<li> Do a <code>"make clean;make Makefiles;make depend"</code>
+<li> Establish a symbolic link from /usr/include/g++ to
+/usr/local/include/g++ (or wherever you installed libstdc++).
+<p>
+You also will see this error whenever NULL gets redefined as "((void*)
+0)" instead of "0", which is the way the C++ compiler likes it.  Most,
+if not all, of these warnings were fixed by ivtools-0.7.4.
+
+<p><a name=optimizeneeded><b>I just installed gcc-2.8.1, and when I rebuild ivtools I see this: <br><code>/tmp/cca09221.s: Assembler messages:<br>
+/tmp/cca09221.s:193: Error: invalid character (0x8) before first operand
+</code>
+</b><p>
+
+You need to turn on optimization to work-around bugs in non-optimized compilation.
+Add these lines to ivtools-0.7/config/local.def:
+<p>
+<code>
+/*<br>
+&nbsp;* What you need to turn on optimizing (a good idea)<br>
+*/
+#undef TurnOnOptimizing<br>
+#define TurnOnOptimizing YES<br>
+</code>
+<p>
+And <code>"make Makefiles;make clean;make"</code>.  This will be included by default in ivtools-0.7.4.
+
+<p><a name=installnonrelativeprob><b>I supplied a --prefix argument to configure, but "make install" does not use this prefix consistently?</b><p>
+
+This was fixed in ivtools-0.7.4.
+
+<p><a name=installUnidrawprob><b>"make install" doesn't install the Unidraw include files.</b><p>
+
+This was fixed in ivtools-0.7.4.
+
+
+<p>
+<hr>
+<p>	
+<a name=ProgramDebug></a>
+<h2>programming and debugging questions</h2>
+
+<menu>
+<li><a href=#standalonedevel>How do I set up a stand-alone program or source tree on top of ivtools for development purposes?</a></li>
+<li><a href=#addnewtool>How do I add a new tool to the toolbar of a drawing editor derived from ivtools?</a></li>
+<li><a href=#addnewcommand>How do I add a new pull-down command to a drawing editor derived from ivtools?</a></li>
+<li><a href=#documentation>How do I possibly begin to program with a source tree that has so little documentation?</a></li>
+<li><a href=#debugmanip>Whenever I attempt to debug a derived Tool's InterpretManipulator method it hangs my X server.</a></li>
+<li><a href=#inspectlocalvar>I can't inspect the value of a local variable in gdb. What do I do?</a></li>
+<li><a href=#heapdebug>I'm having trouble debugging a heap memory management problem.  I get a segfault in malloc or free, and I can't trace what's wrong in the debugger.  What do I do?</a></li>
+<li><a href=#comvalueprinting>Printing out the contents of a ComValue in gdb is troublesome, because of the number of static class variables of type ComValue.  How can I work around this?</a></li>
+<li><a href=#alphainsure>What if I want to use insure++/insight to compile ivtools on an Alpha?</a></li>
+<li><a href=#ivunidrawchanges>What changes, if any, have been made to the API of InterViews and Unidraw?</a></li>
+</menu>
+
+<p><a name=standalonedevel><b>How do I set up a stand-alone program or source tree on top of
+ivtools for development purposes?</b><p>
+
+If you are writing a stand-alone program that will exist in a single
+directory, simply copy an appropriate Imakefile and main.c from a
+InterViews or ivtools example program directory, modify accordingly,
+then use "ivmkmf -a" to generate the Makefile.  Make sure you are using a
+fresh ivmkmf that corresponds to your installation of ivtools.  An
+example of this is the <a href=./comtop-README.txt>comtop sample
+program</a>, a stand-alone program separate from ivtools that builds
+on top of the <a href=./comterp.html>comterp</a> command interpreter
+mechanism.<p>
+
+If you are setting up an entire source tree with both class libraries
+and executable programs, you will want to get started by replicating
+an equivalent source tree (i.e. <a
+href=../vhclmaps/index.html>vhclmaps</a>) and change or rename all
+directories or files as appropriate. 
+
+<p><a name=addnewtool><b>How do I add a new tool to the toolbar of a drawing editor
+derived from ivtools?</b><p>
+
+First locate an existing tool (some subclass of
+Tool) that closely matches your requirements.  Create a new derivative
+or cloned class, which involves specifying a new
+::InterpretManipulator method (and maybe a new ::CreateManipulator
+method).  You might also want to create a new class id by copying the
+implementation of another Tool's ::IsA method.  Then plug it into your
+drawing editor by adding an entry for it in the ::MakeToolBar method
+of a class derived from OverlayKit.  More information about the design
+involved can be found in <a href=./unidrawinfo.html>Unidraw</a>
+documentation.  The OverlayKit object is an ivtools enhancement to
+Unidraw.  It is an object used by the Editor (the OverlayEditor) to
+construct itself.  In this fashion virtual methods can be applied to
+the editor construction process, one of the more central activities in
+constructing a Unidraw based drawing editor.
+
+<p><a name=addnewcommand><b>How do I add a new pull-down command to a drawing editor derived from ivtools?</b><p>
+
+First locate an existing command (some subclass of Command) that
+closely matches your requirements.  Create a new derivative or cloned
+class, which involves specifying a new ::Execute method.  You might
+also want to create a new class id by copying the implementation of
+another Command's ::IsA method.  Then plug it into your drawing editor
+by adding an entry for it in the appropriate ::Make*Menu method of a
+class derived from OverlayKit.  More information about the design
+involved can be found in <a href=./unidrawinfo.html>Unidraw</a>
+documentation.  See the item above for more details on the OverlayKit
+object.
+
+<p><b>How do I possibly begin to program with a source tree that has so little documentation?</b><p>
+
+First off, maybe you can program what you want by using the <a
+href=./comterp.html>command interpreter</a> embedded into the ivtools
+drawing editors and networked servers.  It is a fully-programmable
+function-based interpreter with syntax no more complicated than that
+of C expressions.  Designed to appeal to engineers and scientists,
+ it could have what you're looking for in terms of easily
+programmable manipulation of spatial data.  And it can be extended easily by C programmers, 
+without requiring the mastery of an object-oriented application framework.<p>
+
+Secondly, there really is a lot of documentation.  Read all <a
+href=./doc/index.html>this</a>, then come back and ask the question
+again.<p>
+
+Finally, the whole field of design patterns was launched, after the
+fact, in an attempt to document the inner workings of frameworks like
+these.  If a single man page per class was an adequate approach you
+wouldn't have five or six textbooks and numerous technical papers
+published to date on the subject.  Here's the book that started it
+all, by the notorious <a
+href=http://www.c2.com/cgi-bin/wiki?GangOfFour>Gang of Four</a>, <a
+href=http://st-www.cs.uiuc.edu/users/patterns/DPBook/DPBook.html>Design
+Patterns, Elements of Reusable Object-Oriented Software</a>.<p>
+
+However, reading documentation alone will never make you a capable
+programmer with application frameworks of this complexity. Just as in
+mathematical proofs and circuit design, there is no substitute for
+direct study of the underlying logic if you wish to acquire competence
+in this discipline.  On the other hand, there is no need to study the
+parts that work for you without further investigation, but any
+real-world use of these class libraries will inevitably bring you up
+with a segfault in a debugger staring at code you've never seen
+before.  At this point you have two choices: a) you can welcome this learning opportunity, and start reading the
+source code with the debugger, treating it as a scientific experiment
+where you are attempting to discover the information you need to make
+things work the way you want, or b) switch to using some other
+toolkit, either one with a more constrained programming language (like
+Visual Basic or Tcl/Tk) or one with a more
+extensively-documented set of objects (like MFC or Java Swing) where the hope is you can resolve problems by reading documentation instead of debugging.  Each
+choice has its pros and cons.<p>
+
+Further reading:<br>
+<menu>
+<li><a href=http://st-www.cs.uiuc.edu/users/johnson/frameworks.html>Ralph Johnson's Framework Page</a></li>
+<li><a href=http://st-www.cs.uiuc.edu/users/droberts/evolve.html>Don Robert's and Ralph Johnson's Evolving Frameworks</a></li>
+<li><a href=http://www.riehle.org/Publications.html>Dirk Riehle's Framework Layering</a></li>
+<li><a href=http://rampages.onramp.net/~huston/patterns.htm>Vince Huston's Design Pattern page</a></li>
+<li><a href=http://www.c2.com/cgi-bin/wiki?ExtremeProgramming>Kent Beck's Extreme Programming</a></li>
+</menu>
+
+
+<p><a name=debugmanip><b>Whenever I attempt to debug a derived Tool's
+InterpretManipulator method (or some other event handling software) it hangs my X server</b><p>
+
+Try adding -synchronous to the run command line in gdb.  Or debug with print statements.
+
+<p><a name=inspectlocalvar><b>I can't inspect the value of a local variable in gdb. What do I do?</b><p>
+
+Recompile without optimization (without -O), or try to infer the information you need from other variables.
+
+<p><b>The value of an argument to a method or function (as displayed
+by gdb) gets corrupted halfway through the execution of the
+function/method.  Otherwise things work fine.  Should I worry about
+this?  </b><p>
+
+No, not particularily.  The stack memory associated with an input
+variable can be recycled by the compiler after that value is no longer
+needed.
+
+<p><a name=heapdebug><b>I'm having trouble debugging a heap memory management problem.
+I get a segfault in malloc or free, and I can't trace what's wrong in
+the debugger.  What do I do?</b><p>
+
+You can relink your program with this source version of <a
+href=./malloc.c>malloc.c</a>, and debug as normal.  To add it to a
+program, add an entry for malloc.c right after the entry for any
+main.c in the corresponding Imakefile, then do a "make Makefiles" and
+"make" to rebuild.<p>
+
+Malloc debugging tips:<p>
+
+<i>set conditional breakpts at the end of malloc or the start of free</i><p>
+
+<i>there is a 4 byte offset between a memchunk and a regular pointer</i><p>
+
+<i>use the display command in gdb to watch a variable while single-stepping</i><p>
+
+<p><a name=convalueprinting><b>Printing out the contents of a ComValue in gdb is troublesome, because of the number of static class variables of type ComValue.  How can I work around this?</b><p>
+
+Cast the ComValue to an AttributeValue before printing in gdb.  An
+AttributeValue has most all the member values of a ComValue (at least
+the ones that matter for everyday debugging of comterp applications),
+and none of the static member variables.  <code>_AV</code> is a
+shorthand typedef for AttributeValue you can use from within gdb.
+
+
+<p><a name=alphainsure><b>What if I want to use insure++/insight to compile ivtools on an
+Alpha?</b><p>
+
+Bruno Delfosse of Thompson CSF contributed this <a
+href=./insight.ALPHA.patch>patch</a> to modify the config files as
+necessary.
+
+<p><a name=ivunidrawchanges><b>What changes, if any, have been made to the API of InterViews and Unidraw?</b><p>
+
+In a few places, as needed, a member variable or method has been
+promoted from private to protected, or protected to public, to
+facilitate derivation from a class and reuse of the implementation of
+their methods.  The designers of InterViews seemed to have been pursuing a somewhat black-box
+theory of object-oriented programming, but we've found 
+you have to be able to look inside these boxes whenever and whereever
+you need.  This is a change to the API that doesn't even require
+recompilation.<p>
+
+In a few other places small utility methods have been added as needed,
+most of them non-virtual.  These extend the API without 
+compromising backward compatibility, which has been tested by building
+sizeable packages like <a href=http://www.targetjr.org>TargetJr</a> and 
+<a href=http://www.create.ucsb.edu/~doug/htmls/MiXViews.html>MiXViews</a> on top of ivtools.<p>
+
+Then, in a few specific places new mechanism has been added to the
+original classes of InterViews and Unidraw.  The Session class has
+been altered to support a wider variety of X applications.  The
+Graphic class has been extended with mechanism to hide/show a graphic,
+disable/enable its sensitivity to mouse events, and cache point lists
+for efficiency in memory usage and ASCII serialization.  These changes
+are easily propogated to any third party software by recompilation
+only, requiring no source changes.<p>
+
+But the balance of widgets, glyphs, and Unidraw component classes have
+remained untouched.  New capability has been created by setting up new
+class libraries, and populating them with derived classes.  For
+example, <a href=./glyphinfo.html#ivglyph>IVGlyph</a> is a class
+library of specialized glyphs and dialog boxes that build on the
+observer-observable design pattern.  <a
+href=./ovinfo.html>OverlayUnidraw</a> is a layer on top of both <a
+href=./unidrawinfo.html>Unidraw</a> and <a href=./idraw.html>idraw</a>
+classes that adds or integrates several things to the original
+capability: double-buffering, switchable look-and-feel, an alternate 
+serialization of components, etc..<p>
+
+It is possible that in the future a derivative work of ivtools could
+abandon this backward compatibility, refactoring the existing
+mechanisms to reduce the footprint of applications, to separate the
+component-based server framework from the component-based drawing
+editor framework, and better facilitate cross-platform development.  The
+document formats and scripting languages of ivtools could be preserved
+through such a refactoring, and there probably would be a writeup on
+how to manually upgrade third-party applications from one to the
+other.  And the original architecture can be used indefinitely as
+well.<p>
+
+
+<hr>
+<p>	
+<a name=Miscellaneous></a>
+<h2>miscellaneous questions</h2>
+
+<menu>
+<li><a href=#frescofdraw>What about Fresco and fdraw?</a></li>
+<li><a href=#berlin>How does ivtools relate to Berlin?</a></li>
+<li><a href=#leaksfixed>Have you fixed any documented memory leaks that were in InterViews 3.1?</a></li>
+<li><a href=#whataboutdoc>What happened to Doc?  Where can I find Lexi?</a></li>
+<li><a href=#versionnum>Why is this only version 0.9.*?</a></li>
+</menu>
+
+<p><a name=frescofdraw><b>What about Fresco and fdraw?</b><p>
+
+Fresco is the software development project undertaken by some of the
+team that built InterViews.  Fresco unifies structured graphics and
+structured documents (glyphs), has an OS-portable widget
+representation, and offers embeddability via CORBA.  Thomas Hiller as
+been one of the principle maintainers, and put out a Fresco97 and
+Fresco98 tar file available at <a
+href=http://radagast.ti5.tu-harburg.de/fresco/>
+http://radagast.ti5.tu-harburg.de/fresco/</a>.  More details at <a
+href=http://www.ivtools.org/ivtools/interviews.html>http://www.ivtools.org/ivtools/interviews.html</a>.<p>
+fdraw is the example drawing editor, somewhat like idraw, that comes
+with Fresco. An evolved fdraw is the basis of vistool, a user
+interface in the <a href= http://www.aai.com/AAI/IUE/IUE.html>IUE</a>
+and <a href=http://www.balltown.cma.com/TargetJr>Target Jr</a> image
+understanding software distributions.  fdraw was the starting point
+for a Fujitsu proprietary Fresco GUI builder as well.
+
+<p><a name=berlin><b>How does ivtools relate to Berlin?</b><p>
+
+<a href="http://www.berlin-consortium.org">Berlin</a> is a
+self-contained windowing system evolved from the Fresco sources.  It
+inherits the unified graphic/glyph architecture of Fresco (as well as
+the CORBA API), and in general inherits the structured graphics design
+patterns of ivtools and InterViews.  The Berlin developers have added
+their own extensions like anti-aliased fonts and alpha-transparency.
+And recently they have layered on a UnidrawKit, an application
+framework factory object with the goal of being as useful as <a
+href="./unidrawinfo.html">Unidraw</a> to Berlin developers.
+<p>
+ivtools and Berlin are drastically different branches of the <a
+href="./interviews.html">InterViews</a> evolutionary lineage.  Each
+has its niche.
+
+<p><a name=leaksfixed><b>Have you fixed any documented memory leaks that were in InterViews 3.1?</b><p>
+
+If you are referring to these: <a
+href=ftp://ftp.informatik.uni-kiel.de/pub/graphics/X/InterViews/bug-fixes/memory_leaks.gz>
+ftp://ftp.informatik.uni-kiel.de/pub/graphics/X/InterViews/bug-fixes/memory_leaks.gz</a>,
+no, they seem due to the construction of permanent tables in the
+InterViews and Unidraw frameworks, ones that never shrink at run-time,
+so why worry about their destruction, when an exit() works just as
+well?  We'd be interested in any other Purify like information about
+these source trees.  You can forward that or any other comments and questions about the package to 
+ <a href=mailto:ivtools-info@vectaport.com>ivtools-info@vectaport.com</a>.
+
+<p><a name=whataboutdoc><b>What happened to Doc?  Where can I find Lexi?</b><p>
+
+Doc is a document editor, written by <a
+href=http://www.cs.flinders.edu.au/people/Paul_Calder>Paul Calder</a>.
+It showed how flyweight graphic objects (glyphs) could be used down to
+the single character level in a TeX-like structured document.  Lexi is
+the Doc-based editor described in Chapter 2 of the <a
+href=http://st-www.cs.uiuc.edu/users/patterns/DPBook/DPBook.html>Design
+Patterns</a> textbook, where Vlissides, et.al. take the lessons
+learned on Unidraw and other GUI frameworks and apply them to the case
+study of rebuilding Doc.  You can get the source code for Doc from the
+<a href=http://www.vectaport.com/pub/src/index.html#ivtar>original InterViews tar file</a> (<a
+href=ftp://interviews.stanford.edu/pub/>InterViews ftp site at
+Stanford </a>).  It should build on top of ivtools without
+modification to any source files.  No source code seems available for Lexi.
+
+<p><a name=versionnum><b>Why is this only version 0.9.*?</b><p>
+
+Although some of the code in ivtools is very old (giving users a
+unique form of patent protection), some of the code is always new.  In
+1994 when the effort on ivtools began (two years before we even
+considered directly incorporating the InterViews 3.1 classes) an original
+version number of 0.3 was chosen, to reflect that this was roughly the
+third time our programming team had created and distributed a
+value-added layer on top of InterViews.  Since then the version number
+has increased by .1 a year.  <p>
+
+<i><b>ivtools-1.0 will be out in the near future -- Oct 16th 2001</b></i>
+
+<p>
+<hr>
+<p>	
+<h2>other FAQs</h2>
+<p>
+
+<menu>
+<li><b><a href=../vhclmaps/faq.html>vhclmaps FAQ</a>
+<li> <a href=../ivtools/ivfaq-1992.txt>InterViews/Unidraw FAQ (1992)</a> </li>
+</menu>
+
+<p>
+<hr>
+<a href=../ivtools/index.html><code>up to ivtools home page</code></a>
+
+</html>

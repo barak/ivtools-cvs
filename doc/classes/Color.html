@@ -1,0 +1,393 @@
+
+<html><head><TITLE>Description of Color</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Color</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Resource.html" >Resource</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+an RGB-alpha color object<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Resource.html" >Resource</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Color><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+InterViews/color.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  defines an output color, which is specified by a mix of RGB (red,
+ green, and blue) intensities, and an alpha value for blending
+ <p><a href=../refman3.1/refman.html#PAGE38>in reference manual</a>.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Color(ColorIntensityr&#38;&#38;COMMColorIntensityg&#38;&#38;COMMColorIntensityb&#38;&#38;COMMfloatalpha=1.0&#38;&#38;COMMColorOp=Copy)">
+    <B>Color</B> ( ColorIntensity r, ColorIntensity g, ColorIntensity b, float alpha = 1.0, ColorOp = Copy ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Color(constColor&#38;&#38;&#38;COMMfloatalpha=1.0&#38;&#38;COMMColorOp=Copy)">
+    <B>Color</B> (const <A HREF="Color.html" >Color</A>&#38;, float alpha = 1.0, ColorOp = Copy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Color(intr&#38;&#38;COMMintg&#38;&#38;COMMintb)">
+    <B>Color</B> (int r, int g, int b) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Intensities(int&#38;r&#38;&#38;COMMint&#38;g&#38;&#38;COMMint&#38;b)">
+    <B>Intensities</B> (int&#38; r, int&#38; g, int&#38; b) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="PixelValue()">
+    <B>PixelValue</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual float 
+    <A NAME="alpha()">
+    <B>alpha</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const <A HREF="Color.html" >Color</A>* 
+    <A NAME="brightness(floatadjust)">
+    <B>brightness</B> (float adjust) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="distinguished(Display*&#38;&#38;COMMconstColor*)">
+    <B>distinguished</B> (<A HREF="Display.html" >Display</A>*, const <A HREF="Color.html" >Color</A>*) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="distinguished(constColor*)">
+    <B>distinguished</B> (const <A HREF="Color.html" >Color</A>*) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="enum&#38;16">
+    <B>enum</B>
+     { Copy, Xor, Invisible } 
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="find(constDisplay*&#38;&#38;COMMconstString&#38;&#38;&#38;COMMColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
+    <B>find</B> ( const <A HREF="Display.html" >Display</A>*, const <A HREF="String.html" >String</A>&#38;, ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="find(constDisplay*&#38;&#38;COMMconstchar*name&#38;&#38;COMMColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
+    <B>find</B> ( const <A HREF="Display.html" >Display</A>*, const char* name, ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="intensities(ColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
+    <B>intensities</B> ( ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="intensities(ColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
+    <B>intensities</B> ( ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const <A HREF="Color.html" >Color</A>* 
+    <A NAME="lookup(Display*&#38;&#38;COMMconstString&#38;name)">
+    <B>lookup</B> (<A HREF="Display.html" >Display</A>*, const <A HREF="String.html" >String</A>&#38; name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const <A HREF="Color.html" >Color</A>* 
+    <A NAME="lookup(Display*&#38;&#38;COMMconstchar*name)">
+    <B>lookup</B> (<A HREF="Display.html" >Display</A>*, const char* name) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ColorOp 
+    <A NAME="op()">
+    <B>op</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ColorRep.html" >ColorRep</A>* 
+    <A NAME="rep(WindowVisual*)">
+    <B>rep</B> (<A HREF="WindowVisual.html" >WindowVisual</A>*) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Color()">
+    <B>~Color</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       GraphicCompTool  - tool for instantiating graphical compo-
+       nents
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Tools/grcomptool.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A GraphicCompTool lets the user instantiate graphical com-
+       ponents by direct manipulation.  The GraphicCompTool keeps
+       a prototypical component that defines the type  of  compo-
+       nent it can instantiate.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>GraphicCompTool(ControlInfo*,</B> <B>GraphicComp*</B> <B>prototype)</B>
+       <B>GraphicCompTool()</B>
+              Create  a new GraphicCompTool, supplying the proto-
+              typical GraphicComp.  (You should not normally call
+              the   parameterless   constructor,   which  Creator
+              requires.)  The first constructor creates a graphi-
+              cal view of the prototype for internal use.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              CreateManipulator clears the editor's selection and
+              delegates manipulator creation  and  interpretation
+              to the graphical view of the prototype.
+
+       <B>GraphicComp*</B> <B>GetPrototype()</B>
+              Return the prototypical GraphicComp.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>GraphicComp(3U)</B>, <B>Tool(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,135 @@
+
+		      Reusing Unidraw and idraw
+
+		Scott E. Johnston and Jorge A. Gautier
+			    Vectaport Inc. 
+		       http://www.vectaport.com
+			   Dec. 5th, 1997
+
+Introduction
+
+Unidraw is a C++ framework for creating custom graphical editors that
+was the basis for John Vlissides' thesis at Stanford University in
+1990.  idraw was an existing drawing editor that was rebuilt on top of
+Unidraw.  They were both distributed with the InterViews 3.1 source
+tree which was created by Mark Linton, Paul Calder, and John
+M. Vlissides at Stanford University.  Since then the whole source tree
+has been used for several examples in Vlissides' "Design Patterns"
+textbooks as well as being reused by many parties constructing their
+own custom applications.  At Vectaport we've reused Unidraw for a wide
+variety of applications, integrating other C++ toolkits for networking
+and 3d visualization, and deriving from the original Unidraw software
+new frameworks for spatial-data servers, terrain visualization, and
+vehicle simulation.  The result is a layered collection of C++ source
+trees, each aimed at a generic application area, that serves as a
+reasonable starting point for source-intensive programmers to build
+powerful custom applications that go far beyond the original
+capabilities of Unidraw and its 2d structured graphics.  In this paper
+we discuss specifics of our experience to date.  Results of this
+approach and pointers to more information are presented at
+http://www.vectaport.com.
+
+Experience To Present
+
+We first started using InterViews in 1990, back at release 2.6,
+constructing a variety of map-based user interfaces for autonomous
+vehicle and imaging R&D.  At that time there was no Unidraw, and
+idraw, the MacDraw-like drawing editor that is part of InterViews, was
+built on libgraphic, the 2d structured graphics class library where
+Vlissides, Linton, and Calder prototyped their ideas about
+object-oriented design applied to graphics.  idraw was distributed as
+a class library and main.c all-in-one directory, so we separated the
+two, and started deriving map-format specific class libraries with
+specialized "Editor"s (the central object in 2.6 idraw) for each.  We
+found this approach effective and powerful, being able to reuse the
+complete mechanisms of idraw (pan/zoom, rubberbands,
+selection-highlighting, front/back/group/ungroup) with little changes
+to the original source code. Occasionally we had to de-privatize
+member methods and variables, to facilitate in-place reuse of existing
+methods, or to generate first drafts of derived methods by replicating
+methods that accessed private variables [a].  
+
+Over the course of working on map displays for autonomous vehicles,
+InterViews 3.1 came out, with Unidraw included. At first we kept on
+without Unidraw, bringing up the existing software fairly painlessly
+on 3.1 by using the 2.6 backward compatibility mode (as does Unidraw).
+It seemed Unidraw could replace the library version of idraw we were
+using, with its generalized and improved abstractions for drawing
+editors, but we never got the chance.  But we did get a chance to
+start from scratch with Unidraw.
+
+We found what we learned from 2.6 was quite applicable to 3.1, given
+the nature of code evolution practiced by Mark Linton.  We'd expect
+the same benefit when someday migrating-to or incorporating Fresco,
+one of the current leaves in this software lineage.
+
+And we still found a need to separate the main program of idraw from
+other C++ modules, making a foundation for deriving other class
+libraries and example programs.  In January 1995 we first published
+ivtools, a collection of drawing editors that leveraged Unidraw and
+idraw, adding a variety of things (double-buffered graphics, evolved
+import/export/save/restore, multi-frame animation, graph/node
+editing).  In July 1995 we first published ivmaps, a collection of map
+viewers for USGS and NIMA formats [b].  ivmaps derives class libraries
+from the ivtools class libraries which in turn derive from the
+Unidraw/idraw libraries.  At first ivtools required a separate copy of
+InterViews 3.1 to build, but with ivtools-0.5 (October 1996) we
+incorporated the 3.1 source tree, maintaining backward compatibility
+as much as possible.  We've tested this compatibility by building
+other people's software that needs InterViews with ivtools instead,
+like Target Jr, the image understanding environment from the Target Jr
+Consortium (2.6 and 3.0beta), and MiXViews, the music/sound editing
+system.
+
+In July 1997 we first published vhclserv, a multi-vehicle state
+interpreter that serves off vehicle updates to subscribed viewers and
+receives driving commands over the net.  We utilized the ACE
+networking library from Doug Schmidt, especially the Reactor class
+which happens to be evolved from the InterViews Dispatcher class.
+This relationship between the two classes simplified the job of
+integrating ACE into InterViews.
+
+Lessons Learned
+
+InterViews, Unidraw, and idraw have all served as useful starting
+points for source-intensive C++ software evolution.  The layered
+library architecture of InterViews turned out to be a good thing, not
+an unfortunate lack of completeness.  It takes an evolutionary mindset
+to work with the stuff.  The ability to set up and conduct experiments
+as to why the software is or isn't working is just as critical as the
+ability to imagine extensions to the software. C++ adds a sometimes
+surprising new dimension to C programming and it takes a while to be
+able to navigate well in this extra dimension.  
+
+----------------------------------------------------------------------
+
+[a] A quick fix was to compile everything with -Dprivate=protected
+
+[b] United States Geological Survey, National Imagery and Mapping Agency
+
+References:
+
+Mark A. Linton, Paul R. Calder, John M. Vlissides, "InterViews: A C++
+Graphical Interface Toolkit", Technical Report CSL-TR-88-358, Stanford
+University, Stanford, CA 94305-2192, July 1988.
+
+John M. Vlissides and Mark A. Linton, "Applying Object-Oriented Design
+to Structured Graphics", Proceedings of the USENIX C++ Conference,
+Denver, Colorado, October 1988.
+
+John M. Vlissides and Mark A. Linton, "Unidraw: A Framework for
+Building Domain-Specific Graphical Editors", Proceedings of the ACM
+SIGGRAPH/SIGCHI User Interface Software and Technologies '89
+Conference, Williamsburg, Virginia, November 1989.
+
+Tod S. Levitt, Scott E. Johnston, Scott Barclay, John W. Dye, Daryl
+T. Lawton, "Progress Toward an Image Understanding Application
+Development Environment", Proceedings: Image Understanding Workshop,
+September 1990.
+
+John M. Vlissides, "Generalized Graphical Object Editing", Technical
+Report CSL-TR-90-427, Stanford University, 1990.
+
+"Design Patterns: Elements of Reusable Object-oriented Software",
+Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides,
+Addison-Wesley, 1995.

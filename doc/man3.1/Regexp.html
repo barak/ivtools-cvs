@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Regexp - regular expression searching
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/regexp.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  Regexp  encapsulates  a  regular expression pattern and
+       defines operations for searching and matching the  pattern
+       against  a  string.   The syntax of the regular expression
+       pattern is the same as that for <B>ed(1)</B>.  Information can be
+       obtained  about  the  most  recent  match  of  the regular
+       expression (and its sub-expressions).
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Regexp(const</B> <B>char*</B> <B>pattern)</B>
+       <B>Regexp(const</B> <B>char*</B> <B>pattern,</B> <B>int</B> <B>length)</B>
+              Construct a new Regexp for <I>pattern</I>.
+
+       <B>int</B> <B>Match(const</B> <B>char*</B> <B>text,</B> <B>int</B> <B>length,</B> <B>int</B> <B>index)</B>
+              Attempt a match against <I>text</I> (of length <I>length</I>)  at
+              position  <I>index</I>.  The return value is the length of
+              the matching string, or a negative  number  if  the
+              match failed.
+
+       <B>int</B> <B>Search(const</B> <B>char*</B> <B>text,</B> <B>int</B> <B>length,</B> <B>int</B> <B>index,</B> <B>int</B>
+              <B>range)</B>
+              Search for a match in the string  <I>text</I>  (of  length
+              <I>length</I>).   Matches  are attempted starting at posi-
+              tions between <I>index</I> and <I>index</I> plus <I>range</I>.  If <I>range</I>
+              is   positive   the  first  match  after  <I>index</I>  is
+              reported.  If <I>range</I> is  negative  the  first  match
+              before  <I>index</I> is reported.  The return value is the
+              index of the starting position of the match,  or  a
+              negative  number if there is no match in the speci-
+              fied range.
+
+       <B>int</B> <B>BeginningOfMatch(int</B> <B>subexp)</B>
+       <B>int</B> <B>EndOfMatch(int</B> <B>subexp)</B>
+              Return information about the most recent match.  If
+              <I>subexp</I>   is  zero  (the  default),  information  is
+              reported  for  the  complete  regular   expression.
+              Other  values of <I>subexp</I> refer to sub-expressions in
+              the pattern.  For example, if <I>subexp</I> is 2, informa-
+              tion  is  returned for the sub-expression specified
+              by the second pair of \( and \) delimiters  in  the
+              pattern.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ed(1)</B>
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

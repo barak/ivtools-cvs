@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Viewport - scrollable view
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/viewport.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Viewport</B>  is  a  subclass  of MonoScene that allocates its
+       component exactly as much space as  it  wants  (determined
+       from  its shape).  This space will be clipped to the view-
+       port's size and the viewport maintains  a  perspective  to
+       adjust  the portion of the component that is actually dis-
+       played.  If the component is smaller than  the  viewport's
+       canvas, then the viewport background will be filled with a
+       light gray pattern.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Viewport(Interactor*</B> <B>=</B> <B>nil,</B> <B>Alignment</B> <B>=</B> <B>Center)</B>
+              Construct a new viewport.  If the interactor is not
+              nil,  it  is  inserted as the viewport's component.
+              The second parameter determines where the component
+              is placed relative to the viewport.
+
+       <B>Insert(Interactor*)</B>
+              Set the component interactor.
+
+       <B>void</B> <B>Change(Interactor*)</B>
+              A  viewport  does  not propagate changes.  Thus, if
+              the component's shape changes the  viewport  simply
+              resizes the component according to the new shape.
+
+       <B>void</B> <B>Remove(Interactor*)</B>
+              Take out the component interactor.
+
+       <B>virtual</B> <B>void</B> <B>Adjust(Perspective&amp;)</B>
+              Change the viewport's perspective to the given one.
+              This operation will cause the desired area  of  the
+              component to be drawn.
+
+       <B>void</B> <B>AdjustTo(float</B> <B>px,</B> <B>float</B> <B>py,</B> <B>float</B> <B>zx,</B> <B>float</B> <B>zy)</B>
+       <B>void</B> <B>AdjustBy(float</B> <B>dpx,</B> <B>float</B> <B>dpy,</B> <B>float</B> <B>dzx,</B> <B>float</B> <B>dzy)</B>
+       <B>void</B> <B>ScrollTo(float</B> <B>px,</B> <B>float</B> <B>py)</B>
+       <B>void</B> <B>ScrollXTo(float</B> <B>px)</B>
+       <B>void</B> <B>ScrollYTo(float</B> <B>py)</B>
+       <B>void</B> <B>ScrollBy(float</B> <B>dpx,</B> <B>float</B> <B>dpy)</B>
+       <B>void</B> <B>ScrollXBy(float</B> <B>dpx)</B>
+       <B>void</B> <B>ScrollYBy(float</B> <B>dpy)</B>
+       <B>void</B> <B>ZoomTo(float</B> <B>zx,</B> <B>float</B> <B>zy)</B>
+       <B>void</B> <B>ZoomXTo(float</B> <B>zx)</B>
+       <B>void</B> <B>ZoomYTo(float</B> <B>zy)</B>
+       <B>void</B> <B>ZoomBy(float</B> <B>dzx,</B> <B>float</B> <B>dzy)</B>
+       <B>void</B> <B>ZoomXBy(float</B> <B>dzx)</B>
+       <B>void</B> <B>ZoomYBy(float</B> <B>dzy)</B>
+
+       <B>float</B> <B>XPos()</B>
+       <B>float</B> <B>YPos()</B>
+       <B>float</B> <B>XMag()</B>
+       <B>float</B> <B>YMag()</B>
+              Short-hand for  retrieving  information  about  the
+              current perspective.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Perspective(3I)</B>, <B>Scene(3I)</B>, <B>Shape(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,1073 @@
+<HTML><HEAD><TITLE>Manpage of PSTOEDIT</TITLE>
+</HEAD><BODY>
+<H1>PSTOEDIT</H1>
+Section: User Commands  (1)<BR>Updated: 971204<BR><A HREF="#index">Index</A>
+<HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME </H2>
+
+pstoedit - a converter from PostScript and PDF to editable objects or vector graphic formats
+
+
+
+
+
+
+
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+
+
+
+
+<B>pstoedit</B>
+
+[<B>-help</B>]
+
+<P>
+
+<B>pstoedit</B>
+
+[<B>-dt</B>]
+
+[<B>-dis</B>]
+
+[<B>-merge</B>]
+
+[<B>-df</B>
+
+<I>fontname</I>]
+
+[<B>-flat</B>
+
+<I>number</I>]
+
+[<B>-nomaptoisolatin1</B>]
+
+[<B>-nq</B>]
+
+[<B>-s</B>
+
+<I>factor</I>]
+
+[<B>-psargs</B>
+
+<I>string]</I>
+
+[<B>-include</B>
+
+<I>includefile</I>]
+
+<B>-f&nbsp;</B><I>format</I>[:<I>options</I>]
+[<I>inputfile</I>
+
+[<I>outputfile</I>]]
+
+
+
+
+
+<P>
+
+
+
+<B>pstoedit</B>
+
+[<B>-s</B> <I>factor</I>]
+<B>-f </B><I>format</I>[:<I>options</I>]
+<B>-bo&nbsp;</B><I>inputfile</I>
+
+[<I>outputfile</I>]
+
+
+
+<P>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<A NAME="lbAE">&nbsp;</A>
+<H3>RELEASE LEVEL</H3>
+
+This manpage documents release 2.5.1 of 
+<B>pstoedit</B>.
+
+<A NAME="lbAF">&nbsp;</A>
+<H3>USE</H3>
+
+<P>
+
+
+
+
+<B>pstoedit </B>
+
+converts PostScript and PDF files to a simple vector graphic
+format that can be edited or imported into various drawing packages. 
+Type
+
+<DL COMPACT><DT><DD>
+<B>pstoedit&nbsp;-help</B>
+
+</DL>
+
+to get a list of supported output formats.
+<P>
+
+<B>pstoedit </B>
+
+works by redefining the two basic painting operators of
+PostScript, 
+<B>stroke </B>
+
+and 
+<B>show</B>.
+
+Other drawing operators
+(<I>e.g.</I>
+
+<B>image</B>)
+
+are not supported.
+After redefining these operators, the PostScript or PDF file that needs to
+be converted is processed by a PostScript interpreter, 
+<I>e.g.</I>,
+
+Ghostscript 
+(<B>gs</B>).
+
+You normally need to have a PostScript interpreter installed in order to use 
+this program.  However, you can perform some &quot;back end&quot; processing of prepared 
+files by specifying the 
+<B>-bo</B>
+
+option for debugging or limited filtering.  See &quot;BACK END-SPECIFIC OPTIONS&quot; 
+below.
+<P>
+
+The output that is written by the interpreter due to the redefinition of
+the drawing operators is a sort of 'flat' PostScript file that contains only
+simple operations like 
+<B>moveto</B>,
+
+<B>lineto</B>,
+
+<B>show</B>,
+
+<I>etc.</I>
+
+You can look at this file using the 
+<B>-f&nbsp;debug</B>
+
+option.
+<P>
+
+This output is read by end-processing functions of 
+<B>pstoedit </B>
+
+and triggers the drawing functions in the selected back end driver, or 
+<I>backend</I>.
+
+<P>
+
+<A NAME="lbAG">&nbsp;</A>
+<H3>NOTES</H3>
+
+<P>
+
+If you want to process PDF files directly, your PostScript interpreter
+must provide this feature, as does Ghostscript. Aladdin Ghostscript 4.03
+or later is recommended for processing PDF (and PostScript Level 2) files.
+<P>
+
+<A NAME="lbAH">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>-dt</B><DD>
+Text is drawn as polygons. This might produce a large output file.
+You might want to use this options for example if the PostScript file 
+contains text and the backend does not support this, 
+<I>e.g.</I>
+
+<B>gnuplot</B>.
+
+<DT><B>-dis</B>
+
+<DD>
+Open a display during processing by Ghostscript. Some files only work 
+correctly this way.
+<DT><B>-psargs</B> <I>string</I><DD>
+The string given with this option is passed directly to Ghostscript
+when Ghostscript is called to process the PostScript file for 
+<B>pstoedit.</B>
+
+For example:
+
+
+<B>-psargs &quot;-r72x72&quot;</B>
+
+
+This causes 
+the resolution to be changed to 72x72 dpi.
+(Changing the resolution this way has an effect only if 
+<B>-dis</B>play
+
+is set.
+Otherwise the default resolution of 1 point (72 dots per inch) is used.)
+</DL>
+<P>
+
+You can switch Ghostscript into PostScript Level 1 only mode by
+
+<B>-psargs &quot;level1.ps&quot;.</B>
+
+This can be useful for example if the PostScript file to be
+converted uses some Level 2 specific custom color models that are not 
+supported by pstoedit. 
+However, this requires that the PostScript program checks for the 
+PostScript level supported by the interpreter and &quot;acts&quot; accordingly.
+<P>
+
+If you want to pass multiple options to Ghostscript you
+must enclose all options with quotes, e.g.
+
+<B>-psargs &quot;opt1 opt2 opt2&quot;.</B>
+
+See the
+<B><A HREF="../man1/gs.html">gs</A></B>(1)
+
+manpage for other possible options.
+<DL COMPACT>
+<DT><B>-merge</B><DD>
+Some output formats permit the representation of filled polygons with edges 
+that are in a different color than the fill color. Since PostScript does not
+support this, drawing programs typically generate two objects (the outline and
+the filled polygon) into the PostScript output. 
+<B>pstoedit </B>
+
+is able to recombine these,
+if they follow each other directly and you specify
+<B>-merge</B>.
+
+<DT><B>-df</B> <I>fontname</I><DD>
+Sometimes fonts embedded in a PostScript programs do not have a fontname. This 
+for example happens in PostScript files generated by 
+<B>dvips</B>.
+
+In such a case 
+<B>pstoedit</B>
+
+uses a replacement font. The default for this is Courier. Another font can
+be specified using the
+<B>-df</B>
+
+option.
+
+
+<B>-df Helvetica</B>
+
+
+
+causes all unnamed fonts to be replaced by Helvetica.
+<DT><B>-include</B> <I>name of a PostScript file to be included</I><DD>
+This options allows to specify an additional PostScript file that will
+be executed just before the normal input is read. This is helpful for
+including specific page settings or for disabling potentially unsafe 
+PostScript operators, e.g., file, renamefile, or deletefile.
+<DT><B>-f</B> <I>format</I><DD>
+target output format recognized by 
+<B>pstoedit</B>.
+
+Currently 
+<I>format </I>
+
+may be one of:
+<B>debug</B>,
+
+<B>fig</B>
+
+(Xfig), 
+<B>cgm</B>,
+
+<B>pdf</B>,
+
+<B>gnuplot</B>,
+
+<B>dxf,</B>
+
+<B>lwo</B>,
+
+<B>mif </B>
+
+(Framemaker MIF, not MapInfo MIF),
+<B>rib</B>,
+
+<B>rpl</B>,
+
+<B>java</B>,
+
+<B>ps</B>,
+
+<B>met </B>
+
+(OS/2 only), 
+<B>wmf </B>
+
+(Windows and Borland C++ only), 
+<B>tgif</B>,
+
+<B>idraw</B>,
+
+and
+<B>dump</B>.
+
+See &quot;BACK END-SPECIFIC OPTIONS&quot; below for an explanation of the
+[:<I>options</I>]
+
+to 
+<B>-f&nbsp;</B><I>format</I>.
+<DT><B>-s</B> <I>factor</I><DD>
+scale by the 
+specified bitmap display
+<I>factor</I>.
+
+(Use with <B>-f&nbsp;tgif</B> option only.)
+<DT><B>-bo</B><DD>
+You can run backend processing only (without the PostScript 
+interpreter frontend) by first running
+
+
+<B>pstoedit -f dump</B> <I>infile dumpfile</I>
+
+
+and then running
+
+
+<B>pstoedit -f&nbsp;</B><I>format&nbsp;</I><B>-bo&nbsp;</B><I>dumpfile outfile.</I>
+
+
+
+<DT><B>-flat</B> <I>number</I><DD>
+If the backend does not support curves in the way PostScript does, all
+curves are approximated by lines. Using the
+<B>-flat </B>
+
+option one can
+control this approximation. This parameter is directly converted to a
+PostScript 
+<B>setflat </B>
+
+command.
+<DT><B>-nq</B><DD>
+No exit from the PostScript interpreter.
+Normally Ghostscript exits after processing the 
+<B>pstoedit </B>
+
+<I>inputfile</I>.
+
+For debugging
+it can be useful to avoid this. If you do, you will have to type 
+<B>quit</B>
+
+at the 
+<B>GS&gt;</B>
+
+prompt to exit from Ghostscript.
+<DT><B>-nomaptoisolatin1</B><DD>
+Normally 
+<B>pstoedit </B>
+
+maps all character codes to the ones defined by the ISO-Latin1 encoding. 
+If you specify 
+<B>-nomaptoisolatin1 </B>
+
+then the encoding from the input PostScript is passed unchanged to the output. 
+<DT><I>inputfile</I>
+
+<DD>
+input file. 
+<DT><I>outputfile</I>
+
+<DD>
+output file. If no output file is given as argument, 
+<B>pstoedit </B>
+
+writes the result to standard output.
+</DL>
+<P>
+
+If neither an input nor an output file is given as argument, 
+<B>pstoedit </B>
+
+works as filter reading from standard input and writing to standard output.
+<P>
+
+<A NAME="lbAI">&nbsp;</A>
+<H3>BACK END-SPECIFIC OPTIONS</H3>
+
+<B>pstoedit </B>
+
+allows you to pass individual options to a backend. This is 
+done by appending all options to the 
+<I>format </I>
+
+specified after the 
+<B>-f </B>
+
+option. The format specifier and its options must be separated by a 
+colon 
+(<B>:</B>).
+
+If more than
+one option needs to be passed to the backend, the whole argument to 
+<B>-f</B>
+
+must be enclosed within double-quote characters, thus:
+<DL COMPACT><DT><DD>
+<B>-f&nbsp;&quot;</B><I>format</I><B>:</B><I>option option ...&quot;</I>
+</DL>
+
+<P>
+
+Currently
+<B>met</B>
+
+,
+<B>java </B>
+
+,
+<B>dxf </B>
+
+, and
+<B>wmf </B>
+
+are the only drivers accepting specific options.  Other options may be 
+asserted through environment variables.  See &quot;ENVIRONMENT
+VARIABLES&quot; below.
+<P>
+
+The wmf driver supports two backend specific options, 'v' and 'e'.
+<DL COMPACT><DT><DD>
+<B>-f wmf:v</B>
+</DL>
+
+turns on a verbose mode; 
+<DL COMPACT><DT><DD>
+<B>-f wmf:e</B>
+</DL>
+
+tells <B>pstoedit</B> to generate an enhanced metafile instead of a 
+normal metafile.
+<DL COMPACT><DT><DD>
+<B>-f &quot;wmf:ve&quot;</B>
+</DL>
+
+specifies both verbose mode and enhanced metafile output.
+<P>
+
+The java backend allows to specify the class name of the class that is
+generated by pstoedit. The default is PSJava. You can change this using
+<DL COMPACT><DT><DD>
+<B>-f java:</B><I>anothername</I>
+</DL>
+
+<P>
+
+The dxf backend accepts the option -lines which forces all polygons
+and lines to be represented as LINEs in the generated DXF file. The
+default is to use POLYLINEs. Example:
+<DL COMPACT><DT><DD>
+<B>-f &quot;dxf:-lines&quot;</B>
+</DL>
+
+<P>
+
+The met backend allows the following single character options (without a leading -)
+<DL COMPACT><DT><DD>
+w - Draw into an opened window instead of a metafile
+</DL>
+
+<DL COMPACT><DT><DD>
+p - Draw no geometric linewidths, all lines have a width of zero
+</DL>
+
+<DL COMPACT><DT><DD>
+l - No filling of polygon interiors
+</DL>
+
+<DL COMPACT><DT><DD>
+c - No colors, just greyscales
+</DL>
+
+<DL COMPACT><DT><DD>
+t - Omit all text
+</DL>
+
+<DL COMPACT><DT><DD>
+g - Omit all graphics
+</DL>
+
+<DL COMPACT><DT><DD>
+v - Put verbose output to drvMET.out
+</DL>
+
+<P>
+
+Example:
+<DL COMPACT><DT><DD>
+<B>-f &quot;met:wlc&quot;</B>
+</DL>
+
+<A NAME="lbAJ">&nbsp;</A>
+<H3>NOTES</H3>
+
+<P>
+
+To implement a new backend you can start from 
+<B>drvsampl.cpp </B>
+
+and 
+<B>drvsampl.h</B>.
+
+See also comments in
+<B>drvbase.h </B>
+
+and 
+<B>drvfuncs.h </B>
+
+for an explanation of methods that should be implemented for a new backend.
+<P>
+
+<B>pstoedit</B>
+
+can be configured at compile time to include support for CGM. In this case
+the cd-library from the CGM Draw package
+created by G. Edward Johnson of the United States National Institute
+for Standards and Technology (NIST) is needed.  
+The cd-library and related documentation can be found at:
+<DL COMPACT><DT><DD>
+&lt;URL:<A HREF="http://speckle.ncsl.nist.gov/~lorax/">http://speckle.ncsl.nist.gov/~lorax/</A>&gt;
+</DL>
+
+<P>
+
+<A NAME="lbAK">&nbsp;</A>
+<H2>ENVIRONMENT VARIABLES</H2>
+
+<P>
+
+A default PostScript interpreter to be called by 
+<B>pstoedit </B>
+
+is specified at 
+<I>compile </I>
+
+time. You can overwrite the default by setting
+the GS environment variable to the name of a suitable PostScript 
+interpreter.
+<P>
+
+You can check which name of a PostScript interpreter was compiled into pstoedit
+using:
+<B>pstoedit&nbsp;-help</B>.
+
+<P>
+
+See the
+<B><A HREF="../man1/gs.html">gs</A></B>(1)
+
+manpage for descriptions of environment variables used by Ghostscript
+most importantly GS_FONTPATH and GS_LIB;
+other environment variables also affect output to display, print,
+and additional filtering and processing.  See the related documentation.
+<P>
+
+You can set the environment variable PSTOEDITVERBOSE to 1 to generate
+verbose output from
+<B>pstoedit</B>.
+
+Otherwise the default is 0, nonverbose.
+<P>
+
+<B>pstoedit</B>
+
+allocates temporary files using the function 
+<B><A HREF="../man3/tempnam.html">tempnam</A></B>(3).
+
+Thus the location for
+temporary files might be controllable by other environment variables used
+by this function. See the
+<B><A HREF="../man3/tempnam.html">tempnam</A></B>(3)
+
+manpage for descriptions of environment variables used. On UNIX like system 
+this is probably the TMPDIR variable, on DOS/WINDOWS either TMP or TEMP.
+<P>
+
+<A NAME="lbAL">&nbsp;</A>
+<H2>SYSTEM SPECIFIC NOTES</H2>
+
+<P>
+
+<A NAME="lbAM">&nbsp;</A>
+<H3>DOS/WINDOWS</H3>
+
+<B>pstoedit</B>
+
+compiled with MS-Visual C++ or Borland C++ runs under 32-bit only. 
+It might run under WIN32s, but certainly does not run under plain 16-bit DOS. 
+<P>
+
+The WMF driver backend is available only if 
+<B>pstoedit</B>
+
+was compiled using Borland C++. A graphical user interface for pstoedit
+is available under 
+<B>winp2eex. </B>
+
+The compilation of the GUI is only possible under Borland C++. 
+The GUI relies on 
+<B>pstoedit</B>
+
+to be installed correctly somewhere in a directory where your PATH variable
+points to, since it calls
+<B>pstoedit</B>
+
+as a subprocess. When the GUI is run, it creates a file named makeedit.err
+which contains error and trace messages from the GUI.
+<A NAME="lbAN">&nbsp;</A>
+<H3>OS/2</H3>
+
+When running 
+<B>pstoedit</B>
+
+on OS/2 you need to call it using the script 
+<B>ps2edit.cmd</B>.
+
+<P>
+
+<A NAME="lbAO">&nbsp;</A>
+<H2>TROUBLE SHOOTING</H2>
+
+<P>
+
+If you have problems with 
+<B>pstoedit </B>
+
+first try whether Ghostscript successfully displays your file. If yes
+try 
+
+
+<B>pstoedit -f ps</B> <I>infile.ps testfile.ps</I>
+
+
+and check whether <I>testfile.ps</I>
+still displays correctly using Ghostscript. If this file doesn't look
+correctly then there seems to be a problem with 
+<B>pstoedit's</B>
+
+PostScript frontend. If this file looks good but the output for a specific
+format is wrong, the problem is probably in the backend for the specific format.
+In either case send bug fixes and reports to the author.
+<A NAME="lbAP">&nbsp;</A>
+<H2>RESTRICTIONS</H2>
+
+<P>
+
+Non-standard fonts
+(<I>e.g.</I>
+
+TeX bitmap fonts)
+are mapped to a default font which can be changed using the -df option.
+<B>pstoedit </B>
+
+chooses the size of the replacement font such that the width of the
+string in the original font is the same as in the replacement font. This
+is done for each text fragment displayed.
+Special character encoding support is limited in this case.
+If a character cannot be mapped into the target format, pstoedit displays
+a '#' instead.
+<P>
+
+<B>pstoedit</B>
+
+does not support bitmap graphics, which are left as an exercise for the
+user.  (Ghostscript can be used to generate bitmap output; there are a 
+number of useful filters that convert various vector graphic formats into 
+bitmaps.)
+<P>
+
+The Gnuplot backend and the 3D backends (rpl, lwo, rib) do not support text.
+<P>
+
+The OS/2 met backend sometimes causes the viewer to fail, although drawing
+directly to screen works. This problem is solved with OS/2 FixPak 22.
+<P>
+
+<B>pstoedit</B> does not yet generate placeable 
+metafiles. This feature is planned for a future release.
+<P>
+
+<B>Special note about the Java backend</B>
+
+<P>
+
+The java backend generates a java source file that needs other files
+in order to be compiled and usable. These files are not part of pstoedit
+but can be obtained from the author.
+<P>
+
+These other files are Java classes (one applet and support classes) that 
+allow to step through the individual pages of a converted PostScript
+document. This applet can easily be activated from a html-document.
+<P>
+
+<A NAME="lbAQ">&nbsp;</A>
+<H2>NOTICES</H2>
+
+<A NAME="lbAR">&nbsp;</A>
+<H3>AUTHOR</H3>
+
+Wolfgang Glunz, <A HREF="mailto:Wolfgang.Glunz@mchp.siemens.de">Wolfgang.Glunz@mchp.siemens.de</A>
+<P>
+
+<A NAME="lbAS">&nbsp;</A>
+<H3>CANONICAL ARCHIVE SITE</H3>
+
+<A HREF="ftp://ftp.x.org/contrib/applications/pstoedit/pstoedit.html">ftp://ftp.x.org/contrib/applications/pstoedit/pstoedit.html</A>
+<P>
+
+<A NAME="lbAT">&nbsp;</A>
+<H3>ACKNOWLEDGEMENTS</H3>
+
+<DL COMPACT>
+<DT><B>*</B>
+
+<DD>
+
+
+Klaus Steinberger
+&lt;<A HREF="mailto:Klaus.Steinberger@physik.uni-muenchen.de">Klaus.Steinberger@physik.uni-muenchen.de</A>&gt;
+wrote the initial version of this manpage.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Lar Kaufman 
+&lt;<A HREF="mailto:lark@walden.com">lark@walden.com</A>&gt;
+revised the increasingly complex command syntax diagrams and
+updated the structure and content of this manpage following release 2.5.
+
+&lt;URL:<A HREF="http://www.walden.com/~lark/">http://www.walden.com/~lark/</A>&gt;
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+David B. Rosen
+&lt;<A HREF="mailto:rosen@unr.edu">rosen@unr.edu</A>&gt;
+provided ideas and some PostScript code from his 
+<B>ps2aplot</B>
+
+program.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Ian MacPhedran 
+&lt;<A HREF="mailto:Ian_MacPhedran@engr.USask.CA">Ian_MacPhedran@engr.USask.CA</A>&gt;
+provided the 
+<B>xfig</B>
+
+backend.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Carsten Hammer 
+&lt;<A HREF="mailto:chammer@hermes.hrz.uni-bielefeld.de">chammer@hermes.hrz.uni-bielefeld.de</A>&gt;
+provided the 
+<B>gnuplot</B>
+
+backend and the initial 
+DXF 
+backend.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Christoph Jaeschke 
+&lt;<A HREF="mailto:jaeschke@imbe05.imbe.uni-bremen.de">jaeschke@imbe05.imbe.uni-bremen.de</A>&gt;
+provided the OS/2 metafile (MET) backend.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Jens Weber
+&lt;<A HREF="mailto:rz47b7@PostAG.DE">rz47b7@PostAG.DE</A>&gt;
+provided the Windows metafile (WMF) backend, 
+and a graphical user interface (GUI).
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+G. Edward Johnson
+&lt;<A HREF="mailto:lorax@nist.gov">lorax@nist.gov</A>&gt;
+provided the CGM Draw 
+library used in the CGM backend.
+&lt;URL:<A HREF="http://speckle.ncsl.nist.gov/~lorax/">http://speckle.ncsl.nist.gov/~lorax/</A>&gt;
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Gerhard Kircher 
+&lt;<A HREF="mailto:kircher@edvz.tuwien.ac.at">kircher@edvz.tuwien.ac.at</A>&gt; 
+provided some bug fixes. 
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Bill Cheng 
+&lt;<A HREF="mailto:william@cs.columbia.edu">william@cs.columbia.edu</A>&gt;
+provided help with the tgif format and some changes to 
+<B>tgif </B>
+
+to make the backend easier to implement.
+<BR>
+
+&lt;URL:<A HREF="http://www.cs.columbia.edu/~william">http://www.cs.columbia.edu/~william</A>&gt;
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Reini Urban
+&lt;<A HREF="mailto:rurban@sbox.tu-graz.ac.at">rurban@sbox.tu-graz.ac.at</A>&gt;
+provided input for the extended DXF backend.
+<BR>
+
+&lt;URL:<A HREF="http://xarch.tu-graz.ac.at/autocad/">http://xarch.tu-graz.ac.at/autocad/</A>&gt; 
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Glenn M. Lewis 
+&lt;<A HREF="mailto:glewis@c2.net">glewis@c2.net</A>&gt;
+provided RenderMan (RIB), Real3D (RPL), and LightWave 3D (LWO) 
+backends.
+&lt;URL:<A HREF="http://www.c2.net/~glewis/">http://www.c2.net/~glewis/</A>&gt;
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Piet van Oostrum 
+&lt;<A HREF="mailto:piet@cs.ruu.nl">piet@cs.ruu.nl</A>&gt; 
+made several bug fixes.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Lutz Vieweg &lt;<A HREF="mailto:lkv@mania.robin.de">lkv@mania.robin.de</A>&gt; provided several bug fixes and suggestions 
+for improvements.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Derek B. Noonburg &lt;<A HREF="mailto:derekn@vw.ece.cmu.edu">derekn@vw.ece.cmu.edu</A>&gt; and 
+<BR>
+
+Rainer Dorsch &lt;<A HREF="mailto:rd@berlepsch.wohnheim.uni-ulm.de">rd@berlepsch.wohnheim.uni-ulm.de</A>&gt; isolated and resolved a 
+Linux-specific core dump problem.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Rob Warner &lt;<A HREF="mailto:rcw2@ukc.ac.uk">rcw2@ukc.ac.uk</A>&gt; made 
+<B>pstoedit</B>
+
+compile under RiscOS.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Patrick Gosling &lt;<A HREF="mailto:jpmg@eng.cam.ac.uk">jpmg@eng.cam.ac.uk</A>&gt; made some suggestions regarding the
+usage of 
+<B>pstoedit</B>
+
+in Ghostscript's SAFER mode.
+
+
+<DT><B>*</B>
+
+<DD>
+
+
+Scott Pakin &lt;<A HREF="mailto:pakin@cs.uiuc.edu">pakin@cs.uiuc.edu</A>&gt; for the Idraw backend.
+
+
+</DL>
+<P>
+
+<A NAME="lbAU">&nbsp;</A>
+<H3>LEGAL NOTICES</H3>
+
+<P>
+
+Trademarks mentioned are the property of their respective owners.  
+<P>
+
+Some code incorporated
+in the
+<B>pstoedit</B>
+
+package is subject to copyright or other intellectual property rights or
+restrictions including attribution rights.  See the notes in individual 
+files.
+<P>
+
+<B>pstoedit</B>
+
+is controlled under the Free Software Foundation GNU Public License (GPL).
+<P>
+
+Aladdin Ghostscript is a redistributable software package with copyright
+restrictions controlled by Aladdin Software. 
+<P>
+
+<B>pstoedit</B>
+
+has no other relation to Ghostscript besides calling it in a subprocess.
+<P>
+
+The authors, contributors, and distributors of
+<B>pstoedit</B>
+
+are not responsible for its use for any purpose, or for the results 
+generated thereby.  The CGM cd-library is distributed under the following
+notice:
+<DL COMPACT><DT><DD>
+[CD] software produced by NIST, an agency of the U.S. government, is by
+statute not subject to copyright in the United States.  Recipients of this
+software assume all responsibilities associated with its operation, 
+modification, and maintenance.
+</DL>
+
+<P>
+
+Restrictions such as the foregoing may apply in other countries according
+to international conventions and agreements.
+<P>
+
+<A NAME="lbAV">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<P>
+
+<B><A HREF="../man1/dvips.html">dvips</A></B>(1),
+
+<B><A HREF="../man1/gs.html">gs</A></B>(1),
+
+<B><A HREF="../man1/ghostview.html">ghostview</A></B>(1),
+
+<B><A HREF="../man1/gnuplot.html">gnuplot</A></B>(1),
+
+<B><A HREF="../man1/tgif.html">tgif</A></B>(1),
+
+<B><A HREF="../man1/Xfig.html">Xfig</A></B>(1)
+
+<B><A HREF="../man1/idraw.html">idraw</A></B>(1),
+
+<P>
+
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME </A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAE">RELEASE LEVEL</A><DD>
+<DT><A HREF="#lbAF">USE</A><DD>
+<DT><A HREF="#lbAG">NOTES</A><DD>
+</DL>
+<DT><A HREF="#lbAH">OPTIONS</A><DD>
+<DL>
+<DT><A HREF="#lbAI">BACK END-SPECIFIC OPTIONS</A><DD>
+<DT><A HREF="#lbAJ">NOTES</A><DD>
+</DL>
+<DT><A HREF="#lbAK">ENVIRONMENT VARIABLES</A><DD>
+<DT><A HREF="#lbAL">SYSTEM SPECIFIC NOTES</A><DD>
+<DL>
+<DT><A HREF="#lbAM">DOS/WINDOWS</A><DD>
+<DT><A HREF="#lbAN">OS/2</A><DD>
+</DL>
+<DT><A HREF="#lbAO">TROUBLE SHOOTING</A><DD>
+<DT><A HREF="#lbAP">RESTRICTIONS</A><DD>
+<DT><A HREF="#lbAQ">NOTICES</A><DD>
+<DL>
+<DT><A HREF="#lbAR">AUTHOR</A><DD>
+<DT><A HREF="#lbAS">CANONICAL ARCHIVE SITE</A><DD>
+<DT><A HREF="#lbAT">ACKNOWLEDGEMENTS</A><DD>
+<DT><A HREF="#lbAU">LEGAL NOTICES</A><DD>
+</DL>
+<DT><A HREF="#lbAV">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://wsinwp01.win.tue.nl:1234/cgi-bin/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 16:25:58 GMT, April 15, 1997
+</BODY>
+</HTML>

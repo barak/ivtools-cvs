@@ -1,0 +1,122 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Box, HBox, VBox - tile interactors in a box
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/box.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  box  is  a scene of interactors that are tiled side-by-
+       side in the available space.  Interactors are placed left-
+       to-right  in a horizontal box, and top-to-bottom in a ver-
+       tical box.
+
+       A box will try to stretch or shrink the interactors inside
+       it  to fit the available space.  The natural size of a box
+       is the sum of its elements along the major axis,  and  the
+       maximum  along  its  minor  axis.   A box's stretchability
+       (shrinkability) is the sum of its elements along its major
+       axis and the minimum of its elements along its minor axis.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>HBox(...)</B>
+       <B>VBox(...)</B>
+              Create a new box.  Zero to seven interactors may be
+              passed  as  arguments; the interactors are inserted
+              into the box.
+
+       <B>void</B> <B>Align(Alignment)</B>
+              Set the alignment mode that the box uses  to  place
+              elements  along the minor axis.  The default align-
+              ment for an hbox is <I>Bottom</I>; other choices  are  <I>Top</I>
+              and  <I>Center</I>.   The  default alignment for a vbox is
+              <I>Left</I>; other choices are <I>Right</I> and <I>Center</I>.
+
+       <B>void</B> <B>Insert(Interactor*)</B>
+              Append an interactor to the box.  Components of  an
+              hbox  (vbox) will appear left-to-right (top-to-bot-
+              tom) in the order in which they are inserted.
+
+       <B>void</B> <B>Change(Interactor*)</B>
+              Notify the box that the  given  interactor's  shape
+              has  changed.   If  change propagation is true, the
+              box will modify its own shape to reflect the change
+              and  notify its parent.  Regardless of propagation,
+              the box will recompute the positions of the  compo-
+              nent  interactors and update any that have changed.
+
+       <B>void</B> <B>Remove(Interactor*)</B>
+              Take an element of out  a  box.   Remove  does  not
+              cause  any immediate change to the other components
+              in the box; the Change  operation  must  be  called
+              after  one  or more Removes to update the component
+              positions.
+
+       <B>Glue(3I)</B>, <B>Interactor(3I)</B>, <B>Scene(3I)</B>, <B>Shape(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

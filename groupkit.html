@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>GroupKit1.0 from the University of Calgary</title>
+  </head>
+
+  <body>
+    <h1>GroupKit1.0 from the University of Calgary</h1>
+
+    Sometime in 1998, an attempt was made, for reasons of software
+    archaelogical curiosity, to build GroupKit1.0 from the University
+    of Calgary on top of <a href=./index.html>ivtools</a>.  This
+    version of GroupKit, from Mark Roseman and Saul Greenberg, was
+    delivered on top of the third beta release of InterViews 3.1,
+    published in 1990.  Subsequent versions were written on top of
+    Tcl/Tk.<p>
+
+     GroupKit1.0 relied extensively on the Dispatch class library, and
+     the use of binary iostreams for distributed communication.
+     Subsequent evolutions to either the Dispatch library or the
+     iostreams library (at least the libstdc++ version) seem to have
+     disabled GroupKit1.0.  The assumption that might be the problem
+     was the technique of pushing bytes back onto an incoming binary
+     socket stream as a way of managing distributed communication.<p>
+
+      Because of the scientific free software ethic involved, all
+      components are still available for investigation and/or fixing
+      if anyone is so motivated.  Alternates to the Dispatch library,
+      like <a href=http://www.cs.wustl.edu/~schmidt/ACE.html>ACE</a>
+      from <a href=http://www.cs.wustl.edu/~schmidt>Doug Schmidt</a>,
+      now exist, but it is possible that this original approach
+      attempted by programmers at the University of Calgary might
+      still be viable if upgraded to the latest capability of
+      iostreams.  With it comes one pile of C++ software applicable to
+      multi-media conferencing.<p>
+
+      Here is the original <a href=http://www.vectaport.com/pub/src/GroupKit1.0.tar.Z>GroupKit1.0.tar.Z</a><p>
+
+      Here is the original <a href=./gk1.0-README.txt>README</a><p>
+
+      Here is a <a href=./gk1.0-ivtools.patch>patch</a> which upgrades
+      GroupKit1.0 to build on <a href=./index.html>ivtools</a>.<p>
+
+      Here is the latest version of <a href=http://www.cpsc.ucalgary.ca/grouplab/groupkit/>GroupKit</a><p>
+
+  </body>
+</html>

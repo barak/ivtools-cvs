@@ -1,0 +1,284 @@
+
+<html><head><TITLE>Description of Attribute</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Attribute</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+generic symbol/value pair.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#Attribute><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Attribute/attribute.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <A HREF="Attribute.html" >Attribute</A> consists of a symbol, represented by its index into a symbol table,
+ paired with a value, represented by an <A HREF="AttributeValue.html" >AttributeValue</A>.  <A HREF="Memory.html" >Memory</A> for the
+ <A HREF="AttributeValue.html" >AttributeValue</A> is owned by the <A HREF="Attribute.html" >Attribute</A>.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Attribute(constAttribute&#38;)">
+    <B>Attribute</B> (const <A HREF="Attribute.html" >Attribute</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Attribute(constchar*name=0&#38;&#38;COMMAttributeValue*value=0)">
+    <B>Attribute</B> (const char* name =0, <A HREF="AttributeValue.html" >AttributeValue</A>* value =0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct an attribute by generating a symbol id for the 'name'
+ character string, and accepting a pointer to an externally allocated 'value'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Attribute(intsymid&#38;&#38;COMMAttributeValue*value=0)">
+    <B>Attribute</B> (int symid, <A HREF="AttributeValue.html" >AttributeValue</A>* value =0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct an attribute with a symbol id instead of a character string, 
+ and accepting a pointer to an externally allocated 'value'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="Name()">
+    <B>Name</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        look up and return symbol string.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="SymbolId()">
+    <B>SymbolId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return the id of the symbol in the symbol table.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="Value()">
+    <B>Value</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return a pointer to the internal <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Value(AttributeValue*)">
+    <B>Value</B> (<A HREF="AttributeValue.html" >AttributeValue</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        accept new pointer to an externally allocated <A HREF="AttributeValue.html" >AttributeValue</A>,
+ deleting the old pointer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Attribute()">
+    <B>~Attribute</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        deallocate memory for internal <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDAttribute&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="Attribute.html" >Attribute</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="symbolid">
+    <B>symbolid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="valueptr">
+    <B>valueptr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="AttributeList">
+    <B>AttributeList</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

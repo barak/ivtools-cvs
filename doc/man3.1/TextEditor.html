@@ -1,0 +1,177 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       TextEditor - basic unstructured text editing
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/texteditor.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A TextEditor is an interactor that provides an interactive
+       interface for simple text editing of a TextBuffer.  TextE-
+       ditor  uses  an  editing  model  based on a single current
+       selection.  Editing operations operate on the text in  the
+       selection, alter the position or size of the selection, or
+       scroll the display  to  view  other  parts  of  the  text.
+       TextEditor   interprets   a  perspective  for  interactive
+       scrolling using a scroller.
+
+       TextEditor does not provide  a  default  set  of  keyboard
+       bindings.   You  can implement the key bindings you desire
+       by subclassing and redefining the Handle operation  or  by
+       handling keyboard events in an entirely separate class.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>TextEditor(int</B> <B>rows,</B> <B>int</B> <B>cols,</B> <B>int</B> <B>tabsize,</B> <B>int</B> <B>highlight)</B>
+       <B>~TextEditor()</B>
+              Create or destroy an instance of  TextEditor.   The
+              natural  size  of a TextEditor is specified by <I>rows</I>
+              and <I>columns</I>.  The TextEditor will be tall enough to
+              display <I>rows</I> lines of text in the current font, and
+              it will be wide enough to display  <I>columns</I>  charac-
+              ters.   For  proportionally-spaced fonts, the width
+              of the character 'n' is taken to be representative.
+              Tab  characters  in the text are expanded to multi-
+              ples of  <I>tabsize</I>  character  widths.   The  current
+              selection  highlighted  with  the  text style <I>high-</I>
+              <I>light</I>.
+
+       <B>void</B> <B>Edit(TextBuffer*,</B> <B>int</B> <B>index</B> <B>=</B> <B>0)</B>
+              Specify the text buffer to  edit.   A  text  buffer
+              must  be  specified  before  the TextEditor is dis-
+              played.  The optional <I>index</I> parameter specifies the
+              initial selection point.  If necessary, the TextEd-
+              itor is scrolled so that  the  selection  point  is
+              visible.
+
+       <B>int</B> <B>Dot()</B>
+       <B>int</B> <B>Mark()</B>
+              The  current  selection  is  bounded by two indices
+              into the text buffer.  By convention these  indices
+              are  called  dot  and mark.  Dot is the position at
+              which text will  be  inserted  and  deleted.   Mark
+              locates  the end of the selection that moves as the
+              selection is modified.  When the selection is empty
+              (an insertion point), dot and mark are equal.
+
+       <B>void</B> <B>DeleteText(int</B> <B>count)</B>
+       <B>void</B> <B>DeleteSelection()</B>
+              Edit  the  text  buffer  at  the current selection.
+              InsertText inserts  count  characters  from  string
+              after  dot.   The  selection  becomes  an insertion
+              point following the newly inserted  text.   Delete-
+              Text  deletes count characters at dot.  If count is
+              positive, the characters following dot are deleted;
+              if  count is negative the characters before dot are
+              deleted.  The selection becomes an insertion  point
+              in  the place of the deleted text.  DeleteSelection
+              deletes the text between dot and mark, changing the
+              selection to an insertion point.
+
+       <B>void</B> <B>BackwardCharacter(int</B> <B>count)</B>
+       <B>void</B> <B>ForwardCharacter(int</B> <B>count)</B>
+       <B>void</B> <B>BackwardLine(int</B> <B>count)</B>
+       <B>void</B> <B>ForwardLine(int</B> <B>count)</B>
+       <B>void</B> <B>BackwardWord(int</B> <B>count)</B>
+       <B>void</B> <B>ForwardWord(int</B> <B>count)</B>
+       <B>void</B> <B>BackwardPage(int</B> <B>count)</B>
+       <B>void</B> <B>ForwardPage(int</B> <B>count)</B>
+              Move  the  current selection forward or backward by
+              the specified number of the specified  units.   The
+              default movement is one unit.  The selection is not
+              moved before the beginning of after the end of  the
+              text.
+
+       <B>void</B> <B>BeginningOfLine()</B>
+       <B>void</B> <B>EndOfLine()</B>
+       <B>void</B> <B>BeginningOfWord()</B>
+       <B>void</B> <B>EndOfWord()</B>
+       <B>void</B> <B>BeginningOfSelection()</B>
+       <B>void</B> <B>EndOfSelection()</B>
+       <B>void</B> <B>BeginningOfText()</B>
+       <B>void</B> <B>EndOfText()</B>
+              Move the current selection forwards or backwards to
+              the specified feature of the text.
+
+       <B>void</B> <B>ScrollToSelection(boolean</B> <B>always</B> <B>=</B> <B>false)</B>
+       <B>void</B> <B>SetScrollAlignment(Alignment)</B>
+       <B>Alignment</B> <B>GetScrollAlignment()</B>
+              ScrollToSelction scrolls the display  so  that  dot
+              will  be  visible.  If dot is currently visible and
+              <I>always</I> is false, no scrolling takes place;  if  dot
+              is  not  visible  or <I>always</I> is true, the display is
+              scrolled so that dot will be positioned as close as
+              possible  to  the  position  specified by SetScrol-
+              lAlignment.  GetScrollAlignment returns the current
+              scroll alignment.  The default alignment is Center.
+
+       <B>void</B> <B>ScrollToView(Coord</B> <B>x,</B> <B>Coord</B> <B>y)</B>
+              ScrollToView scrolls the display so that  the  text
+              currently  at  the position (<I>x</I>, <I>y</I>) will be visible.
+              If the specified point  is  currently  visible,  no
+              scrolling   takes  place.   ScrollBy  specifies  an
+              amount by which to scroll  the  display.   Positive
+              values scroll the display upwards and to the right.
+              In each case, the final position of the display  is
+              limited so that some text will be visible.
+
+       <B>void</B> <B>GrabScroll(Event&amp;)</B>
+       <B>void</B> <B>RateScroll(Event&amp;)</B>
+              Initiate  grab  scrolling  or rate scrolling.  Once
+              called, GrabScroll (RateScroll) polls  the  current
+              mouse position as long as the middle (right) button
+              is pressed.  As GrabScroll polls,  it  scrolls  the
+              text to follow the mouse position, making it appear
+              as though the user is  dragging  the  text  itself.
+              Each  time  RateScroll  polls the mouse, it scrolls
+              the text by an amount corresponding to the  differ-
+              ential  between the current and initial mouse posi-
+              tions.  This creates the  illusion  of  a  joystick
+              interface:  the  further away the mouse is from its
+              initial position, the greater the scrolling  incre-
+              ment  and  the  faster  the text appears to scroll;
+              scrolling slows down, stops, and reverses direction
+              as  the  user drags the mouse back towards and past
+              the initial position.
+
+       <B>void</B> <B>Select(int</B> <B>dot)</B>
+       <B>void</B> <B>Select(int</B> <B>dot,</B> <B>int</B> <B>mark)</B>
+       <B>void</B> <B>SelectMore(int</B> <B>mark)</B>
+       <B>void</B> <B>SelectAll()</B>
+              Modify the  current  selection  in  terms  of  text
+              indices.   With  a  single  parameter, Select moves
+              both dot and mark to the specified index.  With two
+              parameters, dot and mark can be controlled indepen-
+              dently.  SelectMore leaves dot unchanged and  moves
+              mark.   SelectAll  sets  dot to the end of the text
+              and mark to the beginning.
+
+       <B>int</B> <B>Locate(Coord</B> <B>x,</B> <B>Coord</B> <B>y)</B>
+              Return the text index  most  closely  matching  the
+              point (<I>x</I>, <I>y</I>).
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(2I)</B>, <B>TextBuffer(3I)</B>
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

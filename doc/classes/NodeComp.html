@@ -1,0 +1,787 @@
+
+<html><head><TITLE>Description of NodeComp</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>NodeComp</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayComp.html" >OverlayComp</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+node component<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayComp.html" >OverlayComp</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#NodeComp><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+GraphUnidraw/nodecomp.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  component for a node in an edge-node directed graph.  Default appearance
+ is a single ellipse with centered text for regular nodes, a double
+ ellipse with centered text for nodes with nested graphs inside them.
+ Uses underlying <A HREF="TopoNode.html" >TopoNode</A> to represent topology.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Component.html" >Component</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="EdgeComp.html" >EdgeComp</A>* 
+    <A NAME="EdgeByDir(intn&#38;&#38;COMMbooleanout_edge)">
+    <B>EdgeByDir</B> (int n, boolean out_edge) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to nth edge of given direction.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="EdgeComp.html" >EdgeComp</A>* 
+    <A NAME="EdgeIn(intn)">
+    <B>EdgeIn</B> (int n) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to nth incoming edge.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="EdgeComp.html" >EdgeComp</A>* 
+    <A NAME="EdgeOut(intn)">
+    <B>EdgeOut</B> (int n) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to nth outgoing edge.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="SF_Ellipse.html" >SF_Ellipse</A>* 
+    <A NAME="GetEllipse()">
+    <B>GetEllipse</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to ellipse graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="SF_Ellipse.html" >SF_Ellipse</A>* 
+    <A NAME="GetEllipse2()">
+    <B>GetEllipse2</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to second ellipse graphic used to indicate internal graph.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphComp.html" >GraphComp</A>* 
+    <A NAME="GetGraph()">
+    <B>GetGraph</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return internal graph for this node.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="NodeView.html" >NodeView</A>* 
+    <A NAME="GetNodeView(Viewer*)">
+    <B>GetNodeView</B> (<A HREF="Viewer.html" >Viewer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to <A HREF="NodeView.html" >NodeView</A> of this component in given viewer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="TextGraphic.html" >TextGraphic</A>* 
+    <A NAME="GetText()">
+    <B>GetText</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to text graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GraphGraphic(SF_Ellipse*e=nil)">
+    <B>GraphGraphic</B> (<A HREF="SF_Ellipse.html" >SF_Ellipse</A>* e = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set auxiliary graphic used to indicate internal graph.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Interpret(Command*)">
+    <B>Interpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        handle delete, cut, move, and change-text commands, pass rest to base class.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="TopoNode.html" >TopoNode</A>* 
+    <A NAME="Node()">
+    <B>Node</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to underlying <A HREF="TopoNode.html" >TopoNode</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="NodeComp(GraphComp*)">
+    <B>NodeComp</B> (<A HREF="GraphComp.html" >GraphComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct node component around a graph.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="NodeComp(Picture*&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NodeComp</B> (<A HREF="Picture.html" >Picture</A>*, boolean reqlabel =false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct node component with pre-made <A HREF="Picture.html" >Picture</A> graphic.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="NodeComp(SF_Ellipse*&#38;&#38;COMMTextGraphic*&#38;&#38;COMMSF_Ellipse*&#38;&#38;COMMGraphComp*&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NodeComp</B> (<A HREF="SF_Ellipse.html" >SF_Ellipse</A>*, <A HREF="TextGraphic.html" >TextGraphic</A>*, <A HREF="SF_Ellipse.html" >SF_Ellipse</A>*, <A HREF="GraphComp.html" >GraphComp</A>*, boolean reqlabel = false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct node component with ellipse and text graphic
+ (text display not requiredd by default).
+ construct node component with internal graph
+ (text display not requiredd by default).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="NodeComp(SF_Ellipse*&#38;&#38;COMMTextGraphic*&#38;&#38;COMMSF_Ellipse*&#38;&#38;COMMGraphComp*&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NodeComp</B> (<A HREF="SF_Ellipse.html" >SF_Ellipse</A>*, <A HREF="TextGraphic.html" >TextGraphic</A>*, <A HREF="SF_Ellipse.html" >SF_Ellipse</A>*, <A HREF="GraphComp.html" >GraphComp</A>*, boolean reqlabel = false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct node component with ellipse and text graphic
+ (text display not requiredd by default).
+ construct node component with internal graph
+ (text display not requiredd by default).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="NodeComp(istream&#38;&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NodeComp</B> (istream&#38;, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct node component from istream, relying on <A HREF="GraphCatalog.html" >GraphCatalog</A>
+ to re-establish connections between edges and nodes.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NodeIn(intn)">
+    <B>NodeIn</B> (int n) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to node on other side of nth incoming edge.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NodeOut(intn)">
+    <B>NodeOut</B> (int n) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to node on other side of nth outgoing edge.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Notify()">
+    <B>Notify</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        override <A HREF="OverlayComp.html" >OverlayComp</A>::Notify, separating view update from 
+ attribute list update. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Read(istream&#38;)">
+    <B>Read</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        archaic read method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="RequireLabel()">
+    <B>RequireLabel</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to indicate whether node must have label (text graphic).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetGraph(GraphComp*)">
+    <B>SetGraph</B> (<A HREF="GraphComp.html" >GraphComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set internal graph for this node.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="EdgeComp.html" >EdgeComp</A>* 
+    <A NAME="SubEdgeComp(int)">
+    <B>SubEdgeComp</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to nth edge component on internal graph.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ArrowLine.html" >ArrowLine</A>* 
+    <A NAME="SubEdgeGraphic(int)">
+    <B>SubEdgeGraphic</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to nth edge graphic on internal graph.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Uninterpret(Command*)">
+    <B>Uninterpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        handle undoing move and graph-delete command, pass rest to base class.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Write(ostream&#38;)">
+    <B>Write</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        archaic write method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="operator==(OverlayComp&#38;)">
+    <B>operator ==</B> (<A HREF="OverlayComp.html" >OverlayComp</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="update(Observable*)">
+    <B>update</B> (<A HREF="Observable.html" >Observable</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        update notification received from <A HREF="Observable.html" >Observable</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~NodeComp()">
+    <B>~NodeComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDNodeComp&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="NodeComp.html" >NodeComp</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="GetParamList()">
+    <B>GetParamList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GrowParamList(ParamList*)">
+    <B>GrowParamList</B> (<A HREF="ParamList.html" >ParamList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="NodeComp(OverlayComp*parent=nil)">
+    <B>NodeComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="GraphComp.html" >GraphComp</A>* 
+    <A NAME="_graph">
+    <B>_graph</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="TopoNode.html" >TopoNode</A>* 
+    <A NAME="_node">
+    <B>_node</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="_node_params">
+    <B>_node_params</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_reqlabel">
+    <B>_reqlabel</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

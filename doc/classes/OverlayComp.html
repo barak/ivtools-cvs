@@ -1,0 +1,932 @@
+
+<html><head><TITLE>Description of OverlayComp</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayComp</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="GraphicComp.html" >GraphicComp</A>, public <A HREF="Observer.html" >Observer</A>, public <A HREF="Observable.html" >Observable</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+derived <A HREF="GraphicComp.html" >GraphicComp</A><br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="GraphicComp.html" >GraphicComp</A>, public <A HREF="Observer.html" >Observer</A>, public <A HREF="Observable.html" >Observable</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayComp><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovcomps.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  derived <A HREF="GraphicComp.html" >GraphicComp</A>  with extensions for property lists of arbitrary 
+ <A HREF="AttributeValue.html" >AttributeValue</A> objects, event propogation inherited from <A HREF="Observer.html" >Observer</A> and 
+ <A HREF="Observable.html" >Observable</A>, and new persistence mechanisms (serialization) derived from 
+ <A HREF="ExternView.html" >ExternView</A> (<A HREF="OverlayScript.html" >OverlayScript</A>).
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AdjustBaseDir(constchar*oldpath&#38;&#38;COMMconstchar*newpath)">
+    <B>AdjustBaseDir</B> (const char* oldpath, const char* newpath) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        adjust base directory used for generating pathnames for this component,
+ done when a document is saved to a new location.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Configure(Editor*)">
+    <B>Configure</B> (<A HREF="Editor.html" >Editor</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        to be filled in by derived class. Useful for initializing a component
+ after the <A HREF="Editor.html" >Editor</A> has been constructed.	
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="FindValue(constchar*name&#38;&#38;COMMbooleanlast=false&#38;&#38;COMMbooleanbreadth=false&#38;&#38;COMMbooleandown=true&#38;&#38;COMMbooleanup=false)">
+    <B>FindValue</B> (const char* name, boolean last = false, boolean breadth = false, boolean down = true, boolean up = false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        search component tree for specified attribute value by 'name'. Only
+ two modes supported so far: the default argument mode which returns the
+ first occurence found with a downward depth-first search, and upward search.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="FindValue(intsymid&#38;&#38;COMMbooleanlast=false&#38;&#38;COMMbooleanbreadth=false&#38;&#38;COMMbooleandown=true&#38;&#38;COMMbooleanup=false)">
+    <B>FindValue</B> (int symid, boolean last = false, boolean breadth = false, boolean down = true, boolean up = false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        search component tree for specified attribute value by 'symid'. Only
+ default argument mode implemented so far -- return first occurence found
+ with a downward depth-first search.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayView.html" >OverlayView</A>* 
+    <A NAME="FindView(Viewer*)">
+    <B>FindView</B> (<A HREF="Viewer.html" >Viewer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return the view for this compoent (for this subject) in a specific viewer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="GetAnnotation()">
+    <B>GetAnnotation</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to annotation string for this component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="GetAttributeList()">
+    <B>GetAttributeList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to associated <A HREF="AttributeList.html" >AttributeList</A> (property list made up of
+ arbitrary <A HREF="AttributeValue.html" >AttributeValue</A> objects), creating if necessary.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="GetBaseDir()">
+    <B>GetBaseDir</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set base directory used for generating pathnames for this component
+ and all of its children.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="GetByPathnameFlag()">
+    <B>GetByPathnameFlag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return by-pathname flag
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        original <A HREF="Unidraw.html" >Unidraw</A> class id system, based on #define's in *classes.h file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="GetFromCommandFlag()">
+    <B>GetFromCommandFlag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return by-pathname flag
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="GetIndexedGS(int)">
+    <B>GetIndexedGS</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return graphic state (gs) from table, a use of <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlaysComp.html" >OverlaysComp</A>* 
+    <A NAME="GetIndexedPic(int)">
+    <B>GetIndexedPic</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return compound-graphic (pic) from table, a use of <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MultiLineObj.html" >MultiLineObj</A>* 
+    <A NAME="GetIndexedPts(int)">
+    <B>GetIndexedPts</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return point-list (pts) from table, a use of <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Component.html" >Component</A>* 
+    <A NAME="GetParent()">
+    <B>GetParent</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get pointer to parent component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="GetPathName()">
+    <B>GetPathName</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get pathname associated with this component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="GraphicEquals(Graphic*a&#38;&#38;COMMGraphic*b)">
+    <B>GraphicEquals</B> (<A HREF="Graphic.html" >Graphic</A>* a, <A HREF="Graphic.html" >Graphic</A>* b) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compare two graphics, 'a' and 'b', for equality.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Interpret(Command*)">
+    <B>Interpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pass command to component for interpretation.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        original <A HREF="Unidraw.html" >Unidraw</A> class id system, based on #define's in *classes.h file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Notify()">
+    <B>Notify</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        method specialized from <A HREF="Component.html" >Component</A> that incorporates the <A HREF="Observer.html" >Observer</A>/<A HREF="Observable.html" >Observable</A>
+ notification with the original <A HREF="Unidraw.html" >Unidraw</A> notification.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayComp(Graphic*g=nil&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>OverlayComp</B> (<A HREF="Graphic.html" >Graphic</A>* g = nil, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        optional graphic and parent component used to initialize component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayComp(istream&#38;in)">
+    <B>OverlayComp</B> (istream&#38; in) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        component initialized by reading from 'in' (de-serialization).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetAnnotation(constchar*)">
+    <B>SetAnnotation</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set the annotation string for this component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetAttributeList(AttributeList*)">
+    <B>SetAttributeList</B> (<A HREF="AttributeList.html" >AttributeList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set new property list for component, de-referencing the old one, and
+ increment the reference-count of the new one.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetByPathnameFlag(boolean)">
+    <B>SetByPathnameFlag</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that determines whether component will be serialized (converted to
+ external persistent storage) by just the pathname or by the internal contents.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetFromCommandFlag(boolean)">
+    <B>SetFromCommandFlag</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that determines whether component will be serialized (converted to
+ external persistent storage) by just the pathname or by the internal contents.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetParent(Component*child&#38;&#38;COMMComponent*parent)">
+    <B>SetParent</B> (<A HREF="Component.html" >Component</A>* child, <A HREF="Component.html" >Component</A>* parent) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set pointer to 'parent' component on 'child' component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetPathName(constchar*)">
+    <B>SetPathName</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set pathname associated with this component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="TopComp()">
+    <B>TopComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns pointer to top-level component in the component tree.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Uninterpret(Command*)">
+    <B>Uninterpret</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pass command to component for reverse interpretation.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="attrlist()">
+    <B>attrlist</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to property list, without allocating a new one if it is nil.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="notify()">
+    <B>notify</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        notify method for an <A HREF="Observer.html" >Observer</A>/<A HREF="Observable.html" >Observable</A> design pattern.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="operator!=(OverlayComp&#38;)">
+    <B>operator !=</B> (<A HREF="OverlayComp.html" >OverlayComp</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compare another component, including its graphic, for non-equality to this one.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="operator==(OverlayComp&#38;)">
+    <B>operator ==</B> (<A HREF="OverlayComp.html" >OverlayComp</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compare another component, including its graphic, for equality to this one.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="update(Observable*)">
+    <B>update</B> (<A HREF="Observable.html" >Observable</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        update method for an <A HREF="Observer.html" >Observer</A>/<A HREF="Observable.html" >Observable</A> design pattern.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="valid()">
+    <B>valid</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        for checking if istream constructor was successfull (if de-serialization
+ was successful).	
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlayComp()">
+    <B>~OverlayComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDOverlayComp&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="OverlayComp.html" >OverlayComp</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="GetParamList()">
+    <B>GetParamList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return <A HREF="ParamList.html" >ParamList</A> of required/optional/keyword arguments to be read
+ from an external (serialized) representation in the istream constructor
+ of a component. Includes pointers to static methods that read portions of
+ an istream. keyword arguments (or fields) not found in the <A HREF="ParamList.html" >ParamList</A> are 
+ used to construct a new entry in the components property list instead of
+ being handled by one of the static methods.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GrowParamList(ParamList*)">
+    <B>GrowParamList</B> (<A HREF="ParamList.html" >ParamList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct the <A HREF="ParamList.html" >ParamList</A> for this class if one does not exist, optionally
+ using similar base class methods to assist.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_anno">
+    <B>_anno</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="_attrlist">
+    <B>_attrlist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="_overlay_comp_params">
+    <B>_overlay_comp_params</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        static holder for this classes <A HREF="ParamList.html" >ParamList</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="_parent">
+    <B>_parent</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_valid">
+    <B>_valid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="OverlayScript">
+    <B>OverlayScript</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="OverlaysScript">
+    <B>OverlaysScript</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

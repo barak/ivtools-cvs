@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       rpcstream - iostreamb specialized to RPC requests
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/rpcstream.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       rpcstream, irpcstream, and orpcstream specialize iostream,
+       istream, and ostream, respectively, to RPC requests.  That
+       is,  the  associated streambuf will be an rpcbuf.  Conver-
+       sions will be formatted (that is, ASCII)  so  datums  will
+       need to be separated by space characters.
+
+
+</PRE>
+<H2>CONSTRUCTORS</H2><PRE>
+       <B>rpcstream()</B>
+              Construct an unopened rpcstream.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>void</B> <B>listen(int</B> <B>port)</B>
+       <B>void</B> <B>connect(const</B> <B>char*</B> <B>host,</B> <B>int</B> <B>port)</B>
+              Create a connection.  Any failure sets ios::failbit
+              in the error state.
+
+       <B>int</B> <B>accept()</B>
+              Accept a pending connection and return the new file
+              descriptor.
+
+       <B>void</B> <B>attach(int</B> <B>fd)</B>
+              Attach to a pre-existing connection.
+
+       <B>void</B> <B>close()</B>
+              Break  a  connection.   The  error state is cleared
+              except on failure.
+
+       <B>void</B> <B>nonblocking(boolean)</B>
+       <B>void</B> <B>verbose(boolean)</B>
+              Enable or disable non-blocking I/O and/or  printing
+              of error messages.
+
+       <B>rpcbuf*</B> <B>rdbuf()</B>
+              Return  a pointer to the rpcbuf created by the rpc-
+              stream.
+
+       <B>boolean</B> <B>incomplete_request()</B>
+       <B>void</B> <B>incomplete_request(boolean)</B>
+              Get or set a flag.  Used  by  the  operations  that
+              insert  an  RpcHdr  into an rpcstream or extract an
+              RpcHdr from an rpcstream.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       IOS.INTRO(3C++), <B>iostreamb(3I)</B>, <B>rpcbuf(3I)</B>
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

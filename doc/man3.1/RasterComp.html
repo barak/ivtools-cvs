@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       RasterComp,  RasterView,  PSRaster - raster component sub-
+       ject, view, and PostScript external representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/rastercomp.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       RasterComp is  a  GraphicComp  that  represents  a  raster
+       image.   It uses a RasterRect graphic to store its graphi-
+       cal attributes.  RasterView is a GraphicView for  display-
+       ing  the  raster image.  PSRaster is a PostScriptView that
+       externalizes the subject's information in PostScript form.
+
+
+</PRE>
+<H2>RASTERCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>RasterComp(RasterRect*</B> <B>=</B> <B>nil,</B> <B>const</B> <B>char*</B> <B>filename</B> <B>=</B> <B>nil)</B>
+              The constructor takes an optional RasterRect struc-
+              tured graphic that defines the  attributes  of  the
+              raster image.  You can also supply an optional file
+              name to associate the component with  a  file  con-
+              taining the (copious) image data.
+
+       <B>RasterRect*</B> <B>GetRasterRect()</B>
+              Return  the  RasterRect  graphic  that  defines the
+              raster's attributes.  GetRaster is  simply  a  more
+              specific form of the GetGraphic operation.
+
+       <B>const</B> <B>char*</B> <B>GetFileName()</B>
+              Return  the file name specified in the constructor,
+              if any.
+
+
+</PRE>
+<H2>RASTERVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>RasterView(RasterComp*</B> <B>=</B> <B>nil)</B>
+              Create an RasterView, optionally supplying the sub-
+              ject.
+
+       <B>RasterComp*</B> <B>GetRasterComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>PSRASTER PUBLIC OPERATIONS</H2><PRE>
+       <B>PSRaster(RasterComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>GraphicComp(3U)</B>,   <B>GraphicView(3U)</B>,    <B>PostScriptView(3U)</B>,
+       <B>RasterRect(3U)</B>
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

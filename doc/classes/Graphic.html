@@ -1,0 +1,2331 @@
+
+<html><head><TITLE>Description of Graphic</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Graphic</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+graphic base-classe<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#Graphic><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/Graphic/graphic.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  interface to <A HREF="Graphic.html" >Graphic</A> base class and <A HREF="FullGraphic.html" >FullGraphic</A>, a subclass of <A HREF="Graphic.html" >Graphic</A>
+ for which all graphics state is defined.
+ <p><a href=../man3.1/Graphic.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Align(Alignment&#38;&#38;COMMGraphic*&#38;&#38;COMMAlignment)">
+    <B>Align</B> (Alignment, <A HREF="Graphic.html" >Graphic</A>*, Alignment) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Append(Graphic*&#38;&#38;COMMGraphic*=nil&#38;&#38;COMMGraphic*=nil&#38;&#38;COMMGraphic*=nil)">
+    <B>Append</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>* =nil, <A HREF="Graphic.html" >Graphic</A>* =nil, <A HREF="Graphic.html" >Graphic</A>* =nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Bequeath()">
+    <B>Bequeath</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="BgFilled()">
+    <B>BgFilled</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="CompId()">
+    <B>CompId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Contains(PointObj&#38;)">
+    <B>Contains</B> (<A HREF="PointObj.html" >PointObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Desensitize(booleandesensitize=true)">
+    <B>Desensitize</B> (boolean desensitize=true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Desensitized()">
+    <B>Desensitized</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Done(Iterator)">
+    <B>Done</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Draw(Canvas*)">
+    <B>Draw</B> (<A HREF="Canvas.html" >Canvas</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Draw(Canvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>Draw</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DrawClipped(Canvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>DrawClipped</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Erase(Canvas*)">
+    <B>Erase</B> (<A HREF="Canvas.html" >Canvas</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Erase(Canvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>Erase</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="EraseClipped(Canvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord)">
+    <B>EraseClipped</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord, Coord, Coord, Coord) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="FillBg(int)">
+    <B>FillBg</B> (int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="First(Iterator&#38;)">
+    <B>First</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="FirstGraphicContaining(PointObj&#38;)">
+    <B>FirstGraphicContaining</B> (<A HREF="PointObj.html" >PointObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="FirstGraphicIntersecting(BoxObj&#38;)">
+    <B>FirstGraphicIntersecting</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="FirstGraphicWithin(BoxObj&#38;)">
+    <B>FirstGraphicWithin</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="PSColor.html" >PSColor</A>* 
+    <A NAME="GetBgColor()">
+    <B>GetBgColor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetBounds(float&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;)">
+    <B>GetBounds</B> (float&#38;, float&#38;, float&#38;, float&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetBox(BoxObj&#38;)">
+    <B>GetBox</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetBox(Coord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;)">
+    <B>GetBox</B> (Coord&#38;, Coord&#38;, Coord&#38;, Coord&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="PSBrush.html" >PSBrush</A>* 
+    <A NAME="GetBrush()">
+    <B>GetBrush</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GetCenter(float&#38;&#38;&#38;COMMfloat&#38;)">
+    <B>GetCenter</B> (float&#38;, float&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="PSColor.html" >PSColor</A>* 
+    <A NAME="GetFgColor()">
+    <B>GetFgColor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="PSFont.html" >PSFont</A>* 
+    <A NAME="GetFont()">
+    <B>GetFont</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="GetGraphic(Iterator)">
+    <B>GetGraphic</B> (<A HREF="Iterator.html" >Iterator</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="PSPattern.html" >PSPattern</A>* 
+    <A NAME="GetPattern()">
+    <B>GetPattern</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void* 
+    <A NAME="GetTag()">
+    <B>GetTag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="GetTransformer()">
+    <B>GetTransformer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Hidden()">
+    <B>Hidden</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Hide(booleanhide=true)">
+    <B>Hide</B> (boolean hide=true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InsertAfter(Iterator&#38;&#38;COMMGraphic*)">
+    <B>InsertAfter</B> (<A HREF="Iterator.html" >Iterator</A>, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InsertBefore(Iterator&#38;&#38;COMMGraphic*)">
+    <B>InsertBefore</B> (<A HREF="Iterator.html" >Iterator</A>, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Intersects(BoxObj&#38;)">
+    <B>Intersects</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Last(Iterator&#38;)">
+    <B>Last</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="LastGraphicContaining(PointObj&#38;)">
+    <B>LastGraphicContaining</B> (<A HREF="PointObj.html" >PointObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="LastGraphicIntersecting(BoxObj&#38;)">
+    <B>LastGraphicIntersecting</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="LastGraphicWithin(BoxObj&#38;)">
+    <B>LastGraphicWithin</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Next(Iterator&#38;)">
+    <B>Next</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="Parent()">
+    <B>Parent</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Prepend(Graphic*&#38;&#38;COMMGraphic*=nil&#38;&#38;COMMGraphic*=nil&#38;&#38;COMMGraphic*=nil)">
+    <B>Prepend</B> (<A HREF="Graphic.html" >Graphic</A>*,<A HREF="Graphic.html" >Graphic</A>* =nil, <A HREF="Graphic.html" >Graphic</A>* =nil, <A HREF="Graphic.html" >Graphic</A>* =nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Prev(Iterator&#38;)">
+    <B>Prev</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Remove(Graphic*)">
+    <B>Remove</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Remove(Iterator&#38;)">
+    <B>Remove</B> (<A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Rotate(floatangle&#38;&#38;COMMfloatctrx=0.0&#38;&#38;COMMfloatctry=0.0)">
+    <B>Rotate</B> (float angle, float ctrx = 0.0, float ctry = 0.0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Scale(floatsx&#38;&#38;COMMfloatsy&#38;&#38;COMMfloatctrx=0.0&#38;&#38;COMMfloatctry=0.0)">
+    <B>Scale</B> (float sx, float sy, float ctrx = 0.0, float ctry = 0.0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Sensitize(booleansensitize=true)">
+    <B>Sensitize</B> (boolean sensitize=true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetBrush(PSBrush*)">
+    <B>SetBrush</B> (<A HREF="PSBrush.html" >PSBrush</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetColors(PSColor*f&#38;&#38;COMMPSColor*b)">
+    <B>SetColors</B> (<A HREF="PSColor.html" >PSColor</A>* f, <A HREF="PSColor.html" >PSColor</A>* b) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetFont(PSFont*)">
+    <B>SetFont</B> (<A HREF="PSFont.html" >PSFont</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetGraphic(Graphic*&#38;&#38;COMMIterator&#38;)">
+    <B>SetGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Iterator.html" >Iterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetPattern(PSPattern*)">
+    <B>SetPattern</B> (<A HREF="PSPattern.html" >PSPattern</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetTag(void*)">
+    <B>SetTag</B> (void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetTransformer(Transformer*)">
+    <B>SetTransformer</B> (<A HREF="Transformer.html" >Transformer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Show(booleanshow=true)">
+    <B>Show</B> (boolean show=true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ToggleDesensitize()">
+    <B>ToggleDesensitize</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ToggleHide()">
+    <B>ToggleHide</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="TotalTransformation(Transformer&#38;)">
+    <B>TotalTransformation</B> (<A HREF="Transformer.html" >Transformer</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Translate(floatdx&#38;&#38;COMMfloatdy)">
+    <B>Translate</B> (float dx, float dy) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="cachingOff()">
+    <B>cachingOff</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="cachingOn()">
+    <B>cachingOn</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="concat(Graphic*a&#38;&#38;COMMGraphic*b&#38;&#38;COMMGraphic*dest)">
+    <B>concat</B> (<A HREF="Graphic.html" >Graphic</A>* a, <A HREF="Graphic.html" >Graphic</A>* b, <A HREF="Graphic.html" >Graphic</A>* dest) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="concatGS(Graphic*a&#38;&#38;COMMGraphic*b&#38;&#38;COMMGraphic*dest)">
+    <B>concatGS</B> (<A HREF="Graphic.html" >Graphic</A>* a, <A HREF="Graphic.html" >Graphic</A>* b, <A HREF="Graphic.html" >Graphic</A>* dest) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="concatTransformer(Transformer*a&#38;&#38;COMMTransformer*b&#38;&#38;COMMTransformer*dest)">
+    <B>concatTransformer</B> ( <A HREF="Transformer.html" >Transformer</A>* a, <A HREF="Transformer.html" >Transformer</A>* b, <A HREF="Transformer.html" >Transformer</A>* dest ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="extentCached()">
+    <B>extentCached</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="invalidateCaches()">
+    <B>invalidateCaches</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>&#38; 
+    <A NAME="operator=(Graphic&#38;)">
+    <B>operator = </B> (<A HREF="Graphic.html" >Graphic</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="uncacheChildren()">
+    <B>uncacheChildren</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="uncacheExtent()">
+    <B>uncacheExtent</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="uncacheParents()">
+    <B>uncacheParents</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="use_iv()">
+    <B>use_iv</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="use_iv(booleanflag)">
+    <B>use_iv</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~Graphic()">
+    <B>~Graphic</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetExtent(Extent&#38;e)">
+    <B>GetExtent</B> (<A HREF="Extent.html" >Extent</A>&#38; e) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Graphic(Graphic*gr=nil)">
+    <B>Graphic</B> (<A HREF="Graphic.html" >Graphic</A>* gr = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="PSColor.html" >PSColor</A>* 
+    <A NAME="_bg">
+    <B>_bg</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="_caching">
+    <B>_caching</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="BoxObj.html" >BoxObj</A>* 
+    <A NAME="_clipping">
+    <B>_clipping</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static unsigned int 
+    <A NAME="_desensitize_mask">
+    <B>_desensitize_mask</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="PSColor.html" >PSColor</A>* 
+    <A NAME="_fg">
+    <B>_fg</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_fillBg">
+    <B>_fillBg</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="_flags">
+    <B>_flags</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static unsigned int 
+    <A NAME="_hide_mask">
+    <B>_hide_mask</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="_identity">
+    <B>_identity</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="Painter.html" >Painter</A>* 
+    <A NAME="_p">
+    <B>_p</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="_parent">
+    <B>_parent</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Transformer.html" >Transformer</A>* 
+    <A NAME="_t">
+    <B>_t</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void* 
+    <A NAME="_tag">
+    <B>_tag</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="_use_iv">
+    <B>_use_iv</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="concatGSGraphic(Graphic*&#38;&#38;COMMGraphic*&#38;&#38;COMMGraphic*&#38;&#38;COMMGraphic*)">
+    <B>concatGSGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="concatGraphic(Graphic*&#38;&#38;COMMGraphic*&#38;&#38;COMMGraphic*&#38;&#38;COMMGraphic*)">
+    <B>concatGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="concatTransformerGraphic(Graphic*&#38;&#38;COMMTransformer*&#38;&#38;COMMTransformer*&#38;&#38;COMMTransformer*)">
+    <B>concatTransformerGraphic</B> ( <A HREF="Graphic.html" >Graphic</A>*,<A HREF="Transformer.html" >Transformer</A>*, <A HREF="Transformer.html" >Transformer</A>*, <A HREF="Transformer.html" >Transformer</A>* ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="contains(PointObj&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>contains</B> (<A HREF="PointObj.html" >PointObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="containsGraphic(Graphic*&#38;&#38;COMMPointObj&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>containsGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="PointObj.html" >PointObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="draw(Canvas*&#38;&#38;COMMGraphic*gs)">
+    <B>draw</B> (<A HREF="Canvas.html" >Canvas</A>*, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="drawClipped(Canvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMGraphic*gs)">
+    <B>drawClipped</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord, Coord, Coord, Coord, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="drawClippedGraphic(Graphic*&#38;&#38;COMMCanvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMGraphic*)">
+    <B>drawClippedGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*,<A HREF="Canvas.html" >Canvas</A>*,Coord,Coord,Coord,Coord,<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="drawGraphic(Graphic*&#38;&#38;COMMCanvas*&#38;&#38;COMMGraphic*)">
+    <B>drawGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Canvas.html" >Canvas</A>*, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="erase(Canvas*&#38;&#38;COMMGraphic*gs)">
+    <B>erase</B> (<A HREF="Canvas.html" >Canvas</A>*, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="eraseClipped(Canvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMGraphic*gs)">
+    <B>eraseClipped</B> (<A HREF="Canvas.html" >Canvas</A>*, Coord, Coord, Coord, Coord,<A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="eraseClippedGraphic(Graphic*&#38;&#38;COMMCanvas*&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMGraphic*)">
+    <B>eraseClippedGraphic</B> ( <A HREF="Graphic.html" >Graphic</A>*, <A HREF="Canvas.html" >Canvas</A>*, Coord, Coord, Coord, Coord, <A HREF="Graphic.html" >Graphic</A>* ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="eraseGraphic(Graphic*&#38;&#38;COMMCanvas*&#38;&#38;COMMGraphic*)">
+    <B>eraseGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Canvas.html" >Canvas</A>*, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="extentCachedGraphic(Graphic*)">
+    <B>extentCachedGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="getBounds(float&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>getBounds</B> (float&#38;, float&#38;, float&#38;, float&#38;, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="getBox(BoxObj&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>getBox</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="getBox(Coord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>getBox</B> (Coord&#38;, Coord&#38;, Coord&#38;, Coord&#38;, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="getExtent(float&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>getExtent</B> (float&#38;, float&#38;, float&#38;, float&#38;, float&#38;,<A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="getExtentGraphic(Graphic*&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>getExtentGraphic</B> ( <A HREF="Graphic.html" >Graphic</A>*, float&#38;, float&#38;, float&#38;, float&#38;, float&#38;, <A HREF="Graphic.html" >Graphic</A>* gs ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="getRoot()">
+    <B>getRoot</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="intersects(BoxObj&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>intersects</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="intersectsGraphic(Graphic*&#38;&#38;COMMBoxObj&#38;&#38;&#38;COMMGraphic*gs)">
+    <B>intersectsGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="BoxObj.html" >BoxObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="invTransform(Coord&#38;tx&#38;&#38;COMMCoord&#38;ty&#38;&#38;COMMGraphic*=nil)">
+    <B>invTransform</B> (Coord&#38; tx, Coord&#38; ty, <A HREF="Graphic.html" >Graphic</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="invTransform(Coordtx&#38;&#38;COMMCoordty&#38;&#38;COMMCoord&#38;x&#38;&#38;COMMCoord&#38;y&#38;&#38;COMMGraphic*=nil)">
+    <B>invTransform</B> (Coord tx, Coord ty, Coord&#38; x, Coord&#38; y, <A HREF="Graphic.html" >Graphic</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="invTransform(floattx&#38;&#38;COMMfloatty&#38;&#38;COMMfloat&#38;x&#38;&#38;COMMfloat&#38;y&#38;&#38;COMMGraphic*=nil)">
+    <B>invTransform</B> (float tx, float ty, float&#38; x, float&#38; y, <A HREF="Graphic.html" >Graphic</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="invTransformList(Coordtx[]&#38;&#38;COMMCoordty[]&#38;&#38;COMMintn&#38;&#38;COMMCoordx[]&#38;&#38;COMMCoordy[]&#38;&#38;COMMGraphic*=nil)">
+    <B>invTransformList</B> ( Coord tx[], Coord ty[], int n, Coord x[], Coord y[], <A HREF="Graphic.html" >Graphic</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="invTransformRect(float&#38;&#38;COMMfloat&#38;&#38;COMMfloat&#38;&#38;COMMfloat&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMGraphic*=nil)">
+    <B>invTransformRect</B> ( float, float, float, float, float&#38;, float&#38;, float&#38;, float&#38;, <A HREF="Graphic.html" >Graphic</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="invalidateCachesGraphic(Graphic*)">
+    <B>invalidateCachesGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="parentXform(Transformer&#38;t)">
+    <B>parentXform</B> (<A HREF="Transformer.html" >Transformer</A>&#38; t) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="setParent(Graphic*&#38;&#38;COMMGraphic*parent)">
+    <B>setParent</B> (<A HREF="Graphic.html" >Graphic</A>*, <A HREF="Graphic.html" >Graphic</A>* parent) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="totalGS(Graphic&#38;p)">
+    <B>totalGS</B> (<A HREF="Graphic.html" >Graphic</A>&#38; p) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="transform(Coord&#38;x&#38;&#38;COMMCoord&#38;y&#38;&#38;COMMGraphic*=nil)">
+    <B>transform</B> (Coord&#38; x, Coord&#38; y, <A HREF="Graphic.html" >Graphic</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="transform(Coordx&#38;&#38;COMMCoordy&#38;&#38;COMMCoord&#38;tx&#38;&#38;COMMCoord&#38;ty&#38;&#38;COMMGraphic*=nil)">
+    <B>transform</B> (Coord x, Coord y, Coord&#38; tx, Coord&#38; ty, <A HREF="Graphic.html" >Graphic</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="transform(floatx&#38;&#38;COMMfloaty&#38;&#38;COMMfloat&#38;tx&#38;&#38;COMMfloat&#38;ty&#38;&#38;COMMGraphic*=nil)">
+    <B>transform</B> (float x, float y, float&#38; tx, float&#38; ty, <A HREF="Graphic.html" >Graphic</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="transformList(Coordx[]&#38;&#38;COMMCoordy[]&#38;&#38;COMMintn&#38;&#38;COMMCoordtx[]&#38;&#38;COMMCoordty[]&#38;&#38;COMMGraphic*=nil)">
+    <B>transformList</B> ( Coord x[], Coord y[], int n, Coord tx[], Coord ty[], <A HREF="Graphic.html" >Graphic</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="transformRect(float&#38;&#38;COMMfloat&#38;&#38;COMMfloat&#38;&#38;COMMfloat&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMGraphic*=nil)">
+    <B>transformRect</B> ( float, float, float, float, float&#38;, float&#38;, float&#38;, float&#38;, <A HREF="Graphic.html" >Graphic</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="uncacheChildrenGraphic(Graphic*)">
+    <B>uncacheChildrenGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="uncacheExtentGraphic(Graphic*)">
+    <B>uncacheExtentGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="uncacheParentsGraphic(Graphic*)">
+    <B>uncacheParentsGraphic</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="unsetParent(Graphic*)">
+    <B>unsetParent</B> (<A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="update(Graphic*gs)">
+    <B>update</B> (<A HREF="Graphic.html" >Graphic</A>* gs) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

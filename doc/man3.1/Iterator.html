@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Iterator - marks a position in a data structure
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/iterator.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An  iterator  marks a position in a data structure, gener-
+       ally during a traversal of some  sort.   For  example,  an
+       iterator  keeps track of the current position when iterat-
+       ing through a list of elements.  Unidraw's Iterator  class
+       serves  this purpose in conjunction with ULists or objects
+       that use them.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Iterator()</B>
+       <B>Iterator(Iterator&amp;)</B>
+              Construct a new iterator.  The  second  constructor
+              initializes  the  iterator's  value  to that of the
+              given iterator.
+
+       <B>virtual</B> <B>void</B> <B>SetValue(void*)</B>
+       <B>virtual</B> <B>void*</B> <B>GetValue()</B>
+              Classes that use an iterator  must  store  position
+              information  in  it.   These operations set and get
+              the this information.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>UList(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

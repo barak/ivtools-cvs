@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>use pstoedit to convert arbitrary PostScript to idraw format</title>
+  </head>
+
+  <body>
+    <h3>use pstoedit to convert arbitrary PostScript to idraw format</h3>
+
+
+     pstoedit is a program for converting between various vector graphic file formats.
+   <p>
+<a href=http://home.t-online.de/home/helga.glunz/wglunz/pstoedit/>home page</a> <p>
+<i>
+A <a href=http://www.vectaport.com/pub/src/pstoedit-idrawrast.patch.txt>patch</a> is available to add raster support to the idraw output format of pstoedit.  Should work on pstoedit-3.14, pstoedit-3.15, and pstoedit-3.16.  It was incorporated into pstoedit-3.17 by Wolfgang Glunz. 
+</i>
+<p>
+<i>
+A 2nd <a href=http://www.ivtools.org/ivtools/pstoedit.3.30.idraw.patch.txt>patch</a> is available to improve raster support for the idraw output format of pstoedit. Now you enter "drawtool -" directly into the print dialog box of Netscape and have the PostScript rendered directly into the drawing editor. Should work on pstoedit-3.30 and be incorporated in pstoedit-3.31.
+</i>
+<p>
+<i>from 2.60 README</i>:
+<p>
+<code>
+PSTOEDIT <br>
+Copyright (C) 1993,1994,1995,1996,1997 Wolfgang Glunz, Wolfgang.Glunz@mchp.siemens.de<br>
+<br>
+pstoedit converts Postscript(TM) and PDF files to other vector graphic<br>
+formats so that they can be edited graphically. See pstoedit.man or<br>
+manual.html for more details on which formats are supported by pstoedit.<br>
+<br>
+The architecture of pstoedit consists of a PostScript frontend which<br>
+needs to call a PostScript interpreter like Ghostscript and the<br>
+individual backends which are plugged into a kind of framework.<br>
+<br>
+This framework can be used independently from the PostScript frontend<br>
+from any other program. The framework provides a uniform interface to<br>
+all different backends. Get in contact with the author if you need<br>
+more information on how to use this framework.<br>
+</code>
+<hr>
+<p>
+    It is used by the barplot command of <a
+    href=./comdraw.html>comdraw</a>.  This uses both 
+    <a href=./plotmtv.html>plotmtv</a> to generate the plot in PostScript, and pstoedit 
+    to re-render it in idraw-formatted PostScript.
+
+<p>
+    <a href=./othertools.html>up to ivtools add-ons</a> &nbsp;
+    <a href=./index.html>up to ivtools</a> 
+  </body>
+</html>

@@ -1,0 +1,338 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       GraphicView,  GraphicViews  -  base  classes for graphical
+       component views
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/grview.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       GraphicView is an abstract base class for graphical  views
+       of  GraphicComp objects.  GraphicView is derived from Com-
+       ponentView and adds operations for manipulating its graph-
+       ical  attributes.  GraphicViews is a non-abstract subclass
+       of GraphicView for composite graphical component views.
+
+
+</PRE>
+<H2>GRAPHICVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              GraphicView objects can (un)interpret the following
+              command:
+
+              <B>AlignToGridCmd</B>  aligns  the  graphical component to
+              the grid that affects  the  view.   Interpret  uses
+              AlignToGridCmd::Align  to  carry out the alignment,
+              while Uninterpret uses  AlignToGridCmd::Unalign  to
+              reverse Interpret's effects.
+
+       <B>virtual</B> <B>void</B> <B>DrawHandles()</B>
+       <B>virtual</B> <B>void</B> <B>RedrawHandles()</B>
+       <B>virtual</B> <B>void</B> <B>InitHandles()</B>
+       <B>virtual</B> <B>void</B> <B>EraseHandles()</B>
+              Operations  for  displaying  and  hiding the view's
+              selection   handles.    All    use    CreateHandles
+              (described below) to create component-specific rub-
+              berbands that draw  the  handles  if  they  do  not
+              already  exist.   The  rubberband  is stored in the
+              <B>_</B><I>handles</I> protected member.  DrawHandles  makes  the
+              handles  visible  if  they are not already visible.
+              RedrawHandles forces the handles to draw themselves
+              even if they are already drawn, which may make them
+              disappear if the rubberband draws them in XOR mode.
+              InitHandles  deletes  and  recreates the rubberband
+              defining the handles if it existed when InitHandles
+              was  called.   EraseHandles  erases the handles and
+              deletes the rubberband.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              Operations that define how the  GraphicView  reacts
+              when  it  is manipulated by a tool and how the tool
+              affects  that  component  following   manipulation.
+              and  interpretation  to  the view.  This allows the
+              same tool to behave differently  depending  on  the
+              component it manipulates.
+
+              CreateManipulator  creates  a  manipulator  that is
+              appropriate for the given tool.   It  receives  the
+              viewer  in  which the manipulation will take place,
+              an event with which to initialize  the  manipulator
+              if  necessary,  and  the  coordinate transformation
+              that maps canvas  coordinates  into  the  subject's
+              coordinate  space.   InterpretManipulator is called
+              following manipulation and defines how to construct
+              a  command  that  carries  out  the  manipulation's
+              desired effect.   GraphicView  objects  create  and
+              interpret manipulators for the following tools:
+
+              <B>GraphicCompTool</B> will let the user position a fixed-
+              sized outline reflecting the view's bounding box on
+              the  screen.  Interpretation will produce a command
+              that inserts a copy of the subject  into  the  edi-
+              tor's  component at the specified position.  Place-
+              ment will be constrained by gravity, if active.
+
+              <B>MoveTool</B> will let the user move a fixed-sized  out-
+              line  reflecting  the  view's  bounding  box on the
+              screen.  Interpretation will produce a command that
+              moves  the subject to the specified position. Hold-
+              ing down the Shift key will constrain the  movement
+              to purely horizontal or vertical, and movement will
+              be constrained by gravity.
+
+              <B>ScaleTool</B> will let the user drag a scaling  rectan-
+              gular  outline  corresponding  to  the view's scale
+              following manipulation with the tool.  Scaling will
+              be constrained by gravity.
+
+              <B>StretchTool</B> will let the user drag a variable-sized
+              rectangular outline corresponding to  a  two-dimen-
+              sional stretch that the component will undergo fol-
+              lowing manipulation.  Holding the  Shift  key  down
+              will   constrain  the  stretch  to  one  dimension.
+              Stretching will be constrained by gravity.
+
+              <B>RotateTool</B> will let the user rotate  a  fixed-sized
+              rectangular  outline reflecting the view's bounding
+              box.  The rotation of the  outline  corresponds  to
+              the  rotation  that the component will undergo fol-
+              lowing manipulation.  Rotation will be  constrained
+              by gravity.
+
+       <B>virtual</B> <B>Graphic*</B> <B>GetGraphic()</B>
+              Return  the  graphic that defines the GraphicView's
+
+       <B>virtual</B> <B>Viewer*</B> <B>GetViewer()</B>
+              Return  the viewer (if any) that displays the view.
+
+       <B>GraphicComp*</B> <B>GetGraphicComp()</B>
+              Return the view's subject.
+
+       <B>boolean</B> <B>Includes(GraphicView*)</B>
+              A convenience function that returns whether or  not
+              the  GraphicView  includes the given view, that is,
+              whether the view is a child of <I>this</I>.
+
+       <B>GraphicView*</B> <B>GetGraphicView(Component*)</B>
+              A convenience function that returns the view of the
+              given  component  (if any) that appears in the same
+              viewer as <I>this</I>.
+
+       <B>GraphicView*</B> <B>GetView(Iterator)</B>
+       <B>void</B> <B>SetView(GraphicView*,</B> <B>Iterator&amp;)</B>
+              These operations do nothing by default.  Subclasses
+              that  contain children should redefine them as fol-
+              lows: GetView  should  return  the  GraphicView  to
+              which  an iterator points.  SetView should initial-
+              ize the iterator to point to  a  particular  Graph-
+              icView  in the list of children; it should initial-
+              ize the iterator to point to a nil instance if  the
+              given GraphicView is not a child.
+
+       <B>virtual</B> <B>Selection*</B> <B>SelectAll()</B>
+       <B>virtual</B> <B>Selection*</B> <B>ViewContaining(Coord,</B> <B>Coord)</B>
+       <B>virtual</B> <B>Selection*</B> <B>ViewsContaining(Coord,</B> <B>Coord)</B>
+       <B>virtual</B> <B>Selection*</B> <B>ViewIntersecting(Coord,</B> <B>Coord,</B> <B>Coord,</B>
+              <B>Coord)</B>
+       <B>virtual</B> <B>Selection*</B> <B>ViewsIntersecting(Coord,</B> <B>Coord,</B> <B>Coord,</B>
+              <B>Coord)</B>
+       <B>virtual</B> <B>Selection*</B> <B>ViewsWithin(Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord)</B>
+       <B>virtual</B> <B>ConnectorView*</B> <B>ConnectorIntersecting(</B>
+           <B>Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Coord</B>
+       <B>)</B>
+              These convenience operations do nothing by default.
+              Subclasses containing children should redefine them
+              to do the  following:  SelectAll  should  return  a
+              selection  object  containing (pointers to) all its
+              children; ViewContaining  should  return  the  last
+              (visibly  topmost)  child view containing the given
+              point,  while  ViewsContaining  should  return  <I>all</I>
+              children  containing  the  point;  ViewIntersecting
+              should return the last (visibly topmost) child view
+              intersecting  a rectangular area, while ViewsInter-
+              secting   should   return   all   such    children;
+              ViewsWithin  should  return  all  the  child  views
+              falling strictly within  a  rectangular  area;  and
+              lar area.
+
+
+</PRE>
+<H2>GRAPHICVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>GraphicView(GraphicComp*</B> <B>=</B> <B>nil)</B>
+              The  constructor  is  protected  to  guard  against
+              instantiation. It takes the view's  subject  as  an
+              optional  argument, passing it to the ComponentView
+              constructor.
+
+       <B>virtual</B> <B>void</B> <B>SetGraphic(Graphic*)</B>
+              Set the GraphicView's graphic to the given one, and
+              store  <I>this</I>  in  the graphic using Graphic::SetTag.
+              This makes it possible to  obtain  the  GraphicView
+              that  owns  the  graphic  from  the graphic itself,
+              e.g., after hit detection.
+
+       <B>virtual</B> <B>void</B> <B>CreateHandles()</B>
+              Initialize the <B>_</B><I>handles</I> member  with  a  rubberband
+              that   will   draw  the  appropriate  handles.   By
+              default,  CreateHandles  creates  a   RubberHandles
+              object  with  eight handles around the periphery of
+              the view's bounding box.
+
+       <B>virtual</B> <B>int</B> <B>ClosestPoint(</B>
+           <B>Coord</B> <B>x[],</B> <B>Coord</B> <B>y[],</B> <B>int</B> <B>n,</B> <B>Coord</B> <B>px,</B> <B>Coord</B> <B>py</B>
+       <B>)</B>
+              A convenience function that returns  the  index  of
+              the  point  closest  to  (<I>px,</I>  <I>py</I>) in an array of <I>n</I>
+              points.
+
+       <B>GraphicView*</B> <B>View(UList*)</B>
+       <B>GraphicView*</B> <B>GetGraphicView(Graphic*)</B>
+              Convenience functions that return  the  GraphicView
+              in  a  UList element and the GraphicView associated
+              with a graphic, respectively.
+
+       <B>Manipulator*</B> <B>CreateGraphicCompManip(</B>
+           <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>Manipulator*</B> <B>CreateStretchManip(</B>
+           <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>Command*</B> <B>InterpretGraphicCompManip(Manipulator*)</B>
+       <B>Command*</B> <B>InterpretStretchManip(Manipulator*)</B>
+              Helper  functions  used  by  CreateManipulator  and
+              InterpretManipulator  to  create  and interpret the
+              manipulators associated  with  GraphicCompTool  and
+              StretchTool.
+
+       <B>void</B> <B>AddDamage(Graphic*)</B>
+              GraphicViews  should  incur damage in response to a
+              change in their appearance, which generally happens
+              in  their Update function.  AddDamage and IncurDam-
+              age produce damage by calling  the  related  opera-
+              tions  on  the  enclosing  viewer's  damage object.
+              Subclasses can use these functions for  convenience
+              to  avoid  accessing  the enclosing viewer's damage
+              object directly.
+
+       <B>void</B> <B>Unselect(GraphicView*)</B>
+              A convenience function  that  unselects  the  given
+              view,  which entails erasing its handles and remov-
+              ing  it  from  the  enclosing  editor's   selection
+              object.
+
+       <B>virtual</B> <B>void</B> <B>Add(GraphicView*)</B>
+       <B>virtual</B> <B>void</B> <B>Append(GraphicView*)</B>
+       <B>virtual</B> <B>void</B> <B>InsertBefore(Iterator,</B> <B>GraphicView*)</B>
+       <B>virtual</B> <B>void</B> <B>Remove(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>DeleteView(Iterator&amp;)</B>
+              Unimplemented  operations that composite subclasses
+              should redefine for modifying  the  their  (concep-
+              tual)  list  of  children.   Note  that  subclasses
+              needn't necessarily store their children in a  list
+              data  structure,  but  a  list  maps closely to the
+              semantics of these  operations.   These  operations
+              are  not  public because only the view itself knows
+              how to keep its structure consistent with  that  of
+              the subject and/or its semantics.
+
+              Add  adds  a  GraphicView to the end of the list of
+              children.   InsertBefore  inserts   a   GraphicView
+              before  the GraphicView pointed to by the iterator.
+              Remove removes a view to which the  given  iterator
+              refers  from  the  list  without deleting it, while
+              DeleteView removes it and deletes it.   Remove  and
+              DeleteView  should advance the iterator to point to
+              the following view as a side effect.
+
+
+</PRE>
+<H2>GRAPHICVIEWS PUBLIC OPERATIONS</H2><PRE>
+       <B>GraphicViews(GraphicComps*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>~GraphicViews()</B>
+              The constructor creates a GraphicViews,  optionally
+              supplying  the subject.  The destructor deletes the
+              GraphicViews' children.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              GraphicViews objects interpret the  following  com-
+              mand:
+
+              <B>AlignToGridCmd</B>  aligns  the  graphical component to
+              the grid that affects the view.  The overall align-
+              component to the grid and then moves all other sub-
+              components by the amount that the leaf moved.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Automatically update the  GraphicViews'  state  and
+              structure  to match the subject's.  Update will <I>not</I>
+              necessarily detect restructurings or state  modifi-
+              cations  made  to  the subject's children more than
+              one level deep.  Update uses GVUpdater  to  do  its
+              work.
+
+       <B>virtual</B> <B>Graphic*</B> <B>GetGraphic()</B>
+              Return  the  GraphicViews' graphic, which (like its
+              subject's graphic) is a Picture.
+
+       <B>GraphicComps*</B> <B>GetGraphicComps()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>GRAPHICVIEWS PROTECTED OPERATIONS</H2><PRE>
+       <B>UList*</B> <B>Elem(Iterator)</B>
+              A convenience function for extracting a UList  from
+              an iterator.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>, <B>ComponentView(3U)</B>, <B>Connector(3U)</B>, <B>Damage(3U)</B>,
+       <B>GVUpdater(3U)</B>,    <B>GraphicComp(3U)</B>,    <B>GraphicCompTool(3U)</B>,
+       <B>Grid(3U)</B>,  <B>Event(3I)</B>,  <B>Manipulator(3U)</B>, <B>MoveTool(3U)</B>, Pic-
+       <B>ture(3U)</B>,  <B>RotateTool(3U)</B>,   <B>Rubband(3I)</B>,   <B>ScaleTool(3U)</B>,
+       <B>Selection(3U)</B>,      <B>StretchTool(3U)</B>,      <B>Transformer(3I)</B>,
+       <B>Viewer(3U)</B>, <B>align(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,332 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Rubband - rubberbanding graphical objects
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/rubband.h&gt;</B>
+       <B>#include</B> <B>&lt;InterViews/rubcurve.h&gt;</B>
+       <B>#include</B> <B>&lt;InterViews/rubgroup.h&gt;</B>
+       <B>#include</B> <B>&lt;InterViews/rubline.h&gt;</B>
+       <B>#include</B> <B>&lt;InterViews/rubrect.h&gt;</B>
+       <B>#include</B> <B>&lt;InterViews/rubverts.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Rubband</B>  is  the base class for a set of classes that pro-
+       vide graphical feedback to a user  during  an  interactive
+       operation such as sizing a rectangle.  A rubberband varies
+       in appearance as its <I>tracking</I> <I>point</I> changes.  A rubberband
+       is  <I>not</I>  an interactor itself; interactors use rubberbands
+       to provide animated effects.  Because rubberbands are  not
+       interactors,  rubberband  constructors  must be passed the
+       painter and canvas to use for drawing.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>RubberLine(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>fx,</B> <B>fy,</B> <B>mx,</B> <B>my,</B> <B>offx</B> <B>=</B> <B>0,</B>
+              <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A  rubber  line  stretches  to  follow the tracking
+              point while its other endpoint stays tied down.
+
+       <B>RubberAxis(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>fx,</B> <B>fy,</B> <B>mx,</B> <B>my,</B> <B>offx</B> <B>=</B> <B>0,</B>
+              <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A rubber axis stretches either horizontally or ver-
+              tically to follow  the  tracking  point  while  its
+              other endpoint stays tied down.  One endpoint stays
+              fixed while the other moves along either the  hori-
+              zontal or vertical axis, whichever is closer to the
+              tracking point.
+
+       <B>SlidingLine(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x0,</B> <B>y0,</B> <B>x1,</B> <B>y1,</B> <B>rfx,</B> <B>rfy,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A sliding line slides around without  changing  its
+              length  or angle as the tracking point moves around
+              a reference point.
+
+       <B>RotatingLine(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x0,</B> <B>y0,</B> <B>x1,</B> <B>y1,</B> <B>rfx,</B> <B>rfy,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A rotating line rotates around  (<I>cx</I>, <I>cy</I>)  based  on
+              tracking point.
+
+       <B>RubberRect(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>fx,</B> <B>fy,</B> <B>mx,</B> <B>my,</B> <B>offx</B> <B>=</B> <B>0,</B>
+              <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A rubber rectangle stretches to follow the  tacking
+              point while its opposite corner stays tied down.
+
+       <B>SlidingRect(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2,</B> <B>rfx,</B> <B>rfy,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A  sliding rectangle slides around the screen with-
+              out changing its side or orientation as the  track-
+              ing point moves around a reference point.
+
+       <B>ScalingRect(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2,</B> <B>cx,</B> <B>cy,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A  scaling  rectangle scales equally in both dimen-
+              sions about (<I>cx</I>, <I>cy</I>) to keep one edge  intersecting
+              the tracking point.
+
+       <B>RotatingRect(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2,</B> <B>cx,</B> <B>cy,</B> <B>rfx,</B>
+              <B>rfy,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A rotating rectangle rotates about  (<I>cx</I>, <I>cy</I>)  based
+              on  the  radius from (<I>cx</I>, <I>cy</I>) to (<I>rfx</I>, <I>rfy</I>) and the
+              radius from (<I>cx</I>, <I>cy</I>) to the tracking point.
+
+       <B>StretchingRect(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x1,</B> <B>y1,</B> <B>x2,</B> <B>y2,</B> <B>Side</B> <B>ts,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A stretching rectangle's tracking side follows  the
+              tracking point while the opposite side stays fixed.
+              The <I>side</I> can be one of <I>LeftSide</I>, <I>RightSide</I>, <I>Bottom-</I>
+              <I>Side</I>, or <I>TopSide</I>.
+
+       <B>RubberCircle(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>cx,</B> <B>cy,</B> <B>rx,</B> <B>ry,</B> <B>offx</B> <B>=</B> <B>0,</B>
+              <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A rubber circle's radius varies with the  magnitude
+              of the tracking point's distance from (<I>cx</I>, <I>cy</I>).
+
+       <B>RubberEllipse(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>cx,</B> <B>cy,</B> <B>rx,</B> <B>ry,</B> <B>offx</B> <B>=</B> <B>0,</B>
+              A rubber ellipse's horizontal  and  vertical  radii
+              vary  with  the  magnitude  of the tracking point's
+              distance from (<I>cx</I>, <I>cy</I>).
+
+       <B>RubberSpline(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B> <B>pt,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+       <B>RubberClosedSpline(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B> <B>pt,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A rubber  spline  is  the  section  of  a  B-spline
+              defined  by  <I>n</I> control points that changes shape as
+              the control point indexed  by  <I>pt</I>  is  set  to  the
+              tracking point.
+
+       <B>RubberHandles(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B> <B>pt,</B> <B>size,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A  rubber handles object is a set of filled squares
+              centered about each point in the list.   The  point
+              index by <I>pt</I> follows the tracking point.
+
+       <B>SlidingPointList(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B> <B>pt,</B> <B>Coord</B>
+              <B>rfx,</B> <B>rfy,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A sliding point list slides around the screen with-
+              out changing its appearance as the  tracking  point
+              moves around a reference point.
+
+       <B>SlidingLineList(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B> <B>pt,</B> <B>Coord</B>
+              <B>rfx,</B> <B>rfy,</B>
+           <B>Coord</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A  sliding line list slides around the screen with-
+              out changing the appearance of its connected  lines
+              as the tracking point moves around (<I>rfx</I>, <I>rfy</I>).
+
+       <B>ScalingLineList(</B>
+           <B>Painer*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>Coord</B> <B>y[],</B> <B>int</B> <B>n,</B>
+           <B>Coord</B> <B>cx,</B> <B>cy,</B> <B>rfx,</B> <B>rfy,</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A  scaling  line  list scales a list of lines about
+              (<I>cx,</I> <I>cy</I>) to  keep  the  line  list's  bounding  box
+              intersecting the tracking point.
+
+       <B>RotatingLineList(</B>
+           <B>Coord</B> <B>cx,</B> <B>cy,</B> <B>rfx,</B> <B>rfy,</B> <B>offx</B> <B>=</B> <B>0,</B> <B>offy</B> <B>=</B> <B>0</B>
+       <B>)</B>
+              A  rotating line list rotates a list of lines about
+              (<I>cx,</I> <I>cy</I>) based on the angle between the radius from
+              (<I>cx</I>, <I>cy</I>) to (<I>rfx</I>, <I>rfy</I>) and the radius from (<I>cx</I>, <I>cy</I>)
+              to the tracking point.
+
+       <B>GrowingVertices(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B>
+           <B>int</B> <B>pt</B> <B>=</B> <B>-1,</B> <B>int</B> <B>handleSize</B> <B>=</B> <B>-1</B>
+       <B>)</B>
+       <B>GrowingMultiLine(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B>
+           <B>int</B> <B>pt</B> <B>=</B> <B>-1,</B> <B>int</B> <B>handleSize</B> <B>=</B> <B>-1</B>
+       <B>)</B>
+       <B>GrowingPolygon(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B>
+           <B>int</B> <B>pt</B> <B>=</B> <B>-1,</B> <B>int</B> <B>handleSize</B> <B>=</B> <B>-1</B>
+       <B>)</B>
+       <B>GrowingBSpline(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B>
+           <B>int</B> <B>pt</B> <B>=</B> <B>-1,</B> <B>int</B> <B>handleSize</B> <B>=</B> <B>-1</B>
+       <B>)</B>
+       <B>GrowingClosedBSpline(</B>
+           <B>Painter*,</B> <B>Canvas*,</B> <B>Coord</B> <B>x[],</B> <B>y[],</B> <B>int</B> <B>n,</B>
+           <B>int</B> <B>pt</B> <B>=</B> <B>-1,</B> <B>int</B> <B>handleSize</B> <B>=</B> <B>-1</B>
+       <B>)</B>
+       <B>virtual</B> <B>void</B> <B>AddVertex(Coord,</B> <B>Coord)</B>
+       <B>virtual</B> <B>void</B> <B>RemoveVertex()</B>
+              GrowingVertices is an abstract rubberband  contain-
+              ing a list of vertices that grows or shrinks dynam-
+              ically.  The <I>pt</I> parameter specifies  the  index  of
+              the  vertex  that will follow the tracking point; a
+              value of -1 specifies a vertex after the  last  one
+              in  the  list.   The <I>handleSize</I> parameter specifies
+              the size of the handle drawn at each vertex (as  in
+              RubberHandles  above); a value of -1 specifies that
+              no handles be drawn.
+
+              The AddVertex operation adds a new  vertex  at  the
+              tracking  point  to the list and makes the next (or
+              last) vertex in the list follow the tracking point.
+              RemoveVertex  removes  the  vertex  at the tracking
+              point and makes the previous (or first) vertex  the
+              new tracking point.  GrowingMultiLine, GrowingPoly-
+              gon, GrowingBSpline, and  GrowingClosedBSpline  are
+              GrowingVertices  subclasses  that draw a multiline,
+              polygon, B-spline,  and  closed  B-spline,  respec-
+              tively.
+
+       <B>RubberGroup(Painter*,</B> <B>Canvas*)</B>
+       <B>void</B> <B>Append(</B>
+           <B>Rubberband*</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+       <B>void</B> <B>Remove(Rubberband*)</B>
+       <B>void</B> <B>RemoveCur()</B>
+       <B>void</B> <B>SetCurrent(Rubberband*)</B>
+       <B>Rubberband*</B> <B>GetCurrent()</B>
+       <B>Rubberband*</B> <B>First()</B>
+       <B>Rubberband*</B> <B>Last()</B>
+       <B>Rubberband*</B> <B>Next()</B>
+       <B>Rubberband*</B> <B>Prev()</B>
+       <B>boolean</B> <B>IsEmpty()</B>
+       <B>boolean</B> <B>AtEnd()</B>
+              A RubberGroup composes other rubberbands, providing
+              operations for including, excluding, and traversing
+              its children. RubberGroups are useful for combining
+              the behavior of several rubberbands into one, elim-
+              inating  the need to call Track on multiple rubber-
+              bands. The RubberGroup's SetCanvas  and  SetPainter
+              operations set the children's canvas and painter as
+              well as the RubberGroup's, but the children do  not
+              otherwise  inherit  the group's canvas and painter.
+              The Track operation calls Track on each child  with
+              the same parameters.
+
+       <B>virtual</B> <B>void</B> <B>Draw()</B>
+       <B>void</B> <B>Redraw()</B>
+       <B>virtual</B> <B>void</B> <B>Erase()</B>
+              Explicitly  draw, redraw, and erase the rubberband.
+              Multiple calls to Draw without an intervening Erase
+              will  only draw the rubberband once.  Redraw forces
+              the rubberband to be drawn.  Since rubberbands  are
+              drawn in XOR mode, Redraw will erase the rubberband
+              every other time it is called.  These functions are
+              used  only  on  occasion, for example, when part of
+              the screen is erased while a rubberband is visible.
+              The  Track  function  is  normally used to draw the
+              rubberband in response to mouse input.
+
+       <B>virtual</B> <B>void</B> <B>Track(Coord</B> <B>x,</B> <B>Coord</B> <B>y)</B>
+              Erase the rubberband and redraw it  using  the  new
+              tracking point.
+
+       <B>void</B> <B>GetOriginal(Coord&amp;</B> <B>x1,</B> <B>Coord&amp;</B> <B>y2,</B> <B>Coord&amp;</B> <B>x2,</B> <B>Coord&amp;</B>
+              <B>y2)</B>
+       <B>void</B> <B>GetCurrent(Coord&amp;</B> <B>x1,</B> <B>Coord&amp;</B> <B>y2,</B> <B>Coord&amp;</B> <B>x2,</B> <B>Coord&amp;</B>
+              <B>y2)</B>
+              GetOriginal  obtains  the original points specified
+              for the rubberband.  GetCurrent obtains the current
+              points based on the most recent call to Track.  The
+              meaning of the points depends on the kind  of  rub-
+              berband.   For lines, the points are the endpoints;
+              for rectangles, the points  are  opposite  corners;
+
+       <B>virtual</B> <B>void</B> <B>SetPainter(Painter*)</B>
+       <B>Painter*</B> <B>GetPainter()</B>
+              Explicitly set and get the painter used by the rub-
+              berband.  By default, rubberbands use a copy of the
+              painter passed to their constructor.  The user  can
+              specify  a  particular  painter to use by passing a
+              nil painter to the constructor  and  later  calling
+              SetPainter.   <I>N.B.:</I>  the  rubberband  may alter the
+              painter specified via SetPainter.
+
+       <B>virtual</B> <B>void</B> <B>SetCanvas(Canvas*)</B>
+       <B>Canvas*</B> <B>GetCanvas()</B>
+              Explicitly set and get the canvas used by the  rub-
+              berband.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Canvas(3I)</B>, <B>Painter(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

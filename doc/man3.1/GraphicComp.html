@@ -1,0 +1,338 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       GraphicComp,  GraphicComps  -  base  classes for graphical
+       component subjects
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/grcomp.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       GraphicComp is an abstract base class for components  that
+       store graphical information in a Graphic object.  Graphic-
+       Comp is derived from Component  and  adds  operations  for
+       manipulating  its graphical attributes.  GraphicComps is a
+       non-abstract subclass of GraphicComp for composite graphi-
+       cal component subjects.
+
+
+</PRE>
+<H2>GRAPHICCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>~GraphicComp()</B>
+              The  destructor  deletes the GraphicComp's graphic,
+              if any.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              GraphicComp objects can (un)interpret the following
+              commands:
+
+              <B>AlignCmd</B>  aligns  the  GraphicComp's  graphic  with
+              respect to the graphic in the GraphicComp  returned
+              by  AlignCmd::GetReference.   The alignment's sense
+              is defined by  the  alignments  that  the  AlignCmd
+              specifies:  The  first Alignment parameter returned
+              by AlignCmd::GetAlignment specifies  the  alignment
+              with  respect  to  the reference graphic, while the
+              second Alignment parameter specifies the  alignment
+              with respect to <I>this</I>'s graphic.
+
+              <B>BrushCmd</B> sets the graphic's brush to the BrushCmd's
+              value.
+
+              <B>ColorCmd</B> sets the graphic's  foreground  and  back-
+              ground colors.
+
+              <B>FontCmd</B> sets the graphic's font.
+
+              <B>MobilityCmd</B>  sets the GraphicComp's mobility to the
+              MobilityCmd's value.
+
+              <B>MoveCmd</B> translates the GraphicComp's graphic by the
+              amounts in the MoveCmd.
+
+              <B>PatternCmd</B> sets the graphic's pattern.
+
+              <B>RotateCmd</B>  rotates the GraphicComp's graphic by the
+              amount in the RotateCmd.
+              amounts in the ScaleCmd.
+
+       <B>virtual</B> <B>Graphic*</B> <B>GetGraphic()</B>
+              Return the GraphicComp's graphic.  GraphicComp sub-
+              class normally redefine this  operation  to  return
+              the graphic that defines their appearance.
+
+       <B>virtual</B> <B>Component*</B> <B>GetParent()</B>
+              GraphicComp  redefines GetParent to return its par-
+              ent.  However, GraphicComp does not store a pointer
+              to  the  parent explicitly; instead, it obtains its
+              graphic's parent and obtains the GraphicComp  asso-
+              ciated with the parent graphic.  The graphic stores
+              the GraphicComp that contains it in  its  tag  (see
+              SetGraphic below).
+
+       <B>GraphicComp*</B> <B>GetComp(Iterator)</B>
+       <B>void</B> <B>SetComp(GraphicComp*,</B> <B>Iterator&amp;)</B>
+              These operations do nothing by default.  Subclasses
+              that contain children should redefine them as  fol-
+              lows:  GetComp  should  return  the  GraphicComp to
+              which an iterator points.  SetComp should  initial-
+              ize  the iterator to point to a particular Graphic-
+              Comp in the list of children; it should  initialize
+              the  iterator  to  point  to  a nil instance if the
+              given GraphicComp is not a child.
+
+       <B>void</B> <B>Append(GraphicComp*)</B>
+       <B>void</B> <B>Prepend(GraphicComp*)</B>
+       <B>void</B> <B>InsertAfter(Iterator,</B> <B>GraphicComp*)</B>
+       <B>void</B> <B>InsertBefore(Iterator,</B> <B>GraphicComp*)</B>
+       <B>void</B> <B>Remove(GraphicComp*)</B>
+       <B>void</B> <B>Remove(Iterator&amp;)</B>
+              Unimplemented operations that composite  subclasses
+              should  redefine  for  modifying the their (concep-
+              tual)  list  of  children.   Note  that  subclasses
+              needn't  necessarily store their children in a list
+              data structure, but a  list  maps  closely  to  the
+              semantics of these operations.
+
+              Append and Prepend add a GraphicComp to the end and
+              the   beginning   of   the   list,    respectively.
+              InsertAfter  and  InsertBefore insert a GraphicComp
+              after and before the GraphicComp pointed to by  the
+              iterator,   respectively.   The  Remove  operations
+              remove a view from the list  without  deleting  it.
+              You  can  remove a view instance by referring to it
+              explicitly or by specifying  an  iterator.   If  an
+              iterator  is  supplied, the Remove operation should
+              advance it to point to the following view as a side
+              effect.
+
+              Modify  the  GraphicComp's graphic state by calling
+              Bequeath on its Graphic.  Graphic::Bequeath  propa-
+              gates  <I>this</I>'s  graphic state to its immediate chil-
+              dren,  nullifying  its  own  graphics  state;   see
+              <B>Graphic(3U)</B> for a more complete description.
+
+       <B>virtual</B> <B>Mobility</B> <B>GetMobility()</B>
+       <B>virtual</B> <B>void</B> <B>SetMobility(Mobility)</B>
+              Get  and set the GraphicComp's mobility.  GetMobil-
+              ity returns Undef by default, and SetMobility  does
+              nothing.
+
+
+</PRE>
+<H2>GRAPHICCOMP PROTECTED OPERATIONS</H2><PRE>
+       <B>GraphicComp(Graphic*</B> <B>=</B> <B>nil)</B>
+              The Graphic instance that defines the GraphicComp's
+              graphical attributes can be specified in  the  con-
+              structor,  which  is  protected  to  guard  against
+              instantiation.
+
+       <B>virtual</B> <B>void</B> <B>SetGraphic(Graphic*)</B>
+       <B>virtual</B> <B>GraphicComp*</B> <B>GetGraphicComp(Graphic*)</B>
+              SetGraphic sets the GraphicComp's  graphic  to  the
+              given  one,  and  store  <I>this</I>  in the graphic using
+              Graphic::SetTag.  This makes it possible to  obtain
+              the  GraphicComp  that  owns  the  graphic from the
+              graphic itself.  GetGraphicComp returns the  Graph-
+              icComp associated with the given graphic.
+
+       <B>void</B> <B>Skip(istream&amp;)</B>
+       <B>void</B> <B>Mark(ostream&amp;)</B>
+              Convenience  functions that simply call their Cata-
+              log counterparts.
+
+       <B>int</B> <B>ReadBgFilled(istream&amp;)</B>
+       <B>PSBrush*</B> <B>ReadBrush(istream&amp;)</B>
+       <B>PSColor*</B> <B>ReadColor(istream&amp;)</B>
+       <B>PSFont*</B> <B>ReadFont(istream&amp;)</B>
+       <B>PSPattern*</B> <B>ReadPattern(istream&amp;)</B>
+       <B>PSTransformer*</B> <B>ReadTransformer(istream&amp;)</B>
+       <B>char*</B> <B>ReadString(istream&amp;)</B>
+       <B>Bitmap*</B> <B>ReadBitmap(istream&amp;)</B>
+       <B>Raster*</B> <B>ReadGraymap(istream&amp;)</B>
+       <B>Raster*</B> <B>ReadRaster(istream&amp;)</B>
+       <B>void</B> <B>ReadVertices(istream&amp;,</B> <B>Coord*&amp;,</B> <B>Coord*&amp;,</B> <B>int&amp;)</B>
+
+       <B>void</B> <B>WriteBgFilled(boolean,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteBrush(PSBrush*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteColor(PSColor*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteFont(PSFont*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WritePattern(PSPattern*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteTransformer(PSTransformer*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteString(const</B> <B>char*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteGraymap(Raster*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteRaster(Raster*,</B> <B>ostream&amp;)</B>
+       <B>void</B> <B>WriteVertices(const</B> <B>Coord*,</B> <B>const</B> <B>Coord*,</B> <B>int,</B>
+              <B>ostream&amp;)</B>
+              Convenience  functions for reading and writing com-
+              mon GraphicComp information.  These operations  are
+              most  often  used  in  the  Read and Write calls of
+              GraphicComp subclasses.   The  Write...  operations
+              send  a  stream of bytes characterizing their first
+              parameter to the ostream.  The  Read...  operations
+              reconstruct  the  object(s) from the bytes that the
+              istream supplies.
+
+
+</PRE>
+<H2>GRAPHICCOMPS PUBLIC OPERATIONS</H2><PRE>
+       <B>GraphicComps()</B>
+       <B>GraphicComps(Graphic*)</B>
+       <B>virtual</B> <B>~GraphicComps()</B>
+              The parameterless  constructor  sets  the  Graphic-
+              Comps' graphic to a new Picture instance, while the
+              other lets you specify the graphic explicitly.  The
+              destructor deletes its children.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              GraphicComps  can  (un)interpret the following com-
+              mands in addition to those that GraphicComp objects
+              (un)interpret:
+
+              <B>BackCmd</B>  and  <B>FrontCmd</B>  change  the position of the
+              GraphicComps' children that are  in  the  command's
+              clipboard object.  If the command has no clipboard,
+              it will create one and fill it with the subjects of
+              GraphicViews  that  are  selected  currently in the
+              command's editor.  Interpreting a BackCmd will move
+              the  children  on the clipboard so that they appear
+              behind the others, preserving their relative order;
+              the opposite occurs when interpreting a FrontCmd.
+
+              <B>CutCmd</B> removes the components in the CutCmd's clip-
+              board from the GraphicComps and places them in  the
+              catalog's  global clipboard.  Interpret will create
+              a clipboard containing  the  subjects  of  selected
+              GraphicViews  if  the  CutCmd has no clipboard ini-
+              tially.
+
+              <B>DeleteCmd</B> removes the components in the DeleteCmd's
+              clipboard  from  the GraphicComps and destroys them
+              when the DeleteCmd is destroyed if it has not  been
+              uninterpreted.   Interpret  will create a clipboard
+              containing the subjects of selected GraphicViews if
+              the DeleteCmd has no clipboard initially.
+
+              Interpret  will  create  a clipboard containing the
+              subject of selected GraphicViews if the DupCmd  has
+              no clipboard initially.
+
+              <B>GroupCmd</B>  removes  the components in the GroupCmd's
+              clipboard from the GraphicComps  and  inserts  them
+              into   the   destination  GraphicComp  returned  by
+              GroupCmd::GetGroup.  The destination is inserted at
+              the  position  formerly occupied by the last compo-
+              nent in the clipboard.   If  the  GroupCmd  has  no
+              clipboard  initially, interpret will create a clip-
+              board containing the subjects  of  selected  Graph-
+              icViews. If GroupCmd does not define a destination,
+              Interpret will create a GraphicComps  instance  and
+              set  the GroupCmd's destination explicitly.  Inter-
+              pret does nothing if the  clipboard  contains  less
+              than two components.
+
+              <B>UngroupCmd</B> extracts the children from components in
+              the UngroupCmd's  clipboard  and  inserts  them  in
+              order immediately after their parents.  The parents
+              are then removed from the GraphicComps.   The  par-
+              ents  are destroyed along with the UngroupCmd if it
+              has not been Uninterpreted.
+
+              <B>PasteCmd</B> appends copies of the  components  in  the
+              PasteCmd's  clipboard  to the GraphicComps.  If the
+              PasteCmd has no clipboard initially,  it  will  use
+              the global clipboard from the catalog.
+
+
+</PRE>
+<H2>GRAPHICCOMPS PROTECTED OPERATIONS</H2><PRE>
+       <B>GraphicComp*</B> <B>Comp(UList*)</B>
+       <B>UList*</B> <B>Elem(Iterator)</B>
+              Convenience  functions for extracting a GraphicComp
+              from a UList element and a UList from an  iterator.
+
+       <B>void</B> <B>SelectViewsOf(GraphicComp*,</B> <B>Editor*)</B>
+              A  convenience function for selecting all the views
+              of the given GraphicComp that appear in  the  given
+              editor.  SelectViewsOf clears the original contents
+              of the selection.
+
+       <B>void</B> <B>SelectClipboard(Clipboard*,</B> <B>Editor)</B>
+              A convenience function for selecting all the  views
+              of  all  the components in the given Clipboard that
+              appear in the given editor.   SelectViewsOf  clears
+              the original contents of the selection.
+
+       <B>void</B> <B>StorePosition(GraphicComp*,</B> <B>Command*)</B>
+              Store  the  given  child's  position into the given
+              Command with Command::Store.
+
+              Insert the given GraphicComp  into  <I>this</I>  based  on
+              position  information  stored in the given command.
+              The position information must have been stored with
+              StorePosition.
+
+       <B>void</B> <B>Group(Clipboard*,</B> <B>GraphicComp*</B> <B>destination,</B> <B>Command*)</B>
+       <B>void</B> <B>Ungroup(GraphicComp*</B> <B>parent,</B> <B>Clipboard*,</B> <B>Command*)</B>
+              Helper functions  used  in  the  interpretation  of
+              GroupCmd   and   UngroupCmd,  respectively.   Group
+              inserts the components in the clipboard into <I>desti-</I>
+              <I>nation</I>  and  inserts <I>destination</I> into <I>this</I>, storing
+              undo information in the command.   Ungroup  removes
+              all  children  from  <I>parent</I>, puts them on the clip-
+              board, and then removes <I>parent</I> from <I>this</I>.   Ungroup
+              also stores undo information in the command.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>BrushCmd(3U)</B>,  <B>Catalog(3U)</B>,  <B>Clipboard(3U)</B>,  <B>ColorCmd(3U)</B>,
+       <B>Component(3U)</B>, <B>Editor(3U)</B>, <B>FontCmd(3U)</B>, <B>Iterator(3U)</B>, Pat-
+       <B>ternCmd(3U)</B>,    <B>Picture(3U)</B>,   <B>Selection(3U)</B>,   <B>UList(3U)</B>,
+       <B>align(3U)</B>,  <B>edit(3U)</B>,  <B>globals(3U)</B>,   <B>struct(3U)</B>,   trans-
+       <B>forms(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,1207 @@
+
+<html><head><TITLE>Description of ComValue</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ComValue</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="AttributeValue.html" >AttributeValue</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+<A HREF="AttributeValue.html" >AttributeValue</A> with extensions for use with <A HREF="ComTerp.html" >ComTerp</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="AttributeValue.html" >AttributeValue</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#ComValue><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+ComTerp/comvalue.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <A HREF="ComValue.html" >ComValue</A> adds to <A HREF="AttributeValue.html" >AttributeValue</A> a set of convenient static methods
+ for returning constants useful in any application of <A HREF="ComTerp.html" >ComTerp</A>, as well
+ as four integers (narg(), nkey(), nids(), pedepth()) used for storing
+ necessary command and keyword state after code conversion and during 
+ interpretation.  
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue()">
+    <B>ComValue</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct of UnknownType.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(AttributeValue&#38;)">
+    <B>ComValue</B> (<A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy constructor from an <A HREF="AttributeValue.html" >AttributeValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(AttributeValueList*listptr)">
+    <B>ComValue</B> (<A HREF="AttributeValueList.html" >AttributeValueList</A>* listptr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        ArrayType/ListType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(ComFunc*func)">
+    <B>ComValue</B> (<A HREF="ComFunc.html" >ComFunc</A>* func) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        CommandType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(ComValue&#38;)">
+    <B>ComValue</B> (<A HREF="ComValue.html" >ComValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(ComValue*)">
+    <B>ComValue</B> (<A HREF="ComValue.html" >ComValue</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        deep copy constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(ValueTypetype)">
+    <B>ComValue</B> (ValueType type) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct of a given 'type' with no initial value.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(charval)">
+    <B>ComValue</B> (char val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        CharType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(constchar*val)">
+    <B>ComValue</B> (const char* val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        StringType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(doubleval)">
+    <B>ComValue</B> (double val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        DoubleType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(floatval)">
+    <B>ComValue</B> (float val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        FloatType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(intval&#38;&#38;COMMValueTypetype=IntType)">
+    <B>ComValue</B> (int val, ValueType type=IntType) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        IntType constructor or any other int-like value.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(intclass_symid&#38;&#38;COMMvoid*ptr)">
+    <B>ComValue</B> (int class_symid, void* ptr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        ObjectType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(longval)">
+    <B>ComValue</B> (long val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        LongType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(postfix_token*token)">
+    <B>ComValue</B> (postfix_token* <A HREF="token.html" >token</A>) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy constructor from a postfix <A HREF="token.html" >token</A> generated by a <A HREF="Parser.html" >Parser</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(shortval)">
+    <B>ComValue</B> (short val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        ShortType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(unsignedcharval)">
+    <B>ComValue</B> (unsigned char val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        UCharType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(unsignedintval&#38;&#38;COMMValueTypetype=IntType)">
+    <B>ComValue</B> (unsigned int val, ValueType type=IntType) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        UIntType constructor or any other unsigned-int-like value including SymbolType.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(unsignedintval&#38;&#38;COMMunsignedint&#38;&#38;COMMValueTypetype=KeywordType)">
+    <B>ComValue</B> (unsigned int val, unsigned int, ValueType type=KeywordType) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        KeywordType constructor (or can be used for ObjectType).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(unsignedlongval)">
+    <B>ComValue</B> (unsigned long val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        ULongType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(unsignedshortval)">
+    <B>ComValue</B> (unsigned short val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        UShortType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(void*funcptr&#38;&#38;COMMAttributeValueList*listptr)">
+    <B>ComValue</B> (void* funcptr, <A HREF="AttributeValueList.html" >AttributeValueList</A>* listptr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        StreamType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="blankval()">
+    <B>blankval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to BlankType <A HREF="ComValue.html" >ComValue</A>. <A HREF="ComTerp.html" >ComTerp</A> places one of these
+ on the stack whenever the execution of a <A HREF="ComFunc.html" >ComFunc</A> places nothing on the stack.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="bquote()">
+    <B>bquote</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return backquote flag
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="bquote(intflag)">
+    <B>bquote</B> (int flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set backquote flag
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const <A HREF="ComTerp.html" >ComTerp</A>* 
+    <A NAME="comterp()">
+    <B>comterp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return static pointer to <A HREF="ComTerp.html" >ComTerp</A> used to provide brief flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="comterp(constComTerp*comterp)">
+    <B>comterp</B> (const <A HREF="ComTerp.html" >ComTerp</A>* comterp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set static pointer to <A HREF="ComTerp.html" >ComTerp</A> used to provide brief flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="falseval()">
+    <B>falseval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to BooleanType <A HREF="ComValue.html" >ComValue</A> with value of 0.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void* 
+    <A NAME="geta(inttype)">
+    <B>geta</B> (int type) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return a pointer if ObjectType matches
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="init()">
+    <B>init</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        initialize member variables.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="is_comfunc(intfunc_classid)">
+    <B>is_comfunc</B> (int func_classid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns true if CommandType with <A HREF="ComFunc.html" >ComFunc</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="minusoneval()">
+    <B>minusoneval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to IntType <A HREF="ComValue.html" >ComValue</A> with value of -1.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="narg()">
+    <B>narg</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of arguments associated with this command or keyword.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="narg(intn)">
+    <B>narg</B> (int n) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set number of arguments associated with this command or keyword.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="nids()">
+    <B>nids</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of subordinate identifiers associated with this identifier (not used).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="nids(intn)">
+    <B>nids</B> (int n) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set number of subordinate identifiers associated with this identifier (not used).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="nkey()">
+    <B>nkey</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of keywords associated with this command.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="nkey(intn)">
+    <B>nkey</B> (int n) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set number of keywords associated with this command.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="null()">
+    <B>null</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if UnknownType.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="nullval()">
+    <B>nullval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to UnknownType <A HREF="ComValue.html" >ComValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="oneval()">
+    <B>oneval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to IntType <A HREF="ComValue.html" >ComValue</A> with value of 1.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="operator=(constComValue&#38;)">
+    <B>operator= </B> (const <A HREF="ComValue.html" >ComValue</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        assignment operator.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int&#38; 
+    <A NAME="pedepth()">
+    <B>pedepth</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set/get depth of nesting in post-evaluated blocks of control commands.
+ Used by <A HREF="ComTerp.html" >ComTerp</A> to efficiently extract and execute post-evaluation commands.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="trueval()">
+    <B>trueval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to BooleanType <A HREF="ComValue.html" >ComValue</A> with value of 1.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="unknown()">
+    <B>unknown</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if UnknownType.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="unkval()">
+    <B>unkval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to UnknownType <A HREF="ComValue.html" >ComValue</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <A NAME="zeroval()">
+    <B>zeroval</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        returns reference to IntType <A HREF="ComValue.html" >ComValue</A> with value of 0.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~ComValue()">
+    <B>~ComValue</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_blankval">
+    <B>_blankval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_bquote">
+    <B>_bquote</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const <A HREF="ComTerp.html" >ComTerp</A>* 
+    <A NAME="_comterp">
+    <B>_comterp</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_falseval">
+    <B>_falseval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_minusoneval">
+    <B>_minusoneval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_narg">
+    <B>_narg</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nids">
+    <B>_nids</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nkey">
+    <B>_nkey</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_nullval">
+    <B>_nullval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_oneval">
+    <B>_oneval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_pedepth">
+    <B>_pedepth</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_trueval">
+    <B>_trueval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_unkval">
+    <B>_unkval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_zeroval">
+    <B>_zeroval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="zero_vals()">
+    <B>zero_vals</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend ostream&#38; 
+    <A NAME="operator&#60;&#60;(ostream&#38;s&#38;&#38;COMMconstComValue&#38;)">
+    <B>operator <<</B> (ostream&#38; s, const <A HREF="ComValue.html" >ComValue</A>&#38;)  </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print contents to ostream, brief or not depending on
+ associated <A HREF="ComTerp.html" >ComTerp</A> brief flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       PadComp,  PadView,  PadGraphic, PSPad - pad connector sub-
+       ject, view, structured graphic,  and  PostScript  external
+       representation
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/pad.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       PadComp is a Connector subclass that supports connectivity
+       with two degrees of freedom.   It  uses  a  PadGraphic  to
+       store  its graphical attributes.  PadView is a GraphicView
+       for displaying the pad.  PSPad is  a  PostScriptView  that
+       externalizes the subject's information in PostScript form.
+
+
+</PRE>
+<H2>PADCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>PadComp(PadGraphic*</B> <B>=</B> <B>nil)</B>
+              The constructor takes an optional  PadGraphic  that
+              defines the pad's graphical attributes.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              PadComp  (un)interprets  a  subset of commands that
+              connectors can generally interpret, namely MoveCmd,
+              BrushCmd,  AlignCmd,  MobilityCmd,  DeleteCmd,  and
+              CutCmd.
+
+       <B>virtual</B> <B>Mobility</B> <B>GetMobility()</B>
+       <B>virtual</B> <B>void</B> <B>SetMobility(Mobility)</B>
+              PadComp redefines these  functions  to  return  and
+              assign its <B>_</B><I>mobility</I> protected member.  The pad has
+              fixed mobility initially.
+
+       <B>Pad*</B> <B>GetPad()</B>
+              Return the Pad  graphic  that  defines  the  line's
+              attributes.   GetPad is simply a more specific form
+              of the GetGraphic operation.
+
+
+</PRE>
+<H2>PADVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>PadView(PadComp*</B> <B>=</B> <B>nil)</B>
+              Create an PadView, optionally  supplying  the  sub-
+              ject.
+
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              PadView  interprets  AlignToGridCmd  to  align  its
+              lower left to the grid.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              PadViews respond only to manipulation  by  Graphic-
+              GraphicCompTool will let the user sweep out a rect-
+              angle that reflects the pad's size.  Creation  will
+              be influenced by gravity, if any. PadView creates a
+              ConnectManip in response to the ConnectTool,  which
+              will  exhibit a gravational attraction to potential
+              target connectors.  PadView  will  produce  a  Con-
+              nectCmd  to  connect  the  pad to its target. A pad
+              connected in this way will receive floating  mobil-
+              ity.
+
+       <B>PadComp*</B> <B>GetPadComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>PADVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>PadGraphic*</B> <B>GetPad()</B>
+              Return   the  PadGraphic  that  defines  the  pad's
+              attributes.  GetPad is simply a more specific  form
+              of the GetGraphic operation.
+
+       <B>virtual</B> <B>PadComp*</B> <B>NewSubject(PadGraphic*)</B>
+              A  helper  function  that creates a PadComp subject
+              with the given pad graphic. This function  produces
+              the   proper  subject  when  the  GraphicCompTool's
+              manipulator is interpreted.  Subclasses  can  rede-
+              fine  this  operation to return a PadComp subclass,
+              thus eliminating the need to reimplement Interpret-
+              Manipulator.
+
+       <B>Manipulator*</B> <B>CreateGraphicCompManip(</B>
+           <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>Manipulator*</B> <B>CreateConnectManip(</B>
+           <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>Command*</B> <B>InterpretGraphicCompManip(Manipulator*)</B>
+       <B>Command*</B> <B>InterpretConnectManip(Manipulator*)</B>
+              Helper  functions  used  by  CreateManipulator  and
+              InterpretManipulator to create  and  interpret  the
+              manipulators  associated  with  GraphicCompTool and
+              ConnectTool.
+
+
+</PRE>
+<H2>PADGRAPHIC PUBLIC OPERATIONS</H2><PRE>
+       <B>PadGraphic(</B>
+           <B>Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0,</B> <B>Coord</B> <B>=</B> <B>0,</B>
+           <B>Graphic*</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+              Create a PadGraphic, optionally  specifying  lower-
+              left  and  upper-right  corners  and a graphic from
+              which to obtain its default graphics attributes.
+
+              Return the  PadGraphic's  original  coordinates  as
+              specified in the constructor.
+
+
+</PRE>
+<H2>PSPAD PUBLIC OPERATIONS</H2><PRE>
+       <B>PSPad(PadComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>BrushCmd(3U)</B>,  <B>ConnectTool(3U)</B>,   <B>Connector(3U)</B>,   Connec-
+       torView3U),  <B>Event(3I)</B>,  <B>Graphic(3U)</B>, <B>GraphicCompTool(3U)</B>,
+       <B>Grid(3U)</B>,          <B>MoveTool(3U)</B>,           <B>PatternCmd(3U)</B>,
+       <B>PostScriptView(3U)</B>,      <B>Transformer(3I)</B>,      <B>Viewer(3U)</B>,
+       <B>align(3U)</B>, <B>edit(3U)</B>, <B>manips(3U)</B>, <B>transforms(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,195 @@
+
+<html><head><TITLE>Description of ACE_IO_Handler</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ACE_IO_Handler</B></FONT>
+
+  <FONT SIZE=4> : public ACE_Event_Handler  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public ACE_Event_Handler 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#ACE_IO_Handler><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+AceDispatch/ace_iohandler.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ACE_IO_Handler(IOHandler*)">
+    <B>ACE_IO_Handler</B> (<A HREF="IOHandler.html" >IOHandler</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_exception(ACE_HANDLEfd=ACE_INVALID_HANDLE)">
+    <B>handle_exception</B> (ACE_HANDLE fd = ACE_INVALID_HANDLE) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Called when execption events occur (e.g., SIGURG).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_input(ACE_HANDLEfd=ACE_INVALID_HANDLE)">
+    <B>handle_input</B> (ACE_HANDLE fd = ACE_INVALID_HANDLE) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Called when input events occur (e.g., connection or data).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_output(ACE_HANDLEfd=ACE_INVALID_HANDLE)">
+    <B>handle_output</B> (ACE_HANDLE fd = ACE_INVALID_HANDLE) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Called when output events are possible (e.g., flow control
+ abates).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_timeout(constACE_Time_Value&#38;tv&#38;&#38;COMMconstvoid*arg=0)">
+    <B>handle_timeout</B> (const ACE_Time_Value &#38;tv, const void *arg = 0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Called when timer expires.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="IOHandler.html" >IOHandler</A>* 
+    <A NAME="iohandler()">
+    <B>iohandler</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="IOHandler.html" >IOHandler</A>* 
+    <A NAME="_iohandler">
+    <B>_iohandler</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

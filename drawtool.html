@@ -1,0 +1,142 @@
+
+<title>ivtools drawtool: idraw derived drawing editor with PostScript and native format</title>
+
+<h1>
+ivtools drawtool
+</h1>
+
+<img src=../ivtools/drawtool-logo.gif><p>
+
+<b>ivtools drawtool</b> is an extended version of <a href=./idraw.html>idraw</a> with
+double-buffered graphics display, a human-readable native format for
+drawing save/restore, Motif-looking toolbar and pull-down menus, and several extensions to the import/export and multi-viewer mechanisms as well.
+Here is <a href=./drawtool.gif>a picture</a> of the user interface.
+
+Here is the <a href=./drawtool.drs>drawtool document</a> for the
+drawing shown in that picture.
+<p>
+<hr>
+<p>
+<b>Usage</b>
+<p>
+<a href=./drawtool-README.txt>man page</a>
+<p>
+<i>Launch drawtool directly on one of these graphic formats, some by using
+helper apps:</i><p>
+
+<table border=1>
+<tr>
+<td><b>FORMAT</b></td><td><b>HELPER APP</b></td>
+</tr>
+<tr>
+<td>PNG</td><td><code>pngtopnm</code> from <a href=./pbmplus.html>netpbm</a></td>
+</tr>
+<tr>
+<td>JPEG</td><td><code>djpeg</code>  from libjpeg</td>
+</tr>
+<tr>
+<td>GIF</td><td><code>giftopnm</code>  from <a href=./pbmplus.html>netpbm</a></td>
+</tr>
+<tr>
+<td>arbitrary PostScript</td><td><code><a href=pstoedit.html>pstoedit</a></code></td>
+</tr>
+<tr>
+<td><a href=idraw.html>idraw-formatted PostScript</a></td><td>none <i>(native format)</i></td>
+</tr>
+<tr>
+<td>TIFF</td><td>none <i>(native format)</i></td>
+</tr>
+<tr>
+<td>PBM/PGM/PPM</td><td>none <i>(native format)</i></td>
+</tr>
+<tr>
+<td>XBM (X bitmap)</td><td>none <i>(native format)</i></td>
+</tr>
+</table>
+<p>
+<i>
+Or use <code>anytopnm</code> <font size=2>(from <a href=pbmplus.html>pbmplus/netpbm</a>)</font> from the import dialog box to convert a wider
+variety of raster formats to a format readable by ivtools drawtool:
+XBM, TIFF, and 8/16 bit binary/ANSI PBM/PGM/PPM.  
+<p>
+Read more about using the import/export capabilities of drawtool <a href=expimpnet.html>here</a> and <a href=othertools.html>here</a></i>
+
+<hr>
+<p>
+<p>
+If you're running Linux download an 
+<a href=http://www.ivtools.org/ivtools/download.html>ivtools drawtool binary</a> (or build from <a href=http://www.vectaport.com/pub/src/index.html>source</a>)
+and add the following to your ~/.mailcap file:<p>
+
+<code>application/ov-idraw; drawtool %s</code>
+
+<p>
+to test launching drawtool when a <a href=./drawtool.drs>drawtool
+document</a> is clicked.
+
+<p>
+The web server at www.vectaport.com is set up to send out .ovs or .drs
+files as MIME type application/ov-idraw.  If downloading an ivtools
+drawtool file from another server, you'd want to add this to your
+~/.mime-types file:<p>
+
+<code>
+application/ov-idraw; ovs<br>
+application/ov-idraw; drs
+</code>
+
+
+<p>
+<b>Other stuff</b>
+
+<table border=1>
+<tr>
+<td>
+<a href=./anteater-art.html>hyper-collage of anteaters</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href=http://www-jlc.kek.jp/~fujiik/mklinux/Packages/dr2.1/shared/ivtools/>adding Kanji input to drawtool</a>   <a href=./ivtools-0.6.2-kanji.patch>(revised Kanji patch)</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href=http://abbadingo.cs.unm.edu/~bap/debianlogo.html>drawtool redraws Debian logo</a>
+</td>
+</tr>
+</table>
+<p>
+Other free software drawing editors similar to <a href=./idraw.html>idraw</a> and drawtool:<br>
+<menu>
+<li><a href=http://www-epb.lbl.gov/xfig/>Xfig</a></li>
+<li><a href=http://bourbon.cs.umd.edu:8001/tgif/>Tgif</li>
+<li><a href=./faq.html#otherdrawingeditors>more...</li>
+</menu>
+<p>
+
+<hr>
+<table border=1><tr><td>
+<b><a href=./index.html>ivtools</a> <a href=./editors.html>drawing editors</a></b>
+</td><td>
+<a href=./idraw.html>idraw</a>
+</td><td>
+drawtool
+</td><td>
+<a href=./comdraw.html>comdraw</a>
+</td><td>
+<a href=./flipbook.html>flipbook</a>
+</td><td>
+<a href=./graphdraw.html>graphdraw</a>
+</td></tr></table>
+
+
+<p>
+
+<a href=../ivtools/index.html> <img src=../ivtools/ivtools-logo.gif align=middle alt="ivtools_button"> </a>
+<a href=../ivtools/index.html><code>ivtools home page</code></a>
+
+
+

@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Picture - composite structured graphic
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/picture.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  Picture  defines  a  composition of graphic objects.  A
+       picture has its own graphics state, which it  concatenates
+       with  its  children's  state  when  it is drawn or erased.
+       Picture adopts the default  concatenation  semantics  sup-
+       ported  by  the Graphic base class: The picture's graphics
+       state effectively overrides its children's  so  that  they
+       are drawn with the picture's state information substituted
+       for their own.  A child's attribute is used only when  the
+       picture  does  not  already  define  it.   Moreover,  each
+       child's transformer is  postmultiplied  by  the  picture's
+       transformer  when  the picture is drawn; thus children are
+       drawn relative to the picture's coordinate system.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Picture(Graphic*</B> <B>=</B> <B>nil)</B>
+              Construct  a  new  picture,  optionally  supply   a
+              graphic from which to copy an initial set of graph-
+              ics state.  Picture is derived from FullGraphic and
+              therefore defines a full set of graphics state.
+
+       <B>virtual</B> <B>~Picture()</B>
+              The   picture  deletes  its  children  when  it  is
+              deleted.
+
+       <B>boolean</B> <B>IsEmpty()</B>
+              Picture defines IsEmpty in addition to the standard
+              Graphic  child  traversal  operations  to provide a
+              convenient way to check  if  the  picture  has  any
+              children.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Graphic*</B> <B>graphic(UList*)</B>
+       <B>UList*</B> <B>Elem(Iterator)</B>
+              Convenience functions for extracting a graphic from
+              a UList element and a UList from an iterator.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>,  <B>Iterator(3U)</B>,  <B>Transformer(3I)</B>,   <B>UList(3U)</B>,
+       <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

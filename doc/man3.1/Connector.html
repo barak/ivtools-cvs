@@ -1,0 +1,182 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Connector, ConnectorView - base classes for connector sub-
+       jects and views
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/connector.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Connector is an abstract base class for  graphical  compo-
+       nent  subjects  that enforce different connectivity seman-
+       tics depending on the particular connector subclass.  Con-
+       nectorView is the abstract base class for views of connec-
+       tor subjects.  A connector can be connected to one or more
+       other  connectors.   Once  connected,  two  connectors can
+       affect each other's position in specific ways  as  defined
+       by the semantics of the connection.
+
+       Connectors  also  participate  in the propagation of state
+       variable values during dataflow.  Two connected connectors
+       with  bound  state  variables will assign the value of one
+       state variable to other, and  the  direction  of  transfer
+       depends on the connectors' transmission method.  For exam-
+       ple, if the transmission method of connector C1 with bound
+       state variable S1 is In, and if the transmission method of
+       connector C2 with bound state variable S2 is Out,  and  if
+       C1  and  C2  are  connected,  then S1 will be assigned the
+       value of S2 during dataflow.
+
+
+</PRE>
+<H2>CONNECTOR PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              In addition to (un)interpreting the commands Graph-
+              icComp  (un)interprets,  connectors also (un)inter-
+              pret DeleteCmd and CutCmd to sever and restore  any
+              connections to them.
+
+       <B>virtual</B> <B>void</B> <B>Connect(Connector*,</B> <B>CGlue*</B> <B>=</B> <B>nil);</B>
+              Connect this connector to the given one, optionally
+              with a piece of CGlue interposed.   This  operation
+              allows redundant connections by default.
+
+       <B>virtual</B> <B>void</B> <B>Disconnect(Connector*)</B>
+       <B>void</B> <B>DisconnectAll()</B>
+              Disconnect  the  given  connector from this one, if
+              they are connected.  DisconnectAll calls Disconnect
+              on  all  connected  connectors until no connections
+              remain.
+
+       <B>virtual</B> <B>boolean</B> <B>ConnectedTo(Connector*)</B>
+              Return whether this connector is connected  to  the
+              given one.
+
+       <B>virtual</B> <B>void</B> <B>GetCenter(float&amp;,</B> <B>float&amp;)</B>
+
+       <B>virtual</B> <B>void</B> <B>SetBinding(StateVar*)</B>
+       <B>virtual</B> <B>StateVar*</B> <B>GetBinding()</B>
+              Assign and return the state variable bound  to  the
+              connector,  if any.  Only one state variable can be
+              bound to a connector at a time.
+
+       <B>virtual</B> <B>void</B> <B>SetTransMethod(TransMethod)</B>
+       <B>virtual</B> <B>TransMethod</B> <B>GetTransMethod()</B>
+              Assign  and  return  the  connector's  transmission
+              method.
+
+       <B>virtual</B> <B>void</B> <B>Transmit(Path*</B> <B>=</B> <B>nil)</B>
+              Initiate  dataflow originating from this connector,
+              optionally based on  information  supplied  in  the
+              given  path  object.   Other Unidraw or application
+              objects call this operation whenever data modifica-
+              tions should be propagated.
+
+
+</PRE>
+<H2>CONNECTOR PROTECTED OPERATIONS</H2><PRE>
+       <B>Connector(Graphic*</B> <B>=</B> <B>nil)</B>
+              Initialize  the connector instance, optionally with
+              a graphic  whose  center  defines  the  connector's
+              position.
+
+       <B>virtual</B> <B>void</B> <B>ConnectMe(Connector*)</B>
+       <B>virtual</B> <B>void</B> <B>DisconnectMe(Connector*)</B>
+              Connectors  maintain  a  list  of the connectors to
+              which they are connected.  The Connect and  Discon-
+              nect operations update this connector's list, while
+              the ConnectMe and  DisconnectMe  operations  inform
+              their argument to update their lists.
+
+       <B>void</B> <B>Retransmit(Path*)</B>
+       <B>void</B> <B>Retransmit(Connector*</B> <B>peer,</B> <B>Path*)</B>
+       <B>boolean</B> <B>Transferable(Connector*</B> <B>peer)</B>
+              The  Transmit  operation  uses  these operations to
+              propagate  state  variable   values.    The   first
+              Retransmit function calls the second one on each of
+              the connector's  peers  (i.e.,  the  connectors  to
+              which  it  is  connected)  if the path records that
+              this connector has not already been visited (other-
+              wise  propagation  ceases).   The  first Retransmit
+              copies the path if necessary to avoid  accumulating
+              visit information from multiple branches.  The sec-
+              ond Retransmit calls  Transferable,  which  returns
+              whether  the  value of this connector's state vari-
+              able can be transferred to the given  peer's  state
+              variable  based on the two connectors' transmission
+              methods.  If the values are transferable, then  the
+              Transferable  operation  carries out the assignment
+              to the peer's state variable as a side-effect.  The
+              parent  and  by calling the first Retransmit opera-
+              tion on the peer.
+
+
+</PRE>
+<H2>CONNECTORVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>Connector*</B> <B>GetConnector()</B>
+              Return the view's subject, if any.
+
+
+</PRE>
+<H2>CONNECTORVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>ConnectorView(Connector*</B> <B>=</B> <B>nil)</B>
+              The constructor takes  a  subject  as  an  optional
+              argument.   The view will attach itself to the sub-
+              ject if one is specified.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>CGlue(3U)</B>,  <B>GraphicComp(3U)</B>,  <B>GraphicView(3U)</B>,   <B>Path(3U)</B>,
+       <B>StateVar(3U)</B>, edit(3U0, <B>globals(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,38 @@
+drawtool(
+    raster("./debianlogo.ppm" :transform 1,0,0,1,257.5,452.5),
+    picture(
+        picture(
+            arrowspline((523,718),(427,713),(391,580),(340,501),(348,345),(415,266),(454,219),(334,223) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375),
+            arrowspline((633,652),(562,624),(608,545),(654,462),(644,383),(550,306) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375),
+            arrowspline((524,719),(543,673),(631,652) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375),
+            arrowspline((550,309),(411,285),(455,222),(599,218) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375)
+            ),
+        picture(
+            arrowspline((523,718),(427,713),(391,580),(340,501),(348,345),(415,266),(454,219),(334,223) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375),
+            arrowspline((633,652),(562,624),(608,545),(654,462),(644,383),(550,306) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375),
+            arrowspline((524,719),(543,673),(631,652) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375),
+            arrowspline((550,309),(411,285),(455,222),(599,218) :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.75,311.375)
+             :transform 1,0,0,1,5.5,-7.25),
+        arrowline(633,650,655,622 :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,193.5,311.875),
+        arrowline(633,650,655,622 :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,145,212.375),
+        arrowline(633,650,655,622 :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,166.5,328.5),
+        arrowline(633,650,655,622 :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,118.875,204.625),
+        arrowline(633,650,655,622 :arrowscale 4 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.25,-0,-0,0.25,158.5,272.5),
+        arrowspline((470,639),(538,530),(526,463) :arrowscale 8 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.125,-0,-0,0.125,256.75,370),
+        arrowspline((470,639),(538,530),(526,463) :arrowscale 8 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "White",1,1,1 :nonepat :transform 0.125,-0,-0,0.125,251.25,377)
+         :transform 1,0,0,1,6.5,117),
+    picture(
+        text(14,"Debian GNU/Linux" :fillbg 0 :fgcolor "Red",1,0,0 :font "-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*","Helvetica-Bold",14 :transform 1,0,0,1,256.125,265.625),
+        picture(
+            ellipse(468,658,42,42 :fillbg 1 :nonebr :fgcolor "Blue",0,0,1 :bgcolor "White",1,1,1 :graypat 0 :transform 0.125,0,0,0.125,265.125,301.25),
+            closedspline((150,490),(150,490),(152,492),(314,272),(300,103),(300,103),(298,102),(202,216),(202,216),(202,216),(232,334) :fillbg 1 :nonebr :fgcolor "Red",1,0,0 :bgcolor "White",1,1,1 :graypat 0 :transform 0.0625,0,0,0.0625,303,337.25),
+            closedspline((95,-343),(95,-343),(95,-345),(139,-405),(140,-405),(139,-404),(291,-409),(385,-395),(143,-141),(171,175),
+                (273,363),(339,577),(509,591),(512,590),(511,591),(555,509),(632,486),(632,487),(631,485),(556,438),
+                (697,219),(751,23),(534,-178),(534,-178),(533,-177),(279,-218),(306,-287),(306,-287),(307,-289),(357,-351),
+                (359,-351),(445,-403),(667,-412),(667,-411),(667,-411),(626,-351),(626,-351),(625,-351),(421,-349),(345,-313),
+                (345,-312),(345,-312),(362,-273),(574,-236),(574,-236),(575,-237),(841,-7),(679,269),(601,403),(739,453),
+                (739,454),(740,455),(697,513),(698,514),(697,514),(575,539),(533,569),(533,571),(479,647),(479,647),
+                (477,647),(273,649),(193,335),(89,195),(139,-177),(367,-353) :fillbg 1 :nonebr :fgcolor "Red",1,0,0 :bgcolor "White",1,1,1 :graypat 0 :transform 0.125,-0,-0,0.125,264.375,326.125)
+            )
+        )
+)

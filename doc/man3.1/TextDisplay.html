@@ -1,0 +1,177 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       TextDisplay - unstructured text display
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/textdisplay.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  TextDisplay  manages  and displays an array of lines of
+       text.  Operations are provided to insert and delete lines,
+       to insert and delete text within a line, and to scroll the
+       display.  TextDisplays are  typically  used  to  implement
+       interactors  that  require non-trivial display of unstruc-
+       tured text.
+
+       The array is addressed by a line number and an index  into
+       the  line.   Text  can be inserted or deleted at arbitrary
+       positions.  By default, the first character in line number
+       zero  is  positioned  with  its top left corner at the top
+       left corner of the TextDisplay.  The display is  automati-
+       cally  updated following modifications to the text or when
+       scrolling.  Each character in the array has an  associated
+       text  style.   Operations  are  provided to apply, add, or
+       remove font styles to a range of  the  text.   TextDisplay
+       can  be  used with both constant-width and proportionally-
+       spaced fonts and with arbitrary geometric transformations.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>TextDisplay()</B>
+       <B>~TextDisplay(boolean</B> <B>autosized</B> <B>=</B> <B>false)</B>
+              Create  or  destroy a TextDisplay.  If <I>autosized</I> is
+              <I>true</I>, the TextDisplay will automatically  grow  its
+              size  as text is added.  The default is to keep the
+              size constant.
+
+       <B>void</B> <B>LineHeight(Coord</B> <B>lineheight)</B>
+       <B>void</B> <B>TabWidth(Coord</B> <B>tabwidth)</B>
+              Lines of text will  be  positioned  with  baselines
+              separated  by  <I>lineheight</I>.   Tab  characters in the
+              text will cause the following character to be posi-
+              tioned  an  integral  multiple of <I>tabwidth</I> from the
+              beginning of the line.
+
+       <B>void</B> <B>Resize(Coord</B> <B>xmin,</B> <B>Coord</B> <B>ymin,</B> <B>Coord</B> <B>xmax,</B> <B>Coord</B>
+              <B>ymax)</B>
+       <B>void</B> <B>Bounds(Coord&amp;</B> <B>xmin,</B> <B>Coord&amp;</B> <B>ymin,</B> <B>Coord&amp;</B> <B>xmax,</B> <B>Coord&amp;</B>
+              <B>ymax)</B>
+              Specify or query the size  of  the  display.   Only
+              lines of text that fall completely inside the spec-
+              ified region will be displayed.   TextDisplay  will
+              not  draw  on  any  part  of the canvas outside the
+              specified bounds.  Conversely, TextDisplay is  free
+              to draw on any part of the canvas within the speci-
+              fied bounds.
+              Specify the painter and canvas to use  for  drawing
+              operations; the painter specifies the font, colors,
+              and  geometric  transformation.   Draw  should   be
+              called  before  performing  any  operation  on  the
+              TextDisplay  which  produces  output  or   requires
+              graphical information, or when there is a possibil-
+              ity that the painter or canvas  has  changed  since
+              the function was last called.
+
+       <B>void</B> <B>Redraw(Coord</B> <B>left,</B> <B>Coord</B> <B>bottom,</B> <B>Coord</B> <B>right,</B> <B>Coord</B>
+              <B>top)</B>
+              Redraw a specified region of the display.
+
+       <B>void</B> <B>Scroll(int</B> <B>line,</B> <B>Coord</B> <B>x,</B> <B>Coord</B> <B>y)</B>
+              Scroll the display so that line <I>line</I> is  positioned
+              with its upper-left corner at (<I>x</I>, <I>y</I>).  There are no
+              restrictions on the arguments: it  is  possible  to
+              scroll the display so that no lines are visible.
+
+       <B>void</B> <B>InsertLinesAfter(int</B> <B>line,</B> <B>int</B> <B>count)</B>
+       <B>void</B> <B>InsertLinesBefore(int</B> <B>line,</B> <B>int</B> <B>count)</B>
+       <B>void</B> <B>DeleteLinesAfter(int</B> <B>line,</B> <B>int</B> <B>count)</B>
+       <B>void</B> <B>DeleteLinesBefore(int</B> <B>line,</B> <B>int</B> <B>count)</B>
+              Insert or delete whole lines of text.  Line <I>line</I> is
+              not affected by the operation.   Other  lines  will
+              move  up or down to accommodate the changes.  Newly
+              inserted lines are blank.  The specified line  need
+              not refer to an existing line.
+
+       <B>void</B> <B>InsertText(int</B> <B>line,</B> <B>int</B> <B>index,</B> <B>const</B> <B>char*,</B> <B>int</B>
+              <B>count)</B>
+       <B>void</B> <B>DeleteText(int</B> <B>line,</B> <B>int</B> <B>index,</B> <B>int</B> <B>count)</B>
+       <B>void</B> <B>ReplaceText(int</B> <B>line,</B> <B>const</B> <B>char*,</B> <B>int</B> <B>count)</B>
+              Modify the text within line <I>line</I>.   InsertText  and
+              DeleteText  will  cause the following characters on
+              the  line  to  move  to  accommodate  the  changes.
+              ReplaceText  replaces  the entire text of the line.
+              If the specified line is non-existent, a  new  line
+              will be created.
+
+       <B>void</B>  <B>Style(int</B>  <B>line1,</B>  <B>int</B>  <B>index1,</B>  <B>int</B> <B>line2,</B> <B>int</B>
+              <B>index2,</B> <B>int</B> <B>style)</B>
+       <B>void</B>  <B>AddStyle(int</B>  <B>line1,</B> <B>int</B> <B>index1,</B> <B>int</B> <B>line2,</B> <B>int</B>
+              <B>index2,</B> <B>int</B> <B>style)</B>
+       <B>void</B>  <B>RemoveStyle(int</B>  <B>line1,</B>  <B>int</B> <B>index1,</B> <B>int</B> <B>line2,</B> <B>int</B>
+              <B>index2,</B> <B>int</B> <B>style)</B>
+              Modify  the  styling  of  a  range  of  text. Style
+              replaces any existing style;  AddStyle  adds  style
+              <I>style</I>   in   addition   to   any  existing  styles;
+              RemoveStyle removes style <I>style</I>  without  affecting
+              other existing styles.  Styles are specified as any
+              combination  of  the  constants  Plain,   Boldface,
+
+       <B>void</B> <B>Caret(int</B> <B>line,</B> <B>int</B> <B>index)</B>
+              Control  the  shape and position of a caret.  Valid
+              caret  styles  are  currently  NoCaret,   BarCaret,
+              UnderscoreCaret and OutlineCaret.  TextDisplay does
+              not automatically adjust the position of the  caret
+              following insertions and deletions.
+
+       <B>int</B> <B>LineNumber(Coord</B> <B>y)</B>
+       <B>int</B> <B>LineIndex(int</B> <B>line,</B> <B>Coord</B> <B>x)</B>
+              Map x and y display coordinates into line and index
+              text coordinates.  LineNumber returns the number of
+              the line that contains the specified vertical posi-
+              tion <I>y</I>.  LineIndex returns the index into line <I>line</I>
+              that  best  corresponds to the specified horizontal
+              position <I>x</I>.
+
+       <B>Coord</B> <B>Width()</B>
+       <B>Coord</B> <B>Height()</B>
+              Return the width or the height  of  the  text  cur-
+              rently displayed by the TextDisplay.  Width returns
+              the width of  the  longest  line  in  the  display.
+              Height  returns  the  distance  from the top of the
+              topmost line to the bottom of the bottommost  line.
+              Note  that these dimensions do not necessarily cor-
+              respond to the TextDisplay's bounds as returned  by
+              Bounds.
+
+       <B>Coord</B> <B>Base(int</B> <B>line)</B>
+       <B>Coord</B> <B>Top(int</B> <B>line)</B>
+       <B>Coord</B> <B>Left(int</B> <B>line,</B> <B>int</B> <B>index)</B>
+       <B>Coord</B> <B>Right(int</B> <B>line,</B> <B>int</B> <B>index)</B>
+              Map  line  and  index text coordinates into x and y
+              display coordinates.  The return  values  define  a
+              bounding  box  for  the character specified by <I>line</I>
+              and <I>index</I>.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Painter(2I)</B>, <B>Canvas(2I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ControlInfo  - object for storing control-related informa-
+       tion
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/ctrlinfo.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A ControlInfo object  stores  information  from  which  to
+       build  a  Control  for executing a command or engaging the
+       current tool. The ControlInfo object is  stored  with  the
+       command or tool, thus providing all the information neces-
+       sary to recreate the interface when the command or tool is
+       retrieved  from  disk  through  a catalog. The ControlInfo
+       object also defines the mapping between a  keycode  and  a
+       UControl  instance to support keyboard equivalents via the
+       KeyMap class.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>ControlInfo(</B>
+           <B>GraphicComp*</B> <B>label,</B> <B>const</B> <B>char*</B> <B>keylabel</B> <B>=</B> <B>``'',</B>
+           <B>const</B> <B>char*</B> <B>keycode</B> <B>=</B> <B>``'',</B> <B>void*</B> <B>owner</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+
+       <B>ControlInfo(</B>
+           <B>const</B> <B>char*</B> <B>label</B> <B>,</B> <B>const</B> <B>char*</B> <B>=</B> <B>``'',</B>
+           <B>const</B> <B>char*</B> <B>=</B> <B>``'',</B> <B>void*</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+              Create a new ControlInfo instance, supplying either
+              a  GraphicComp  or a character string to define its
+              label's appearance.   The  <I>label</I>  parameter  is  an
+              iconic  or  textual  cue that a control displays to
+              identify the command or  tool  it  activates.   The
+              <I>keylabel</I>  parameter  specifies  a string to be dis-
+              played in the control that identifies the control's
+              keyboard  equivalent,  while  the <I>keycode</I> parameter
+              defines the mapping between a  keyboard  event  and
+              the  ControlInfo.   Finally,  the  <I>owner</I>  parameter
+              specifies the command or tool instance to which the
+              ControlInfo object corresponds.
+
+       <B>void</B> <B>SetLabel(GraphicComp*)</B>
+       <B>void</B> <B>SetLabel(const</B> <B>char*)</B>
+       <B>void</B> <B>SetKeyLabel(const</B> <B>char*)</B>
+       <B>void</B> <B>SetKeyCode(const</B> <B>char*)</B>
+       <B>void</B> <B>SetOwner(void*)</B>
+
+       <B>GraphicComp*</B> <B>GetLabel()</B>
+       <B>const</B> <B>char*</B> <B>GetKeyLabel()</B>
+       <B>const</B> <B>char*</B> <B>GetKeyCode()</B>
+       <B>void*</B> <B>GetOwner()</B>
+              Explicitly   set  or  get  a  constructor-specified
+              parameter.  The Set  operations  delete  the  value
+
+       <B>virtual</B> <B>ControlInfo*</B> <B>Copy()</B>
+              Return  a  copy of this ControlInfo object, copying
+              its constituent members.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>,  <B>Command(3U)</B>,  <B>KeyMap(3U)</B>,  <B>Tool(3U)</B>,   UCon-
+       <B>trol(3U)</B>, <B>uctrls(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

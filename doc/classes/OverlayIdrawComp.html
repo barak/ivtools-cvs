@@ -1,0 +1,547 @@
+
+<html><head><TITLE>Description of OverlayIdrawComp</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayIdrawComp</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlaysComp.html" >OverlaysComp</A>, public <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>, public <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>, public <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+top-level <A HREF="OverlaysComp.html" >OverlaysComp</A>, the root of a component tree or document.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlaysComp.html" >OverlaysComp</A>, public <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>, public <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>, public <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayIdrawComp><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovcomps.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Component.html" >Component</A>* 
+    <A NAME="Copy()">
+    <B>Copy</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Graphic.html" >Graphic</A>* 
+    <A NAME="GetIndexedGS(inti)">
+    <B>GetIndexedGS</B> (int i) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return graphic state (gs) from table, a use of <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlaysComp.html" >OverlaysComp</A>* 
+    <A NAME="GetIndexedPic(inti)">
+    <B>GetIndexedPic</B> (int i) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return compound-graphic (pic) from table, a use of <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="MultiLineObj.html" >MultiLineObj</A>* 
+    <A NAME="GetIndexedPts(inti)">
+    <B>GetIndexedPts</B> (int i) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return point-list (pts) from table, a use of <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="GetPathName()">
+    <B>GetPathName</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pathname associated with this component tree.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedGS(Graphic*gr)">
+    <B>GrowIndexedGS</B> (<A HREF="Graphic.html" >Graphic</A>* gr) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        grow table of graphic states (gs) managed by <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedPic(OverlaysComp*comp)">
+    <B>GrowIndexedPic</B> (<A HREF="OverlaysComp.html" >OverlaysComp</A>* comp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        grow table of composite graphics (pic) managed by <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="GrowIndexedPts(MultiLineObj*ml)">
+    <B>GrowIndexedPts</B> (<A HREF="MultiLineObj.html" >MultiLineObj</A>* ml) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        grow table of point lists (pts) managed by <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayIdrawComp(constchar*pathname=nil&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>OverlayIdrawComp</B> (const char* pathname = nil, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct component tree from 'pathname', with optional 'parent'
+ to graft onto.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayIdrawComp(istream&#38;&#38;&#38;COMMconstchar*pathname=nil&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>OverlayIdrawComp</B> (istream&#38;, const char* pathname = nil, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        de-serialize component tree from istream, remembering optional 'pathname'
+ if available, with optional 'parent' to graft onto.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetIndexedGS()">
+    <B>ResetIndexedGS</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset table of graphic states (gs) managed by <A HREF="IndexedGsMixin.html" >IndexedGsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetIndexedPic()">
+    <B>ResetIndexedPic</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset table of composite graphics (pic) managed by <A HREF="IndexedPicMixin.html" >IndexedPicMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetIndexedPts()">
+    <B>ResetIndexedPts</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reset table of point lists (pts) managed by <A HREF="IndexedPtsMixin.html" >IndexedPtsMixin</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetPathName(constchar*)">
+    <B>SetPathName</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set pathname associated with this component tree. Affects saving out.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlayIdrawComp()">
+    <B>~OverlayIdrawComp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CLASS_SYMID(&#38;&#38;QUOTDOverlayIdrawComp&#38;&#38;QUOTD)">
+    <B>CLASS_SYMID</B> ("<A HREF="OverlayIdrawComp.html" >OverlayIdrawComp</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual const char* 
+    <A NAME="GetBaseDir()">
+    <B>GetBaseDir</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="GetParamList()">
+    <B>GetParamList</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GrowParamList(ParamList*)">
+    <B>GrowParamList</B> (<A HREF="ParamList.html" >ParamList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_basedir">
+    <B>_basedir</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ParamList.html" >ParamList</A>* 
+    <A NAME="_overlay_idraw_params">
+    <B>_overlay_idraw_params</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_pathname">
+    <B>_pathname</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>float 
+    <A NAME="_xincr">
+    <B>_xincr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        x grid dimensions
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>float 
+    <A NAME="_yincr">
+    <B>_yincr</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        y grid dimensions
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="OverlayCatalog">
+    <B>OverlayCatalog</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

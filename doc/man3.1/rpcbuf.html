@@ -1,0 +1,182 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       rpcbuf  -  streambuf specialized for sending and receiving
+       RPC requests
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/rpcbuf.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An rpcbuf is a streambuf specialized in two ways:  to  use
+       an IPC connection as a source or sink of characters and to
+       send and receive RPC requests.  The  rpcbuf  encloses  RPC
+       requests  in  packets  which  begin with a length field so
+       that the rpcbuf can buffer requests until  they  are  com-
+       plete if the user uses non-blocking I/O.
+
+
+</PRE>
+<H2>CONSTRUCTORS</H2><PRE>
+       <B>rpcbuf(iostreamb*</B> <B>=</B> <B>nil)</B>
+              Construct  an  unopened rpcbuf, giving it a pointer
+              to an iostreamb so that the  rpcbuf  can  read  and
+              write the length field of RPC requests.
+
+
+</PRE>
+<H2>IPC OPERATIONS</H2><PRE>
+       <B>const</B> <B>char*</B> <B>host()</B>
+       <B>int</B> <B>port()</B>
+       <B>int</B> <B>fd()</B>
+       <B>boolean</B> <B>opened()</B>
+       <B>boolean</B> <B>nonblocking()</B>
+              Return information about the IPC connection.
+
+       <B>enum</B> <B>{</B> <B>anyport</B> <B>=</B> <B>0</B> <B>}</B>
+       <B>rpcbuf*</B> <B>listen(int</B> <B>port)</B>
+              Create  a  socket, bind the socket to a &lt;localhost,
+              port&gt; address, and prepare to accept incoming  con-
+              nections.   anyport  can be used in place of a spe-
+              cific port number.  Return the rpcbuf's address  if
+              successful, nil otherwise.
+
+       <B>rpcbuf*</B> <B>connect(const</B> <B>char*</B> <B>host,</B> <B>int</B> <B>port)</B>
+              Create  a  socket  and  connect it to a peer at the
+              &lt;host, port&gt; address.  Return the rpcbuf's  address
+              if successful, nil otherwise.
+
+       <B>rpcbuf*</B> <B>accept(int&amp;</B> <B>fd)</B>
+              Accept  an incoming connection, allocate a new file
+              descriptor for it, and assign the new file descrip-
+              tor  to the parameter.  Return the rpcbuf's address
+              if successful, nil otherwise.  Can be  called  only
+              for rpcbufs that have already called listen.
+
+       <B>rpcbuf*</B> <B>attach(int</B> <B>fd)</B>
+              Attach the rpcbuf to a file descriptor.  The rpcbuf
+              will not be allowed to close the file descriptor.
+
+              Enable or disable  non-blocking  I/O  on  the  file
+              descriptor (disabled by default).
+
+       <B>rpcbuf*</B> <B>verbose(boolean)</B>
+              Enable  or  disable printing of error messages when
+              anything goes wrong (enabled by default).
+
+       <B>rpcbuf*</B> <B>close()</B>
+              Flush  the  get  and  put  areas,  close  the  file
+              descriptor  if  it  was  created by the rpcbuf, and
+              detach the rpcbuf from the file descriptor.
+
+
+</PRE>
+<H2>RPC OPERATIONS</H2><PRE>
+       <B>int</B> <B>start_request()</B>
+              If a current request exists, compute its length and
+              insert  the length into the request's length field.
+              Then start a new  request,  making  sure  to  leave
+              space  for the request's length field.  Return 0 if
+              no problem occurred, EOF otherwise.
+
+       <B>int</B> <B>read_request()</B>
+              Return 0 if a complete request is buffered  in  the
+              get  area, EOF otherwise.  The rpcbuf moves the get
+              pointer back to the beginning of the request  after
+              extracting  the  length field and checking that the
+              get area contains that many bytes.
+
+
+</PRE>
+<H2>STREAMBUF OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>int</B> <B>overflow(int</B> <B>c=EOF)</B>
+              If given EOF, terminate the current request.  Flush
+              all  requests  buffered  in the put area except for
+              the last request if it's still  incomplete.   Shift
+              any  still  incomplete  request to the beginning of
+              the put area.  If given a character, append  it  to
+              the request.
+
+       <B>virtual</B> <B>int</B> <B>underflow()</B>
+              Flush  the  put  area.   Shift  any still unread or
+              incomplete requests to the  beginning  of  the  get
+              area  and position the get pointer at the beginning
+              of the get area.  Read as much data as available to
+              fill  the  rest  of  the  get area.  Return the get
+              area's  first  character  or  EOF  if   a   problem
+              occurred.
+
+       <B>virtual</B> <B>int</B> <B>sync()</B>
+              Discard  any  still  unread  requests  from the get
+              area.  Flush all buffered  requests  from  the  put
+              area.
+
+       <B>virtual</B> <B>streampos</B> <B>seekoff(streamoff,</B> <B>ios::seek_dir,</B> <B>int)</B>
+              Allow  the  user  to find the get pointer's current
+              EOF if the user tries to do anything else than find
+              the get pointer's current position.
+
+       <B>virtual</B> <B>streambuf*</B> <B>setbuf(char*,</B> <B>int)</B>
+              Reject  any attempt to set the buffer used to store
+              incoming and outgoing requests.  The rpcbuf dynami-
+              cally allocates separate buffers for both areas and
+              automatically resizes the buffers  whenever  neces-
+              sary.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       IOS.INTRO(3C++), <B>rpcstream(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

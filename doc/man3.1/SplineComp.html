@@ -1,0 +1,190 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       SplineComp,    SplineView,   PSSpline,   ClosedSplineComp,
+       ClosedSplineView, PSClosedSpline - open and closed  spline
+       component  subjects, views, and PostScript external repre-
+       sentations
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/spline.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       SplineComp and  ClosedSplineComp  are  VerticesComps  that
+       define  open and closed splines, respectively.  SplineComp
+       uses an SFH_OpenBSpline graphic  to  store  its  graphical
+       attributes,  while  ClosedSplineComp  uses an SFH_ClosedB-
+       Spline.  SplineView and ClosedSplineView are VerticesViews
+       for  displaying  open  and  closed  splines.  PSSpline and
+       PSClosedSpline are PSVertices that externalize their  sub-
+       ject's information in PostScript form.
+
+
+</PRE>
+<H2>SPLINECOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>SplineComp(SFH_OpenBSpline*</B> <B>=</B> <B>nil)</B>
+              The  constructor  takes  an  optional control point
+              hit-detecting stroked-filled open B-spline  graphic
+              that defines the attributes of the spline.
+
+       <B>SFH_OpenBSpline*</B> <B>GetSpline()</B>
+              Return the SFH_OpenBSpline graphic that defines the
+              spline's attributes.  GetSpline is  simply  a  more
+              specific form of the GetGraphic operation.
+
+
+</PRE>
+<H2>SPLINEVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>SplineView(SplineComp*</B> <B>=</B> <B>nil)</B>
+              Create  a SplineView, optionally supplying the sub-
+              ject.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              SplineView redefines its response  to  manipulation
+              with  a  GraphicCompTool.  The user clicks the left
+              mouse button to specify each vertex and clicks with
+              the  middle  mouse button to specify the final ver-
+              tex.  Vertex positioning  will  be  constrained  by
+              gravity,   if   any.   SplineView  also  defines  a
+              response to the ReshapeTool, allowing the  user  to
+              click  on  one  of its control points to reposition
+              it.   The  subject  is   actually   replaced   (via
+              ReplaceCmd)  with a new SplineComp subject reflect-
+              ing the repositioned control point.   Repositioning
+              will be influenced by gravity.
+
+              Return the subject.
+
+
+</PRE>
+<H2>PSSPLINE PUBLIC OPERATIONS</H2><PRE>
+       <B>PSSpline(SplineComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>PSSPLINE PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>const</B> <B>char*</B> <B>Name()</B>
+              PSSpline  identifies  itself  as  "BSpl"   in   the
+              PostScript output.
+
+
+</PRE>
+<H2>CLOSEDSPLINECOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>ClosedSplineComp(SFH_ClosedBSpline*</B> <B>=</B> <B>nil)</B>
+              The  constructor  takes  an  optional control point
+              hit-detecting   stroked-filled   closed    B-spline
+              graphic  that  defines the attributes of the closed
+              spline.
+
+       <B>SFH_ClosedBSpline*</B> <B>GetClosedSpline()</B>
+              Return the SFH_ClosedBSpline graphic  that  defines
+              the closed spline's attributes.  GetClosedSpline is
+              simply a more specific form of the GetGraphic oper-
+              ation.
+
+
+</PRE>
+<H2>CLOSEDSPLINEVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>ClosedSplineView(ClosedSplineComp*</B> <B>=</B> <B>nil)</B>
+              Create a ClosedSplineView, optionally supplying the
+              subject.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              ClosedSplineView redefines its response to  manipu-
+              lation with a GraphicCompTool.  The user clicks the
+              left mouse button to specify each vertex and clicks
+              with  the  middle mouse button to specify the final
+              vertex.  Vertex positioning will be constrained  by
+              gravity,  if  any.  ClosedSplineView also defines a
+              response to the ReshapeTool, allowing the  user  to
+              click  on  one  of its control points to reposition
+              it.   The  subject  is   actually   replaced   (via
+              ReplaceCmd)  with  a  new  ClosedSplineComp subject
+              reflecting the repositioned control point.  Reposi-
+              tioning will be influenced by gravity.
+
+       <B>ClosedSplineComp*</B> <B>GetClosedSplineComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>PSCLOSEDSPLINE PUBLIC OPERATIONS</H2><PRE>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>PSCLOSEDSPLINE PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>const</B> <B>char*</B> <B>Name()</B>
+              PSClosedSpline identifies itself as "CBSpl" in  the
+              PostScript output.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>,  <B>GraphicComp(3U)</B>,  <B>GraphicCompTool(3U)</B>,  Graph-
+       <B>icView(3U)</B>, <B>Grid(3U)</B>, <B>PatternCmd(3U)</B>,  <B>PostScriptView(3U)</B>,
+       <B>ReshapeTool(3U)</B>,    <B>Rubband(3I)</B>,   <B>Transformer(3I)</B>,   Ver-
+       <B>ticesComp(3U)</B>,    <B>Viewer(3U)</B>,     <B>align(3U)</B>,     <B>edit(3U)</B>,
+       <B>splines(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

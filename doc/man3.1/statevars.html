@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       BrushVar, ColorVar, CompNameVar, FontVar, GravityVar, Mag-
+       nifVar, ModifStatusVar, NameVar, PatternVar - state  vari-
+       able subject subclasses
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/statevars.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Unidraw  predefines  several  state  variable subject sub-
+       classes: BrushVar, ColorVar, FontVar, and PatternVar store
+       the graphics state information their names suggest; Gravi-
+       tyVar records whether  gravity  is  in  effect;  MagnifVar
+       records  the  current viewer magnification; ModifStatusVar
+       records  whether  state-modifying  operations  have   been
+       applied  to  a  component  being  edited; NameVar stores a
+       string of interest; and  CompNameVar  is  a  NameVar  that
+       stores  a  component  and keeps track of its catalog name.
+       These variables represent state that is basic to graphical
+       components  and state that is often globally accessible in
+       graphics applications.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>BrushVar(PSBrush*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>PSBrush*</B> <B>BrushVar::GetBrush()</B>
+       <B>virtual</B> <B>void</B> <B>BrushVar::SetBrush(PSBrush*)</B>
+
+       <B>ColorVar(PSColor*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>PSColor*</B> <B>ColorVar::GetColor()</B>
+       <B>virtual</B> <B>void</B> <B>ColorVar::SetColor(PSColor*)</B>
+
+       <B>FontVar(PSFont*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>PSFont*</B> <B>FontVar::GetFont()</B>
+       <B>virtual</B> <B>void</B> <B>FontVar::SetFont(PSFont*)</B>
+
+       <B>PatternVar(PSPattern*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>PSPattern*</B> <B>PatternVar::GetPattern()</B>
+       <B>virtual</B> <B>void</B> <B>PatternVar::SetPattern(PSPattern*)</B>
+              Each graphics state state variable subclass defines
+              a  constructor  that takes an initial value for the
+              state it represents and adds operations for assign-
+              ing and retrieving that state.
+
+       <B>GravityVar(boolean</B> <B>=</B> <B>false)</B>
+       <B>virtual</B> <B>boolean</B> <B>GravityVar::IsActive();</B>
+       <B>virtual</B> <B>void</B> <B>GravityVar::Activate(boolean)</B>
+              The  GravityVar  constructor takes an initial value
+              that specifies whether gravity is on or off.  IsAc-
+              tive   returns  the  current  value,  and  Activate
+              changes it to the one supplied.
+
+       <B>MagnifVar(float</B> <B>=</B> <B>1)</B>
+       <B>virtual</B> <B>float</B> <B>MagnifVar::GetMagnif()</B>
+              The MagnifVar constructor takes  an  initial  value
+              for  the  magnification  factor, and SetMagnify and
+              GetMagnif assign and return the current value.
+
+       <B>ModifStatusVar(Component*</B> <B>=</B> <B>nil,</B> <B>boolean</B> <B>=</B> <B>false)</B>
+       <B>virtual</B> <B>boolean</B> <B>ModifStatusVar::GetModifStatus()</B>
+       <B>virtual</B> <B>void</B> <B>ModifStatusVar::SetModifStatus(boolean)</B>
+       <B>virtual</B> <B>Component*</B> <B>ModifStatusVar::GetComponent()</B>
+       <B>virtual</B> <B>void</B> <B>ModifStatusVar::SetComponent(Component*)</B>
+              The ModifStatusVar constructor  takes  a  component
+              instance  and  an  initial value as arguments.  The
+              ModifStatusVar  is   responsible   for   indicating
+              whether the given component is modified.  GetModif-
+              Status, SetModifStatus, GetComponent, and SetCompo-
+              nent get and set these arguments.  The modification
+              status will be set automatically (in  editors  that
+              maintain   a   ModifStatusVar   instance)  when  an
+              reversible operation is performed on the component.
+
+       <B>NameVar(const</B> <B>char*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>const</B> <B>char*</B> <B>NameVar::GetName()</B>
+       <B>virtual</B> <B>void</B> <B>NameVar::SetName(const</B> <B>char*)</B>
+              The  NameVar  constructor  takes  a  string  as  an
+              optional  arguement,  while  GetName  and   SetName
+              retrieve and assign the string.
+
+       <B>CompNameVar(Component*</B> <B>=</B> <B>nil)</B>
+       <B>virtual</B> <B>Component*</B> <B>CompNameVar::GetComponent()</B>
+       <B>virtual</B> <B>void</B> <B>CompNameVar::SetComponent(Component*)</B>
+       <B>virtual</B> <B>void</B> <B>CompNameVar::UpdateName()</B>
+       <B>virtual</B> <B>const</B> <B>char*</B> <B>PartOf()</B>
+              The CompNameVar constructor takes a component as an
+              optional argument.  CompNameVar inherits  the  Get-
+              Name   operation   from  NameVar;  calling  GetName
+              returns the name associated with the component that
+              the  CompNameVar stores.  The GetComponent and Set-
+              Component calls get and set the component.  Update-
+              Name  updates  the  string  that GetName returns to
+              reflect the component's catalog name.  SetComponent
+              calls  this operation automatically when it changes
+              the CompNameVar's component.   PartOf  returns  the
+              name  of the root component in the CompNameVar com-
+              ponent's hierarchy.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>,  <B>Component(3U)</B>,   <B>Editor(3U)</B>,   <B>StateVar(3U)</B>,
+       <B>pspaint(3U)</B>
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>InterViews</title>
+</head>
+
+<body>
+
+<h1>
+InterViews
+</h1>
+<p>
+InterViews is a native C++ toolkit for X Windows developed by Mark
+Linton and his team at <a
+href=http://www-cs.stanford.edu/csci>Stanford University</a> and later 
+<a href=http://www.sgi.com>Silicon Graphics</a>.  The
+last major release was InterViews 3.1 in 1993, and included the <a
+href=./unidrawinfo.html>Unidraw</a> drawing editor application
+framework which was the basis of <a href=http://www.c2.com/cgi/wiki?JohnVlissides>John Vlissides</a>'  thesis work at
+Stanford.  InterViews also has lightweight glyphs with switchable
+look-and-feel (Apple monochrome, Motif, OpenLook, and SGI Motif).  It
+has been ported to most any Unix which runs X11. Other programmers
+known to have worked on InterViews include Paul Calder, John
+Interrante, Steven Tang, and Scott Stanton.  Later Mark Linton
+released an InterViews 3.2a with minor bug fixes and platform-specific
+changes.  That is the source tree we started with for <a
+href=./index.html>ivtools</a>.
+<p>
+<menu>
+<font size=5><i>InterViews Resources</i></font>
+<li><a href=ftp://interviews.stanford.edu/pub/>InterViews ftp site at 
+Stanford </a>, wide variety of documentation and example source code </li>
+<li>
+papers on:
+<table>
+<td><a href=ftp://interviews.stanford.edu/pub/papers/unidraw.ps.Z>Unidraw</a></td> 
+<td><a href=ftp://interviews.stanford.edu/pub/papers/libgraphic.ps.Z>structured graphics</a> </td>
+<td><a href=ftp://interviews.stanford.edu/pub/papers/glyphs.ps.Z>lightweight glyphs</a>.</td>
+<td>   Local copies <a href=./ivtools-layers.html#localcopies>here</a>.</td>
+</table>
+</li>
+
+<li><a href=./doc/man3.1/index.html>InterViews 3.1 class man pages</a>. &nbsp; Copies at <a href=http://www.yggdrasil.com/bible/bible-src/bible/manpages/packages/interviews/mann/>Yggdrasil</a>. </li>
+
+<li><a href=./doc/refman3.1/index.html>InterViews 3.1 Reference Manual</a> <a href=./doc/refman3.1/refman.html>(no frames)</a>, <font size=2>converted by a <a href=http://www.csd.uch.gr/~nikop/thesis.html>ps2html from Yannis Nikopoylos</a>. </font></li>
+
+<li>InterViews <a href=http://www.ics.forth.gr/~leventis/iky/diploHTML/node28.html#SECTION00521000000000000000>auf Deutsch</a>. </li>
+
+<li><a href=ftp://ftp.sgi.com/graphics/interviews/>Silicon Graphics ftp site</a> (for the 3.2a tar file)</li>
+
+<li> two more repositories of InterViews information:
+
+
+
+
+
+<table>
+<tr><a href=ftp://ftp.informatik.uni-kiel.de/pub/graphics/X/InterViews>
+ftp://ftp.informatik.uni-kiel.de/pub/graphics/X/InterViews</a> </tr>
+
+<tr><a href=ftp://ftp.leo.org/pub/comp/X11/contrib/toolkits/InterViews/>
+ftp://ftp.leo.org/pub/comp/X11/contrib/toolkits/InterViews/</a></tr></table></li>
+
+<li><a href=http://miha.tts.tomsk.su/books/SLACKWAREUNL/ch33.htm#Heading2>chapter on InterViews</a> from SlackWare 3.0</li>
+</menu>
+
+Several members of the InterViews team went on to work on <a
+href=http://www2.berlin-consortium.org/fresco/>Fresco</a>, a
+separate package that borrows many ideas from InterViews and Unidraw (and has a shared lineage of source, so you could say it is one of the things with InterViews-inside).
+It unifies glyphs (i.e. menu/button/scrollbar) and graphics programming,
+and extends them with CORBA to support embeddability (i.e. plugins).
+Fujitsu Software Labs was a primary developer of Fresco up to the
+Fresco 96 tar file.  Then maintenance/extension/porting was taken over by others on the net, notably Thomas Hiller in Germany who has put out
+a Fresco97 and a <a href=http://www2.berlin-consortium.org/fresco/files/Fresco98.tar.gz>Fresco98</a> tar file (<a href=./fresco98-announce.txt>Fresco98 announcement</a>)  
+(<a href=http://members.aa.net/~swear/pedia/fresco.html>a Fresco advocacy page</a>).  <a href=ftp://ftp.esat.kuleuven.ac.be/pub/psi/visics/TargetJr/>Alternate Fresco download site</a>.
+<p>
+GE Corporate R&D created an add-on layer to Fresco called
+<a href=http://www.esat.kuleuven.ac.be/~targetjr/GE_mirror/manpages/IUPackages/Parmesan/HTML/classes.html>Parmesan</a>.
+It is distributed as part of the <a
+href=http://www.aai.com/AAI/IUE/IUE.html>IUE</a> and <a
+href=http://www.esat.kuleuven.ac.be/~targetjr/GE_mirror/index.html>Target Jr</a>, two related environments
+for image understanding.  It incorporates optimizations to the
+baseline Fresco mechanisms for raster display and 3d display,
+especially under Windows NT.  It is the foundation on which the
+IUE/TargetJr vistool example program is built.  It supports a
+multi-plane, multi-tile-window architecture with special optimizations
+for refresh of double-buffered graphics in front of a complex background graphic (i.e. an image).
+These extensions may or may not be incorporated into a future version of Fresco.
+<menu>
+<font size=5><i>InterViews Related</i></font>
+<li><a href=http://www.berlin-consortium.org>Berlin</a> is an effort to build an X11 replacement that
+incorporates the ideas of InterViews, <a href=./unidrawinfo.html>Unidraw</a>, and Fresco. </li>
+
+<li>a <a href=./reusingunidraw.txt>writeup</a> on our experience to
+date reusing and evolving <a href=./interviews.html>InterViews</a>, <a
+href=./unidrawinfo.html>Unidraw</a>, and <a
+href=./idraw.html>idraw</a>.</li>
+
+<li>a <a href=http://faser.cs.olemiss.edu/~hcc/engr691/notes/02mismatch.html>paper</a> by programmers with a different kind of experience</li>
+
+<li>
+book by Ted Lewis, Larry Rosenstein,
+Wolfgang Pree, Andre Weinand, Erich Gamma, Paul Calder, Glenn Andert,
+John Vlissides, and Kurt Shumucker, <i><a
+href=http://www.browsebooks.com/Lewis2/>Object Oriented Application
+Frameworks</a></i> </li>
+</menu>
+
+<p>
+<b><i><a href=./ivapps.html>Applications built on InterViews</a></i></b>.
+<p>
+
+<a href=./index.html> <img src=./ivtools-logo.gif align=middle alt="ivtools_button"> </a>
+<a href=./index.html><code>up to ivtools home page</code></a>
+</body>
+</html>

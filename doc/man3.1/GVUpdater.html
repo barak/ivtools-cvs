@@ -1,0 +1,125 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       GVUpdater  -  updates  GraphicViews structure to match its
+       subject
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/gvupdater.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       GVUpdater is an  implementation  class  that  GraphicViews
+       uses  to  keep its state and structure consistent with its
+       GraphicComps subject.  GVUpdater  ensures  that  subject's
+       immediate  children  are identical to the view's in number
+       and graphics state attributes. It also  ensures  that  the
+       root  GraphicViews  and  GraphicComps  themselves have the
+       same graphics state.  GVUpdater does <I>not</I>  ensure  that  it
+       will detect and update changes made to deeper child nodes.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>GVUpdater(GraphicView*)</B>
+              The constructor takes the GraphicView that it  will
+              be  updating  as  a  parameter and stores it in the
+              protected member <B>_</B><I>gv</I>.  Normally,  GraphicViews  are
+              the only objects that will instantiate GVUpdater.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Update  the  GraphicView to make it consistent with
+              its subject.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>UpdateStructure()</B>
+       <B>void</B> <B>UpdateState()</B>
+              The Update procedure takes  place  in  two  stages.
+              The  subject's and view's structures are reconciled
+              first  by  UpdateStructure,  and  then  the  view's
+              graphic state is changed to match the subjects with
+              UpdateState.
+
+       <B>void</B> <B>AddDamage(Graphic*)</B>
+       <B>void</B> <B>IncurDamage(Graphic*)</B>
+       <B>void</B> <B>Unselect(GraphicView*)</B>
+       <B>virtual</B> <B>void</B> <B>Add(GraphicView*)</B>
+       <B>virtual</B> <B>void</B> <B>Append(GraphicView*)</B>
+       <B>virtual</B> <B>void</B> <B>InsertBefore(Iterator,</B> <B>GraphicView*)</B>
+        <B>virtual</B> <B>void</B> <B>Remove(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>DeleteView(Iterator&amp;)</B>
+              GVUpdater is a friend of GraphicViews.  These  con-
+              venience  operations  provide  an  interface to the
+              corresponding protected GraphicViews operations.
+
+       <B>virtual</B> <B>ClassId</B> <B>ViewCategory()</B>
+              Returns the view category (see  <B>classes(3U)</B>)  GVUp-
+              dater  will  use  to instantiate views of subjects.
+              ViewCategory returns COMPONENT_VIEW by default.
+
+       <B>GraphicComp(3U)</B>, <B>GraphicView(3U)</B>, <B>classes(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

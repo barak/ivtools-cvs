@@ -1,0 +1,70 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       UArray - dynamic array class
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/uarray.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       UArray implements a dynamic array, that is, one that grows
+       as elements are added.  It can also act as a linked  list,
+       allowing  insertion  and  removal  of  objects, though the
+       overhead for such operations  is  generally  greater  than
+       that  for conventional doubly-linked list implementations.
+       However, the overhead per  stored  object  is  potentially
+       much  less  for  a  UArray, and objects can be accessed by
+       index in constant time.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>UArray(int</B> <B>=</B> <B>16)</B>
+              Create a new UArray instance, optionally  providing
+              an  estimate of its maximum size.  While specifying
+              the size is not  required,  supplying  an  accurate
+              estimate will improve performance.
+
+       <B>void*&amp;</B> <B>operator[](int</B> <B>index)</B>
+              Overloading  the brackets operator allows access to
+              the UArray's elements with the standard array nota-
+              tion.   Note  that  type  information  is lost when
+              retrieving objects from the UArray, requiring cast-
+              ing.
+
+       <B>void</B> <B>Insert(void*,</B> <B>int</B> <B>index)</B>
+       <B>void</B> <B>Remove(int</B> <B>index)</B>
+              Insert  and remove an object at a particular index,
+              moving the succeeding objects up or down one  posi-
+              tion as required.
+
+       <B>int</B> <B>Index(void*)</B>
+              Return  the  given  object's  index  in the UArray,
+              returning -1 if the object does not appear  in  the
+              UArray.
+
+       <B>int</B> <B>Count()</B>
+              Return  the  number of objects inserted in the UAr-
+              ray.
+
+       <B>void</B> <B>Clear()</B>
+              Clear the UArray, reducing the number of object  it
+              contains to zero.
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

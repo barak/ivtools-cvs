@@ -1,0 +1,308 @@
+
+<html><head><TITLE>Description of Ellipse</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>Ellipse</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="Graphic.html" >Graphic</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+ellipse graphic<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="Graphic.html" >Graphic</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#Ellipse><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/Graphic/ellipses.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/ellipses.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="Ellipse(Coordx0&#38;&#38;COMMCoordy0&#38;&#38;COMMintr1&#38;&#38;COMMintr2&#38;&#38;COMMGraphic*gr=nil)">
+    <B>Ellipse</B> (Coord x0, Coord y0, int r1, int r2, <A HREF="Graphic.html" >Graphic</A>* gr = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetOriginal(Coord&#38;&#38;&#38;COMMCoord&#38;&#38;&#38;COMMint&#38;&#38;&#38;COMMint&#38;)">
+    <B>GetOriginal</B> (Coord&#38;, Coord&#38;, int&#38;, int&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetOriginal(Coord&#38;&#38;COMMCoord&#38;&#38;COMMint&#38;&#38;COMMint)">
+    <B>SetOriginal</B> (Coord, Coord, int, int) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="MultiLineObj.html" >MultiLineObj</A>* 
+    <A NAME="ellipse_to_polygon(Transformer*t=nil)">
+    <B>ellipse_to_polygon</B> (<A HREF="Transformer.html" >Transformer</A>* t = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="CalcControlPts(Transformer*)">
+    <B>CalcControlPts</B> (<A HREF="Transformer.html" >Transformer</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_r1,_r2">
+    <B>_r1, _r2</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>Coord 
+    <A NAME="_x0,_y0">
+    <B>_x0, _y0</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static Coord 
+    <A NAME="_x[8],_y[8]">
+    <B>_x[8], _y[8]</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="f_contains(PointObj&#38;&#38;&#38;COMMGraphic*)">
+    <B>f_contains</B> (<A HREF="PointObj.html" >PointObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="f_getExtent(float&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMGraphic*)">
+    <B>f_getExtent</B> (float&#38;, float&#38;, float&#38;, float&#38;, float&#38;, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="f_intersects(BoxObj&#38;&#38;&#38;COMMGraphic*)">
+    <B>f_intersects</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="s_contains(PointObj&#38;&#38;&#38;COMMGraphic*)">
+    <B>s_contains</B> (<A HREF="PointObj.html" >PointObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="s_getExtent(float&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMfloat&#38;&#38;&#38;COMMGraphic*)">
+    <B>s_getExtent</B> (float&#38;, float&#38;, float&#38;, float&#38;, float&#38;, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="s_intersects(BoxObj&#38;&#38;&#38;COMMGraphic*)">
+    <B>s_intersects</B> (<A HREF="BoxObj.html" >BoxObj</A>&#38;, <A HREF="Graphic.html" >Graphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

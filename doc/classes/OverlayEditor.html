@@ -1,0 +1,1045 @@
+
+<html><head><TITLE>Description of OverlayEditor</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>OverlayEditor</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="IdrawEditor.html" >IdrawEditor</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+editor derived from <A HREF="IdrawEditor.html" >IdrawEditor</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="IdrawEditor.html" >IdrawEditor</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#OverlayEditor><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/oved.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Annotate(OverlayComp*)">
+    <B>Annotate</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        invoke annotation dialog box for this component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="AttrEdit(OverlayComp*)">
+    <B>AttrEdit</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        invoke dialog box for editing attribute list (property list) associated
+ with this component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ClearText()">
+    <B>ClearText</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        clear contents of text-editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DoAutoNewFrame()">
+    <B>DoAutoNewFrame</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        empty method for use by multi-frame editors for creating a new frame
+ when auto-new-frame is enabled.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ExecuteCmd(Command*cmd)">
+    <B>ExecuteCmd</B> (<A HREF="Command.html" >Command</A>* cmd) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        indirect command execution for distributed whiteboard mechanism.
+ actual mechanism implemented in <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="Tool.html" >Tool</A>* 
+    <A NAME="GetCurTool()">
+    <B>GetCurTool</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to current default tool.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlaysView.html" >OverlaysView</A>* 
+    <A NAME="GetFrame(intindex=-1)">
+    <B>GetFrame</B> (int index=-1) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return current frame number. -1 unless multi-frame editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayViewer.html" >OverlayViewer</A>* 
+    <A NAME="GetOverlayViewer()">
+    <B>GetOverlayViewer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to default viewer.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InformComponents()">
+    <B>InformComponents</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        inform components in the tree of the current editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="InitCommands()">
+    <B>InitCommands</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        to be filled in by derived classes, for any kind of initialization
+ that needs to occur after the environment has been fully constructed,
+ i.e. after the viewer has been displayed on the screen (after a call
+ to <A HREF="OverlayViewer.html" >OverlayViewer</A>::Resize()).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="IsClean()">
+    <B>IsClean</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        checks modified status flag.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ObservableText.html" >ObservableText</A>* 
+    <A NAME="MouseDocObservable()">
+    <B>MouseDocObservable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to observable text that contains current mouse documentation
+ (a text string associated with the current tool).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayEditor(OverlayComp*&#38;&#38;COMMOverlayKit*ok=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>OverlayEditor</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="OverlayKit.html" >OverlayKit</A>* ok = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct an editor for editing a given component, using the 'ok'
+ <A HREF="OverlayKit.html" >OverlayKit</A> to build the surrounding menus and tools.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayEditor(booleaninitflag&#38;&#38;COMMOverlayKit*ok=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>OverlayEditor</B> (boolean initflag, <A HREF="OverlayKit.html" >OverlayKit</A>* ok = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        constructor for use of derived classes. Probably could be protected.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="OverlayEditor(constchar*file&#38;&#38;COMMOverlayKit*ok=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
+    <B>OverlayEditor</B> (const char* file, <A HREF="OverlayKit.html" >OverlayKit</A>* ok = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct an editor for opening and editing a given component, specified
+ the pathname 'file, using the 'ok' <A HREF="OverlayKit.html" >OverlayKit</A> to build the surrounding 
+ menus and tools.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ReplaceComponent(Component*)">
+    <B>ReplaceComponent</B> (<A HREF="Component.html" >Component</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set new component tree, informing them of their new editor, and delete old one.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ResetStateVars()">
+    <B>ResetStateVars</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        to be filled in by derived classses.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetComponent(Component*)">
+    <B>SetComponent</B> (<A HREF="Component.html" >Component</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set new component tree, informing them of their new editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetCurTool(Tool*)">
+    <B>SetCurTool</B> (<A HREF="Tool.html" >Tool</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set current default tool.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetText()">
+    <B>SetText</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set contents of text-editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="EivTextEditor.html" >EivTextEditor</A>* 
+    <A NAME="TextEditor()">
+    <B>TextEditor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to text-editor that holds current frame annotation.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        update every viewer associated with this editor (usually only one).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="UpdateText(OverlayComp*&#38;&#38;COMMbooleanupdate=true)">
+    <B>UpdateText</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, boolean update =true) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        update contents of text-editor with frame annotation.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="add_comterp(constchar*name&#38;&#38;COMMComTerpServ*comterp)">
+    <B>add_comterp</B> (const char* name, <A HREF="ComTerpServ.html" >ComTerpServ</A>* comterp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add <A HREF="ComTerpServ.html" >ComTerpServ</A> to static list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="add_edlauncher(constchar*name&#38;&#38;COMMeditor_launcher)">
+    <B>add_edlauncher</B> (const char* name, editor_launcher) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add editor launching function pointer to list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="comterp(constchar*)">
+    <B>comterp</B> (const char *) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get <A HREF="ComTerpServ.html" >ComTerpServ</A> by 'name' from static list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="comterp(intsymid)">
+    <B>comterp</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get <A HREF="ComTerpServ.html" >ComTerpServ</A> by 'symid' from static list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="comterplist()">
+    <B>comterplist</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to static list of <A HREF="ComTerpServ.html" >ComTerpServ</A> objects.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static editor_launcher 
+    <A NAME="edlauncher(constchar*)">
+    <B>edlauncher</B> (const char *) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get editor launching function pointer by 'name'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static editor_launcher 
+    <A NAME="edlauncher(intsymid)">
+    <B>edlauncher</B> (int symid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get editor launching function pointer by 'symid'.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="edlauncherlist()">
+    <B>edlauncherlist</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to static list of editor launching function pointers.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ncomterp()">
+    <B>ncomterp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of <A HREF="ComTerpServ.html" >ComTerpServ</A> objects in static list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="nedlauncher()">
+    <B>nedlauncher</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        number of editor launching function pointers in static list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="opaque_flag()">
+    <B>opaque_flag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return global flag indicating whether opaque tranformations are enabled.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayKit.html" >OverlayKit</A>* 
+    <A NAME="overlay_kit()">
+    <B>overlay_kit</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to paired <A HREF="OverlayKit.html" >OverlayKit</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="PtrLocState.html" >PtrLocState</A>* 
+    <A NAME="ptrlocstate()">
+    <B>ptrlocstate</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        state variable for displaying pointer location within document.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ptrlocstate(PtrLocState*ptrlocstate)">
+    <B>ptrlocstate</B> (<A HREF="PtrLocState.html" >PtrLocState</A>* ptrlocstate) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set state variable for displaying pointer location within document.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~OverlayEditor()">
+    <B>~OverlayEditor</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="GetComTerp()">
+    <B>GetComTerp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return nil because this is not a <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init(OverlayComp*=nil&#38;&#38;COMMconstchar*=&#38;&#38;QUOTDOverlayEditor&#38;&#38;QUOTD)">
+    <B>Init</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* = nil, const char* = "<A HREF="OverlayEditor.html" >OverlayEditor</A>") </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct empty component tree if necessary, and pass to
+ <A HREF="OverlayKit.html" >OverlayKit</A> for the rest of initialization process.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Interactor.html" >Interactor</A>* 
+    <A NAME="Interior()">
+    <B>Interior</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        lay out the <A HREF="Interactor.html" >Interactor</A> based interior of a drawing editor.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SetComTerp(ComTerpServ*terp)">
+    <B>SetComTerp</B> (<A HREF="ComTerpServ.html" >ComTerpServ</A>* terp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        do nothing because this is not a <A HREF="ComEditor.html" >ComEditor</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="_comterplist">
+    <B>_comterplist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Tool.html" >Tool</A>* 
+    <A NAME="_curtool">
+    <B>_curtool</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="AttributeList.html" >AttributeList</A>* 
+    <A NAME="_edlauncherlist">
+    <B>_edlauncherlist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="ObservableText.html" >ObservableText</A>* 
+    <A NAME="_mousedoc">
+    <B>_mousedoc</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayKit.html" >OverlayKit</A>* 
+    <A NAME="_overlay_kit">
+    <B>_overlay_kit</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="PtrLocState.html" >PtrLocState</A>* 
+    <A NAME="_ptrlocstate">
+    <B>_ptrlocstate</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="EivTextEditor.html" >EivTextEditor</A>* 
+    <A NAME="_texteditor">
+    <B>_texteditor</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComTerpServ.html" >ComTerpServ</A>* 
+    <A NAME="comterp()">
+    <B>comterp</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return nil because this is not a <A HREF="ComEditor.html" >ComEditor</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="comterp(ComTerpServ*terp)">
+    <B>comterp</B> (<A HREF="ComTerpServ.html" >ComTerpServ</A>* terp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        do nothing because this is not a <A HREF="ComEditor.html" >ComEditor</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="OverlayPanner.html" >OverlayPanner</A>* 
+    <A NAME="make_panner()">
+    <B>make_panner</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        make panner/zoomer/slider buttons, paying attention to 
+ command line arguments/default resources for positioning and enable/disable 
+ hints.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="panner_align()">
+    <B>panner_align</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        handle -panner_align or -pal command line argument.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="OverlayKit">
+    <B>OverlayKit</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

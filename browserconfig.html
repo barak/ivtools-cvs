@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Configuring your web browser for ivtools</title>
+  </head>
+
+<body bgcolor="ffffff" text=black link=blue alink=red vlink=purple>
+    <h1>Configuring your web browser for ivtools</h1>
+
+There are four steps to configuring your browser to automatically
+launch applications and demonstrations from these web pages.
+<p>
+<b>1. </b>  First acquire <a href=../ivtools/index.html>ivtools</a>, by <a href=./download.html>downloading binaries or building from source</a>.
+<p>
+<b>2. </b>  Add the following Mime Types to the appropriate file for your browser:<br>
+<p>
+<code>
+application/comterp; cms<br>
+application/ov-idraw; drs<br>
+application/frame-idraw; frs<br>
+application/graph-idraw; grs<br>
+</code>
+<p>
+<i>Mime Types file for common browsers:
+<menu>
+<li>emacs/w3: .mime-types
+<li>chimera: .chimera_mime.types (.Xdefaults resource settable)
+<li>lynx: .mime.types
+<li>mosaic: .mime.types
+<li>netscape: .mime.types
+</menu>
+</i>
+<p>
+
+<b>3. </b>  Add the following helper app command lines to your ~/.mailcap file:
+<p>
+<code>
+application/comterp; comterp run %s<br>
+application/ov-idraw; drawtool %s >& /dev/null<br>
+application/frame-idraw; flipbook -bookgeom %s >& /dev/null<br>
+application/graph-idraw; graphdraw %s >& /dev/null<br>
+</code>
+
+<p>
+<b>4. </b> Restart your browser and try loading this 
+<a href=../ivtools/drawtool.drs>file</a> into 
+<a href=../ivtools/drawtool.html>ivtools drawtool</a>.  If it doesn't
+work go back to step 2 and make sure you added the Mime Types to the appropriate
+file for your browser.  
+<hr>
+
+  </body>
+</html>
+

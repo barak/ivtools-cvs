@@ -1,0 +1,1122 @@
+
+<html><head><TITLE>Description of CSolver</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>CSolver</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+connector constraint solver<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#CSolver><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Unidraw/Components/csolver.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  <a href=../man3.1/CSolver.html>man page</a>
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="CSolver()">
+    <B>CSolver</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Connect(Connector*&#38;&#38;COMMConnector*&#38;&#38;COMMCGlue*=nil)">
+    <B>Connect</B> (<A HREF="Connector.html" >Connector</A>*, <A HREF="Connector.html" >Connector</A>*, <A HREF="CGlue.html" >CGlue</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Disconnect(Connector*)">
+    <B>Disconnect</B> (<A HREF="Connector.html" >Connector</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Disconnect(Connector*)">
+    <B>Disconnect</B> (<A HREF="Connector.html" >Connector</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="CSolverState.html" >CSolverState</A>* 
+    <A NAME="GetState(Connector*)">
+    <B>GetState</B> (<A HREF="Connector.html" >Connector</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Print()">
+    <B>Print</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        for debugging only
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Read(istream&#38;)">
+    <B>Read</B> (istream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetState(CSolverState*)">
+    <B>SetState</B> (<A HREF="CSolverState.html" >CSolverState</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Solve()">
+    <B>Solve</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Write(ostream&#38;)">
+    <B>Write</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="~CSolver()">
+    <B>~CSolver</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="CreateNetwork(CCnxn*&#38;&#38;COMMConnInfo*&#38;&#38;COMMConnInfo*&#38;&#38;COMMUList*)">
+    <B>CreateNetwork</B> (CCnxn*, ConnInfo*, ConnInfo*, <A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DefaultPosition(CNet*)">
+    <B>DefaultPosition</B> (CNet*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DeleteCnxnsBetween(Connector*&#38;&#38;COMMConnector*&#38;&#38;COMMCNet*)">
+    <B>DeleteCnxnsBetween</B> (<A HREF="Connector.html" >Connector</A>*, <A HREF="Connector.html" >Connector</A>*, CNet*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DeleteCnxnsTo(Connector*&#38;&#38;COMMCNet*&#38;&#38;COMMUList*)">
+    <B>DeleteCnxnsTo</B> (<A HREF="Connector.html" >Connector</A>*, CNet*, <A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DeletePeerInfo(Connector*&#38;&#38;COMMConnInfo*&#38;&#38;COMMConnector*)">
+    <B>DeletePeerInfo</B> (<A HREF="Connector.html" >Connector</A>*, ConnInfo*, <A HREF="Connector.html" >Connector</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DeletePeerInfo(Connector*&#38;&#38;COMMConnInfo*&#38;&#38;COMMConnector*)">
+    <B>DeletePeerInfo</B> (<A HREF="Connector.html" >Connector</A>*, ConnInfo*, <A HREF="Connector.html" >Connector</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DestroyCnxns()">
+    <B>DestroyCnxns</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DestroyCnxns(CNet*)">
+    <B>DestroyCnxns</B> (CNet*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="Found2Fixed(CNet*net&#38;&#38;COMMConnector*&#38;c1&#38;&#38;COMMConnector*&#38;c2)">
+    <B>Found2Fixed</B> (CNet* net, <A HREF="Connector.html" >Connector</A>*&#38; c1, <A HREF="Connector.html" >Connector</A>*&#38; c2) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="FoundFixed(CNet*&#38;&#38;COMMCNet*&#38;)">
+    <B>FoundFixed</B> (CNet*, CNet*&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="FoundParallel(CNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMOrientation)">
+    <B>FoundParallel</B> (CNet*, CNet*&#38;, CNet*&#38;, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="FoundSeries(CNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMOrientation)">
+    <B>FoundSeries</B> (CNet*, CNet*&#38;, CNet*&#38;, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="FoundY(CNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMOrientation)">
+    <B>FoundY</B> (CNet*, CNet*&#38;, CNet*&#38;, CNet*&#38;, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="GetState(Connector*&#38;&#38;COMMConnInfo*&#38;&#38;COMMOrientation&#38;&#38;COMMCSolverState*)">
+    <B>GetState</B> (<A HREF="Connector.html" >Connector</A>*, ConnInfo*, Orientation, <A HREF="CSolverState.html" >CSolverState</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>ConnInfo* 
+    <A NAME="Info(Connector*&#38;&#38;COMMOrientation)">
+    <B>Info</B> (<A HREF="Connector.html" >Connector</A>*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InitConnectors(CNet*&#38;&#38;COMMCNet*)">
+    <B>InitConnectors</B> (CNet*, CNet*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="InitInfo(Connector*)">
+    <B>InitInfo</B> (<A HREF="Connector.html" >Connector</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="MergeNetworks(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMUList*)">
+    <B>MergeNetworks</B> (CNet*, CNet*, <A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>CNet* 
+    <A NAME="Network(UList*)">
+    <B>Network</B> (<A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReadConnectors(istream&#38;&#38;&#38;COMMCNet*)">
+    <B>ReadConnectors</B> (istream&#38;, CNet*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceFixed(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMOrientation)">
+    <B>ReplaceFixed</B> (CNet*, CNet*, CNet*&#38;, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceFixedInfo(CNet*&#38;&#38;COMMOrientation)">
+    <B>ReplaceFixedInfo</B> (CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceParallel(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMboolean&#38;&#38;COMMOrientation)">
+    <B>ReplaceParallel</B> (CNet*, CNet*, CNet*, CNet*&#38;, boolean, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceParallelInfo(CNet*&#38;&#38;COMMOrientation)">
+    <B>ReplaceParallelInfo</B> (CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplacePseudoFixed(CNet*&#38;&#38;COMMConnector*&#38;&#38;COMMConnector*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMOrientation)">
+    <B>ReplacePseudoFixed</B> (CNet*, <A HREF="Connector.html" >Connector</A>*, <A HREF="Connector.html" >Connector</A>*, CNet*&#38;,Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplacePseudoFixedInfo(CNet*&#38;&#38;COMMOrientation)">
+    <B>ReplacePseudoFixedInfo</B> (CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceSeries(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMboolean&#38;&#38;COMMboolean&#38;&#38;COMMOrientation)">
+    <B>ReplaceSeries</B> ( CNet*, CNet*, CNet*, CNet*&#38;, boolean, boolean, Orientation ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceSeriesInfo(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMOrientation)">
+    <B>ReplaceSeriesInfo</B> (CNet*, CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceY(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMboolean&#38;&#38;COMMboolean&#38;&#38;COMMboolean&#38;&#38;COMMOrientation)">
+    <B>ReplaceY</B> ( CNet*, CNet*, CNet*, CNet*, CNet*&#38;, CNet*&#38;, CNet*&#38;, boolean, boolean, boolean, Orientation ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ReplaceYInfo(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMOrientation)">
+    <B>ReplaceYInfo</B> (CNet*, CNet*, CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Solve(CNet*&#38;&#38;COMMOrientation)">
+    <B>Solve</B> (CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SolveAll(UList*&#38;&#38;COMMOrientation)">
+    <B>SolveAll</B> (<A HREF="UList.html" >UList</A>*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstFixedEquiv(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMOrientation)">
+    <B>SubstFixedEquiv</B> (CNet*, CNet*, CNet*&#38;, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstFixedInfo(CNet*&#38;&#38;COMMOrientation)">
+    <B>SubstFixedInfo</B> (CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstParallelEquiv(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMboolean&#38;&#38;&#38;COMMOrientation)">
+    <B>SubstParallelEquiv</B> (CNet*, CNet*, CNet*, CNet*&#38;, boolean&#38;,Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstParallelInfo(CNet*&#38;&#38;COMMOrientation)">
+    <B>SubstParallelInfo</B> (CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstPseudoFixed(CNet*&#38;&#38;COMMConnector*&#38;&#38;COMMConnector*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMOrientation)">
+    <B>SubstPseudoFixed</B> (CNet*, <A HREF="Connector.html" >Connector</A>*, <A HREF="Connector.html" >Connector</A>*, CNet*&#38;, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstPseudoFixedInfo(CNet*&#38;&#38;COMMOrientation)">
+    <B>SubstPseudoFixedInfo</B> (CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstSeriesEquiv(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMboolean&#38;&#38;&#38;COMMboolean&#38;&#38;&#38;COMMOrientation)">
+    <B>SubstSeriesEquiv</B> ( CNet*, CNet*, CNet*, CNet*&#38;, boolean&#38;, boolean&#38;, Orientation ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstSeriesInfo(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMOrientation)">
+    <B>SubstSeriesInfo</B> (CNet*, CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstYEquiv(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMCNet*&#38;&#38;&#38;COMMboolean&#38;&#38;&#38;COMMboolean&#38;&#38;&#38;COMMboolean&#38;&#38;&#38;COMMOrientation)">
+    <B>SubstYEquiv</B> ( CNet*, CNet*, CNet*, CNet*, CNet*&#38;, CNet*&#38;, CNet*&#38;, boolean&#38;, boolean&#38;, boolean&#38;, Orientation ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SubstYInfo(CNet*&#38;&#38;COMMCNet*&#38;&#38;COMMCNet*&#38;&#38;COMMOrientation)">
+    <B>SubstYInfo</B> (CNet*, CNet*, CNet*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Update()">
+    <B>Update</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="UpdateInfo(CCnxn*&#38;&#38;COMMConnInfo*&#38;&#38;COMMConnInfo*&#38;&#38;COMMUList*)">
+    <B>UpdateInfo</B> (CCnxn*, ConnInfo*, ConnInfo*, <A HREF="UList.html" >UList</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="UpdateInfo(CCnxn*&#38;&#38;COMMOrientation)">
+    <B>UpdateInfo</B> (CCnxn*, Orientation) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="WriteConnectors(ostream&#38;&#38;&#38;COMMCCnxn_HashTable*)">
+    <B>WriteConnectors</B> (ostream&#38;, CCnxn_HashTable*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Wrote(Connector*)">
+    <B>Wrote</B> (<A HREF="Connector.html" >Connector</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Wrote(Connector*&#38;&#38;COMMCNet*cl&#38;&#38;COMMCCnxn_HashTable*written)">
+    <B>Wrote</B> (<A HREF="Connector.html" >Connector</A>*, CNet* cl, CCnxn_HashTable* written) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="UList.html" >UList</A>* 
+    <A NAME="_hnets,*_vnets">
+    <B>_hnets, *_vnets</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>CCnxn_HashTable* 
+    <A NAME="_hwritten,*_vwritten">
+    <B>_hwritten, *_vwritten</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<FONT FACE=Times SIZE=4><B>Friend methods:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    friend class 
+    <A NAME="Connector">
+    <B>Connector</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

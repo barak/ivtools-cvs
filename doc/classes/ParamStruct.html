@@ -1,0 +1,496 @@
+
+<html><head><TITLE>Description of ParamStruct</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>ParamStruct</B></FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+parameter definition structure for <A HREF="ParamList.html" >ParamList</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+
+<A HREF=derivedclasses.html#ParamStruct><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+Attribute/paramlist.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  structure for defining an argument to be read out of a serialized view
+ of an object written out for persistent storage or interprocess communication.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ParamStruct(ParamStruct&#38;)">
+    <B>ParamStruct</B> (<A HREF="ParamStruct.html" >ParamStruct</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        copy constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ParamStruct(constchar*name&#38;&#38;COMMParamFormatformat&#38;&#38;COMMparam_callbackifunc&#38;&#38;COMMintoffset1&#38;&#38;COMMintoffset2&#38;&#38;COMMintoffset3&#38;&#38;COMMintoffset4&#38;&#38;COMMintindirection=-1)">
+    <B>ParamStruct</B> (const char* name, ParamFormat format, param_callback ifunc, int offset1, int offset2, int offset3, int offset4, int indirection = -1) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct with 'name' and 'format', a pointer to a static method
+ with 'param_callback' signature, and up to 4 offsets relative to a 
+ base pointer that will be used in constructing the contents of another
+ object during a de-serialization process (an istream constructor).
+ Also possible to specify an 'indirection' amount used when adding
+ offsets to the base.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void* 
+    <A NAME="addr1(void*base)">
+    <B>addr1</B> (void* base) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compute address by adding offset1() to 'base' or an indirect base
+ determined by the contents of 'base' + indirection().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void* 
+    <A NAME="addr2(void*base)">
+    <B>addr2</B> (void* base) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compute address by adding offset2() to 'base' or an indirect base
+ determined by the contents of 'base' + indirection().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void* 
+    <A NAME="addr3(void*base)">
+    <B>addr3</B> (void* base) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compute address by adding offset3() to 'base' or an indirect base
+ determined by the contents of 'base' + indirection().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void* 
+    <A NAME="addr4(void*base)">
+    <B>addr4</B> (void* base) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        compute address by adding offset4() to 'base' or an indirect base
+ determined by the contents of 'base' + indirection().
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="enumParamFormat">
+    <B>enum ParamFormat</B>
+     { required, optional, keyword, other } 
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        type of parameter formats supported. Similar to Common Lisp.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>ParamFormat 
+    <A NAME="format()">
+    <B>format</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        parameter format type: required, optional, keyword, or other.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>param_callback 
+    <A NAME="ifunc()">
+    <B>ifunc</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        pointer to static method (or function) to invoke when parameter found
+ during de-serialization process.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="indirection()">
+    <B>indirection</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        offset from base address used to retrieve another address (by indirection). 
+ disabled if less than zero.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>const char* 
+    <A NAME="name()">
+    <B>name</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        the name of the parameter -- keyword parameters do not need the ":".
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="offset1()">
+    <B>offset1</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        first offset from base. This one is always supplied, and might
+ be the only true offset if pointing to an array.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="offset2()">
+    <B>offset2</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        second offset from base. Might really be an array length in a
+ certain usage. The 'ifunc' is free to interpret these as it wants.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="offset3()">
+    <B>offset3</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        third offset from base.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="offset4()">
+    <B>offset4</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        fourth offset from base. If this is not enough either an array can
+ can be passed by using the first two, or these can be ignored
+ all together and you can use fixed locations within the object being 
+ deserialized.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="~ParamStruct()">
+    <B>~ParamStruct</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>ParamFormat 
+    <A NAME="_format">
+    <B>_format</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>param_callback 
+    <A NAME="_ifunc">
+    <B>_ifunc</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_indirection">
+    <B>_indirection</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>char* 
+    <A NAME="_name">
+    <B>_name</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_offset1">
+    <B>_offset1</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_offset2">
+    <B>_offset2</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_offset3">
+    <B>_offset3</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_offset4">
+    <B>_offset4</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

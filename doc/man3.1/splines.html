@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       OpenBSpline, S_OpenBSpline, F_OpenBSpline, SF_OpenBSpline,
+       SFH_OpenBSpline,      ClosedBSpline,      S_ClosedBSpline,
+       F_ClosedBSpline,   SF_ClosedBSpline,  SFH_ClosedBSpline  -
+       structured graphics classes for open and closed B-splines
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/splines.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       OpenBSpline and ClosedBSpline are Vertices subclasses that
+       serve  as  abstract  base  classes  for open and closed B-
+       spline structured graphics.  Predefined subclasses include
+       S_OpenBSpline,  F_OpenBSpline,  and  SF_OpenBSpline, which
+       draw stroked, filled, and stroked-filled  open  B-splines,
+       respectively;  and  S_ClosedBSpline,  F_ClosedBSpline, and
+       SF_ClosedBSpline, which draw stroked, filled, and stroked-
+       filled  closed  B-splines,  respectively.   The SFH_OpenB-
+       Spline and SFH_ClosedBSpline subclasses are  identical  to
+       their  SF_-prefixed  counterparts,  except they can detect
+       hits on their control points in addition to detecting hits
+       on  their  visible  parts.  The stroked subclasses store a
+       PSBrush, the filled subclasses store a PSPattern, and  the
+       stroked-filled subclasses store one of each.
+
+
+</PRE>
+<H2>OPENBSPLINE PROTECTED OPERATIONS</H2><PRE>
+       <B>OpenBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              OpenBSpline's constructor is protected  to  prevent
+              instantiation  of  the  abstract  base  class.  The
+              parameters are passed directly to the Vertices con-
+              structor.
+
+
+</PRE>
+<H2>OPENBSPLINE SUBCLASS PUBLIC OPERATIONS</H2><PRE>
+       <B>S_OpenBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>F_OpenBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>SF_OpenBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>SFH_OpenBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+              Constructors  for  the various predefined Rect sub-
+              classes.
+
+
+</PRE>
+<H2>CLOSEDBSPLINE PROTECTED OPERATIONS</H2><PRE>
+       <B>ClosedBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+              ClosedBSpline's constructor is protected to prevent
+              instantiation of  the  abstract  base  class.   The
+              parameters are passed directly to the Vertices con-
+              structor.
+
+
+</PRE>
+<H2>CLOSEDBSPLINE SUBCLASS PUBLIC OPERATIONS</H2><PRE>
+              <B>nil)</B>
+       <B>F_ClosedBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>SF_ClosedBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B>
+              <B>nil)</B>
+       <B>SFH_ClosedBSpline(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B>
+              <B>=</B> <B>nil)</B>
+              Constructors for the various predefined  Rect  sub-
+              classes.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>, <B>Vertices(3U)</B>, <B>geomobjs(3U)</B>, <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

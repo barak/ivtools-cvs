@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       UControl,  UControlInteractor  - base classes for menu and
+       button interfaces that work with ControlInfo objects
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/uctrl.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       UControl is an abstract class  that  augments  InterViews'
+       Control  base  class  to  deal  with Unidraw's ControlInfo
+       objects, which define a keyboard equivalent for  the  con-
+       trol.   UControlInteractor  is  an abstract base class for
+       interactors that base their appearance on the  information
+       in  a  ControlInfo  object.   UControl  subclasses can use
+       UControlInteractor subclasses to define their  appearance.
+
+       Unidraw-based applications needn't use UControls and UCon-
+       trolInteractors to help define  their  look  and  feel  if
+       Unidraw's keyboard equivalent mechanism is not needed.
+
+
+</PRE>
+<H2>UCONTROL PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>SetControlInfo(ControlInfo*)</B>
+       <B>ControlInfo*</B> <B>GetControlInfo()</B>
+              Assign  and  retrieve  the  UControl's  ControlInfo
+              object.
+
+
+</PRE>
+<H2>UCONTROL PROTECTED OPERATIONS</H2><PRE>
+       <B>UControl(ControlInfo*)</B>
+       <B>UControl(const</B> <B>char*,</B> <B>ControlInfo*)</B>
+              UControl provides protected constructors  that  let
+              subclasses  initialize  the  ControlInfo object and
+              optionally specify their instance name.
+
+
+</PRE>
+<H2>UCONTROLINTERACTOR PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>SetControlInfo(ControlInfo*)</B>
+       <B>ControlInfo*</B> <B>GetControlInfo()</B>
+              Assign and retrieve the  UControlInteractor's  Con-
+              trolInfo object.
+
+       <B>virtual</B> <B>void</B> <B>Highlight(boolean)</B>
+              The UControlInteractor's appearance is defined by a
+              Graphic object, which it builds from information in
+              its ControlInfo object.  By default, UControlInter-
+              actor highlights itself  by  drawing  this  graphic
+              with its foreground and background colors reversed.
+
+
+</PRE>
+<H2>UCONTROLINTERACTOR PROTECTED OPERATIONS</H2><PRE>
+       <B>UControlInteractor(ControlInfo*)</B>
+       <B>UControlInteractor()</B>
+              UControlInteractor defines two protected  construc-
+              tors.   One  takes the ControlInfo object to use as
+              an argument.  This constructor also initializes the
+              UControlInteractor's  <B>_</B><I>label</I>  protected  member  by
+              initializes <B>_</B><I>label</I> to nil.  Both constructors  ini-
+              tialize the UControlInteractor's <B>_</B><I>picture</I> protected
+              member to point to an instance of a Picture object,
+              which  defines the UControlInteractor's appearance.
+
+       <B>virtual</B> <B>void</B> <B>Invert()</B>
+              Invert reverses <B>_</B><I>picture's</I> colors  without  drawing
+              it.
+
+       <B>Graphic*</B> <B>InitLabel(ControlInfo*)</B>
+              Create  a  graphic from the information stored in a
+              ControlInfo object that defines the  UControlInter-
+              actor's   appearance.   This  operation  creates  a
+              GraphicView of the  ControlInfo's  GraphicComp  and
+              returns a copy of the view's graphic.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Control(3I)</B>,    <B>ControlInfo(3U)</B>,   <B>Graphic(3U)</B>,   Graphic-
+       <B>Comp(3U)</B>, <B>GraphicView(3U)</B>, <B>KeyMap(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,122 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       UList - circular, doubly-linked list class
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/ulist.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       UList implements a circular, doubly-linked list.  The sen-
+       tinel and each entry in the  list  are  instances  of  the
+       UList  class,  each  containing a void pointer to the data
+       they contain as well as pointers to the next and  previous
+       UList  instance  in the list.  The sentinel UList instance
+       is considered to represent the list.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>UList(void*</B> <B>=</B> <B>nil)</B>
+              Create a new UList instance,  optionally  supplying
+              the value for the void pointer it stores.
+
+       <B>virtual</B> <B>~UList()</B>
+              Delete  the  entire  list.   Normally the sentinel,
+              which represents the list, is  the  entry  that  is
+              deleted  explicitly.   Note  that  the  data on the
+              list, stored as void*'s, cannot be deleted in  this
+              manner.
+
+       <B>void</B> <B>Append(UList*)</B>
+       <B>void</B> <B>Prepend(UList*)</B>
+              When  performed  on the sentinel, Append appends an
+              element to the end of the list and Prepend prepends
+              it to the beginning of the list.  When performed on
+              a UList instance other than  the  sentinel,  Append
+              has the effect of inserting its argument <I>before</I> the
+              instance, while Prepend has the effect of inserting
+              it <I>after</I> the instance.
+
+       <B>void</B> <B>Remove(UList*)</B>
+              Unlink  the  specified UList instance from the list
+              it is in.  The object on which  this  operation  is
+              called is irrelevant.
+
+       <B>void</B> <B>Delete(void*)</B>
+              Find the UList instance in this list containing the
+              given void pointer, remove it from the list  it  is
+              in, and delete it.
+
+       <B>UList*</B> <B>Find(void*)</B>
+              Return  the  UList instance in this list containing
+              the given void pointer.
+
+       <B>UList*</B> <B>First()</B>
+       <B>UList*</B> <B>Last()</B>
+       <B>UList*</B> <B>End()</B>
+       <B>UList*</B> <B>Prev()</B>
+              Return various UList instance in the list  relative
+              to  <I>this</I>,  i.e.,  as  if it were the sentinel.  End
+              returns the  sentinel  (<I>this</I>)  and  is  useful  for
+              detecting the end of an iteration through the list;
+              the other operations are self-explanatory.
+
+       <B>boolean</B> <B>IsEmpty()</B>
+              Return whether or not the list has any elements.
+
+       <B>void*</B> <B>operator()()</B>
+              Return the void pointer that the UList stores.
+
+       <B>UList*</B> <B>operator[](int</B> <B>i)</B>
+              Return the <I>i</I>th UList in the list,  where  the  next
+              element is the first, etc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

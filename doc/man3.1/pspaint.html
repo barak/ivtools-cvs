@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       PSBrush,  PSColor,  PSFont,  PSPattern  -  graphics  state
+       objects with added PostScript information
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/pspaint.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       PSBrush, PSColor, PSFont, and PSPattern are subclasses  of
+       Brush,  Color, Font, and Pattern, respectively, that store
+       added  information  needed  to  generate  idraw-compatible
+       PostScript.   Unidraw's  structured  graphics  objects use
+       these subclasses exclusively.
+
+
+</PRE>
+<H2>PSBRUSH PUBLIC OPERATIONS</H2><PRE>
+       <B>PSBrush()</B>
+       <B>PSBrush(int</B> <B>pattern,</B> <B>int</B> <B>width)</B>
+              Create an undefined PSBrush (the parameterless con-
+              structor)  or one having the specified line pattern
+              and width.  Structured graphics having an undefined
+              brush will not render their stroked portions.
+
+       <B>int</B> <B>GetLinePattern()</B>
+       <B>int</B> <B>Width()</B>
+              Return constructor-specified brush parameters.
+
+       <B>boolean</B> <B>None()</B>
+              Return <I>true</I> if this is an undefined brush.
+
+       <B>const</B> <B>int*</B> <B>GetDashPattern()</B>
+       <B>int</B> <B>GetDashPatternSize()</B>
+       <B>int</B> <B>GetDashOffset()</B>
+              Return values required to characterize the brush in
+              PostScript.  The equivalent PostScript dash pattern
+              is computed from the brush's line pattern.
+
+
+</PRE>
+<H2>PSBRUSH PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>CalcDashPat(int)</B>
+              Compute the equivalent PostScript dash pattern from
+              the line pattern specified in the constructor.
+
+
+</PRE>
+<H2>PSCOLOR PUBLIC OPERATIONS</H2><PRE>
+       <B>PSColor(</B>
+           <B>Color_Intensity,</B> <B>Color_Intensity,</B> <B>Color_Intensity,</B>
+           <B>const</B> <B>char*</B> <B>name</B>
+       <B>)</B>
+              Create a PSColor, supplying color intensity  infor-
+              mation  and  a  name to associate with the intensi-
+              ties.  The name is used solely to  generate  idraw-
+              compatible PostScript.
+
+
+</PRE>
+<H2>PSFONT PUBLIC OPERATIONS</H2><PRE>
+       <B>PSFont(</B>
+              <B>PS_size</B>
+       <B>)</B>
+              Construct a PSFont,  supplying  the  window-system-
+              specified   font   name   and   the   corresponding
+              PostScript font name and its size.
+
+       <B>const</B> <B>char*</B> <B>GetName()</B>
+       <B>const</B> <B>char*</B> <B>GetPrintFont()</B>
+       <B>const</B> <B>char*</B> <B>GetPrintSize()</B>
+       <B>const</B> <B>char*</B> <B>GetPrintFontAndSize()</B>
+              Return constructor-supplied parameters.   GetPrint-
+              FontAndSize   returns   the  concatenation  of  the
+              PostScript font name and its  size,  with  a  space
+              interposed for legibility.
+
+       <B>int</B> <B>GetLineHt()</B>
+              Return  an integer version of the PostScript font's
+              size (as supplied to the constructor).
+
+
+</PRE>
+<H2>PSPATTERN PUBLIC OPERATIONS</H2><PRE>
+       <B>PSPattern()</B>
+       <B>PSPattern(int</B> <B>dither,</B> <B>float</B> <B>graylevel)</B>
+       <B>PSPattern(const</B> <B>int*</B> <B>pattern,</B> <B>int)</B>
+              Create an undefined  PSPattern  (the  parameterless
+              constructor),  or  one  having  specific dither and
+              graylevel values, or one that replicates a  pattern
+              defined  by  the  given array.  Structured graphics
+              having an undefined pattern will not  render  their
+              filled portions.
+
+       <B>boolean</B> <B>None()</B>
+              Return <I>true</I> if this is an undefined pattern.
+
+       <B>float</B> <B>GetGrayLevel()</B>
+              Return the graylevel that the pattern approximates,
+              if one was specified in the constructor.
+
+       <B>const</B> <B>int*</B> <B>GetData()</B>
+       <B>int</B> <B>GetSize()</B>
+              Return the array that defines the  replicated  pat-
+              tern  and  its size, if the pattern was constructed
+              with one.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Brush(3I)</B>, <B>Color(3I)</B>, <B>Font(3I)</B>, <B>Pattern(3I)</B>, <B>idraw(1I)</B>
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

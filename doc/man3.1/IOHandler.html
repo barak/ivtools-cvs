@@ -1,0 +1,123 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       IOHandler  -  read  input,  write output, or handle an I/O
+       exception or timeout
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/iohandler.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An iohandler reads data from  a  file  descriptor,  writes
+       data  to  a file descriptor, handles an I/O exception on a
+       file descriptor, or handles a  timer's  expiration.   Once
+       the  user has requested the dispatcher to attach an iohan-
+       dler to a file descriptor or a timer, the dispatcher  will
+       automatically  notify the iohandler when the file descrip-
+       tor's I/O condition changes or the timer expires.
+
+       For convenience, the user can use a derived generic  class
+       (see <B>IOCallback(3I)</B>) to make the iohandler do nothing more
+       than call an arbitrary object's member function.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>int</B> <B>inputReady(int</B> <B>fd)</B>
+       <B>virtual</B> <B>int</B> <B>outputReady(int</B> <B>fd)</B>
+       <B>virtual</B> <B>int</B> <B>exceptionRaised(int</B> <B>fd)</B>
+              The dispatcher will call one of these functions  to
+              notify  an  iohandler  that it can read data from a
+              file descriptor, write data to a  file  descriptor,
+              or  handle  an  I/O exception on a file descriptor.
+              The iohandler should perform the appropriate action
+              and  tell  the dispatcher what to do next.  A nega-
+              tive return value means that the iohandler  encoun-
+              tered  an error or it doesn't want to read or write
+              anything more.   The  dispatcher  will  unlink  the
+              iohandler  from  its file descriptor automatically.
+              A positive return value means  that  the  iohandler
+              didn't read or write everything that it could have.
+              The dispatcher will call  the  iohandler  again  in
+              round  robin fashion WITHOUT checking select, which
+              means that the iohandler will be  called  again  as
+              soon  as  the rest of the iohandlers have performed
+              their actions.  A zero return value means that  the
+              iohandler finished reading or writing everything it
+              was  able  to.   The  dispatcher  must  check   the
+              descriptor's  status with the select call before it
+              can call the iohandler again.
+
+       <B>virtual</B> <B>void</B> <B>timerExpired(long</B> <B>sec,</B> <B>long</B> <B>usec)</B>
+              The dispatcher will call this function to notify an
+              iohandler  that  a timer has expired.  For informa-
+              tional purposes, the parameters  give  the  current
+              time  in  seconds  and  microseconds since midnight
+              January 1, 1970.  If the iohandler wants  to  reset
+              the  timer,  it  must  tell the dispatcher to start
+
+       <B>Dispatcher(3I)</B>, <B>IOCallback(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

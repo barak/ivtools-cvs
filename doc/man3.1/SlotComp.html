@@ -1,0 +1,186 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       SlotComp,   SlotView,   HSlotComp,  HSlotView,  VSlotComp,
+       VSlotView, SlotGraphic, PSSlot - abstract base  class  and
+       subclasses for slot connector subject and view; and struc-
+       tured  graphic  and  PostScript  external   representation
+       classes for slots
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/slot.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       SlotComp  is a Connector subclass that supports connectiv-
+       ity with one degree of freedom.  It serves as an  abstract
+       base  class  from which to derive HSlotComp and VSlotComp,
+       which support horizontal and vertical  orientations.   The
+       slot  component  classes  use  SlotGraphics to store their
+       graphical attributes.  SlotView is an abstract subclass of
+       ConnectorView   for   displaying   slots.   HSlotView  and
+       VSlotView are SlotViews that display slots with the corre-
+       sponding    orientations.     Finally,    PSSlot    is   a
+       PostScriptView that externalizes the slot subject's infor-
+       mation in PostScript form.
+
+
+</PRE>
+<H2>SLOTCOMP PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              SlotComp  (un)interprets  a subset of commands that
+              connectors can generally interpret, namely MoveCmd,
+              BrushCmd,  AlignCmd,  MobilityCmd,  DeleteCmd,  and
+              CutCmd.
+
+       <B>virtual</B> <B>Mobility</B> <B>GetMobility()</B>
+       <B>virtual</B> <B>void</B> <B>SetMobility(Mobility)</B>
+              SlotComp redefines these functions  to  return  and
+              assign  its <B>_</B><I>mobility</I> protected member.  Slots have
+              fixed mobility initially.
+
+       <B>Slot*</B> <B>GetSlot()</B>
+              Return the Slot graphic  that  defines  the  line's
+              attributes.  GetSlot is simply a more specific form
+              of the GetGraphic operation.
+
+
+</PRE>
+<H2>SLOTCOMP PROTECTED OPERATIONS</H2><PRE>
+       <B>SlotComp(SlotGraphic*</B> <B>=</B> <B>nil)</B>
+              The constructor takes an optional SlotGraphic  that
+              defines the slot's graphical attributes. It is pro-
+              tected to prevent instantiation, since SlotComp  is
+              an abstract class.
+
+       <B>void</B> <B>SetOrientation(SlotGraphic*,</B> <B>Orientation)</B>
+              Define  the  orientation  of  the  SlotComp's Slot-
+              Graphic.  Only  SlotComp  can  specify  this  Slot-
+              Graphic  attribute;  HSlotComp  and  VSlotComp sub-
+
+
+</PRE>
+<H2>SLOTVIEW PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+              SlotView  interprets  AlignToGridCmd  to  align its
+              starting point to the grid.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              SlotViews respond only to manipulation by  Graphic-
+              CompTools,  MoveTools,  and  ConnectTools. SlotView
+              inherits its MoveTool response from  ConnectorView.
+              GraphicCompTool  will  let  the  user  sweep  out a
+              crosshaired rectangle that reflects the slot's size
+              and  orientation.   Creation  will be influenced by
+              gravity, if any. SlotView creates a ConnectManip in
+              response  to  the ConnectTool, which will exhibit a
+              gravational attraction to potential target  connec-
+              tors.   SlotView  will produce a ConnectCmd to con-
+              nect the slot to its target. A  slot  connected  in
+              this way will receive floating mobility.
+
+       <B>SlotComp*</B> <B>GetSlotComp()</B>
+              Return the subject.
+
+
+</PRE>
+<H2>SLOTVIEW PROTECTED OPERATIONS</H2><PRE>
+       <B>SlotView(SlotComp*</B> <B>=</B> <B>nil)</B>
+              Create  an  SlotView, optionally supplying the sub-
+              ject.  The  constructor  is  protected  to  prevent
+              instantiation.
+
+       <B>SlotGraphic*</B> <B>GetSlot()</B>
+              Return  the  SlotGraphic  that  defines  the slot's
+              attributes.  GetSlot is simply a more specific form
+              of the GetGraphic operation.
+
+       <B>virtual</B> <B>SlotComp*</B> <B>NewSubject(SlotGraphic*)</B>
+              A  helper  function that creates a SlotComp subject
+              with the given slot graphic. This function produces
+              the   proper  subject  when  the  GraphicCompTool's
+              manipulator   is   interpreted.    HSlotView    and
+              VSlotView  redefine  this  operation  to return the
+              corresponding SlotComp subclasses, thus eliminating
+              the need to reimplement InterpretManipulator.
+
+       <B>Manipulator*</B> <B>CreateGraphicCompManip(</B>
+           <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*,</B> <B>Tool*</B>
+       <B>)</B>
+
+       <B>Manipulator*</B> <B>CreateConnectManip(</B>
+       <B>)</B>
+
+       <B>Command*</B> <B>InterpretGraphicCompManip(Manipulator*)</B>
+       <B>Command*</B> <B>InterpretConnectManip(Manipulator*)</B>
+              Helper  functions  used  by  CreateManipulator  and
+              InterpretManipulator to create  and  interpret  the
+              manipulators  associated  with  GraphicCompTool and
+              ConnectTool.
+
+
+</PRE>
+<H2>SLOTGRAPHIC PUBLIC OPERATIONS</H2><PRE>
+       <B>SlotGraphic(Coord,</B> <B>Coord,</B> <B>Coord,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              Create  a  SlotGraphic,  specifying  the   starting
+              point,  length, and optionally a graphic from which
+              to obtain its default graphics attributes.
+
+       <B>void</B> <B>GetOriginal(Coord&amp;,</B> <B>Coord&amp;,</B> <B>Coord&amp;)</B>
+              Return the SlotGraphic's original geometry  parame-
+              ters as specified in the constructor.
+
+
+</PRE>
+<H2>PSSLOT PUBLIC OPERATIONS</H2><PRE>
+       <B>PSSlot(SlotComp*</B> <B>=</B> <B>nil)</B>
+              Construct  a  PostScript external representation of
+              the given subject, if any.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>BrushCmd(3U)</B>,  <B>ConnectTool(3U)</B>,   <B>Connector(3U)</B>,   Connec-
+       torView3U),  <B>Event(3I)</B>,  <B>Graphic(3U)</B>, <B>GraphicCompTool(3U)</B>,
+       <B>Grid(3U)</B>,          <B>MoveTool(3U)</B>,           <B>PatternCmd(3U)</B>,
+       <B>PostScriptView(3U)</B>,      <B>Transformer(3I)</B>,      <B>Viewer(3U)</B>,
+       <B>align(3U)</B>,  <B>edit(3U)</B>,  <B>globals(3U)</B>,   <B>manips(3U)</B>,   trans-
+       <B>forms(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

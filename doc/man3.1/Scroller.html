@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Scroller, HScroller, VScroller - scrolling an interactor
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/scroller.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  scroller is an interactor that manipulates the perspec-
+       tive of another interactor.  It contains a bar whose posi-
+       tion  and  size reflect the current origin and size in the
+       interactor's perspective.  Clicking and  dragging  in  the
+       scroller  modifies  the attached interactor's perspective.
+       <B>VScroller</B> is a  class  for  defining  vertical  scrollers,
+       <B>HScroller</B> for horizontal scrollers.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>HScroller(Interactor*,</B> <B>int</B> <B>size</B> <B>=</B> <B>0)</B>
+       <B>VScroller(Interactor*,</B> <B>int</B> <B>size</B> <B>=</B> <B>0)</B>
+              Create  a  scroller  of  a given size (height for a
+              horizontal   scroller,   width   for   a   vertical
+              scroller).   A  zero  size means to use the default
+              size.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Redisplay the scroller to reflect a change  in  the
+              interactor's perspective.
+
+
+</PRE>
+<H2>X DEFAULTS</H2><PRE>
+       The ``syncScroll'' resource specifies whether the scroller
+       should  work  in  real-time  or  not.   When  synchronized
+       scrolling is employed the interactor scrolls synchronously
+       as the scroller's bar is dragged; otherwise the bar's out-
+       line follows the mouse during dragging, and the interactor
+       is scrolled only after the user stops  dragging  the  bar.
+       Scrollers  will  scroll  synchronously if their syncScroll
+       resource is set to ``on'' or ``true.''  The state  of  the
+       syncScroll attribute can be toggled temporarily by holding
+       down the ``control'' key while  the  scroller  is  manipu-
+       lated.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(3I)</B>, <B>Perspective(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

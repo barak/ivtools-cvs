@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       UHashTable, UHashElem - hash table classes
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/uhash.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       UHashTable  implements a simple open hash table.  The num-
+       ber of slots can be specified when the table  is  created.
+       UHashTable  stores  UHashElem instances, which contain the
+       key that is hashed.  Code that uses UHashTables may derive
+       from  UHashElem  to  store  data  in  addition to the key.
+       UHashTable also provides operations for iterating over the
+       elements in the hash table.
+
+
+</PRE>
+<H2>UHASHELEM OPERATIONS</H2><PRE>
+       <B>UHashElem(void*</B> <B>=</B> <B>nil)</B>
+              Create a UHashElem with the given key value.
+
+       <B>void*</B> <B>GetKey()</B>
+       <B>void</B> <B>SetKey(void*)</B>
+              Explicitly get and set the element's key value.
+
+
+</PRE>
+<H2>UHASHTABLE PUBLIC OPERATIONS</H2><PRE>
+       <B>UHashTable(int</B> <B>nslots)</B>
+              Create  a  new UHashTable, specifying its number of
+              slots.
+
+       <B>virtual</B> <B>void</B> <B>Register(void*</B> <B>key,</B> <B>UHashElem*</B> <B>=</B> <B>nil)</B>
+              Make an entry into the hash table.  If no UHashElem
+              is  supplied,  this  function  call  the CreateElem
+              function (described below) to create  one,  and  it
+              will  call SetKey (with <I>key</I> as its argument) on the
+              result.
+
+       <B>virtual</B> <B>void</B> <B>Unregister(void*</B> <B>key)</B>
+              Remove the element with the matching key  from  the
+              hash table and delete it.
+
+       <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>boolean</B> <B>Done(Iterator)</B>
+       <B>UHashElem*</B> <B>GetElem(Iterator)</B>
+              Operations  for  iterating over the elements in the
+              hash table.  These operation  do  not  guarantee  a
+              particular  ordering for the iteration.  First ini-
+              tializes an iterator to point to the first  element
+              in  the  traversal, Next increments the iterator to
+              point to the following element,  and  Done  returns
+              whether  or not the iterator points beyond the last
+              element in the traversal.  GetElem returns the ele-
+              ment to which the given iterator points.
+
+              Find  the element with the matching key (as defined
+              by the Equal operation,  described  below)  in  the
+              hash table.
+
+
+</PRE>
+<H2>UHASHTABLE PROTECTED OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>UHashElem*</B> <B>CreateElem()</B>
+              Return  a  new  UHashElem  instance.  Subclasses of
+              UHashTable should redefine this  function  if  they
+              use subclasses of UHashElem.
+
+       <B>virtual</B> <B>int</B> <B>Hash(void*</B> <B>key)</B>
+              Hash  the  specified  key  to  return a slot index.
+              This value should be less than  the  value  of  the
+              <B>_</B><I>nslots</I> member variable.
+
+       <B>virtual</B> <B>boolean</B> <B>Equal(void*</B> <B>key1,</B> <B>void*</B> <B>key2)</B>
+              Return  whether  the specified keys are equivalent.
+              By default, Equal simply compares the pointers  for
+              equality.   Subclasses  may redefine this operation
+              to make more sophisticated comparisons.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Iterator(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

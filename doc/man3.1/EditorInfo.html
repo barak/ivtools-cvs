@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       EditorInfo - stores information about an editor's contents
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/editorinfo.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An EditorInfo object is a  UMap  that  stores  a  list  of
+       strings  and/or  string tuples.  Application-specific edi-
+       tors can use these objects to store information about what
+       components,  commands, and tools they incorporate in their
+       interface.  The programmer can write out this  information
+       with  a  catalog  object  and  read it back in later.  The
+       application can then let the user change the editor's con-
+       figuration  by  editing  the  catalog-generated file.  For
+       example, an EditorInfo object could have a list  of  names
+       for  tools  in the editor's interface that have been saved
+       with the catalog. When the application is  restarted,  the
+       EditorInfo  object can be read first, and then the catalog
+       can reconstruct the tools given their names.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>EditorInfo()</B>
+              Construct an EditorInfo instance.
+
+       <B>void</B> <B>Register(const</B> <B>char*</B> <B>name,</B> <B>const</B> <B>char*</B> <B>info</B> <B>=</B> <B>``'')</B>
+       <B>void</B> <B>UnregisterName(const</B> <B>char*)</B>
+       <B>void</B> <B>UnregisterInfo(const</B> <B>char*)</B>
+       <B>boolean</B> <B>Registered(const</B> <B>char*</B> <B>name)</B>
+              Register enters a name or name-info tuple into  the
+              EditorInfo object.  UnregisterName removes an entry
+              whose name string  matches  the  given  one,  while
+              UnregisterInfo  removes  an entry whose info string
+              matches the given  one.  The  Registered  operation
+              returns  whether  or  not  an entry with a matching
+              name exists.
+
+       <B>const</B> <B>char*</B> <B>GetName(const</B> <B>char*</B> <B>info)</B>
+       <B>const</B> <B>char*</B> <B>GetInfo(const</B> <B>char*</B> <B>name)</B>
+              Name-info  tuple  lookup  operations.  The  GetName
+              operation returns the name corresponding to a given
+              info string, while the  GetInfo  operation  returns
+              the info string for a given name.
+
+       <B>const</B> <B>char*</B> <B>GetName(int</B> <B>index)</B>
+       <B>const</B> <B>char*</B> <B>GetInfo(int</B> <B>index)</B>
+              Name  or  info  strings can be accessed by an index
+              that reflects the order in which they  were  regis-
+              tered.   These  operations  return the name or info
+              string for a given index.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>, <B>Editor(3U)</B>, <B>UMap(3U)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

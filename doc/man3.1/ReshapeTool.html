@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ReshapeTool  -  tool  for  reshaping or otherwise altering
+       components' structures
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Tools/reshape.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       ReshapeTool  lets  the  user  perform   component-specific
+       structural changes by direct manipulation.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>ReshapeTool(ControlInfo*</B> <B>=</B> <B>nil)</B>
+              Create a new ConnectTool.
+
+       <B>virtual</B> <B>Manipulator*</B> <B>CreateManipulator(</B>
+          <B>Viewer*,</B> <B>Event&amp;,</B> <B>Transformer*</B>
+       <B>)</B>
+
+       <B>virtual</B> <B>void</B> <B>InterpretManipulator(Manipulator*)</B>
+              CreateManipulator  detects whether the user clicked
+              on a component.  If not, it returns a nil manipula-
+              tor.   If  a  component  was hit, CreateManipulator
+              clears the editor's selection, selects that  compo-
+              nent, and delegates manipulator creation and inter-
+              pretation to that component.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Tool(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

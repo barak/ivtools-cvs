@@ -1,0 +1,230 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Component  - base class for objects that model domain-spe-
+       cific elements
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/component.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Component is an abstract base class for objects  that  are
+       created,  edited,  and  composed  to  form domain-specific
+       drawings.  Components represent the objects of interest in
+       an  editing  domain,  encapsulating  their  appearance and
+       semantics.  Components are partitioned into a subject  and
+       zero  or more views: the subject encapsulates the context-
+       independent state and operations of a component, and  each
+       view supports a context-dependent presentation of the sub-
+       ject.  A subject notifies its views whenever its state  is
+       modified to allow them to change their state or appearance
+       to reflect the modification.  The Component class  defines
+       the  protocol  for component subjects, while ComponentView
+       is the abstract base class defining the protocol for  com-
+       ponent  views.  See <B>ComponentView(3U)</B> for more information
+       on the component view class.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              Interpret performs a  component-specific  operation
+              based  on  the type of command passed.  Uninterpret
+              reverses the effects of a preceding Interpret.  The
+              component  is  responsible for storing enough state
+              (either in itself or in the command) to  carry  out
+              the Uninterpret operation.
+
+       <B>virtual</B> <B>void</B> <B>Attach(ComponentView*)</B>
+       <B>virtual</B> <B>void</B> <B>Detach(ComponentView*)</B>
+              Attach  adds  a  component  view to the component's
+              list of views.  Note that by default  these  opera-
+              tions  do not check to ensure that the view is com-
+              patible with the subject.  Detach removes the argu-
+              ment from the component's list of views.
+
+       <B>virtual</B> <B>void</B> <B>Notify()</B>
+              Notify  the  component's  views  that its state has
+              changed.  This operation calls Update on each  view
+              in the component's list of attached views.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Other  classes may use this operation to notify the
+              component subject of a  possible  change  in  state
+              that  the  component  depends  upon. This operation
+              does nothing by default.
+
+       <B>virtual</B> <B>TransferFunct*</B> <B>GetTransferFunct()</B>
+              Return the component's parent  and  transfer  func-
+              tion,  if  any.   These  operations  return  nil by
+              default.
+
+       <B>virtual</B> <B>Component*</B> <B>GetRoot()</B>
+              Return the root component in this hierarchy.   Get-
+              Root  calls  GetParent  recursively and returns the
+              last non-nil parent, if any.
+
+       <B>virtual</B> <B>StateVar*</B> <B>GetState(const</B> <B>char*)</B>
+              The component may maintain a string-to-state  vari-
+              able  mapping  to  provide  external  access to any
+              state variables it defines.  The GetState operation
+              returns  a  state  variable  given  an  identifying
+              string.  Defining such a mapping lets other objects
+              (typically  commands) query the component for state
+              variables that it may define without extending  the
+              component  protocol,  potentially  allowing  inter-
+              change of components from  different  applications.
+              This operation returns nil by default.
+
+       <B>virtual</B> <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Last(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>Done(Iterator)</B>
+              Operations  for  iterating  over the component sub-
+              ject's children, if any.  First and Last initialize
+              an  iterator  to  point to the beginning and end of
+              the list of children,  respectively.   Next  incre-
+              ments the iterator to point to the following child,
+              while Prev decrements the iterator to point to  the
+              preceding  child.   Done returns whether or not the
+              iterator points beyond the first or last  child  in
+              the list.
+
+       <B>virtual</B> <B>Component*</B> <B>Copy()</B>
+              Return  a copy of the component.  Subclasses should
+              redefine this operation to return  an  instance  of
+              their type.
+
+       <B>virtual</B> <B>void</B> <B>Read(istream&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Write(ostream&amp;)</B>
+              Read and write the component's contents to a stream
+              to support catalog operations.  Read and write typ-
+              ically  call  first  the  corresponding  operations
+              defined by their parent class, and then  they  read
+              or write their class-specific state.  Note that you
+              must ensure that the objects are read in  the  same
+              order they are written.
+
+       <B>virtual</B> <B>boolean</B> <B>IsA(ClassId)</B>
+              GetClassId  returns the unique class identifier for
+              the Component subclass, while IsA  returns  whether
+              the  instance is of a class or subclass correspond-
+              ing to the given identifier.  IsA typically  checks
+              the given identifier against the instance's own (as
+              defined by its GetClassId operation)  and,  failing
+              that, calls its parent classes' IsA operation.  All
+              subclasses must  redefine  GetClassId  and  IsA  to
+              ensure  that  their identifiers are unique and that
+              instances are written and read properly.
+
+       <B>virtual</B> <B>ClassId</B> <B>GetSubstId(const</B> <B>char*&amp;</B> <B>delim)</B>
+              A Component subclasses can redefine  GetSubstId  to
+              specify  a  component  that  can substitute for it.
+              This lets applications that do not define a partic-
+              ular  component subclass still read in a substitute
+              that is compatible with the subclass.  The  substi-
+              tute  class  should be one of the predefined compo-
+              nents in the Unidraw library.  This guarantees that
+              all applications can instantiate the substitute.
+
+              GetSubstId  returns  the  class  identifier for the
+              substitute.  When an another Unidraw  application's
+              catalog   reads  this  object,  it  can  create  an
+              instance of the substitute (which it is  guaranteed
+              to  define)  instead  of the original (which it may
+              not define).
+
+              The original should read and write  a  superset  of
+              the  substitute's  data.   The catalog will read to
+              the end of the substitute's data and  then  advance
+              the  stream  to the point following the sequence of
+              characters specified by  <I>delim</I>,  saving  the  extra
+              characters  between  the  two points in the stream.
+              When the substitute object is  saved  subsequently,
+              the original class identifier will be written along
+              with the substitute's data plus the  extra  charac-
+              ters saved previously.  Thus information needn't be
+              lost as a result of being read and  written  by  an
+              unsophisticated application.
+
+       <B>ComponentView*</B> <B>Create(ClassId)</B>
+              Create  a view instance that is appropriate for the
+              component subject given a view category.  The rela-
+              tionship  between  subjects,  views, and view cate-
+              gories is encoded in their class identifiers.   See
+              <B>classes(3U)</B>  for  more information on class identi-
+              fiers and view categories.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>void</B> <B>Component()</B>
+
+       <B>ComponentView*</B> <B>View(UList*)</B>
+              Each  component  maintains  a  list  of  its views,
+              implemented with a UList.  This  operation  returns
+              the component view associated with a given entry in
+              the UList.
+
+       <B>virtual</B> <B>void</B> <B>SetParent(Component*</B> <B>child,</B> <B>Component*</B> <B>par-</B>
+              <B>ent)</B>
+              Notify  a child component that it has a new or dif-
+              ferent parent.   This  operation  does  nothing  by
+              default.   Composite  components  should  call this
+              function in their  structure-modifying  operations,
+              and  components  that  keep information about their
+              parents should redefine it to update this  informa-
+              tion.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>,  <B>Command(3U)</B>, <B>ComponentView(3U)</B>, <B>Creator(3U)</B>,
+       <B>Iterator(3U)</B>, <B>StatVar(3U)</B>,  <B>TransferFunct(3U)</B>,  <B>UList(3U)</B>,
+       <B>classes(3U)</B>, istream(3C++), ostream(3C++)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

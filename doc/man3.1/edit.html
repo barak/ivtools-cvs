@@ -1,0 +1,248 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ConnectCmd,  CopyCmd, CutCmd, DeleteCmd, DupCmd, Mobility-
+       Cmd, PasteCmd, RedoCmd, ReplaceCmd, SlctAllCmd, UndoCmd  -
+       editing commands
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Commands/edit.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  Unidraw  library  defines several commands that offer
+       common component editing functionality.  ConnectCmd  is  a
+       non-interpretive  command  that  connects  two connectors.
+       CopyCmd copies selected components onto its clipboard  (if
+       it  defines  one)  or  onto the global clipboard.  CutCmd,
+       DeleteCmd, DupCmd, and PasteCmd  are  purely  interpretive
+       commands  that  are  always  interpreted by their editor's
+       component.  MobilityCmd  gives  selected  components   the
+       opportunity  to  set  their mobility based on the value it
+       provides.  UndoCmd and RedoCmd are  non-interpretive  com-
+       mands  that  simply  undo  and  redo the last command that
+       affected their editor's  component.   ReplaceCmd  replaces
+       selected   components   with   the  component  it  stores.
+       Finally, SlctAllCmd is  a  non-interpretive  command  that
+       selects all the components displayed in its editor.
+
+
+</PRE>
+<H2>CONNECTCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>ConnectCmd(</B>
+           <B>ControlInfo*,</B>
+           <B>Connector*</B> <B>source</B> <B>=</B> <B>nil,</B> <B>Connector*</B> <B>target</B> <B>=</B> <B>nil</B>
+       <B>)</B>
+
+       <B>ConnectCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Connector*</B> <B>=</B> <B>nil,</B> <B>Connector*</B> <B>=</B>
+              <B>nil)</B>
+              The ConnectCmd  constructor  optionally  takes  two
+              connectors  as  parameters, the <I>source</I> and the <I>tar-</I>
+              <I>get</I>.  When executed, it will call Connect on <I>source</I>
+              with  <I>target</I> as its argument.  It will also set the
+              source's mobility to floating.
+
+       <B>void</B> <B>GetConnectors(Connector*&amp;</B> <B>source,</B> <B>Connector*&amp;</B> <B>target)</B>
+              Return  the connectors supplied in the constructor.
+
+
+</PRE>
+<H2>COPYCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>CopyCmd(ControlInfo*,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+       <B>CopyCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+              Create a CopyCmd instance, optionally specifying  a
+              clipboard in which to store copied components.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+              Execute does nothing if no components are selected.
+              Otherwise, Execute places a copy  of  the  selected
+              components  onto the CopyCmd's clipboard if is non-
+              nil or else onto  the  global  clipboard  (obtained
+              CopyCmd is not reversible.
+
+
+</PRE>
+<H2>CUTCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>CutCmd(ControlInfo*,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+       <B>CutCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+              Create  a  CutCmd instance, optionally specifying a
+              clipboard in which to  store  the  components  that
+              were cut.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+              CutCmd  redefines  these operations to let the edi-
+              tor's component interpret it.  Execute will set the
+              value of the <B>_</B><I>executed</I> protected member variable to
+              <I>true</I> as a side effect.  Similarly,  Unexecute  will
+              reset the value to <I>false</I> as a side effect.
+
+
+</PRE>
+<H2>DELETECMD PUBLIC OPERATIONS</H2><PRE>
+       <B>DeleteCmd(ControlInfo*,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+       <B>DeleteCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+              Create  a DeleteCmd instance, optionally specifying
+              a clipboard in which to store the  components  that
+              were deleted.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+              DeleteCmd  redefines  these  operations  to let the
+              editor's component interpret it. Execute  will  set
+              the  value  of the <B>_</B><I>executed</I> protected member vari-
+              able to <I>true</I> as a side effect.   Similarly,  Unexe-
+              cute  will  reset  the  value  to  <I>false</I>  as a side
+              effect.
+
+
+</PRE>
+<H2>DUPCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>DupCmd(ControlInfo*,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+       <B>DupCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+              Create a DupCmd instance, optionally  specifying  a
+              clipboard  in  which  to  store the components that
+              were duplicated.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+              DupCmd redefines these operations to let  the  edi-
+              tor's  component interpret it. Execute will set the
+              value of the <B>_</B><I>executed</I> protected member variable to
+              <I>true</I>  as  a side effect.  Similarly, Unexecute will
+              reset the value to <I>false</I> as a side effect.
+
+
+</PRE>
+<H2>MOBILITYCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>MobilityCmd(ControlInfo*,</B> <B>Mobility</B> <B>=</B> <B>Fixed)</B>
+       <B>MobilityCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Mobility</B> <B>=</B> <B>Fixed)</B>
+              Create a MobilityCmd instance, optionally  specify-
+
+       <B>Mobility</B> <B>GetMobility()</B>
+              Return the mobility specified in the constructor.
+
+
+</PRE>
+<H2>PASTECMD PUBLIC OPERATIONS</H2><PRE>
+       <B>PasteCmd(ControlInfo*,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+       <B>PasteCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>Clipboard*</B> <B>=</B> <B>nil)</B>
+              Create a PasteCmd instance, optionally specifying a
+              clipboard  in  which  to  store the components that
+              will be pasted.
+
+       <B>virtual</B> <B>void</B> <B>Execute()</B>
+       <B>virtual</B> <B>void</B> <B>Unexecute()</B>
+              PasteCmd redefines these operations to let the edi-
+              tor's component interpret it.  Execute will set the
+              value of the <B>_</B><I>executed</I> protected member variable to
+              <I>true</I>  as  a side effect.  Similarly, Unexecute will
+              reset the value to <I>false</I> as a side effect.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              PasteCmd is reversible if either its  clipboard  or
+              the global clipboard is non-empty.
+
+
+</PRE>
+<H2>REDOCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>RedoCmd(ControlInfo*)</B>
+       <B>RedoCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new RedoCmd.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              RedoCmd is not reversible.
+
+
+</PRE>
+<H2>REPLACECMD PUBLIC OPERATIONS</H2><PRE>
+       <B>ReplaceCmd(ControlInfo*,</B> <B>GraphicComp*</B> <B>replacement</B> <B>=</B> <B>nil)</B>
+       <B>ReplaceCmd(Editor*</B> <B>=</B> <B>nil,</B> <B>GraphicComp*</B> <B>replacement</B> <B>=</B> <B>nil)</B>
+              Create  a  new ReplaceCmd, optionally supplying the
+              GraphicComp  that  will  replace  those  that   are
+              selected.
+
+       <B>GraphicComp*</B> <B>GetReplacement()</B>
+              Return  the replacement GraphicComp supplied in the
+              constructor.
+
+
+</PRE>
+<H2>SLCTALLCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>SlctAllCmd(ControlInfo*)</B>
+       <B>SlctAllCmd(Editor*</B> <B>=</B> <B>nil)</B>
+              Construct a new SlctAllCmd.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              SlctAllCmd is not reversible.
+
+
+</PRE>
+<H2>UNDOCMD PUBLIC OPERATIONS</H2><PRE>
+       <B>UndoCmd(ControlInfo*)</B>
+              Construct a new UndoCmd.
+
+       <B>virtual</B> <B>boolean</B> <B>Reversible()</B>
+              UndoCmd is not reversible.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>,  <B>Clipboard(3U)</B>,  <B>Command(3U)</B>,  <B>Connector(3U)</B>,
+       <B>GraphicComp(3U)</B>, <B>globals(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

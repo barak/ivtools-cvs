@@ -1,0 +1,424 @@
+
+<html><head><TITLE>Description of RasterScript</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>RasterScript</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayScript.html" >OverlayScript</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+serialized view of <A HREF="RasterOvComp.html" >RasterOvComp</A>.<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayScript.html" >OverlayScript</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#RasterScript><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+OverlayUnidraw/ovraster.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="Definition(ostream&#38;)">
+    <B>Definition</B> (ostream&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        output variable-length ASCII record that defines the component.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="GetByPathnameFlag()">
+    <B>GetByPathnameFlag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ClassId 
+    <A NAME="GetClassId()">
+    <B>GetClassId</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="GetFromCommandFlag()">
+    <B>GetFromCommandFlag</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsA(ClassId)">
+    <B>IsA</B> (ClassId) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="RasterScript(RasterOvComp*=nil)">
+    <B>RasterScript</B> (<A HREF="RasterOvComp.html" >RasterOvComp</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayChar(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayChar</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read 8-bit pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayDouble(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayDouble</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read double floating point pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayFloat(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayFloat</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read floating point pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayInt(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayInt</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read integer pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayLong(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayLong</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read long pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayShort(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayShort</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read 16-bit pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayUChar(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayUChar</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read unsigned 8-bit pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayUInt(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayUInt</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read unsigned integer pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayULong(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayULong</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read unsigned long pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadGrayUShort(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadGrayUShort</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read unsigned 16-bit pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadProcess(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadProcess</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read image-processing command string.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadRGB(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadRGB</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read RGB pixel values directly from serialized file.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadRaster(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadRaster</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read raster pathname if it exists, and construct <A HREF="OverlayRasterRect.html" >OverlayRasterRect</A> 
+ a <A HREF="OverlayRaster.html" >OverlayRaster</A> or <A HREF="GrayRaster.html" >GrayRaster</A> inside.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="ReadSub(istream&#38;&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*&#38;&#38;COMMvoid*)">
+    <B>ReadSub</B> (istream&#38;, void*, void*, void*, void*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        read sub-image specification.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

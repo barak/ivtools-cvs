@@ -1,0 +1,70 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       istreamb, ostreamb, iostreamb - unformatted streams
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/iostreamb.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       istreamb,  ostreamb,  and  iostreamb are streams just like
+       istream, ostream, and iostream except  for  two  features.
+       First,  they  automatically  insert and extract delimiters
+       around datums where necessary so you never have  to  sepa-
+       rate  datums  by  whitespace  yourself.   Second, they can
+       insert and extract integers as either unformatted (binary)
+       bytes  or  formatted  characters  so you can eliminate the
+       time needed to convert integers to strings and back.  Both
+       of  these  features  make these classes easier to use than
+       the base stream classes  for  inter-process  communication
+       (IPC).
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       IOS.INTRO(3C++)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

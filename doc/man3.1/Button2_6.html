@@ -1,0 +1,179 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ButtonState,  Button, TextButton, PushButton, RadioButton,
+       CheckBox - interactive buttons
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/button.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Button</B> is a class of interactors that can set the value of
+       a  piece of state.  <B>ButtonState</B> is a class of objects that
+       contain a value and a list of buttons  that  can  set  its
+       value.   A  value  is  either  an  integer or an arbitrary
+       pointer.
+
+       <B>TextButton</B> is a subclass of <B>Button</B> that has an  associated
+       text  label  to be displayed inside or to the right of the
+       button.  <B>PushButton,</B> <B>RadioButton,</B> and  <B>CheckBox</B>  are  sub-
+       classes of <B>TextButton</B> that provide particular displays for
+       buttons.  Each kind of button will display itself  differ-
+       ently  for  each  of the five possible cases: ``enabled'',
+       when the button is listening to input, ``disabled'',  when
+       the button is not listening, ``chosen'', when the button's
+       value is equal to its button state's value, ``hit'',  when
+       a  button  that  is not chosen first receives a DownEvent,
+       and ``same-hit'', when a button that is chosen receives  a
+       DownEvent.
+
+       When  a  button receives a DownEvent, it calls the virtual
+       Refresh() to update its  display.   It  then  reads  input
+       waiting  for  an  UpEvent.  If the UpEvent coordinates are
+       also within the button, then it calls the virtual Press().
+       The  default  Press  operation sets the associated state's
+       value to the button's value.
+
+       A button can have a list of attached buttons.  When a but-
+       ton  is  not chosen its attached buttons are ``disabled'',
+       meaning they ignore all input events.
+
+
+</PRE>
+<H2>BUTTONSTATE OPERATIONS</H2><PRE>
+       <B>ButtonState()</B>
+       <B>ButtonState(int)</B>
+       <B>ButtonState(void*)</B>
+              Define a button state optionally  with  an  initial
+              value.
+
+       <B>void</B> <B>Attach(Button*)</B>
+              Add  a  button to the list associated with a button
+              state.  The button will be notified when the button
+              state's value is modified.
+
+       <B>void</B> <B>Detach(Button*)</B>
+              Remove  a  button  from  the list associated with a
+              button state.
+
+       <B>void</B> <B>GetValue(void*&amp;)</B>
+              Get the value of a button.
+
+       <B>void</B> <B>SetValue(int)</B>
+       <B>void</B> <B>SetValue(void*)</B>
+              Set the value of a button state and notify all  the
+              buttons associated with the state.
+
+       <B>void</B> <B>operator=(ButtonState&amp;)</B>
+              Copy the value of one button state to another.  The
+              button list associated with the source button state
+              is not copied.
+
+
+</PRE>
+<H2>BUTTON OPERATIONS</H2><PRE>
+       <B>void</B> <B>PushButton(const</B> <B>char*</B> <B>text,</B> <B>ButtonState*</B> <B>s,</B> <B>int</B> <B>v)</B>
+       <B>void</B> <B>PushButton(const</B> <B>char*</B> <B>text,</B> <B>ButtonState*</B> <B>s,</B> <B>void*</B> <B>v)</B>
+              Construct a button with <I>text</I> in the  center  and  a
+              polygon  on  the  outside.   The  polygon is like a
+              rectangle, but with rounded corners.  When  chosen,
+              the  entire  button  is  drawn  with foreground and
+              background colors reversed.
+
+       <B>void</B> <B>RadioButton(const</B> <B>char*</B> <B>text,</B> <B>ButtonState*</B> <B>s,</B> <B>int</B> <B>v)</B>
+       <B>void</B> <B>RadioButton(const</B> <B>char*</B> <B>text,</B> <B>ButtonState*</B> <B>s,</B> <B>void*</B>
+              <B>v)</B>
+              Construct  a  button  with a circle on the left and
+              <I>text</I> on the right.  When hit, a  second  circle  is
+              drawn inside the first.  When chosen, a filled cir-
+              cle is drawn inside the outer circle.
+
+       <B>void</B> <B>CheckBox(const</B> <B>char*</B> <B>text,</B> <B>ButtonState*</B> <B>s,</B> <B>int</B> <B>on,</B>
+              <B>int</B> <B>off)</B>
+       <B>void</B>  <B>CheckBox(const</B>  <B>char*</B> <B>text,</B> <B>ButtonState*</B> <B>s,</B> <B>void*</B>
+              <B>on,</B> <B>void*</B> <B>off)</B>
+              Construct a button with a rectangle on the left and
+              <I>text</I> on the right.  When hit, a second rectangle is
+              drawn  inside the first.  When chosen, two diagonal
+              lines are drawn connecting the opposite corners  of
+              the  rectangle.   When  a  checkbox  is pressed the
+              first time, it sets <I>s</I> to <I>off</I> if the value is <I>on</I> and
+              sets  <I>s</I>  to  <I>on</I> otherwise.  Subsequent presses swap
+              the values of the checkbox and <I>s</I>.
+
+       <B>void</B> <B>Attach(Button*)</B>
+              Add to this button's list  of  associated  buttons.
+              These buttons are enabled when the button is chosen
+              and disabled when it is not chosen.
+
+       <B>void</B> <B>Detach(Button*)</B>
+              Remove a button from this button's list of  associ-
+              ated buttons.
+
+              Stop  listening  to input events.  Disabled buttons
+              are typically ``grayed out''  by  drawing  a  half-
+              filled rectangle in the background.
+
+       <B>void</B> <B>Enable()</B>
+              Start listening to input events.
+
+       <B>void</B> <B>Choose()</B>
+              Make  the button as chosen, enabling any associated
+              buttons.
+
+       <B>void</B> <B>Handle(Event&amp;)</B>
+              If the event type is DownEvent and  the  button  is
+              enabled,  call  Refresh  and  read  events until an
+              UpEvent occurs.  If the button is the target of the
+              UpEvent, then call Press.
+
+       <B>virtual</B> <B>void</B> <B>Press()</B>
+              Take  the  appropriate  action for the button being
+              pressed.  The default  is  to  set  the  associated
+              state to the button's value, which will trigger all
+              related buttons to update their display.
+
+       <B>virtual</B> <B>void</B> <B>Refresh()</B>
+              Update the button display.
+
+       <B>void</B> <B>SetDimensions(int</B> <B>width,</B> <B>int</B> <B>height)</B>
+              Specify  the  natural  size  of  the  button.   The
+              default size is a function of the size of the text.
+              This routine is obsolete;  use  Interactor::Reshape
+              instead.
+
+       <B>void</B> <B>UnChoose()</B>
+              Mark  the button as not chosen, disabling any asso-
+              ciated buttons.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Event(3I)</B>, <B>Interactor(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

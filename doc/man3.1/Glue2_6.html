@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Glue, HGlue, VGlue - open space between interactors
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/glue.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  glue  object  is  an  interactor that is used to define
+       variable-size space between  interactors  in  boxes.   The
+       <B>HGlue</B> subclass is for space in a horizontal box; <B>VGlue</B> for
+       space in a vertical box.  Along its minor  axis  (vertical
+       for  <B>HGlue</B>, horizontal for <B>VGlue</B>), glue has a natural size
+       of zero and infinite stretchability.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>HGlue(int</B> <B>natural</B> <B>=</B> <B>0,</B> <B>int</B> <B>stretch</B> <B>=</B> <B>hfil)</B>
+       <B>VGlue(int</B> <B>natural</B> <B>=</B> <B>0,</B> <B>int</B> <B>stretch</B> <B>=</B> <B>vfil)</B>
+              Construct  glue  with  a  given  natural  size  and
+              stretchability.    The   glue's   shrinkability  is
+              defined to be the same as the natural size, meaning
+              it can shrink to zero.
+
+       <B>HGlue(int</B> <B>natural,</B> <B>int</B> <B>shrink,</B> <B>int</B> <B>stretch)</B>
+       <B>VGlue(int</B> <B>natural,</B> <B>int</B> <B>shrink,</B> <B>int</B> <B>stretch)</B>
+              Construct  glue with a given natural size, shrinka-
+              bility, and stretchability.  If  <I>shrink</I>  is  larger
+              than  <I>natural</I> the glue potentially can have ``nega-
+              tive size'', meaning interactors will overlap in  a
+              box.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Box(3I)</B>, <B>Interactor(3I)</B>, <B>Shape(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Creator  - recreates catalog-managed objects from disk and
+       instantiates component views from their class identifiers
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/creator.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A creator object can reconstruct a catalog-managed  object
+       from  disk  and  can  instantiate a component view given a
+       class identifier.  Generally only the Catalog  class  uses
+       the  creator  to reconstruct objects from disk, but it may
+       be useful for other  classes  (e.g.,  the  Component  base
+       class)  to  use  the  creator to create views of component
+       subjects.
+
+       Applications that derive new  catalog-managed  classes  or
+       component  views  must  also  derive a subclass of Creator
+       that extends the base class operations to support the  new
+       classes.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Creator()</B>
+              Instantiate  an  new  creator  object.  The Catalog
+              constructor  requires  an  instance  of  a  creator
+              object,  either  an  instance  of  the Creator base
+              class or an  instance  of  an  application-specific
+              Creator subclass.
+
+       <B>virtual</B> <B>void*</B> <B>Create(</B>
+           <B>ClassId,</B> <B>istream&amp;</B> <B>in,</B> <B>ObjectMap*</B> <B>objmap,</B> <B>int</B> <B>objid</B>
+       <B>)</B>
+              Create  an  instance  of the class corresponding to
+              the given class identifier.  Normally  this  opera-
+              tion will be used by the Catalog class exclusively.
+              This operation contains  a  switch  statement  that
+              calls  a CREATE macro for each possible class iden-
+              tifier.   The  CREATE  macro  takes  the   istream,
+              ObjectMap,  and  int arguments as parameters; it is
+              not important to  understand  how  the  macro  uses
+              these  arguments.   For  example, the entry for the
+              LineComp line component subject class is
+
+              case  LINE_COMP:   CREATE(LineComp,   in,   objmap,
+              objid);
+
+              Derived  Creator  classes must redefine this opera-
+              tion to include a switch statement for application-
+              specific classes, with the default case calling the
+              parent class's Create operation.
+
+       <B>virtual</B> <B>void*</B> <B>Create(ClassId</B> <B>id)</B>
+              Create an instance of the view class  corresponding
+              ments of the form
+
+              if  (id  ==  <I>&lt;identifier</I>  <I>name&gt;</I>)  return new <I>&lt;class</I>
+              <I>name&gt;</I>;
+
+              For example, the entry for the PostScript  external
+              view class identifier for line components is
+
+              if (id == PS_LINE) return new PSLine;
+
+              Derived  Creator  classes must redefine this opera-
+              tion to include if statements for  application-spe-
+              cific  view classes, with the final statement being
+              a call to the parent classes's Create operation.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>, <B>classes(3U)</B>, <B>globals(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

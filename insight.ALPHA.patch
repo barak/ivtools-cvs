@@ -1,0 +1,122 @@
+This patch adds make rules to config/rules.def to build on an Alpha
+with insight support.  It then enables them with a patch to
+config/site.def.ALPHA.  Contributed by Bruno Delfosse of Thomson CSF
+(Bruno.DELFOSSE@fr.airsysatm.thomson-csf.com).  This disables the use
+of the ocnfigure script.
+
+*** config/rules.def	Thu Jul 30 11:02:36 1998
+--- config/rules.def	Fri Oct  2 01:42:17 1998
+***************
+*** 70,80 ****
+  #define MakeWorld(flags)						@@\
+  MakeNormalWorld(flags)							@@\
+  MakeSpecialWorld(.debug,flags)						@@\
+  MakeSpecialWorld(.noshared,flags)
+  #else
+  #define MakeWorld(flags)						@@\
+  MakeNormalWorld(flags)							@@\
+! MakeSpecialWorld(.debug,flags)
+  #endif
+  #endif
+  
+--- 70,82 ----
+  #define MakeWorld(flags)						@@\
+  MakeNormalWorld(flags)							@@\
+  MakeSpecialWorld(.debug,flags)						@@\
++ MakeSpecialWorld(.insight,flags)					@@\
+  MakeSpecialWorld(.noshared,flags)
+  #else
+  #define MakeWorld(flags)						@@\
+  MakeNormalWorld(flags)							@@\
+! MakeSpecialWorld(.debug,flags)						@@\
+! MakeSpecialWorld(.insight,flags)
+  #endif
+  #endif
+  
+***************
+*** 271,276 ****
+--- 273,279 ----
+  InstallSubdirs(dirs)							@@\
+  CleanSubdirs(dirs)							@@\
+  SpecialTargets(debug,-DUseDebug)					@@\
++ SpecialTargets(insight,-DUseInsight)					@@\
+  SpecialTargets(noshared,-DUseNonShared)					@@\
+  IvmkcmTargets($(PACKAGE))						@@\
+  IvmkcmSubdirs(dirs)
+***************
+*** 282,287 ****
+--- 285,291 ----
+  InstallSubdirs(dirs)							@@\
+  CleanSubdirs(dirs)							@@\
+  SpecialTargets(debug,-DUseDebug)					@@\
++ SpecialTargets(insight,-DUseInsight)                                    @@\
+  IvmkcmTargets($(PACKAGE))						@@\
+  IvmkcmSubdirs(dirs)
+  #endif
+***************
+*** 300,305 ****
+--- 304,310 ----
+  InstallSubdirs($(ARCH))							@@\
+  CleanSubdirs($(ARCH))							@@\
+  SpecialTargets(debug,-DUseDebug)					@@\
++ SpecialTargets(insight,-DUseInsight)                                    @@\
+  SpecialTargets(noshared,-DUseNonShared)					@@\
+  IvmkcmTargets($(PACKAGE))
+  #else
+***************
+*** 310,315 ****
+--- 315,321 ----
+  InstallSubdirs($(ARCH))							@@\
+  CleanSubdirs($(ARCH))							@@\
+  SpecialTargets(debug,-DUseDebug)					@@\
++ SpecialTargets(insight,-DUseInsight)                                    @@\
+  IvmkcmTargets($(PACKAGE))
+  #endif
+  #endif
+Index: site.def.ALPHA
+===================================================================
+RCS file: /xtra3/ivtools-0.6/cm/config_ivtools/site.def.ALPHA,v
+retrieving revision 1.6
+diff -c -r1.6 site.def.ALPHA
+*** config/site.def.ALPHA	1998/10/02 16:09:27	1.6
+--- config/site.def.ALPHA	1998/10/02 16:21:23
+***************
+*** 13,19 ****
+  
+  /* gcc command line with -V for version and -O for optimize */
+  #undef CCDriver
+! #define CCDriver gcc 
+  
+  #undef HasDynamicSharedLibraries
+  #define HasDynamicSharedLibraries YES
+--- 13,24 ----
+  
+  /* gcc command line with -V for version and -O for optimize */
+  #undef CCDriver
+! /*#define CCDriver gcc */
+! #ifdef UseInsight
+! #define CCDriver $(INSURE_LOC)/insight
+! #else
+! #define CCDriver $(IV_CC)/gcc
+! #endif
+  
+  #undef HasDynamicSharedLibraries
+  #define HasDynamicSharedLibraries YES
+***************
+*** 118,124 ****
+  #define LibDir /usr/local/lib
+  #define LibAllDir /usr/local/lib/ivtools
+  
+! #if 0 
+  
+  /* -------------- imake way of configuring ------------------ */
+  
+--- 123,129 ----
+  #define LibDir /usr/local/lib
+  #define LibAllDir /usr/local/lib/ivtools
+  
+! #if 1 
+  
+  /* -------------- imake way of configuring ------------------ */
+  
+Using /xtra3/ivtools-0.6/cm as repository for config_ivtools module.

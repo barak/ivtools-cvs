@@ -1,0 +1,39 @@
+ivtools-0.7.5 is now available from http://www.vectaport.com/ivtools/.
+This release features an improved configure script (no longer any need
+to supply CPU, PWD, XCONFIGDIR, or GPLUSPLUSINCLUDEDIR make
+variables), automatic re-centering of rasters read from URLs, and full
+animation of direct-manipulation graphic transformations
+(move/scale/stretch/rotate).
+
+ivtools is a collection of extendable drawing editors and spatial data
+servers.  It is also a layered application framework with support for
+vector and raster graphics, multi-view document editing, networking,
+scripting, components, and serialization.  An alternate to Java Swing
+or MFC for the Unix/X11/C++ programmer.
+
+Documentation available online (http://www.vectaport.com/ivtools/doc/)
+as well as downloadable in a tar file of HTML and other files, all
+copyrighted identical to ivtools (X11 style):
+
+	http://www.vectaport.com/pub/src/ivtools-0.7.5-html.tgz
+
+If you're interested in adding capability to ivtools, such as one of
+those listed in http://www.vectaport.com/ivtools/help-wanted.html, or
+are interested in helping out with the documentation, please get in
+touch via ivtools-info@vectaport.com.
+
+Scott Johnston
+Vectaport Inc.
+http://www.vectaport.com
+
+
+******************* errata -- April 8th 1999 ********************
+
+There is still a need for the CPU environment variable.  A patch to
+fix this lingering problem is available at:
+
+  http://www.vectaport.com/ivtools/ivtools-0.7.5-CPUprob.patch.txt.
+
+See other details at:
+
+       http://www.vectaport.com/ivtools/release-note-0.7.5.html

@@ -1,0 +1,182 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       globals  - Unidraw global constants, types, instances, and
+       functions.
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/globals.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Several  constants  and  types  are  used  throughout  the
+       Unidraw  library.   It also provides global access to one-
+       of-a-kind instances such as the unidraw object as well  as
+       shared  graphics  resources.   Finally,  there are several
+       global functions for common data  manipulations.   All  of
+       these are declared one file for inclusion into other files
+       where they are needed.
+
+
+</PRE>
+<H2>CONSTANTS</H2><PRE>
+       <B>static</B> <B>const</B> <B>int</B> <B>CHARBUFSIZE</B>
+              Size of standard character buffer.
+
+       <B>static</B> <B>const</B> <B>int</B> <B>HANDLE_SIZE</B>
+              Size of selection handles, in pixels.
+
+       <B>static</B> <B>const</B> <B>char</B> <B>MARK[]</B>
+              String that delineates data boundaries in the ASCII
+              representation  that  Catalog  generates.  Used for
+              error checking.
+
+       <B>static</B> <B>const</B> <B>int</B> <B>PIN_RAD</B>
+              The radius of a pin, used in its default  graphical
+              representation, in pixels.
+
+       <B>static</B> <B>const</B> <B>int</B> <B>SLOP</B>
+              Tolerance  within which a hit on a graphical object
+              will be detected, in pixels.
+
+
+</PRE>
+<H2>TYPES</H2><PRE>
+       <B>enum</B> <B>DragConstraint</B>
+              Enumerates orthogonal ways in which cursor movement
+              may be constrained, usually during direct manipula-
+              tion.   Possible  values  include   <B>None</B>,   <B>XFixed</B>,
+              <B>YFixed</B>, <B>XYEqual</B>, <B>HorizOrVert</B>, or <B>Gravity</B>.
+
+       <B>enum</B> <B>Mobility</B>
+              Enumerates the three possible component mobilities:
+              <B>Fixed</B>, <B>Floating</B>, or <B>Undef</B> (undefined).
+
+       <B>typedef</B> <B>unsigned</B> <B>Orientation</B>
+              Specifies two kinds  of  orientation:  <B>Portrait</B>  or
+              <B>Vertical</B>  (synonymous), and <B>Landscape</B> or <B>Horizontal</B>
+              (synonymous).
+
+       <B>enum</B> <B>TransMethod</B>
+
+       <B>typedef</B> <B>unsigned</B> <B>long</B> <B>ClassId</B>
+              Type  for representing unique class names for cata-
+              log-managed objects.
+
+
+</PRE>
+<H2>INSTANCES</H2><PRE>
+       <B>extern</B> <B>Unidraw*</B> <B>unidraw</B>
+       <B>extern</B> <B>CSolver*</B> <B>csolver</B>
+              The global unidraw and csolver objects.  These  and
+              all other global instances are initialized automat-
+              ically.
+
+       <B>extern</B> <B>PSColor*</B> <B>psblack</B>
+       <B>extern</B> <B>PSColor*</B> <B>pswhite</B>
+       <B>extern</B> <B>PSPattern*</B> <B>pssolid</B>
+       <B>extern</B> <B>PSPattern*</B> <B>psclear</B>
+       <B>extern</B> <B>PSPattern*</B> <B>psnonepat</B>
+       <B>extern</B> <B>PSBrush*</B> <B>pssingle</B>
+       <B>extern</B> <B>PSBrush*</B> <B>psnonebr</B>
+       <B>extern</B> <B>PSFont*</B> <B>psstdfont</B>
+              Predefined graphics  resource  objects.   The  None
+              operation on <I>psnonepat</I> and <I>psnonebr</I> returns <I>true</I>.
+
+       <B>extern</B> <B>Graphic*</B> <B>stdgraphic</B>
+              A  FullGraphic instance with its graphics state set
+              to  the  global  values  listed  above,   excluding
+              <I>psnonepat</I> and <I>psnonebr</I>.
+
+
+</PRE>
+<H2>FUNCTIONS</H2><PRE>
+       <B>extern</B> <B>void</B> <B>NormalRect(Coord&amp;</B> <B>l,</B> <B>Coord&amp;</B> <B>b,</B> <B>Coord&amp;</B> <B>r,</B>
+              <B>Coord&amp;</B> <B>t)</B>
+              Given two coordinate pairs (<I>l</I>, <I>b</I>) and  (<I>r</I>,  <I>t</I>),  it
+              checks  whether  <I>l</I> &lt; <I>r</I> and <I>b</I> &lt; <I>t</I>.  If not, it swaps
+              the values in  the  offending  inequalities.   This
+              function is useful for ensuring that a rectangle is
+              defined by its lower-left and upper-right vertices.
+
+       <B>extern</B> <B>void</B> <B>GetLine(</B>
+           <B>const</B> <B>char*</B> <B>buf,</B> <B>int</B> <B>len,</B> <B>int</B> <B>beg,</B> <B>int&amp;</B> <B>end,</B>
+           <B>int&amp;</B> <B>size,</B> <B>int&amp;</B> <B>nextBeg</B>
+       <B>)</B>
+              This  function  is  convenient for extracting lines
+              from a buffer with a  minimum  of  additional  math
+              operations.  Given  a  buffer  of characters <I>buf</I> of
+              length <I>len</I>, search for the first newline  character
+              (or  the  last  character  in the buffer) after the
+              character at index <I>beg</I>; return the newline's  posi-
+              tion in <I>end</I>, the size of the run of text terminated
+              by a newline (<I>end</I> + 1 - <I>beg</I>), and  the  index  with
+              which  to begin a search for the next newline char-
+              acter (<I>nextBeg</I>).
+
+           <B>Graphic*,</B> <B>Alignment,</B> <B>float&amp;,</B> <B>float&amp;</B>
+       <B>)</B>
+              Return the point (in floating point canvas  coordi-
+              nates)  on  a  graphic  corresponding  to the given
+              alignment.  For example, to obtain the  coordinates
+              of  the  lower-left of a rectangle graphic, specify
+              the graphic and a <I>BottomLeft</I> alignment.
+
+       <B>extern</B> <B>void</B> <B>Ref(Resource*)</B>
+              Call the Reference operation on the given  instance
+              of a resource subclass if the pointer is non-nil.
+
+       <B>extern</B> <B>char*</B> <B>strnew(const</B> <B>char*)</B>
+              Duplicate  the given null-terminated string, creat-
+              ing a buffer of the appropriate size and  returning
+              the null-terminated result.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>CSolver(3U)</B>,  <B>Catalog(3U)</B>,  <B>Graphic(3U)</B>,  <B>GraphicView(3U)</B>,
+       <B>Pin(3U)</B>,   <B>Resource(3I)</B>,   <B>Unidraw(3U)</B>,    <B>InterViews(3I)</B>,
+       <B>pspaint(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

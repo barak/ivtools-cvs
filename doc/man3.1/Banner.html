@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Banner - one line title bar
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/banner.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A  banner is an interactor that draws a one line title bar
+       with optional left-justified, centered,  and  right-justi-
+       fied  headings.   The member variable <I>highlight</I> can be set
+       to cause drawing to be performed with the  foreground  and
+       background colors reversed.
+
+       The  natural  size  of a banner depends on the size of its
+       headings.  Banners  are  infinitely  stretchable  horizon-
+       tally, but fixed size vertically.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Banner(char*</B> <B>left,</B> <B>char*</B> <B>middle,</B> <B>char*</B> <B>right)</B>
+              The  <I>left</I> string will be left-justified, the <I>middle</I>
+              string centered, and <I>right</I>  string  right-justified
+              in  the banner.  A header can be omitted by passing
+              a nil string.
+
+       <B>void</B> <B>Update()</B>
+              The strings can be set through  the  <I>left</I>,  <I>middle</I>,
+              and  <I>right</I>  member variables.  The Update operation
+              should be called after one or more of  the  strings
+              is changed.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Interactor(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

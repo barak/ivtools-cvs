@@ -1,0 +1,127 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Clipboard - manages a list of graphical component subjects
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/clipboard.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A Clipboard maintains a list of  GraphicComp  objects  and
+       provides  operations  for  manipulating the list.  Catalog
+       and Command classes use clipboards to store graphical com-
+       ponents they affect.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>Clipboard(GraphicComp*</B> <B>=</B> <B>nil)</B>
+              Construct a new clipboard object, optionally with a
+              GraphicComp that should  appear  initially  on  the
+              list.
+
+       <B>virtual</B> <B>~Clipboard()</B>
+              Delete  the clipboard.  Deleting the clipboard does
+              <I>not</I> delete the GraphicComp objects it contains.
+
+       <B>void</B> <B>Init(Selection*)</B>
+       <B>void</B> <B>CopyInit(Selection*)</B>
+              Init initializes the clipboard  with  the  subjects
+              belonging  to  the  graphical  views  in  the given
+              selection object.   CopyInit  initializes  it  with
+              <I>copies</I> of the subjects.
+
+       <B>void</B> <B>Clear()</B>
+              Remove  all GraphicComp objects from the clipboard.
+              The objects are not deleted.
+
+       <B>void</B> <B>DeleteComps()</B>
+              Delete each GraphicComp  in  the  clipboard.   This
+              operation  does <I>not</I> delete the list itself; thus it
+              will still be possible to iterate through the  list
+              afterwards.   DeleteComps  is generally called just
+              before the clipboard is destroyed.
+
+       <B>void</B> <B>Append(GraphicComp*)</B>
+       <B>void</B> <B>Prepend(GraphicComp*)</B>
+       <B>void</B> <B>InsertAfter(Iterator,</B> <B>GraphicComp*)</B>
+       <B>void</B> <B>InsertBefore(Iterator,</B> <B>GraphicComp*)</B>
+       <B>void</B> <B>Remove(GraphicComp*)</B>
+       <B>void</B> <B>Remove(Iterator&amp;)</B>
+              Operations  for  adding  and  removing  GraphicComp
+              objects   from   the  clipboard.   InsertAfter  and
+              InsertBefore take an iterator  that  specifies  the
+              point  before  or after which the given GraphicComp
+              should be inserted.  Remove(Iterator&amp;) removes  the
+              GraphicComp to which the iterator refers and incre-
+              ments the iterator to point to the following Graph-
+
+       <B>void</B> <B>SetComp(GraphicComp*,</B> <B>Iterator&amp;)</B>
+              GetComp   effectively   dereferences  an  iterator,
+              returning the GraphicComp to which it points.  Set-
+              Comp  initializes an iterator to point to the given
+              GraphicComp object, assuming the object is  in  the
+              clipboard.
+
+       <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>void</B> <B>Last(Iterator&amp;)</B>
+       <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>boolean</B> <B>Done(Iterator&amp;)</B>
+              Operations  for  iterating through the GraphicComps
+              in the clipboard.  First and Last modify the itera-
+              tor  to  point  to  the  first and last GraphicComp
+              objects.  Next and Prev make the iterator point  to
+              the  succeeding  and preceding GraphicComp objects.
+              Done returns whether the  iterator  points  to  the
+              sentinel object on the list, which marks the begin-
+              ning and the end of list.
+
+       <B>boolean</B> <B>IsEmpty()</B>
+       <B>boolean</B> <B>Includes(GraphicComp*)</B>
+              Return whether or not the  clipboard  is  empty  or
+              whether it includes the given GraphicComp object.
+
+       <B>virtual</B> <B>Clipboard*</B> <B>Copy()</B>
+       <B>virtual</B> <B>Clipboard*</B> <B>DeepCopy()</B>
+              Copy  creates  a  new  clipboard with a list of the
+              same GraphicComp objects as <I>this</I>.  DeepCopy creates
+              a new clipboard containing copies of the objects in
+              <I>this</I>.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>UList*</B> <B>Elem(Iterator)</B>
+       <B>GraphicComp*</B> <B>Comp(UList*)</B>
+              The Clipboard class stores its GraphicComp  objects
+              in a UList.  These convenience functions convert an
+              iterator into a UList  element  and  dereference  a
+              UList  element  to  obtain  a  GraphicComp  object,
+              respectively.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Catalog(3U)</B>, <B>Command(3U)</B>,  <B>GraphicComp(3U)</B>,  <B>Iterator(3U)</B>,
+       <B>Selection(3U)</B>, <B>UList(3U)</B>
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Layers of C++ Frameworks in ivtools</title>
+  </head>
+
+  <body>
+    <h2>Layers of C++ Frameworks in <a href=./index.html>ivtools</a></h2>
+
+      <a href=./index.html>ivtools</a> comprises 6 distinct layers of C++ frameworks.  The
+      first 5 of them are copies or extensions of frameworks
+      originated by <a href=./interviews.html>InterViews</a>.  Taken together they provide a unified
+      environment for developing a wide variety of interactive
+      applications for structured graphics, structured documents, and
+      spatial databases.  Taken separately they each have their merit
+      for consideration by programming projects with matching requirements
+      (one of the six frameworks, <a
+      href=#Unidraw>Unidraw</a>, forms the basis for 6 other layers
+      within ivtools, and at least 7 layers built on top of ivtools).<p>
+
+      These frameworks were created with a balance of design and
+      evolution. Thanks to the C++ compiler and the care taken by all
+      programmers involved in the source tree to date, the end result
+      is far from heavy, but instead a seasoned toolkit with an edge
+      in performance and representational power.  With it a
+      source-intensive programmer can create their own custom drawing
+      editors that conform to standards, with no barriers for
+      integration with other systems.<p>
+
+      The investment required to be productive with this toolkit is
+      sizeable, but then the investment in the toolkit by others that
+      you get to leverage is sizeable as well.  And the
+      <a href="http://www.fsf.org/philosophy/categories.html#Non-CopyleftedFreeSoftware">non-copylefted free software</a> license of ivtools (and InterViews)
+      protects your investment, leaving you free to engage in any
+      commercial or non-commercial activity with the software, and to
+      join up or go your own way with any community of programmers you
+      can find in the future.<p>
+
+   <h3>X Protocol (Xlib) Wrappers</h3><p>
+
+      The first layer of C++ classes in ivtools (and InterViews) are
+      fairly straightforward wrappers for the primitive constructs
+      supported by the X protocol: elements of graphic state -- font,
+      color, brush, pattern; and elements of graphical data -- point,
+      line, multi-line, and raster.  Originally part of InterViews
+      2.6, these classes were integrated into the main-line library of
+      InterView 3.1 (the part that did not rely on an InterViews 2.6
+      backward compatibility mode), and remain largely unmodified in
+      the ivtools source tree.  A programmer of raw Xlib clients could
+      reuse these classes without need for the rest of ivtools.<p>
+
+    <h3>X Window Wrappers</h3><p>
+
+     The next layer of C++ classes in ivtools, and chronologically the
+     second layer to probably be developed in InterViews, is a set of
+     classes for wrapping around X windows, the nestable rectangular
+     portions of screen real-estate managed by the X server.  The base
+     class is Interactor.  These classes are similar in architecture
+     to the widgets of an Xt or Xt-derived toolkit like Motif.  There
+     are mechanisms for layout built into derived Interactors,
+     structured-document primitives like boxes, glue, and trays, to
+     allow for dynamic reallocation of screen real estate when windows
+     are resized.  <p>
+
+     Interactors were the essential class of InterViews 2.6.  But due
+     to the inherent overhead in relying on the server to manage a
+     complex pyramid of window ids, in InterViews 3.1 they were
+     augmented by the flyweight glyphs discussed below.  To support
+     legacy code, and because they were used for the drawing area of
+     <a href=./idraw.html>idraw</a>, the Interactors live on thanks to the InterViews 2.6
+     backward compatibility of InterViews 3.1.  Little new development
+     uses the Interactors outside of work done with the <a href=#Unidraw>Unidraw</a>
+     application framework discussed below.  A programmer who
+     otherwise wanted to program in a Xt like way would probably use
+     Motif or lesstif.
+
+
+    <h3>Interactive Structured Graphics</h3> <p>
+
+      Structured graphics seem the first experimentation by the
+      InterViews team in lighter weight objects for screen rendering,
+      and the libgraphic in InterViews 2.6 was absorbed and re-used in
+      InterViews 3.1 <a href=#Unidraw>Unidraw</a>.  InterViews 2.6 programs that relied on
+      libgraphic can be readily upgraded to Unidraw's copy of the
+      classes.
+
+      This framework has support for all the objects that <a href=./idraw.html>idraw</a> can
+      render: line, multiline, polygon, ellipse, rectangle,
+      open/closed spline, rasters, bitmaps.  And support for groups of
+      graphics (the Composite design pattern).<p>
+
+<a name="Unidraw"> <h3>Application Foundations for Structured Graphics</h3><p>
+
+      <a href=./unidrawinfo.html>Unidraw</a> was the thesis work of John Vlissides and lays a
+      foundation which he showed could be built upon with a schematic
+      editor, a GUI builder, and <a href=./idraw.html>idraw</a>.  The layer which turned
+      Unidraw into idraw is another foundation laid on the first,
+      which was proof by induction of the utility of Unidraw.  With
+      <a href=./ovinfo.html>OverlayUnidraw</a>, <a href=./comunidrawinfo.html>ComUnidraw</a>, 
+      <a href=./frameinfo.html>FrameUnidraw</a>, and <a href=./graphinfo.html>GraphUnidraw</a> in ivtools,
+      MapUnidraw, ProjUnidraw, UtmUnidraw, VpfUnidraw, DlgUnidraw,
+	 and VhclUnidraw in <a href=http://www.vectaport.com/vhclmaps/>vhclmaps</a> we've continued building
+      our own repeated layers on the foundation.  The idraw of
+      InterViews 2.6 and the fdraw in Fresco have proven to be similar
+      foundations where projects like 
+      <a href=http://www.targetjr.org>Target Jr</a> and 
+      <a href=http://www.aai.com/AAI/IUE/IUE.html>IUE</a> have used
+      similar layering of frameworks.<p>
+
+    <h3>Lightweight Glyphs</h3> <p> Glyphs are the more recent
+    structured document classes of ivtools (and InterViews).  They are
+    structured document objects that can do some structured graphics
+    as well.  The most complex example program for glyphs that came
+    with InterViews 3.1 is a structured document editor, doc.  A
+    derivative of doc called lexi was the source examined in the
+    first Design Patterns book.<p>
+
+      Programming and debugging with them is quite a different thing
+      from programming and debugging with libgraphic or Unidraw.  The
+      rendering is procedural and TeX like, and requires a tracing of
+      the layout process to debug.
+      <a href=http://radagast.ti5.tu-harburg.de/fresco/>Fresco</a> glyphs are
+      multi-platform glyphs evolved from InterViews glyphs <p>
+
+    <h3>Extendable Command Interpreter</h3> 
+      The interpreter embedded into ivtools was originally developed
+      for interpreting image processing algorithms.  It evolved into a
+      stack-based interpreter for generic command processing; a C
+      expression evaluator written in C++ where new commands can be
+      added by C or C++ programmers.<p>
+
+      It can be built and used mostly without InterViews.  Only a few
+      files are duplicated verbatim in the IV-common and
+      Unidraw-common libraries to facilitate this, the generic base
+      classes of Resource, Regexp, UList, and Iterator.  It is a
+      fairly lightweight interpreter augmented with server capability by
+      <a href=http://www.cs.wustl.edu/%7Eschmidt/ACE.html>ACE</a>
+      objects.  In addition to the stand-alone demonstrator <a
+      href=./comterp.html>comterp</a>, this capability has been
+      integrated into drawing editors evolved from idraw.  It makes
+      for an interactive drawing capability controllable by local or
+      remote commands, extendable by C or C++ programmers.<p>
+
+    <h3>References</h3>
+     <a name=localcopies>
+
+      Applying Object-Oriented Design to Structured Graphics 
+     <b>(<a href=./libgraphic.ps>libgraphic.ps</a>,
+	<a href=http://www.vectaport.com/pub/doclibgraphic.ps.gz>.gz</a> or 
+       <a href=ftp://interviews.stanford.edu/pub/papers/libgraphic.ps.Z>
+       ftp://interviews.stanford.edu/pub/papers/libgraphic.ps.Z</a>)</b>, 
+        John M. Vlissides and Mark A. Linton, Stanford University<p>
+
+      Unidraw: A Framework for Building Domain-Specific Graphical Editors
+      <b>(<a href=./unidraw.ps>unidraw.ps</a>, 
+       <a href=http://www.vectaport.com/pub/doc/unidraw.ps.gz>.gz</a> or 
+       <a href=ftp://interviews.stanford.edu/pub/papers/unidraw.ps.Z>
+       ftp://interviews.stanford.edu/pub/papers/unidraw.ps.Z</a>)</b>, 
+       John M. Vlissides and Mark A. Linton, Stanford University.<p>
+
+      Glyphs: Flyweight Objects for User Interfaces
+      <b>(<a href=./glyphs.ps>glyphs.ps</a>,
+       <a href=http://www.vectaport.com/pub/doc/glyphs.ps.gz>.gz</a> or 
+       <a href=ftp://interviews.stanford.edu/pub/papers/glyphs.ps.Z>
+       ftp://interviews.stanford.edu/pub/papers/glyphs.ps.Z</a>)</b>, 
+       Paul R. Calder and Mark A. Linton, Stanford University.<p>
+
+      <a href=./reusingunidraw.txt>Reusing Unidraw and idraw</a>, Scott E. Johnston and Jorge
+      A. Gautier, <a href=http://www.vectaport.com>Vectaport Inc.</a><p>
+
+
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       RpcWriter - write RPC requests to a server
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Dispatch/rpcwriter.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       An  RpcWriter  (actually,  an  instance of a class derived
+       from RpcWriter) writes RPC requests to a server.   Derived
+       classes should add member functions that send RPC requests
+       corresponding to the RPC service's protocol.
+
+
+</PRE>
+<H2>CONSTRUCTORS</H2><PRE>
+       <B>RpcWriter(const</B> <B>char*</B> <B>path,</B> <B>boolean</B> <B>fatal,</B> <B>boolean</B> <B>binary)</B>
+       <B>RpcWriter(const</B>  <B>char*</B>  <B>host,</B>  <B>int</B>  <B>port,</B>  <B>boolean</B> <B>fatal,</B>
+              <B>boolean</B> <B>binary)</B>
+       <B>RpcWriter(int</B> <B>fd,</B> <B>boolean</B> <B>fatal,</B> <B>boolean</B> <B>binary)</B>
+       <B>RpcWriter(rpcstream*</B> <B>server)</B>
+              Open  a  connection to an RPC service at its regis-
+              tered host name and port number, or give  the  host
+              name and port number needed to open a connection to
+              the RPC service, or give the number of  an  already
+              open  file  descriptor,  or  give the address of an
+              already open rpcstream (connection).  Negotiate the
+              I/O  format (binary or formatted) if opening a con-
+              nection.  Terminate the program if errors should be
+              fatal.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>RpcHdr(3I)</B>, <B>RpcRegistry(3I)</B>, <B>rpcstream(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

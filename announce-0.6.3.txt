@@ -1,0 +1,44 @@
+Subject: ivtools-0.6.3: drawing editor frameworks with XFree86 style license
+
+ivtools is a collection of sample drawing editors that exercise and
+demonstrate the capabilities of their underlying C++ class libraries.
+It comes with an XFree86 style, non-copylefted freeware license, and
+is available for use in any commercial or free software effort.
+
+ivtools-0.6.3, the latest release, is available at:
+http://www.vectaport.com/pub/src/ivtools-0.6.3.tgz
+
+ivtools was built by augmenting the libraries of InterViews 3.1 with
+new libraries that extend the idraw framework and add features like a
+node-graph editor, a multi-frame editor, and a script-based
+interpreter.
+
+We've tested the backward compatibility of ivtools with the original
+InterViews and Unidraw by building significant third-party packages
+like Target Jr and MixViews on top. More information at:
+http://www.vectaport.com/ivtools/
+
+ivtools drawing editors:
+
+idraw -- original capability of InterViews 3.1 idraw
+
+drawtool -- idraw extended with alternate document format, 
+            network export/import, pbmplus image support, 
+            and SGI-motif looking glyphs
+
+flipbook -- multi-frame editor with a multi-page Postscript print 
+            feature able to generate animated GIF89a's
+
+graphdraw -- sample node-edge graph editor
+
+comdraw -- drawing editor with integrated command interpreter
+
+Linux 2.0 Elf binaries at:
+http://www.vectaport.com/pub/bin/ivtools-0.6.3-LINUX.tgz
+
+Vectaport Inc.
+http://www.vectaport.com
+
+
+
+

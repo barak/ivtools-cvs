@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       Vertices  -  abstract base class for graphics defined by a
+       set of coordinate pairs
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Graphic/verts.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Vertices is an abstract base class for  graphics  such  as
+       polygons  and splines whose geometry is specified by a set
+       of coordinate pairs.  The Vertices class supports  vertex-
+       related  operations  common  to all such graphical objects
+       and also supports extent caching.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>~Vertices()</B>
+              The destructor deallocates the list  of  coordinate
+              pairs stored in the graphic.
+
+       <B>virtual</B> <B>int</B> <B>GetOriginal(const</B> <B>Coord*&amp;</B> <B>x,</B> <B>const</B> <B>Coord*&amp;</B> <B>y)</B>
+              Return  pointers  to  the  arrays  of Coords stored
+              internally  that  define  the  graphic's  vertices.
+              GetOriginal's return value reflects the size of the
+              arrays.
+
+       <B>virtual</B> <B>boolean</B> <B>operator</B> <B>==</B> <B>(Vertices&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>operator</B> <B>!=</B> <B>(Vertices&amp;)</B>
+              Compare <I>this</I> to the  given  Vertices  instance  and
+              return  whether  they (do not) store identical sets
+              of vertices.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>Vertices(Graphic*</B> <B>=</B> <B>nil)</B>
+       <B>Vertices(Coord*</B> <B>x,</B> <B>Coord*</B> <B>y,</B> <B>int</B> <B>count,</B> <B>Graphic*</B> <B>=</B> <B>nil)</B>
+              The constructors are protected to disallow  instan-
+              tiation of the abstract class.  Subclasses can pass
+              a set of vertices to copy into internal storage and
+              an optional graphic from which to obtain an initial
+              set of graphics state.  Vertices itself  stores  no
+              additional  graphics state over that in the Graphic
+              base class.
+
+       <B>void</B> <B>s_getExtent(</B>
+           <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*</B>
+       <B>)</B>
+
+       <B>void</B> <B>f_getExtent(</B>
+           <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>float&amp;,</B> <B>Graphic*</B>
+       <B>)</B>
+              Helper functions  that  return  extent  information
+              based on the bounding box that the vertices define.
+              s_getExtent returns an extent that accounts for the
+              width of a brush, as would be necessary if the ver-
+              extremities, as would be the case if  the  vertices
+              defined  a filled path.  These operations cache the
+              extent they compute initially.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Graphic(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

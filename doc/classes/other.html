@@ -1,0 +1,124 @@
+<html><head><TITLE>Other Documented Items</TITLE></head>
+<body BGCOLOR=#FFFFFF>
+<BR><BR>
+<CENTER><H3>Other Documented Items</H3></CENTER>
+
+<BR><BR>
+
+<B>FUNCTIONS</B><BR><BR>
+<UL><DL>
+
+</DL></UL>
+<B>GLOBALS</B><BR><BR>
+<UL><DL>
+
+</DL></UL>
+<B>TYPEDEFS</B><BR><BR>
+<UL><DL>
+
+
+    <DT>class <A HREF="AttributeValue.html" >AttributeValue</A><B>_AV</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        for quick casting in debugger <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>ACE_Singleton&#60;ACE_Reactor, ACE_Null_Mutex&#62; 
+<B>COMTERP_REACTOR</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        A Reactor Singleton. <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>ACE_Singleton&#60;ACE_Test_and_Set &#60;ACE_Null_Mutex, sig_atomic_t&#62;, ACE_Null_Mutex&#62; 
+<B>COMTERP_QUIT_HANDLER</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        An ACE_Test_and_Set Singleton. <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>ACE_Acceptor &#60;<A HREF="ComterpHandler.html" >ComterpHandler</A>, ACE_SOCK_ACCEPTOR&#62; 
+<B>ComterpAcceptor</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        Specialize a ComterpAcceptor. <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>ACE_Acceptor &#60;<A HREF="UnidrawComterpHandler.html" >UnidrawComterpHandler</A>, ACE_SOCK_ACCEPTOR&#62; 
+<B>UnidrawComterpAcceptor</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        Acceptor specialized for use with <A HREF="Unidraw.html" >Unidraw</A> and <A HREF="ComTerp.html" >ComTerp</A>. <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>ACE_Singleton&#60;ACE_Reactor, ACE_Null_Mutex&#62; 
+<B>IMPORT_REACTOR</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        a Reactor Singleton. <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>ACE_Singleton&#60;ACE_Test_and_Set &#60;ACE_Null_Mutex, sig_atomic_t&#62;, ACE_Null_Mutex&#62; 
+<B>IMPORT_QUIT_HANDLER</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        an ACE_Test_and_Set Singleton for Ctrl-C. <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>ACE_Acceptor &#60;<A HREF="UnidrawImportHandler.html" >UnidrawImportHandler</A>, ACE_SOCK_ACCEPTOR&#62; 
+<B>UnidrawImportAcceptor</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        acceptor specialized on <A HREF="UnidrawImportHandler.html" >UnidrawImportHandler</A>. <br> 
+      
+      </FONT>
+
+<br>
+
+</DL></UL>
+<B>MACROS</B><BR><BR>
+<UL><DL>
+
+
+    <DT><B>CLASS_SYMID(name)</B> : public: 
+  static const char* class_name() {return name;}
+  static int class_symid()
+    { if (_symid&#60;0) _symid=symbol_add((char*)class_name()); return _symid;} 
+  virtual int classid()
+    { if (_symid&#60;0) _symid=symbol_add((char*)class_name()); return _symid;} 
+protected: 
+  static int _symid;
+
+    <DD><FONT FACE="Times" SIZE=3>
+        define methods for a class name and class symbol id. <br> 
+        adds ::class_name() and ::class_symid() based on 'name' to any 
+ class definition.  For use in servers built on <A HREF="ComTerp.html" >ComTerp</A> for generating a
+ unique id for a given type of component.
+ <br> 
+      </FONT>
+
+<br>
+
+</DL></UL>
+</body>
+</html>

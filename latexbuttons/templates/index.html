@@ -1,0 +1,36 @@
+
+<title>Advanced graphics with templates</title>
+
+<h1>
+ivtools Templates
+</h1>
+
+<b>ivtools Templates </b> is a set of building blocks for building complex chemical
+ring structures, technical diagrams etc. The example below uses the decagon
+template to construct a diagram of the Krebs cycle. (A complex biochemical/metabolic
+pathway.
+<p>
+We start with the decagon template, which is essentially a bunch of spokes whose
+apical angle is 360/n degrees -- where n=the number of sides. So for a pentagon,
+n=5, and (360/n) = 72 degrees; for a decagon, n=10 and (360/n) = 36 degrees. We proceed
+around the template with some complete sides, and several Fischer projections of
+the involved sugars. We then adjust the sides as necessary to make the thing look
+acceptable, like in the figure below:
+<p>
+<h1>
+<img align=middle src="./krebs1.jpeg" >
+</h1>
+<p>
+Our last step is to get rid of the template, get rid of extraneous symbols, screen
+clutter, etc. Label and select the final graphic, and save it to a file. Here is
+my final copy of the Krebs cycle:
+<p>
+<h1>
+<img align=middle src="./krebs-fin.jpeg" >
+</h1>
+The use of these templates to create complex diagrams, chemical structures, etc., is
+limited only by the imagination of the user. As covered in the Chemical and Electrical
+pages, these diagrams can then be included into your technical document by using
+the <b>psfig</b> macro in your LaTeX header.
+<p>
+<a href = ../index.html>up to LaTeX toolbutton page</a>

@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       FileChooser - dialog box for choosing a file name
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;InterViews/filechooser.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       FileChooser  is  a  StringChooser that provides a complete
+       dialog box interface to selecting a file name.  The inter-
+       face   consists  of  two  lines  of  descriptive  text,  a
+       StringEditor for entering  the  file  name  explicitly,  a
+       FileBrowser,  and  two  PushButtons, one for accepting and
+       one for canceling the dialog.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>FileChooser(const</B> <B>char*</B> <B>title,</B> <B>const</B> <B>char*</B> <B>subtitle,</B> <B>const</B>
+              <B>char*</B>          <B>dir,</B> <B>int</B> <B>rows,</B> <B>int</B> <B>cols,</B> <B>const</B> <B>char*</B>
+              <B>acceptLabel,</B> <B>Alignment)</B>
+       <B>FileChooser(const</B>  <B>char*</B>  <B>name,</B>  <B>const</B>  <B>char*,</B> <B>const</B>
+              <B>char*,</B> <B>const</B>   <B>char*,</B> <B>int,</B> <B>int,</B> <B>const</B> <B>char*</B> <B>accept,</B>
+              <B>Alignment)</B>
+              Construct a new FileChooser with  the  given  <I>title</I>
+              and  <I>subtitle</I>,  search  directory  <I>dir</I>, FileBrowser
+              size specification <I>rows</I> and  <I>cols</I>,  label  for  the
+              accept  PushButton  <I>acceptLabel</I>,  and pop-up align-
+              ment.  These constructors create all  the  elements
+              of  the  dialog box and compose them into a default
+              layout.
+
+       <B>void</B> <B>SetTitle(const</B> <B>char*)</B>
+       <B>void</B> <B>SetSubtitle(const</B> <B>char*)</B>
+              Change the text in title or the subtitle.  The  new
+              text  will  appear  immediately  in the dialog when
+              either function is called.
+
+       <B>void</B> <B>SelectFile()</B>
+              Highlight the text in the StringEditor.
+
+       <B>void</B> <B>Update()</B>
+              FileChooser's Update simply  calls  Update  on  the
+              FileBrowser  instance  to rescan the current direc-
+              tory and update its appearance.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>FileChooser(ButtonState*,</B> <B>Alignment</B> <B>=</B> <B>Center)</B>
+              Construct a new FileChooser with the  given  button
+              state  and  pop-up alignment <I>without</I> creating File-
+              Browser, StringEditor, title, subtitle, or PushBut-
+              ton  instances.   This constructor should be called
+              in subclasses requiring a specialized  StringEditor
+              or FileBrowser.
+
+       <B>FileChooser(ButtonState*,</B>  <B>const</B>  <B>char*</B>  <B>dir,</B> <B>int</B> <B>rows,</B>
+              StringEditor and its FileBrowser)  with  the  given
+              button  state,  search  directory, FileBrowser size
+              specification, and pop-up alignment <I>without</I> compos-
+              ing them into the default layout and without creat-
+              ing the title, subtitle, or PushButtons. This  con-
+              structor  should  be used by FileChooser subclasses
+              that define a specialized look and feel.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Button(3I)</B>,    <B>Dialog(3I)</B>,    <B>FileBrowser(3I)</B>,     String-
+       <B>Chooser(3I)</B>, <B>StringEditor(3I)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

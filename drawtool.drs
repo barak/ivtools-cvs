@@ -1,0 +1,22 @@
+drawtool(
+    rectangle(123,112,397,413 :fillbg 1 :brush 65535,3 :fgcolor "LtGray",0.762951,0.762951,0.762951 :bgcolor "White",1,1,1 :pattern 88,44,22,11,88,44,22,11 :transform 4,-0,-0,4,-677,-608),
+    polygon((268,448),(248,426),(267,426),(249,397),(268,395),(250,355),(272,350),(253,309),(303,306),(288,345),
+        (310,353),(288,396),(313,396),(286,430),(305,435),(271,464) :fillbg 1 :brush 65535,0 :fgcolor "Green",0,1,0 :bgcolor "Black",0,0,0 :graypat 0.75 :transform 2,-0,-0,2,-85,-24),
+    polygon((268,448),(248,426),(267,426),(249,397),(268,395),(250,355),(272,350),(253,309),(303,306),(288,345),
+        (310,353),(288,396),(313,396),(286,430),(305,435),(271,464) :fillbg 1 :brush 65535,0 :fgcolor "Green",0,1,0 :bgcolor "Black",0,0,0 :graypat 0.75 :transform 2,-0,-0,2,-167,-12),
+    ellipse(51,287,242,65 :fillbg 1 :brush 65535,0 :fgcolor "Blue",0,0,1 :bgcolor "White",1,1,1 :pattern 11,22,44,88,11,22,44,88 :transform 1,-0,-0,1,118,220),
+    polygon((268,448),(248,426),(267,426),(249,397),(268,395),(250,355),(272,350),(253,309),(303,306),(288,345),
+        (310,353),(288,396),(313,396),(286,430),(305,435),(271,464) :fillbg 1 :brush 65535,0 :fgcolor "Green",0,1,0 :bgcolor "Black",0,0,0 :graypat 0.75 :transform 2,-0,-0,2,-235,-38),
+    polygon((268,448),(248,426),(267,426),(249,397),(268,395),(250,355),(272,350),(253,309),(303,306),(288,345),
+        (310,353),(288,396),(313,396),(286,430),(305,435),(271,464) :fillbg 1 :brush 65535,0 :fgcolor "Green",0,1,0 :bgcolor "Black",0,0,0 :graypat 0.75 :transform 2,-0,-0,2,-147,-56),
+    arrowspline((20,255),(34,198),(231,222),(400,208),(278,16) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Brown",0.647059,0.164706,0.164706 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((25,258),(46,223),(142,229),(355,234),(416,179),(450,8) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Brown",0.647059,0.164706,0.164706 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((37,232),(45,225),(53,223) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((71,219),(87,219),(104,219),(104,219) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((127,220),(152,224),(178,224) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((206,224),(230,223),(268,224) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((284,223),(320,221),(343,206),(343,207) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((369,189),(380,145),(381,120),(381,108) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    arrowspline((382,76),(367,12) :arrowscale 0.5 :fillbg 1 :brush 65535,3 :fgcolor "Black",0,0,0 :bgcolor "Black",0,0,0 :nonepat :transform 2,-0,-0,2,-147,-56),
+    polygon((448,504),(407,464),(449,418),(493,470),(425,494),(414,435),(475,428),(475,479),(415,483),(436,425),(482,453) :fillbg 1 :brush 65535,3 :fgcolor "Yellow",1,1,0 :bgcolor "Orange",1,0.647059,0 :pattern 88,44,22,11,88,44,22,11 :transform 2,-0,-0,2,-147,-56)
+)

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Handling large images in ivtools drawing editors</title>
+  </head>
+
+  <body>
+    <h3>Handling large images in ivtools drawing editors</h3>
+
+
+    First, the image (raster) handling software in an ivtools drawing
+    editor has been optimized beyond the mechanisms of <a
+    href=./idraw.html>idraw</a> for more efficient <b>zoom-in</b>, by
+    limiting the zooming activity (and hence the virtual memory
+    required) to just the on-screen region.  This mechanism kicks in
+    at 4x or greater magnification. In addition, the rendering
+    algorithm switches to using rectangle drawing instead of
+    pix-blitting at higher resolutions like 16x.
+    <p>
+
+    After that there are four distinct and composable methods for
+    tiling large images in <a href=./index.html>ivtools</a> <a
+    href=./editors.html>drawing editors</a>:
+
+      <menu>
+      <li>on-the-fly tiling</li>
+      <li>tiling by drawing editor document</li>
+      <li>internal raster tiling</li>
+      <li>external raster tiling</li>
+      </menu>
+
+      <b>on-the-fly tiling:</b> <a href=./drawtool.html>ivtools
+      drawtool</a> and all other drawing editors derived from drawtool
+      support a "<code>-tile</code>", "<code>-theight</code>", and
+      "<code>-twidth</code>" command line arguments.  If
+      "<code>-tile</code>" is supplied, all binary PPM or PGM images
+      greater than <code>twidth x theight</code> in size are
+      automatically loaded into an internal tiled representation.
+      "<code>-theight</code>" and "<code>-twidth</code>" default to
+      512x512 if not supplied.  Any tile not currently on the screen
+      is not loaded into memory.  A "level-of-detail" pyramid is
+      maintained for each tile, and pixel data is only loaded into
+      memory at the resolutions at which it appears in the on-screen
+      viewer.  This means the entirety of a sizeable raster (10K by
+      10K or greater) can be viewed at once without requiring a
+      gigabyte of swap.  If the document into which a large image has
+      been imported is saved to disk, the result will be one entry for
+      each tile with the original pathname specified along with the
+      subimage coordinates of the tile.<p>
+
+      <b>tiling by drawing editor document:</b> a user can manually
+      create an ivtools drawing editor document that tiles a large
+      image into pieces using the :sub argument on the raster entry.
+      The easiest way to get an example of this kind of tiling is by
+      using the "<code>-tile</code>" mechanism described above and
+      saving the document out to a file.<p>
+
+      <b>internal raster tiling:</b> large binary PGM or PPM image
+      files can be internally tiled using the tilefile command on <a
+      href=./comdraw.html>ivtools comdraw</a>.  The arguments to the
+      tilefile command can be viewed by typing "help(tilefile)" into
+      stdin on comdraw, but for reference they are:
+      "<code>tilefile(oldpath newpath [xtilesize]
+      [ytilesize])</code>".  The newly generated binary PGM or PPM
+      file contains a comment field which is used later by ivtools
+      drawing editors to access the internally tiled raster.<p>
+
+      <b>external raster tiling:</b> finally, the most efficient
+      mechanism, if you have the disk space available, is to use a
+      utility like "<code>pnmcut</code>" to manually split a large
+      image into smaller tiles, then in a text editor generate the
+      drawing editor document with a raster entry for each tile with
+      an appropriate :transform argument to position the raster
+      relative to the origin and other tiles.  If the tile should be
+      positioned at 2048,32768 relative the origin of the large image,
+      the :transform argument would read ":transform
+      1,0,0,1,2048,32768".<p>
+
+      <hr>
+
+      Please send comments or questions on this document to <a
+      href=mailto:ivtools-info@vectaport.com>ivtools-info@vectaport.com</a>.
+      The majority of the tiling extensions to the original raster
+      display mechanisms of <a href=./interviews.html>InterViews</a> were
+      done by Rick Kissh under contract to <a
+      href=../index.html>Vectaport Inc.</a><p>
+      
+
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ComponentView - base class for views of objects that model
+       domain-specific elements
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;Unidraw/Components/compview.h&gt;</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       ComponentView is an abstract base class for views of  com-
+       ponent  subjects.   Component  views provide a specialized
+       presentation of the information in the  component  subject
+       to which they are attached.  Usually there is at least one
+       view subclass defined for each subclass of component  sub-
+       ject.
+
+
+</PRE>
+<H2>PUBLIC OPERATIONS</H2><PRE>
+       <B>virtual</B> <B>void</B> <B>Interpret(Command*)</B>
+       <B>virtual</B> <B>void</B> <B>Uninterpret(Command*)</B>
+              These  operations  call  the  corresponding subject
+              operations by default.  They are  included  in  the
+              component  view  protocol  for  convenience,  since
+              other  objects  often  deal  with  component  views
+              rather than their subjects.
+
+       <B>virtual</B> <B>void</B> <B>Update()</B>
+              Notify  the  view of a change in some state that it
+              depends on, normally state in  the  subject.   This
+              operation does nothing by default.
+
+       <B>virtual</B> <B>Component*</B> <B>GetParent()</B>
+              Return  the  view's parent, if any.  Like component
+              subjects, component views may be structured hierar-
+              chically,  and  their  structure  may  or  may  not
+              reflect that of their subject.
+
+       <B>Component*</B> <B>GetSubject()</B>
+              Return the component view's subject.
+
+       <B>virtual</B> <B>void</B> <B>First(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Last(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Next(Iterator&amp;)</B>
+       <B>virtual</B> <B>void</B> <B>Prev(Iterator&amp;)</B>
+       <B>virtual</B> <B>boolean</B> <B>Done(Iterator)</B>
+              Operations for iterating over the component  view's
+              children,  if  any.   First  and Last initialize an
+              iterator to point to the beginning and end  of  the
+              list  of  children,  respectively.  Next increments
+              the iterator to point to the following child, while
+              Prev  decrements  the iterator to point to the pre-
+              ceding child.  Done  returns  whether  or  not  the
+              iterator  points  beyond the first or last child in
+              the list.
+
+       <B>virtual</B> <B>boolean</B> <B>IsA(ClassId)</B>
+              GetClassId returns the unique class identifier  for
+              the   ComponentView  subclass,  while  IsA  returns
+              whether the instance is of a class or subclass cor-
+              responding  to the given identifier.  IsA typically
+              checks the given identifier against the  instance's
+              own  (as  defined by its GetClassId operation) and,
+              failing that, calls its parent classes' IsA  opera-
+              tion.   All subclasses must redefine GetClassId and
+              IsA to ensure that their identifiers are unique and
+              that view category information is defined properly.
+              See <B>classes(3U)</B> for more information on class iden-
+              tifiers and view categories.
+
+
+</PRE>
+<H2>PROTECTED OPERATIONS</H2><PRE>
+       <B>ComponentView(Component*</B> <B>subject</B> <B>=</B> <B>nil)</B>
+              The  constructor  initializes  the component view's
+              subject pointer to the given value.  The view  will
+              also  attach  itself to the subject if the argument
+              is non-nil.
+
+       <B>virtual</B> <B>void</B> <B>SetSubject(Component*)</B>
+              Set the component's subject pointer  to  the  given
+              value.   By  default,  this operation does not call
+              Attach or Detach on the subject(s).
+
+       <B>virtual</B> <B>void</B> <B>SetParent(Component*</B> <B>child,</B> <B>Component*</B> <B>par-</B>
+              <B>ent)</B>
+              Notify  a child component that it has a new or dif-
+              ferent parent.   This  operation  does  nothing  by
+              default.   Composite  components  should  call this
+              function in their  structure-modifying  operations,
+              and  components  that  keep information about their
+              parents should redefine it to update this  informa-
+              tion.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>Command(3U)</B>, <B>Component(3U)</B>, <B>Iterator(3U)</B>, <B>classes(3U)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>
