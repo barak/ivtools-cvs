@@ -28,6 +28,59 @@
 #include <Unidraw/iterator.h>
 #include <Unidraw/viewer.h>
 #include <Attribute/attrlist.h>
+//SECIL
+#include <IV-2_6/InterViews/world.h>
+/*****************************************************************************/
+PixelPokeLineFunc::PixelPokeLineFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void PixelPokeLineFunc::execute() {
+  Viewer* viewer = _ed->GetViewer();
+  
+  ComValue rastcompv(stack_arg(0));
+  ComValue xv(stack_arg(1));
+  ComValue yv(stack_arg(2));
+  ComValue wv(stack_arg(3));
+  ComValue vallistv(stack_arg(4));
+  int xval = xv.int_val();
+  int yval = yv.int_val();
+  int wval = wv.int_val();  
+  int pixelvals[wval];
+  
+  if(!vallistv.is_type(ComValue::ArrayType) || vallistv.array_len() != wval){
+    reset_stack();
+    push_stack(ComValue::nullval());
+    return;
+  }
+
+  ALIterator i;
+  AttributeValueList* avl = vallistv.array_val();
+  avl->First(i);
+  for (int j=0; j<wval && !avl->Done(i); j++){
+    pixelvals[j]= avl->GetAttrVal(i)->int_val();
+    avl->Next(i);
+  }
+  reset_stack();
+  
+  RasterOvComp* rastcomp = (RasterOvComp*) rastcompv.geta(RasterOvComp::class_symid());
+  OverlayRasterRect* rastrect = rastcomp ? rastcomp->GetOverlayRasterRect() : nil;
+  OverlayRaster* raster = rastrect ? rastrect->GetOriginal() : nil;
+  
+  if (raster) {
+    for(int j=0; j<wval; j++){
+      ColorIntensity r,g,b;
+      int pixelcolor = pixelvals[j];
+      char colorname[7];
+      sprintf(colorname,"#%06x",pixelcolor);
+      Color::find(World::current()->display(),colorname, r, g, b);
+      raster->poke(xval+j, yval, r, g, b, 1.0);
+    }
+    push_stack(rastcompv);
+  } 
+  else 
+    push_stack(ComValue::nullval());
+}
+//SECIL
 
 /*****************************************************************************/
 
