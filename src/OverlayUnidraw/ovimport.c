@@ -973,14 +973,9 @@ const char* OvImportCmd::ReadCreator (istream& in, FileType& ftype) {
       if (ftype==UnknownFile) ftype = OvImportCmd::PostScriptFile;
     }
 
-    /* other PostScript files */
-    if (!*creator && strncmp(line, "%!PS", 4)==0) {
-      ftype = OvImportCmd::PostScriptFile;
-      strcpy(creator, "PostScript");
-    }
-    
     /* fullup idraw format */
     if (!*creator && line[0] == '%' && line[1] == '!' ) {
+      ftype = OvImportCmd::PostScriptFile;
       do {
 	if (sscanf(line, "%%%%Creator: %s", creator)) {
 	  break;
@@ -990,9 +985,8 @@ const char* OvImportCmd::ReadCreator (istream& in, FileType& ftype) {
 	}
       } while (in.getline(line, linesz) != NULL);
       chcnt = 0;
-      if (*creator && ftype==UnknownFile) ftype = OvImportCmd::PostScriptFile;
+      if (!*creator) strcpy(creator, "PostScript");
     }
-    
     
     if (!*creator) {
       char *ptr = line;
