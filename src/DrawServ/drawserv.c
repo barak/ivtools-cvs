@@ -108,4 +108,35 @@ int DrawServ::linkdown(DrawLink* link) {
   delete link;
 }
 
-  
+DrawLink* DrawServ::linkget(int local_id, int remote_id) {
+  DrawLink* link = nil;
+  if (_list) {
+    Iterator(i);
+    _list->First(i);
+    while (!_list->Done(i) && !link) {
+      DrawLink* l = _list->GetDrawLink(i);
+      if (l->local_linkid()==local_id && remote_id==-1 ||
+	  local_id==-1 && l->remote_linkid()==remote_id ||
+	  l->local_linkid()==local_id && l->remote_linkid()==remote_id)
+	link = l;
+      _list->Next(i);
+    }
+  }
+  return link;
+}
+
+void DrawServ::linkdump(FILE* fptr) {
+  fprintf(fptr, "Host                            Alt.                            Port    LID  RID\n");
+  fprintf(fptr, "------------------------------  ------------------------------  ------  ---  ---\n");
+  if (_list) {
+    Iterator i;
+    _list->First(i);
+    while(!_list->Done(i)) {
+      DrawLink* link = _list->GetDrawLink(i);
+      fprintf(fptr, "%-30.30s  %-30.30s  %-6d  %-3d  %-3d\n", 
+	      link->hostname(), link->althostname(), link->portnum(),
+	      link->local_linkid(), link->remote_linkid());
+      _list->Next(i);
+    }
+  }
+}

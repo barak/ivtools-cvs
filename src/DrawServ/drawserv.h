@@ -60,6 +60,12 @@ public:
     int linkdown(DrawLink* link);
     // shut down existing link to remote drawserv
 
+    DrawLink* linkget(int local_id, int remote_id=-1);
+    // return pointer to existing DrawLink
+
+    void linkdump(FILE*);
+    // dump text table of DrawLink's
+
 protected:
     DrawLinkList* _list;
 };

@@ -54,6 +54,8 @@ void DrawLinkFunc::execute() {
   ComValue lidv(stack_key(lid_sym));
   static int rid_sym = symbol_add("rid");
   ComValue ridv(stack_key(rid_sym));
+  static int close_sym = symbol_add("close");
+  ComValue closev(stack_key(close_sym));
   reset_stack();
 
 #if __GNUC__==3&&__GNUC_MINOR__<1
@@ -62,6 +64,9 @@ void DrawLinkFunc::execute() {
   return;
 #endif
 
+  DrawLink* link = nil;
+
+  /* creating a new link to remote drawserv */
   if (hostv.is_string() && portv.is_known() && statev.is_known()) {
     
     const char* hoststr = hostv.string_ptr();
@@ -71,19 +76,40 @@ void DrawLinkFunc::execute() {
     int lidnum = lidv.is_known() ? lidv.int_val() : -1;
     int ridnum = ridv.is_known() ? ridv.int_val() : -1;
 
-    DrawLink* link = 
+    link = 
       ((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum, 
 				   lidnum, ridnum, this->comterp());
-    if (link) {
-      DrawLinkComp* linkcomp = new DrawLinkComp(link);
-      ComValue result(DrawLinkComp::class_symid(), new ComponentView(linkcomp));
-      result.object_compview(true);
-      push_stack(result);
-    }
-    else
-      push_stack(ComValue::nullval());
+  
+     
   } 
+
+  /* return pointer to existing link */
+  else if (ridv.is_known() || lidv.is_known()) {
+    link = ((DrawServ*)unidraw)->linkget
+      (lidv.is_known() ? lidv.int_val() : -1, 
+       ridv.is_known() ? ridv.int_val() : -1);
+
+    /* close if that flag is set. */
+    if (link && closev.is_true()) {
+      ((DrawServ*)unidraw)->linkdown(link);
+      link = nil;
+    }
     
+  }
+
+  /* dump DrawLink table to stderr */
+  else 
+    ((DrawServ*)unidraw)->linkdump(stderr);
+  
+  if (link) {
+    DrawLinkComp* linkcomp = new DrawLinkComp(link);
+    ComValue result(DrawLinkComp::class_symid(), new ComponentView(linkcomp));
+    result.object_compview(true);
+    push_stack(result);
+  }
+  else
+    push_stack(ComValue::nullval());
+
   return;
 
 #endif
