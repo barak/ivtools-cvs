@@ -43,7 +43,7 @@ public:
     virtual void Update(Viewer* = nil); 
     virtual void Clear(Viewer* = nil);
 
-    virtual void Reserve();
+    virtual void Reserve(Editor*);
     // reserve newly created graphics in selection across the network
 
   enum { NotSelected, LocallySelected, RemotelySelected, WaitingToBeSelected };

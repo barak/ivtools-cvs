@@ -27,6 +27,7 @@
 #include <FrameUnidraw/frameeditor.h>
 
 class DrawKit;
+class Selection;
 
 //: editor for DrawServ application
 class DrawEditor : public FrameEditor {
@@ -45,7 +46,10 @@ public:
     // method for adding ComFunc objects to the ComTerp associated with
     // this DrawEditor.
 
+    Selection* last_selection() { return _last_selection; }
+    // return point to Selection that shadows the last setting.
 protected:
+    Selection* _last_selection;
 
 friend class DrawKit;
 

@@ -210,6 +210,15 @@ static OptionDesc options[] = {
 /*****************************************************************************/
 
 int main (int argc, char** argv) {
+
+    /* ignore broken pipe, so socket writes that are in error return EPIPE */
+    struct sigaction oldaction, newaction;
+    newaction.sa_handler = SIG_IGN;
+    newaction.sa_mask = 0;
+    newaction.sa_flags = 0;
+    newaction.sa_sigaction = 0;
+    int status = sigaction(SIGPIPE, &newaction, &oldaction); 
+  
 #ifdef HAVE_ACE
     Dispatcher::instance(new AceDispatcher(ComterpHandler::reactor_singleton()));
 #endif

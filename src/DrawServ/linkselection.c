@@ -25,6 +25,7 @@
  * Implementation of LinkSelection class.
  */
 
+#include <DrawServ/draweditor.h>
 #include <DrawServ/drawserv.h>
 #include <DrawServ/grid.h>
 #include <DrawServ/gridlist.h>
@@ -34,6 +35,7 @@
 #include <OverlayUnidraw/ovviews.h>
 
 #include <Unidraw/iterator.h>
+#include <Unidraw/viewer.h>
 
 #include <Attribute/attrlist.h>
 #include <Attribute/attrvalue.h>
@@ -62,7 +64,8 @@ LinkSelection::LinkSelection (Selection* s) : OverlaySelection(s) {
 
 void LinkSelection::Update(Viewer* viewer) {
   fprintf(stderr, "LinkSelection::Update\n");
-  Reserve();
+  if (viewer) 
+    Reserve(viewer->GetEditor());
   OverlaySelection::Update(viewer);
 }
 
@@ -91,13 +94,40 @@ void LinkSelection::Clear(Viewer* viewer) {
   
 }
 
-void LinkSelection::Reserve() {
+void LinkSelection::Reserve(Editor* ed) {
   fprintf(stderr, "LinkSelection::Reserve\n");
   static int id_sym = symbol_add("id");
   CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
 
-  /* remove anything from selection that has a remote selector */
+  /* clear anything that was in the previous selection, but not in this one */
+  Selection* lastsel = ((DrawEditor*)ed)->last_selection();
+  Iterator lt;
+  lastsel->First(lt);
   Iterator it;
+  while (!lastsel->Done(lt)) {
+    First(it);
+    boolean match = false;
+    while (!Done(it) && !match) {
+      if(GetView(it)==lastsel->GetView(lt)) 
+	match = true;
+      else 
+	Next(it);
+    }
+    if (!match) {
+      OverlayComp* comp = ((OverlayView*)lastsel->GetView(lt))->GetOverlayComp();
+      void* ptr = nil;
+      table->find(ptr, (void*)comp);
+      if (ptr) {
+	GraphicId* grid = (GraphicId*)ptr;
+	grid->selected(NotSelected);
+	((DrawServ*)unidraw)->grid_message(grid);
+      }
+    }
+    lastsel->Next(lt);
+  }
+  lastsel->Clear();
+
+  /* remove anything from selection that has a remote selector */
   First(it);
   while (!Done(it)) {
     int removed = false;
@@ -121,12 +151,17 @@ void LinkSelection::Reserve() {
 	} 
 	
       } else {
-	grid->selected(LocallySelected);
-	((DrawServ*)unidraw)->grid_message(grid);
+	if (grid->selected()!=LocallySelected) {
+	  grid->selected(LocallySelected);
+	  ((DrawServ*)unidraw)->grid_message(grid);
+	}
       }
       
     }
     if (!removed) 
       Next(it);
   }
+
+  /* store copy of selection */
+  lastsel->Merge(this);
 }

@@ -202,18 +202,10 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
       ostr.flush();
       return 0;
 #else
-      /* ignore broken pipe just in case that is why the input was null */
-      struct sigaction oldaction, newaction;
-      newaction.sa_handler = SIG_IGN;
-      newaction.sa_mask = 0;
-      newaction.sa_flags = 0;
-      newaction.sa_sigaction = 0;
-      int status = sigaction(SIGPIPE, &newaction, &oldaction);  // this doesn't work yet
       fileptr_filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
       ostream ostr(&obuf);
       ostr << "\n";
       ostr.flush();
-      status = sigaction(SIGPIPE, &oldaction, nil);
       return 0;
 #endif
     }

@@ -1008,7 +1008,7 @@ void OverlaysComp::SelectClipboard (Clipboard* cb, Editor* ed) {
             if (view != nil) s->Append(view);
         }
     }
-    ((OverlaySelection*)s)->Reserve();
+    ((OverlaySelection*)s)->Reserve(ed);
 }
 
 void OverlaysComp::StorePosition (OverlayComp* comp, Command* cmd) {

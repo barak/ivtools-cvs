@@ -1152,8 +1152,10 @@ void OvImportCmd::Execute () {
 
         // let components configures themselves with the editor
         ((OverlayEditor*)GetEditor())->InformComponents();
-	if (preserve_selection_)
+	if (preserve_selection_) {
+	  delete GetEditor()->GetSelection();
 	  GetEditor()->SetSelection(oldsel);
+	}
         unidraw->Update();
     } else {
       if (!from_dialog && !empty) {
