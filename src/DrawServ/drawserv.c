@@ -300,7 +300,7 @@ void DrawServ::sessionid_handle_new(int new_id, int remote_linkid) {
 	table->insert(new_id, link);
       }
       char buf[BUFSIZ];
-      snprintf(buf, BUFSIZ, "sessionid(0x08x :ok %d :rid %d )%c", new_id, okflag, link->local_linkid(), '\0');
+      snprintf(buf, BUFSIZ, "sessionid(0x%08x :ok %d :rid %d )%c", new_id, okflag, link->local_linkid(), '\0');
       SendCmdString(link, buf);
     } else {
       fprintf(stderr, "code for passing selection id request on to other DrawLink's not implemented\n");
