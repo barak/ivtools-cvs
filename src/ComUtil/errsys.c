@@ -613,7 +613,9 @@ See Also:  err_open, err_read, err_set, err_get, err_print, err_str,
    TooManyErrors = FALSE;
    fclose( ErrorIOFile );
    ErrorIOFile = NULL;
+#if 0
    unlink( ERROR_IO_FILE );
+#endif
    return;
 
 }
@@ -713,6 +715,7 @@ See Also:  err_open, err_read, err_set, err_get, err_print, err_str,
 !*/
 
 {
+#if 0
    char *errpath;
    if( ErrorIOFile == NULL ) {
       errpath = tmpnam(nil);
@@ -721,6 +724,14 @@ See Also:  err_open, err_read, err_set, err_get, err_print, err_str,
 	 KANIL1( "Unable to open error I/O file %s", errpath );
       }
    return ErrorIOFile;
+#else
+   if( ErrorIOFile == NULL ) {
+      ErrorIOFile = tmpfile();
+      if( ErrorIOFile == NULL )
+	 KANIL( "Unable to open error I/O file" );
+      }
+   return ErrorIOFile;
+#endif
 
 }
 

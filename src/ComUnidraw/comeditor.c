@@ -109,10 +109,12 @@ void ComEditor::InitCommands() {
     if (!_terp) 
       _terp = new ComTerpServ();
       const char* comdraw_off_str = unidraw->GetCatalog()->GetAttribute("comdraw_off");
+#ifndef HAVE_ACE
     if ((!comterplist() || comterplist()->Number()==1) &&
 	(comdraw_off_str ? strcmp(comdraw_off_str, "false")==0 : true))
       _terp_iohandler = new ComTerpIOHandler(_terp, stdin);
     else
+#endif
       _terp_iohandler = nil;
 #if 0
     _terp->add_defaults();
