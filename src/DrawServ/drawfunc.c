@@ -23,6 +23,8 @@
 
 #include <DrawServ/draweditor.h>
 #include <DrawServ/drawfunc.h>
+#include <DrawServ/drawlink.h>
+#include <DrawServ/drawlinkcomp.h>
 #include <DrawServ/drawserv.h>
 
 #define TITLE "DrawLinkFunc"
@@ -69,11 +71,17 @@ void DrawLinkFunc::execute() {
     int lidnum = lidv.is_known() ? lidv.int_val() : -1;
     int ridnum = ridv.is_known() ? ridv.int_val() : -1;
 
-    if (((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum, 
-				     lidnum, ridnum, this->comterp()))
-      push_stack(ComValue::minusoneval());
+    DrawLink* link = 
+      ((DrawServ*)unidraw)->linkup(hoststr, portnum, statenum, 
+				   lidnum, ridnum, this->comterp());
+    if (link) {
+      DrawLinkComp* linkcomp = new DrawLinkComp(link);
+      ComValue result(DrawLinkComp::class_symid(), new ComponentView(linkcomp));
+      result.object_compview(true);
+      push_stack(result);
+    }
     else
-      push_stack(ComValue::zeroval());
+      push_stack(ComValue::nullval());
   } 
     
   return;

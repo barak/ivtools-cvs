@@ -289,6 +289,8 @@ ivtools-1.1/src/DrawServ/drawkit.c
 ivtools-1.1/src/DrawServ/drawkit.h
 ivtools-1.1/src/DrawServ/drawlink.c
 ivtools-1.1/src/DrawServ/drawlink.h
+ivtools-1.1/src/DrawServ/drawlinkcomp.c
+ivtools-1.1/src/DrawServ/drawlinkcomp.h
 ivtools-1.1/src/DrawServ/drawlinklist.c
 ivtools-1.1/src/DrawServ/drawlinklist.h
 ivtools-1.1/src/DrawServ/drawserv.c

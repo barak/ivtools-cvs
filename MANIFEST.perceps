@@ -73,6 +73,7 @@ DrawServ/draweditor.h
 DrawServ/drawfunc.h
 DrawServ/drawkit.h
 DrawServ/drawlink.h
+DrawServ/drawlinkcomp.h
 DrawServ/drawlinklist.h
 DrawServ/drawserv.h
 DrawServ/drawserv-handler.h
