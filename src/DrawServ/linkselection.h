@@ -40,17 +40,11 @@ public:
     LinkSelection(DrawLinkList* list, LinkSelection* = nil);
     LinkSelection(DrawLinkList* list, Selection*);
 
-    virtual void Exclusive(Selection*);
-    virtual void Merge(Selection*);    
+    virtual int Update(Viewer* = nil); 
+    virtual void Clear(Viewer* = nil);
 
-    virtual void Append(GraphicView*);
-    virtual void Prepend(GraphicView*);
-    virtual void InsertAfter(Iterator, GraphicView*);
-    virtual void InsertBefore(Iterator, GraphicView*);
-    virtual void Remove(GraphicView*);
-    virtual void Remove(Iterator&);
-
-    virtual OverlaySelection* ViewsWithin(IntCoord l, IntCoord b, IntCoord r, IntCoord t);
+    virtual void Reserve();
+    // reserve newly created graphics in selection across the network
 
 protected:
     DrawLinkList* _linklist;

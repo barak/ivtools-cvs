@@ -109,6 +109,9 @@ public:
 };
     // enum for attribute value types.
 
+    enum ValueState { UnknownState, OctState, HexState };
+    // enum for states
+
     AttributeValue(ValueType type);
     // construct with specified type and unitialized value.
     AttributeValue(ValueType type, attr_value value);
@@ -259,7 +262,7 @@ public:
     int state();
     // get generic state value useful for any type other than CommandType, ObjectType, or StreamType
     void state(int val);
-    // set generic state value useful for any type other than CommandType, ObjectType, or StreamType0 = disabled, negative = internal, positive = external
+    // set generic state value useful for any type other than CommandType, ObjectType, or StreamType
 
     void negate();
     // negate numeric values.

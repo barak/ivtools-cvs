@@ -99,6 +99,9 @@ void CreateRectFunc::execute() {
         coords[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -126,6 +129,7 @@ void CreateRectFunc::execute() {
 	rect->SetTransformer(rel);
 	Unref(rel);
 	RectOvComp* comp = new RectOvComp(rect);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("RectComp"), new ComponentView(comp));
@@ -135,6 +139,7 @@ void CreateRectFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -163,6 +168,9 @@ void CreateLineFunc::execute() {
         coords[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -191,6 +199,7 @@ void CreateLineFunc::execute() {
 	line->SetTransformer(rel);
 	Unref(rel);
 	ArrowLineOvComp* comp = new ArrowLineOvComp(line);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ArrowLineComp"), new ComponentView(comp));
@@ -200,6 +209,7 @@ void CreateLineFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -228,6 +238,9 @@ void CreateEllipseFunc::execute() {
         args[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -255,6 +268,7 @@ void CreateEllipseFunc::execute() {
 	ellipse->SetTransformer(rel);
 	Unref(rel);
 	EllipseOvComp* comp = new EllipseOvComp(ellipse);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("EllipseComp"), new ComponentView(comp));
@@ -264,6 +278,7 @@ void CreateEllipseFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -295,6 +310,9 @@ void CreateTextFunc::execute() {
     }
 
     char* txt = symbol_pntr( txtv.symbol_ref() );
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
    
     PasteCmd* cmd = nil;
@@ -321,6 +339,7 @@ void CreateTextFunc::execute() {
 	text->GetTransformer()->postmultiply(rel);
 	Unref(rel);
 	TextOvComp* comp = new TextOvComp(text);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("TextComp"), new ComponentView(comp));
@@ -330,6 +349,7 @@ void CreateTextFunc::execute() {
         push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -358,6 +378,9 @@ void CreateMultiLineFunc::execute() {
         y[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -387,6 +410,7 @@ void CreateMultiLineFunc::execute() {
 	multiline->SetTransformer(rel);
 	Unref(rel);
 	ArrowMultiLineOvComp* comp = new ArrowMultiLineOvComp(multiline);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ArrowMultiLineComp"), new ComponentView(comp));
@@ -396,6 +420,7 @@ void CreateMultiLineFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -424,6 +449,9 @@ void CreateOpenSplineFunc::execute() {
         y[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -453,6 +481,7 @@ void CreateOpenSplineFunc::execute() {
 	openspline->SetTransformer(rel);
 	Unref(rel);
 	ArrowSplineOvComp* comp = new ArrowSplineOvComp(openspline);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ArrowSplineComp"), new ComponentView(comp));
@@ -462,6 +491,7 @@ void CreateOpenSplineFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -490,6 +520,9 @@ void CreatePolygonFunc::execute() {
         y[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -517,6 +550,7 @@ void CreatePolygonFunc::execute() {
 	polygon->SetTransformer(rel);
 	Unref(rel);
 	PolygonOvComp* comp = new PolygonOvComp(polygon);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("PolygonComp"), new ComponentView(comp));
@@ -526,6 +560,7 @@ void CreatePolygonFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -554,6 +589,9 @@ void CreateClosedSplineFunc::execute() {
         y[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -582,6 +620,7 @@ void CreateClosedSplineFunc::execute() {
 	closedspline->SetTransformer(rel);
 	Unref(rel);
 	ClosedSplineOvComp* comp = new ClosedSplineOvComp(closedspline);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("ClosedSplineComp"), new ComponentView(comp));
@@ -591,6 +630,7 @@ void CreateClosedSplineFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/
@@ -619,6 +659,9 @@ void CreateRasterFunc::execute() {
         coords[j] = avl->GetAttrVal(i)->int_val();
 	avl->Next(i);
     }
+
+    AttributeList* al = stack_keys();
+    Resource::ref(al);
     reset_stack();
 
     PasteCmd* cmd = nil;
@@ -644,6 +687,7 @@ void CreateRasterFunc::execute() {
 	Unref(t);
 
 	RasterOvComp* comp = new RasterOvComp(rasterrect);
+	comp->SetAttributeList(al);
 	if (PasteModeFunc::paste_mode()==0)
 	  cmd = new PasteCmd(_ed, new Clipboard(comp));
 	ComValue compval(symbol_add("RasterComp"), new ComponentView(comp));
@@ -653,6 +697,7 @@ void CreateRasterFunc::execute() {
 	push_stack(ComValue::nullval());
 
     execute_log(cmd);
+    Unref(al);
 }
 
 /*****************************************************************************/

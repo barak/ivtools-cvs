@@ -70,7 +70,7 @@ void Selection::Show (Viewer* viewer) {
     }
 }
 
-void Selection::Update (Viewer* viewer) {
+int Selection::Update (Viewer* viewer) {
     Iterator i;
     
     for (First(i); !Done(i); Next(i)) {
@@ -80,6 +80,7 @@ void Selection::Update (Viewer* viewer) {
             view->DrawHandles();
         }
     }
+    return 0;
 }
 
 void Selection::Hide (Viewer* viewer) {

@@ -39,7 +39,7 @@ public:
   GraphicId(unsigned int sessionid);
   virtual ~GraphicId();
   
-  unsigned int id() { return _id&_sid; }
+  unsigned int id() { return _id|_sid; }
   // get associated unique composite integer id
 
   unsigned int grid() { return _id; }
@@ -59,11 +59,25 @@ public:
   // set pointer to associated GraphicComp
 
   GraphicComp* grcomp() { return _comp; }
-  // set pointer to associated GraphicComp
+  // get pointer to associated GraphicComp
+
+  void selector(unsigned int sid) { _selector = sid; }
+  // set session id of current selector
+
+  unsigned int selector() { return _selector; }
+  // get session id of current selector
+
+  void selected(int flag) { _selected = flag; }
+  // set flag that indicates graphic is currently selected
+
+  int selected() { return _selected; }
+  // get flag that indicates graphics is currently selected
 
 protected:
   unsigned int _id;
   unsigned int _sid;
+  unsigned int _selector;
+  int _selected;
   GraphicComp* _comp;
 
 };

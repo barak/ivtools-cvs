@@ -188,7 +188,9 @@ void SessionIdFunc::execute() {
   else if (nargs()==0 && nkeys()==0) 
     returnid = ((DrawServ*)unidraw)->sessionid();
 
-  ComValue retval(returnid);
+  ComValue retval(returnid, ComValue::UIntType);
+
+  retval.state(AttributeValue::HexState);
   push_stack(retval);
   return;
 

@@ -47,7 +47,16 @@ OverlaySelection::OverlaySelection (Selection* s) : Selection(s) {
 }
 
 void OverlaySelection::Show (Viewer* viewer) {
+#if 0
     if (!viewer) return;
+#else
+    if (!viewer) {
+      Iterator i;
+      First(i);
+      if (Done(i)) return;
+      viewer = GetView(i)->GetViewer();
+    }
+#endif
     if (ShowHighlights(viewer)) 
 	viewer->GetDamage()->Repair();
     if (HandlesEnabled()) 
@@ -55,21 +64,40 @@ void OverlaySelection::Show (Viewer* viewer) {
 }
 
 void OverlaySelection::Hide (Viewer* viewer) {
+#if 0
     if (!viewer) return;
+#else
+    if (!viewer) {
+      Iterator i;
+      First(i);
+      if (Done(i)) return;
+      viewer = GetView(i)->GetViewer();
+    }
+#endif
     if (HandlesEnabled()) 
 	HideHandles(viewer);
     if (HideHighlights(viewer)) 
 	viewer->GetDamage()->Repair();
 }
 
-void OverlaySelection::Update (Viewer* viewer) {
+int OverlaySelection::Update (Viewer* viewer) {
+#if 0
     if (!viewer) return;
+#else
+    if (!viewer) {
+      Iterator i;
+      First(i);
+      if (Done(i)) return -1;
+      viewer = GetView(i)->GetViewer();
+    }
+#endif
     if (HandlesEnabled()) 
 	HideHandles(viewer);
     ShowHighlights(viewer);
     viewer->GetDamage()->Repair();
     if (HandlesEnabled())
 	ShowHandles(viewer);
+    return 0;
 }
 
 void OverlaySelection::Clear (Viewer* viewer) {

@@ -45,7 +45,7 @@ public:
 
     virtual void Show(Viewer* = nil);	
     virtual void Hide(Viewer* = nil);
-    virtual void Update(Viewer* = nil); 
+    virtual int Update(Viewer* = nil); 
     virtual void Clear(Viewer* = nil);
 
     virtual void RepairClear(Viewer*, boolean);
@@ -67,7 +67,10 @@ public:
     OverlayView* GetView(Iterator);
     void SetView(OverlayView*, Iterator&);
 
-    virtual OverlaySelection* ViewsWithin(IntCoord l, IntCoord b, IntCoord r, IntCoord t);
+    OverlaySelection* ViewsWithin(IntCoord l, IntCoord b, IntCoord r, IntCoord t);
+
+    virtual void Reserve() { return; }
+    // for use of derived classes
 
 protected:
     boolean _clear_to_repair;

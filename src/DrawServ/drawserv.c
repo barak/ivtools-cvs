@@ -37,6 +37,7 @@
 #include <OverlayUnidraw/scriptview.h>
 
 #include <Unidraw/Commands/command.h>
+#include <Unidraw/Commands/edit.h>
 #include <Unidraw/catalog.h>
 #include <Unidraw/clipboard.h>
 #include <Unidraw/creator.h>
@@ -205,7 +206,9 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	  GraphicId* grid = new GraphicId(sessionid());
 	  grid->grcomp(comp);
 	  AttributeList* al = comp->GetAttributeList();
-	  al->add_attr(id_sym, new AttributeValue(grid->id(), AttributeValue::UIntType));
+	  AttributeValue* av = new AttributeValue(grid->id(), AttributeValue::UIntType);
+	  av->state(AttributeValue::HexState);
+	  al->add_attr(id_sym, av);
 
 	  if (comp) {
 	    Creator* creator = unidraw->GetCatalog()->GetCreator();
@@ -230,24 +233,30 @@ void DrawServ::ExecuteCmd(Command* cmd) {
       cout.flush();
 
       /* first execute here */
+#if 0
       ((ComEditor*)cmd->GetEditor())->GetComTerp()->run(sbuf.str());
+      ((PasteCmd*)cmd)->executed(true);
+#else
+      cmd->Execute();
+#endif
 
       /* then send everywhere else */
       DistributeCmdString(sbuf.str());
-
-      delete cmd;
+      
       }
       break;
     default:
       sbuf << "print(\"Attempt to convert unknown command (id == %d) to interpretable script\\n\" " << cmd->GetClassId() << " :err)";
       cmd->Execute();
-      if (cmd->Reversible()) {
-	cmd->Log();
-      } else {
-	delete cmd;
-      }
       break;
     }
+
+    if (cmd->Reversible()) {
+      cmd->Log();
+    } else {
+      delete cmd;
+    }
+
     OverlayScript::ptlist_parens(oldflag);
   }
 }
