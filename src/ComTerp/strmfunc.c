@@ -108,7 +108,12 @@ void ConcatFunc::execute() {
   reset_stack();
 
   /* setup for concatenation */
-  static ConcatNextFunc* cnfunc = new ConcatNextFunc(comterp());
+  static ConcatNextFunc* cnfunc = nil;
+  
+  if (!cnfunc) {
+    cnfunc = new ConcatNextFunc(comterp());
+    cnfunc->funcid(symbol_add("concat"));
+  }
   AttributeValueList* avl = new AttributeValueList();
   avl->Append(new AttributeValue(operand1));
   avl->Append(new AttributeValue(operand2));
@@ -141,11 +146,8 @@ void ConcatNextFunc::execute() {
     /* stream first argument until nil */
     if (oneval->is_known()) {
       if (oneval->is_stream()) {
-	NextFunc nextfunc(comterp());
-	push_stack(*oneval);
-	push_funcstate(1,0);
-	nextfunc.execute();
-	pop_funcstate();
+	ComValue valone(*oneval);
+	NextFunc::execute_impl(comterp(), valone);
 	if (comterp()->stack_top().is_unknown()) {
 	  *oneval = ComValue::nullval();
 	  comterp()->pop_stack();
@@ -161,11 +163,8 @@ void ConcatNextFunc::execute() {
     /* stream 2nd argument until nil */
     if (twoval->is_known() && !done) {
       if (twoval->is_stream()) {
-	NextFunc nextfunc(comterp());
-	push_stack(*twoval);
-	push_funcstate(1,0);
-	nextfunc.execute();
-	pop_funcstate();
+	ComValue valtwo(*twoval);
+	NextFunc::execute_impl(comterp(), valtwo);
 	if (comterp()->stack_top().is_unknown())
 	  *twoval = ComValue::nullval();
       } else {
@@ -190,7 +189,7 @@ void RepeatFunc::execute() {
     ComValue operand1(stack_arg(0));
 
 #ifdef STREAM_MECH
-    if (operand1.is_stream()) {
+    if (operand1.is_stream() && nargs()==1) {
       reset_stack();
       AttributeValueList* avl = operand1.stream_list();
       if (avl) {
@@ -206,6 +205,10 @@ void RepeatFunc::execute() {
 	cntval->int_ref()--;
       } else
 	push_stack(ComValue::nullval());
+      return;
+    } else if (operand1.is_stream()) {
+      fprintf(stderr, "no more than doubly nested streams supported as of yet\n");
+      push_stack(ComValue::nullval());
       return;
     }
 #endif
@@ -246,7 +249,7 @@ void IterateFunc::execute() {
     ComValue operand1(stack_arg(0));
 
 #ifdef STREAM_MECH
-    if (operand1.is_stream()) {
+    if (operand1.is_stream() && nargs()==1) {
       reset_stack();
       AttributeValueList* avl = operand1.stream_list();
       if (avl) {
@@ -268,6 +271,10 @@ void IterateFunc::execute() {
 	}
       } else
 	push_stack(ComValue::nullval());
+      return;
+    } else if (operand1.is_stream()) {
+      fprintf(stderr, "no more than doubly nested streams supported as of yet\n");
+      push_stack(ComValue::nullval());
       return;
     }
 #endif
@@ -311,16 +318,19 @@ void NextFunc::execute() {
     ComValue streamv(stack_arg_post_eval(0));
     reset_stack();
 
+    execute_impl(comterp(), streamv);
+}
+
+void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
+
     if (!streamv.is_stream()) return;
 
     if (streamv.stream_mode()<0) {
 
       /* internal execution -- handled by stream func */
-      push_stack(streamv);
-      push_funcstate(1, 0);
-      ((ComFunc*)streamv.stream_func())->execute();
-      pop_funcstate();
-      if (comterp()->stack_top().is_null()) streamv.stream_list()->clear();
+      comterp->push_stack(streamv);
+      ((ComFunc*)streamv.stream_func())->exec(1, 0);
+      if (comterp->stack_top().is_null()) streamv.stream_list()->clear();
 
     } else if (streamv.stream_mode()>0) {
 
@@ -338,27 +348,26 @@ void NextFunc::execute() {
 	  if (val->is_stream()) {
 
 	    /* stream argument, use stream func to get next one */
-	    push_stack(*val);
-	    push_funcstate(1,0);
 	    if (val->stream_mode()<0 && val->stream_func()) {
 	      /* internal use */
-	      ((ComFunc*)val->stream_func())->execute();
-	      if (comterp()->stack_top().is_null()) 
+	      comterp->push_stack(*val);
+	      ((ComFunc*)val->stream_func())->exec(1,0);
+	      if (comterp->stack_top().is_null()) 
 		val->stream_list()->clear();
 
 	    } else {
 
 	      /* external use */
-	      this->execute();  
+	      ComValue cval(*val);
+	      NextFunc::execute_impl(comterp, cval);
 
 	    }
-	    pop_funcstate();
 	    narg++;
 
 	  } else {
 
 	    /* non-stream argument, push as is */
-	    push_stack(*val);
+	    comterp->push_stack(*val);
 	    if (val->is_key()) 
 	      nkey++;
 	    else
@@ -368,14 +377,13 @@ void NextFunc::execute() {
 	  avl->Next(i);
 	}
 
-	push_funcstate(narg, nkey);
-	funcptr->execute();
-	pop_funcstate();
+	funcptr->exec(narg, nkey);
       }
 
-      if (comterp()->stack_top().is_null()) streamv.stream_list()->clear();
+      if (comterp->stack_top().is_null()) streamv.stream_list()->clear();
 
     } else 
-      push_stack(ComValue::nullval());
+      comterp->push_stack(ComValue::nullval());
 }
+
 

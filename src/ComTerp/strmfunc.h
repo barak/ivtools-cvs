@@ -109,6 +109,7 @@ public:
     NextFunc(ComTerp*);
 
     virtual void execute();
+    static  void execute_impl(ComTerp*, ComValue& strmv);
     virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
       return "val=%s(stream) -- return next value from stream"; }

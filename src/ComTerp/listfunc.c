@@ -55,13 +55,9 @@ void ListFunc::execute() {
       if (strmlstv.is_false()) {
 
 	/* stream to list conversion */
-	NextFunc nextfunc(comterp());
 	boolean done = false;
 	while (!done) {
-	  push_stack(listv);
-	  push_funcstate(1,0);
-	  nextfunc.execute();
-	  pop_funcstate();
+	  NextFunc::execute_impl(comterp(), listv);
 	  AttributeValue* newval = new AttributeValue(comterp()->pop_stack());
 	  if (newval->is_unknown()) {
 	    done = true;
