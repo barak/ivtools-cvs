@@ -25,6 +25,7 @@
 #include <ComUnidraw/grdotfunc.h>
 #include <ComUnidraw/grfunc.h>
 #include <ComUnidraw/grlistfunc.h>
+#include <ComUnidraw/groupfunc.h>
 #include <ComUnidraw/grstatfunc.h>
 #include <ComUnidraw/highlightfunc.h>
 #include <ComUnidraw/comeditor.h>
@@ -190,7 +191,7 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
     comterp->add_command("highlight", new HighlightFunc(comterp, this));
     comterp->add_command("frame", new FrameFunc(comterp, this));
-    comterp->add_command("reorder", new ReorderFunc(comterp, this));
+    comterp->add_command("growgroup", new GrowGroupFunc(comterp, this));
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {

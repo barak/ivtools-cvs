@@ -919,8 +919,13 @@ void OverlaysComp::InsertBefore (Iterator i, GraphicComp* comp) {
 void OverlaysComp::InsertAfter (Iterator i, GraphicComp* comp) {
     Graphic* g = comp->GetGraphic();
     Graphic* parent;
-    
-    Elem(i)->Prepend(new UList(comp));
+
+    if (Elem(i))
+      Elem(i)->Prepend(new UList(comp));
+    else {
+      cerr << "OverlaysComp::InsertAfter -- Iterator has nil value\n";
+      return;
+    }
     
     if (g != nil) {
         Iterator j;

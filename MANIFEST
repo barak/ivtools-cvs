@@ -200,6 +200,8 @@ ivtools-0.8/src/ComUnidraw/grfunc.c
 ivtools-0.8/src/ComUnidraw/grfunc.h
 ivtools-0.8/src/ComUnidraw/grlistfunc.c
 ivtools-0.8/src/ComUnidraw/grlistfunc.h
+ivtools-0.8/src/ComUnidraw/groupfunc.c
+ivtools-0.8/src/ComUnidraw/groupfunc.h
 ivtools-0.8/src/ComUnidraw/grstatfunc.c
 ivtools-0.8/src/ComUnidraw/grstatfunc.h
 ivtools-0.8/src/ComUnidraw/highlightfunc.c

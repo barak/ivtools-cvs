@@ -64,6 +64,10 @@ move(dx dy) -- move current selection
 scale(xflt yflt) -- scale current selection
 rotate(degflt) -- rotate current selection
 
+GROUP/UNGROUP COMMANDS
+
+growgroup(groupview compview) -- add graphic to existing group graphic
+
 COMPONENT AND ATTRIBUTE COMMANDS
 
 compview=setattr(compview [:keyword value [:keyword value [...]]]) -- set attributes of a graphic component
