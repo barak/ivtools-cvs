@@ -141,7 +141,7 @@ DrawLink* DrawServ::linkup(const char* hostname, int portnum,
 
       /* register all sessionid's with other DrawServ */
       sessionid_register(curlink);
-      SendCmdString(curlink, "sessionid(:all)");
+      SendCmdString(curlink, "sid(:all)");
       SendCmdString(curlink, "drawlink(:state 2)");
 
       return curlink;
@@ -337,21 +337,23 @@ void DrawServ::SendCmdString(DrawLink* link, const char* cmdstring) {
   }
 }
 
-// generate request to check unique session id
+// generate request to register each locally unique session id
 void DrawServ::sessionid_register(DrawLink* link) {
   char buf[BUFSIZ];
-  snprintf(buf, BUFSIZ, "sessionid(0x%08x 0x%08x)%c", sessionid(), sessionid(), '\0');
+  snprintf(buf, BUFSIZ, "sid(0x%08x 0x%08x)%c", sessionid(), sessionid(), '\0');
   SendCmdString(link, buf);
   SessionIdTable* table = ((DrawServ*)unidraw)->sessionidtable();
   SessionIdTable_Iterator it(*table);
   while(it.more()) {
     if(it.cur_value()) {
-      DrawLink* link = (DrawLink*)it.cur_value();
-      unsigned int sid, osid;
-      sid = (unsigned int)it.cur_key();
-      originalsidtable()->find(osid, sid);
-      snprintf(buf, BUFSIZ, "sessionid(0x%08x 0x%08x)%c", sid, osid, '\0');
-      SendCmdString(link, buf);
+      DrawLink* otherlink = (DrawLink*)it.cur_value();
+      if (otherlink != link) {
+	unsigned int sid, osid;
+	sid = (unsigned int)it.cur_key();
+	originalsidtable()->find(osid, sid);
+	snprintf(buf, BUFSIZ, "sid(0x%08x 0x%08x)%c", sid, osid, '\0');
+	SendCmdString(link, buf);
+      }
     }
     it.next();
   }
@@ -458,7 +460,7 @@ void DrawServ::grid_message_propagate(unsigned int id, unsigned int selector, in
 void DrawServ::print_gridtable() {
   GraphicIdTable* table = gridtable();
   GraphicIdTable_Iterator it(*table);
-  printf("id          grid        grcomp      selector    selected\n");
+  printf("id          &grid       &grcomp     selector    selected\n");
   printf("----------  ----------  ----------  ----------  --------\n");
   while(it.more()) {
     GraphicId* grid = (GraphicId*)it.cur_value();
