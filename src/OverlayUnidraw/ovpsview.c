@@ -27,6 +27,8 @@
  */
 
 #include <OverlayUnidraw/ovclasses.h>
+#include <OverlayUnidraw/ovexport.h>
+#include <OverlayUnidraw/ovprint.h>
 #include <OverlayUnidraw/ovpsview.h>
 
 #include <UniIdraw/idarrows.h>

@@ -344,18 +344,30 @@ boolean ArrowLineScript::Definition (ostream& out) {
     head = comp->GetArrowLine()->Head();
     tail = comp->GetArrowLine()->Tail();
 
-    out << "arrowline(";
-    out << x0 << "," << y0 << "," << x1 << "," << y1;
-    if (arrow_scale != 1 )
+    if (!svg_format()) {
+
+      out << "arrowline(";
+      out << x0 << "," << y0 << "," << x1 << "," << y1;
+      if (arrow_scale != 1 )
 	out << " :arrowscale " << arrow_scale;
-    if (head) 
+      if (head) 
 	out << " :head";
-    if (tail)
+      if (tail)
 	out << " :tail";
-    MinGS(out);
-    Annotation(out);
-    Attributes(out);
-    out << ")";
+      MinGS(out);
+      Annotation(out);
+      Attributes(out);
+      out << ")";
+      
+    } else {
+      
+      out << "<line x1=\"" << x0 << "\" y1=\"" << y0 << "\" x2=\"" << x1 << "\" y2=\"" << y1 << "\" ";
+      MinGS(out);
+      Annotation(out);
+      Attributes(out);
+      out << " />\n";
+    }
+    
 
     return out.good();
 }

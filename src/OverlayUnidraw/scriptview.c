@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 1994-1998 Vectaport Inc.
+ * Copyright (C) 2002 Scott E. Johnston
+ * Copyright (C) 1994-1998 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided
@@ -26,6 +27,7 @@
 #include <OverlayUnidraw/scriptview.h>
 #include <OverlayUnidraw/ovcatalog.h>
 #include <OverlayUnidraw/ovclasses.h>
+#include <OverlayUnidraw/ovexport.h>
 
 #include <ComTerp/parser.h>
 
@@ -66,6 +68,7 @@
 /*****************************************************************************/
 
 boolean OverlayScript::_ptlist_parens = true;
+boolean OverlayScript::_svg_format = false;
 
 ClassId OverlayScript::GetClassId () { return OVERLAY_SCRIPT; }
 
@@ -81,8 +84,10 @@ OverlayScript::~OverlayScript () {
 }
 
 void OverlayScript::FillBg (ostream& out) {
-    int filled = GetOverlayComp()->GetGraphic()->BgFilled();
+  int filled = GetOverlayComp()->GetGraphic()->BgFilled();
+  if (!svg_format()) {
     out << " :fillbg " << filled;
+  }
 }
 
 void OverlayScript::Brush (ostream& out) {
@@ -90,17 +95,50 @@ void OverlayScript::Brush (ostream& out) {
 
     if (brush != nil) {
 
-	if (brush->None()) {
-	    out << " :nonebr";
-
-	} else {
-	    out << " :brush ";
-	    int p = brush->GetLinePattern();
-	    out << p << ",";
-
-	    float w = brush->width();
-	    out << w;
+      if (brush->None()) {
+	
+	if (!svg_format()) {
+	  out << " :nonebr";
 	}
+	
+      } else {
+	int p = brush->GetLinePattern();
+	float w = brush->width();
+
+	if (!svg_format()) {
+	  out << " :brush ";
+	  out << p << ",";
+	  out << w;
+	} else {
+	  out << "stroke-width: " << w << "; ";
+	  out << "stroke-dasharray: ";
+
+	  /* reverse dash bit field */
+	  int reverse_p = 0;
+	  for (int i=0; i<16; i++) {
+	    reverse_p <<= 1;
+	    reverse_p |= p & 0x1;
+	    p >>= 1;
+	  }
+
+	  /* output count of on/off runs */
+	  boolean lastbit=1;
+	  int dashlen = 0;
+	  for (int i=0; i<16; i++) {
+	    boolean bit = reverse_p & 1;
+	    if (lastbit==bit) dashlen++;
+	    if (lastbit != bit || i==15)  {
+	      out << dashlen;
+	      if (i != 15 ) out << ", ";
+	      dashlen=1;
+	    }
+	    lastbit = bit;
+	    reverse_p >>= 1;
+	  }
+	  out << "; ";
+	}
+
+      }
     }
 }
 
@@ -108,12 +146,21 @@ void OverlayScript::FgColor (ostream& out) {
     PSColor* fgcolor = (PSColor*) GetOverlayComp()->GetGraphic()->GetFgColor();
 
     if (fgcolor != nil) {
-	const char* name = fgcolor->GetName();
-	out << " :fgcolor \"" << name << "\"";
+      
+      const char* name = fgcolor->GetName();
+      ColorIntensity r, g, b;
+      fgcolor->GetIntensities(r, g, b);
 
-	ColorIntensity r, g, b;
-	fgcolor->GetIntensities(r, g, b);
+      if (!svg_format()) {
+	out << " :fgcolor \"" << name << "\"";
 	out << "," << r << "," << g << "," << b;
+      } else {
+	out << "stroke: rgb(" 
+	    << (int)(r*100) << "%,"
+	    << (int)(g*100) << "%,"
+	    << (int)(b*100) << "%) ";
+      }
+      
     }
 }
 
@@ -121,24 +168,33 @@ void OverlayScript::BgColor (ostream& out) {
     PSColor* bgcolor = (PSColor*) GetOverlayComp()->GetGraphic()->GetBgColor();
 
     if (bgcolor != nil) {
-	const char* name = bgcolor->GetName();
-	out << " :bgcolor \"" << name << "\"";
 
-	ColorIntensity r, g, b;
-	bgcolor->GetIntensities(r, g, b);
+      const char* name = bgcolor->GetName();
+      ColorIntensity r, g, b;
+      bgcolor->GetIntensities(r, g, b);
+
+      if (!svg_format()) {
+	out << " :bgcolor \"" << name << "\"";
 	out << "," << r << "," << g << "," << b;
+      } 
+      
     }
 }
 
 void OverlayScript::Font (ostream& out) {
     PSFont* font = (PSFont*) GetOverlayComp()->GetGraphic()->GetFont();
     if (font != nil) {
+
 	const char* name = font->GetName();
-	out << " :font \"" << name << "\"" << ",";
 	const char* pf = font->GetPrintFont();
-	out << "\"" << pf << "\"" << ",";
 	const char* ps = font->GetPrintSize();
-	out << ps;
+
+	if (!svg_format()) {
+	  out << " :font \"" << name << "\"" << ",";
+	  out << "\"" << pf << "\"" << ",";
+	  out << ps;
+	}
+	
     }
 }
 
@@ -146,57 +202,68 @@ void OverlayScript::Pattern (ostream& out) {
     PSPattern* pat = (PSPattern*) GetOverlayComp()->GetGraphic()->GetPattern();
 
     if (pat != nil) {
+      
+      if (pat->None()) {
 
-
-	if (pat->None()) {
-	    out << " :nonepat";
-	} else if (pat->GetSize() > 0) {
-	    const int* data = pat->GetData();
-	    int size = pat->GetSize();
-	    char buf[BUFSIZ];
-	    out << " :pattern ";
-
-	    if (size <= 8) {
-		for (int i = 0; i < 8; i++) {
-		    sprintf(buf, "0x%02x", data[i] & 0xff);
-		    out << buf;
-		    if (i < 7 ) out << ",";
-		}
-
-	    } else {
-		for (int i = 0; i < patternHeight; i++) {
-		    sprintf(buf, "0x%0*x", patternWidth/4, data[i]);
-		    if (i != patternHeight - 1) {
-			out << buf << ",";
-		    } else {
-			out << buf;
-		    }
-		}
-	    }
-
-	} else {
-	    float graylevel = pat->GetGrayLevel();
-	    out << " :graypat " << graylevel;
+	if (!svg_format()) {
+	  out << " :nonepat";
 	}
+
+      } else if (pat->GetSize() > 0) {
+	
+	const int* data = pat->GetData();
+	int size = pat->GetSize();
+	char buf[BUFSIZ];
+
+	if (!svg_format()) {
+
+	  out << " :pattern ";
+	  
+	  if (size <= 8) {
+	    for (int i = 0; i < 8; i++) {
+	      sprintf(buf, "0x%02x", data[i] & 0xff);
+	      out << buf;
+	      if (i < 7 ) out << ",";
+	    }
+	    
+	  } else {
+	    for (int i = 0; i < patternHeight; i++) {
+	      sprintf(buf, "0x%0*x", patternWidth/4, data[i]);
+	      if (i != patternHeight - 1) {
+		out << buf << ",";
+	      } else {
+		out << buf;
+	      }
+	    }
+	  }
+	}
+	
+      } else {
+	float graylevel = pat->GetGrayLevel();
+	if (!svg_format()) {
+	  out << " :graypat " << graylevel;
+	}
+      }
     }
 }
 
 void OverlayScript::Transformation (ostream& out) {
-    Transformation(out, "transform");
-}
-
-void OverlayScript::Transformation (ostream& out, char* keyword, Graphic* gr) {
-    Transformer* t = gr ? gr->GetTransformer() : GetOverlayComp()->GetGraphic()->GetTransformer();
+    Graphic *gr = GetOverlayComp()->GetGraphic();
+    Transformer* t = gr ? gr->GetTransformer() : nil;
     Transformer identity;
 
     if (t != nil && *t != identity) {
-	char key[strlen(keyword)+4];
-	sprintf(key," :%s ",keyword);
-	float a00, a01, a10, a11, a20, a21;
-	t->GetEntries(a00, a01, a10, a11, a20, a21);
-	out << key;
+      float a00, a01, a10, a11, a20, a21;
+      t->GetEntries(a00, a01, a10, a11, a20, a21);
+      if (!svg_format()) {
+	out << " :transform ";
 	out << a00 << "," << a01 << "," << a10 << ",";
 	out << a11 << "," << a20 << "," << a21;
+      } else {
+	out << "transform=\"matrix(";
+	out << a00 << " " << a01 << " " << a10 << " ";
+	out << a11 << " " << a20 << " " << a21 << ")\"";
+      }
     }
 }
 
@@ -205,9 +272,11 @@ void OverlayScript::Annotation (ostream& out) {
     const char* anno = comp->GetAnnotation();
     if (!anno) 
         return;
-    out << " :annotation " << "\n";
-    int indent = Indent(out);
-    ParamList::output_text(out, anno, indent);
+    if (!svg_format()) {
+      out << " :annotation " << "\n";
+      int indent = Indent(out);
+      ParamList::output_text(out, anno, indent);
+    }
 }
 
 OverlayScript* OverlayScript::CreateOverlayScript (OverlayComp* comp) {
@@ -262,6 +331,17 @@ boolean OverlayScript::skip_comp(istream& in) {
   return true;
 }
   
+boolean OverlayScript::svg_format() {
+    boolean format = OverlayScript::_svg_format;
+    Command* cmd = GetCommand();
+    if (cmd) {
+      if (GetCommand()->IsA(OV_EXPORT_CMD))
+	format = ((OvExportCmd*)GetCommand())->svg_format();
+    }
+    return format;
+}
+
+void OverlayScript::svg_format(boolean flag) { _svg_format = flag; }
 
 /*****************************************************************************/
 
@@ -745,14 +825,16 @@ boolean OverlayScript::EmitPic(ostream& out, Clipboard* cb1, Clipboard* cb2, boo
 void OverlayScript::MinGS (ostream& out) {
     if (!DefaultGS()) {
 	Clipboard* cb = GetGSList();
-	if (cb) 
+	if (cb && !svg_format()) 
 	    out << " :gs " << MatchedGS(cb);
 	else {
+	    if (svg_format()) out << "style=\"";
 	    FillBg(out);
 	    Brush(out);
 	    FgColor(out);
 	    BgColor(out);
 	    Pattern(out);
+	    if (svg_format()) out << "\" ";
 	}
     }
     Transformation(out);
@@ -1164,6 +1246,9 @@ boolean OverlayIdrawScript::IsA (ClassId id) {
 }
 
 boolean OverlayIdrawScript::Emit (ostream& out) {
+    if (svg_format()) 
+      return EmitSvg(out);
+
     out << "drawtool(";
 
     /* make list and output unique point lists */
@@ -1254,4 +1339,48 @@ void OverlayIdrawScript::SetByPathnameFlag(boolean flag) {
 boolean OverlayIdrawScript::GetByPathnameFlag() {
     return _by_pathname;
 }
+
+boolean OverlayIdrawScript::EmitSvg (ostream& out) {
+  out << "<?xml version=\"1.0\"?>\n";
+  out << "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.0/EN\"\n";
+  out << "    \"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd\">\n";
+
+  Coord l, b, r, t;
+  GetBox(l, b, r, t);
+
+  Coord w = r - l;
+  Coord h = t - b;
+
+  out << "<svg width=\"" << w << "\" height=\"" << h << "\" >\n";
+  out << "<title>ivtools drawing</title>\n";
+  out << "<desc>ivtools drawing</desc>\n";
+
+  out << "<g transform=\"matrix(1 0 0 -1 " << -l << " " << t << ")\" >\n";
+
+  /* output graphic components */
+  boolean status = true;
+  Iterator i;
+  First(i);
+
+  static int readonly_symval = symbol_add("readonly");
+  for (; status && !Done(i); ) {
+    OverlayScript* ev = (OverlayScript*)GetView(i);
+    boolean readonly = false;
+    AttributeList *al;
+    if (al = ev->GetOverlayComp()->attrlist()) {
+      AttributeValue* av = al->find(readonly_symval);
+      if (av) readonly = av->is_true();
+    }
+    if (!readonly) {
+      Indent(out);
+      status = ev->Definition(out);
+    }
+    Next(i);
+  }
+
+  out << "</g>\n";
+  out << "</svg>\n";
+  return status;
+}
+
 
