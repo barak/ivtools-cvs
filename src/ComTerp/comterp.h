@@ -83,6 +83,8 @@ public:
     // evaluate topmost expression on the stack, with a flag to
     // indicate if this call to eval_expr() is nested inside
     // another, so that initialization doesn't get repeated.
+    virtual int eval_expr(ComValue* pfvals, int npfvals);
+    // evaluate postfix expression stored in ComValue objects.
     virtual int post_eval_expr(int tokcnt, int offtop, int pedepth);
     // copy unevaluated expression to the stack and evaluate.
 
@@ -114,6 +116,9 @@ public:
     ComValue& lookup_symval(ComValue&);
     // look up a ComValue associated with a symbol (specified in the
     // input ComValue) in the local or global symbol tables.
+    ComValue& lookup_symval(int symid);
+    // look up a ComValue associated with a symbol (specified with a
+    // symbol id) in the local or global symbol tables.
 
     ComValue& stack_top(int n=0);
     // return reference to top of the stack, offset by 'n' (usually negative).
@@ -189,6 +194,9 @@ public:
     virtual boolean is_serv() { return false; } 
     // flag to test if ComTerp or ComTerpServ
 
+    void func_for_next_sym(ComFunc* func);
+    // set ComFunc to use on subsequent expression
+
 protected:
     void incr_stack();
     void incr_stack(int n);
@@ -236,6 +244,10 @@ protected:
 
     ComterpHandler* _handler;
     // I/O handler for this ComTerp.
+
+    ComFunc* _func_for_next_sym;
+    // ComFunc to run on next symbol
+
 
     friend class ComFunc;
     friend class ComterpHandler;

@@ -165,6 +165,27 @@ int ComTerp::eval_expr(boolean nested) {
   return FUNCOK;
 }
 
+int ComTerp::eval_expr(ComValue* pfvals, int npfvals) {
+  int save_pfoff = _pfoff;
+  int save_pfnum = _pfnum;
+  ComValue* save_pfcomvals = _pfcomvals;
+
+  _pfoff = 0;
+  _pfnum = npfvals;
+  _pfcomvals = pfvals;
+
+  while (_pfoff < _pfnum) {
+    load_sub_expr();
+    eval_expr_internals();
+  }
+
+  _pfoff = save_pfoff;
+  _pfnum = save_pfnum;
+  _pfcomvals = save_pfcomvals;
+
+  return FUNCOK;
+}
+
 void ComTerp::eval_expr_internals(int pedepth) {
   ComValue& sv = pop_stack(false);
   
@@ -180,24 +201,40 @@ void ComTerp::eval_expr_internals(int pedepth) {
     }
     
   } else if (sv.type() == ComValue::SymbolType) {
-    
-    if (_alist) {
-      int id = sv.symbol_val();
-      AttributeValue* val = _alist->find(id);  
-      if (val) {
-	ComValue newval(*val);
-	push_stack(newval);
-      } else
-	push_stack(ComValue::nullval());
-    } else 
-      push_stack(lookup_symval(sv));
+
+    if (_func_for_next_sym) {
+      ComFunc* func = _func_for_next_sym;
+      _func_for_next_sym = nil;
+
+      push_stack(sv);
+      func->push_funcstate(1, 0, pedepth, func->funcid());
+      func->execute();
+      func->pop_funcstate();
+      if (_just_reset) {
+	push_stack(ComValue::blankval());
+	_just_reset = false;
+      }
+
+    } else {
+      
+      if (_alist) {
+	int id = sv.symbol_val();
+	AttributeValue* val = _alist->find(id);  
+	if (val) {
+	  ComValue newval(*val);
+	  push_stack(newval);
+	} else
+	  push_stack(ComValue::nullval());
+      } else 
+	push_stack(lookup_symval(sv));
+    }
     
   } else if (sv.type() == ComValue::ObjectType && sv.class_symid() == Attribute::class_symid()) {
     
     push_stack(*((Attribute*)sv.obj_val())->Value());
     
   } else if (sv.type() == ComValue::BlankType) {
-
+    
     /* ignore it */
     eval_expr_internals(pedepth);
 
@@ -592,6 +629,7 @@ ComValue& ComTerp::pop_symbol() {
 
 int ComTerp::add_command(const char* name, ComFunc* func, const char* alias) {
     int symid = symbol_add((char *)name);
+    func->funcid(symid);
     ComValue* comval = new ComValue();
     comval->type(ComValue::CommandType);
     comval->obj_ref() = (void*)func;
@@ -996,3 +1034,11 @@ void ComTerp::push_funcstate(ComFuncState& funcstate) {
   ComFuncState* sfs = _fsstack + _fsstack_top;
   *sfs = ComFuncState(funcstate);
 }
+
+void ComTerp::func_for_next_sym(ComFunc* func) {
+  if (!_func_for_next_sym)
+    _func_for_next_sym = func;
+}
+
+
+
