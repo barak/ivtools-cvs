@@ -193,9 +193,9 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     if (!comterp_ || !input_good)
       return -1;
     else if (!inbuf || !*inbuf) {
-#if 1 // do nothing on null input
-      fprintf(stderr, "ComterpHandler::handle_input null input\n");
-      return 0;
+#if 1 // shut down on null input
+      fprintf(stderr, "ComterpHandler::handle_input null input--shutting down\n");
+      return -1;
 #else
 #if __GNUC__<3
       filebuf obuf(fd ? fd : 1);
