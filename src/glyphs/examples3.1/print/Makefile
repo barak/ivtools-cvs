@@ -93,7 +93,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
            CCSUFFIX = c
             CDRIVER = gcc
             CSUFFIX = c
-                SRC = /src/glyphs/examples3.1/print/.
+                SRC = /home/scott/src/ivtools-0.9/src/glyphs/examples3.1/print/.
               SLASH = /
                SRCS = $(SRC)$(SLASH)*.$(CCSUFFIX)
                OBJS = *.o
@@ -206,9 +206,9 @@ NONSHARED_CCLDFLAGS =
              RM_CMD = $(RM) ,* .emacs_* *..c *.BAK *.CKP *.a *.bak *.ln *.o a.out core errs make.log make.out tags TAGS
               TROFF = groff
 
-                TOP =
+                TOP = /home/scott/src/ivtools-0.9
              RELTOP = ../../../../.
-        CURRENT_DIR = /src/glyphs/examples3.1/print
+        CURRENT_DIR = /home/scott/src/ivtools-0.9/src/glyphs/examples3.1/print
 
               IVSRC = /home/scott/src/ivtools-0.9/src
              BINSRC = $(IVSRC)/bin
