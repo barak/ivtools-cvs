@@ -25,6 +25,7 @@
 #include <ComUnidraw/comeditor.h>
 #include <ComUnidraw/unifunc.h>
 #include <OverlayUnidraw/ovcatalog.h>
+#include <OverlayUnidraw/ovcmds.h>
 #include <OverlayUnidraw/ovcomps.h>
 #include <OverlayUnidraw/ovimport.h>
 #include <OverlayUnidraw/ovselection.h>
@@ -216,6 +217,35 @@ void ReadOnlyFunc::execute() {
     al->add_attr("readonly", ComValue::trueval());
 
     push_stack(viewval);
+}
+
+/*****************************************************************************/
+
+SaveFileFunc::SaveFileFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+Command* SaveFileFunc::save(const char* path) {
+  if (!path) {
+    OvSaveCompCmd* cmd = new OvSaveCompCmd(editor());
+    cmd->Execute();
+    return cmd->component() ? cmd : nil; 
+  } else {
+    OvSaveCompAsCmd* cmd = new OvSaveCompAsCmd(editor());
+    cmd->pathname(path);
+    cmd->Execute();
+    return cmd->component() ? cmd : nil; 
+  }
+}
+
+void SaveFileFunc::execute() {
+    const char* path = nil;
+    if (nargs()>0) {
+      ComValue pathnamev(stack_arg(0));
+      path = pathnamev.string_ptr();
+    }
+    reset_stack();
+    
+    push_stack( save(path) ? ComValue::oneval()	: ComValue::zeroval());
 }
 
 /*****************************************************************************/

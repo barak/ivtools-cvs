@@ -31,6 +31,7 @@
 class Command;
 class ComTerp;
 class OvImportCmd;
+class OvSaveCompCmd;
 class OverlayCatalog;
 
 //: base class for interpreter commands in comdraw.
@@ -104,6 +105,19 @@ public:
     virtual void execute();
     virtual const char* docstring() { 
 	return "compview=%s(compview :clear) -- set or clear the readonly attribute of a graphic component"; }
+
+};
+
+//: command to save document (to pathname)
+//error=save([path]) -- save editor document (to pathname). 
+class SaveFileFunc : public UnidrawFunc {
+public:
+    SaveFileFunc(ComTerp*,Editor*);
+    Command* save(const char* path);
+    // helper method to import from path
+    virtual void execute();
+    virtual const char* docstring() { 
+	return "error=%s([path]) -- save editor document (to pathname)"; }
 
 };
 
