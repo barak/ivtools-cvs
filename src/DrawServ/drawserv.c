@@ -181,6 +181,7 @@ void DrawServ::linkdump(FILE* fptr) {
 void DrawServ::ExecuteCmd(Command* cmd) {
   static int id_sym = symbol_add("id");
   static int sid_sym = symbol_add("sid");
+  boolean original = false;
 
   if(!_linklist || _linklist->Number()==0) 
 
@@ -225,9 +226,10 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	    AttributeValue* sidv = new AttributeValue(grid->selector(), AttributeValue::UIntType);
 	    sidv->state(AttributeValue::HexState);
 	    al->add_attr(sid_sym, sidv);
+	    original = true;
 	  }
 	    
-	  if (comp) {
+	  if (comp&&original) {
 	    Creator* creator = unidraw->GetCatalog()->GetCreator();
 	    OverlayScript* scripter = (OverlayScript*)
 	      creator->Create(Combine(comp->GetClassId(), SCRIPT_VIEW));
@@ -243,11 +245,13 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	  }
 	}
       }
-      if (!scripted)
-	sbuf << "print(\"Failed attempt to generate script for a PASTE_CMD\\n\" :err)";
-      sbuf.put('\0');
-      cout << sbuf.str() << "\n";
-      cout.flush();
+      if (original) {
+	if (!scripted)
+	  sbuf << "print(\"Failed attempt to generate script for a PASTE_CMD\\n\" :err)";
+	sbuf.put('\0');
+	cout << sbuf.str() << "\n";
+	cout.flush();
+      }
 
       /* first execute here */
 #if 0
@@ -258,7 +262,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 #endif
 
       /* then send everywhere else */
-      DistributeCmdString(sbuf.str());
+      if (original) DistributeCmdString(sbuf.str());
       
       }
       break;
