@@ -104,7 +104,6 @@ inline PulldownMenu* MakePulldown (const char* name) {
 AttributeList* OverlayEditor::_edlauncherlist = nil;
 AttributeList* OverlayEditor::_comterplist = nil;
 
-
 OverlayEditor::OverlayEditor (OverlayComp* comp, OverlayKit* ok) : IdrawEditor(false) {
     _viewer = nil;
     ok->SetEditor(this);
@@ -141,6 +140,7 @@ OverlayEditor::OverlayEditor (boolean initflag, OverlayKit* ok) : IdrawEditor(in
     ok->SetEditor(this);
     _overlay_kit = ok;
     _mousedoc = new ObservableText("");
+    _texteditor = nil;
 }
 
 OverlayEditor::~OverlayEditor() {
@@ -148,6 +148,7 @@ OverlayEditor::~OverlayEditor() {
 }
 
 void OverlayEditor::Init (OverlayComp* comp, const char* name) {
+    _texteditor = nil;
     if (!comp) comp = new OverlayIdrawComp;
     _overlay_kit->Init(comp, name);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1994-1999 Vectaport Inc.
+ * Copyright (c) 1994-2000 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
  * its documentation for any purpose is hereby granted without fee, provided
@@ -62,11 +62,15 @@ public:
     virtual OverlaysView* GetFrame(int index=-1);
     // return current frame.
 
-    int OtherFrame(){ return _curr_other; }
+    int OtherFrame(){ return _curr_others ? _curr_others[0] : nil; }
     // return index of previous (or secondary) frame.
-    void OtherFrame(int other_frame) 
-      { _prev_other = _curr_other; _curr_other = other_frame; }
+    void OtherFrame(int other_frame);
     // set index of previous (or secondary) frame.
+
+    int* OtherFrames(){ return _curr_others; }
+    // return index of previous (or secondary) frames.
+    void OtherFrames(int* other_frames, int num_others);
+    // set index of previous (or secondary) frames.
 
     FrameNumberState*& framenumstate() { return _framenumstate; }
     // return reference to pointer to current-frame-number state variable
@@ -91,8 +95,10 @@ protected:
     FrameView* _prevframe;
     FrameNumberState* _framenumstate;
     FrameListState* _frameliststate;
-    int _curr_other;
-    int _prev_other;
+    int* _curr_others;
+    int* _prev_others;
+    int _num_curr_others;
+    int _num_prev_others;
     boolean _autonewframe;
     TelltaleState* _autonewframe_tts;
 
