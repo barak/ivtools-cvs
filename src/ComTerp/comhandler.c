@@ -107,6 +107,7 @@ ComterpHandler::handle_timeout (const ACE_Time_Value &,
 	    if (!comterp_->stack_empty()) {
 	      filebuf obuf(1);
 	      ostream ostr(&obuf);
+	      ostr << "timeexpr result:  ";
 	      comterp_->print_stack_top(ostr);
 	      ostr << "\n";
 	      ostr.flush();
