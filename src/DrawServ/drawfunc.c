@@ -180,15 +180,30 @@ GraphicIdFunc::GraphicIdFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp
 }
 
 void GraphicIdFunc::execute() {
+  static int request_sym = symbol_add("request");
+  ComValue requestv(stack_key(request_sym));
+  static int grant_sym = symbol_add("grant");
+  ComValue grantv(stack_key(grant_sym));
+  static int state_sym = symbol_add("state");
+  ComValue statev(stack_key(state_sym));
+
   ComValue idv(stack_arg(0));
   ComValue selectorv(stack_arg(1));
-  ComValue selectedv(stack_arg(2));
 
   reset_stack();
 
-  if (idv.is_known() && selectorv.is_known() && selectedv.is_known()) {
+  DrawServHandler* handler = comterp() ? (DrawServHandler*)comterp()->handler() : nil;
+  DrawLink* link = handler ? (DrawLink*)handler->drawlink() : nil;
+
+  if (idv.is_known() && selectorv.is_known()) {
+    if (requestv.is_true())
     ((DrawServ*)unidraw)->grid_message_handle
-      (idv.uint_val(), selectorv.uint_val(), selectedv.int_val());
+      (link, idv.uint_val(), selectorv.uint_val(), statev.int_val(), 
+       requestv.is_known() ? requestv.uint_val() : 0);
+    else if (grantv.is_true()) 
+    ((DrawServ*)unidraw)->grid_message_callback
+      (link, idv.uint_val(), selectorv.uint_val(), statev.int_val(), 
+       grantv.is_known() ? grantv.uint_val() : 0);
   } else if (idv.is_unknown()) {
     ((DrawServ*)unidraw)->print_gridtable();
   }

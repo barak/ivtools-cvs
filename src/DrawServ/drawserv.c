@@ -425,33 +425,59 @@ int DrawServ::test_sessionid(unsigned int id) {
     return 1;
 }
 
-void DrawServ::ReserveSelection(GraphicId* grid) {
+void DrawServ::grid_message(GraphicId* grid) {
   /* find link on which current selector lives */
   DrawLink* link = _linklist->find_drawlink(grid);
 
   if (link) {
     char buf[BUFSIZ];
-    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d)%c", grid->id(), sessionid(), 
+    snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x %d :request 0x%08x)%c", grid->id(), grid->selector(), 
 	     grid->selected()==LinkSelection::LocallySelected ? 
-	     LinkSelection::RemotelySelected : LinkSelection::WaitingToBeSelected, '\0');
+	     LinkSelection::RemotelySelected : LinkSelection::WaitingToBeSelected,
+	     sessionid(), '\0');
     SendCmdString(link, buf);
   }
 }
 
 // handle reserve request from remote DrawLink.
-void DrawServ::grid_message_handle(unsigned int id, unsigned int selector, int selected)
+void DrawServ::grid_message_handle(DrawLink* link, unsigned int id, unsigned int selector, 
+				   int state, unsigned int newselector)
+{
+  void* ptr = nil;
+  gridtable()->find(ptr, id);
+  if (ptr) {
+    GraphicId* grid = (GraphicId*)ptr;
+    if (selector==sessionid() && newselector) {
+      if (grid->selector()==sessionid() && grid->selected()==LinkSelection::NotSelected) {
+	grid->selector(newselector);
+	grid->selected(LinkSelection::RemotelySelected);
+	char buf[BUFSIZ];
+	snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :grant 0x%08x)%c",
+		 grid->id(), newselector, sessionid(), '\0');
+	SendCmdString(link, buf);
+      }
+    } else {
+      grid->selector(selector);
+      grid->selected(state);
+    }
+  }
+}
+
+// handle callback from remote DrawLink.
+void DrawServ::grid_message_callback(DrawLink* link, unsigned int id, unsigned int selector, 
+				     int state, unsigned int oldselector)
 {
   void* ptr = nil;
   gridtable()->find(ptr, id);
   if (ptr) {
     GraphicId* grid = (GraphicId*)ptr;
     grid->selector(selector);
-    grid->selected(selected);
   }
 }
 
 // handle reserve request from remote DrawLink.
-void DrawServ::grid_message_propagate(unsigned int id, unsigned int selector, int selected)
+void DrawServ::grid_message_propagate(DrawLink* link, unsigned int id, unsigned int selector, 
+				      int selected, unsigned int otherselector)
 {
   void* ptr = nil;
   gridtable()->find(ptr, id);

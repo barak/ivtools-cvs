@@ -86,9 +86,6 @@ public:
   virtual void SendCmdString(DrawLink* link, const char* cmdstring);
   // execute command string on one remote DrawServ
 
-  virtual void ReserveSelection(GraphicId* grid);
-  // send request to reserve graphic for future selection
-  
   DrawLinkList* linklist() { return _linklist; }
   // return pointer to list of DrawLink's
   
@@ -118,13 +115,19 @@ public:
   unsigned int sessionid() { return _sessionid; }
   // current unique session id.
 
-  void grid_message(unsigned int id, unsigned int selector, int selected);
+  void grid_message(GraphicId* grid);
   // generate graphic id selection message
 
-  void grid_message_handle(unsigned int id, unsigned int selector, int selected);
+  void grid_message_handle(DrawLink* link, unsigned int id, unsigned int selector, 
+			   int state, unsigned int newselector=0);
   // handle graphic id selection message
 
-  void grid_message_propagate(unsigned int id, unsigned int selector, int selected);
+  void grid_message_callback(DrawLink* link, unsigned int id, unsigned int selector, 
+			     int state, unsigned int oldselector);
+  // callback for graphic id selection message 
+
+  void grid_message_propagate(DrawLink* link, unsigned int id, unsigned int selector, 
+			      int state, unsigned int otherselector=0);
   // propagate graphic id selection message
 
   static unsigned int unique_grid();

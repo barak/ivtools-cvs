@@ -48,13 +48,13 @@ public:
 };
 
 //: command to send message between remote selections
-// grid(id selector selected) -- command to send message between remote selections
+// grid(id selector :state selected :request newselector :grant oldselector) -- command to send message between remote selections
 class GraphicIdFunc : public UnidrawFunc {
 public:
     GraphicIdFunc(ComTerp*,Editor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s(id selector selected) -- command to send message between remote selections"; }
+	return "%s(id selector :state selected :request newselector :grant oldselector) -- command to send message between remote selections"; }
 };
 
 #endif /* !defined(_drawfunc_h) */

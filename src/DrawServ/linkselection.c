@@ -117,12 +117,12 @@ void LinkSelection::Reserve() {
 	  
 	  /* make a request to select this in the future */
 	  grid->selected(WaitingToBeSelected);
-	  ((DrawServ*)unidraw)->ReserveSelection(grid);
+	  ((DrawServ*)unidraw)->grid_message(grid);
 	} 
 	
       } else {
 	grid->selected(LocallySelected);
-	((DrawServ*)unidraw)->ReserveSelection(grid);
+	((DrawServ*)unidraw)->grid_message(grid);
       }
       
     }
