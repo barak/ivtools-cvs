@@ -37,13 +37,13 @@ class DrawLinkList;
 // between two remote drawing editors that are linked together.
 class LinkSelection: public OverlaySelection {
 public:
-    LinkSelection(LinkSelection* = nil);
-    LinkSelection(Selection*);
+    LinkSelection(DrawEditor* ed, LinkSelection* = nil);
+    LinkSelection(DrawEditor* ed, Selection*);
 
     virtual void Update(Viewer* = nil); 
     virtual void Clear(Viewer* = nil);
 
-    virtual void Reserve(Editor*);
+    virtual void Reserve();
     // reserve newly created graphics in selection across the network
 
   enum { NotSelected, LocallySelected, RemotelySelected, WaitingToBeSelected };
@@ -51,6 +51,7 @@ public:
   static const char* selected_string(int state) { return _selected_strings[state]; }
 
 protected:
+  DrawEditor* _editor;
   static GraphicIdList* _locally_selected;
   static GraphicIdList* _waiting_to_be_selected;
 

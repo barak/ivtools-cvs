@@ -31,7 +31,6 @@
 
 #include <Unidraw/selection.h>
 
-class Editor;
 class OverlayView;
 class OverlayViewer;
 
@@ -70,7 +69,7 @@ public:
 
     OverlaySelection* ViewsWithin(IntCoord l, IntCoord b, IntCoord r, IntCoord t);
 
-    virtual void Reserve(Editor* ed) { return; }
+    virtual void Reserve() { return; }
     // for use of derived classes
 
 protected:

@@ -48,14 +48,16 @@ char* LinkSelection::_selected_strings[] =  { "NotSelected", "LocallySelected", 
 
 /*****************************************************************************/
 
-LinkSelection::LinkSelection (LinkSelection* s) : OverlaySelection(s) {
+LinkSelection::LinkSelection (DrawEditor* editor, LinkSelection* s) : OverlaySelection(s) {
+  _editor = editor;
   if (!_locally_selected) {
     _locally_selected = new GraphicIdList;
     _waiting_to_be_selected = new GraphicIdList;
   }
 }
 
-LinkSelection::LinkSelection (Selection* s) : OverlaySelection(s) {
+LinkSelection::LinkSelection (DrawEditor* editor, Selection* s) : OverlaySelection(s) {
+  _editor = editor;
   if (!_locally_selected) {
     _locally_selected = new GraphicIdList;
     _waiting_to_be_selected = new GraphicIdList;
@@ -64,13 +66,13 @@ LinkSelection::LinkSelection (Selection* s) : OverlaySelection(s) {
 
 void LinkSelection::Update(Viewer* viewer) {
   fprintf(stderr, "LinkSelection::Update\n");
-  if (viewer) 
-    Reserve(viewer->GetEditor());
+  Reserve();
   OverlaySelection::Update(viewer);
 }
 
 void LinkSelection::Clear(Viewer* viewer) {
   fprintf(stderr, "LinkSelection::Clear\n");
+#if 0
   CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
   Iterator it;
   First(it);
@@ -90,17 +92,19 @@ void LinkSelection::Clear(Viewer* viewer) {
     }
     Next(it);
   }
+#else
+  Reserve();
+#endif
   OverlaySelection::Clear(viewer);
   
 }
 
-void LinkSelection::Reserve(Editor* ed) {
+void LinkSelection::Reserve() {
   fprintf(stderr, "LinkSelection::Reserve\n");
-  static int id_sym = symbol_add("id");
   CompIdTable* table = ((DrawServ*)unidraw)->compidtable();
 
   /* clear anything that was in the previous selection, but not in this one */
-  Selection* lastsel = ((DrawEditor*)ed)->last_selection();
+  Selection* lastsel = _editor->last_selection();
   Iterator lt;
   lastsel->First(lt);
   Iterator it;
@@ -123,9 +127,9 @@ void LinkSelection::Reserve(Editor* ed) {
 	((DrawServ*)unidraw)->grid_message(grid);
       }
     }
-    lastsel->Next(lt);
+    lastsel->Remove(lt);
   }
-  lastsel->Clear();
+
 
   /* remove anything from selection that has a remote selector */
   First(it);
@@ -163,5 +167,9 @@ void LinkSelection::Reserve(Editor* ed) {
   }
 
   /* store copy of selection */
-  lastsel->Merge(this);
+  First(it);
+  while (!Done(it)) {
+    lastsel->Append(GetView(it));
+    Next(it);
+  }
 }
