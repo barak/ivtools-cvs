@@ -91,6 +91,10 @@ void DrawServ::Init() {
 
 DrawServ::~DrawServ () 
 {
+  Iterator it;
+  _linklist->First(it);
+  while(_linklist->GetDrawLink(it) && !_linklist->Done(it))
+    linkdown(_linklist->GetDrawLink(it));
   delete _linklist;
   delete _gridtable;
   delete _sessionidtable;

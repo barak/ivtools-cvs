@@ -218,6 +218,7 @@ int main (int argc, char** argv) {
     newaction.sa_flags = 0;
     newaction.sa_sigaction = 0;
     int status = sigaction(SIGPIPE, &newaction, &oldaction); 
+    fprintf(stderr, "sigaction status %d  errno %d\n", status, errno);
   
 #ifdef HAVE_ACE
     Dispatcher::instance(new AceDispatcher(ComterpHandler::reactor_singleton()));

@@ -26,6 +26,7 @@
  */
 
 #include <DrawServ/drawlink.h>
+#include <DrawServ/drawserv-handler.h>
 #include <Unidraw/globals.h>
 #include <fstream.h>
 #include <unistd.h>
@@ -101,6 +102,7 @@ int DrawLink::open() {
 int DrawLink::close() {
   fprintf(stderr, "Closing link to %s (%s) port # %d (lid=%d, rid=%d)\n", 
 	  hostname(), althostname(), portnum(), local_linkid(), remote_linkid());
+  if (handler()) handler()->drawlink(nil);
   if (_socket) {
     if (_socket->close () == -1)
       ACE_ERROR ((LM_ERROR, "%p\n", "close"));

@@ -92,11 +92,9 @@ void LinkSelection::Clear(Viewer* viewer) {
     }
     Next(it);
   }
-#else
-  Reserve();
 #endif
   OverlaySelection::Clear(viewer);
-  
+  Reserve();
 }
 
 void LinkSelection::Reserve() {

@@ -73,6 +73,8 @@
 
 #define TITLE "GrFunc"
 
+static int transformer_symid = symbol_add("transformer");
+
 /*****************************************************************************/
 
 CreateRectFunc::CreateRectFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
