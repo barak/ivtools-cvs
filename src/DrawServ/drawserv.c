@@ -207,7 +207,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	  AttributeValue* sidv = al->find(sid_sym);
 	  
 	  /* unique id already remotely assigned */
-	  if (idv && idv->uint_val() !=0 && sidv && sidv->uint_val()) {
+	  if (idv && idv->uint_val() !=0 && sidv && sidv->uint_val() !=0) {
 	    GraphicId* grid = new GraphicId();
 	    grid->id(idv->uint_val());
 	    grid->selector(sidv->uint_val());
