@@ -32,6 +32,7 @@
 #include <DrawServ/drawserv-handler.h>
 #include <DrawServ/grid.h>
 #include <DrawServ/gridlist.h>
+#include <DrawServ/linkselection.h>
 
 #include <OverlayUnidraw/ovclasses.h>
 #include <OverlayUnidraw/ovviews.h>
@@ -453,7 +454,7 @@ void DrawServ::reserve_handle(unsigned int id, unsigned int selector)
       
       /* if available, broadcast to everyone */
       char buf[BUFSIZ];
-      snprintf(buf, BUFSIZ, "reserve(0x%08x 0x%08x :chg)%c", id, selector, '\0');
+      snprintf(buf, BUFSIZ, "grid(0x%08x 0x%08x :chg)%c", id, selector, '\0');
       DistributeCmdString(buf);
     }
     
@@ -471,7 +472,7 @@ void DrawServ::reserve_change(unsigned int id, unsigned int selector,
     if (ptr) {
       GraphicId* grid = (GraphicId*)ptr;
       grid->selector(selector);
-      grid->selected(false);
+      grid->selected(LinkSelection::RemotelySelected);
     } else
       fprintf(stderr, "reserve change received for unknown id 0x%08x\n", id);
   } else
@@ -480,6 +481,7 @@ void DrawServ::reserve_change(unsigned int id, unsigned int selector,
 
 boolean DrawServ::reserve_if_not_selected(GraphicId* grid, unsigned int selector) {
   
+#if 0
   /* check if graphic is still locally selected */
   GraphicComp* comp = grid->grcomp();
   boolean selected = false;
@@ -503,5 +505,30 @@ boolean DrawServ::reserve_if_not_selected(GraphicId* grid, unsigned int selector
     grid->selector(selector);
     grid->selected(false);
     return true;
+  }
+#else
+  if (grid->selected() == LinkSelection::NotSelected ||
+      grid->selected() == LinkSelection::PreviouslySelected) {
+    grid->selector(selector);
+    return true;
+  } else if (grid->selected() == LinkSelection::RemotelySelected ||
+	     grid->selected() == LinkSelection::WaitingToBeSelected) 
+    fprintf(stderr, "selection request made it to wrong selector\n");
+  else
+    return false;
+#endif
+}
+
+void DrawServ::print_gridtable() {
+  GraphicIdTable* table = gridtable();
+  GraphicIdTable_Iterator it(*table);
+  printf("id          grid        grcomp      selector    selected\n");
+  printf("----------  ----------  ----------  ----------  --------\n");
+  while(it.more()) {
+    GraphicId* grid = (GraphicId*)it.cur_value();
+    printf("0x%08x  0x%08x  0x%08x  0x%08x  0x%08x  %s\n", 
+	   (unsigned int)it.cur_key(), grid, grid->grcomp(),
+	   grid->selector(), LinkSelection::selected_string(grid->selected()));
+    it.next();
   }
 }

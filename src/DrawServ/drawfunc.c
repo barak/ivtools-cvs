@@ -201,10 +201,10 @@ void SessionIdFunc::execute() {
 
 /*****************************************************************************/
 
-ReserveFunc::ReserveFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+GraphicIdFunc::GraphicIdFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
 }
 
-void ReserveFunc::execute() {
+void GraphicIdFunc::execute() {
   static int chg_sym = symbol_add("chg");
   ComValue chgv(stack_key(chg_sym));
 
@@ -221,6 +221,8 @@ void ReserveFunc::execute() {
       ((DrawServ*)unidraw)->reserve_change
 	(idv.uint_val(), selectorv.uint_val(), chgv.is_true());
     }
+  } else if (idv.is_unknown()) {
+    ((DrawServ*)unidraw)->print_gridtable();
   }
 }
 

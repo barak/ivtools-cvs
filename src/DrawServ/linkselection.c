@@ -27,6 +27,7 @@
 
 #include <DrawServ/drawserv.h>
 #include <DrawServ/grid.h>
+#include <DrawServ/gridlist.h>
 #include <DrawServ/linkselection.h>
 
 #include <OverlayUnidraw/ovcomps.h>
@@ -39,12 +40,24 @@
 
 #include <stdio.h>
 
+GraphicIdList* LinkSelection::_locally_selected = nil;
+GraphicIdList* LinkSelection::_waiting_to_be_selected = nil;
+char* LinkSelection::_selected_strings[] =  { "NotSelected", "LocallySelected", "RemotelySelected", "WaitingToBeSelected", "PreviouslySelected" };
+
 /*****************************************************************************/
 
 LinkSelection::LinkSelection (LinkSelection* s) : OverlaySelection(s) {
+  if (!_locally_selected) {
+    _locally_selected = new GraphicIdList;
+    _waiting_to_be_selected = new GraphicIdList;
+  }
 }
 
 LinkSelection::LinkSelection (Selection* s) : OverlaySelection(s) {
+  if (!_locally_selected) {
+    _locally_selected = new GraphicIdList;
+    _waiting_to_be_selected = new GraphicIdList;
+  }
 }
 
 void LinkSelection::Update(Viewer* viewer) {
@@ -62,8 +75,21 @@ void LinkSelection::Reserve() {
   fprintf(stderr, "LinkSelection::Reserve\n");
   static int id_sym = symbol_add("id");
 
-  /* remove anything from selection that has a remote selector */
+  /* remove everything from the selected and waiting lists */
   Iterator it;
+  _locally_selected->First(it);
+  while (!_locally_selected->Done(it)) {
+    GraphicId* grid = _locally_selected->GetGraphicId(it);
+    _locally_selected->Remove(it);
+    grid->selected(NotSelected);
+  }
+  while (!_waiting_to_be_selected->Done(it)) {
+    GraphicId* grid = _waiting_to_be_selected->GetGraphicId(it);
+    _waiting_to_be_selected->Remove(it);
+    grid->selected(NotSelected);
+  }
+
+  /* remove anything from selection that has a remote selector */
   First(it);
   while (!Done(it)) {
     int removed = false;
@@ -83,6 +109,16 @@ void LinkSelection::Reserve() {
 
 	  Remove(it);
 	  removed = true;
+
+	  /* add to list of graphics waiting to be selected */
+	  grid->selected(WaitingToBeSelected);
+	  _waiting_to_be_selected->Append(grid);
+	} else {
+
+	  /* add to list of graphics currently selected */
+	  grid->selected(LocallySelected);
+	  grid->selector(((DrawServ*)unidraw)->sessionid());
+	  _waiting_to_be_selected->Append(grid);
 	}
       }
     }

@@ -33,6 +33,7 @@
 #include <OS/table.h>
 declareTable(GraphicIdTable,int,void*)
 declareTable(SessionIdTable,int,void*)
+     
 
 //: Unidraw specialized for DrawServ
 // Unidraw (OverlayUnidraw) specialized for DrawServ application.
@@ -130,6 +131,9 @@ public:
   
   static unsigned int GraphicIdMask;
   static unsigned int SessionIdMask;
+
+  void print_gridtable();
+  // print contents of table of GraphicId's
   
 protected:
     DrawLinkList* _linklist;

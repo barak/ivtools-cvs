@@ -48,13 +48,13 @@ public:
 };
 
 //: command to reserve graphics for selection in remote editors
-// reserve([compview ...] :all :clear) -- reserve graphic(s) for remote selection
-class ReserveFunc : public UnidrawFunc {
+// grid(id selector :chg) -- reserve graphic for remote selection
+class GraphicIdFunc : public UnidrawFunc {
 public:
-    ReserveFunc(ComTerp*,Editor*);
+    GraphicIdFunc(ComTerp*,Editor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s([compview ...] :all :clear) -- reserve graphic(s) for remote selection"; }
+	return "%s(id selector :chg) -- reserve graphic for remote selection"; }
 };
 
 #endif /* !defined(_drawfunc_h) */

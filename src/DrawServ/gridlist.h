@@ -95,6 +95,7 @@ protected:
     unsigned int _count;
 
 friend class DrawServ;
+friend class LinkSelection;
 };
 
 #endif

@@ -70,11 +70,11 @@ public:
   unsigned int selector() { return _selector; }
   // get session id of current selector
 
-  void selected(int flag) { _selected = flag; }
-  // set flag that indicates graphic is remotely selected
+  void selected(int state) { _selected = state; }
+  // set selected state
 
   int selected() { return _selected; }
-  // get flag that indicates graphic is remotely selected
+  // get selected state
 
 protected:
   unsigned int _id;
