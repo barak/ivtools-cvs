@@ -213,6 +213,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	  /* unique id already remotely assigned */
 	  if (idv && idv->uint_val() !=0 && sidv && sidv->uint_val() !=0) {
 	    GraphicId* grid = new GraphicId();
+	    grid->grcomp(comp);
 	    grid->id(idv->uint_val());
 	    grid->selector(sidv->uint_val());
 	  } 
@@ -232,6 +233,7 @@ void DrawServ::ExecuteCmd(Command* cmd) {
 	    original = true;
 	  }
 	    
+
 	  if (comp&&original) {
 	    Creator* creator = unidraw->GetCatalog()->GetCreator();
 	    OverlayScript* scripter = (OverlayScript*)
