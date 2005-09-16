@@ -1,0 +1,5 @@
+XCONFIGDIR = /usr/X11R6/lib/X11/config
+ABSTOP = /Users/scott/src/ivtools-1.2
+CPU = DARWIN
+LIBSTDCPLUSPLUS2 = 0
+LIBSTDCPLUSPLUS3 = 1
