@@ -347,6 +347,15 @@ config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp
 		      $(CCINCLUDES)
 #endif
 
+#ifndef IvCFlags
+#define IvCFlags \							@@\
+		      DefaultDebugCCFlags\				@@\
+		      DefaultOptimizeCCFlags\				@@\
+		      $(SHARED_CCFLAGS)\				@@\
+		      $(CDEFINES)\					@@\
+		      $(CCINCLUDES)
+#endif
+
 #ifndef DefaultDebugCCFlags
 #if TurnOnDebugging
 #define DefaultDebugCCFlags $(DEBUG_CCFLAGS)
@@ -401,6 +410,7 @@ config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp
 
             CCFLAGS = CCFlags
          IV_CCFLAGS = IvCCFlags
+          IV_CFLAGS = IvCFlags
       DEBUG_CCFLAGS = DebugCCFlags
    OPTIMIZE_CCFLAGS = OptimizeCCFlags
      SHARED_CCFLAGS = /* defined when MakeLibrary() is used in Imakefile */
@@ -420,8 +430,15 @@ config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp
 #define IvCCDefines $(LANGUAGE_CCDEFINES) $(BACKWARD_CCDEFINES)
 #endif
 
-#ifndef LanguageCCDefines
-#define LanguageCCDefines -Dcplusplus_2_1
+/*
+ * Define the defines passed to the C compiler when we compile a C file.
+ */
+#ifndef CDefines
+#define CDefines $(APP_CCDEFINES) $(IV_CDEFINES) $(OTHER_CCDEFINES) $(EXTRA_CCDEFINES) 
+#endif
+
+#ifndef IvCDefines
+#define IvCDefines -D_POSIX_C_SOURCE $(BACKWARD_CCDEFINES)
 #endif
 
 #ifndef BackwardCompatibilityCCDefines
@@ -478,6 +495,8 @@ config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp
 
           CCDEFINES = CCDefines
        IV_CCDEFINES = IvCCDefines
+           CDEFINES = CDefines
+        IV_CDEFINES = IvCDefines
  LANGUAGE_CCDEFINES = LanguageCCDefines
  BACKWARD_CCDEFINES = /* defined when Use_2_6() is used in Imakefile */
     EXTRA_CCDEFINES = ExtraCCDefines
@@ -609,9 +628,10 @@ CLIPPOLY_CCINCLUDES = ClipPolyCCIncludes
 
 /*
  * Define all the flags passed to the C driver when we compile a C file.
+ * 10/3/05:  change to $(IV_CFLAGS) to avoid -Wno-deprecated warning
  */
 #ifndef CFlags
-#define CFlags CCFlags
+#define CFlags $(APP_CCFLAGS) $(IV_CFLAGS) $(OTHER_CCFLAGS) $(EXTRA_CCFLAGS)  
 #endif
 
              CFLAGS = CFlags
