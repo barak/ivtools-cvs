@@ -27,7 +27,7 @@
  * Name of the software release
  */
 #ifndef Release
-#define	Release ivtools-1.2.2
+#define	Release ivtools-1.2.3
 #endif
 
    RELEASE = Release
@@ -36,7 +36,7 @@
  * VersionNumber
  */
 #ifndef Version
-#define	Version 1.2.2
+#define	Version 1.2.3
 #endif
 
    VERSION = Version
@@ -589,7 +589,7 @@ config.guess config.sub configure configure.in MANIFEST.perceps MANIFEST.comterp
 
 #ifndef TiffCCIncludes
 #ifdef TiffDir
-#define TiffCCIncludes -I$(TIFFINCS)
+#define TiffCCIncludes -I$(TIFFDIR)/include
 #else
 #define TiffCCIncludes /**/
 #endif
@@ -613,6 +613,7 @@ CLIPPOLY_CCINCLUDES = ClipPolyCCIncludes
      ACE_CCINCLUDES = AceCCIncludes
      IUE_CCINCLUDES = IueCCIncludes
       QT_CCINCLUDES = QtCCIncludes
+    TIFF_CCINCLUDES = TiffCCIncludes
 #ifdef ClipPolyDir
         CLIPPOLYDIR = ClipPolyDir
 #endif
@@ -627,6 +628,9 @@ CLIPPOLY_CCINCLUDES = ClipPolyCCIncludes
 #endif
 #ifdef QtDir
               QTDIR = QtDir
+#endif
+#ifdef TiffDir
+            TIFFDIR = TiffDir
 #endif
 
 /*
