@@ -65,6 +65,17 @@ static unsigned MaxPriority;	/* Maximum priority encountered so far */
 				/* Minimum can always be considered zero */
 static int last_operid = -1;
 
+void* opr_tbl_ptr_get()                  { return (void*)OperatorTable; }
+void opr_tbl_ptr_set(void* ptr)          { OperatorTable = ptr; }
+unsigned opr_tbl_numop_get()             { return NumOperators; }
+void opr_tbl_numop_set(unsigned numop)   { NumOperators = numop; }
+unsigned opr_tbl_maxop_get()             { return MaxOperators; }
+void opr_tbl_maxop_set(unsigned maxop)   { MaxOperators = maxop; }
+unsigned opr_tbl_maxpri_get()            { return MaxPriority; }
+void opr_tbl_maxpri_set(unsigned maxpri) { MaxPriority = maxpri; }
+int opr_tbl_lastop_get()                 { return last_operid; } 
+void opr_tbl_lastop_set(int lastop)      { last_operid = lastop; }
+
 #define OPSTR( index ) (symbol_pntr(OperatorTable[index].operid))
 #define OPSTR_LEN( index ) (symbol_len(OperatorTable[index].operid))
 #define COMMAND( index ) (symbol_pntr(OperatorTable[index].commid))
@@ -1046,8 +1057,3 @@ the command referred to by commid.
 {
    return last_operid;
 }
-
-
-
-
-

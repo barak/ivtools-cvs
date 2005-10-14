@@ -176,8 +176,11 @@ char* infunc_retval;
 
 /* Initialize */
    *toktype = TOK_NONE;
-   *toklen = 0;
    *tokstart = 0;
+   if (token_state_save != TOK_STRING)
+     *toklen = 0;
+   else
+     *toklen = strlen(token);
    token_state = token_state_save;
    token_state_save = TOK_WHITESPACE;
 
@@ -305,8 +308,10 @@ char* infunc_retval;
 	 *bufptr = 0;
          CURR_CHAR = buffer[0];
 	 if (CURR_CHAR == '\0') {
-	   if (token_state == TOK_COMMENT)
+	   if (token_state == TOK_COMMENT || token_state == TOK_STRING) {
 	     token_state_save = token_state;
+	     token[*toklen] = '\0';
+  	    }
 	    *linenum--;
 	    return  FUNCOK;
 	 }

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2005 Scott E. Johnston
  * Copyright (c) 1993-1995 Vectaport Inc.
  * Copyright (c) 1989 Triple Vision, Inc.
  *
@@ -164,8 +165,10 @@ if( toktype == TOK_RPAREN ) \
    errid = ERR_UNEXPECTED_RPAREN;\
 else if( toktype == TOK_RBRACKET )\
    errid = ERR_UNEXPECTED_RBRACKET;\
-else\
+else if( toktype == TOK_RBRACE )\
    errid = ERR_UNEXPECTED_RBRACE;\
+else\
+   errid = ERR_UNEXPECTED_RANGBRACK;\
 COMERR_SET1( errid, *linenum );\
 goto error_return;}
 
@@ -175,18 +178,20 @@ if( toktype == TOK_LPAREN ) \
    errid = ERR_UNEXPECTED_LPAREN;\
 else if( toktype == TOK_LBRACKET )\
    errid = ERR_UNEXPECTED_LBRACKET;\
-else\
+else if( toktype == TOK_LBRACE )\
    errid = ERR_UNEXPECTED_LBRACE;\
+else\
+   errid = ERR_UNEXPECTED_LANGBRACK;\
 COMERR_SET1( errid, *linenum );\
 goto error_return;}
 
 #define INSTACK_PRIORITY_HIGHER( incoming_priority ) rkg_instack( incoming_priority)
 
 #define LEFT_PAREN( toktype ) \
-(toktype == TOK_LPAREN || toktype == TOK_LBRACKET || toktype == TOK_LBRACE)
+(toktype == TOK_LPAREN || toktype == TOK_LBRACKET || toktype == TOK_LBRACE || toktype == TOK_LANGBRACK)
 
 #define RIGHT_PAREN( toktype ) \
-(toktype == TOK_RPAREN || toktype == TOK_RBRACKET || toktype == TOK_RBRACE)
+(toktype == TOK_RPAREN || toktype == TOK_RBRACKET || toktype == TOK_RBRACE || toktype == TOK_LANGBRACK)
 
 #define PROCEEDING_WHITESPACE( tokstart ) \
 (tokstart == 0 || isspace( buffer[tokstart-1] ))
@@ -1010,7 +1015,7 @@ int status;
 	 if( expecting == OPTYPE_BINARY ) {
 	     if( !PROCEEDING_WHITESPACE( tokstart ) ||
 		 UNEXPECTED_NEW_EXPRESSION ) {
-		 UNEXPECTED_LPAREN_ERROR( tokstart );
+		 UNEXPECTED_LPAREN_ERROR( toktype );
 	     }
 
              /* End of an argument                     */
