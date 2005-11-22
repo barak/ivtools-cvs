@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2005 Scott E. Johnston
  * Copyright (c) 1994, 1995, 1998 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -28,6 +29,32 @@
 #include <string.h>
 
 #define TITLE "Parser"
+
+extern int _continuation_prompt;
+extern int _continuation_prompt_disabled;
+extern int _skip_shell_comments;
+extern infuncptr _oneshot_infunc;
+extern int _angle_brackets;
+extern unsigned _token_state_save;
+
+extern void* parser_client;             /* pointer to current client */
+extern unsigned expecting;              /* Type of operator expected next */
+
+extern paren_stack *ParenStack;         /* Stack to count args and keywords */
+extern int TopOfParenStack;             /* Top of ParenStack */
+extern int SizeOfParenStack;            /* Allocated size of ParenStack */
+
+extern oper_stack *OperStack;          /* Operator stack */
+extern int TopOfOperStack;             /* Top of OperStack */
+extern int SizeOfOperStack;            /* Allocated size of OperStack */
+
+extern unsigned NextBufptr;            /* Variables for look-ahead token */
+extern char *NextToken;
+extern unsigned NextToklen;    
+extern unsigned NextToktype;
+extern unsigned NextTokstart;
+extern unsigned NextLinenum;
+extern int NextOp_ids[OPTYPE_NUM];
 
 #if __GNUC__>=3
 static char newline;
@@ -69,6 +96,7 @@ void Parser::init() {
     /* Create and load operator table */
     if(opr_tbl_default() != 0) 
 	KANRET("error in creating and loading default operator table");
+
 }
 
 
@@ -166,3 +194,57 @@ int Parser::istream_ferror(void* instreamp) {
   return !in.good();
 }
 
+void Parser::check_parser_client() {
+  if (parser_client==NULL)
+    parser_client = (void*)this;
+  else if (parser_client != (void*)this) {
+    if (_linenum != 0) {
+      parser_client = (void*)this;
+      _continuation_prompt = __continuation_prompt;
+      _continuation_prompt_disabled = __continuation_prompt_disabled;
+      _skip_shell_comments = __skip_shell_comments;
+      _oneshot_infunc = __oneshot_infunc;
+      _angle_brackets  = __angle_brackets ;
+      _token_state_save = __token_state_save;
+      expecting = _expecting;
+      ParenStack = _ParenStack;
+      TopOfParenStack = _TopOfParenStack;
+      SizeOfParenStack = _SizeOfParenStack;
+      OperStack = _OperStack;
+      TopOfOperStack = _TopOfOperStack;
+      SizeOfOperStack = _SizeOfOperStack;
+      NextBufptr = _NextBufptr;
+      NextToken = _NextToken;
+      NextToklen = _NextToklen;    
+      NextToktype = _NextToktype;
+      NextTokstart = _NextTokstart;
+      NextLinenum = _NextLinenum;
+      for (int i=0; i<OPTYPE_NUM; i++)
+	NextOp_ids[i] = _NextOp_ids[i];
+    }
+  }
+}
+
+void Parser::save_parser_client() {
+  __continuation_prompt = _continuation_prompt;
+  __continuation_prompt_disabled = _continuation_prompt_disabled;
+  __skip_shell_comments = _skip_shell_comments;
+  __oneshot_infunc = _oneshot_infunc;
+  __angle_brackets  = _angle_brackets ;
+  __token_state_save = _token_state_save;
+  _expecting = expecting;
+  _ParenStack = ParenStack;
+  _TopOfParenStack = TopOfParenStack;
+  _SizeOfParenStack = SizeOfParenStack;
+  _OperStack = OperStack;
+  _TopOfOperStack = TopOfOperStack;
+  _SizeOfOperStack = SizeOfOperStack;
+  _NextBufptr = NextBufptr;
+  _NextToken = NextToken;
+  _NextToklen = NextToklen;    
+  _NextToktype = NextToktype;
+  _NextTokstart = NextTokstart;
+  _NextLinenum = NextLinenum;
+  for (int i=0; i<OPTYPE_NUM; i++)
+    _NextOp_ids[i] = NextOp_ids[i];
+}

@@ -140,6 +140,25 @@ typedef struct postfix_token_struct
    int nids;		/* Number of ids in compound command name */
 } postfix_token;
 
+/* Structure of stack to count command arguments and keywords */
+typedef struct _paren_stack paren_stack;
+struct _paren_stack 
+{
+  unsigned nids;
+  unsigned narg;
+  unsigned nkey;
+  unsigned paren_type;
+  int comm_id;
+};
+
+/* Structure of stack to store operators and keywords */
+typedef struct _oper_stack oper_stack;
+struct _oper_stack 
+{
+  int id;
+  int oper_type;
+};
+
 /* Package function prototypes */
 #if !defined(OSK)
 #include <ComUtil/comterp.arg>

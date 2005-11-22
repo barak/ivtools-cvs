@@ -355,5 +355,6 @@ protected:
   eoffuncptr _eoffunc;
   errfuncptr _errfunc;
   void* _inptr;
+
 };
 #endif /* !defined(_comterp_h) */

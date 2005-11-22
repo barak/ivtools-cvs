@@ -56,26 +56,12 @@ static int get_next_token(void *infile, char *(*infunc)(), int (*eoffunc)(),
 #define LEFTPAREN 1
 #define KEYWORD   2
 
-/* Structure of stack to count command arguments and keywords */
-typedef struct _paren_stack paren_stack;
-struct _paren_stack 
-{
-  unsigned nids;
-  unsigned narg;
-  unsigned nkey;
-  unsigned paren_type;
-  int comm_id;
-};
-
-/* Structure of stack to store operators and keywords */
-typedef struct _oper_stack oper_stack;
-struct _oper_stack 
-{
-  int id;
-  int oper_type;
-};
-
 /* Static Variables */
+#define EXTERN_VISIBILITY
+#ifdef EXTERN_VISIBILITY
+#define static /**/
+void* parser_client = NULL;                    /* pointer to current client */
+#endif
 static unsigned expecting;              /* Type of operator expected next */
 
 static paren_stack *ParenStack = NULL;  /* Stack to count args and keywords */
@@ -93,6 +79,9 @@ static unsigned NextToktype;
 static unsigned NextTokstart;
 static unsigned NextLinenum;
 static int NextOp_ids[OPTYPE_NUM];
+#ifdef EXTERN_VISIBILITY
+#undef static
+#endif
 
 /* Parenthesis stack macros */
 #define INITIAL_PAREN_STACK_SIZE 32

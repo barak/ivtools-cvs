@@ -32,9 +32,6 @@ Summary:        Lexical scanning routine to recognize C-like tokens
 History:        Written by Scott E. Johnston, March 1989
 */
 
-extern int _continuation_prompt;
-extern int _continuation_prompt_disabled;
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -42,6 +39,11 @@ extern int _continuation_prompt_disabled;
 #include <math.h>
 
 #include "comutil.ci"
+
+extern int _continuation_prompt;
+extern int _continuation_prompt_disabled;
+unsigned _token_state_save = TOK_WHITESPACE;
+				/* variable to save token state between calls */
 
 /* MACROS */
 
@@ -152,8 +154,6 @@ unsigned double_state = FLOAT_INTEGER;
 BOOLEAN long_num = FALSE;       /* Indicates long integer to be used */
 unsigned token_state = TOK_WHITESPACE;
 				/* Internal token state variable */
-static unsigned token_state_save = TOK_WHITESPACE;
-				/* variable to save token state between calls */
 unsigned begcmt_len =           /* Number of characters in comment beginning */
    (begcmt != NULL ? strlen(begcmt) : 0 );
 unsigned endcmt_len =           /* Number of characters in comment ending */
@@ -177,12 +177,12 @@ char* infunc_retval;
 /* Initialize */
    *toktype = TOK_NONE;
    *tokstart = 0;
-   if (token_state_save != TOK_STRING)
+   if (_token_state_save != TOK_STRING)
      *toklen = 0;
    else
      *toklen = strlen(token);
-   token_state = token_state_save;
-   token_state_save = TOK_WHITESPACE;
+   token_state = _token_state_save;
+   _token_state_save = TOK_WHITESPACE;
 
 /* Initialize if linenumber is 0 */
    if( *linenum == 0 ) {
@@ -309,7 +309,7 @@ char* infunc_retval;
          CURR_CHAR = buffer[0];
 	 if (CURR_CHAR == '\0') {
 	   if (token_state == TOK_COMMENT || token_state == TOK_STRING) {
-	     token_state_save = token_state;
+	     _token_state_save = token_state;
 	     token[*toklen] = '\0';
   	    }
 	    *linenum--;

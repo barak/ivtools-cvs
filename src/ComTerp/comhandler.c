@@ -212,7 +212,7 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     if (!ComterpHandler::logger_mode()) {
       comterp_->load_string(inbuf);
       if (fd>0) 
-	cerr << "command via ACE -- " << inbuf << "\n";
+	cerr << "(" << fd << "):  " << inbuf << "\n";
       comterp_->_fd = fd;
       comterp_->_outfunc = (outfuncptr)&ComTerpServ::fd_fputs;
 

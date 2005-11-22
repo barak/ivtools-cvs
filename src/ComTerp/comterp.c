@@ -170,12 +170,13 @@ const ComValue* ComTerp::stack(unsigned int &top) const {
 }
 
 boolean ComTerp::read_expr() {
-    unsigned int toklen, tokstart;
+    check_parser_client();
     int status = parser (_inptr, _infunc, _eoffunc, _errfunc, (FILE*)_outptr, _outfunc,
 			 _buffer, _bufsiz, &_bufptr, _token, _toksiz, &_linenum,
 			 &_pfbuf, &_pfsiz, &_pfnum);
 
     _pfoff = 0;
+    save_parser_client();    
     return status==0 && _pfbuf[_pfnum-1].type != TOK_EOF && _buffer[0] != '\0';
 }
 
@@ -887,7 +888,6 @@ int ComTerp::run(boolean one_expr, boolean nested) {
   _errbuf[0] = '\0';
   char errbuf_save[BUFSIZ];
   errbuf_save[0] = '\0';
-  
 
 #if __GNUC__<3
   filebuf fbuf;
