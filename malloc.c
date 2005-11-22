@@ -254,7 +254,7 @@ inline void      bzero(void* s, int l) { memset(s, 0, l); }
 extern void      bzero(void*, size_t      );
 #endif
 
-extern void      bcopy(void*, void*, size_t      );
+extern void      bcopy(const void*, void*, size_t      );
 
 extern void*     sbrk(size_t      );
 
@@ -1167,6 +1167,8 @@ void* memalign(size_t       alignment, size_t       bytes)
 #ifndef sun
 #include <getpagesize.h>
 #endif
+#else
+int getpagesize(void);
 #endif
 
 static size_t       malloc_pagesize = 0;
