@@ -64,6 +64,9 @@ ComTerpServ::ComTerpServ(int bufsize, int fd)
 
     /* inform the parser which infunc is the oneshot infunc */
     _oneshot_infunc = (infuncptr)&s_fgets;
+  
+    /* initialize shadow copy too */
+    __oneshot_infunc = (infuncptr)&s_fgets;
 
     _logger_mode = 0;
 }

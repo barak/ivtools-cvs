@@ -76,10 +76,19 @@ protected:
     int __continuation_prompt_disabled;
     int __skip_shell_comments;
     infuncptr __oneshot_infunc;
+    int __detail_matched_delims;
+    int __ignore_numerics;
     int __angle_brackets;
     unsigned __token_state_save;
 
     unsigned _expecting;             /* Type of operator expected next */
+
+    /* copy of operator table */
+    void* _opr_tbl_ptr;
+    unsigned _opr_tbl_numop;
+    unsigned _opr_tbl_maxop;
+    unsigned _opr_tbl_maxpri;
+    int _opr_tbl_lastop;
 
     paren_stack* _ParenStack;               /* Stack to count args and keywords */
     int _TopOfParenStack;            /* Top of ParenStack */

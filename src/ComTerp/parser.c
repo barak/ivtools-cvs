@@ -34,6 +34,8 @@ extern int _continuation_prompt;
 extern int _continuation_prompt_disabled;
 extern int _skip_shell_comments;
 extern infuncptr _oneshot_infunc;
+extern int _detail_matched_delims;
+extern int _ignore_numerics;
 extern int _angle_brackets;
 extern unsigned _token_state_save;
 
@@ -97,6 +99,14 @@ void Parser::init() {
     if(opr_tbl_default() != 0) 
 	KANRET("error in creating and loading default operator table");
 
+    /* initialize the backup copies of all the globals */
+    __continuation_prompt = 0;
+    __continuation_prompt_disabled = 0;
+    __skip_shell_comments = 0;
+    __detail_matched_delims = 0;
+    __angle_brackets = 0;
+    __token_state_save = TOK_WHITESPACE;
+    __ignore_numerics = 0;
 }
 
 
@@ -198,14 +208,16 @@ void Parser::check_parser_client() {
   if (parser_client==NULL)
     parser_client = (void*)this;
   else if (parser_client != (void*)this) {
+    parser_client = (void*)this;
+    _continuation_prompt = __continuation_prompt;
+    _continuation_prompt_disabled = __continuation_prompt_disabled;
+    _skip_shell_comments = __skip_shell_comments;
+    _oneshot_infunc = __oneshot_infunc;
+    _detail_matched_delims = __detail_matched_delims;
+    _ignore_numerics = __ignore_numerics;
+    _angle_brackets = __angle_brackets ;
+    _token_state_save = __token_state_save;
     if (_linenum != 0) {
-      parser_client = (void*)this;
-      _continuation_prompt = __continuation_prompt;
-      _continuation_prompt_disabled = __continuation_prompt_disabled;
-      _skip_shell_comments = __skip_shell_comments;
-      _oneshot_infunc = __oneshot_infunc;
-      _angle_brackets  = __angle_brackets ;
-      _token_state_save = __token_state_save;
       expecting = _expecting;
       ParenStack = _ParenStack;
       TopOfParenStack = _TopOfParenStack;
@@ -221,6 +233,11 @@ void Parser::check_parser_client() {
       NextLinenum = _NextLinenum;
       for (int i=0; i<OPTYPE_NUM; i++)
 	NextOp_ids[i] = _NextOp_ids[i];
+      opr_tbl_ptr_set(_opr_tbl_ptr);
+      opr_tbl_numop_set(_opr_tbl_numop);
+      opr_tbl_maxop_set(_opr_tbl_maxop);
+      opr_tbl_maxpri_set(_opr_tbl_maxpri);
+      opr_tbl_lastop_set(_opr_tbl_lastop);
     }
   }
 }
@@ -230,6 +247,8 @@ void Parser::save_parser_client() {
   __continuation_prompt_disabled = _continuation_prompt_disabled;
   __skip_shell_comments = _skip_shell_comments;
   __oneshot_infunc = _oneshot_infunc;
+  __detail_matched_delims = _detail_matched_delims;
+  __ignore_numerics = _ignore_numerics;
   __angle_brackets  = _angle_brackets ;
   __token_state_save = _token_state_save;
   _expecting = expecting;
@@ -247,4 +266,9 @@ void Parser::save_parser_client() {
   _NextLinenum = NextLinenum;
   for (int i=0; i<OPTYPE_NUM; i++)
     _NextOp_ids[i] = NextOp_ids[i];
+  _opr_tbl_ptr = opr_tbl_ptr_get();
+  _opr_tbl_numop = opr_tbl_numop_get();
+  _opr_tbl_maxop = opr_tbl_maxop_get();
+  _opr_tbl_maxpri = opr_tbl_maxpri_get();
+  _opr_tbl_lastop = opr_tbl_lastop_get();
 }

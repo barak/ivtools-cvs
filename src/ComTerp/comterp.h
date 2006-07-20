@@ -137,7 +137,7 @@ public:
     // copy the state of an AttributeValue into a ComValue on the stack, 
     // incrementing the reference count of any AttributeValueList, 
     // otherwise replicating data.
-    boolean stack_empty() { return _stack_top<0; }
+    boolean stack_empty();
 
     ComValue& expr_top(int n=0);
     // top of currently evaluating expression buffer.

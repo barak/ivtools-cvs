@@ -65,6 +65,14 @@ static unsigned MaxPriority;	/* Maximum priority encountered so far */
 				/* Minimum can always be considered zero */
 static int last_operid = -1;
 
+/* variables for preserving default table once created */
+static opr_tbl_is_default = 0;  
+static opr_tbl_entry* opr_tbl_default_table = NULL;
+static unsigned opr_tbl_default_numop;
+static unsigned opr_tbl_default_maxop;
+static unsigned opr_tbl_default_maxpri;
+static int opr_tbl_default_lastop;
+
 void* opr_tbl_ptr_get()                  { return (void*)OperatorTable; }
 void opr_tbl_ptr_set(void* ptr)          { OperatorTable = ptr; }
 unsigned opr_tbl_numop_get()             { return NumOperators; }
@@ -186,6 +194,8 @@ int index;
    NumOperators = 0;
    MaxOperators = maxop;
    MaxPriority  = 0;
+   last_operid = -1; 
+   opr_tbl_is_default = 0;
 
    return FUNCOK;
 
@@ -961,8 +971,20 @@ $          stream             125        Y      UNARY PREFIX
     sizeof( struct _opr_tbl_default_entry );
   int index;
 
-  if (OperatorTable)
+  if (OperatorTable && opr_tbl_is_default)
      return 0;
+
+  /* restore from saved pointers if previously constructed */
+  if (opr_tbl_default_table) {
+    opr_tbl_ptr_set(opr_tbl_default_table);
+    opr_tbl_numop_set(opr_tbl_default_numop);
+    opr_tbl_maxop_set(opr_tbl_default_maxop);
+    opr_tbl_maxpri_set(opr_tbl_default_maxpri);
+    opr_tbl_lastop_set(opr_tbl_default_lastop);
+    return 0;
+  }
+
+  OperatorTable = NULL;
 
   /* Initalize table to the right size */
   if( opr_tbl_create( table_size ) != 0 )
@@ -976,6 +998,12 @@ $          stream             125        Y      UNARY PREFIX
                          DefaultOperatorTable[index].rtol,
 			 DefaultOperatorTable[index].optype ) != 0 )
         KAPUT1( "Unable to add the %d entry to the default operator table", index );
+  opr_tbl_is_default = 1;
+  opr_tbl_default_table = opr_tbl_ptr_get();
+  opr_tbl_default_numop = opr_tbl_numop_get();
+  opr_tbl_default_maxop = opr_tbl_maxop_get();
+  opr_tbl_default_maxpri = opr_tbl_maxpri_get();
+  opr_tbl_default_lastop = opr_tbl_lastop_get();
 
   return 0;
 

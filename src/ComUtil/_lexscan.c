@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2005 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1993-1995 Vectaport Inc.
  * Copyright (c) 1989 Triple Vision, Inc.
@@ -44,6 +45,7 @@ extern int _continuation_prompt;
 extern int _continuation_prompt_disabled;
 unsigned _token_state_save = TOK_WHITESPACE;
 				/* variable to save token state between calls */
+int _ignore_numerics = 0;
 
 /* MACROS */
 
@@ -363,7 +365,7 @@ char* infunc_retval;
             }
 
       /* Start of identifier */
-	 else if( isident( CURR_CHAR )) {
+	 else if( isident( CURR_CHAR ) || (_ignore_numerics && isdigit( CURR_CHAR))) {
 	    token_state = TOK_IDENTIFIER;
 	    TOKEN_ADD( CURR_CHAR );
 	    }
