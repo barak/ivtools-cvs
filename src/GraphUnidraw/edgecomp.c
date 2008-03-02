@@ -297,8 +297,8 @@ void EdgeComp::Interpret(Command* cmd) {
 	    ecmd->Node2()->Notify();
         }
 
-	EdgeUpdateCmd* eucmd = new EdgeUpdateCmd(ecmd->GetEditor(), this);
-	eucmd->Execute();
+	EdgeUpdateCmd eucmd(ecmd->GetEditor(), this);
+	eucmd.Execute();
     }
     else if (cmd->IsA(EDGEUPDATE_CMD)) {
 	int x0, y0, x1, y1;

@@ -505,8 +505,8 @@ void NodeComp::Interpret(Command* cmd) {
 	Editor* ed = cmd->GetEditor();
 	for (node->first(i); !node->done(i); node->next(i)) {
 	    TopoEdge* edge = node->edge(node->elem(i));
-	    EdgeUpdateCmd* eucmd = new EdgeUpdateCmd(ed, (EdgeComp*)edge->value());
-	    eucmd->Execute();
+	    EdgeUpdateCmd eucmd(ed, (EdgeComp*)edge->value());
+	    eucmd.Execute();
 	}
     }
     else if (cmd->IsA(NODETEXT_CMD)) {
@@ -515,6 +515,16 @@ void NodeComp::Interpret(Command* cmd) {
 	SetText(tg);
 	Notify();
 	unidraw->Update();
+    } else if (cmd->IsA(ALIGN_CMD)) {
+        OverlayComp::Interpret(cmd);
+	Iterator i;
+	TopoNode* node = Node();
+	Editor* ed = cmd->GetEditor();
+	for (node->first(i); !node->done(i); node->next(i)) {
+	    TopoEdge* edge = node->edge(node->elem(i));
+	    EdgeUpdateCmd eucmd(ed, (EdgeComp*)edge->value());
+	    eucmd.Execute();
+	}
     }
     else
 	OverlayComp::Interpret(cmd);
@@ -547,8 +557,8 @@ void NodeComp::Uninterpret(Command* cmd) {
 	Editor* ed = cmd->GetEditor();
 	for (node->first(i); !node->done(i); node->next(i)) {
 	    TopoEdge* edge = node->edge(node->elem(i));
-	    EdgeUpdateCmd* eucmd = new EdgeUpdateCmd(ed, (EdgeComp*)edge->value());
-	    eucmd->Execute();
+	    EdgeUpdateCmd eucmd(ed, (EdgeComp*)edge->value());
+	    eucmd.Execute();
 	}
     }
     else if (cmd->IsA(GRAPHDELETE_CMD)) {
@@ -569,6 +579,16 @@ void NodeComp::Uninterpret(Command* cmd) {
 			    (TopoNode*)data->edge->start_node(), Node());
 		}
 	    conn = conn->Next();
+	}
+    } else if (cmd->IsA(ALIGN_CMD)) {
+        OverlayComp::Uninterpret(cmd);
+	Iterator i;
+	TopoNode* node = Node();
+	Editor* ed = cmd->GetEditor();
+	for (node->first(i); !node->done(i); node->next(i)) {
+	    TopoEdge* edge = node->edge(node->elem(i));
+	    EdgeUpdateCmd eucmd(ed, (EdgeComp*)edge->value());
+	    eucmd.Execute();
 	}
     }
     else
