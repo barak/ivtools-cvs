@@ -226,6 +226,8 @@ void ComEditor::AddCommands(ComTerp* comterp) {
     comterp->add_command("pclip", new PixelClipFunc(comterp, this));
     comterp->add_command("alpha", new AlphaTransFunc(comterp, this));
 
+    comterp->add_command("trans", new TransformerFunc(comterp, this));
+
 }
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {

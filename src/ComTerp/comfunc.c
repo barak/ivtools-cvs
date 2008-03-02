@@ -44,6 +44,7 @@ int ComFunc::_symid = -1;
 
 ComFunc::ComFunc(ComTerp* comterp) {
     _comterp = comterp;
+    _context = nil;
 }
 
 void ComFunc::reset_stack() {

@@ -514,6 +514,8 @@ unsigned int AttributeValue::uint_val() {
 	return (unsigned int) boolean_val();
     case AttributeValue::SymbolType:
 	return (unsigned int) int_val();
+    case AttributeValue::ObjectType:
+        return (unsigned int)obj_val();
     default:
 	return 0;
     }
@@ -545,6 +547,8 @@ int AttributeValue::int_val() {
 	return (int) boolean_val();
     case AttributeValue::SymbolType:
 	return int_ref();
+    case AttributeValue::ObjectType:
+        return (int)obj_val();
     default:
 	return 0;
     }
@@ -576,6 +580,8 @@ unsigned long AttributeValue::ulong_val() {
 	return (unsigned long) boolean_val();
     case AttributeValue::SymbolType:
 	return (unsigned long) int_val();
+    case AttributeValue::ObjectType:
+        return (unsigned long)obj_val();
     default:
 	return 0L;
     }
@@ -607,6 +613,8 @@ long AttributeValue::long_val() {
 	return (long) boolean_val();
     case AttributeValue::SymbolType:
 	return (long) int_val();
+    case AttributeValue::ObjectType:
+        return (long)obj_val();
     default:
 	return 0L;
     }

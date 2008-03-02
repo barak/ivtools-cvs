@@ -34,10 +34,11 @@
 #include <OS/types.h>
 #include <ComTerp/comvalue.h>
 #include <Attribute/classid.h>
+#include <Unidraw/Components/component.h>
 
 class AttributeList;
 class ComFuncState;
-class ComTerp;
+class Component;
 class ComTerpServ;
 
 
@@ -171,6 +172,8 @@ public:
     // print contents to ostream, brief or not depending on
     // associated ComTerp brief flag.
 
+    Component* context() { return _context; }
+    void context(Component* comp) { _context = comp; }
 
 protected:
 
@@ -211,6 +214,7 @@ protected:
 
     ComTerp* _comterp;
     int _funcid;
+    Component* _context;
 
     CLASS_SYMID("ComFunc");
 };

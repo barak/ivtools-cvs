@@ -336,6 +336,12 @@ void ComTerp::eval_expr_internals(int pedepth) {
       pop_stack();
     }
 
+    int stack_base = _stack_top;
+    if (!func->post_eval()) 
+      stack_base -= sv.narg()+sv.nkey();
+    else
+      stack_base -= 1;
+
     func->execute();
     func->pop_funcstate();
 
@@ -343,6 +349,11 @@ void ComTerp::eval_expr_internals(int pedepth) {
       push_stack(ComValue::blankval());
       _just_reset = false;
     }
+
+    if (stack_base+1 < _stack_top)
+      fprintf(stderr, "func \"%s\" failed to push a single value on stack\n", symbol_pntr(func->funcid()));
+    else if (stack_base+1 > _stack_top)
+      fprintf(stderr, "func \"%s\" pushed more than a single value on stack\n", symbol_pntr(func->funcid()));
     
   } else if (sv.type() == ComValue::SymbolType) {
 
@@ -1145,6 +1156,7 @@ void ComTerp::add_defaults() {
 
     add_command("print", new PrintFunc(this));
 
+    add_command("usleep", new USleepFunc(this));
 #ifdef HAVE_ACE
     add_command("timeexpr", new TimeExprFunc(this));
 #endif

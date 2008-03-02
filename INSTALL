@@ -82,7 +82,7 @@ or use the Debian binary if you happen to be working on that platform
 	cp config-linux.h config.h  # substitute appropriate OS name
 	cd ../include/makeinclude
 	cp platform_linux.GNU platform_macros.GNU  # substitute OS	
-	emacs platform_macros.GNU   # add "threads = 0" near top of file
+	emacs platform_macros.GNU   # add "threads = 0" near top of file, step may no longer be needed
 	cd ../../ace
 	make
 

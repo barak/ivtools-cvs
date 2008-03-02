@@ -269,6 +269,19 @@ void ShellFunc::execute() {
     return;
 }
 
+USleepFunc::USleepFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void USleepFunc::execute() {
+    ComValue msecv(stack_arg(0));
+    reset_stack();
+
+    if (msecv.int_val()>0) 
+    usleep(msecv.int_val());
+    push_stack(msecv);
+    return;
+}
+
 /*****************************************************************************/
 
 NilFunc::NilFunc(ComTerp* comterp) : ComFunc(comterp) {
