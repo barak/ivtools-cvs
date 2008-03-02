@@ -446,7 +446,7 @@ ostream& operator<< (ostream& out, const AttributeValueList& al) {
 	        out << *attrval->array_ref();
 	        break;
             default:
-		out << "Unknown type";
+		out << "nil";
 	        break;
 	}
 

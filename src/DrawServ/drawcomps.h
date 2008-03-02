@@ -54,6 +54,8 @@ public:
     void AppendEdge(EdgeComp*);
     // add edge component to the graph.
 
+    UList* GraphEdges() { return _graphedges; }
+
 protected:
     UList* _graphedges;
     int _num_edge;

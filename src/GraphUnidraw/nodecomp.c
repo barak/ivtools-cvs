@@ -1323,3 +1323,21 @@ int NodeScript::ReadTextTransform (istream& in, void* addr1, void* addr2, void* 
         return 0;
     }
 }
+
+void NodeComp::nedges(int &nin, int &nout) const {
+  nin = 0;
+  nout = 0;
+
+  TopoNode* toponode = Node();
+  if (toponode) {
+    Iterator it;
+    toponode->first(it);
+    while (!toponode->done(it)) {
+      TopoEdge* edge = toponode->get_edge(it);
+      if (edge && edge->end_node()==toponode) nin++;
+      if (edge && edge->start_node()==toponode) nout++;
+      toponode->next(it);
+    }
+  } 
+}
+
