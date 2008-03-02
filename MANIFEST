@@ -632,6 +632,8 @@ ivtools-1.2/src/OverlayUnidraw/grloctool.c
 ivtools-1.2/src/OverlayUnidraw/grloctool.h
 ivtools-1.2/src/OverlayUnidraw/indexmixins.c
 ivtools-1.2/src/OverlayUnidraw/indexmixins.h
+ivtools-1.2/src/OverlayUnidraw/leafwalker.c
+ivtools-1.2/src/OverlayUnidraw/leafwalker.h
 ivtools-1.2/src/OverlayUnidraw/ovabout.c
 ivtools-1.2/src/OverlayUnidraw/ovabout.h
 ivtools-1.2/src/OverlayUnidraw/ovadjuster.c
