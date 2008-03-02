@@ -89,15 +89,15 @@ public:
     void SetStartNode(int n) { _start_node = n; }
     // set index of node on tail end of arrow.
 
-    int GetEndNode() { return _end_node; }
+    virtual int GetEndNode() { return _end_node; }
     // get index of node on head end of arrow.
-    void SetEndNode(int n) { _end_node = n; }
+    virtual void SetEndNode(int n) { _end_node = n; }
     // set index of node on head end of arrow.
 
-    NodeComp* NodeStart() const;
+    virtual NodeComp* NodeStart() const;
     // return pointer to start node.
 
-    NodeComp* NodeEnd() const;
+    virtual NodeComp* NodeEnd() const;
     // return pointer to end node.
 
     int StartSubEdge() { return _start_subedge; }
@@ -107,7 +107,7 @@ public:
 
     virtual boolean operator == (OverlayComp&);
 
-    static boolean clipline(Coord, Coord, Coord, Coord, Ellipse*, Coord&, Coord&);
+    static boolean clipline(Coord, Coord, Coord, Coord, Ellipse*, boolean, Coord&, Coord&);
     // clip edge graphic with node's ellipse graphic 
 
 protected:

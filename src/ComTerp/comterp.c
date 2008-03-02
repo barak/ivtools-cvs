@@ -75,7 +75,7 @@
 #include <fstream.h>
 #endif
 
-#define LEAKCHECK
+// #define LEAKCHECK
 
 #ifdef LEAKCHECK
 #include <ivstd/leakchecker.h>

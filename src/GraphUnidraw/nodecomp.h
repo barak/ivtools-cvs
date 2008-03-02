@@ -40,6 +40,7 @@ class FullGraphic;
 class GraphComp;
 class NodeView;
 class Picture;
+class Rubberband;
 class SF_Ellipse;
 class TextGraphic;
 class TopoNode;
@@ -210,6 +211,9 @@ public:
     virtual NodeComp* NewNodeComp(SF_Ellipse* ellipse, TextGraphic* txt, boolean reqlabel = false) 
       { return new NodeComp(ellipse, txt, reqlabel); }
     // virtual function to allow construction of specialized NodeComp's by specialized NodeView's
+
+    virtual Rubberband* MakeRubberband(IntCoord x, IntCoord y);
+    // make Rubberband specific to this node.
 
 protected:
     static FullGraphic* _nv_gs;

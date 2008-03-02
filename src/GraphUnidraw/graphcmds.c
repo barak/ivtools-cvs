@@ -101,13 +101,12 @@ static void index_clipboard(Selection* s, Clipboard* cb) {
             GraphicComp* cbgcomp = cb->GetComp(j);
 	    EdgeComp* comp = (EdgeComp*)gcomp;
             TopoEdge* topoedge = comp->Edge();
-            const TopoNode* node;
             int start = -1;
             int end = -1;
-            if ((node = topoedge->start_node()) && selected(s, (NodeComp*)node->value()))
-	        start = node_index(s, (NodeComp*)node->value());
-            if ((node = topoedge->end_node()) && selected(s, (NodeComp*)node->value()))
-	        end = node_index(s, (NodeComp*)node->value());
+            if ((topoedge->start_node()) && selected(s,  comp->NodeStart()))
+	        start = node_index(s, comp->NodeStart());
+            if ((topoedge->end_node()) && selected(s, comp->NodeEnd()))
+	        end = node_index(s, comp->NodeEnd());
 
 	    EdgeComp* cbcomp = (EdgeComp*)cbgcomp;
 	    cbcomp->SetStartNode(start);

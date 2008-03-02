@@ -189,7 +189,7 @@ static void CalcControlPts (Ellipse* ell, Transformer* t,
 }
 
 boolean EdgeComp::clipline(Coord x0, Coord y0, Coord x1, Coord y1, Ellipse* ell,
-	       Coord &nx0, Coord &ny0)
+	       boolean clip1, Coord &nx0, Coord &ny0)
 {
     Coord x[8], y[8];
     FullGraphic gs;
@@ -240,12 +240,12 @@ boolean EdgeComp::clipline(Coord x0, Coord y0, Coord x1, Coord y1, Ellipse* ell,
 		nx0 = Math::round((c2 - c1) / (b2 - b1));
 	    }
 	    else if (!origslopegood) {
-		nx0 = x0;
+		nx0 = clip1? x1 : x0;
 		ny0 = lineobj._p1._y;
 	    }
 	    else {
 		nx0 = lineobj._p1._x;
-		ny0 = y0;
+		ny0 = clip1 ? y1 : y0;
 	    }
 	    return true;
 	}
@@ -261,7 +261,9 @@ void EdgeComp::Interpret(Command* cmd) {
 	    ((GraphDeleteCmd*)cmd)->connections->Append(new UList(
 		new EdgeData(this, (TopoNode*)Edge()->start_node(),
 			     (TopoNode*)Edge()->end_node())));
+	#if defined(GRAPH_OBSERVABLES)
 	if (NodeStart() && NodeEnd()) NodeStart()->detach(NodeEnd());
+	#endif
 	Edge()->attach_nodes(nil, nil);
     }
     else if (cmd->IsA(EDGECONNECT_CMD)) {
@@ -275,7 +277,7 @@ void EdgeComp::Interpret(Command* cmd) {
 	if(ecmd->Node1() && ecmd->Node2()) {
 	  NodeComp* start_node_comp = (NodeComp*)ecmd->Node1();
 	  NodeComp* end_node_comp = (NodeComp*)ecmd->Node2();
-	  #if 0
+	  #if defined(GRAPH_OBSERVABLES)
 	  if (start_node_comp && start_node_comp->IsA(NODE_COMP) &&
 	      end_node_comp && end_node_comp->IsA(NODE_COMP)) {
 	    start_node_comp->attach(end_node_comp);
@@ -303,14 +305,14 @@ void EdgeComp::Interpret(Command* cmd) {
 	GetArrowLine()->GetOriginal(x0, y0, x1, y1);
 	if (Edge()->start_node()) {
 	    float fx, fy;
-	    ((NodeComp*)Edge()->start_node()->value())
+	    ((NodeComp*)NodeStart())
 		->GetEllipse()->GetCenter(fx, fy);
 	    x0 = Math::round(fx);
 	    y0 = Math::round(fy);
 	}
 	if (Edge()->end_node()) {
 	    float fx, fy;
-	    ((NodeComp*)Edge()->end_node()->value())
+	    ((NodeComp*)NodeEnd())
 		->GetEllipse()->GetCenter(fx, fy);
 	    x1 = Math::round(fx);
 	    y1 = Math::round(fy);
@@ -319,53 +321,53 @@ void EdgeComp::Interpret(Command* cmd) {
 	if (Edge()->start_node()) {
 	  SF_Ellipse* e1;
 	  boolean newe = false;
-	  if (((NodeComp*)Edge()->start_node()->value())->GetClassId() == NODE_COMP)
-	    e1 = ((NodeComp*)Edge()->start_node()->value())->GetEllipse();
+	  if (((NodeComp*)NodeStart())->GetClassId() == NODE_COMP)
+	    e1 = ((NodeComp*)NodeStart())->GetEllipse();
 	  else {
 	    int ex0, ey0, ex1, ey1;
-	    ((NodeComp*)Edge()->start_node()->value())->GetGraphic()->
+	    ((NodeComp*)NodeStart())->GetGraphic()->
 	      GetBox(ex0, ey0, ex1, ey1);
 	    e1 = new SF_Ellipse(ex0+(ex1-ex0)/2, ey0+(ey1-ey0)/2,
-			     (ex1-ex0)/2, (ey1-ey0)/2);
+				(ex1-ex0)/2, (ey1-ey0)/2);
 	    newe = true;
 	  }
-
-	    if (clipline(x0, y0, x1, y1, e1,
-			 nx0, ny0)) {
-		x0 = nx0;
-		y0 = ny0;
-	    }
-	    if (newe)
-	      delete e1;
-	    #if defined(GRAPH_OBSERVABLES)
-	    ((NodeComp*)Edge()->start_node()->value())->notify();
-	    #endif
+	  
+	  if (clipline(x0, y0, x1, y1, e1, false /* clip x0, y0 */,
+		       nx0, ny0)) {
+	    x0 = nx0;
+	    y0 = ny0;
+	  }
+	  if (newe)
+	    delete e1;
+#if defined(GRAPH_OBSERVABLES)
+	  ((NodeComp*)Edge()->NodeStart())->notify();
+#endif
 	}
 	Coord nx1, ny1;
 	if (Edge()->end_node()) {
 	  SF_Ellipse* e2;
 	  boolean newe = false;
-	  if (((NodeComp*)Edge()->end_node()->value())->GetClassId() == NODE_COMP)
-	    e2 = ((NodeComp*)Edge()->end_node()->value())->GetEllipse();
+	  if (((NodeComp*)NodeEnd())->GetClassId() == NODE_COMP)
+	    e2 = ((NodeComp*)NodeEnd())->GetEllipse();
 	  else {
 	    int ex0, ey0, ex1, ey1;
-	    ((NodeComp*)Edge()->end_node()->value())->GetGraphic()->
+	    ((NodeComp*)NodeEnd())->GetGraphic()->
 	      GetBox(ex0, ey0, ex1, ey1);
 	    e2 = new SF_Ellipse(ex0+(ex1-ex0)/2, ey0+(ey1-ey0)/2,
 			     (ex1-ex0)/2, (ey1-ey0)/2);
 	    newe = true;
 	  }
-	    if (clipline(x0, y0, x1, y1, e2,
-			 nx1, ny1)) {
-		x1 = nx1;
-		y1 = ny1;
-	    }
-	    if (newe)
-	      delete e2;
+	  if (clipline(x0, y0, x1, y1, e2, true /* clip x1,y1 */,
+		       nx1, ny1)) {
+	    x1 = nx1;
+	    y1 = ny1;
+	  }
+	  if (newe)
+	    delete e2;
 	}
 	GetArrowLine()->SetOriginal(x0, y0, x1, y1);
 	Notify();
-
+	
     } else if (cmd->IsA(MOVE_CMD)) {
         float dx, dy;
         ((MoveCmd*) cmd)->GetMovement(dx, dy);
@@ -549,13 +551,9 @@ Manipulator* EdgeView::CreateManipulator(
 	rubgroup->Append(rub);
 	TopoEdge* edge = ((EdgeComp*)GetGraphicComp())->Edge();
 	if (edge->start_node()) {
-	    NodeComp* nodecmp = (NodeComp*)edge->start_node()->value();
+	    NodeComp* nodecmp = (NodeComp*)((EdgeComp*)GetGraphicComp())->NodeStart();
 	    NodeView* nodeview = nodecmp->GetNodeView(GetViewer());
-	    nodeview->GetEllipse()->GetBox(l, b, r, t);
-	    rub = new SlidingEllipse(nil, nil, l+(r-l)/2, b+(t-b)/2,
-				     Math::round(xradius * v->GetMagnification()),
-				     Math::round(yradius * v->GetMagnification()),
-				     e.x, e.y);
+	    rub = nodeview->MakeRubberband(e.x, e.y);
 	    rubgroup->Append(rub);
 	    Iterator i;
 	    TopoNode* node = nodecmp->Node();
@@ -583,13 +581,9 @@ Manipulator* EdgeView::CreateManipulator(
 	    }
 	}
 	if (edge->end_node()) {
-	    NodeComp* nodecmp = (NodeComp*)edge->end_node()->value();
+	    NodeComp* nodecmp = ((EdgeComp*)GetGraphicComp())->NodeEnd();
 	    NodeView* nodeview = nodecmp->GetNodeView(GetViewer());
-	    nodeview->GetEllipse()->GetBox(l, b, r, t);
-	    rub = new SlidingEllipse(nil, nil, l+(r-l)/2, b+(t-b)/2,
-				     Math::round(xradius * v->GetMagnification()),
-				     Math::round(yradius * v->GetMagnification()),
-				     e.x, e.y);
+	    rub = nodeview->MakeRubberband(e.x, e.y);
 	    rubgroup->Append(rub);
 	    Iterator i;
 	    TopoNode* node = nodecmp->Node();
@@ -734,12 +728,12 @@ Command* EdgeView::InterpretManipulator(Manipulator* m) {
         ((MacroCmd*)cmd)->Append(new MoveCmd(ed, fx1 - fx0, fy1 - fy0));
 	TopoEdge* edge = ((EdgeComp*)GetGraphicComp())->Edge();
 	if (edge->start_node()) {
-	    NodeComp* nodecmp = (NodeComp*)edge->start_node()->value();
+	    NodeComp* nodecmp = (NodeComp*)((EdgeComp*)GetGraphicComp())->NodeStart();
 	    NodeView* nodeview = nodecmp->GetNodeView(GetViewer());
 	    v->GetSelection()->Append(nodeview);
 	}
 	if (edge->end_node()) {
-	    NodeComp* nodecmp = (NodeComp*)edge->end_node()->value();
+	    NodeComp* nodecmp = (NodeComp*)((EdgeComp*)GetGraphicComp())->NodeEnd();
 	    NodeView* nodeview = nodecmp->GetNodeView(GetViewer());
 	    v->GetSelection()->Append(nodeview);
 	}
@@ -856,10 +850,10 @@ void EdgePS::Brush (ostream& out) {
 void EdgePS::IndexNodes(int &start, int &end) {
     TopoEdge* edge = ((EdgeComp*)_subject)->Edge();
     const TopoNode* node;
-    if (node = edge->start_node())
-	start = IndexNode((NodeComp*)node->value());
-    if (node = edge->end_node())
-	end  = IndexNode((NodeComp*)node->value());
+    if (edge->start_node())
+	start = IndexNode(((EdgeComp*)_subject)->NodeStart());
+    if (edge->end_node())
+	end  = IndexNode(((EdgeComp*)_subject)->NodeEnd());
     return;
 }
 
@@ -920,10 +914,10 @@ boolean EdgeScript::Definition (ostream& out) {
 void EdgeScript::IndexNodes(int &start, int &end) {
     TopoEdge* edge = ((EdgeComp*)_subject)->Edge();
     const TopoNode* node;
-    if (node = edge->start_node())
-	start = IndexNode((NodeComp*)node->value());
-    if (node = edge->end_node())
-	end  = IndexNode((NodeComp*)node->value());
+    if (edge->start_node())
+	start = IndexNode(((EdgeComp*)_subject)->NodeStart());
+    if (edge->end_node())
+	end = IndexNode(((EdgeComp*)_subject)->NodeEnd());
     return;
 }
 

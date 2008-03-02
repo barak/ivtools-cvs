@@ -312,12 +312,12 @@ void NodeComp::GraphGraphic(SF_Ellipse* ellipse2) {
 	    x1 = x0 + dx;
 	    y1 = y0 + dy;
        	    arrow = new ArrowLine(x0, y0, x1, y1, false, true, 1.5);
-	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse2, nx, ny)) {
+	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse2, false, nx, ny)) {
 	        x0 = nx;
 	        y0 = ny;
 		arrow->SetOriginal(x0, y0, x1, y1);
 	    } 
-	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse3, nx, ny)) {
+	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse3, true, nx, ny)) {
 	        x1 = nx;
 	        y1 = ny;
 		arrow->SetOriginal(x0, y0, x1, y1);
@@ -329,12 +329,12 @@ void NodeComp::GraphGraphic(SF_Ellipse* ellipse2) {
 	    x0 = x1 - dx;
 	    y0 = y1 - dy;
        	    arrow = new ArrowLine(x1, y1, x0, y0, false, true, 1.5);
-	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse2, nx, ny)) {
+	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse2, true, nx, ny)) {
 	        x1 = nx;
 	        y1 = ny;
 		arrow->SetOriginal(x0, y0, x1, y1);
 	    }
-	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse, nx, ny)) {
+	    if (EdgeComp::clipline(x0, y0, x1, y1, ellipse, false, nx, ny)) {
 	        x0 = nx;
 	        y0 = ny;
 		arrow->SetOriginal(x0, y0, x1, y1);
@@ -386,8 +386,10 @@ void NodeComp::GrowParamList(ParamList* pl) {
 
 SF_Ellipse* NodeComp::GetEllipse() {
     Picture* pic = (Picture*)GetGraphic();
+    if (!pic) return nil;
     Iterator i;
     pic->First(i);
+    if (pic->Done(i)) return nil;
     return (SF_Ellipse*)pic->GetGraphic(i);
 }
 
@@ -690,7 +692,7 @@ NodeComp* NodeComp::NodeIn(int n) const {
   if (edgecomp) {
     TopoEdge* edge = edgecomp->Edge();
     if (edge && edge->start_node()) {
-      return (NodeComp*)edge->start_node()->value();
+      return (NodeComp*)edgecomp->NodeStart();
     }
   }  
   return nil;
@@ -701,7 +703,7 @@ NodeComp* NodeComp::NodeOut(int n) const {
   if (edgecomp) {
     TopoEdge* edge = edgecomp->Edge();
     if (edge && edge->end_node()) {
-      return (NodeComp*)edge->end_node()->value();
+      return (NodeComp*)edgecomp->NodeEnd();
     }
   }  
   return nil;
@@ -865,11 +867,7 @@ Manipulator* NodeView::CreateManipulator(Viewer* v, Event& e, Transformer* rel,
     } else if (tool->IsA(MOVE_TOOL)) {
 	RubberGroup* rubgroup = new RubberGroup(nil,nil);
         v->Constrain(e.x, e.y);
-        v->GetSelection()->GetBox(l, b, r, t);
-        rub = new SlidingEllipse(nil, nil, l+(r-l)/2, b+(t-b)/2, 
-				 Math::round(xradius * v->GetMagnification()),
-				 Math::round(yradius * v->GetMagnification()),
-				 e.x, e.y);
+	rub = MakeRubberband(e.x, e.y);
 	rubgroup->Append(rub);
 	Iterator i;
 	TopoNode* node = ((NodeComp*)GetGraphicComp())->Node();
@@ -928,13 +926,28 @@ Manipulator* NodeView::CreateManipulator(Viewer* v, Event& e, Transformer* rel,
     return m;
 }
 
+
+Rubberband* NodeView::MakeRubberband(IntCoord x, IntCoord y) {
+  Coord l, r, b, t;
+  Viewer* v = GetViewer();
+  GetEllipse()->GetBox(l, b, r, t);
+  Coord cx, cy;
+  int rx, ry;
+  GetEllipse()->GetOriginal(cx, cy, rx, ry);
+  Rubberband* rub = new SlidingEllipse(nil, nil, l+(r-l)/2, b+(t-b)/2,
+				       Math::round(rx * v->GetMagnification()),
+				       Math::round(ry * v->GetMagnification()),
+				       x, y);
+  return rub;
+}
+
 Command* NodeView::InterpretManipulator(Manipulator* m) {
     Tool* tool = m->GetTool();
     Command* cmd = nil;
 
     if (tool->IsA(GRAPHIC_COMP_TOOL)) {
-        Graphic* tpg = ((NodeComp*)GetGraphicComp())->GetText();
-        Graphic* epg = ((NodeComp*)GetGraphicComp())->GetEllipse();
+        TextGraphic* tpg = (TextGraphic*)((NodeComp*)GetGraphicComp())->GetText();
+        SF_Ellipse* epg = (SF_Ellipse*)((NodeComp*)GetGraphicComp())->GetEllipse();
         TextGraphic* textgr;
 	SF_Ellipse* ellipse;
 	Coord xpos, ypos;
@@ -955,7 +968,11 @@ Command* NodeView::InterpretManipulator(Manipulator* m) {
             textgr->SetTransformer(nil);
             textgr->Translate(xpos, ypos);
 
-	    ellipse = new SF_Ellipse(xpos, ypos, xradius, yradius, epg);
+ 	    Coord expos, eypos;
+	    int exradius, eyradius;
+	    epg->GetOriginal(expos, eypos, exradius, eyradius);
+
+	    ellipse = new SF_Ellipse(xpos, ypos, exradius, eyradius, epg);
 	    ellipse->SetTransformer(nil);
 	    BrushVar* brVar = (BrushVar*) ed->GetState("BrushVar");
 	    PatternVar* patVar = (PatternVar*) ed->GetState("PatternVar");
@@ -970,7 +987,10 @@ Command* NodeView::InterpretManipulator(Manipulator* m) {
 		ellipse->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
 	    }
 
+	    #if 0
 	    textgr->Align(Center, ellipse, Center);
+	    #else	    ellipse->Align(Center, textgr, Center);
+	    #endif
 	    cmd = new PasteCmd(ed, new Clipboard(NewNodeComp(ellipse, textgr)));
 	}
 	else {
@@ -1009,7 +1029,11 @@ Command* NodeView::InterpretManipulator(Manipulator* m) {
 		    ellipse->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
 		}
 
+		#if 0
 		textgr->Align(Center, ellipse, Center);
+		#else
+		ellipse->Align(Center, textgr, Center);
+		#endif
 
 		cmd = new PasteCmd(ed, new Clipboard(NewNodeComp(ellipse, textgr, true)));
 	    } else if (size == 0) {

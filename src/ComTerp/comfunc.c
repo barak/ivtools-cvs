@@ -31,7 +31,7 @@
 
 #define TITLE "ComFunc"
 
-#define LEAKCHECK
+//#define LEAKCHECK
 
 #ifdef LEAKCHECK
 #include <ivstd/leakchecker.h>

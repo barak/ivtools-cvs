@@ -41,7 +41,7 @@
 
 #include <IV-2_6/_enter.h>
 
-#define LEAKCHECK
+//#define LEAKCHECK
 
 #ifdef LEAKCHECK
 #include <ivstd/leakchecker.h>
