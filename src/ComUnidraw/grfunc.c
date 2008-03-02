@@ -29,6 +29,7 @@
 #include <ComTerp/comterp.h>
 
 #include <OverlayUnidraw/ovarrow.h>
+#include <OverlayUnidraw/ovclasses.h>
 #include <OverlayUnidraw/oved.h>
 #include <OverlayUnidraw/ovcmds.h>
 #include <OverlayUnidraw/ovselection.h>
@@ -1301,6 +1302,4 @@ void TileFileFunc::execute() {
 	push_stack(ComValue::nullval());
     }
 }
-
-
 
