@@ -35,6 +35,7 @@
 #include <OverlayUnidraw/ovcmds.h>
 #include <OverlayUnidraw/ovellipse.h>
 #include <OverlayUnidraw/ovtext.h>
+#include <OverlayUnidraw/ovunidraw.h>
 #include <OverlayUnidraw/paramlist.h>
 
 #include <IVGlyph/observables.h>
@@ -56,7 +57,6 @@
 #include <Unidraw/statevars.h>
 #include <Unidraw/ulist.h>
 #include <Unidraw/viewer.h>
-#include <Unidraw/unidraw.h>
 #include <UniIdraw/idarrows.h>
 #include <UniIdraw/ided.h>
 #include <IV-2_6/InterViews/painter.h>
@@ -657,7 +657,7 @@ void NodeComp::update(Observable*) {
 #endif
 
 void NodeComp::Notify() {
-  GraphicComp::Notify();
+    GraphicComp::Notify();
 }
 
 EdgeComp* NodeComp::EdgeIn(int n) const {

@@ -101,7 +101,7 @@ void Damage::Merge (BoxObj& newb) {
     diff1 = area1 + newArea - Area(merge1);
     diff2 = area2 + newArea - Area(merge2);
     diff3 = area1 + area2 - Area(merge3);
-    maximum = max(max(diff1, diff2), diff3);
+    maximum = ivmax(ivmax(diff1, diff2), diff3);
 
     if (maximum == diff1) {
 	if (a2->Intersects(merge1)) {

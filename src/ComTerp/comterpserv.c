@@ -23,7 +23,6 @@
  */
 
 #include <ComTerp/comhandler.h>
-
 #include <ComTerp/_comterp.h>
 #include <ComTerp/_comutil.h>
 #include <ComTerp/comterpserv.h>
@@ -161,7 +160,7 @@ char* ComTerpServ::fd_fgets(char* s, int n, void* serv) {
     fileptr_filebuf fbuf(ifptr, ios_base::in);
     istream in (&fbuf);
     in.get(instr, BUFSIZ, '\n');  // needs to be generalized with <vector.h>
-#elif __GNUC__>3
+#elif __GNUC__>3 || defined(__CYGWIN__)
     char instr[BUFSIZ];
     FILE* ifptr = fd==0 ? stdin : server->handler()->rdfptr();
     fileptr_filebuf fbuf(ifptr, ios_base::in);
@@ -214,7 +213,7 @@ int ComTerpServ::fd_fputs(const char* s, void* serv) {
 #elif (__GNUC__==3 && __GNUC_MINOR__<1)
     FILE* ofptr = fd==0 ? stdout : fdopen(fd, "w");
     fileptr_filebuf fbuf(ofptr, ios_base::out);
-#elif __GNUC__>3
+#elif __GNUC__>3 || defined(__CYGWIN__)
     FILE* ofptr = fd==0 ? stdout : server->handler()->wrfptr();
     fileptr_filebuf fbuf(ofptr, ios_base::out);
 #else
@@ -335,7 +334,7 @@ int ComTerpServ::runfile(const char* filename) {
 #elif __GNUC__==3 && __GNUC_MINOR__<1
                 FILE* ofptr = handler() ? fdopen(handler()->get_handle(), "w") : stdout; 
 	        fileptr_filebuf obuf(ofptr, ios_base::out);
-#elif __GNUC__>3
+#elif __GNUC__>3 || defined(__CYGWIN__)
                 FILE* ofptr = handler() ? handler()->wrfptr() : stdout; 
 	        fileptr_filebuf obuf(ofptr, ios_base::out);
 #else
@@ -363,7 +362,7 @@ int ComTerpServ::runfile(const char* filename) {
 #elif __GNUC__==3 && __GNUC_MINOR__<1
           FILE* ofptr = handler() ? fdopen(handler()->get_handle(), "w") : stdout; 
 	  fileptr_filebuf obuf(ofptr, ios_base::out);
-#elif __GNUC__>3
+#elif __GNUC__>3 || defined(__CYGWIN__)
           FILE* ofptr = handler() ? handler()->wrfptr() : stdout; 
 	  fileptr_filebuf obuf(ofptr, ios_base::out);
 #else

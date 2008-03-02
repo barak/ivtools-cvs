@@ -1783,9 +1783,9 @@ OverlayRaster* OverlayRaster::pseudocolor(
 	    newr = grayfract < 0.5 ? 0.0 : (grayfract-.5)*2;
 	    newg = grayfract < 0.5 ? grayfract*2 : 1.0 - (grayfract-.5)*2;
 	    newb = grayfract < 0.5 ? 1.0 - (grayfract-.5)*2 : 0.0;
-	    newr = max((float)0.0, newr);
-	    newg = max((float)0.0, newg);
-	    newb = max((float)0.0, newb);
+	    newr = ivmax((float)0.0, newr);
+	    newg = ivmax((float)0.0, newg);
+	    newb = ivmax((float)0.0, newb);
 #endif
 
 	    color->poke(w, h, newr, newg, newb, 1.0);
@@ -1853,7 +1853,7 @@ RampAlignment OverlayRaster::ramppos(IntCoord x, IntCoord y) {
         dists[i] = dist(x, y, xside[i], yside[i]);
     }
 
-    float side = min(min(dists[0], dists[1]), min(dists[2], dists[3]));
+    float side = ivmin(ivmin(dists[0], dists[1]), ivmin(dists[2], dists[3]));
 
     RampAlignment align;
     if ( side == dists[0] ) {

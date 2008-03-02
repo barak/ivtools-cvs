@@ -389,7 +389,7 @@ void TextGraphic::CalcBox (Coord& l, Coord& b, Coord& r, Coord& t, PSFont* f) {
     
     for (beg = 0; beg < size; beg = nextBeg) {
         GetLine(s, size, beg, end, lineSize, nextBeg);
-        r = max(r, f->Width(&s[beg], lineSize) - 1);
+        r = ivmax(r, f->Width(&s[beg], lineSize) - 1);
         b -= _lineHt;
     }
 }

@@ -146,7 +146,7 @@ void RemoteFunc::execute() {
 #if __GNUC__<3
     filebuf ofbuf;
     ofbuf.attach(socket.get_handle());
-#elif __GNUC__<4
+#elif __GNUC__<4 && !defined(__CYGWIN__)
     fileptr_filebuf ofbuf((int)socket.get_handle(), ios_base::out,
 			  false, static_cast<size_t>(BUFSIZ));
 #else

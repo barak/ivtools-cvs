@@ -667,7 +667,7 @@ boolean ArrowMultiLinePS::Definition (ostream& out) {
     int cnt = 0;
     for (int v=0; v<numverts; v+=limit-1) {
 
-	int n = min(numverts-cnt,limit);
+	int n = ivmin(numverts-cnt,limit);
 
 	if (v==0)
 	    aml->SetArrows(head, false);

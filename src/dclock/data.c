@@ -111,12 +111,12 @@ void MakeSeg( Seg s, SegLayout& base, float Xoff, float Yoff ) {
 void InitData() {
     FadeStep = FadeRate==0 ? 16 : 1;
     SegCode[9][SegD] = (JohnsFlag)? true : false;
-    Slant = min( max( 0,SlantPC ), 100 )/100.0;
-    HThick = min( max( 5,ThickPC ), 25 )/100.0;
-    VThick = min( max( 5,ThickPC ), 25 )/100.0 * 3.0/2.0;
+    Slant = ivmin( ivmax( 0,SlantPC ), 100 )/100.0;
+    HThick = ivmin( ivmax( 5,ThickPC ), 25 )/100.0;
+    VThick = ivmin( ivmax( 5,ThickPC ), 25 )/100.0 * 3.0/2.0;
 
-    Width = Coord( min( max( 100,Width ), 1024));
-    Height = Coord( min( max( 25,Height ), 865));
+    Width = Coord( ivmin( ivmax( 100,Width ), 1024));
+    Height = Coord( ivmin( ivmax( 25,Height ), 865));
     YPos = YPos - Height + 1;// ypos is the TOP of clock; we need the bottom
 
     width = 2*BorderWidth+LMargin+4.0+2*DigitGap+SepGap+RMargin+Slant;

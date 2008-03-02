@@ -156,6 +156,11 @@ public:
     virtual void Notify(); 
     // method specialized from Component that incorporates the Observer/Observable
     // notification with the original Unidraw notification.
+    virtual void NotifyLater();
+    // defers notifications when enabled
+
+    virtual void DeferredNotify();
+    // do all deferred Notify's
 protected:
     ParamList* GetParamList();
     // return ParamList of required/optional/keyword arguments to be read
@@ -175,6 +180,7 @@ protected:
     char* _anno;
     OverlayComp* _parent;
     AttributeList* _attrlist;
+    boolean _notify_deferred;
 
 friend class OverlayScript;
 friend class OverlaysScript;
@@ -273,6 +279,9 @@ public:
     // search component tree for specified attribute value by 'symid'.  Only
     // default argument mode implemented so far -- return first occurence found
     // with a downward depth-first search.
+
+    virtual void DeferredNotify();
+    // do all deferred Notify's
 
 protected:
     OverlayComp* Comp(UList*);

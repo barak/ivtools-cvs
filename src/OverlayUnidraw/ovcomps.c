@@ -32,6 +32,7 @@
 #include <OverlayUnidraw/oved.h>
 #include <OverlayUnidraw/ovpainter.h>
 #include <OverlayUnidraw/ovselection.h>
+#include <OverlayUnidraw/ovunidraw.h>
 #include <OverlayUnidraw/ovviewer.h>
 #include <OverlayUnidraw/ovviews.h>
 #include <OverlayUnidraw/paramlist.h>
@@ -45,7 +46,6 @@
 #include <Unidraw/clipboard.h>
 #include <Unidraw/iterator.h>
 #include <Unidraw/ulist.h>
-#include <Unidraw/unidraw.h>
 
 #include <Unidraw/Commands/datas.h>
 #include <Unidraw/Commands/struct.h>
@@ -95,6 +95,7 @@ OverlayComp::OverlayComp (Graphic* g, OverlayComp* parent) : GraphicComp(g)
     _parent = parent;
     _anno = nil;
     _attrlist = nil;
+    _notify_deferred = 0;
 }
 
 OverlayComp::OverlayComp (istream& in) { 
@@ -102,6 +103,7 @@ OverlayComp::OverlayComp (istream& in) {
     _parent = nil;
     _anno = nil;
     _attrlist = nil;
+    _notify_deferred = 0;
     _valid = GetParamList()->read_args(in, this);
 }
 
@@ -347,8 +349,18 @@ void OverlayComp::update(Observable* obs) {
   Notify();
 }
 
+void OverlayComp::NotifyLater() {
+  Observable::notify();
+
+  if (OverlayUnidraw::deferred_notifications()) 
+    _notify_deferred = 1;
+  else 
+    GraphicComp::Notify();
+}
+
 void OverlayComp::Notify() {
   Observable::notify();
+
   GraphicComp::Notify();
 }
 
@@ -376,6 +388,13 @@ AttributeValue* OverlayComp::FindValue
     return  al->find(symid);
   } else
     return nil;
+}
+
+void OverlayComp::DeferredNotify() {
+  if (_notify_deferred) {
+    GraphicComp::Notify();
+    _notify_deferred = false;
+  }
 }
 
 /*****************************************************************************/
@@ -1171,6 +1190,20 @@ AttributeValue* OverlaysComp::FindValue
     }
   }
   return nil;
+}
+
+void OverlaysComp::DeferredNotify() {
+  if (_notify_deferred) {
+    GraphicComp::Notify();
+    _notify_deferred = false;
+  } else {
+    Iterator i;
+    for (First(i); !Done(i); Next(i)) {
+      OverlayComp* comp = (OverlayComp*)GetComp(i);
+      if (!comp->GetGraphic()->Hidden())
+	((OverlayComp*)GetComp(i))->DeferredNotify();
+    }
+  }
 }
 
 /*****************************************************************************/

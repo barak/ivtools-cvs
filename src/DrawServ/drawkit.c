@@ -100,6 +100,8 @@ declareActionCallback(DrawKit)
 implementActionCallback(DrawKit)
 
 static const int unit = 15;
+static const int xradius = 35;
+static const int yradius = 20;
 
 static int xClosed[] = { unit/5, unit, unit, unit*3/5, 0 };
 static int yClosed[] = { 0, unit/5, unit*3/5, unit, unit*2/5 };
@@ -444,7 +446,7 @@ Glyph* DrawKit::MakeToolbar() {
 					    protoedge),
 			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
 				       layout.hcenter(gedge)), _tg, _ed->MouseDocObservable(), GraphKit::mouse_edge));
-    SF_Ellipse* nellipse = new SF_Ellipse(0, 0, unit, unit*3/5, stdgraphic);
+    SF_Ellipse* nellipse = new SF_Ellipse(0, 0, xradius, yradius, stdgraphic);
     nellipse->SetPattern(psnonepat);
     TextGraphic* ntext = new TextGraphic("___", stdgraphic);
     nellipse->Align(4, ntext, 4); // same as Center in IV-2_6/InterViews/alignment.h
@@ -453,7 +455,7 @@ Glyph* DrawKit::MakeToolbar() {
 					    protonode),
 			layout.overlay(layout.hcenter(layout.hspace(maxwidth)),
 				       layout.hcenter(gnod1)), _tg, _ed->MouseDocObservable(), GraphKit::mouse_node));
-    SF_Ellipse* nellipse2 = new SF_Ellipse(0, 0, unit, unit*3/5, stdgraphic);
+    SF_Ellipse* nellipse2 = new SF_Ellipse(0, 0, xradius, yradius, stdgraphic);
     nellipse2->SetPattern(psnonepat);
     TextGraphic* ntext2 = new TextGraphic("abc", stdgraphic);
     nellipse2->Align(4, ntext2, 4); // same as Center in IV-2_6/InterViews/alignment.h

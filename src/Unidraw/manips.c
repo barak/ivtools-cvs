@@ -729,16 +729,16 @@ void TextManip::DeleteSelection () {
 }
 
 void TextManip::BeginningOfSelection () {
-    Select(min(_mark, _dot));
+    Select(ivmin(_mark, _dot));
 }
 
 void TextManip::EndOfSelection () {
-    Select(max(_mark, _dot));
+    Select(ivmax(_mark, _dot));
 }
 
 void TextManip::BeginningOfWord () {
     if (_dot != _mark) {
-        Select(min(_mark, _dot));
+        Select(ivmin(_mark, _dot));
     } else {
         Select(_text->BeginningOfWord(_dot));
     }
@@ -746,7 +746,7 @@ void TextManip::BeginningOfWord () {
 
 void TextManip::EndOfWord () {
     if (_dot != _mark) {
-        Select(max(_mark, _dot));
+        Select(ivmax(_mark, _dot));
     } else {
         Select(_text->EndOfWord(_dot));
     }
@@ -754,7 +754,7 @@ void TextManip::EndOfWord () {
 
 void TextManip::BeginningOfLine () {
     if (_dot != _mark) {
-        Select(min(_mark, _dot));
+        Select(ivmin(_mark, _dot));
     } else {
         Select(_text->BeginningOfLine(_dot));
     }
@@ -762,7 +762,7 @@ void TextManip::BeginningOfLine () {
 
 void TextManip::EndOfLine () {
     if (_dot != _mark) {
-        Select(max(_mark, _dot));
+        Select(ivmax(_mark, _dot));
     } else {
         Select(_text->EndOfLine(_dot));
     }
@@ -778,7 +778,7 @@ void TextManip::EndOfText () {
 
 void TextManip::ForwardCharacter (int count) {
     if (_mark != _dot) {
-        Select(max(_mark, _dot));
+        Select(ivmax(_mark, _dot));
     } else {
         int d = _dot;
         while (count > 0) {
@@ -791,7 +791,7 @@ void TextManip::ForwardCharacter (int count) {
 
 void TextManip::BackwardCharacter (int count) {
     if (_dot != _mark) {
-        Select(min(_mark, _dot));
+        Select(ivmin(_mark, _dot));
     } else {
         int d = _dot;
         while (count > 0) {
@@ -804,7 +804,7 @@ void TextManip::BackwardCharacter (int count) {
 
 void TextManip::ForwardLine (int count) {
     if (_dot != _mark) {
-        Select(max(_mark, _dot));
+        Select(ivmax(_mark, _dot));
     } else {
         int d = _dot;
         while (count > 0) {
@@ -817,7 +817,7 @@ void TextManip::ForwardLine (int count) {
 
 void TextManip::BackwardLine (int count) {
     if (_dot != _mark) {
-        Select(min(_mark, _dot));
+        Select(ivmin(_mark, _dot));
     } else {
         int d = _dot;
         while (count > 0) {
@@ -830,7 +830,7 @@ void TextManip::BackwardLine (int count) {
 
 void TextManip::ForwardWord (int count) {
     if (_dot != _mark) {
-        Select(max(_mark, _dot));
+        Select(ivmax(_mark, _dot));
     } else {
         int d = _dot;
         while (count > 0) {
@@ -843,7 +843,7 @@ void TextManip::ForwardWord (int count) {
 
 void TextManip::BackwardWord (int count) {
     if (_dot != _mark) {
-        Select(min(_mark, _dot));
+        Select(ivmin(_mark, _dot));
     } else {
         int d = _dot;
         while (count > 0) {
@@ -867,10 +867,10 @@ void TextManip::SelectAll () {
 }
 
 void TextManip::Select (int d, int m) {
-    int oldl = min(_dot, _mark);
-    int oldr = max(_dot, _mark);
-    int newl = min(d, m);
-    int newr = max(d, m);
+    int oldl = ivmin(_dot, _mark);
+    int oldr = ivmax(_dot, _mark);
+    int newl = ivmin(d, m);
+    int newr = ivmax(d, m);
     if (oldl == oldr && newl != newr) {
         _display->CaretStyle(NoCaret);
     }

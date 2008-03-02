@@ -36,6 +36,7 @@
 #include <OverlayUnidraw/ovimport.h>
 #include <OverlayUnidraw/ovselection.h>
 #include <OverlayUnidraw/ovpsview.h>
+#include <OverlayUnidraw/ovunidraw.h>
 #include <OverlayUnidraw/ovviewer.h>
 #include <OverlayUnidraw/ovviews.h>
 #include <OverlayUnidraw/scriptview.h>
@@ -45,7 +46,6 @@
 #include <Unidraw/creator.h>
 #include <Unidraw/globals.h>
 #include <Unidraw/iterator.h>
-#include <Unidraw/unidraw.h>
 #include <Unidraw/Commands/command.h>
 #include <Unidraw/Commands/edit.h>
 #include <Unidraw/Components/compview.h>
