@@ -27,7 +27,6 @@
 
 #include <Unidraw/Graphic/util.h>
 #include <Unidraw/Graphic/verts.h>
-#include <InterViews/transformer.h>
 
 #include <IV-2_6/_enter.h>
 
@@ -130,10 +129,10 @@ void Vertices::s_getExtent (
 	by0 = by1 = y() ? y()[0] : 0.0;
 
 	for (int i = 1; i < count(); ++i) {
-	    bx0 = ivmin(bx0, float(x()[i]));
-	    by0 = ivmin(by0, float(y()[i]));
-	    bx1 = ivmax(bx1, float(x()[i]));
-	    by1 = ivmax(by1, float(y()[i]));
+	    bx0 = min(bx0, float(x()[i]));
+	    by0 = min(by0, float(y()[i]));
+	    bx1 = max(bx1, float(x()[i]));
+	    by1 = max(by1, float(y()[i]));
 	}
 	tcx = (bx0 + bx1) / 2;
 	tcy = (by0 + by1) / 2;
@@ -157,10 +156,10 @@ void Vertices::f_getExtent (
 	bx0 = bx1 = x()[0]; by0 = by1 = y()[0];
 
 	for (int i = 1; i < count(); ++i) {
-	    bx0 = ivmin(bx0, float(x()[i]));
-	    by0 = ivmin(by0, float(y()[i]));
-	    bx1 = ivmax(bx1, float(x()[i]));
-	    by1 = ivmax(by1, float(y()[i]));
+	    bx0 = min(bx0, float(x()[i]));
+	    by0 = min(by0, float(y()[i]));
+	    bx1 = max(bx1, float(x()[i]));
+	    by1 = max(by1, float(y()[i]));
 	}
 	tcx = (bx0 + bx1) / 2;
 	tcy = (by0 + by1) / 2;
@@ -182,15 +181,3 @@ Coord* Vertices::x() {
 Coord* Vertices::y() { 
     return _pts ? _pts->y() : nil; 
 }
-
-boolean Vertices::GetPoint (int index, Coord& px, Coord& py) {
-    if (index<0 || index>=count()) return false;
-    Coord tx, ty;
-    Transformer t;
-    tx = x()[index];
-    ty = y()[index];
-    TotalTransformation(t);
-    t.Transform(tx, ty, px, py);
-    return true;
-}
-

@@ -30,8 +30,8 @@ LineObj::LineObj (LineObj* l) {
 }
 boolean LineObj::Contains (PointObj& p) {
     return
-	(p._x >= ivmin(_p1._x, _p2._x)) && (p._x <= ivmax(_p1._x, _p2._x)) &&
-	(p._y >= ivmin(_p1._y, _p2._y)) && (p._y <= ivmax(_p1._y, _p2._y)) && (
+	(p._x >= min(_p1._x, _p2._x)) && (p._x <= max(_p1._x, _p2._x)) &&
+	(p._y >= min(_p1._y, _p2._y)) && (p._y <= max(_p1._y, _p2._y)) && (
             (p._y - _p1._y)*(_p2._x - _p1._x) - 
             (_p2._y - _p1._y)*(p._x - _p1._x)
         ) == 0;
@@ -72,8 +72,8 @@ boolean LineObj::Intersects (LineObj& l) {  // from Sedgewick, p. 313
 /*****************************************************************************/
 
 BoxObj::BoxObj (Coord x0, Coord y0, Coord x1, Coord y1) {
-    _left = ivmin(x0, x1); _bottom = ivmin(y0, y1); 
-    _right = ivmax(x0, x1); _top = ivmax(y0, y1);
+    _left = min(x0, x1); _bottom = min(y0, y1); 
+    _right = max(x0, x1); _top = max(y0, y1);
 }
 
 BoxObj::BoxObj (BoxObj* b) {
@@ -104,10 +104,10 @@ boolean BoxObj::Intersects (BoxObj& b) {
 }
 
 boolean BoxObj::Intersects (LineObj& l) {
-    Coord x1 = ivmin(l._p1._x, l._p2._x);
-    Coord x2 = ivmax(l._p1._x, l._p2._x);
-    Coord y1 = ivmin(l._p1._y, l._p2._y);
-    Coord y2 = ivmax(l._p1._y, l._p2._y);
+    Coord x1 = min(l._p1._x, l._p2._x);
+    Coord x2 = max(l._p1._x, l._p2._x);
+    Coord y1 = min(l._p1._y, l._p2._y);
+    Coord y2 = max(l._p1._y, l._p2._y);
     BoxObj lbox(x1, y1, x2, y2);
     boolean intersects = false;
 
@@ -130,10 +130,10 @@ BoxObj BoxObj::operator- (BoxObj& b) {
     BoxObj i;
 
     if (Intersects(b)) {
-        i._left = ivmax(_left, b._left);
-	i._bottom = ivmax(_bottom, b._bottom);
-	i._right = ivmin(_right, b._right);
-	i._top = ivmin(_top, b._top);
+        i._left = max(_left, b._left);
+	i._bottom = max(_bottom, b._bottom);
+	i._right = min(_right, b._right);
+	i._top = min(_top, b._top);
     }
     return i;
 }
@@ -141,10 +141,10 @@ BoxObj BoxObj::operator- (BoxObj& b) {
 BoxObj BoxObj::operator+ (BoxObj& b) {
     BoxObj m;
     
-    m._left = ivmin(_left, b._left);
-    m._bottom = ivmin(_bottom, b._bottom);
-    m._right = ivmax(_right, b._right);
-    m._top = ivmax(_top, b._top);
+    m._left = min(_left, b._left);
+    m._bottom = min(_bottom, b._bottom);
+    m._right = max(_right, b._right);
+    m._top = max(_top, b._top);
     return m;
 }
 
@@ -347,10 +347,10 @@ void MultiLineObj::GetBox (BoxObj& b) {
     b._bottom = b._top = _y[0];
 
     for (int i = 1; i < _count; ++i) {
-	b._left = ivmin(b._left, _x[i]);
-	b._bottom = ivmin(b._bottom, _y[i]);
-	b._right = ivmax(b._right, _x[i]);
-	b._top = ivmax(b._top, _y[i]);
+	b._left = min(b._left, _x[i]);
+	b._bottom = min(b._bottom, _y[i]);
+	b._right = max(b._right, _x[i]);
+	b._top = max(b._top, _y[i]);
     }
 }
 
@@ -592,16 +592,16 @@ boolean Extent::Within (Extent& e) {
     }
 
 void Extent::Merge (Extent& e) {
-    float nl = ivmin(_left, e._left);
-    float nb = ivmin(_bottom, e._bottom);
+    float nl = min(_left, e._left);
+    float nb = min(_bottom, e._bottom);
 
     if (Undefined()) {
 	_left = e._left; _bottom = e._bottom; _cx = e._cx; _cy = e._cy;
     } else if (!e.Undefined()) {
-	_cx = (nl + ivmax(2*_cx - _left, 2*e._cx - e._left)) / 2;
-	_cy = (nb + ivmax(2*_cy - _bottom, 2*e._cy - e._bottom)) / 2;
+	_cx = (nl + max(2*_cx - _left, 2*e._cx - e._left)) / 2;
+	_cy = (nb + max(2*_cy - _bottom, 2*e._cy - e._bottom)) / 2;
 	_left = nl;
 	_bottom = nb;
     }
-    _tol = ivmax(_tol, e._tol);
+    _tol = max(_tol, e._tol);
 }

@@ -746,7 +746,7 @@ int& n) {
     if (n > sizepoints) {
         delete xcoords;
         delete ycoords;
-        sizepoints = ivmax(n, INITIALSIZE);
+        sizepoints = max(n, INITIALSIZE);
         xcoords = new Coord[sizepoints];
         ycoords = new Coord[sizepoints];
     }

@@ -60,12 +60,12 @@ char sbuf[SBUFSIZE];
 void NormalRect (Coord& left, Coord& bottom, Coord& right, Coord& top) {
     Coord tempx, tempy;
     
-    tempx = ivmin(left, right);
-    right = ivmax(left, right);
+    tempx = min(left, right);
+    right = max(left, right);
     left = tempx;
     
-    tempy = ivmin(bottom, top);
-    top = ivmax(bottom, top);
+    tempy = min(bottom, top);
+    top = max(bottom, top);
     bottom = tempy;
 }
 

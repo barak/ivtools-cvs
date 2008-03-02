@@ -27,11 +27,11 @@
 
 #include <InterViews/boolean.h>
 
-#if !defined(ivmin) && !defined(ivmax)
+#if !defined(min) && !defined(max)
 
 #define declare_2(T) \
-inline T ivmin(T a, T b) { return a < b ? a : b; } \
-inline T ivmax(T a, T b) { return a > b ? a : b; } \
+inline T min(T a, T b) { return a < b ? a : b; } \
+inline T max(T a, T b) { return a > b ? a : b; } \
 
 declare_2(int)
 declare_2(unsigned)
@@ -43,21 +43,21 @@ declare_2(double)
  */
 
 #define declare_4(T) \
-inline T ivmin(T a, T b, T c, T d) { \
-    T r1 = ivmin(a, b), r2 = ivmin(c, d); \
-    return ivmin(r1, r2); \
+inline T min(T a, T b, T c, T d) { \
+    T r1 = min(a, b), r2 = min(c, d); \
+    return min(r1, r2); \
 } \
 \
-inline T ivmax(T a, T b, T c, T d) { \
-    T r1 = ivmax(a, b), r2 = ivmax(c, d); \
-    return ivmax(r1, r2); \
+inline T max(T a, T b, T c, T d) { \
+    T r1 = max(a, b), r2 = max(c, d); \
+    return max(r1, r2); \
 }
 
 declare_4(int)
 declare_4(float)
 declare_4(double)
 
-#endif /* !defined(ivmin) && !defined(ivmax) */
+#endif /* !defined(min) && !defined(max) */
 
 #if __GNUC__<3 && 0 /* removed, used Math::round from now on */
 inline int round(double x) { return x > 0 ? int(x+0.5) : -int(-x+0.5); }

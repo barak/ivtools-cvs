@@ -412,8 +412,8 @@ void BrushInteractor::Reconfig () {
     Unref(tmp);
 
     const Font* f = output->GetFont();
-    shape->width = ivmax(f->Width(NONE) + 2*HPAD, VIEW_WIDTH);
-    shape->height = ivmax(f->Height() + 2*VPAD, VIEW_HEIGHT);
+    shape->width = max(f->Width(NONE) + 2*HPAD, VIEW_WIDTH);
+    shape->height = max(f->Height() + 2*VPAD, VIEW_HEIGHT);
 
     shape->Rigid(shape->width/2, shape->width, shape->height/2, shape->height);
 }
@@ -565,8 +565,8 @@ void PatternInteractor::Reconfig () {
     Unref(tmp);
 
     const Font* f = output->GetFont();
-    shape->width = ivmax(f->Width(NONE) + 2*HPAD, VIEW_WIDTH);
-    shape->height = ivmax(f->Height() + 2*VPAD, VIEW_HEIGHT);
+    shape->width = max(f->Width(NONE) + 2*HPAD, VIEW_WIDTH);
+    shape->height = max(f->Height() + 2*VPAD, VIEW_HEIGHT);
 
     shape->Rigid(shape->width/2, shape->width, shape->height/2, shape->height);
 }

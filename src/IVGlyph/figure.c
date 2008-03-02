@@ -134,7 +134,7 @@ int Graphic31::ctrlpts (Coord*& x, Coord*& y) const{
 void Graphic31::ctrlpts (Coord* x, Coord* y, int count) {
     delete _x;
     delete _y;
-    _ctrlpts = ivmax(count+1, buf_size);
+    _ctrlpts = max(count+1, buf_size);
     _x = new Coord[_ctrlpts];
     _y = new Coord[_ctrlpts];
     for (int i = 0; i < count; i++) {

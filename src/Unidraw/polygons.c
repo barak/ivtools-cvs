@@ -36,10 +36,10 @@
 /*****************************************************************************/
 
 Rect::Rect (Coord x0, Coord y0, Coord x1, Coord y1, Graphic* gr) : Graphic(gr){
-    _x0 = ivmin(x0, x1);
-    _y0 = ivmin(y0, y1);
-    _x1 = ivmax(x0, x1);
-    _y1 = ivmax(y0, y1);
+    _x0 = min(x0, x1);
+    _y0 = min(y0, y1);
+    _x1 = max(x0, x1);
+    _y1 = max(y0, y1);
 }
 
 void Rect::GetOriginal (Coord& x0, Coord& y0, Coord& x1, Coord& y1) {

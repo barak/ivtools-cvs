@@ -114,7 +114,7 @@ void DFace::Set (char *today, int hours, int minutes) {
 	}
     }
 
-    unsigned long fade = FadeDelay * (1 << (ivmin(4,ivmax(0,FadeRate))) );
+    unsigned long fade = FadeDelay * (1 << (min(4,max(0,FadeRate))) );
     Event e;
     boolean done_fading = false;
     while (showTime && !done_fading && !done) {

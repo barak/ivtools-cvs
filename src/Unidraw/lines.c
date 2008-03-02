@@ -164,8 +164,8 @@ void Line::getExtent (
     transform(float(_x0+_x1)/2, float(_y0+_y1)/2, cx, cy, gs);
     transform(float(_x0), float(_y0), l, b, gs);
     transform(float(_x1), float(_y1), r, t, gs);
-    l = ivmin(l, r);
-    b = ivmin(b, t);
+    l = min(l, r);
+    b = min(b, t);
 }
 
 boolean Line::contains (PointObj& po, Graphic* gs) {

@@ -525,7 +525,7 @@ int ReadImageHandler::process(const char* newdat, int len) {
     int h = rr->GetOverlayRaster()->pheight();
     int w = rr->GetOverlayRaster()->pwidth();
     int xbeg = 0;
-    int yend = ivmin(_itr->ycur() + (int)ceil(1./mag), h-1);
+    int yend = min(_itr->ycur() + (int)ceil(1./mag), h-1);
     _itr->getPixels(in); 
     int xend = w-1;
     int ybeg = _itr->ycur() + 1;
@@ -550,7 +550,7 @@ int ReadImageHandler::process(const char* newdat, int len) {
 	   // << sxend << "," << syend << "\n";
       
 //      if ( _lastmag == mag ) 
-	viewer->GetDamage()->Incur(ivmin(sxbeg,sxend)-1,ivmin(sybeg,syend)-1, ivmax(sxend, sxbeg)+1, ivmax(syend, sybeg)+1);
+	viewer->GetDamage()->Incur(min(sxbeg,sxend)-1,min(sybeg,syend)-1, max(sxend, sxbeg)+1, max(syend, sybeg)+1);
 //      else {
 //	cerr << "ReadImageHandler::process -- damaging entire raster\n";
 //	cerr << "ReadImageHandler::process -- mag is now " << mag << "\n";
@@ -2316,10 +2316,10 @@ OverlayRaster* OvImportCmd::PI_Raster_Read(
     boolean compressed, boolean tiled, boolean delayed, OverlayRaster* raster,
     IntCoord xbeg, IntCoord xend, IntCoord ybeg, IntCoord yend
 ) {
-    xbeg = xbeg < 0 ? 0 : ivmin(xbeg, ncols-1);
-    xend = xend < 0 ? ncols-1 : ivmin(xend, ncols-1);
-    ybeg = ybeg < 0 ? 0 : ivmin(ybeg, nrows-1);
-    yend = yend < 0 ? nrows-1 : ivmin(yend, nrows-1);
+    xbeg = xbeg < 0 ? 0 : min(xbeg, ncols-1);
+    xend = xend < 0 ? ncols-1 : min(xend, ncols-1);
+    ybeg = ybeg < 0 ? 0 : min(ybeg, nrows-1);
+    yend = yend < 0 ? nrows-1 : min(yend, nrows-1);
 
     if (!raster) 
 	raster = pih->create_raster(xend-xbeg+1, yend-ybeg+1);

@@ -172,12 +172,12 @@ void CommandInteractor::Reconfig () {
 
     _label->GetBox(x0, y0, x1, y1);
     shape->width = 2*HPAD + x1 - x0;
-    shape->height = ivmax(2*VPAD + y1 - y0, MINHT);
+    shape->height = max(2*VPAD + y1 - y0, MINHT);
 
     if (*kl != '\0') {
 	Font* f = stdgraphic->GetFont();
 	shape->width += f->Width(kl) + SEP;
-	shape->height = ivmax(shape->height, f->Height() + 2*VPAD);
+	shape->height = max(shape->height, f->Height() + 2*VPAD);
     }
     shape->Rigid(shape->width, hfil, 0, 0);
 }
@@ -250,7 +250,7 @@ void PanelInteractor::Reconfig () {
 	shape->width += 2 * f->Width(kl) + HPAD;
 	shape->height += f->Height();
     }
-    shape->height = ivmax(shape->height, MINHT);
+    shape->height = max(shape->height, MINHT);
 
     if (_orient == Horizontal) {
         shape->Rigid(0, shape->width, 0, vfil);

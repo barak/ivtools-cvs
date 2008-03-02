@@ -493,8 +493,8 @@ void GraphicBlock::RateScroll (Event& e) {
 
         s.curx -= dx;
         s.cury -= dy;
-        s.curx = ivmin(ivmax(s.x0, s.curx), s.x0 + s.width - s.curwidth);
-        s.cury = ivmin(ivmax(s.y0, s.cury), s.y0 + s.height - s.curheight);
+        s.curx = min(max(s.x0, s.curx), s.x0 + s.width - s.curwidth);
+        s.cury = min(max(s.y0, s.cury), s.y0 + s.height - s.curheight);
 
         Adjust(s);
         Poll(e);

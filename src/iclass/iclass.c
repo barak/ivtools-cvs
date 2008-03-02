@@ -196,7 +196,7 @@ void IClass::Visit (const char* filename) {
         if (f != nil) {
             struct stat filestats;
             stat(filename, &filestats);
-            _bufsize = ivmax(Math::round(filestats.st_size * 1.2), MINTEXTSIZE);
+            _bufsize = max(Math::round(filestats.st_size * 1.2), MINTEXTSIZE);
             _buf = new char[_bufsize];
             char* b = _buf;
             int remaining = _bufsize;

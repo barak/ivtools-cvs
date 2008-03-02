@@ -109,11 +109,11 @@ CSGlue* CSGlue::Series (CSGlue* g) {
 CSGlue* CSGlue::Parallel (CSGlue* g) {
     CSGlue* combo = new CSGlue;
 
-    combo->_natural = ivmax(_natural, g->_natural);
-    combo->_stretch = ivmin(_stretch, g->_stretch);
-    combo->_shrink = ivmin(_shrink, g->_shrink);
-    combo->_strlim = ivmin(_strlim, g->_strlim);
-    combo->_shrlim = ivmin(_shrlim, g->_shrlim);
+    combo->_natural = max(_natural, g->_natural);
+    combo->_stretch = min(_stretch, g->_stretch);
+    combo->_shrink = min(_shrink, g->_shrink);
+    combo->_strlim = min(_strlim, g->_strlim);
+    combo->_shrlim = min(_shrlim, g->_shrlim);
 
     return combo;
 }
@@ -122,8 +122,8 @@ CSGlue* CSGlue::a_Y (CSGlue* b, CSGlue* c) {
     CSGlue* combo = new CSGlue;
 
     combo->_natural = _natural + b->_natural;
-    combo->_stretch = ivmin(_stretch + b->_stretch, c->_stretch);
-    combo->_shrink = ivmin(_shrink + b->_shrink, c->_shrink);
+    combo->_stretch = min(_stretch + b->_stretch, c->_stretch);
+    combo->_shrink = min(_shrink + b->_shrink, c->_shrink);
     combo->_strlim = _strlim + b->_strlim;
     combo->_shrlim = _shrlim + b->_shrlim;
 
@@ -134,8 +134,8 @@ CSGlue* CSGlue::b_Y (CSGlue* b, CSGlue* c) {
     CSGlue* combo = new CSGlue;
 
     combo->_natural = c->_natural - b->_natural;
-    combo->_stretch = ivmin(b->_stretch + c->_stretch, _stretch);
-    combo->_shrink = ivmin(b->_shrink + c->_shrink, _shrink);
+    combo->_stretch = min(b->_stretch + c->_stretch, _stretch);
+    combo->_shrink = min(b->_shrink + c->_shrink, _shrink);
     combo->_strlim = c->_strlim - b->_strlim;
     combo->_shrlim = c->_shrlim - b->_shrlim;
 
@@ -146,8 +146,8 @@ CSGlue* CSGlue::c_Y (CSGlue* b, CSGlue* c) {
     CSGlue* combo = new CSGlue;
 
     combo->_natural = _natural + c->_natural;
-    combo->_stretch = ivmin(_stretch + c->_stretch, b->_stretch);
-    combo->_shrink = ivmin(_shrink + c->_shrink, b->_shrink);
+    combo->_stretch = min(_stretch + c->_stretch, b->_stretch);
+    combo->_shrink = min(_shrink + c->_shrink, b->_shrink);
     combo->_strlim = _strlim + c->_strlim;
     combo->_shrlim = _shrlim + c->_shrlim;
 
@@ -155,7 +155,7 @@ CSGlue* CSGlue::c_Y (CSGlue* b, CSGlue* c) {
 }
 
 void CSGlue::Limit (float& deform) {
-    deform = ivmin(ivmax(-_shrlim, deform), _strlim);
+    deform = min(max(-_shrlim, deform), _strlim);
 }
 
 void CSGlue::Reverse () {
