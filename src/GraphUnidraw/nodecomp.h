@@ -115,6 +115,8 @@ public:
     // return pointer to ellipse graphic.
     TextGraphic* GetText();
     // return pointer to text graphic.
+    void SetText(TextGraphic*);
+    // set pointer to text graphic.
     SF_Ellipse* GetEllipse2();
     // return pointer to second ellipse graphic used to indicate internal graph.
     EdgeComp* SubEdgeComp(int);

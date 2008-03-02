@@ -247,10 +247,6 @@ int ComTerp::eval_expr(ComValue* pfvals, int npfvals) {
 
 void ComTerp::eval_expr_internals(int pedepth) {
   static int step_symid = symbol_add("step");
-  static ComFunc* stepfunc = nil;
-  if (!stepfunc)
-    stepfunc = new ComterpStepFunc(this);
-
   ComValue sv = pop_stack(false);
   
   if (sv.type() == ComValue::CommandType) {
@@ -333,9 +329,10 @@ void ComTerp::eval_expr_internals(int pedepth) {
       static int pause_symid = symbol_add("pause");
       ComValue pausekey(pause_symid, 0, ComValue::KeywordType);
       push_stack(pausekey);
-      stepfunc->push_funcstate(0,1, pedepth, step_symid);
-      stepfunc->execute();
-      stepfunc->pop_funcstate();
+      ComterpStepFunc stepfunc(this);
+      stepfunc.push_funcstate(0,1, pedepth, step_symid);
+      stepfunc.execute();
+      stepfunc.pop_funcstate();
       pop_stack();
     }
 
@@ -954,7 +951,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
     fbuf.attach(fd);
   } else
     fbuf.attach(fileno(stdout));
-#elif (__GNUC__==3 && __GNUC_MINOR__<1) || __GNUC__>3
+#elif (__GNUC__==3 && __GNUC_MINOR__<1) || __GNUC__>3 || defined(__CYGWIN__)
   fileptr_filebuf fbuf(handler() && handler()->wrfptr() 
 	       ? handler()->wrfptr() : stdout, 
 	       ios_base::out);

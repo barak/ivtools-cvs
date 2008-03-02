@@ -671,6 +671,7 @@ void UnidrawPauseFunc::execute() {
   } else {
     cerr << "this version of pause command only works with ComTextEditor\n";
   }
+  push_stack(ComValue::blankval());
 }
 
 /*****************************************************************************/

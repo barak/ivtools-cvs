@@ -442,6 +442,9 @@ ostream& operator<< (ostream& out, const AttributeValueList& al) {
 	    case AttributeValue::BooleanType:
 	        out << attrval->boolean_ref();
 	        break;
+	    case AttributeValue::ArrayType:
+	        out << *attrval->array_ref();
+	        break;
             default:
 		out << "Unknown type";
 	        break;
@@ -464,3 +467,39 @@ void AttributeValueList::clear() {
   }
 }
 
+AttributeValue* AttributeValueList::Get(unsigned int index) {
+  if (Number()<=index) return nil;
+  Iterator it;
+  First(it);
+  for (int i=0; i<index; i++) Next(it);
+  return GetAttrVal(it);
+}
+
+AttributeValue* AttributeValueList::Set(unsigned int index, AttributeValue* av) {
+  if (Number()<=index) {
+    Iterator it;
+    Last(it);
+    int padding = index-Number();
+    for (int i=0; i<padding; i++) Append(new AttributeValue());
+    Append(av);
+    return nil;
+  }
+  else {
+    Iterator it;
+    First(it);
+    for (int i=0; i<index; i++) Next(it);
+    AttributeValue* oldv = Replace(it, av);
+    return oldv;
+  }
+}
+
+AttributeValue* AttributeValueList::Replace (ALIterator& i, AttributeValue* av) {
+    AList* doomed = Elem(i);
+    AttributeValue* removed = GetAttrVal(i);
+    Next(i);
+    _alist->Remove(doomed);
+    delete doomed;
+    Elem(i)->Append(new AList(av));
+    return removed;
+}	
+    

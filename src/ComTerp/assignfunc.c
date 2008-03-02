@@ -99,8 +99,8 @@ void ModAssignFunc::execute() {
 	push_stack(*(ComValue*)op1val);
 	delete (ComValue*)op1val;
 	push_stack(operand2);
-	static ModFunc* subfunc = new ModFunc(comterp());
-	subfunc->exec(2,0);
+	ModFunc modfunc(comterp());
+	modfunc.exec(2,0);
 	ComValue* result = new ComValue(pop_stack());
         _comterp->localtable()->insert(operand1.symbol_val(), result);
 	push_stack(*result);
@@ -130,8 +130,8 @@ void MpyAssignFunc::execute() {
 	push_stack(*(ComValue*)op1val);
 	delete (ComValue*)op1val;
 	push_stack(operand2);
-	static MpyFunc* subfunc = new MpyFunc(comterp());
-	subfunc->exec(2,0);
+	MpyFunc mpyfunc(comterp());
+	mpyfunc.exec(2,0);
 	ComValue* result = new ComValue(pop_stack());
         _comterp->localtable()->insert(operand1.symbol_val(), result);
 	push_stack(*result);
@@ -161,8 +161,8 @@ void AddAssignFunc::execute() {
 	push_stack(*(ComValue*)op1val);
 	delete (ComValue*)op1val;
 	push_stack(operand2);
-	static AddFunc* subfunc = new AddFunc(comterp());
-	subfunc->exec(2,0);
+	AddFunc addfunc(comterp());
+	addfunc.exec(2,0);
 	ComValue* result = new ComValue(pop_stack());
         _comterp->localtable()->insert(operand1.symbol_val(), result);
 	push_stack(*result);
@@ -192,8 +192,8 @@ void SubAssignFunc::execute() {
 	push_stack(*(ComValue*)op1val);
 	delete (ComValue*)op1val;
 	push_stack(operand2);
-	static SubFunc* subfunc = new SubFunc(comterp());
-	subfunc->exec(2,0);
+	SubFunc subfunc(comterp());
+	subfunc.exec(2,0);
 	ComValue* result = new ComValue(pop_stack());
         _comterp->localtable()->insert(operand1.symbol_val(), result);
 	push_stack(*result);
@@ -223,8 +223,8 @@ void DivAssignFunc::execute() {
 	push_stack(*(ComValue*)op1val);
 	delete (ComValue*)op1val;
 	push_stack(operand2);
-	static DivFunc* subfunc = new DivFunc(comterp());
-	subfunc->exec(2,0);
+	DivFunc divfunc(comterp());
+	divfunc.exec(2,0);
 	ComValue* result = new ComValue(pop_stack());
         _comterp->localtable()->insert(operand1.symbol_val(), result);
 	push_stack(*result);
@@ -253,8 +253,8 @@ void IncrFunc::execute() {
 	    one.type(ComValue::IntType);
 	    one.int_ref() = 1;
 	    push_stack(one);
-	    static AddFunc* subfunc = new AddFunc(comterp());
-	    subfunc->exec(2,0);
+	    AddFunc addfunc(comterp());
+	    addfunc.exec(2,0);
 	    ComValue* result = new ComValue(pop_stack());
             _comterp->localtable()->insert(operand1.symbol_val(), result);
 	    push_stack(*result);
@@ -284,8 +284,8 @@ void IncrAfterFunc::execute() {
 	    one.type(ComValue::IntType);
 	    one.int_ref() = 1;
 	    push_stack(one);
-	    static AddFunc* subfunc = new AddFunc(comterp());
-	    subfunc->exec(2,0);
+	    AddFunc addfunc(comterp());
+	    addfunc.exec(2,0);
 	    ComValue* result = new ComValue(pop_stack());
             _comterp->localtable()->insert(operand1.symbol_val(), result);
 	    push_stack(*(ComValue*)op1val);
@@ -317,8 +317,8 @@ void DecrFunc::execute() {
 	    one.type(ComValue::IntType);
 	    one.int_ref() = 1;
 	    push_stack(one);
-	    static SubFunc* subfunc = new SubFunc(comterp());
-	    subfunc->exec(2,0);
+	    SubFunc subfunc(comterp());
+	    subfunc.exec(2,0);
 	    ComValue* result = new ComValue(pop_stack());
             _comterp->localtable()->insert(operand1.symbol_val(), result);
 	    push_stack(*result);
@@ -348,8 +348,8 @@ void DecrAfterFunc::execute() {
 	    one.type(ComValue::IntType);
 	    one.int_ref() = 1;
 	    push_stack(one);
-	    static SubFunc* subfunc = new SubFunc(comterp());
-	    subfunc->exec(2,0);
+	    SubFunc subfunc(comterp());
+	    subfunc.exec(2,0);
 	    ComValue* result = new ComValue(pop_stack());
             _comterp->localtable()->insert(operand1.symbol_val(), result);
 	    push_stack(*(ComValue*)op1val);

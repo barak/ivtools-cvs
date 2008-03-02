@@ -417,6 +417,18 @@ TextGraphic* NodeComp::GetText() {
 	return (TextGraphic*)pic->GetGraphic(i);
 }
 
+void NodeComp::SetText(TextGraphic* tg) {
+  TextGraphic* oldtg = GetText();
+  if (oldtg) {
+    ((Picture*)GetGraphic())->Remove(oldtg);
+    delete oldtg;
+  }
+  Iterator it;
+  GetGraphic()->First(it);
+  GetGraphic()->InsertAfter(it, tg);
+}
+
+
 ArrowLine* NodeComp::SubEdgeGraphic(int index) {
     if (!GetGraph() || index == -1)
 	return nil;
@@ -500,9 +512,7 @@ void NodeComp::Interpret(Command* cmd) {
     else if (cmd->IsA(NODETEXT_CMD)) {
 	NodeTextCmd* ntcmd = (NodeTextCmd*)cmd;
 	TextGraphic* tg = ntcmd->Graphic();
-	if (GetText())
-	    ((Picture*)GetGraphic())->Remove(GetText());
-	((Picture*)GetGraphic())->Append(tg);
+	SetText(tg);
 	Notify();
 	unidraw->Update();
     }
@@ -989,7 +999,8 @@ Command* NodeView::InterpretManipulator(Manipulator* m) {
 
 	    #if 0
 	    textgr->Align(Center, ellipse, Center);
-	    #else	    ellipse->Align(Center, textgr, Center);
+	    #else
+	    ellipse->Align(Center, textgr, Center);
 	    #endif
 	    cmd = new PasteCmd(ed, new Clipboard(NewNodeComp(ellipse, textgr)));
 	}

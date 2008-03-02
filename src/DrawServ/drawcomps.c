@@ -46,7 +46,7 @@
 ParamList* DrawIdrawComp::_com_idraw_params = nil;
 
 DrawIdrawComp::DrawIdrawComp (const char* pathname, OverlayComp* parent)
-: FrameIdrawComp(true, pathname, parent) {
+: FrameIdrawComp(false, pathname, parent) {
     _graphedges = new UList();
 }
 
