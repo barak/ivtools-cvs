@@ -419,10 +419,14 @@ TextGraphic* NodeComp::GetText() {
 
 void NodeComp::SetText(TextGraphic* tg) {
   TextGraphic* oldtg = GetText();
+  Transformer t;
   if (oldtg) {
+    if (oldtg->GetTransformer()) 
+      t = *oldtg->GetTransformer();
     ((Picture*)GetGraphic())->Remove(oldtg);
     delete oldtg;
   }
+  tg->SetTransformer(new Transformer(t));
   Iterator it;
   GetGraphic()->First(it);
   GetGraphic()->InsertAfter(it, tg);

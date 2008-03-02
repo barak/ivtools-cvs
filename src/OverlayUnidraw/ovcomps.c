@@ -397,6 +397,42 @@ void OverlayComp::DeferredNotify() {
   }
 }
 
+boolean OverlayComp::IsPrev(OverlayComp* prev) {
+  OverlaysComp* parent = (OverlaysComp*)GetParent();
+  if (!parent) return false;
+  Iterator it;
+  parent->First(it);
+  while (parent->GetComp(it) != this) parent->Next(it);
+  parent->Prev(it);
+  return !parent->Done(it) && parent->GetComp(it)==prev;
+}
+
+boolean OverlayComp::IsNext(OverlayComp* next) {
+  OverlaysComp* parent = (OverlaysComp*)GetParent();
+  if (!parent) return false;
+  Iterator it;
+  parent->First(it);
+  while (parent->GetComp(it) != this) parent->Next(it);
+  parent->Next(it);
+  return !parent->Done(it) && parent->GetComp(it)==next;
+}
+
+boolean OverlayComp::IsParent(OverlayComp* parent) {
+  return parent==GetParent();
+}
+
+boolean OverlayComp::IsChild(OverlayComp* parent) {
+  return false;
+}
+
+OverlayComp* OverlayComp::DepthPrev(OverlayComp*) {
+  return (OverlayComp*) GetParent();
+}
+
+OverlayComp* OverlayComp::DepthNext(OverlayComp*) {
+  return (OverlayComp*) GetParent();
+}
+
 /*****************************************************************************/
 
 ParamList* OverlaysComp::_overlay_comps_params = nil;
@@ -1205,6 +1241,59 @@ void OverlaysComp::DeferredNotify() {
     }
   }
 }
+
+boolean OverlaysComp::IsChild(OverlayComp* child) {
+  Iterator it;
+  First(it);
+  while (!Done(it) && GetComp(it)!=child) Next(it);
+  return !Done(it);
+}
+
+OverlayComp* OverlaysComp::DepthPrev(OverlayComp* before) {
+  Iterator it;
+  
+  // move down
+  if (!before || IsParent(before)) {
+    First(it);
+    return (OverlayComp*)GetComp(it);
+  } 
+
+  // IsChild(before)
+  else {  
+    First(it);
+    while (GetComp(it)!=before) Prev(it);
+    Prev(it);
+    if (!Done(it)) return (OverlayComp*)GetComp(it);
+  }
+  
+  // or move up
+  OverlaysComp* parent = (OverlaysComp*)GetParent();
+  return parent;
+}
+
+
+OverlayComp* OverlaysComp::DepthNext(OverlayComp* before) {
+  Iterator it;
+  
+  // move down
+  if (!before || IsParent(before)) {
+    First(it);
+    return (OverlayComp*)GetComp(it);
+  } 
+
+  // IsChild(before)
+  else {  
+    First(it);
+    while (GetComp(it)!=before) Next(it);
+    Next(it);
+    if (!Done(it)) return (OverlayComp*)GetComp(it);
+  }
+  
+  // or move up
+  OverlaysComp* parent = (OverlaysComp*)GetParent();
+  return parent;
+}
+
 
 /*****************************************************************************/
 

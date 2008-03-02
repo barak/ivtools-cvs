@@ -303,6 +303,7 @@ void EdgeComp::Interpret(Command* cmd) {
     else if (cmd->IsA(EDGEUPDATE_CMD)) {
 	int x0, y0, x1, y1;
 	GetArrowLine()->GetOriginal(x0, y0, x1, y1);
+	GetArrowLine()->SetTransformer(new Transformer());
 	if (Edge()->start_node()) {
 	    float fx, fy;
 	    ((NodeComp*)NodeStart())

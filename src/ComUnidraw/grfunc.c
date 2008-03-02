@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001 Scott E. Johnston
+ * Copyright (c) 2001-2007 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1994-1997 Vectaport Inc.
  *
@@ -1300,6 +1300,73 @@ void TileFileFunc::execute() {
     }
     else {
 	push_stack(ComValue::nullval());
+    }
+}
+
+/*****************************************************************************/
+
+TransformerFunc::TransformerFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
+}
+
+void TransformerFunc::execute() {
+    
+    ComValue objv(stack_arg(0));
+    ComValue transv(stack_arg(0));
+    reset_stack();
+    if (objv.object_compview()) {
+      ComponentView* compview = (ComponentView*)objv.obj_val();
+      if (compview && compview->GetSubject()) {
+	OverlayComp* comp = (OverlayComp*)compview->GetSubject();
+	Graphic* gr = comp->GetGraphic();
+	if (gr) {
+	  Transformer* trans = gr->GetTransformer();
+	  if (transv.is_unknown() || !transv.is_array() || transv.array_val()->Number()!=6) {
+	    AttributeValueList* avl = new AttributeValueList();
+	    float a00, a01, a10, a11, a20, a21;
+	    trans->matrix(a00, a01, a10, a11, a20, a21);
+	    avl->Append(new AttributeValue(a00));
+	    avl->Append(new AttributeValue(a01));
+	    avl->Append(new AttributeValue(a10));
+	    avl->Append(new AttributeValue(a11));
+	    avl->Append(new AttributeValue(a20));
+	    avl->Append(new AttributeValue(a21));
+	    ComValue retval(avl);
+	    push_stack(retval);
+
+	  } else {
+	    float a00, a01, a10, a11, a20, a21;
+	    AttributeValueList* avl = transv.array_val();
+	    Iterator it;
+	    AttributeValue* av;
+
+	    avl->First(it);
+	    av = avl->GetAttrVal(it);
+	    a00 = av->float_val();
+	    avl->Next(it);
+	    av = avl->GetAttrVal(it);
+	    a01 = av->float_val();
+	    avl->Next(it);
+	    av = avl->GetAttrVal(it);
+	    a10 = av->float_val();
+	    avl->Next(it);
+	    av = avl->GetAttrVal(it);
+	    a11 = av->float_val();
+	    avl->Next(it);
+	    av = avl->GetAttrVal(it);
+	    a20 = av->float_val();
+	    avl->Next(it);
+	    av = avl->GetAttrVal(it);
+	    a21 = av->float_val();
+
+	    Transformer t(a00, a01, a10, a11, a20, a21);
+	    *gr->GetTransformer()=t;
+
+	    ComValue compval(comp->class_symid(), new ComponentView(comp));
+	    compval.object_compview(true);
+	    push_stack(compval);
+	  }
+	}
+      } 	
     }
 }
 
