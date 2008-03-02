@@ -58,7 +58,8 @@ void ListFunc::execute() {
 	boolean done = false;
 	while (!done) {
 	  NextFunc::execute_impl(comterp(), listv);
-	  AttributeValue* newval = new AttributeValue(comterp()->pop_stack());
+	  ComValue topval(comterp()->pop_stack());
+	  AttributeValue* newval = new AttributeValue(topval);
 	  if (newval->is_unknown()) {
 	    done = true;
 	    delete newval;

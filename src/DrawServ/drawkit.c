@@ -58,6 +58,7 @@
 #include <OverlayUnidraw/ovexport.h>
 #include <OverlayUnidraw/ovimport.h>
 #include <OverlayUnidraw/ovpolygon.h>
+#include <OverlayUnidraw/ovprecise.h>
 #include <OverlayUnidraw/ovprint.h>
 #include <OverlayUnidraw/ovrect.h>
 #include <OverlayUnidraw/ovtext.h>
@@ -67,6 +68,7 @@
 #include <UniIdraw/idarrows.h>
 #include <UniIdraw/idkybd.h>
 
+#include <Unidraw/Commands/transforms.h>
 #include <Unidraw/Components/text.h>
 #include <Unidraw/Graphic/ellipses.h>
 #include <Unidraw/Graphic/polygons.h>
@@ -125,6 +127,12 @@ void DrawKit::Init (OverlayComp* comp, const char* name) {
     FrameKit::Init(comp, name);
 }
 
+DrawKit* DrawKit::Instance() {
+    if (!_comkit)
+	_comkit = new DrawKit();
+    return _comkit;
+}
+
 MenuItem * DrawKit::MakeFileMenu() {
     LayoutKit& lk = *LayoutKit::instance();
     WidgetKit& kit = *WidgetKit::instance();
@@ -160,10 +168,58 @@ MenuItem * DrawKit::MakeFileMenu() {
     return mbi;
 }
 
-DrawKit* DrawKit::Instance() {
-    if (!_comkit)
-	_comkit = new DrawKit();
-    return _comkit;
+MenuItem* DrawKit::MakeEditMenu() {
+    LayoutKit& lk = *LayoutKit::instance();
+    WidgetKit& kit = *WidgetKit::instance();
+    
+    MenuItem *mbi = kit.menubar_item(kit.label("Edit"));
+    mbi->menu(kit.pulldown());
+
+    MakeMenu(mbi, new UndoCmd(new ControlInfo("Undo", KLBL_UNDO, CODE_UNDO)),
+	     "Undo   ");
+    MakeMenu(mbi, new RedoCmd(new ControlInfo("Redo", KLBL_REDO, CODE_REDO)),
+	     "Redo   ");
+    MakeMenu(mbi, new GraphCutCmd(new ControlInfo("Cut", KLBL_CUT, CODE_CUT)),
+	     "Cut   "); // overrides FrameCutCmd
+    MakeMenu(mbi, new GraphCopyCmd(new ControlInfo("Copy", KLBL_COPY, CODE_COPY)),
+	     "Copy   ");
+    MakeMenu(mbi, new GraphPasteCmd(new ControlInfo("Paste", KLBL_PASTE, CODE_PASTE)),
+	     "Paste   ");
+    MakeMenu(mbi, new GraphDupCmd(new ControlInfo("Duplicate", KLBL_DUP, CODE_DUP)),
+	     "Duplicate   ");
+    MakeMenu(mbi, new GraphDeleteCmd(new ControlInfo("Delete", KLBL_DEL, CODE_DEL)),
+	     "Delete   ");
+    MakeMenu(mbi, new OvSlctAllCmd(new ControlInfo("Select All", KLBL_SLCTALL, CODE_SLCTALL)),
+	     "Select All   ");
+    MakeMenu(mbi, new SlctByAttrCmd(new ControlInfo("Select by Attribute", "$", "$")),
+	     "Select by Attribute   ");
+    mbi->menu()->append_item(kit.menu_item_separator());
+    MakeMenu(mbi, new ScaleCmd(new ControlInfo("Flip Horizontal",
+				       KLBL_HFLIP, CODE_HFLIP),
+		       -1.0, 1.0),
+	     "Flip Horizontal   ");
+    MakeMenu(mbi, new ScaleCmd(new ControlInfo("Flip Vertical",
+				       KLBL_VFLIP, CODE_VFLIP),
+		       1.0, -1.0),
+	     "Flip Vertical   ");
+    MakeMenu(mbi, new RotateCmd(new ControlInfo("90 Clockwise", KLBL_CW90, CODE_CW90),
+			-90.0),
+	     "90 Clockwise   ");
+    MakeMenu(mbi, new RotateCmd(new ControlInfo("90 CounterCW", KLBL_CCW90, CODE_CCW90),
+			90.0),
+	     "90 CounterCW   ");
+    mbi->menu()->append_item(kit.menu_item_separator());
+    MakeMenu(mbi, new OvPreciseMoveCmd(new ControlInfo("Precise Move",
+					     KLBL_PMOVE, CODE_PMOVE)),
+	     "Precise Move   ");
+    MakeMenu(mbi, new OvPreciseScaleCmd(new ControlInfo("Precise Scale",
+					      KLBL_PSCALE, CODE_PSCALE)),
+	     "Precise Scale   ");
+    MakeMenu(mbi, new OvPreciseRotateCmd(new ControlInfo("Precise Rotate",
+					       KLBL_PROTATE, CODE_PROTATE)),
+	     "Precise Rotate   ");
+
+    return mbi;
 }
 
 MenuItem * DrawKit::MakeToolsMenu() {

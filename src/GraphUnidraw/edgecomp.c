@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2007 Scott E. Johnston
  * Copyright (c) 1994-1996, 1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -97,11 +98,13 @@ EdgeComp::EdgeComp(ArrowLine* g, OverlayComp* parent, int start_subedge,
 
 EdgeComp::EdgeComp(istream& in, OverlayComp* parent) 
     : OverlayComp(nil, parent) {
+    _start_subedge = _end_subedge = -1;
     _edge = new TopoEdge(this);
     _valid = GetParamList()->read_args(in, this);
 }
     
 EdgeComp::EdgeComp(OverlayComp* parent) : OverlayComp(nil, parent) {
+    _start_subedge = _end_subedge = -1;
     _edge = new TopoEdge(this);
 }
 
@@ -133,7 +136,7 @@ void EdgeComp::GrowParamList(ParamList* pl) {
 }
 
 Component* EdgeComp::Copy() {
-    EdgeComp* comp = new EdgeComp((ArrowLine*) GetArrowLine()->Copy());
+    EdgeComp* comp = NewEdgeComp((ArrowLine*) GetArrowLine()->Copy());
     if (attrlist()) comp->SetAttributeList(new AttributeList(attrlist()));
     comp->_start_node = _start_node;
     comp->_end_node = _end_node;
@@ -272,10 +275,12 @@ void EdgeComp::Interpret(Command* cmd) {
 	if(ecmd->Node1() && ecmd->Node2()) {
 	  NodeComp* start_node_comp = (NodeComp*)ecmd->Node1();
 	  NodeComp* end_node_comp = (NodeComp*)ecmd->Node2();
+	  #if 0
 	  if (start_node_comp && start_node_comp->IsA(NODE_COMP) &&
 	      end_node_comp && end_node_comp->IsA(NODE_COMP)) {
 	    start_node_comp->attach(end_node_comp);
 	  }
+	  #endif
 	}
         ArrowLine* subgr1 = ecmd->Node1() ? ecmd->Node1()->SubEdgeGraphic(_start_subedge) : nil;
         if (subgr1) {
@@ -299,14 +304,14 @@ void EdgeComp::Interpret(Command* cmd) {
 	if (Edge()->start_node()) {
 	    float fx, fy;
 	    ((NodeComp*)Edge()->start_node()->value())
-		->GetGraphic()->GetCenter(fx, fy);
+		->GetEllipse()->GetCenter(fx, fy);
 	    x0 = Math::round(fx);
 	    y0 = Math::round(fy);
 	}
 	if (Edge()->end_node()) {
 	    float fx, fy;
 	    ((NodeComp*)Edge()->end_node()->value())
-		->GetGraphic()->GetCenter(fx, fy);
+		->GetEllipse()->GetCenter(fx, fy);
 	    x1 = Math::round(fx);
 	    y1 = Math::round(fy);
 	}
@@ -332,7 +337,9 @@ void EdgeComp::Interpret(Command* cmd) {
 	    }
 	    if (newe)
 	      delete e1;
+	    #if defined(GRAPH_OBSERVABLES)
 	    ((NodeComp*)Edge()->start_node()->value())->notify();
+	    #endif
 	}
 	Coord nx1, ny1;
 	if (Edge()->end_node()) {
@@ -411,8 +418,10 @@ void EdgeComp::Uninterpret(Command* cmd) {
 		    {
 			EdgeData* data = (EdgeData*)(*conn)();
 			Edge()->attach_nodes(data->start, data->end);
+			#if defined(GRAPH_OBSERVABLES)
 			if (data->start && data->end) 
 			  NodeStart()->attach(NodeEnd());
+			#endif
 			break;
 		    }
 		conn = conn->Next();
@@ -696,7 +705,7 @@ Command* EdgeView::InterpretManipulator(Manipulator* m) {
                 line->SetColors(colVar->GetFgColor(), colVar->GetBgColor());
 	    }
 
-	    EdgeComp* newedge = new EdgeComp(line, nil, start_subedge, end_subedge);
+	    EdgeComp* newedge = NewEdgeComp(line, nil, start_subedge, end_subedge);
 	    if (gv0 || gv1)
 		cmd = new MacroCmd(
 		    ed,
@@ -892,7 +901,7 @@ boolean EdgeScript::Definition (ostream& out) {
     head = arrowline->Head();
     tail = arrowline->Tail();
 
-    out << "edge(";
+    out << script_name() << "(";
     out << x0 << "," << y0 << "," << x1 << "," << y1;
     if (arrow_scale != 1 )
 	out << " :arrowscale " << arrow_scale;

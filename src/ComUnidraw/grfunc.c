@@ -1222,7 +1222,7 @@ ZoomFunc::ZoomFunc(ComTerp* comterp, Editor* ed) : UnidrawFunc(comterp, ed) {
 }
 
 void ZoomFunc::execute() {
-    ComValue& zoomv = pop_stack();
+    ComValue zoomv(pop_stack());
     double zoom = zoomv.double_val();
     reset_stack();
     

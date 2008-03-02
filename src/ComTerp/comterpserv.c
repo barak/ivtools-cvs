@@ -404,7 +404,7 @@ int ComTerpServ::runfile(const char* filename) {
     return status;
 }
 
-ComValue& ComTerpServ::run(const char* expression, boolean nested) {
+ComValue ComTerpServ::run(const char* expression, boolean nested) {
     _errbuf[0] = '\0';
 
 #if 0
@@ -479,7 +479,7 @@ ComValue& ComTerpServ::run(const char* expression, boolean nested) {
     return *_errbuf ? ComValue::nullval() : pop_stack();
 }
 
-ComValue& ComTerpServ::run(postfix_token* tokens, int ntokens) {
+ComValue ComTerpServ::run(postfix_token* tokens, int ntokens) {
     _errbuf[0] = '\0';
 
 #if 0
@@ -499,7 +499,7 @@ ComValue& ComTerpServ::run(postfix_token* tokens, int ntokens) {
     eval_expr();
     err_str(_errbuf, BUFSIZ, "comterp");
 
-    ComValue& retval = *_errbuf ? ComValue::nullval() : pop_stack();
+    ComValue retval(*_errbuf ? ComValue::nullval() : pop_stack());
 #if 0
     _pfbuf = save_pfbuf;
     _pfnum = save_pfnum;

@@ -41,6 +41,14 @@
 
 #include <IV-2_6/_enter.h>
 
+#define LEAKCHECK
+
+#ifdef LEAKCHECK
+#include <ivstd/leakchecker.h>
+LeakChecker AttributeValueListchecker("AttributeValueList");
+#endif
+
+
 /*****************************************************************************/
 
 int AttributeList::_symid = -1;
@@ -298,6 +306,9 @@ void AttributeList::clear() {
 /*****************************************************************************/
 
 AttributeValueList::AttributeValueList (AttributeValueList* s) {
+#ifdef LEAKCHECK
+    AttributeValueListchecker.create();
+#endif
     _alist = new AList;
     _count = 0;
     if (s != nil) {
@@ -311,6 +322,9 @@ AttributeValueList::AttributeValueList (AttributeValueList* s) {
 }
 
 AttributeValueList::~AttributeValueList () { 
+#ifdef LEAKCHECK
+    AttributeValueListchecker.destroy();
+#endif
     if (_alist) {
         ALIterator i;
 	for (First(i); !Done(i); Next(i)) {
@@ -424,6 +438,9 @@ ostream& operator<< (ostream& out, const AttributeValueList& al) {
 	        break;
 	    case AttributeValue::DoubleType:
 	        out << attrval->double_ref();
+	        break;
+	    case AttributeValue::BooleanType:
+	        out << attrval->boolean_ref();
 	        break;
             default:
 		out << "Unknown type";

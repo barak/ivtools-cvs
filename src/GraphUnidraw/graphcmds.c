@@ -29,6 +29,8 @@
 #include <GraphUnidraw/edgecomp.h>
 #include <GraphUnidraw/nodecomp.h>
 
+#include <OverlayUnidraw/ovviewer.h>
+
 #include <TopoFace/topoedge.h>
 #include <TopoFace/toponode.h>
 
@@ -42,7 +44,6 @@
 #include <Unidraw/statevars.h>
 #include <Unidraw/ulist.h>
 #include <Unidraw/unidraw.h>
-#include <Unidraw/viewer.h>
 
 #include <UniIdraw/idarrows.h>
 
@@ -466,7 +467,7 @@ void GraphDupCmd::Execute () {
     Editor* editor = GetEditor();
     Selection* s = editor->GetSelection();
     Clipboard* cb = new Clipboard();
-    GraphicView* views = editor->GetViewer()->GetGraphicView();
+    GraphicView* views = ((OverlayViewer*)editor->GetViewer())->GetCurrentGraphicView();
     s->Sort(views);
     cb->CopyInit(s);
     index_clipboard(s, cb);

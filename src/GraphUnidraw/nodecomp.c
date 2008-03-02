@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 Scott E. Johnston
+ * Copyright (c) 2006-2007 Scott E. Johnston
  * Copyright (c) 1994-1996, 1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -153,7 +153,16 @@ NodeComp::NodeComp(Picture* pic, boolean rl, OverlayComp* parent)
     _node = new TopoNode(this);
     // kludge to fix ps: fonts are collected from comp\'s graphic, so we
     // need to add the font to the picture\'s gs
-    if (GetText()) pic->SetFont(GetText()->GetFont());
+    Iterator it;
+    pic->First(it);
+    Graphic* first = pic->GetGraphic(it);
+    if (first) {
+      pic->FillBg(first->BgFilled() && !first->GetBgColor()->None());
+      pic->SetColors(first->GetFgColor(), first->GetBgColor());
+      pic->SetPattern(first->GetPattern());
+      pic->SetBrush(first->GetBrush());
+      if (GetText()) pic->SetFont(GetText()->GetFont());
+    }
     _reqlabel = rl;
 }
 
@@ -218,9 +227,9 @@ boolean NodeComp::IsA(ClassId id) {
 Component* NodeComp::Copy() {
     NodeComp* comp = nil;
     if (GetGraph()) {
-        comp = new NodeComp((SF_Ellipse*)GetEllipse()->Copy(),
+        comp = NewNodeComp((SF_Ellipse*)GetEllipse()->Copy(),
 	    (TextGraphic*)GetText()->Copy(), (SF_Ellipse*)GetEllipse2()->Copy(), 
-	    (GraphComp*)GetGraph()->Copy());
+	    GetGraph() ? (GraphComp*)GetGraph()->Copy() : nil);
 	if (attrlist()) comp->SetAttributeList(new AttributeList(attrlist()));
 
 	Picture* pic = (Picture*)GetGraphic();
@@ -246,7 +255,7 @@ Component* NodeComp::Copy() {
         }
 
     } else {
-        comp = new NodeComp((SF_Ellipse*)GetEllipse()->Copy(), 
+        comp = NewNodeComp((SF_Ellipse*)GetEllipse()->Copy(), 
             (TextGraphic*)GetText()->Copy());
     }
     return comp;
@@ -590,6 +599,7 @@ boolean NodeComp::operator == (OverlayComp& comp) {
 	*(OverlayComp*)this == (OverlayComp&)comp;
 }
 
+#if defined(GRAPH_OBSERVABLES)
 void NodeComp::update(Observable*) {
   AttributeList* al;
   if(al = attrlist()) {
@@ -642,6 +652,7 @@ void NodeComp::update(Observable*) {
     }
   }
 }
+#endif
 
 void NodeComp::Notify() {
   GraphicComp::Notify();
@@ -960,7 +971,7 @@ Command* NodeView::InterpretManipulator(Manipulator* m) {
 	    }
 
 	    textgr->Align(Center, ellipse, Center);
-	    cmd = new PasteCmd(ed, new Clipboard(new NodeComp(ellipse, textgr)));
+	    cmd = new PasteCmd(ed, new Clipboard(NewNodeComp(ellipse, textgr)));
 	}
 	else {
 	    TextManip* tm = (TextManip*) m;
@@ -1000,7 +1011,7 @@ Command* NodeView::InterpretManipulator(Manipulator* m) {
 
 		textgr->Align(Center, ellipse, Center);
 
-		cmd = new PasteCmd(ed, new Clipboard(new NodeComp(ellipse, textgr, true)));
+		cmd = new PasteCmd(ed, new Clipboard(NewNodeComp(ellipse, textgr, true)));
 	    } else if (size == 0) {
 		Viewer* v = m->GetViewer();
 		v->Update();          // to repair text display-incurred damage
@@ -1142,7 +1153,7 @@ void NodeScript::Attributes(ostream& out) {
 }
 
 boolean NodeScript::Definition (ostream& out) {
-    out << "node(";
+    out << script_name() << "(" ;
     Attributes(out);
     out << ")";
     return out.good();

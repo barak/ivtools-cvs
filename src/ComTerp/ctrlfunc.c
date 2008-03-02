@@ -173,7 +173,7 @@ void RemoteFunc::execute() {
       } while (i<BUFSIZ-1 && buf[i-1]!='\n');
       if (buf[i]=='\n') buf[i]==0;
 #endif
-      ComValue& retval = comterpserv()->run(buf, true);
+      ComValue retval(comterpserv()->run(buf, true));
       push_stack(retval);
     }
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2007 Scott E. Johnston
  * Copyright (c) 1994, 1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -57,6 +58,17 @@ public:
     EdgeComp(OverlayComp* parent = nil);
     // construct edge component but defer anything graphical
     virtual ~EdgeComp();
+
+    virtual EdgeComp* NewEdgeComp(ArrowLine* al, OverlayComp* parent = nil, int start_subedge = -1, 
+	int end_subedge = -1)
+      { return new EdgeComp(al, parent, start_subedge, end_subedge); }
+    // virtual constructor for use of derived classes
+    virtual EdgeComp* NewEdgeComp(istream& strm, OverlayComp* parent = nil)
+      { return new EdgeComp(strm, parent); }
+    // virtual constructor for use of derived classes
+    virtual EdgeComp* NewEdgeComp(OverlayComp* parent = nil)
+      { return new EdgeComp(parent); }
+    // virtual constructor for use of derived classes
 
     virtual Component* Copy();
     virtual void Interpret(Command*);
@@ -144,6 +156,10 @@ public:
     ArrowLine* GetArrowLine () { return (ArrowLine*) GetGraphic(); }
     // return pointer to view's ArrowLine graphic.
 
+    virtual EdgeComp* NewEdgeComp(ArrowLine* al, OverlayComp* parent = nil, int start_subedge = -1, 
+				  int end_subedge = -1)
+      { return new EdgeComp(al, parent, start_subedge, end_subedge); }
+    // virtual function to allow construction of specialized NodeComp's by specialized NodeView's
 protected:
     static FullGraphic* _ev_gs;
 };
@@ -177,6 +193,9 @@ public:
     // return index of start and stop nodes.
     int IndexNode (NodeComp *comp);
     // return index of given node.
+
+    virtual const char* script_name() { return "edge"; }
+    // for overriding in derived classes
 
     virtual ClassId GetClassId();
     virtual boolean IsA(ClassId);

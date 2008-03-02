@@ -127,7 +127,7 @@ boolean DrawIdrawScript::IsA (ClassId id) {
 }
 
 boolean DrawIdrawScript::Emit (ostream& out) {
-    out << "drawserv(";
+    out << script_name() << "(";
 
     GraphicComp* comps = GetGraphicComp();
     Iterator i;

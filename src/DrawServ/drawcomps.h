@@ -76,6 +76,9 @@ public:
     virtual boolean IsA(ClassId);
 
     static int ReadFrames(istream& in, void* addr1, void* addr2, void* addr3, void* addr4);
+
+    virtual const char* script_name() { return "drawserv"; }
+    // for overriding in derived classes
 };
 
 

@@ -55,10 +55,18 @@ void AssignFunc::execute() {
 					    operand2);
 	    attrlist->add_attribute(attr);
 	    Unref(attrlist);
-	} else if (operand1.global_flag()) 
+	} else if (operand1.global_flag()) {
+	    void* oldval = nil;
+	    comterp()->globaltable()->find_and_remove(oldval, operand1.symbol_val());
+	    if (oldval) delete (ComValue*)oldval;
 	    comterp()->globaltable()->insert(operand1.symbol_val(), operand2);
-	else
+	}
+	else {
+	    void* oldval = nil;
+	    comterp()->localtable()->find_and_remove(oldval, operand1.symbol_val());
+	    if (oldval) delete (ComValue*)oldval;
 	    comterp()->localtable()->insert(operand1.symbol_val(), operand2);
+	}
     } else if (operand1.is_object(Attribute::class_symid())) {
       Attribute* attr = (Attribute*)operand1.obj_val();
       attr->Value(operand2);
