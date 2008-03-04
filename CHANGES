@@ -1,6 +1,7 @@
-August 31st, 2007  ivtools-1.2.5
+March 4th, 2008  ivtools-1.2.5
 
-- comterp parser evolution to support derived uses.
+- overall evolution to support use by ipl-1.0.1 (see
+  http://sf.net/projects/ipl for further details)
 
 July 20th, 2006  ivtools-1.2.4
 
