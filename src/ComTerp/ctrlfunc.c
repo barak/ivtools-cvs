@@ -22,6 +22,7 @@
  */
 
 #include <fstream.h>
+#include <iostream>
 #include <ComTerp/comhandler.h>
 
 #include <ComTerp/ctrlfunc.h>
@@ -42,6 +43,7 @@ static char newline;
 #endif
 #endif
 
+using std::cerr;
 
 /*****************************************************************************/
 
@@ -79,7 +81,7 @@ void TimeExprFunc::execute() {
     if (handler) {
         if (nargs()) {
 	  if (timeoutstr.type() == ComValue::StringType) {
-	      handler->timeoutseconds(sec_val.int_val());
+  	      handler->timeoutseconds(sec_val.int_val());
 	      handler->timeoutscriptid(timeoutstr.string_val());
 	      push_stack(timeoutstr);
 	  } else 

@@ -25,12 +25,10 @@ BSD-derivative OS.  As of version 1.0.7 ivtools is Jaguar ready.
 with "make -v"
 
 0.c. The gcc compiler.  Almost any recent version of gcc will work, up
-to but not including gcc-4.3, which has a backward compatibility
-problem that is yet to be overcome.  You will also need an equivalent
-copy of libstdc++.  libstdc++ comes bundled with gcc-3.0 and greater.
-Before that the libstdc++ version numbers stay roughly in synch with
-the gcc version numbers.  If you have gcc-2.8.1 you'd want
-libstdc++-2.8.1, etc..
+to gcc-4.3.  You will also need an equivalent copy of libstdc++.
+libstdc++ comes bundled with gcc-3.0 and greater.  Before that the
+libstdc++ version numbers stay roughly in synch with the gcc version
+numbers.  If you have gcc-2.8.1 you'd want libstdc++-2.8.1, etc..
 
 Be aware that sometimes the include files for libstdc++ are in
 /usr/local/include/g++-2, a place that cannot be auto-determined by

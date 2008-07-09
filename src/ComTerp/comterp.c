@@ -87,6 +87,9 @@ extern LeakChecker AttributeValuechecker;
 
 extern int _detail_matched_delims;
 
+using std::cerr;
+using std::cout;
+
 implementTable(ComValueTable,int,void*)
 
 ComTerp* ComTerp::_instance = nil;
