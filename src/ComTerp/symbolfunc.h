@@ -111,7 +111,7 @@ public:
     virtual void execute();
 
     virtual const char* docstring() { 
-      return "sym=%s(symbol)|global(symbol)=val -- make symbol global"; }
+      return "val=%s(symbol)|global(symbol)=val -- make symbol global"; }
 };
 
 

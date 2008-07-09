@@ -281,6 +281,8 @@ void ComTerp::eval_expr_internals(int pedepth) {
 #endif
 
     ComFunc* func = nil;
+    int nargs = sv.narg();
+    int nkeys = sv.nkey();
     if (_func_for_next_expr) {
       func = _func_for_next_expr;
       _func_for_next_expr = nil;
@@ -291,9 +293,9 @@ void ComTerp::eval_expr_internals(int pedepth) {
       if (_delim_func && sv.nids()!=1) {
 	ComValue nameval(sv.command_symid(), ComValue::SymbolType);
 	push_stack(nameval);  // this assumes it will be immediately popped off the stack
-      } 
-      func->push_funcstate(sv.narg(), sv.nkey(), 
-			   pedepth, sv.command_symid());
+	nargs++;
+      }
+      func->push_funcstate(nargs, nkeys, pedepth, func->funcid());
     }
 
     /* output execution trace */
@@ -301,7 +303,7 @@ void ComTerp::eval_expr_internals(int pedepth) {
       for(int i=0; i<pedepth; i++) cerr << "    ";
       cerr << symbol_pntr(sv.command_symid());
       if (func->post_eval()) 
-	cerr << ": nargs=" << sv.narg() << " nkeys=" << sv.nkey() << "\n";
+	cerr << ": nargs=" << nargs << " nkeys=" << nkeys << "\n";
       else {
 	int ntotal = func->nargs() + func->nkeys();
 	for(int i=0; i<ntotal; i++) {
@@ -338,7 +340,7 @@ void ComTerp::eval_expr_internals(int pedepth) {
 
     int stack_base = _stack_top;
     if (!func->post_eval()) 
-      stack_base -= sv.narg()+sv.nkey();
+      stack_base -= nargs+nkeys;
     else
       stack_base -= 1;
 
