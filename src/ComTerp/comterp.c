@@ -160,8 +160,9 @@ void ComTerp::init() {
     _npause = 0;
     _stepflag = 0;
     _echo_postfix = 0;
-    _delim_func;
-
+    _delim_func = 0;
+    _running = 0;
+    _muted = 0;
 }
 
 
@@ -994,7 +995,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
 	if (quitflag()) {
 	  status = -1;
 	  break;
-	} else if (!func_for_next_expr() && val_for_next_func().is_null()) {
+	} else if (!func_for_next_expr() && val_for_next_func().is_null() && !muted()) {
 	  print_stack_top(out);
 	  out << "\n"; out.flush(); 
 	}
@@ -1171,6 +1172,7 @@ void ComTerp::add_defaults() {
     add_command("shell", new ShellFunc(this));
     add_command("quit", new QuitFunc(this));
     add_command("exit", new ExitFunc(this));
+    add_command("mute", new MuteFunc(this));
   }
 }
 

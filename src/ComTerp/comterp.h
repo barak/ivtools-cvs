@@ -265,6 +265,12 @@ public:
     boolean running() const { return _running; }
     // return flag that indicates whether to run a delimeter selected func.
 
+    void muted(boolean flag) { _muted = flag; }
+    // set flag that indicates whether to mute output
+ 
+    boolean muted() const { return _muted; }
+    // return flag that indicates whether to mute output
+
 protected:
     void incr_stack();
     void incr_stack(int n);
@@ -342,7 +348,10 @@ protected:
     // use delimeter selected func, passing symbol in ::command_symid()
 
     boolean _running;
-    // flag to inform others this ComTerp in us
+    // flag to inform others this ComTerp in use
+
+    boolean _muted;
+    // flag to mute any response from a ComTerp
 
     friend class ComFunc;
     friend class ComterpHandler;

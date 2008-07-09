@@ -269,6 +269,8 @@ void ShellFunc::execute() {
     return;
 }
 
+/*****************************************************************************/
+
 USleepFunc::USleepFunc(ComTerp* comterp) : ComFunc(comterp) {
 }
 
@@ -295,6 +297,24 @@ void NilFunc::execute() {
       cerr << "unknown command \"" << symbol_pntr(comm_symid)
 	<< "\" returned nil\n";
     push_stack(ComValue::nullval());
+}
+
+/*****************************************************************************/
+
+MuteFunc::MuteFunc(ComTerp* comterp) : ComFunc(comterp) {
+}
+
+void MuteFunc::execute() {
+    ComValue mutev(stack_arg(0));
+    reset_stack();
+
+    if (mutev.is_unknown())
+      comterp()->muted(!comterp()->muted());
+    else
+      comterp()->muted(mutev.boolean_val());
+    ComValue retval(comterp()->muted());
+    push_stack(retval);
+    return;
 }
 
 

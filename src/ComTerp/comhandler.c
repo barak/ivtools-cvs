@@ -201,19 +201,21 @@ ComterpHandler::handle_input (ACE_HANDLE fd)
     if (!comterp_ || !input_good)
       return -1;
     else if (!inbuf || !*inbuf) {
+#if 0
 #if __GNUC__<3
-      filebuf obuf(fd ? fd : 1);
-      ostream ostr(&obuf);
-      ostr << "\n";
-      ostr.flush();
-      return 0;
+	filebuf obuf(fd ? fd : 1);
+	ostream ostr(&obuf);
+	ostr << "\n";
+	ostr.flush();
 #else
-      fileptr_filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
-      ostream ostr(&obuf);
-      ostr << "\n";
-      ostr.flush();
-      return 0;
+	fprintf(stderr, "unexpected empty command string\n");
+	fileptr_filebuf obuf(fd ? wrfptr() : stdout, ios_base::out);
+	ostream ostr(&obuf);
+	ostr << "\n";
+	ostr.flush();
 #endif
+#endif
+	return -1;
     }
     if (!ComterpHandler::logger_mode()) {
       comterp_->load_string(inbuf);
