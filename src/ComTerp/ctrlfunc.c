@@ -171,7 +171,7 @@ void RemoteFunc::execute() {
       do {
 	read(socket.get_handle(), buf+i++, 1);
       } while (i<BUFSIZ-1 && buf[i-1]!='\n');
-      if (buf[i]=='\n') buf[i]==0;
+      if (buf[i-1]=='\n') buf[i-1]=0;
 #endif
       ComValue retval(comterpserv()->run(buf, true));
       push_stack(retval);

@@ -259,6 +259,12 @@ public:
     boolean delim_func() const { return _delim_func; }
     // return flag that indicates whether to run a delimeter selected func.
 
+    void running(boolean flag) { _running = flag; }
+    // set flag that indicates whether to run a delimeter selected func.
+ 
+    boolean running() const { return _running; }
+    // return flag that indicates whether to run a delimeter selected func.
+
 protected:
     void incr_stack();
     void incr_stack(int n);
@@ -334,6 +340,9 @@ protected:
 
     boolean _delim_func;
     // use delimeter selected func, passing symbol in ::command_symid()
+
+    boolean _running;
+    // flag to inform others this ComTerp in us
 
     friend class ComFunc;
     friend class ComterpHandler;

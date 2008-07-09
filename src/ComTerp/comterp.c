@@ -952,6 +952,9 @@ void ComTerp::quitflag(boolean flag) {
 }
 
 int ComTerp::run(boolean one_expr, boolean nested) {
+  int old_runflag = running();
+  running(true);
+
   int status = 1;
   _errbuf[0] = '\0';
   char errbuf_save[BUFSIZ];
@@ -1025,6 +1028,7 @@ int ComTerp::run(boolean one_expr, boolean nested) {
     status = -1;
     fprintf(stderr, "broken pipe detected: comterp quit\n");
   }
+  running(old_runflag);
   return status;
 }
 
@@ -1180,6 +1184,9 @@ AttributeList* ComTerp::get_attributes() { return _alist;}
 
 
 int ComTerp::runfile(const char* filename) {
+    int old_runflag = running();
+    running(true);
+
     /* save tokens to restore after the file has run */
     int toklen;
     postfix_token* tokbuf = copy_postfix_tokens(toklen);
@@ -1241,6 +1248,7 @@ int ComTerp::runfile(const char* filename) {
     } else
         push_stack(ComValue::nullval());
 
+    running(old_runflag);
     return status;
 }
 
