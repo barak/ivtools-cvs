@@ -357,9 +357,9 @@ void ComTerp::eval_expr_internals(int pedepth) {
     }
 
     if (stack_base+1 < _stack_top)
-      fprintf(stderr, "func \"%s\" failed to push a single value on stack\n", symbol_pntr(func->funcid()));
-    else if (stack_base+1 > _stack_top)
       fprintf(stderr, "func \"%s\" pushed more than a single value on stack\n", symbol_pntr(func->funcid()));
+    else if (stack_base+1 > _stack_top)
+      fprintf(stderr, "func \"%s\" failed to push a single value on stack\n", symbol_pntr(func->funcid()));
     
   } else if (sv.type() == ComValue::SymbolType) {
 

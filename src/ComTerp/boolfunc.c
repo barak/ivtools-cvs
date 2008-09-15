@@ -23,6 +23,7 @@
  * 
  */
 
+#include <Unidraw/Components/grview.h>
 #include <ComTerp/boolfunc.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
@@ -256,9 +257,16 @@ void EqualFunc::execute() {
 	  operand1.array_val() == operand2.array_val();
 	break;
       case ComValue::ObjectType:
-	result.boolean_ref() = operand2.type() == ComValue::ObjectType && 
-	  operand1.obj_val() == operand2.obj_val() &&
-	  operand1.class_symid() == operand2.class_symid();
+	if (!operand1.object_compview())
+	  result.boolean_ref() = operand2.type() == ComValue::ObjectType && 
+	    operand1.obj_val() == operand2.obj_val() &&
+	    operand1.class_symid() == operand2.class_symid();
+	else
+	  result.boolean_ref() = operand2.type() == ComValue::ObjectType && 
+	    operand1.class_symid() == operand2.class_symid() &&
+	    operand2.object_compview() &&
+	    ((GraphicView*)operand1.obj_val())->GetGraphicComp() == 
+	    ((GraphicView*)operand2.obj_val())->GetGraphicComp();
 	break;
       default:
         result.boolean_ref() = operand1.is_type(ComValue::UnknownType) && 
@@ -335,6 +343,18 @@ void NotEqualFunc::execute() {
       result.boolean_ref() = operand2.type() != ComValue::ArrayType || 
 	operand1.array_val() != operand2.array_val();
       break;
+      case ComValue::ObjectType:
+	if (!operand1.object_compview())
+	  result.boolean_ref() = operand2.type() != ComValue::ObjectType || 
+	    operand1.obj_val() != operand2.obj_val() ||
+	    operand1.class_symid() != operand2.class_symid();
+	else
+	  result.boolean_ref() = operand2.type() != ComValue::ObjectType || 
+	    operand1.class_symid() != operand2.class_symid() ||
+	    !operand2.object_compview() ||
+	    ((GraphicView*)operand1.obj_val())->GetGraphicComp() != 
+	    ((GraphicView*)operand2.obj_val())->GetGraphicComp();
+	break;
     case ComValue::UnknownType:
 	result.boolean_ref() = operand2.is_known();
 	break;

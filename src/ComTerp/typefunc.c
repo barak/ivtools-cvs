@@ -84,7 +84,7 @@ void ClassSymbolFunc::execute() {
   if (!numargs) return;
   int class_syms[numargs];
   for (int i=0; i<numargs; i++) {
-    ComValue& val = stack_arg(i);
+    ComValue val = stack_arg(i);
     if (val.is_object()) 
       class_syms[i] = val.class_symid();
     else

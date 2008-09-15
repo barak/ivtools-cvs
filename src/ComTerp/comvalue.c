@@ -22,7 +22,7 @@
  * 
  */
 
-#include <Unidraw/Components/compview.h>
+#include <Unidraw/Components/grview.h>
 #include <ComTerp/comfunc.h>
 #include <ComTerp/comvalue.h>
 #include <ComTerp/comterp.h>
@@ -389,7 +389,7 @@ boolean ComValue::is_comfunc(int func_classid) {
 void* ComValue::geta(int id) {
   if (is_object(id)) {
     if (object_compview())
-      return ((ComponentView*)obj_val())->GetSubject();
+      return ((GraphicView*)obj_val())->GetGraphicComp();
     else
       return obj_val();
   } else
