@@ -200,7 +200,7 @@ public:
     SelectFunc(ComTerp*,Editor*);
     virtual void execute();
     virtual const char* docstring() { 
-	return "%s([compview ...] :all :clear) -- make these graphics the current selection (dflt is current)"; }
+	return "%s([compview ... | compview,compview[,... compview]] :all :clear) -- make these graphics the current selection (dflt is current)"; }
 };
 
 //: command to delete graphics in comdraw.

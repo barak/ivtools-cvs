@@ -999,6 +999,23 @@ void SelectFunc::execute() {
 	    compval->object_compview(true);
 	    avl->Append(compval);
 	  }
+	} else if (obj.is_array()) {
+	  Iterator it;
+	  AttributeValueList* al = obj.array_val();
+	  al->First(it);
+	  while (!al->Done(it)) {
+	    if (al->GetAttrVal(it)->object_compview()) {
+	      ComponentView* comview = (ComponentView*)al->GetAttrVal(it)->obj_val();
+	      OverlayComp* comp = (OverlayComp*)comview->GetSubject();
+	      if (comp) {
+		newSel->Append(comp->FindView(viewer));
+		ComValue* compval = new ComValue(comp->classid(), new OverlayView(comp));
+		compval->object_compview(true);
+		avl->Append(compval);
+	      }
+	    }
+	    al->Next(it);
+	  }
 	}
       }
     }

@@ -389,7 +389,7 @@ boolean ComValue::is_comfunc(int func_classid) {
 void* ComValue::geta(int id) {
   if (is_object(id)) {
     if (object_compview())
-      return ((GraphicView*)obj_val())->GetGraphicComp();
+      return ((ComponentView*)obj_val())->GetSubject();
     else
       return obj_val();
   } else

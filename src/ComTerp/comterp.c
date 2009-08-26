@@ -715,7 +715,7 @@ void ComTerp::token_to_comvalue(postfix_token* token, ComValue* sv) {
     localtable()->find(vptr, command_symid);
 
     /* handle case where symbol has matched parens, and things are set up to invoke a delim-specific func. */
-    if (!vptr && _delim_func && sv->nids() != 1) {
+    if (/*!vptr && */ _delim_func && sv->nids() != 1) {
       if (sv->nids() == TOK_RPAREN) {
 	static int parens_symid =  symbol_add("()");
 	localtable()->find(vptr, parens_symid);

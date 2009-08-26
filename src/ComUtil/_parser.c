@@ -1205,7 +1205,6 @@ int status;
    /*   4) If the next token is an operator, it is not a binary operator    */
    /*   5) If _sticky_matched_delims is true, and the next token is not an  */
    /*      operator, then it can't be a matching delimeter.                 */
-   /*      and _delim_concatenation */
       if( !done && TopOfParenStack < 0 && expecting == OPTYPE_BINARY ) {
 
 	 if( NextToklen == 0 ) 

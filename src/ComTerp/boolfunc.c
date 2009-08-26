@@ -268,8 +268,8 @@ void EqualFunc::execute() {
 	  result.boolean_ref() = operand2.type() == ComValue::ObjectType && 
 	    operand1.class_symid() == operand2.class_symid() &&
 	    operand2.object_compview() &&
-	    ((GraphicView*)operand1.obj_val())->GetGraphicComp() == 
-	    ((GraphicView*)operand2.obj_val())->GetGraphicComp();
+	    ((ComponentView*)operand1.obj_val())->GetSubject() == 
+	    ((ComponentView*)operand2.obj_val())->GetSubject();
 	break;
       default:
         result.boolean_ref() = 
@@ -356,8 +356,8 @@ void NotEqualFunc::execute() {
 	  result.boolean_ref() = operand2.type() != ComValue::ObjectType || 
 	    operand1.class_symid() != operand2.class_symid() ||
 	    !operand2.object_compview() ||
-	    ((GraphicView*)operand1.obj_val())->GetGraphicComp() != 
-	    ((GraphicView*)operand2.obj_val())->GetGraphicComp();
+	    ((ComponentView*)operand1.obj_val())->GetSubject() != 
+	    ((ComponentView*)operand2.obj_val())->GetSubject();
 	break;
     case ComValue::UnknownType:
 	result.boolean_ref() = operand2.is_known();
