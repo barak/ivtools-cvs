@@ -70,11 +70,13 @@ Dispatch/netinet_in.h
 DrawServ/ackback-handler.h
 DrawServ/drawcatalog.h
 DrawServ/drawclasses.h
+DrawServ/drawcmds.h
 DrawServ/drawcomps.h
 DrawServ/drawcreator.h
 DrawServ/draweditor.h
 DrawServ/drawfunc.h
 DrawServ/drawkit.h
+DrawServ/drawimport.h
 DrawServ/drawlink.h
 DrawServ/drawlinkcomp.h
 DrawServ/drawlinklist.h
@@ -92,6 +94,7 @@ FrameUnidraw/framecreator.h
 FrameUnidraw/frameeditor.h
 FrameUnidraw/framefile.h
 FrameUnidraw/framefunc.h
+FrameUnidraw/frameimport.h
 FrameUnidraw/framekit.h
 FrameUnidraw/frameps.h
 FrameUnidraw/framescripts.h

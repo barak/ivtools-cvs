@@ -521,6 +521,7 @@ void NodeComp::Interpret(Command* cmd) {
 	NodeTextCmd* ntcmd = (NodeTextCmd*)cmd;
 	TextGraphic* tg = ntcmd->Graphic();
 	SetText(tg);
+	_reqlabel = 1;
 	Notify();
 	unidraw->Update();
     } else if (cmd->IsA(ALIGN_CMD)) {

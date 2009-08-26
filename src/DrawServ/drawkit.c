@@ -30,6 +30,7 @@
 #include <DrawServ/drawkit.h>
 #include <DrawServ/drawcomps.h>
 #include <DrawServ/draweditor.h>
+#include <DrawServ/drawimport.h>
 #include <DrawServ/drawlinklist.h>
 #include <DrawServ/drawserv.h>
 #include <DrawServ/linkselection.h>
@@ -42,7 +43,6 @@
 #include <GraphUnidraw/graphcmds.h>
 #include <GraphUnidraw/graphcomp.h>
 #include <GraphUnidraw/grapheditor.h>
-#include <GraphUnidraw/graphimport.h>
 #include <GraphUnidraw/graphkit.h>
 
 #include <OverlayUnidraw/annotate.h>
@@ -157,7 +157,7 @@ MenuItem * DrawKit::MakeFileMenu() {
 	     "Save As...   ");
     MakeMenu(mbi, new OvPrintCmd(new ControlInfo("Print...", KLBL_PRINT, CODE_PRINT)),
 	     "Print...   ");
-    MakeMenu(mbi, new OvImportCmd(new ControlInfo("Import Graphic...",
+    MakeMenu(mbi, new DrawImportCmd(new ControlInfo("Import Graphic...",
 						  KLBL_IMPORT,
 						  CODE_IMPORT)),
 	     "Import Graphic...   ");

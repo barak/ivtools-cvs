@@ -436,7 +436,7 @@ ostream& operator<< (ostream& out, const AttributeValueList& al) {
 	        out << attrval->ulong_ref();
 	        break;
 	    case AttributeValue::FloatType:
-	        out << attrval->double_ref();
+	        out << attrval->float_ref();
 	        break;
 	    case AttributeValue::DoubleType:
 	        out << attrval->double_ref();

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2009 Scott E. Johnston
  * Copyright (c) 1997-2000 Vectaport Inc.
  * Copyright (c) 1994, 1995 Vectaport Inc., Cider Press
  *
@@ -832,4 +833,88 @@ void AutoNewFrameCmd::Unexecute() {
 }
 
 implementActionCallback(AutoNewFrameCmd)
+
+/*****************************************************************************/
+
+ClassId FramePasteCmd::GetClassId () { return FRAMEPASTE_CMD; }
+
+boolean FramePasteCmd::IsA (ClassId id) { 
+    return FRAMEPASTE_CMD==id || MacroCmd::IsA(id);
+}
+
+FramePasteCmd::FramePasteCmd (ControlInfo* c, Clipboard* cb) : MacroCmd(c) {
+    SetClipboard(cb);
+    _executed = 0;
+}
+
+FramePasteCmd::FramePasteCmd (Editor* ed, Clipboard* cb) : MacroCmd(ed) {
+    SetClipboard(cb);
+    _executed = 0;
+}
+
+FramePasteCmd::~FramePasteCmd () {
+}
+
+Command* FramePasteCmd::Copy () {
+    Command* copy = new FramePasteCmd(CopyControlInfo(), DeepCopyClipboard());
+    InitCopy(copy);
+    return copy;
+}
+
+void FramePasteCmd::Execute () {
+  if(!_executed) {
+    Clipboard* cb = GetClipboard();
+    Iterator it;
+    cb->First(it);
+    GraphicComp* gcomp = cb->GetComp(it);
+    cb->Next(it);
+    if(cb->Done(it) && gcomp->IsA(FRAME_IDRAW_COMP))
+      {
+	gcomp->First(it);
+
+	/* move to background frame */
+	FrameEditor* ed = (FrameEditor*)GetEditor();
+	FrameNumberState* fnumstate = ed->framenumstate();
+	int origfnum = fnumstate->framenumber();
+	int currfnum = 0;
+	Append(new MoveFrameCmd(ed, -origfnum, true /* allowbg */));
+	
+	/* paste contents of background frame */
+	FrameComp* fcomp = (FrameComp*) (gcomp->GetComp(it)->IsA(FRAME_COMP) ? gcomp->GetComp(it) : nil);
+	if (fcomp) {
+
+	  while(!gcomp->Done(it)) {
+	    gcomp->Remove(it);
+	    Clipboard* newcb = new Clipboard();
+	    Iterator jt;
+	    fcomp->First(jt);
+	    while(!fcomp->Done(jt)) {
+	      newcb->Append(fcomp->GetComp(jt));
+	      fcomp->Remove(jt);
+	    }
+	    Append(new PasteCmd(ed, newcb));
+	    delete fcomp;
+	  
+	  /* while more frames move to next frame and paste (create new frame if necessary) */
+	    if(!gcomp->Done(it)) {
+	      currfnum++;
+	      fcomp = (FrameComp*) (gcomp->GetComp(it)->IsA(FRAME_COMP) ? gcomp->GetComp(it) : nil);
+	      if(currfnum>=ed->NumFrames()) 
+		Append(new CreateMoveFrameCmd(ed));
+	      else
+		Append(new MoveFrameCmd(ed, 1, true /* allowbg */));
+	    }
+	  }
+	}
+
+	/* move to original frame */
+	Append(new MoveFrameCmd(ed, origfnum-currfnum, true /* allowbg */));
+      }
+    
+    else  
+      Append(new PasteCmd(GetEditor(), cb->Copy()));
+  }
+  MacroCmd::Execute();
+  _executed = 1;
+}
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2009 Scott E. Johnston
  * Copyright (c) 1994, 1995, 1999 Vectaport Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and
@@ -324,5 +325,22 @@ protected:
 };
 
 declareActionCallback(AutoNewFrameCmd)
+
+//: specialized PasteCmd for flipbook
+class FramePasteCmd : public MacroCmd {
+public:
+    FramePasteCmd(ControlInfo*, Clipboard* = nil);
+    FramePasteCmd(Editor* = nil, Clipboard* = nil);
+    virtual ~FramePasteCmd();
+
+    virtual void Execute();
+
+    virtual Command* Copy();
+    virtual ClassId GetClassId();
+    virtual boolean IsA(ClassId);
+
+ protected:
+    int _executed;
+};
 
 #endif

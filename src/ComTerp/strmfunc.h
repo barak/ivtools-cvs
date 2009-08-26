@@ -146,4 +146,31 @@ public:
       return "cnt=%s(strm) -- traverse list returning its length"; }
 };
 
+//: stream filter command
+class FilterFunc : public StrmFunc {
+public:
+    FilterFunc(ComTerp*);
+
+    virtual void execute();
+    virtual boolean post_eval() { return true; }
+    virtual const char* docstring() { 
+      return "val=filter(strm classid)"; }
+
+    CLASS_SYMID("FilterFunc");
+
+};
+
+//: hidden func used by next command for stream filter command
+class FilterNextFunc : public StrmFunc {
+public:
+    FilterNextFunc(ComTerp*);
+
+    virtual void execute();
+    virtual const char* docstring() { 
+      return "hidden func used by next command for filter command"; }
+
+    CLASS_SYMID("FilterNextFunc");
+
+};
+
 #endif /* !defined(_strmfunc_h) */

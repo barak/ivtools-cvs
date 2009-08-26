@@ -261,7 +261,7 @@ SocketFunc::SocketFunc(ComTerp* comterp) : ComFunc(comterp) {
 
 
 void SocketFunc::execute() {
-  ComValue hostv(stack_arg(0, true));
+  ComValue hostv(stack_arg(0));
   ComValue portv(stack_arg(1));
   reset_stack();
 
