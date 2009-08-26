@@ -343,7 +343,11 @@ NextFunc::NextFunc(ComTerp* comterp) : StrmFunc(comterp) {
 }
 
 void NextFunc::execute() {
+#ifdef STREAMS_FOR_IPL
+    ComValue streamv(stack_arg(0));
+#else
     ComValue streamv(stack_arg_post_eval(0));
+#endif
     reset_stack();
 
     execute_impl(comterp(), streamv);

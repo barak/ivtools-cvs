@@ -230,6 +230,8 @@ val|lst=symval(symbol [symbol ...]) -- return value(s) associated with symbol va
 
 sym|lst=symadd(sym|str [sym|str ...]) -- create symbol(s) and return without lookup.
 
+str=symstr(sym) -- return string version of symbol
+
 lst=split(symbol|string) -- split symbol or string into list of characters.
 
 str=join(clist :sym) -- join list of characters into string

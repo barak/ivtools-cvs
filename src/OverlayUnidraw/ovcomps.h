@@ -227,6 +227,8 @@ public:
     // move Iterator to the previous element in the list.
     virtual boolean Done(Iterator);
     // test Iterator to see if off the end of the list.
+    virtual int Count();
+    // return number of elements
 
     virtual GraphicComp* GetComp(Iterator);
     // return pointer to component within the current element of the list

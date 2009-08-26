@@ -68,6 +68,17 @@ public:
       return "val|lst=%s(symbol_var [symbol_var ...]) -- return value(s) associated with symbol variables(s)"; }
 };
 
+//: return string version of symbol
+// str=symstr(sym) -- return string version of symbol
+class SymStrFunc : public ComFunc {
+public:
+    SymStrFunc(ComTerp*);
+    virtual void execute();
+
+    virtual const char* docstring() { 
+      return "str=%s(sym) -- return string version of symbol"; }
+};
+
 //: create symbol command for ComTerp.
 // sym|lst=symadd(syml|str [sym|str ...]) -- create symbol(s) and return without lookup
 class SymAddFunc : public ComFunc {

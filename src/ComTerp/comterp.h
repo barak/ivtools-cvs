@@ -91,6 +91,8 @@ public:
     // evaluate postfix expression stored in ComValue objects.
     virtual int post_eval_expr(int tokcnt, int offtop, int pedepth);
     // copy unevaluated expression to the stack and evaluate.
+    boolean top_expr();
+    // return true if the topmost expression is currently being evaluated
 
     int print_stack_top() const;
     // print the top of the stack to stdout.
@@ -259,6 +261,12 @@ public:
     boolean delim_func() const { return _delim_func; }
     // return flag that indicates whether to run a delimeter selected func.
 
+    void autostream(boolean flag) { _autostream = flag; }
+    // set flag that indicates whether to run a delimeter selected func.
+ 
+    boolean autostream() const { return _autostream; }
+    // return flag that indicates whether to run a delimeter selected func.
+
     void running(boolean flag) { _running = flag; }
     // set flag that indicates whether to run a delimeter selected func.
  
@@ -347,6 +355,9 @@ protected:
     boolean _delim_func;
     // use delimeter selected func, passing symbol in ::command_symid()
 
+    boolean _autostream;
+    // automatically iterates over stream if left on stack
+
     boolean _running;
     // flag to inform others this ComTerp in use
 
@@ -398,4 +409,6 @@ protected:
   void* _inptr;
 
 };
+
+//#define STREAMS_FOR_IPL
 #endif /* !defined(_comterp_h) */

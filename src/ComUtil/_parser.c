@@ -32,6 +32,7 @@ Summary:
 History:        Written by Scott E. Johnston, April 1989
 */
 
+// #define DYNAMIC_COMMANDS
 
 #include <stdio.h>
 #include <string.h>
@@ -158,8 +159,10 @@ else if( toktype == TOK_RBRACKET )\
    errid = ERR_UNEXPECTED_RBRACKET;\
 else if( toktype == TOK_RBRACE )\
    errid = ERR_UNEXPECTED_RBRACE;\
-else\
+else if( toktype == TOK_RANGBRACK )\
    errid = ERR_UNEXPECTED_RANGBRACK;\
+else\
+   errid = ERR_UNEXPECTED_RANGBRACK2;\
 COMERR_SET1( errid, *linenum );\
 goto error_return;}
 
@@ -171,18 +174,20 @@ else if( toktype == TOK_LBRACKET )\
    errid = ERR_UNEXPECTED_LBRACKET;\
 else if( toktype == TOK_LBRACE )\
    errid = ERR_UNEXPECTED_LBRACE;\
-else\
+else if( toktype == TOK_LANGBRACK )\
    errid = ERR_UNEXPECTED_LANGBRACK;\
+else\
+   errid = ERR_UNEXPECTED_LANGBRACK2;\
 COMERR_SET1( errid, *linenum );\
 goto error_return;}
 
 #define INSTACK_PRIORITY_HIGHER( incoming_priority ) rkg_instack( incoming_priority)
 
 #define LEFT_PAREN( toktype ) \
-(toktype == TOK_LPAREN || toktype == TOK_LBRACKET || toktype == TOK_LBRACE || toktype == TOK_LANGBRACK)
+(toktype == TOK_LPAREN || toktype == TOK_LBRACKET || toktype == TOK_LBRACE || toktype == TOK_LANGBRACK || toktype== TOK_LANGBRACK2)
 
 #define RIGHT_PAREN( toktype ) \
-(toktype == TOK_RPAREN || toktype == TOK_RBRACKET || toktype == TOK_RBRACE || toktype == TOK_RANGBRACK)
+(toktype == TOK_RPAREN || toktype == TOK_RBRACKET || toktype == TOK_RBRACE || toktype == TOK_RANGBRACK || toktype == TOK_RANGBRACK2)
 
 #define PROCEEDING_WHITESPACE( tokstart ) \
 (tokstart == 0 || isspace( buffer[tokstart-1] ))
@@ -211,6 +216,7 @@ static int parens_symid = -1;
 static int brackets_symid = -1;
 static int braces_symid = -1;
 static int angbracks_symid = -1;
+static int dblangbracks_symid = -1;
 
 /* === Static functions ================================================== */
 
@@ -928,12 +934,45 @@ int status;
             /* which will trigger the counting of narg and nkey to begin. */
 	    if( LEFT_PAREN( NextToktype )) 
             {
-	       PARENSTK_PUSH( NextToktype, *(int *)token, 1 );
-	       OPERSTK_PUSH ( -NextToktype, LEFTPAREN );
-	       *bufptr    = NextBufptr;
-	       *linenum   = NextLinenum;
-	       NextToklen = 0;
-	       expecting  = OPTYPE_UNARY_PREFIX;
+
+
+#if defined(DYNAMIC_COMMANDS)
+
+	      if ( TopOfOperStack >=0 && INSTACK_PRIORITY_HIGHER(1000)) {
+
+		/* Take all operators off the stack with priority higher than 1000 */
+		while ( TopOfOperStack >= 0 &&
+			INSTACK_PRIORITY_HIGHER(1000))
+		  {
+		    expecting = OPTYPE_BINARY;
+		    PFOUT( TOK_COMMAND, *(int *)token, 0, 0, 1 );
+		    
+		    if (OperStack[TopOfOperStack].oper_type == OPERATOR)
+		      {
+			OPERSTK_POP( temp_id );
+			PFOUT( TOK_COMMAND, opr_tbl_commid( temp_id ),
+			       (opr_tbl_optype( temp_id ) == OPTYPE_BINARY ? 2 : 1), 0, 1 );
+		      }
+		    else
+		      {
+			OPERSTK_POP( temp_id );
+			PFOUT( TOK_KEYWORD, temp_id, 1, 0, 0);
+		      }
+		  }
+	      } else {
+#endif
+		
+		PARENSTK_PUSH( NextToktype, *(int *)token, 1 );
+		OPERSTK_PUSH ( -NextToktype, LEFTPAREN );
+		*bufptr    = NextBufptr;
+		*linenum   = NextLinenum;
+		NextToklen = 0;
+		expecting  = OPTYPE_UNARY_PREFIX;
+
+#if defined(DYNAMIC_COMMANDS)
+	      }
+#endif
+
 	    }
 	    else
             {
@@ -1001,11 +1040,13 @@ int status;
 /*-LBRACKET-LBRACKET-LBRACKET-LBRACKET-LBRACKET-LBRACKET-LBRACKET-LBRACKET-*/
 /*-LBRACE-LBRACE-LBRACE-LBRACE-LBRACE-LBRACE-LBRACE-LBRACE-LBRACE-LBRACE-*/
 /*-LANGBRACK-LANGBRACK-LANGBRACK-LANGBRACK-LANGBRACK-LANGBRACK-LANGBRACK-*/
+/*-LANGBRACK2-LANGBRACK2-LANGBRACK2-LANGBRACK2-LANGBRACK2-LANGBRACK2-LANGBRACK2-*/
 
       case TOK_LPAREN:
       case TOK_LBRACKET:
       case TOK_LBRACE:
       case TOK_LANGBRACK:
+      case TOK_LANGBRACK2:
 
       /* Expecting a binary is either an error, or an indicator of  */
       /* separation between free format parameters                  */
@@ -1040,11 +1081,13 @@ int status;
 /*-RBRACKET-RBRACKET-RBRACKET-RBRACKET-RBRACKET-RBRACKET-RBRACKET-RBRACKET-*/
 /*-RBRACE-RBRACE-RBRACE-RBRACE-RBRACE-RBRACE-RBRACE-RBRACE-RBRACE-RBRACE-*/
 /*-RANGBRACK-RANGBRACK-RANGBRACK-RANGBRACK-RANGBRACK-RANGBRACK-RANGBRACK-*/
+/*-RANGBRACK2-RANGBRACK2-RANGBRACK2-RANGBRACK2-RANGBRACK2-RANGBRACK2-RANGBRACK2-*/
 
       case TOK_RPAREN:
       case TOK_RBRACKET:
       case TOK_RBRACE:
       case TOK_RANGBRACK:
+      case TOK_RANGBRACK2:
 
       /* Parenthesis integrity checking */
 	 if( TopOfParenStack < 0  ||
@@ -1065,7 +1108,10 @@ int status;
 		ParenStack[TopOfParenStack].paren_type != TOK_LBRACE ||
 
 	     toktype == TOK_RANGBRACK &&
-		ParenStack[TopOfParenStack].paren_type != TOK_LANGBRACK ) {
+		ParenStack[TopOfParenStack].paren_type != TOK_LANGBRACK ||
+
+	     toktype == TOK_RANGBRACK2 &&
+		ParenStack[TopOfParenStack].paren_type != TOK_LANGBRACK2 ) {
 
 	    UNEXPECTED_RPAREN_ERROR(toktype);
 	    }
@@ -1127,13 +1173,15 @@ int status;
 		     brackets_symid = symbol_add("[]");
 		     braces_symid = symbol_add("{}");
 		     angbracks_symid = symbol_add("<>");
+		     dblangbracks_symid = symbol_add("<<>>");
 		   }
 		   int commandid = ParenStack[TopOfParenStack].comm_id;
 		   if (commandid<0) {
 		     if (toktype==TOK_RPAREN) commandid = parens_symid;
 		     else if (toktype==TOK_RBRACKET) commandid = brackets_symid;
 		     else if (toktype==TOK_RBRACE) commandid = braces_symid;
-		     else commandid = angbracks_symid;
+		     else if (toktype==TOK_RANGBRACK) commandid = angbracks_symid;
+		     else commandid = dblangbracks_symid;
 		   }
 		   PFOUT( TOK_COMMAND,
 			  commandid,

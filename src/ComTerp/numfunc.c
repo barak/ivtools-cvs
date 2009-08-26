@@ -192,6 +192,10 @@ void AddFunc::execute() {
     }
     
     switch (result.type()) {
+    case ComValue::BooleanType:
+	result.int_ref() = operand1.int_val() + operand2.int_val();
+	result.type(ComValue::IntType);
+	break;
     case ComValue::CharType:
 	result.char_ref() = operand1.char_val() + operand2.char_val();
 	break;

@@ -952,22 +952,24 @@ Manipulator* NodeView::CreateManipulator(Viewer* v, Event& e, Transformer* rel,
 	for (node->first(i); !node->done(i); node->next(i)) {
 	    TopoEdge* edge = node->edge(node->elem(i));
 	    int x0, y0, x1, y1;
-	    if (edge->end_node() == node) {
+	    if (((EdgeComp*)edge->value())->GetArrowLine()) {
+	      if (edge->end_node() == node) {
 		((EdgeComp*)edge->value())->GetEdgeView(GetViewer())->GetArrowLine()->
-		    GetOriginal(x0, y0, x1, y1);
-	    }
-	    else {
+		  GetOriginal(x0, y0, x1, y1);
+	      }
+	      else {
 		((EdgeComp*)edge->value())->GetEdgeView(GetViewer())->GetArrowLine()->
-		    GetOriginal(x1, y1, x0, y0);
-	    }
-	    Transformer trans;
-	    ((EdgeComp*)edge->value())->GetEdgeView(GetViewer())->GetArrowLine()->
+		  GetOriginal(x1, y1, x0, y0);
+	      }
+	      Transformer trans;
+	      ((EdgeComp*)edge->value())->GetEdgeView(GetViewer())->GetArrowLine()->
 		TotalTransformation(trans);
-	    trans.Transform(x0, y0);
-	    trans.Transform(x1, y1);
-	    RubberLine* rubline = new RubberLine(nil, nil, x0-(x1-e.x), y0-(y1-e.y), x1, y1,
-						 x1 - e.x, y1 - e.y);
-	    rubgroup->Append(rubline);
+	      trans.Transform(x0, y0);
+	      trans.Transform(x1, y1);
+	      RubberLine* rubline = new RubberLine(nil, nil, x0-(x1-e.x), y0-(y1-e.y), x1, y1,
+						   x1 - e.x, y1 - e.y);
+	      rubgroup->Append(rubline);
+	    }
 	}
         m = new DragManip(
 	    v, rubgroup, rel, tool, DragConstraint(HorizOrVert | Gravity)

@@ -949,6 +949,17 @@ boolean OverlaysComp::Done (Iterator i) { return Elem(i) == _comps->End(); }
 OverlayComp* OverlaysComp::Comp (UList* r) { return (OverlayComp*) (*r)(); }
 GraphicComp* OverlaysComp::GetComp (Iterator i) { return Comp(Elem(i)); }
 
+int OverlaysComp::Count() {
+  Iterator it;
+  int i=0;
+  First(it);
+  while (!Done(it)) {
+    i++;
+    Next(it);
+  }
+  return i;
+}
+
 void OverlaysComp::SetComp (GraphicComp* gc, Iterator& i) {
     i.SetValue(_comps->Find(gc));
 }
