@@ -146,6 +146,12 @@ public:
     EdgeComp* EdgeOut(int n) const;
     // return pointer to nth outgoing edge.
 
+    int EdgeInOrder(EdgeComp*) const;
+    // return order of incoming edge.
+
+    int EdgeOutOrder(EdgeComp*) const;
+    // return order of outgoing edge.
+
     void nedges (int &nin, int &nout) const;
     // count number of input and ouput edges
 

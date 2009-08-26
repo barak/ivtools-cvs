@@ -210,6 +210,9 @@ void EqualFunc::execute() {
     if (operand2.type()==ComValue::UnknownType && operand1.type()!=ComValue::UnknownType)
       result.boolean_ref() = 0;
     
+    else if (operand2.type()==ComValue::BlankType && operand1.type()!=ComValue::BlankType)
+      result.boolean_ref() = 0;
+    
     else {
       switch (operand1.type()) {
       case ComValue::CharType:
@@ -269,8 +272,9 @@ void EqualFunc::execute() {
 	    ((GraphicView*)operand2.obj_val())->GetGraphicComp();
 	break;
       default:
-        result.boolean_ref() = operand1.is_type(ComValue::UnknownType) && 
-	  operand2.is_type(ComValue::UnknownType);
+        result.boolean_ref() = 
+	  operand1.is_type(ComValue::UnknownType) && operand2.is_type(ComValue::UnknownType) ||
+	  operand1.is_type(ComValue::BlankType) && operand2.is_type(ComValue::BlankType);
 	break;
       }
     }

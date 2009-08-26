@@ -748,6 +748,46 @@ NodeComp* NodeComp::NodeOut(int n) const {
 }
 
 
+int NodeComp::EdgeInOrder(EdgeComp* edgecomp) const {
+  int order = 0;
+  if (edgecomp) {
+    TopoEdge* edge = edgecomp->Edge();
+      TopoNode* toponode = Node();
+    if (edge && edge->end_node()==toponode) {
+      Iterator it;
+      toponode->first(it);
+      while (!toponode->done(it)) {
+	TopoEdge* edge = toponode->get_edge(it);
+	if (edge ==toponode->get_edge(it))
+	  return order;
+	order++;
+	toponode->next(it);
+      }
+    } 
+  }
+  return -1;
+}
+
+int NodeComp::EdgeOutOrder(EdgeComp* edgecomp) const {
+  int order = 0;
+  if (edgecomp) {
+    TopoEdge* edge = edgecomp->Edge();
+      TopoNode* toponode = Node();
+    if (edge && edge->start_node()==toponode) {
+      Iterator it;
+      toponode->first(it);
+      while (!toponode->done(it)) {
+	TopoEdge* edge = toponode->get_edge(it);
+	if (edge ==toponode->get_edge(it))
+	  return order;
+	order++;
+	toponode->next(it);
+      }
+    } 
+  }
+  return -1;
+}
+
 /*****************************************************************************/
 
 NodeView::NodeView(NodeComp* comp) : OverlayView(comp) {

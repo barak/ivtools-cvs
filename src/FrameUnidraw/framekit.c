@@ -247,11 +247,15 @@ void FrameKit::InitLayout(OverlayKit* kit, const char* name) {
 		    layout.vcenter(
 		      layout.margin(
 			layout.vbox(
+#if 0
 			  wk.label("type help"),
 			  layout.vspace(10),
 			  wk.label("to print"),
 			  layout.vspace(10),
 		          wk.label("info to stdout")
+#else
+			  kit->appicon()
+#endif
 		        ),
 			10
 		      )

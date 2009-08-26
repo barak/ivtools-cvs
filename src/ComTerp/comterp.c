@@ -1328,6 +1328,8 @@ int* ComTerp::get_commands(int& ncomm, boolean sort) {
 	for (int j=0; j<bufsiz; j++) 
 	  newbuf[j] = buffer[j];
 	bufsiz *= 2;
+	delete buffer;
+	buffer = newbuf;
       }
       buffer[ncomm++] = key;
     }
