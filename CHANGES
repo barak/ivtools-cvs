@@ -18,6 +18,8 @@ August 25th, 2009  ivtools-1.2.7
 
 - port to Ubuntu Heron
 
+- applied (most of) patch to build on Fedora 10 contributed by John Heidemann
+
 - balance of changes to support ipl-1.0.4
 
 July 9th, 2008  ivtools-1.2.6

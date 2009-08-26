@@ -39,6 +39,8 @@
 #endif
 #include <stdio.h>
 #include <string.h>
+#include <cstdio>
+using namespace std;
 
 #ifdef LEAKCHECK
 #include <leakchecker.h>
