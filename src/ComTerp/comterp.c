@@ -76,11 +76,8 @@
 #include <fstream.h>
 #endif
 
-// #define LEAKCHECK
-
 #ifdef LEAKCHECK
-#include <ivstd/leakchecker.h>
-extern LeakChecker AttributeValuechecker;
+#include <leakchecker.h>
 #endif
 
 #define TITLE "ComTerp"
@@ -835,7 +832,7 @@ void ComTerp::decr_stack(int n) {
         ComValue& stacktop = _stack[_stack_top--];
 	stacktop.AttributeValue::~AttributeValue();
         #ifdef LEAKCHECK // destructor called where constructor never called
-	AttributeValuechecker.create();
+	AttributeValue::_leakchecker->create();
         #endif
     }
 }
@@ -846,7 +843,7 @@ ComValue ComTerp::pop_stack(boolean lookupsym) {
     ComValue topval(stacktop);
     stacktop.AttributeValue::~AttributeValue();
     #ifdef LEAKCHECK  // destructor called where constructor never called
-    AttributeValuechecker.create();
+    AttributeValue::_leakchecker->create();
     #endif
     if (lookupsym)
       return lookup_symval(topval);

@@ -29,6 +29,11 @@
 #ifndef ovcomps_h
 #define ovcomps_h
 
+#define LEAKCHECK
+#ifdef LEAKCHECK
+class LeakChecker;
+#endif
+
 #include <UniIdraw/idcomp.h>
 #include <InterViews/observe.h>
 #include <Attribute/classid.h>
@@ -201,6 +206,13 @@ friend class OverlayScript;
 friend class OverlaysScript;
 
     CLASS_SYMID("OverlayComp"); 
+
+#ifdef LEAKCHECK
+ public:
+    static LeakChecker* _leakchecker;
+#endif
+
+
 };
 
 //: composite component, clone of GraphicComps derived from OverlayComp

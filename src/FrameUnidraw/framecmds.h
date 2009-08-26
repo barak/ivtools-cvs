@@ -326,21 +326,4 @@ protected:
 
 declareActionCallback(AutoNewFrameCmd)
 
-//: specialized PasteCmd for flipbook
-class FramePasteCmd : public MacroCmd {
-public:
-    FramePasteCmd(ControlInfo*, Clipboard* = nil);
-    FramePasteCmd(Editor* = nil, Clipboard* = nil);
-    virtual ~FramePasteCmd();
-
-    virtual void Execute();
-
-    virtual Command* Copy();
-    virtual ClassId GetClassId();
-    virtual boolean IsA(ClassId);
-
- protected:
-    int _executed;
-};
-
 #endif

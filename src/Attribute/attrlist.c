@@ -42,11 +42,9 @@
 
 #include <IV-2_6/_enter.h>
 
-//#define LEAKCHECK
-
 #ifdef LEAKCHECK
-#include <ivstd/leakchecker.h>
-LeakChecker AttributeValueListchecker("AttributeValueList");
+#include <leakchecker.h>
+LeakChecker* AttributeValueList::_leakchecker = nil;
 #endif
 
 
@@ -309,7 +307,8 @@ void AttributeList::clear() {
 
 AttributeValueList::AttributeValueList (AttributeValueList* s) {
 #ifdef LEAKCHECK
-    AttributeValueListchecker.create();
+    if(!_leakchecker) _leakchecker = new LeakChecker("AttributeValueList");
+    _leakchecker->create();
 #endif
     _alist = new AList;
     _count = 0;
@@ -325,7 +324,7 @@ AttributeValueList::AttributeValueList (AttributeValueList* s) {
 
 AttributeValueList::~AttributeValueList () { 
 #ifdef LEAKCHECK
-    AttributeValueListchecker.destroy();
+    _leakchecker->destroy();
 #endif
     if (_alist) {
         ALIterator i;

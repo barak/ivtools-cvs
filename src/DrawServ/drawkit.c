@@ -28,6 +28,7 @@
  */
 
 #include <DrawServ/drawkit.h>
+#include <DrawServ/drawcmds.h>
 #include <DrawServ/drawcomps.h>
 #include <DrawServ/draweditor.h>
 #include <DrawServ/drawimport.h>
@@ -221,6 +222,71 @@ MenuItem* DrawKit::MakeEditMenu() {
 					       KLBL_PROTATE, CODE_PROTATE)),
 	     "Precise Rotate   ");
 
+    return mbi;
+}
+
+MenuItem* DrawKit::MakeFrameMenu() {
+    LayoutKit& lk = *LayoutKit::instance();
+    WidgetKit& kit = *WidgetKit::instance();
+    
+    MenuItem *mbi = kit.menubar_item(kit.label("Frame"));
+    mbi->menu(kit.pulldown());
+
+    MoveFrameCmd::default_instance
+      (new MoveFrameCmd(new ControlInfo("Move Forward","^F",""), +1));
+    MakeMenu(mbi, MoveFrameCmd::default_instance(),
+	     "Move Forward   ");
+
+    MakeMenu(mbi, new MoveFrameCmd(new ControlInfo("Move Backward","^B",""), -1),
+	     "Move Backward   ");
+    MakeMenu(mbi, new FrameBeginCmd(new ControlInfo("Goto First Frame")),
+	     "Goto First Frame");
+    MakeMenu(mbi, new FrameEndCmd(new ControlInfo("Goto Last Frame")),
+	     "Goto Last Frame ");
+    mbi->menu()->append_item(kit.menu_item_separator());
+    MakeMenu(mbi, new CreateMoveFrameCmd(new ControlInfo("New Forward","F","F")),
+	     "New Forward    ");
+    MakeMenu(mbi, new CreateMoveFrameCmd(new ControlInfo("New Backward","B","B"), false),
+	     "New Backward   ");
+    MakeMenu(mbi, new CopyMoveGraphFrameCmd(new ControlInfo("Copy Forward","X","X")),
+	     "Copy Forward   ");
+    MakeMenu(mbi, new CopyMoveGraphFrameCmd(new ControlInfo("Copy Backward","Y","Y"), false),
+	     "Copy Backward  ");
+    MakeMenu(mbi, new DeleteFrameCmd(new ControlInfo("Delete","D","D")),
+	     "Delete  ");
+    mbi->menu()->append_item(kit.menu_item_separator());
+    MakeMenu(mbi, new ShowOtherFrameCmd(new ControlInfo("Show Prev Frame","",""), -1),
+	     "Show Prev Frame");
+    MakeMenu(mbi, new ShowOtherFrameCmd(new ControlInfo("Hide Prev Frame","",""), 0),
+	     "Hide Prev Frame");
+
+    MenuItem* menu_item;
+    menu_item = kit.menu_item(kit.label("Enable Looping"));
+    menu_item->action
+      (new ActionCallback(MoveFrameCmd)
+       (MoveFrameCmd::default_instance(), &MoveFrameCmd::set_wraparound));
+    mbi->menu()->append_item(menu_item);
+
+    menu_item = kit.menu_item(kit.label("Disable Looping"));
+    menu_item->action
+      (new ActionCallback(MoveFrameCmd)
+       (MoveFrameCmd::default_instance(), &MoveFrameCmd::clr_wraparound));
+    mbi->menu()->append_item(menu_item);
+
+#if 0
+    MakeMenu(mbi, new AutoNewFrameCmd(new ControlInfo("Toggle Auto New Frame",
+						      "","")),
+	     "Toggle Auto New Frame");
+#else
+    menu_item = kit.check_menu_item(kit.label("Auto New Frame"));
+    menu_item->state()->set(TelltaleState::is_chosen, ((FrameEditor*)GetEditor())->AutoNewFrame());
+    ((FrameEditor*)GetEditor())->_autonewframe_tts = menu_item->state();
+    AutoNewFrameCmd::default_instance(new AutoNewFrameCmd(GetEditor()));
+    menu_item->action
+      (new ActionCallback(AutoNewFrameCmd)
+       (AutoNewFrameCmd::default_instance(), &AutoNewFrameCmd::Execute));
+    mbi->menu()->append_item(menu_item);
+#endif
     return mbi;
 }
 
