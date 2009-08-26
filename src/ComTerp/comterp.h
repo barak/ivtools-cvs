@@ -31,6 +31,8 @@
 #if !defined(_comterp_h)
 #define _comterp_h
 
+// #define POSTEVAL_EXPERIMENT
+
 #include <ComTerp/parser.h>
 
 #include <OS/table.h>
@@ -89,7 +91,11 @@ public:
     // another, so that initialization doesn't get repeated.
     virtual int eval_expr(ComValue* pfvals, int npfvals);
     // evaluate postfix expression stored in ComValue objects.
-    virtual int post_eval_expr(int tokcnt, int offtop, int pedepth);
+    virtual int post_eval_expr(int tokcnt, int offtop, int pedepth 
+#ifdef POSTEVAL_EXPERIMENT
+			       , int nolookup=false
+#endif
+);
     // copy unevaluated expression to the stack and evaluate.
     boolean top_expr();
     // return true if the topmost expression is currently being evaluated
@@ -410,5 +416,4 @@ protected:
 
 };
 
-//#define STREAMS_FOR_IPL
 #endif /* !defined(_comterp_h) */

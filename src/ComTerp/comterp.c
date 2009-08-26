@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2007 Scott E. Johnston
+ * Copyright (c) 2001-2009 Scott E. Johnston
  * Copyright (c) 2000 IET Inc.
  * Copyright (c) 1994-1998 Vectaport Inc.
  *
@@ -41,6 +41,7 @@
 #include <ComTerp/bitfunc.h>
 #include <ComTerp/boolfunc.h>
 #include <ComTerp/bquotefunc.h>
+#include <ComTerp/charfunc.h>
 #include <ComTerp/comfunc.h>
 #include <ComTerp/comterp.h>
 #include <ComTerp/comterpserv.h>
@@ -221,7 +222,7 @@ int ComTerp::eval_expr(boolean nested) {
   return FUNCOK;
 }
 
-boolean ComTerp::top_expr() { return _pfoff >= _pfnum; }
+boolean ComTerp::top_expr() { return _pfoff >= _pfnum && NextFunc::next_depth()<=1; }
 
 int ComTerp::eval_expr(ComValue* pfvals, int npfvals) {
 #if 0
@@ -280,14 +281,18 @@ void ComTerp::eval_expr_internals(int pedepth) {
       }
     if (has_streams) {
       AttributeValueList* avl = new AttributeValueList();
+      
+      /* if delims associated with symbol, put that first in stream list */
+      if (_delim_func && sv.nids()!=1) {
+	ComValue nameval(sv.command_symid(), ComValue::SymbolType);
+	avl->Prepend(new AttributeValue(nameval));
+      }
+
       for(int i=0; i<sv.narg()+sv.nkey(); i++) {
-#ifdef STREAMS_FOR_IPL
 	ComValue topval(pop_stack(i==streamid));
-#else
-	ComValue topval(pop_stack(true));
-#endif
 	avl->Prepend(new AttributeValue(topval));
       }
+
       ComValue val(sv.obj_val(), avl);
       val.stream_mode(1); // for external use
       push_stack(val);
@@ -525,7 +530,14 @@ void ComTerp::load_sub_expr() {
 }
 
 
-int ComTerp::post_eval_expr(int tokcnt, int offtop, int pedepth) {
+int ComTerp::post_eval_expr(int tokcnt, int offtop, int pedepth 
+#ifdef POSTEVAL_EXPERIMENT
+			    , int nolookup 
+#endif
+			    ) {
+#ifdef POSTEVAL_EXPERIMENT
+  int numtok = tokcnt;
+#endif
   if (tokcnt) {
     int offset = _pfnum+offtop;
     while (tokcnt>0) {
@@ -557,7 +569,9 @@ int ComTerp::post_eval_expr(int tokcnt, int offtop, int pedepth) {
 	if (stack_top().is_type(ComValue::CommandType) 
 	    && stack_top().pedepth() == pedepth) break;
       }
-      // if (!stack_top().is_symbol())
+#ifdef POSTEVAL_EXPERIMENT 
+      if (!(stack_top().is_symbol()&&numtok==1&&nolookup))
+#endif
       eval_expr_internals(pedepth);
       
     }
@@ -1016,11 +1030,9 @@ int ComTerp::run(boolean one_expr, boolean nested) {
 	} else if (!func_for_next_expr() && val_for_next_func().is_null() && !muted()) {
 	  if (stack_top().is_stream() && autostream()) {
 	    ComValue streamv(stack_top());
-	    NextFunc nextfunc(this);
 	    do {
 	      pop_stack();
-	      push_stack(streamv);
-	      nextfunc.exec(1, 0);
+	      NextFunc::execute_impl(this, streamv);
 	      if (stack_top().is_known()) {
 		print_stack_top(out);
 		out << "\n"; out.flush(); 
@@ -1177,6 +1189,7 @@ void ComTerp::add_defaults() {
     add_command("symval", new SymValFunc(this));
     add_command("symbol", new SymbolFunc(this));
     add_command("symadd", new SymAddFunc(this));
+    add_command("symstr", new SymStrFunc(this));
     add_command("global", new GlobalSymbolFunc(this));
     add_command("split", new SplitStrFunc(this));
     add_command("join", new JoinStrFunc(this));
@@ -1205,6 +1218,10 @@ void ComTerp::add_defaults() {
     add_command("quit", new QuitFunc(this));
     add_command("exit", new ExitFunc(this));
     add_command("mute", new MuteFunc(this));
+
+    add_command("ctoi", new CtoiFunc(this));
+    add_command("isspace", new IsSpaceFunc(this));
+
   }
 }
 

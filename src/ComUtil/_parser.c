@@ -32,7 +32,7 @@ Summary:
 History:        Written by Scott E. Johnston, April 1989
 */
 
-// #define DYNAMIC_COMMANDS
+#define DYNAMIC_COMMANDS
 
 #include <stdio.h>
 #include <string.h>
@@ -88,6 +88,21 @@ static int NextOp_ids[OPTYPE_NUM];
 
 /* Parenthesis stack macros */
 #define INITIAL_PAREN_STACK_SIZE 32
+#ifdef PAREN_STACK_EXPERIMENT
+#define PARENSTK_PUSH( paren_val, comm_val, nids_val ) {\
+if( ++TopOfParenStack == SizeOfParenStack ) {\
+   SizeOfParenStack *= 2;\
+   dmm_realloc_size(sizeof(paren_stack));\
+   if( dmm_realloc( (void **) &ParenStack, (long)SizeOfParenStack )) {\
+      COMERR_SET( ERR_MEMORY );\
+      goto error_return;}}\
+ParenStack[TopOfParenStack].paren_type = paren_val;\
+ParenStack[TopOfParenStack].narg = 0;\
+ParenStack[TopOfParenStack].nkey = 0;\
+ParenStack[TopOfParenStack].nids = nids_val;\
+ParenStack[TopOfParenStack].pfnum = *pfnum;\
+ParenStack[TopOfParenStack].comm_id = comm_val;}
+#else
 #define PARENSTK_PUSH( paren_val, comm_val, nids_val ) {\
 if( ++TopOfParenStack == SizeOfParenStack ) {\
    SizeOfParenStack *= 2;\
@@ -100,7 +115,7 @@ ParenStack[TopOfParenStack].narg = 0;\
 ParenStack[TopOfParenStack].nkey = 0;\
 ParenStack[TopOfParenStack].nids = nids_val;\
 ParenStack[TopOfParenStack].comm_id = comm_val;}
-
+#endif
 /* Operator stack macros */
 #define INITIAL_OPER_STACK_SIZE 32
 #define OPERSTK_PUSH( oper_id, type_val ) {\
@@ -217,6 +232,11 @@ static int brackets_symid = -1;
 static int braces_symid = -1;
 static int angbracks_symid = -1;
 static int dblangbracks_symid = -1;
+static int parensplus_symid = -1;
+static int bracketsplus_symid = -1;
+static int bracesplus_symid = -1;
+static int angbracksplus_symid = -1;
+static int dblangbracksplus_symid = -1;
 
 /* === Static functions ================================================== */
 
@@ -1170,18 +1190,39 @@ int status;
 		 } else {
 		   if (parens_symid==-1) {
 		     parens_symid = symbol_add("()");
+		     parensplus_symid = symbol_add("+()");
 		     brackets_symid = symbol_add("[]");
+		     bracketsplus_symid = symbol_add("+[]");
 		     braces_symid = symbol_add("{}");
+		     bracesplus_symid = symbol_add("+{}");
 		     angbracks_symid = symbol_add("<>");
+		     angbracksplus_symid = symbol_add("+<>");
 		     dblangbracks_symid = symbol_add("<<>>");
+		     dblangbracksplus_symid = symbol_add("+<<>>");
 		   }
 		   int commandid = ParenStack[TopOfParenStack].comm_id;
 		   if (commandid<0) {
-		     if (toktype==TOK_RPAREN) commandid = parens_symid;
-		     else if (toktype==TOK_RBRACKET) commandid = brackets_symid;
-		     else if (toktype==TOK_RBRACE) commandid = braces_symid;
-		     else if (toktype==TOK_RANGBRACK) commandid = angbracks_symid;
-		     else commandid = dblangbracks_symid;
+#ifdef PAREN_STACK_EXPERIMENT
+		     if (ParenStack[TopOfParenStack].pfnum==0 || TopOfParenStack>0 && ParenStack[TopOfParenStack-1].narg==0) {
+#else
+		     if (*pfnum==0 || TopOfParenStack>0 && ParenStack[TopOfParenStack-1].narg==0) {
+#endif
+		       if (toktype==TOK_RPAREN) commandid = parens_symid;
+		       else if (toktype==TOK_RBRACKET) commandid = brackets_symid;
+		       else if (toktype==TOK_RBRACE) commandid = braces_symid;
+		       else if (toktype==TOK_RANGBRACK) commandid = angbracks_symid;
+		       else commandid = dblangbracks_symid;
+		     } else {
+		       ParenStack[TopOfParenStack].narg++;   // assume associated symbol (or stream) will be on stack
+#ifdef PAREN_STACK_EXPERIMENT
+		       if (TopOfParenStack>0) ParenStack[TopOfParenStack-1].narg--;
+#endif
+		       if (toktype==TOK_RPAREN) commandid = parensplus_symid;
+		       else if (toktype==TOK_RBRACKET) commandid = bracketsplus_symid;
+		       else if (toktype==TOK_RBRACE) commandid = bracesplus_symid;
+		       else if (toktype==TOK_RANGBRACK) commandid = angbracksplus_symid;
+		       else commandid = dblangbracksplus_symid;
+		     }
 		   }
 		   PFOUT( TOK_COMMAND,
 			  commandid,

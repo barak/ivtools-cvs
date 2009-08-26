@@ -339,23 +339,25 @@ void IterateFunc::execute() {
 
 /*****************************************************************************/
 
+int NextFunc::_next_depth = 0;
+
 NextFunc::NextFunc(ComTerp* comterp) : StrmFunc(comterp) {
 }
 
 void NextFunc::execute() {
-#ifdef STREAMS_FOR_IPL
-    ComValue streamv(stack_arg(0));
-#else
     ComValue streamv(stack_arg_post_eval(0));
-#endif
     reset_stack();
 
     execute_impl(comterp(), streamv);
 }
 
 void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
+    _next_depth++;
 
-    if (!streamv.is_stream()) return;
+    if (!streamv.is_stream()) {
+      _next_depth--;
+      return;
+    }
 
     int outside_stackh = comterp->stack_height();
 
@@ -408,6 +410,7 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 	      streamv.stream_list()->clear();
 	      while (comterp->stack_height()>outside_stackh) comterp->pop_stack();
 	      comterp->push_stack(ComValue::nullval());
+	      _next_depth--;
 	      return;
 	    } else if (comterp->stack_height()==inside_stackh)
 	      comterp->push_stack(ComValue::blankval());
@@ -438,6 +441,8 @@ void NextFunc::execute_impl(ComTerp* comterp, ComValue& streamv) {
 
     } else 
       comterp->push_stack(ComValue::nullval());
+
+    _next_depth--;
 }
 
 

@@ -144,7 +144,11 @@ ComValue ComFunc::stack_arg_post_eval(int n, boolean symbol, ComValue& dflt) {
     skip_arg_in_expr(offtop, argcnt);
   }
 
-  comterp()->post_eval_expr(argcnt, offtop, pedepth()+1);
+  comterp()->post_eval_expr(argcnt, offtop, pedepth()+1 
+#ifdef POSTEVAL_EXPERIMENT
+			    , symbol
+#endif
+			    );
 
   return comterp()->pop_stack(!symbol);
 }

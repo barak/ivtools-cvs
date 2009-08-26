@@ -142,6 +142,8 @@ typedef struct postfix_token_struct
    int nids;		/* Number of ids in compound command name */
 } postfix_token;
 
+#define PAREN_STACK_EXPERIMENT
+
 /* Structure of stack to count command arguments and keywords */
 typedef struct _paren_stack paren_stack;
 struct _paren_stack 
@@ -151,6 +153,9 @@ struct _paren_stack
   unsigned nkey;
   unsigned paren_type;
   int comm_id;
+#ifdef PAREN_STACK_EXPERIMENT
+  int pfnum;   // to keep track of postfix output prior this paren pushed on stack
+#endif
 };
 
 /* Structure of stack to store operators and keywords */

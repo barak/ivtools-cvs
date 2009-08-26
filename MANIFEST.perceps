@@ -22,6 +22,8 @@ ComTerp/assignfunc.h
 ComTerp/bitfunc.h
 ComTerp/boolfunc.h
 ComTerp/bquotefunc.h
+ComTerp/charfunc.c
+ComTerp/charfunc.h
 ComTerp/comfunc.h
 ComTerp/comhandler.h
 ComTerp/commodule.h

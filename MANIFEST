@@ -155,6 +155,8 @@ ivtools-1.2/src/ComTerp/boolfunc.c
 ivtools-1.2/src/ComTerp/boolfunc.h
 ivtools-1.2/src/ComTerp/bquotefunc.c
 ivtools-1.2/src/ComTerp/bquotefunc.h
+ivtools-1.2/src/ComTerp/charfunc.c
+ivtools-1.2/src/ComTerp/charfunc.h
 ivtools-1.2/src/ComTerp/comfunc.c
 ivtools-1.2/src/ComTerp/comfunc.h
 ivtools-1.2/src/ComTerp/comhandler.c

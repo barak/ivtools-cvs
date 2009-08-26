@@ -128,6 +128,10 @@ public:
     virtual const char* docstring() { 
       return "val=%s(stream) -- return next value from stream"; }
 
+    static int next_depth() { return _next_depth; }
+protected:
+    static int _next_depth;
+
 };
 
 //: traverse stream command for ComTerp.
