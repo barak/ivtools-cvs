@@ -445,7 +445,9 @@ ostream& operator<< (ostream& out, const AttributeValueList& al) {
 	        out << attrval->boolean_ref();
 	        break;
 	    case AttributeValue::ArrayType:
+  	        out << "{";
 	        out << *attrval->array_ref();
+  	        out << "}";
 	        break;
             default:
 		out << "nil";

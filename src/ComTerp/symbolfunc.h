@@ -69,7 +69,7 @@ public:
 };
 
 //: create symbol command for ComTerp.
-// sym|lst=symadd(symbol [symbol ...]) -- create symbol(s) and return without lookup
+// sym|lst=symadd(syml|str [sym|str ...]) -- create symbol(s) and return without lookup
 class SymAddFunc : public ComFunc {
 public:
     SymAddFunc(ComTerp*);
@@ -77,7 +77,7 @@ public:
 
     // virtual boolean post_eval() { return true; }
     virtual const char* docstring() { 
-      return "sym|lst=%s(symbol [symbol ...]) -- create symbol(s) and return without lookup"; }
+      return "sym|lst=%s(sym|str [sym|str ...]) -- create symbol(s) and return without lookup"; }
 };
 
 //: command to split a symbol or string into a list of character objects

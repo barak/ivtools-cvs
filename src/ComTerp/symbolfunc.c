@@ -87,7 +87,7 @@ void SymAddFunc::execute() {
   if (!numargs) return;
   int symbol_ids[numargs];
   for (int i=0; i<numargs; i++) {
-    ComValue& val = stack_arg(i, true);
+    ComValue& val = stack_arg(i);
     if (val.is_type(AttributeValue::CommandType))
       symbol_ids[i] = val.command_symid();
     else if (val.is_type(AttributeValue::StringType))
