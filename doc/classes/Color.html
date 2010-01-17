@@ -207,7 +207,7 @@ InterViews/color.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="enum&#38;16">
+    <A NAME="enum&#38;19">
     <B>enum</B>
      { Copy, Xor, Invisible } 
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -223,8 +223,8 @@ InterViews/color.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>static boolean 
-    <A NAME="find(constDisplay*&#38;&#38;COMMconstString&#38;&#38;&#38;COMMColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
-    <B>find</B> ( const <A HREF="Display.html" >Display</A>*, const <A HREF="String.html" >String</A>&#38;, ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) </FONT> 
+    <A NAME="find(constDisplay*&#38;&#38;COMMconstchar*name&#38;&#38;COMMColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
+    <B>find</B> ( const <A HREF="Display.html" >Display</A>*, const char* name, ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -273,9 +273,9 @@ InterViews/color.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="intensities(ColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
-    <B>intensities</B> ( ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) const</FONT> 
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="intensities(Display*&#38;&#38;COMMColorIntensity&#38;r&#38;&#38;COMMColorIntensity&#38;g&#38;&#38;COMMColorIntensity&#38;b)">
+    <B>intensities</B> ( <A HREF="Display.html" >Display</A>*, ColorIntensity&#38; r, ColorIntensity&#38; g, ColorIntensity&#38; b ) const</FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -291,8 +291,8 @@ InterViews/color.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>static const <A HREF="Color.html" >Color</A>* 
-    <A NAME="lookup(Display*&#38;&#38;COMMconstString&#38;name)">
-    <B>lookup</B> (<A HREF="Display.html" >Display</A>*, const <A HREF="String.html" >String</A>&#38; name) </FONT> 
+    <A NAME="lookup(Display*&#38;&#38;COMMconstchar*name)">
+    <B>lookup</B> (<A HREF="Display.html" >Display</A>*, const char* name) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>

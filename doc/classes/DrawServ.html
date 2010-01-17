@@ -1,0 +1,807 @@
+
+<html><head><TITLE>Description of DrawServ</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>DrawServ</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlayUnidraw.html" >OverlayUnidraw</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlayUnidraw.html" >OverlayUnidraw</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#DrawServ><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+DrawServ/drawserv.h
+</FONT></UL>
+<br>
+
+
+
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DistributeCmdString(constchar*cmdstring&#38;&#38;COMMDrawLink*orglink=nil)">
+    <B>DistributeCmdString</B> (const char* cmdstring, <A HREF="DrawLink.html" >DrawLink</A>* orglink=nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        send command string to every remote <A HREF="DrawServ.html" >DrawServ</A> (except where it came from).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="DrawServ(Catalog*&#38;&#38;COMMWorld*)">
+    <B>DrawServ</B> (<A HREF="Catalog.html" >Catalog</A>*, <A HREF="World.html" >World</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="DrawServ(Catalog*&#38;&#38;COMMint&#38;argc&#38;&#38;COMMchar**argv&#38;&#38;COMMOptionDesc*=nil&#38;&#38;COMMPropertyData*=nil)">
+    <B>DrawServ</B> ( <A HREF="Catalog.html" >Catalog</A>*, int&#38; argc, char** argv, <A HREF="OptionDesc.html" >OptionDesc</A>* = nil, <A HREF="PropertyData.html" >PropertyData</A>* = nil ) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="ExecuteCmd(Command*)">
+    <B>ExecuteCmd</B> (<A HREF="Command.html" >Command</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        execute <A HREF="Command.html" >Command</A>'s locally, and on remote linked <A HREF="DrawServ.html" >DrawServ</A>'s.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static unsigned int 
+    <A NAME="GraphicIdMask">
+    <B>GraphicIdMask</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="Init()">
+    <B>Init</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Create new link to remote drawserv, return -1 if error
+ state: 0==new_link, 1==one_way, 2==two_way.
+ Let <A HREF="DrawLink.html" >DrawLink</A> assign local_id by passing -1 for local_id.
+ The local_id argument is for verification purposes once
+ two-way link is established.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="PrintAttributeList(ostream&#38;out&#38;&#38;COMMAttributeList*list)">
+    <B>PrintAttributeList</B> (ostream&#38; out, <A HREF="AttributeList.html" >AttributeList</A>* list) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        alternate method for serializing an <A HREF="AttributeList.html" >AttributeList</A>
+ returns false if really not there.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="SendCmdString(DrawLink*link&#38;&#38;COMMconstchar*cmdstring)">
+    <B>SendCmdString</B> (<A HREF="DrawLink.html" >DrawLink</A>* link, const char* cmdstring) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        execute command string on one remote <A HREF="DrawServ.html" >DrawServ</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static unsigned int 
+    <A NAME="SessionIdMask">
+    <B>SessionIdMask</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="comdraw_port()">
+    <B>comdraw_port</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return port used for comdraw command interpreter
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>CompIdTable* 
+    <A NAME="compidtable()">
+    <B>compidtable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to table that map from <A HREF="GraphicComp.html" >GraphicComp</A>* to <A HREF="GraphicId.html" >GraphicId</A>*
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="cycletest(unsignedintsid&#38;&#38;COMMconstchar*host&#38;&#38;COMMconstchar*user&#38;&#38;COMMintpid)">
+    <B>cycletest</B> (unsigned int sid, const char* host, const char* user, int pid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test for new incoming link that would establish a cycle
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="grid_message(GraphicId*grid)">
+    <B>grid_message</B> (<A HREF="GraphicId.html" >GraphicId</A>* grid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate graphic id selection message
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="grid_message_callback(DrawLink*link&#38;&#38;COMMunsignedintid&#38;&#38;COMMunsignedintselector&#38;&#38;COMMintstate&#38;&#38;COMMunsignedintoldselector)">
+    <B>grid_message_callback</B> (<A HREF="DrawLink.html" >DrawLink</A>* link, unsigned int id, unsigned int selector, int state, unsigned int oldselector) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        callback for graphic id selection message 
+ propagate graphic id selection message
+ generate unique graphic id.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="grid_message_handle(DrawLink*link&#38;&#38;COMMunsignedintid&#38;&#38;COMMunsignedintselector&#38;&#38;COMMintstate&#38;&#38;COMMunsignedintnewselector=0)">
+    <B>grid_message_handle</B> (<A HREF="DrawLink.html" >DrawLink</A>* link, unsigned int id, unsigned int selector, int state, unsigned int newselector=0) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        handle graphic id selection message
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>GraphicIdTable* 
+    <A NAME="gridtable()">
+    <B>gridtable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to table of <A HREF="GraphicId.html" >GraphicId</A>'s.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="linkdown(DrawLink*link)">
+    <B>linkdown</B> (<A HREF="DrawLink.html" >DrawLink</A>* link) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        shut down existing link to remote drawserv
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="linkdump(FILE*)">
+    <B>linkdump</B> (FILE*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        dump text table of <A HREF="DrawLink.html" >DrawLink</A>'s
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLink.html" >DrawLink</A>* 
+    <A NAME="linkget(constchar*hostname&#38;&#38;COMMintportnum)">
+    <B>linkget</B> (const char* hostname, int portnum) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to existing <A HREF="DrawLink.html" >DrawLink</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLink.html" >DrawLink</A>* 
+    <A NAME="linkget(intlocal_id&#38;&#38;COMMintremote_id=-1)">
+    <B>linkget</B> (int local_id, int remote_id=-1) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to existing <A HREF="DrawLink.html" >DrawLink</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLink.html" >DrawLink</A>* 
+    <A NAME="linkget(unsignedintsessionid)">
+    <B>linkget</B> (unsigned int sessionid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to existing <A HREF="DrawLink.html" >DrawLink</A> given a sessionid.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLinkList.html" >DrawLinkList</A>* 
+    <A NAME="linklist()">
+    <B>linklist</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to list of <A HREF="DrawLink.html" >DrawLink</A>'s
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="print_gridtable()">
+    <B>print_gridtable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print contents of table of <A HREF="GraphicId.html" >GraphicId</A>'s
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="print_sidtable()">
+    <B>print_sidtable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        print contents of table of SessionId's
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="remove_sids(DrawLink*)">
+    <B>remove_sids</B> (<A HREF="DrawLink.html" >DrawLink</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        remove all SessionId's associated with this <A HREF="DrawLink.html" >DrawLink</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="selftest(constchar*host&#38;&#38;COMMunsignedintportnum)">
+    <B>selftest</B> (const char* host, unsigned int portnum) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test if a new outgoing link is really to yourself
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>unsigned int 
+    <A NAME="sessionid()">
+    <B>sessionid</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        current unique session id.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="sessionid_register(DrawLink*link)">
+    <B>sessionid_register</B> (<A HREF="DrawLink.html" >DrawLink</A>* link) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        register all sessionid's used by this <A HREF="DrawServ.html" >DrawServ</A> with remote <A HREF="DrawServ.html" >DrawServ</A>
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="sessionid_register_handle(DrawLink*link&#38;&#38;COMMunsignedintsid&#38;&#38;COMMunsignedintosid&#38;&#38;COMMintpid&#38;&#38;COMMconstchar*user&#38;&#38;COMMconstchar*host&#38;&#38;COMMinthostid)">
+    <B>sessionid_register_handle</B> (<A HREF="DrawLink.html" >DrawLink</A>* link, unsigned int sid, unsigned int osid, int pid, const char* user, const char* host, int hostid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        handle request to register unique session id
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="sessionid_register_propagate(DrawLink*link&#38;&#38;COMMunsignedintsid&#38;&#38;COMMunsignedintosid&#38;&#38;COMMintpid&#38;&#38;COMMconstchar*user&#38;&#38;COMMconstchar*host&#38;&#38;COMMinthostid)">
+    <B>sessionid_register_propagate</B> (<A HREF="DrawLink.html" >DrawLink</A>* link, unsigned int sid, unsigned int osid, int pid, const char* user, const char *host, int hostid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        propagate a newly registered session id to all other <A HREF="DrawLink.html" >DrawLink</A>'s
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>SessionIdTable* 
+    <A NAME="sessionidtable()">
+    <B>sessionidtable</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return pointer to table of session id's that map to SessionId's
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="test_grid(unsignedintid)">
+    <B>test_grid</B> (unsigned int id) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test candidate graphic id for local uniqueness
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="test_sessionid(unsignedintid)">
+    <B>test_sessionid</B> (unsigned int id) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        test candidate session id for local uniqueness
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static unsigned int 
+    <A NAME="unique_sessionid()">
+    <B>unique_sessionid</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        generate unique session id.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~DrawServ()">
+    <B>~DrawServ</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_comdraw_port">
+    <B>_comdraw_port</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        port used for comdraw command interpreter
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>CompIdTable* 
+    <A NAME="_compidtable">
+    <B>_compidtable</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        table of all <A HREF="GraphicComp.html" >GraphicComp</A>'s associated with a <A HREF="GraphicId.html" >GraphicId</A>.
+ maps from <A HREF="GraphicComp.html" >GraphicComp</A>* to <A HREF="GraphicId.html" >GraphicId</A>*
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>GraphicIdTable* 
+    <A NAME="_gridtable">
+    <B>_gridtable</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        table of all <A HREF="GraphicId.html" >GraphicId</A>'s.
+ maps from id to <A HREF="GraphicId.html" >GraphicId</A>*
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLinkList.html" >DrawLinkList</A>* 
+    <A NAME="_linklist">
+    <B>_linklist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        <A HREF="DrawLink.html" >DrawLink</A> list
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_sessionid">
+    <B>_sessionid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        unique session id.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>SessionIdTable* 
+    <A NAME="_sessionidtable">
+    <B>_sessionidtable</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        table of all session id's.
+ maps from session id to SessionId*
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

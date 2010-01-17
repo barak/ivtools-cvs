@@ -51,8 +51,8 @@ ComTerp/comterpserv.h
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="ComTerpServ(intbufsize=1024*1024&#38;&#38;COMMintfd=-1)">
-    <B>ComTerpServ</B> (int bufsize = 1024*1024, int fd = -1) </FONT> 
+    <A NAME="ComTerpServ(intbufsize=1024&#38;&#38;COMMintfd=-1)">
+    <B>ComTerpServ</B> (int bufsize = 1024, int fd = -1) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -77,6 +77,40 @@ ComTerp/comterpserv.h
       
         add a default list of <A HREF="ComFunc.html" >ComFunc</A> objects to this interpreter.
  <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="delete_later()">
+    <B>delete_later</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="delete_later(booleanflag)">
+    <B>delete_later</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
       <br>
       
       
@@ -178,7 +212,7 @@ ComTerp/comterpserv.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComValue.html" >ComValue</A> 
     <A NAME="run(constchar*&#38;&#38;COMMbooleannested=false)">
     <B>run</B> (const char*, boolean nested=false) </FONT> 
     
@@ -198,7 +232,7 @@ ComTerp/comterpserv.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual <A HREF="ComValue.html" >ComValue</A>&#38; 
+    <DT><FONT FACE=Helvetica>virtual <A HREF="ComValue.html" >ComValue</A> 
     <A NAME="run(postfix_token*&#38;&#38;COMMint)">
     <B>run</B> (postfix_token*, int) </FONT> 
     
@@ -257,6 +291,22 @@ ComTerp/comterpserv.h
 
 
 <FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_delete_later">
+    <B>_delete_later</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>int 
     <A NAME="_fd">

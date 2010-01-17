@@ -282,16 +282,14 @@ OverlayUnidraw/scriptview.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
-    <A NAME="MatchedGS(Clipboard*&#38;&#38;COMMint&#38;)">
-    <B>MatchedGS</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="MatchedGS(Clipboard*)">
+    <B>MatchedGS</B> (<A HREF="Clipboard.html" >Clipboard</A>*) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         return index of where the graphic state of this component
- matches the graphic state of a component in the clipboard.
- return iterator that points to where the graphic state of this component
  matches the graphic state of a component in the clipboard.
  <br> 
       <br>
@@ -310,10 +308,27 @@ OverlayUnidraw/scriptview.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        return index of where the graphic state of this component
+        return iterator that points to where the graphic state of this component
  matches the graphic state of a component in the clipboard.
- return iterator that points to where the graphic state of this component
- matches the graphic state of a component in the clipboard.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="MatchedPic(Clipboard*)">
+    <B>MatchedPic</B> (<A HREF="Clipboard.html" >Clipboard</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return index of where the compound graphic of this component
+ matches the compound graphic of a component in the clipboard.
  <br> 
       <br>
       
@@ -331,9 +346,7 @@ OverlayUnidraw/scriptview.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        return index of where the compound graphic of this component
- matches the compound graphic of a component in the clipboard.
- return iterator that points to where the compound graphic of this component
+        return iterator that points to where the compound graphic of this component
  matches the compound graphic of a component in the clipboard.
  <br> 
       <br>
@@ -345,37 +358,14 @@ OverlayUnidraw/scriptview.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
-    <A NAME="MatchedPic(Clipboard*&#38;&#38;COMMint&#38;)">
-    <B>MatchedPic</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        return index of where the compound graphic of this component
- matches the compound graphic of a component in the clipboard.
- return iterator that points to where the compound graphic of this component
- matches the compound graphic of a component in the clipboard.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="Iterator.html" >Iterator</A> 
-    <A NAME="MatchedPts(Clipboard*&#38;&#38;COMMint&#38;)">
-    <B>MatchedPts</B> (<A HREF="Clipboard.html" >Clipboard</A>*, int&#38;) </FONT> 
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="MatchedPts(Clipboard*)">
+    <B>MatchedPts</B> (<A HREF="Clipboard.html" >Clipboard</A>*) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         return index of where the point list of this component
- matches the point list of a component in the clipboard.
- return iterator that points to where the point list of this component
  matches the point list of a component in the clipboard.
  <br> 
       <br>
@@ -394,9 +384,7 @@ OverlayUnidraw/scriptview.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        return index of where the point list of this component
- matches the point list of a component in the clipboard.
- return iterator that points to where the point list of this component
+        return iterator that points to where the point list of this component
  matches the point list of a component in the clipboard.
  <br> 
       <br>
@@ -781,6 +769,43 @@ OverlayUnidraw/scriptview.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="svg_format()">
+    <B>svg_format</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if exporting SVG
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="svg_format(boolean)">
+    <B>svg_format</B> (boolean) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag for exporting SVG
+ can be overridden by flag associated with <A HREF="Command.html" >Command</A> objects
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>virtual 
     <A NAME="~OverlayScript()">
     <B>~OverlayScript</B> () </FONT> 
@@ -859,6 +884,23 @@ OverlayUnidraw/scriptview.h
     <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="Brush(ostream&#38;out)">
     <B>Brush</B> (ostream&#38; out) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Colors(ostream&#38;out)">
+    <B>Colors</B> (ostream&#38; out) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -1045,6 +1087,22 @@ OverlayUnidraw/scriptview.h
     <DT><FONT FACE=Helvetica>static boolean 
     <A NAME="_ptlist_parens">
     <B>_ptlist_parens</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="_svg_format">
+    <B>_svg_format</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       

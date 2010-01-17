@@ -121,6 +121,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="AckBackHandler.html">
+      <FONT FACE="Helvetica" SIZE=3><B>AckBackHandler</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized ACE_EventHandler for monitoring responses from outgoing connection</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="AcknowledgeBoxFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>AcknowledgeBoxFunc</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to popup an acknowledge dialog box</TD>
@@ -244,6 +254,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="AlignToGridCmd.html">
       <FONT FACE="Helvetica" SIZE=3><B>AlignToGridCmd</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>align-to-grid command</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="AlistLeakFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>AlistLeakFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return current number of <A HREF="AttributeValueList.html" >AttributeValueList</A>'s</TD>
   
 </TR>
 
@@ -721,9 +741,9 @@
 
 <TR >
   
-  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="AttributeValueList.html">
-      <FONT FACE="Helvetica" SIZE=3><B>AttributeValueList</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>list of <A HREF="AttributeValue.html" >AttributeValue</A> objects.</TD>
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="AttrvLeakFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>AttrvLeakFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return current number of <A HREF="AttributeValue.html" >AttributeValue</A>'s</TD>
   
 </TR>
 
@@ -833,7 +853,7 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="BitAndFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>BitAndFunc</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>&#38; (bitwise-and) operator.</TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>&#38; (bit_and) operator.</TD>
   
 </TR>
 
@@ -843,7 +863,7 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="BitNotFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>BitNotFunc</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>~ (bitwise-not) operator.</TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>~ (bit_not) operator.</TD>
   
 </TR>
 
@@ -853,7 +873,7 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="BitOrFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>BitOrFunc</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>| (bitwise-or) operator.</TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>| (bit_or) operator.</TD>
   
 </TR>
 
@@ -863,7 +883,7 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="BitXorFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>BitXorFunc</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>^ (bitwise-xor) operator.</TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>^ (bit_xor) operator.</TD>
   
 </TR>
 
@@ -1261,6 +1281,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="ChangeIdFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>ChangeIdFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to change session (or graphic id) to use local session id</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CharFieldEditor.html">
       <FONT FACE="Helvetica" SIZE=3><B>CharFieldEditor</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
@@ -1561,6 +1591,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="ColorRgbFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>ColorRgbFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>comand for setting color state variables by RGB name in comdraw.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="ColorVar.html">
       <FONT FACE="Helvetica" SIZE=3><B>ColorVar</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>current color state variable</TD>
@@ -1731,9 +1771,29 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CommandLeakFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>CommandLeakFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return current number of <A HREF="Command.html" >Command</A>'s</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CommandPusher.html">
       <FONT FACE="Helvetica" SIZE=3><B>CommandPusher</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>helper object for postponing execution of commands until environment is ready.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CompLeakFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>CompLeakFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return current number of <A HREF="OverlayComp.html" >OverlayComp</A>'s</TD>
   
 </TR>
 
@@ -1843,7 +1903,7 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="ComterpStackHeightFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>ComterpStackHeightFunc</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to toggle step script execution </TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return stack height for debugging</TD>
   
 </TR>
 
@@ -2051,6 +2111,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CopyMoveGraphFrameCmd.html">
+      <FONT FACE="Helvetica" SIZE=3><B>CopyMoveGraphFrameCmd</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to copy contents of current frame to create a new frame and reconnect graph.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CopyString.html">
       <FONT FACE="Helvetica" SIZE=3><B>CopyString</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
@@ -2104,6 +2174,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CreateFrameFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>CreateFrameFunc</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>interpreter command to create new frame.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CreateGraphicFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>CreateGraphicFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>base class for graphic construction func's</TD>
   
 </TR>
 
@@ -2194,6 +2274,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="Creator.html">
       <FONT FACE="Helvetica" SIZE=3><B>Creator</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>component factory class</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="CtoiFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>CtoiFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
   
 </TR>
 
@@ -2671,6 +2761,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawEditor.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawEditor</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>editor for <A HREF="DrawServ.html" >DrawServ</A> application</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawIdrawComp.html">
       <FONT FACE="Helvetica" SIZE=3><B>DrawIdrawComp</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>top-level component for a drawserv document.</TD>
@@ -2701,9 +2801,79 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawImportCmd.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawImportCmd</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized <A HREF="FrameImportCmd.html" >FrameImportCmd</A> for importing graphs in frames</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawImportPasteCmd.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawImportPasteCmd</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized ImportPasteCmd for <A HREF="DrawServ.html" >DrawServ</A></TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawKit.html">
       <FONT FACE="Helvetica" SIZE=3><B>DrawKit</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized <A HREF="FrameKit.html" >FrameKit</A> for use with drawserv.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawLinkComp.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawLinkComp</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawLinkFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawLinkFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to connect to another drawserv</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawLinkList.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawLinkList</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawServ.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawServ</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="DrawServHandler.html">
+      <FONT FACE="Helvetica" SIZE=3><B>DrawServHandler</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized <A HREF="UnidrawComterpHandler.html" >UnidrawComterpHandler</A> for integration into <A HREF="DrawServ.html" >DrawServ</A></TD>
   
 </TR>
 
@@ -3321,6 +3491,26 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FilterFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>FilterFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>stream filter command</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FilterNextFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>FilterNextFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>hidden func used by next command for stream filter command</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FixViewCmd.html">
       <FONT FACE="Helvetica" SIZE=3><B>FixViewCmd</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command for fixing size or location of a graphic view.</TD>
@@ -3394,6 +3584,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FontBoundingBox.html">
       <FONT FACE="Helvetica" SIZE=3><B>FontBoundingBox</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FontByNameFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>FontByNameFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command for setting font state variable by  font name in comdraw.</TD>
   
 </TR>
 
@@ -3664,6 +3864,26 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FrameIdrawView.html">
       <FONT FACE="Helvetica" SIZE=3><B>FrameIdrawView</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>graphical view of <A HREF="FrameIdrawComp.html" >FrameIdrawComp</A>.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FrameImportCmd.html">
+      <FONT FACE="Helvetica" SIZE=3><B>FrameImportCmd</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized <A HREF="OvImportCmd.html" >OvImportCmd</A> for importing frames</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="FrameImportPasteCmd.html">
+      <FONT FACE="Helvetica" SIZE=3><B>FrameImportPasteCmd</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized <A HREF="PasteCmd.html" >PasteCmd</A> for flipbook</TD>
   
 </TR>
 
@@ -4053,7 +4273,7 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="GraphDeleteCmd.html">
       <FONT FACE="Helvetica" SIZE=3><B>GraphDeleteCmd</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized <A HREF="DeleteCmd.html" >DeleteCmd</A> for graphdraw.</TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>specialized <A HREF="OvDeleteCmd.html" >OvDeleteCmd</A> for graphdraw.</TD>
   
 </TR>
 
@@ -4234,6 +4454,46 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="GraphicComps.html">
       <FONT FACE="Helvetica" SIZE=3><B>GraphicComps</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="GraphicIdFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>GraphicIdFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to send message between remote selections</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="GraphicIdList.html">
+      <FONT FACE="Helvetica" SIZE=3><B>GraphicIdList</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="GraphicIds.html">
+      <FONT FACE="Helvetica" SIZE=3><B>GraphicIds</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>object to encapsulate a set of graphic ids</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="GraphicLeakFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>GraphicLeakFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return current number of <A HREF="Graphic.html" >Graphic</A>'s</TD>
   
 </TR>
 
@@ -4931,6 +5191,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="IsSpaceFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>IsSpaceFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="IterateFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>IterateFunc</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>.. (iterate) operator.</TD>
@@ -5151,9 +5421,9 @@
 
 <TR >
   
-  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="LeakChecker.html">
-      <FONT FACE="Helvetica" SIZE=3><B>LeakChecker</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>utility for counting undestroyed instances of a class.</TD>
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="LeafWalker.html">
+      <FONT FACE="Helvetica" SIZE=3><B>LeafWalker</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>walk the leafs of an <A HREF="OverlaysComp.html" >OverlaysComp</A> tree</TD>
   
 </TR>
 
@@ -5304,6 +5574,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="LinkComp.html">
       <FONT FACE="Helvetica" SIZE=3><B>LinkComp</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>link component</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="LinkSelection.html">
+      <FONT FACE="Helvetica" SIZE=3><B>LinkSelection</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>distributed <A HREF="Selection.html" >Selection</A> class</TD>
   
 </TR>
 
@@ -5721,6 +6001,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="MlineLeakFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>MlineLeakFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return current number of <A HREF="MultiLineObj.html" >MultiLineObj</A>'s</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="MobilityCmd.html">
       <FONT FACE="Helvetica" SIZE=3><B>MobilityCmd</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>mobility command</TD>
@@ -5984,6 +6274,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="MultiLineView.html">
       <FONT FACE="Helvetica" SIZE=3><B>MultiLineView</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="MuteFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>MuteFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>mute command for <A HREF="ComTerp.html" >ComTerp</A></TD>
   
 </TR>
 
@@ -6464,6 +6764,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="Open_BSpline31.html">
       <FONT FACE="Helvetica" SIZE=3><B>Open_BSpline31</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="OptableFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>OptableFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>print contents of operator table</TD>
   
 </TR>
 
@@ -7084,6 +7394,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="OverlayView.html">
       <FONT FACE="Helvetica" SIZE=3><B>OverlayView</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>base class for graphic view of an <A HREF="OverlayComp.html" >OverlayComp</A>.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="OverlayViewRef.html">
+      <FONT FACE="Helvetica" SIZE=3><B>OverlayViewRef</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3><A HREF="OverlayView.html" >OverlayView</A> used as <A HREF="Resource.html" >Resource</A></TD>
   
 </TR>
 
@@ -7723,7 +8043,7 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="Path.html">
       <FONT FACE="Helvetica" SIZE=3><B>Path</B></FONT></A></TD>
-  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>transmission path for state variable propogation</TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>transmission path for state variable propagation</TD>
   
 </TR>
 
@@ -7914,6 +8234,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="PixelPokeFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>PixelPokeFunc</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to poke pixel values into raster</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="PixelPokeLineFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>PixelPokeLineFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to poke a line of pixel values into raster</TD>
   
 </TR>
 
@@ -9631,6 +9961,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="SessionIdFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>SessionIdFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to reserve unique session id</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="SetAttrByExprCmd.html">
       <FONT FACE="Helvetica" SIZE=3><B>SetAttrByExprCmd</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to set attributes on a component by evaluating an expression.</TD>
@@ -9873,6 +10213,26 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="SlotView.html">
       <FONT FACE="Helvetica" SIZE=3><B>SlotView</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="SocketFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>SocketFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>create socket object</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="SocketObj.html">
+      <FONT FACE="Helvetica" SIZE=3><B>SocketObj</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
   
 </TR>
@@ -10284,6 +10644,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="SymIdFunc.html">
       <FONT FACE="Helvetica" SIZE=3><B>SymIdFunc</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>symbol id command for <A HREF="ComTerp.html" >ComTerp</A>.</TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="SymStrFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>SymStrFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>return string version of symbol</TD>
   
 </TR>
 
@@ -10961,6 +11331,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="TransformerFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>TransformerFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to access a graphic's transformer</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="TransientWindow.html">
       <FONT FACE="Helvetica" SIZE=3><B>TransientWindow</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
@@ -11124,6 +11504,16 @@
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="UPage.html">
       <FONT FACE="Helvetica" SIZE=3><B>UPage</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="USleepFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>USleepFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>usleep sleep microseconds</TD>
   
 </TR>
 
@@ -11511,6 +11901,16 @@
 
 <TR >
   
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="ViewLeakFunc.html">
+      <FONT FACE="Helvetica" SIZE=3><B>ViewLeakFunc</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>command to return current number of <A HREF="OverlayView.html" >OverlayView</A>'s</TD>
+  
+</TR>
+
+
+
+<TR >
+  
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="Viewer.html">
       <FONT FACE="Helvetica" SIZE=3><B>Viewer</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3>displays a graphical component view hierarchy.</TD>
@@ -11783,6 +12183,26 @@
   
   <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="_dmmwalk.html">
       <FONT FACE="Helvetica" SIZE=3><B>_dmmwalk</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="_oper_stack.html">
+      <FONT FACE="Helvetica" SIZE=3><B>_oper_stack</B></FONT></A></TD>
+  <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
+  
+</TR>
+
+
+
+<TR >
+  
+  <TD  ALIGN=RIGHT VALIGN=TOP><A HREF="_paren_stack.html">
+      <FONT FACE="Helvetica" SIZE=3><B>_paren_stack</B></FONT></A></TD>
   <TD VALIGN=TOP><FONT FACE="Times" SIZE=3></TD>
   
 </TR>

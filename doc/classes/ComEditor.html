@@ -43,85 +43,13 @@ ComUnidraw/comeditor.h
 <br>
 
 
-
+ <B>Description:</B><P>  return pointer to associated <A HREF="ComTerp.html" >ComTerp</A> (always a <A HREF="ComTerpServ.html" >ComTerpServ</A>).
+  <br><br>
 </DL></FONT>
 
 
 
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="AddCommands(ComTerp*)">
-    <B>AddCommands</B> (<A HREF="ComTerp.html" >ComTerp</A>*) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        method for adding <A HREF="ComFunc.html" >ComFunc</A> objects to the <A HREF="ComTerp.html" >ComTerp</A> associated with
- this <A HREF="ComEditor.html" >ComEditor</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="ComEditor(OverlayComp*&#38;&#38;COMMOverlayKit*=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>ComEditor</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        constructor for using existing component.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="ComEditor(booleaninitflag&#38;&#38;COMMOverlayKit*=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>ComEditor</B> (boolean initflag, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        constructor for use of derived classes.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="ComEditor(constchar*file&#38;&#38;COMMOverlayKit*=OverlayKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>ComEditor</B> (const char* file, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="OverlayKit.html" >OverlayKit</A>::Instance()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        constructor for building top-level component from a file.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="ExecuteCmd(Command*cmd)">
@@ -131,60 +59,6 @@ ComUnidraw/comeditor.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         indirect command execution for distributed whiteboard mechanism.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual <A HREF="ComTerpServ.html" >ComTerpServ</A>* 
-    <A NAME="GetComTerp()">
-    <B>GetComTerp</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        return pointer to associated <A HREF="ComTerp.html" >ComTerp</A> (always a <A HREF="ComTerpServ.html" >ComTerpServ</A>).
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="Init(OverlayComp*=nil&#38;&#38;COMMconstchar*name=&#38;&#38;QUOTDComEditor&#38;&#38;QUOTD)">
-    <B>Init</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* = nil, const char* name = "<A HREF="ComEditor.html" >ComEditor</A>") </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="InitCommands()">
-    <B>InitCommands</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        method for running <A HREF="Unidraw.html" >Unidraw</A> <A HREF="Command.html" >Command</A> objects after <A HREF="OverlayEditor.html" >OverlayEditor</A>
- is constructed.
  <br> 
       <br>
       

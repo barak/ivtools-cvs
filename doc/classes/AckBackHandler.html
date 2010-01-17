@@ -1,0 +1,350 @@
+
+<html><head><TITLE>Description of AckBackHandler</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>AckBackHandler</B></FONT>
+
+  <FONT SIZE=4> : public ACE_Event_Handler  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+specialized ACE_EventHandler for monitoring responses from outgoing connection<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public ACE_Event_Handler 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#AckBackHandler><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+DrawServ/ackback-handler.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  = Initialization and termination methods.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="AckBackHandler()">
+    <B>AckBackHandler</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLink.html" >DrawLink</A>* 
+    <A NAME="drawlink()">
+    <B>drawlink</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get <A HREF="DrawLink.html" >DrawLink</A> associated with this handler
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="drawlink(DrawLink*link)">
+    <B>drawlink</B> (<A HREF="DrawLink.html" >DrawLink</A>* link) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="DrawLink.html" >DrawLink</A> associated with this handler
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual ACE_HANDLE 
+    <A NAME="get_handle(void)">
+    <B>get_handle</B> (void) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Get the I/O handle.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_close(ACE_HANDLEhandle&#38;&#38;COMMACE_Reactor_Maskclose_mask)">
+    <B>handle_close</B> (ACE_HANDLE handle, ACE_Reactor_Mask close_mask) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Called when a <handle_*()> method returns -1 or when the
+ <remove_handler> method is called on an <ACE_Reactor>. The
+ <close_mask> indicates which event has triggered the
+ <handle_close> method callback on a particular <handle>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_input(ACE_HANDLEfd=ACE_INVALID_HANDLE)">
+    <B>handle_input</B> (ACE_HANDLE fd = ACE_INVALID_HANDLE) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Called when input events occur (e.g., connection or data).
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_timeout(constACE_Time_Value&#38;tv&#38;&#38;COMMconstvoid*arg)">
+    <B>handle_timeout</B> (const ACE_Time_Value &#38;tv, const void *arg) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        called when timer goes off.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="set_handle(ACE_HANDLE)">
+    <B>set_handle</B> (ACE_HANDLE) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Set the I/O handle.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="start_timer()">
+    <B>start_timer</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        Start timer waiting for ackback
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual 
+    <A NAME="~AckBackHandler()">
+    <B>~AckBackHandler</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_ackback_arrived">
+    <B>_ackback_arrived</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLink.html" >DrawLink</A>* 
+    <A NAME="_drawlink">
+    <B>_drawlink</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_eof_expected">
+    <B>_eof_expected</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>ACE_HANDLE 
+    <A NAME="_handle">
+    <B>_handle</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_timer_started">
+    <B>_timer_started</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>long 
+    <A NAME="_timerid">
+    <B>_timerid</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

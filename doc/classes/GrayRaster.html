@@ -43,49 +43,13 @@ OverlayUnidraw/grayraster.h
 <br>
 
 
-
+ <B>Description:</B><P>  pixel type.
+  <br><br>
 </DL></FONT>
 
 
 
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="GrayRaster(constGrayRaster&#38;raster)">
-    <B>GrayRaster</B> (const <A HREF="GrayRaster.html" >GrayRaster</A>&#38; raster) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        construct a <A HREF="GrayRaster.html" >GrayRaster</A> by copying 'raster'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="GrayRaster(unsignedlongwidth&#38;&#38;COMMunsignedlongheight&#38;&#38;COMMAttributeValue::ValueTypetype=AttributeValue::UCharType&#38;&#38;COMMvoid*data=nil)">
-    <B>GrayRaster</B> (unsigned long width, unsigned long height, <A HREF="AttributeValue.html" >AttributeValue</A>::ValueType type = <A HREF="AttributeValue.html" >AttributeValue</A>::UCharType, void* data = nil) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        construct a <A HREF="GrayRaster.html" >GrayRaster</A> of 'width','height' and 'type', with an optional
- copy of 'data', a linear array of 'width'*'height' values of 'type'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
     <A NAME="addgrayramp(CopyString&#38;cmd&#38;&#38;COMMIntCoordx&#38;&#38;COMMIntCoordy)">
@@ -125,42 +89,6 @@ OverlayUnidraw/grayraster.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
-    <A NAME="copy()">
-    <B>copy</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        interface to <A HREF="GrayRaster.html" >GrayRaster</A> copy constructor.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="flush()">
-    <B>flush</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        scale pixel values to onscreen graylevels and flush to display.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
     <DT><FONT FACE=Helvetica>virtual boolean 
     <A NAME="gray_flag()">
     <B>gray_flag</B> () </FONT> 
@@ -169,261 +97,6 @@ OverlayUnidraw/grayraster.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         always true.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValue&#38;v)">
-    <B>graypeek</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A>&#38; v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        insert value of value_type() at 'x','y' into an <A HREF="AttributeValue.html" >AttributeValue</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMdouble&#38;v)">
-    <B>graypeek</B> (unsigned long x, unsigned long y, double&#38; v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert value of value_type() at 'x','y' to a double.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMfloat&#38;v)">
-    <B>graypeek</B> (unsigned long x, unsigned long y, float&#38; v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert value of value_type() at 'x','y' to a float.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedint&#38;v)">
-    <B>graypeek</B> (unsigned long x, unsigned long y, unsigned int&#38; v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert value of value_type() at 'x','y' to an unsigned int.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedlong&#38;v)">
-    <B>graypeek</B> (unsigned long x, unsigned long y, unsigned long&#38; v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert value of value_type() at 'x','y' to an unsigned long.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValuev)">
-    <B>graypoke</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A> v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert numeric <A HREF="AttributeValue.html" >AttributeValue</A> to value_type(), then poke at 'x','y'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMdoublev)">
-    <B>graypoke</B> (unsigned long x, unsigned long y, double v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert double to value_type(), then poke at 'x','y'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMfloatv)">
-    <B>graypoke</B> (unsigned long x, unsigned long y, float v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert unsigned float to value_type(), then poke at 'x','y'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedintv)">
-    <B>graypoke</B> (unsigned long x, unsigned long y, unsigned int v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert unsigned int to value_type(), then poke at 'x','y'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypoke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMunsignedlongv)">
-    <B>graypoke</B> (unsigned long x, unsigned long y, unsigned long v) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        convert unsigned long to value_type(), then poke at 'x','y'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="highlight(unsignedlongx&#38;&#38;COMMunsignedlongy)">
-    <B>highlight</B> (unsigned long x, unsigned long y) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        highlight pixel at 'x','y' by setting red value to 1.0.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
-    <A NAME="logscale(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray&#38;&#38;COMMCopyString&#38;cmd)">
-    <B>logscale</B> ( ColorIntensity mingray, ColorIntensity maxgray, <A HREF="CopyString.html" >CopyString</A>&#38; cmd ) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        create new raster logarithmically scaled between 'mingray' and 'maxgray', 
- and return command string to reproduce this effect after save/restore.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="poke(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMColorIntensityred&#38;&#38;COMMColorIntensitygreen&#38;&#38;COMMColorIntensityblue&#38;&#38;COMMfloatalpha)">
-    <B>poke</B> ( unsigned long x, unsigned long y, ColorIntensity red, ColorIntensity green, ColorIntensity blue, float alpha ) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        Convert 'red','green','blue' to graylevel value using 
- this equation: 0.299 r + 0.587 g + 0.114 b, then poke at 'x','y'.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
-    <A NAME="pseudocolor(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray&#38;&#38;COMMCopyString&#38;cmd)">
-    <B>pseudocolor</B> ( ColorIntensity mingray, ColorIntensity maxgray, <A HREF="CopyString.html" >CopyString</A>&#38; cmd ) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        create new raster pseudo-colored between 'mingray' and 'maxgray', 
- and return command string to reproduce this effect after save/restore.
  <br> 
       <br>
       
@@ -452,25 +125,6 @@ OverlayUnidraw/grayraster.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayRaster.html" >OverlayRaster</A>* 
-    <A NAME="scale(ColorIntensitymingray&#38;&#38;COMMColorIntensitymaxgray&#38;&#38;COMMCopyString&#38;cmd)">
-    <B>scale</B> ( ColorIntensity mingray, ColorIntensity maxgray, <A HREF="CopyString.html" >CopyString</A>&#38; cmd ) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        create new raster scaled between 'mingray' and 'maxgray', and return
- command string to reproduce this effect after save/restore.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
     <DT><FONT FACE=Helvetica>void 
     <A NAME="set_minmax(doubleminval&#38;&#38;COMMdoublemaxval&#38;&#38;COMMbooleanfixminmax=false)">
     <B>set_minmax</B> (double minval, double maxval, boolean fixminmax = false) </FONT> 
@@ -479,24 +133,6 @@ OverlayUnidraw/grayraster.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         set 'minval' and 'maxval' used for flush().
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual int 
-    <A NAME="status()">
-    <B>status</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        0 if ok, -1 if error.
  <br> 
       <br>
       
@@ -543,42 +179,6 @@ OverlayUnidraw/grayraster.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="unhighlight()">
-    <B>unhighlight</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        clear pixel highlighting by restoring red value.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual <A HREF="AttributeValue.html" >AttributeValue</A>::ValueType 
-    <A NAME="value_type()">
-    <B>value_type</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        pixel type.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
     <DT><FONT FACE=Helvetica>virtual boolean 
     <A NAME="write(ostream&#38;out&#38;&#38;COMMbooleangray=false)">
     <B>write</B> (ostream&#38; out, boolean gray=false) </FONT> 
@@ -588,23 +188,6 @@ OverlayUnidraw/grayraster.h
       
         write raster to ostream.
  <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual 
-    <A NAME="~GrayRaster()">
-    <B>~GrayRaster</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
       <br>
       
       

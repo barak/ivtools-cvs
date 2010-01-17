@@ -43,30 +43,13 @@ FrameUnidraw/frameeditor.h
 <br>
 
 
-
+ <B>Description:</B><P>  set current frame.
+  <br><br>
 </DL></FONT>
 
 
 
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="AddCommands(ComTerp*)">
-    <B>AddCommands</B> (<A HREF="ComTerp.html" >ComTerp</A>*) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        add interpreter commands to <A HREF="ComTerp.html" >ComTerp</A> associated with this <A HREF="ComEditor.html" >ComEditor</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>boolean 
     <A NAME="AutoNewFrame()">
@@ -106,60 +89,6 @@ FrameUnidraw/frameeditor.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>
-    <A NAME="FrameEditor(OverlayComp*&#38;&#38;COMMOverlayKit*=FrameKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>FrameEditor</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="FrameKit.html" >FrameKit</A>::Instance()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        construct based on pre-existing <A HREF="FrameIdrawComp.html" >FrameIdrawComp</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="FrameEditor(booleaninitflag&#38;&#38;COMMOverlayKit*=FrameKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>FrameEditor</B> (boolean initflag, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="FrameKit.html" >FrameKit</A>::Instance()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        constructor for use of derived classes.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="FrameEditor(constchar*&#38;&#38;COMMOverlayKit*=FrameKit::Instance&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>FrameEditor</B> (const char*, <A HREF="OverlayKit.html" >OverlayKit</A>* = <A HREF="FrameKit.html" >FrameKit</A>::Instance()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        construct from pathname of a flipbook document.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
     <DT><FONT FACE=Helvetica>virtual <A HREF="OverlaysView.html" >OverlaysView</A>* 
     <A NAME="GetFrame(intindex=-1)">
     <B>GetFrame</B> (int index=-1) </FONT> 
@@ -168,59 +97,6 @@ FrameUnidraw/frameeditor.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         return current frame.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="Init(OverlayComp*=nil&#38;&#38;COMMconstchar*=&#38;&#38;QUOTDFrameEditor&#38;&#38;QUOTD)">
-    <B>Init</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* = nil, const char* = "<A HREF="FrameEditor.html" >FrameEditor</A>") </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="InitCommands()">
-    <B>InitCommands</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        execute <A HREF="Unidraw.html" >Unidraw</A> commands as needed after <A HREF="FrameEditor.html" >FrameEditor</A> is constructed.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="InitFrame()">
-    <B>InitFrame</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        initialize multi-frame display mechanism.
  <br> 
       <br>
       
@@ -322,24 +198,6 @@ FrameUnidraw/frameeditor.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>void 
-    <A NAME="SetFrame(FrameView*f)">
-    <B>SetFrame</B> (<A HREF="FrameView.html" >FrameView</A>* f) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        set current frame.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
     <A NAME="ToggleAutoNewFrame()">
     <B>ToggleAutoNewFrame</B> () </FONT> 
     
@@ -358,33 +216,13 @@ FrameUnidraw/frameeditor.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="Update()">
-    <B>Update</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        pass to <A HREF="ComEditor.html" >ComEditor</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="UpdateFrame(booleantxtupdate=true)">
-    <B>UpdateFrame</B> (boolean txtupdate =true) </FONT> 
-    
+    <DT><FONT FACE=Helvetica><A HREF="TelltaleState.html" >TelltaleState</A>* 
+    <A NAME="_autonewframe_tts">
+    <B>_autonewframe_tts</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        update state variables and text-editor display for current frame.
- <br> 
+      
       <br>
       
       
@@ -430,23 +268,6 @@ FrameUnidraw/frameeditor.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual 
-    <A NAME="~FrameEditor()">
-    <B>~FrameEditor</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
 </UL><br><br>
 
 
@@ -457,22 +278,6 @@ FrameUnidraw/frameeditor.h
     <DT><FONT FACE=Helvetica>boolean 
     <A NAME="_autonewframe">
     <B>_autonewframe</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="TelltaleState.html" >TelltaleState</A>* 
-    <A NAME="_autonewframe_tts">
-    <B>_autonewframe_tts</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       

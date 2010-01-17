@@ -138,14 +138,32 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="add_defaults()">
-    <B>add_defaults</B> () </FONT> 
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="autostream()">
+    <B>autostream</B> () const</FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        add default commands (<A HREF="ComFunc.html" >ComFunc</A> objects).
+        return flag that indicates whether to run a delimeter selected func.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="autostream(booleanflag)">
+    <B>autostream</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates whether to run a delimeter selected func.
  <br> 
       <br>
       
@@ -210,6 +228,42 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="delim_func()">
+    <B>delim_func</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates whether to run a delimeter selected func.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="delim_func(booleanflag)">
+    <B>delim_func</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates whether to run a delimeter selected func.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>void 
     <A NAME="disable_prompt()">
     <B>disable_prompt</B> () </FONT> 
@@ -218,6 +272,42 @@ ComTerp/comterp.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         disable '>' prompting sent in response to an unfinished input expression.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="echo_postfix()">
+    <B>echo_postfix</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates whether to echo contents of postfix buffer
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="echo_postfix(booleanflag)">
+    <B>echo_postfix</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates whether to echo postfix or not
  <br> 
       <br>
       
@@ -520,6 +610,42 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="ignore_commands()">
+    <B>ignore_commands</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates whether to ignore all built-in commands
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ignore_commands(booleanflag)">
+    <B>ignore_commands</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates whether to ignore all built-in commands
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>void 
     <A NAME="init()">
     <B>init</B> () </FONT> 
@@ -611,24 +737,6 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>ComValueTable* 
-    <A NAME="localtable()">
-    <B>localtable</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        local symbol table associated with an individual <A HREF="ComTerp.html" >ComTerp</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
     <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>* 
     <A NAME="localvalue(intsymid)">
     <B>localvalue</B> (int symid) </FONT> 
@@ -705,6 +813,42 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="muted()">
+    <B>muted</B> () const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates whether to mute output
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="muted(booleanflag)">
+    <B>muted</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates whether to mute output
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>int&#38; 
     <A NAME="npause()">
     <B>npause</B> () </FONT> 
@@ -761,7 +905,7 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A> 
     <A NAME="pop_stack(booleanlookupsym=true)">
     <B>pop_stack</B> (boolean lookupsym=true) </FONT> 
     
@@ -801,13 +945,31 @@ ComTerp/comterp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual int 
-    <A NAME="post_eval_expr(inttokcnt&#38;&#38;COMMintofftop&#38;&#38;COMMintpedepth)">
-    <B>post_eval_expr</B> (int tokcnt, int offtop, int pedepth) </FONT> 
+    <A NAME="post_eval_expr(inttokcnt&#38;&#38;COMMintofftop&#38;&#38;COMMintpedepth#ifdefPOSTEVAL_EXPERIMENT&#38;&#38;COMMintnolookup=false#endif)">
+    <B>post_eval_expr</B> (int tokcnt, int offtop, int pedepth #ifdef POSTEVAL_EXPERIMENT , int nolookup=false #endif ) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         copy unevaluated expression to the stack and evaluate.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="postfix_echo()">
+    <B>postfix_echo</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        echo the postfix tokens
  <br> 
       <br>
       
@@ -1010,9 +1172,8 @@ ComTerp/comterp.h
       
         run interpreter until end-of-file or quit command, unless 
  'one_expr' is true. Leave 'one_expr' false when using a <A HREF="ComTerpServ.html" >ComTerpServ</A>.
- Return Value: -1 if eof, 0 if normal operation, 1 if 
- partial expression parsed, 2 if no result computed. 'nested' indicates
- contents of stack should be preserved.
+ Return Value
+ local symbol table associated with an individual <A HREF="ComTerp.html" >ComTerp</A>.
  <br> 
       <br>
       
@@ -1023,14 +1184,32 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual int 
-    <A NAME="runfile(constchar*filename)">
-    <B>runfile</B> (const char* filename) </FONT> 
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="running()">
+    <B>running</B> () const</FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        run interpreter on contents of 'filename'.
+        return flag that indicates whether to run a delimeter selected func.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="running(booleanflag)">
+    <B>running</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates whether to run a delimeter selected func.
  <br> 
       <br>
       
@@ -1120,6 +1299,24 @@ ComTerp/comterp.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         return flag that controls stepwise execution
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="top_expr()">
+    <B>top_expr</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return true if the topmost expression is currently being evaluated
  <br> 
       <br>
       
@@ -1262,6 +1459,23 @@ ComTerp/comterp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_autostream">
+    <B>_autostream</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        automatically iterates over stream if left on stack
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
     <A NAME="_brief">
     <B>_brief</B>
     
@@ -1334,6 +1548,40 @@ ComTerp/comterp.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         flag for base set of commands added 
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_delim_func">
+    <B>_delim_func</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        use delimeter selected func, passing symbol in ::command_symid()
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_echo_postfix">
+    <B>_echo_postfix</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        echos postfix tokens if true
  <br> 
       <br>
       
@@ -1478,6 +1726,23 @@ ComTerp/comterp.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_ignore_commands">
+    <B>_ignore_commands</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        ignore any built-in commands.
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>static <A HREF="ComTerp.html" >ComTerp</A>* 
     <A NAME="_instance">
     <B>_instance</B>
@@ -1519,6 +1784,23 @@ ComTerp/comterp.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         per interpreter symbol table
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_muted">
+    <B>_muted</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to mute any response from a <A HREF="ComTerp.html" >ComTerp</A>
  <br> 
       <br>
       
@@ -1587,6 +1869,23 @@ ComTerp/comterp.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         flag that can be set to terminate interpreter
+ <br> 
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_running">
+    <B>_running</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to inform others this <A HREF="ComTerp.html" >ComTerp</A> in use
  <br> 
       <br>
       

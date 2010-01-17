@@ -52,8 +52,8 @@ ComTerp/comhandler.h
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="ComterpHandler(void)">
-    <B>ComterpHandler</B> (void) </FONT> 
+    <A NAME="ComterpHandler(ComTerpServ*serv=NULL)">
+    <B>ComterpHandler</B> (<A HREF="ComTerpServ.html" >ComTerpServ</A>* serv=NULL) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -186,6 +186,24 @@ ComTerp/comhandler.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         file pointer for reading from handle
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static ACE_Reactor* 
+    <A NAME="reactor_singleton()">
+    <B>reactor_singleton</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        alternate way of getting at reactor singleton
  = Demultiplexing hooks.
  <br> 
       <br>

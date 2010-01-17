@@ -1,0 +1,228 @@
+
+<html><head><TITLE>Description of DrawServHandler</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>DrawServHandler</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="UnidrawComterpHandler.html" >UnidrawComterpHandler</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+specialized <A HREF="UnidrawComterpHandler.html" >UnidrawComterpHandler</A> for integration into <A HREF="DrawServ.html" >DrawServ</A><br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="UnidrawComterpHandler.html" >UnidrawComterpHandler</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#DrawServHandler><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+DrawServ/drawserv-handler.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  = Initialization and termination methods.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="DrawServHandler(ComTerpServ*serv=NULL)">
+    <B>DrawServHandler</B> (<A HREF="ComTerpServ.html" >ComTerpServ</A>* serv = NULL) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="destroy(void)">
+    <B>destroy</B> (void) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        traps disconnects
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLink.html" >DrawLink</A>* 
+    <A NAME="drawlink()">
+    <B>drawlink</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get <A HREF="DrawLink.html" >DrawLink</A> associated with this handler
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="drawlink(DrawLink*link)">
+    <B>drawlink</B> (<A HREF="DrawLink.html" >DrawLink</A>* link) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set <A HREF="DrawLink.html" >DrawLink</A> associated with this handler
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="handle_signal(int&#38;&#38;COMMsiginfo_t*&#38;&#38;COMMucontext_t*)">
+    <B>handle_signal</B> (int, siginfo_t*, ucontext_t*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        handle signals
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual int 
+    <A NAME="open(void*)">
+    <B>open</B> (void *) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        open handler hook.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawLink.html" >DrawLink</A>* 
+    <A NAME="_drawlink">
+    <B>_drawlink</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_sigpipe_handler">
+    <B>_sigpipe_handler</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static int 
+    <A NAME="_sigpipe_handler_initialized">
+    <B>_sigpipe_handler_initialized</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

@@ -12,6 +12,35 @@
 <B>GLOBALS</B><BR><BR>
 <UL><DL>
 
+
+    <DT>class <B>DrawLink</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        <A HREF="UList.html" >UList</A> based list of <A HREF="DrawLink.html" >DrawLink</A>'s <br> 
+      
+      </FONT>
+
+<br>
+
+
+    <DT>class <B>AttributeValueList</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        <A HREF="Unidraw.html" >Unidraw</A> specialized for <A HREF="DrawServ.html" >DrawServ</A> <br> 
+        <A HREF="Unidraw.html" >Unidraw</A> (<A HREF="OverlayUnidraw.html" >OverlayUnidraw</A>) specialized for <A HREF="DrawServ.html" >DrawServ</A> application.
+ Networked application of the <A HREF="Unidraw.html" >Unidraw</A> framework.
+ <br> 
+      </FONT>
+
+<br>
+
+
+    <DT>class <B>GraphicId</B>;
+    <DD><FONT FACE="Times" SIZE=3>
+        <A HREF="UList.html" >UList</A> based list of <A HREF="GraphicId.html" >GraphicId</A>'s <br> 
+      
+      </FONT>
+
+<br>
+
 </DL></UL>
 <B>TYPEDEFS</B><BR><BR>
 <UL><DL>
@@ -20,16 +49,6 @@
     <DT>class <A HREF="AttributeValue.html" >AttributeValue</A><B>_AV</B>;
     <DD><FONT FACE="Times" SIZE=3>
         for quick casting in debugger <br> 
-      
-      </FONT>
-
-<br>
-
-
-    <DT>ACE_Singleton&#60;ACE_Reactor, ACE_Null_Mutex&#62; 
-<B>COMTERP_REACTOR</B>;
-    <DD><FONT FACE="Times" SIZE=3>
-        A Reactor Singleton. <br> 
       
       </FONT>
 
@@ -66,10 +85,10 @@
 <br>
 
 
-    <DT>ACE_Singleton&#60;ACE_Reactor, ACE_Null_Mutex&#62; 
-<B>IMPORT_REACTOR</B>;
+    <DT>ACE_Acceptor &#60;<A HREF="DrawServHandler.html" >DrawServHandler</A>, ACE_SOCK_ACCEPTOR&#62; 
+<B>DrawServAcceptor</B>;
     <DD><FONT FACE="Times" SIZE=3>
-        a Reactor Singleton. <br> 
+        Acceptor specialized for use with <A HREF="DrawServ.html" >DrawServ</A> and <A HREF="ComTerp.html" >ComTerp</A>. <br> 
       
       </FONT>
 

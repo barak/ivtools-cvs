@@ -1,0 +1,275 @@
+
+<html><head><TITLE>Description of LinkSelection</TITLE><BASE TARGET="_parent" ></head>
+<body BGCOLOR=#FFFFFF>
+<FONT FACE=Helvetica>
+<DL><DT>
+<FONT SIZE=4> 
+  class  
+</FONT>
+<FONT SIZE=5><B>LinkSelection</B></FONT>
+
+  <FONT SIZE=4> : public <A HREF="OverlaySelection.html" >OverlaySelection</A>  </FONT>
+
+
+<A HREF="index.html">(Return to index)</A>
+
+<br><br>
+
+<DD><FONT FACE=Times SIZE=4>
+distributed <A HREF="Selection.html" >Selection</A> class<br><br>
+
+<B>Type:</B><br>
+<UL>
+Instantiable
+</UL>
+<br>
+
+
+<B>Base Classes:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+public <A HREF="OverlaySelection.html" >OverlaySelection</A> 
+</FONT></UL>
+<br>
+
+
+<A HREF=derivedclasses.html#LinkSelection><B>Derived Classes</B></A>
+<p>
+
+
+<B>Include file:</B><br>
+<UL><FONT FACE=Helvetica SIZE=3>
+DrawServ/linkselection.h
+</FONT></UL>
+<br>
+
+
+ <B>Description:</B><P>  specialized <A HREF="Selection.html" >Selection</A> class with support for coordinating the selection of graphics
+ between two remote drawing editors that are linked together.
+  <br><br>
+</DL></FONT>
+
+
+
+<FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="AddComp(OverlayComp*)">
+    <B>AddComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        add this graphic to the <A HREF="Selection.html" >Selection</A>.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Clear(Viewer*=nil)">
+    <B>Clear</B> (<A HREF="Viewer.html" >Viewer</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="LinkSelection(DrawEditor*ed&#38;&#38;COMMLinkSelection*=nil)">
+    <B>LinkSelection</B> (<A HREF="DrawEditor.html" >DrawEditor</A>* ed, <A HREF="LinkSelection.html" >LinkSelection</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="LinkSelection(DrawEditor*ed&#38;&#38;COMMSelection*)">
+    <B>LinkSelection</B> (<A HREF="DrawEditor.html" >DrawEditor</A>* ed, <A HREF="Selection.html" >Selection</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Reserve()">
+    <B>Reserve</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reserve newly created graphics in selection across the network
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update(Viewer*=nil)">
+    <B>Update</B> (<A HREF="Viewer.html" >Viewer</A>* = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="enum&#38;5">
+    <B>enum</B>
+     { NotSelected, LocallySelected, RemotelySelected, WaitingToBeSelected } 
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="selected_string(intstate)">
+    <B>selected_string</B> (int state) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
+
+    <DT><FONT FACE=Helvetica><A HREF="DrawEditor.html" >DrawEditor</A>* 
+    <A NAME="_editor">
+    <B>_editor</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicIdList.html" >GraphicIdList</A>* 
+    <A NAME="_locally_selected">
+    <B>_locally_selected</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static char* 
+    <A NAME="_selected_strings[]">
+    <B>_selected_strings[]</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="GraphicIdList.html" >GraphicIdList</A>* 
+    <A NAME="_waiting_to_be_selected">
+    <B>_waiting_to_be_selected</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+</UL><br><br>
+
+
+
+
+
+<A HREF="../index.html">(more documentation)</A>
+
+<br><br>
+
+</FONT>
+</body>
+</html>

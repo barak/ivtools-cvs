@@ -51,8 +51,76 @@ IVGlyph/stredit.h
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="StrEditDialog(constchar*caption1&#38;&#38;COMMconstchar*caption2=nil&#38;&#38;COMMGlyph*extra=nil)">
-    <B>StrEditDialog</B> (const char* caption1, const char* caption2 = nil, <A HREF="Glyph.html" >Glyph</A>* extra=nil) </FONT> 
+    <A NAME="StrEditDialog(constchar*caption1&#38;&#38;COMMconstchar*caption2=nil&#38;&#38;COMMGlyph*extra=nil&#38;&#38;COMMbooleancustom=false)">
+    <B>StrEditDialog</B> (const char* caption1, const char* caption2 = nil, <A HREF="Glyph.html" >Glyph</A>* extra=nil, boolean custom=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="Action.html" >Action</A>* 
+    <A NAME="accept_action_custom()">
+    <B>accept_action_custom</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="accept_custom()">
+    <B>accept_custom</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="accept_custom(constchar*caption)">
+    <B>accept_custom</B> (const char* caption) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="action_custom(Action*accept&#38;&#38;COMMAction*cancel)">
+    <B>action_custom</B> (<A HREF="Action.html" >Action</A>* accept, <A HREF="Action.html" >Action</A>* cancel) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -84,6 +152,57 @@ IVGlyph/stredit.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>static <A HREF="Action.html" >Action</A>* 
+    <A NAME="cancel_action_custom()">
+    <B>cancel_action_custom</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const char* 
+    <A NAME="cancel_custom()">
+    <B>cancel_custom</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="cancel_custom(constchar*caption)">
+    <B>cancel_custom</B> (const char* caption) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="keystroke(constEvent&#38;)">
     <B>keystroke</B> (const <A HREF="Event.html" >Event</A>&#38;) </FONT> 
@@ -101,9 +220,26 @@ IVGlyph/stredit.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>static <A HREF="StrEditDialog.html" >StrEditDialog</A>* 
+    <A NAME="map(Window*&#38;&#38;COMMconstchar*message&#38;&#38;COMMconstchar*string=nil&#38;&#38;COMMconstchar*title=nil&#38;&#38;COMMGlyph*extra=nil&#38;&#38;COMMbooleancustom=false)">
+    <B>map</B> (<A HREF="Window.html" >Window</A>*, const char* message, const char* string=nil, const char* title=nil, <A HREF="Glyph.html" >Glyph</A>* extra = nil, boolean custom=false) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>static char* 
-    <A NAME="post(Window*&#38;&#38;COMMconstchar*message&#38;&#38;COMMconstchar*string=nil&#38;&#38;COMMconstchar*title=nil&#38;&#38;COMMGlyph*extra=nil)">
-    <B>post</B> (<A HREF="Window.html" >Window</A>*, const char* message, const char* string=nil, const char* title=nil, <A HREF="Glyph.html" >Glyph</A>* extra = nil) </FONT> 
+    <A NAME="post(Window*&#38;&#38;COMMconstchar*message&#38;&#38;COMMconstchar*string=nil&#38;&#38;COMMconstchar*title=nil&#38;&#38;COMMGlyph*extra=nil&#38;&#38;COMMbooleancustom=false)">
+    <B>post</B> (<A HREF="Window.html" >Window</A>*, const char* message, const char* string=nil, const char* title=nil, <A HREF="Glyph.html" >Glyph</A>* extra = nil, boolean custom=false) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>

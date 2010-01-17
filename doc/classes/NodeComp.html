@@ -107,6 +107,24 @@ GraphUnidraw/nodecomp.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="EdgeInOrder(EdgeComp*)">
+    <B>EdgeInOrder</B> (<A HREF="EdgeComp.html" >EdgeComp</A>*) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return order of incoming edge.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica><A HREF="EdgeComp.html" >EdgeComp</A>* 
     <A NAME="EdgeOut(intn)">
     <B>EdgeOut</B> (int n) const</FONT> 
@@ -115,6 +133,24 @@ GraphUnidraw/nodecomp.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         return pointer to nth outgoing edge.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="EdgeOutOrder(EdgeComp*)">
+    <B>EdgeOutOrder</B> (<A HREF="EdgeComp.html" >EdgeComp</A>*) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return order of outgoing edge.
  <br> 
       <br>
       
@@ -285,6 +321,114 @@ GraphUnidraw/nodecomp.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NewNodeComp(GraphComp*comp)">
+    <B>NewNodeComp</B> (<A HREF="GraphComp.html" >GraphComp</A>* comp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NewNodeComp(OverlayComp*parent=nil)">
+    <B>NewNodeComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NewNodeComp(Picture*pict&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NewNodeComp</B> (<A HREF="Picture.html" >Picture</A>* pict, boolean reqlabel =false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NewNodeComp(SF_Ellipse*ell1&#38;&#38;COMMTextGraphic*txt&#38;&#38;COMMSF_Ellipse*ell2&#38;&#38;COMMGraphComp*comp&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NewNodeComp</B> (<A HREF="SF_Ellipse.html" >SF_Ellipse</A>* ell1, <A HREF="TextGraphic.html" >TextGraphic</A>* txt, <A HREF="SF_Ellipse.html" >SF_Ellipse</A>* ell2, <A HREF="GraphComp.html" >GraphComp</A>* comp, boolean reqlabel = false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NewNodeComp(SF_Ellipse*ell&#38;&#38;COMMTextGraphic*txt&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NewNodeComp</B> (<A HREF="SF_Ellipse.html" >SF_Ellipse</A>* ell, <A HREF="TextGraphic.html" >TextGraphic</A>* txt, boolean reqlabel = false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
+    <A NAME="NewNodeComp(istream&#38;strm&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NewNodeComp</B> (istream&#38; strm, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica><A HREF="TopoNode.html" >TopoNode</A>* 
     <A NAME="Node()">
     <B>Node</B> () const</FONT> 
@@ -322,6 +466,24 @@ GraphUnidraw/nodecomp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
+    <A NAME="NodeComp(OverlayComp*parent=nil)">
+    <B>NodeComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct node component but defer anything graphical
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
     <A NAME="NodeComp(Picture*&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
     <B>NodeComp</B> (<A HREF="Picture.html" >Picture</A>*, boolean reqlabel =false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
     
@@ -346,9 +508,7 @@ GraphUnidraw/nodecomp.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        construct node component with ellipse and text graphic
- (text display not requiredd by default).
- construct node component with internal graph
+        construct node component with internal graph
  (text display not requiredd by default).
  <br> 
       <br>
@@ -361,15 +521,13 @@ GraphUnidraw/nodecomp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="NodeComp(SF_Ellipse*&#38;&#38;COMMTextGraphic*&#38;&#38;COMMSF_Ellipse*&#38;&#38;COMMGraphComp*&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
-    <B>NodeComp</B> (<A HREF="SF_Ellipse.html" >SF_Ellipse</A>*, <A HREF="TextGraphic.html" >TextGraphic</A>*, <A HREF="SF_Ellipse.html" >SF_Ellipse</A>*, <A HREF="GraphComp.html" >GraphComp</A>*, boolean reqlabel = false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    <A NAME="NodeComp(SF_Ellipse*&#38;&#38;COMMTextGraphic*&#38;&#38;COMMbooleanreqlabel=false&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NodeComp</B> (<A HREF="SF_Ellipse.html" >SF_Ellipse</A>*, <A HREF="TextGraphic.html" >TextGraphic</A>*, boolean reqlabel = false, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         construct node component with ellipse and text graphic
- (text display not requiredd by default).
- construct node component with internal graph
  (text display not requiredd by default).
  <br> 
       <br>
@@ -437,25 +595,6 @@ GraphUnidraw/nodecomp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="Notify()">
-    <B>Notify</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        override <A HREF="OverlayComp.html" >OverlayComp</A>::Notify, separating view update from 
- attribute list update. 
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="Read(istream&#38;)">
     <B>Read</B> (istream&#38;) </FONT> 
     
@@ -492,6 +631,27 @@ GraphUnidraw/nodecomp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>void 
+    <A NAME="RequireLabel(booleanflag)">
+    <B>RequireLabel</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        flag to indicate whether node must have label (text graphic).
+ update notification received from <A HREF="Observable.html" >Observable</A>.
+ override <A HREF="OverlayComp.html" >OverlayComp</A>::Notify, separating view update from 
+ attribute list update. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
     <A NAME="SetGraph(GraphComp*)">
     <B>SetGraph</B> (<A HREF="GraphComp.html" >GraphComp</A>*) </FONT> 
     
@@ -499,6 +659,24 @@ GraphUnidraw/nodecomp.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         set internal graph for this node.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="SetText(TextGraphic*)">
+    <B>SetText</B> (<A HREF="TextGraphic.html" >TextGraphic</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set pointer to text graphic.
  <br> 
       <br>
       
@@ -581,14 +759,15 @@ GraphUnidraw/nodecomp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual boolean 
-    <A NAME="operator==(OverlayComp&#38;)">
-    <B>operator ==</B> (<A HREF="OverlayComp.html" >OverlayComp</A>&#38;) </FONT> 
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="index()">
+    <B>index</B> () </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-      
+        get temporary index for writing to file
+ <br> 
       <br>
       
       
@@ -599,14 +778,49 @@ GraphUnidraw/nodecomp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>void 
-    <A NAME="update(Observable*)">
-    <B>update</B> (<A HREF="Observable.html" >Observable</A>*) </FONT> 
+    <A NAME="index(inti)">
+    <B>index</B> (int i) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        update notification received from <A HREF="Observable.html" >Observable</A>.
+        set temporary index for writing to file
  <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="nedges(int&#38;nin&#38;&#38;COMMint&#38;nout)">
+    <B>nedges</B> (int &#38;nin, int &#38;nout) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        count number of input and ouput edges
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="operator==(OverlayComp&#38;)">
+    <B>operator ==</B> (<A HREF="OverlayComp.html" >OverlayComp</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
       <br>
       
       
@@ -691,10 +905,9 @@ GraphUnidraw/nodecomp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>
-    <A NAME="NodeComp(OverlayComp*parent=nil)">
-    <B>NodeComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
-    
+    <DT><FONT FACE=Helvetica><A HREF="GraphComp.html" >GraphComp</A>* 
+    <A NAME="_graph">
+    <B>_graph</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
@@ -708,9 +921,9 @@ GraphUnidraw/nodecomp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="GraphComp.html" >GraphComp</A>* 
-    <A NAME="_graph">
-    <B>_graph</B>
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_index">
+    <B>_index</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       

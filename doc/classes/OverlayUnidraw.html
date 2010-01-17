@@ -103,6 +103,24 @@ OverlayUnidraw/ovunidraw.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="DeferredNotify()">
+    <B>DeferredNotify</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        do all deferred notifications
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="Log(Command*&#38;&#38;COMMbooleandirty)">
     <B>Log</B> (<A HREF="Command.html" >Command</A>*, boolean dirty) </FONT> 
@@ -154,9 +172,63 @@ OverlayUnidraw/ovunidraw.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="PrintAttributeList(ostream&#38;out&#38;&#38;COMMAttributeList*list)">
+    <B>PrintAttributeList</B> (ostream&#38; out, <A HREF="AttributeList.html" >AttributeList</A>* list) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        alternate method for serializing an <A HREF="AttributeList.html" >AttributeList</A>
+ returns false if really not there.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="Run()">
     <B>Run</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="RunOnce()">
+    <B>RunOnce</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        run <A HREF="OverlayUnidraw.html" >OverlayUnidraw</A> just once
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="Update(booleanimmediate=false)">
+    <B>Update</B> (boolean immediate = false) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -206,6 +278,42 @@ OverlayUnidraw/ovunidraw.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="deferred_notifications()">
+    <B>deferred_notifications</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return flag that indicates deferred notifications
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static void 
+    <A NAME="deferred_notifications(booleanflag)">
+    <B>deferred_notifications</B> (boolean flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set flag that indicates deferred notifications
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static boolean 
     <A NAME="npause_lessened()">
     <B>npause_lessened</B> () </FONT> 
     
@@ -225,6 +333,40 @@ OverlayUnidraw/ovunidraw.h
     <DT><FONT FACE=Helvetica>static void 
     <A NAME="pointer_tracker_func(Event&#38;)">
     <B>pointer_tracker_func</B> (<A HREF="Event.html" >Event</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="run_once()">
+    <B>run_once</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="run_once(intflag)">
+    <B>run_once</B> (int flag) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -346,6 +488,22 @@ OverlayUnidraw/ovunidraw.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>static boolean 
+    <A NAME="_deferred_notifications">
+    <B>_deferred_notifications</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>static int 
     <A NAME="_npause">
     <B>_npause</B>
@@ -365,6 +523,22 @@ OverlayUnidraw/ovunidraw.h
     <DT><FONT FACE=Helvetica><A HREF="OverlayViewer.html" >OverlayViewer</A>* 
     <A NAME="_ovviewer">
     <B>_ovviewer</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_run_once">
+    <B>_run_once</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       

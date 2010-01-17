@@ -115,6 +115,24 @@ Attribute/attrvalue.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
+    <A NAME="AttributeValue(ComponentView*view&#38;&#38;COMMintcompid)">
+    <B>AttributeValue</B> (<A HREF="ComponentView.html" >ComponentView</A>* view, int compid) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        <A HREF="ComponentView.html" >ComponentView</A> constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
     <A NAME="AttributeValue(ValueTypetype)">
     <B>AttributeValue</B> (ValueType type) </FONT> 
     
@@ -295,13 +313,55 @@ Attribute/attrvalue.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="AttributeValue(unsignedcharval)">
-    <B>AttributeValue</B> (unsigned char val) </FONT> 
+    <A NAME="AttributeValue(unsignedlongval)">
+    <B>AttributeValue</B> (unsigned long val) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         UCharType constructor.
+ UShortType constructor.
+ ULongType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="AttributeValue(unsignedlongval)">
+    <B>AttributeValue</B> (unsigned long val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        UCharType constructor.
+ UShortType constructor.
+ ULongType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="AttributeValue(unsignedlongval)">
+    <B>AttributeValue</B> (unsigned long val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        UCharType constructor.
+ UShortType constructor.
+ ULongType constructor.
  <br> 
       <br>
       
@@ -349,42 +409,6 @@ Attribute/attrvalue.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="AttributeValue(unsignedlongval)">
-    <B>AttributeValue</B> (unsigned long val) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        ULongType constructor.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="AttributeValue(unsignedshortval)">
-    <B>AttributeValue</B> (unsigned short val) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        UShortType constructor.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
     <A NAME="AttributeValue(void*comfunc&#38;&#38;COMMAttributeValueList*vallist)">
     <B>AttributeValue</B> (void* comfunc, <A HREF="AttributeValueList.html" >AttributeValueList</A>* vallist) </FONT> 
     
@@ -393,6 +417,22 @@ Attribute/attrvalue.h
       
         StreamType constructor.
  <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static LeakChecker* 
+    <A NAME="_leakchecker">
+    <B>_leakchecker</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
       <br>
       
       
@@ -708,6 +748,41 @@ Attribute/attrvalue.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="dup_as_needed()">
+    <B>dup_as_needed</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        duplicate lists then increment ref counters as needed
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="enumValueState">
+    <B>enum ValueState</B>
+     { UnknownState, OctState, HexState } 
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        enum for states
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>
     <A NAME="enumValueType">
     <B>enum ValueType</B>
@@ -768,7 +843,7 @@ Attribute/attrvalue.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        return a pointer if ObjectType matches
+        return a pointer if ObjectType matches or is a parent class
  <br> 
       <br>
       
@@ -841,24 +916,6 @@ Attribute/attrvalue.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         int by value. 
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="is_array()">
-    <B>is_array</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        returns true if ArrayType/ListType.
  <br> 
       <br>
       
@@ -1353,7 +1410,8 @@ Attribute/attrvalue.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        same as <A HREF="AttributeValue.html" >AttributeValue</A>::is_num().
+        same as <A HREF="AttributeValue.html" >AttributeValue</A>
+ returns true if ArrayType/ListType.
  <br> 
       <br>
       
@@ -1389,7 +1447,7 @@ Attribute/attrvalue.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        returns true if ObjectType and matching class_symid.
+        returns true if ObjectType and class_symid matches or belongs to a parent class.
  <br> 
       <br>
       
@@ -1839,24 +1897,8 @@ Attribute/attrvalue.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         true if object is wrapped with a <A HREF="ComponentView.html" >ComponentView</A>
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="object_compview(booleanflag)">
-    <B>object_compview</B> (boolean flag) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        true if object is wrapped with a <A HREF="ComponentView.html" >ComponentView</A>
+ true if object is wrapped with a <A HREF="ComponentView.html" >ComponentView</A>
+ 0 = disabled, negative = internal, positive = external
  <br> 
       <br>
       
@@ -1875,6 +1917,42 @@ Attribute/attrvalue.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         copy assignment operator.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="ref_as_needed()">
+    <B>ref_as_needed</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        increment ref counters as needed
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="same_list(constAttributeValue&#38;av)">
+    <B>same_list</B> (const <A HREF="AttributeValue.html" >AttributeValue</A>&#38; av) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        check if arrayval or streamval are the same
  <br> 
       <br>
       
@@ -1911,6 +1989,42 @@ Attribute/attrvalue.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         short by value. 
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="state()">
+    <B>state</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        get generic state value useful for any type other than CommandType, ObjectType, or StreamType
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="state(intval)">
+    <B>state</B> (int val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set generic state value useful for any type other than CommandType, ObjectType, or StreamType
  <br> 
       <br>
       
@@ -1983,24 +2097,6 @@ Attribute/attrvalue.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         set pointer to <A HREF="AttributeValueList.html" >AttributeValueList</A> associated with stream object
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>int 
-    <A NAME="stream_mode()">
-    <B>stream_mode</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        0 = disabled, negative = internal, positive = external
  <br> 
       <br>
       
@@ -2334,6 +2430,24 @@ Attribute/attrvalue.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="unref_as_needed()">
+    <B>unref_as_needed</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        decrement ref counters as needed
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>unsigned short&#38; 
     <A NAME="ushort_ref()">
     <B>ushort_ref</B> () </FONT> 
@@ -2415,7 +2529,7 @@ Attribute/attrvalue.h
 
     <DT><FONT FACE=Helvetica>union 
     <A NAME="NONAME">
-    <B><A HREF='AttributeValue::NONAME.html'>NONAME</A></B>
+    <B><A HREF='AttributeValue___NONAME.html'>NONAME</A></B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
@@ -2468,60 +2582,6 @@ Attribute/attrvalue.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
       
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="dup_as_needed()">
-    <B>dup_as_needed</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        duplicate lists then increment ref counters as needed
- <br> 
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="ref_as_needed()">
-    <B>ref_as_needed</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        increment ref counters as needed
- <br> 
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="unref_as_needed()">
-    <B>unref_as_needed</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        decrement ref counters as needed
- <br> 
       <br>
       
       

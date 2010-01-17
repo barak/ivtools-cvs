@@ -51,13 +51,14 @@ OverlayUnidraw/ovraster.h
 <FONT FACE=Times SIZE=4><B>Public:</B></FONT><br><br><UL>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="OverlayRaster(constOverlayRaster&#38;raster)">
-    <B>OverlayRaster</B> (const <A HREF="OverlayRaster.html" >OverlayRaster</A>&#38; raster) </FONT> 
+    <A NAME="OverlayRaster(constRaster&#38;raster)">
+    <B>OverlayRaster</B> (const <A HREF="Raster.html" >Raster</A>&#38; raster) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         copy constructor
+ conversion constructor
  <br> 
       <br>
       
@@ -75,7 +76,8 @@ OverlayUnidraw/ovraster.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        conversion constructor
+        copy constructor
+ conversion constructor
  <br> 
       <br>
       
@@ -196,8 +198,8 @@ OverlayUnidraw/ovraster.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="flushrect(IntCoordl&#38;&#38;COMMIntCoordb&#38;&#38;COMMIntCoordt&#38;&#38;COMMIntCoordt)">
-    <B>flushrect</B> (IntCoord l, IntCoord b, IntCoord t, IntCoord t) const</FONT> 
+    <A NAME="flushrect(IntCoordl&#38;&#38;COMMIntCoordb&#38;&#38;COMMIntCoords&#38;&#38;COMMIntCoordt)">
+    <B>flushrect</B> (IntCoord l, IntCoord b, IntCoord s, IntCoord t) const</FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -257,9 +259,7 @@ OverlayUnidraw/ovraster.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        get green pixel value at 'x','y' and convert to a float.
- get green pixel value at 'x','y' and convert to a double.
- get green pixel value at 'x','y' and place in an <A HREF="AttributeValue.html" >AttributeValue</A>.
+        get green pixel value at 'x','y' and place in an <A HREF="AttributeValue.html" >AttributeValue</A>.
  <br> 
       <br>
       
@@ -271,15 +271,13 @@ OverlayUnidraw/ovraster.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValue&#38;)">
-    <B>graypeek</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMdouble&#38;)">
+    <B>graypeek</B> (unsigned long x, unsigned long y, double&#38;) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        get green pixel value at 'x','y' and convert to a float.
- get green pixel value at 'x','y' and convert to a double.
- get green pixel value at 'x','y' and place in an <A HREF="AttributeValue.html" >AttributeValue</A>.
+        get green pixel value at 'x','y' and convert to a double.
  <br> 
       <br>
       
@@ -291,15 +289,13 @@ OverlayUnidraw/ovraster.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMAttributeValue&#38;)">
-    <B>graypeek</B> (unsigned long x, unsigned long y, <A HREF="AttributeValue.html" >AttributeValue</A>&#38;) </FONT> 
+    <A NAME="graypeek(unsignedlongx&#38;&#38;COMMunsignedlongy&#38;&#38;COMMfloat&#38;)">
+    <B>graypeek</B> (unsigned long x, unsigned long y, float&#38;) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         get green pixel value at 'x','y' and convert to a float.
- get green pixel value at 'x','y' and convert to a double.
- get green pixel value at 'x','y' and place in an <A HREF="AttributeValue.html" >AttributeValue</A>.
  <br> 
       <br>
       
@@ -449,6 +445,7 @@ OverlayUnidraw/ovraster.h
       
         return flag that indicates whether this is a <A HREF="GrayRaster.html" >GrayRaster</A>
  (always false for <A HREF="OverlayRaster.html" >OverlayRaster</A>).
+ arbitrary type is not enabled in this class, only <A HREF="GrayRaster.html" >GrayRaster</A>.
  <br> 
       <br>
       
@@ -689,24 +686,6 @@ OverlayUnidraw/ovraster.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         clear the highlighted pixels. Implemented only in <A HREF="GrayRaster.html" >GrayRaster</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual <A HREF="AttributeValue.html" >AttributeValue</A>::ValueType 
-    <A NAME="value_type()">
-    <B>value_type</B> () const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        arbitrary type is not enabled in this class, only <A HREF="GrayRaster.html" >GrayRaster</A>.
  <br> 
       <br>
       

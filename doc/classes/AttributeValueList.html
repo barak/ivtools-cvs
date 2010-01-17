@@ -6,7 +6,7 @@
 <FONT SIZE=4> 
   class  
 </FONT>
-<FONT SIZE=5><B>AttributeValueList</B></FONT>
+<FONT SIZE=5><B></B></FONT>
 
   <FONT SIZE=4> : public <A HREF="Resource.html" >Resource</A>  </FONT>
 
@@ -16,7 +16,7 @@
 <br><br>
 
 <DD><FONT FACE=Times SIZE=4>
-list of <A HREF="AttributeValue.html" >AttributeValue</A> objects.<br><br>
+<A HREF="Unidraw.html" >Unidraw</A> specialized for <A HREF="DrawServ.html" >DrawServ</A><br><br>
 
 <B>Type:</B><br>
 <UL>
@@ -38,16 +38,13 @@ public <A HREF="Resource.html" >Resource</A>
 
 <B>Include file:</B><br>
 <UL><FONT FACE=Helvetica SIZE=3>
-Attribute/attrlist.h
+DrawServ/drawserv.h
 </FONT></UL>
 <br>
 
 
- <B>Description:</B><P>  An <A HREF="AttributeValueList.html" >AttributeValueList</A> is derived from <A HREF="Resource.html" >Resource</A>, so it is a reference-counted
- object that can be freely shared between other objects.
-
- An <A HREF="AttributeValueList.html" >AttributeValueList</A> assumes responsibility for the memory of its member
- <A HREF="AttributeValue.html" >AttributeValue</A> objects.
+ <B>Description:</B><P>  <A HREF="Unidraw.html" >Unidraw</A> (<A HREF="OverlayUnidraw.html" >OverlayUnidraw</A>) specialized for <A HREF="DrawServ.html" >DrawServ</A> application.
+ Networked application of the <A HREF="Unidraw.html" >Unidraw</A> framework.
   <br><br>
 </DL></FONT>
 
@@ -154,6 +151,24 @@ Attribute/attrlist.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         set iterator to point to first <A HREF="AttributeValue.html" >AttributeValue</A> in list.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="Get(unsignedintindex)">
+    <B>Get</B> (unsigned int index) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        retrieve value by index, return nil if not there
  <br> 
       <br>
       
@@ -345,6 +360,26 @@ Attribute/attrlist.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>void 
+    <A NAME="Remove(ALIterator&#38;)">
+    <B>Remove</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        remove <A HREF="AttributeValue.html" >AttributeValue</A> pointed to by iterator from the list, 
+ returning responsibility for freeing the associated memory.
+ This requires saving a pointer to the <A HREF="AttributeValue.html" >AttributeValue</A> before calling this method.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
     <A NAME="Remove(AttributeValue*)">
     <B>Remove</B> (<A HREF="AttributeValue.html" >AttributeValue</A>*) </FONT> 
     
@@ -353,6 +388,45 @@ Attribute/attrlist.h
       
         remove <A HREF="AttributeValue.html" >AttributeValue</A> from list, returning responsibility for freeing the
  associated memory.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="Replace(ALIterator&#38;&#38;&#38;COMMAttributeValue*)">
+    <B>Replace</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;, <A HREF="AttributeValue.html" >AttributeValue</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        remove <A HREF="AttributeValue.html" >AttributeValue</A> pointed to by iterator from the list, 
+ returning responsibility for freeing the associated memory.
+ Then insert new <A HREF="AttributeValue.html" >AttributeValue</A> in the same place.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="AttributeValue.html" >AttributeValue</A>* 
+    <A NAME="Set(unsignedintindex&#38;&#38;COMMAttributeValue*av)">
+    <B>Set</B> (unsigned int index, <A HREF="AttributeValue.html" >AttributeValue</A>* av) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set value by index, increase list length if necessary with nil padding,
+ take responsibility for the memory (and return responsibility for old memory)
  <br> 
       <br>
       
@@ -372,6 +446,22 @@ Attribute/attrlist.h
       
         set <A HREF="AttributeValue.html" >AttributeValue</A> pointed to by iterator.
  <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static LeakChecker* 
+    <A NAME="_leakchecker">
+    <B>_leakchecker</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
       <br>
       
       
@@ -459,26 +549,6 @@ Attribute/attrlist.h
 
 
 <FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="Remove(ALIterator&#38;)">
-    <B>Remove</B> (<A HREF="ALIterator.html" >ALIterator</A>&#38;) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        remove <A HREF="AttributeValue.html" >AttributeValue</A> pointed to by iterator from the list, 
- returning responsibility for freeing the associated memory.
- This requires saving a pointer to the <A HREF="AttributeValue.html" >AttributeValue</A> before calling this method.
- <br> 
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica><A HREF="AList.html" >AList</A>* 
     <A NAME="_alist">

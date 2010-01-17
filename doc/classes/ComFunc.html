@@ -148,6 +148,57 @@ ComTerp/comfunc.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="comterpserv(ComTerpServ*serv)">
+    <B>comterpserv</B> ( <A HREF="ComTerpServ.html" >ComTerpServ</A>* serv) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Component.html" >Component</A>* 
+    <A NAME="context()">
+    <B>context</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="context(Component*comp)">
+    <B>context</B> (<A HREF="Component.html" >Component</A>* comp) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>virtual const char* 
     <A NAME="docstring()">
     <B>docstring</B> () </FONT> 
@@ -211,24 +262,6 @@ ComTerp/comfunc.h
     <DD><FONT FACE=Times SIZE=3><UL>
       
         get symbol id of name for func
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="funcid(intid)">
-    <B>funcid</B> (int id) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        set symbol id of name for func
  <br> 
       <br>
       
@@ -433,7 +466,7 @@ ComTerp/comfunc.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A> 
     <A NAME="pop_stack()">
     <B>pop_stack</B> () </FONT> 
     
@@ -451,7 +484,7 @@ ComTerp/comfunc.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
+    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A> 
     <A NAME="pop_symbol()">
     <B>pop_symbol</B> () </FONT> 
     
@@ -553,123 +586,7 @@ ComTerp/comfunc.h
  derived execute() method. Save it to last if you're using references
  to <A HREF="ComValue.html" >ComValue</A> objects directly on the stack. Otherwise, call it as
  soon as all the arguments have been loaded into local copies.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
-    <A NAME="stack_arg(intn&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::nullval&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>stack_arg</B> (int n, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::nullval()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        return the nth argument on the stack for this <A HREF="ComFunc.html" >ComFunc</A> execute() call.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
-    <A NAME="stack_arg_post_eval(intn&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::nullval&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>stack_arg_post_eval</B> (int n, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::nullval()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        evaluate the nth argument for this post-evaluating <A HREF="ComFunc.html" >ComFunc</A>.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
-    <A NAME="stack_dotname(intn)">
-    <B>stack_dotname</B> (int n) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        unused method to get at a dotted list of names, i.e. a.b.c
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
-    <A NAME="stack_key(intid&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::trueval&#38;&#38;BRAKO&#38;&#38;BRAKC&#38;&#38;COMMbooleanuse_dflt_for_no_key=false)">
-    <B>stack_key</B> (int id, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::trueval(), boolean use_dflt_for_no_key=false ) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        return the value of an argument that follows a keyword,
- optionally return the value of 'dflt' if no argument follows
- the keyword. If 'use_dflt_for_no_key' is true, 'dflt' gets returned
- as the value when a keyword is not found.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="ComValue.html" >ComValue</A>&#38; 
-    <A NAME="stack_key_post_eval(intid&#38;&#38;COMMbooleansymbol=false&#38;&#38;COMMComValue&#38;dflt=ComValue::trueval&#38;&#38;BRAKO&#38;&#38;BRAKC&#38;&#38;COMMbooleanuse_dflt_for_no_key=false)">
-    <B>stack_key_post_eval</B> (int id, boolean symbol=false, <A HREF="ComValue.html" >ComValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::trueval(), boolean use_dflt_for_no_key=false) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        evaluate the argument following a keyword for this post-evaluating <A HREF="ComFunc.html" >ComFunc</A>.
- Optionally return the value of 'dflt' if no argument follows
- the keyword. If 'use_dflt_for_no_key' is true, 'dflt' gets returned
- as the value when a keyword is not found.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
-    <A NAME="stack_keys(booleansymbol=false&#38;&#38;COMMAttributeValue&#38;dflt=ComValue::trueval&#38;&#38;BRAKO&#38;&#38;BRAKC)">
-    <B>stack_keys</B> (boolean symbol = false, <A HREF="AttributeValue.html" >AttributeValue</A>&#38; dflt=<A HREF="ComValue.html" >ComValue</A>::trueval()) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        return newly-constructed <A HREF="AttributeList.html" >AttributeList</A> (which needs referencing)
- that contains a copy of each keyword/value pair in the arguments
- to the invocation of this <A HREF="ComFunc.html" >ComFunc</A>. 'dflt' is used whenever a 
- keyword has no matching argument.
+ set symbol id of name for func
  <br> 
       <br>
       
@@ -724,6 +641,22 @@ ComTerp/comfunc.h
     <DT><FONT FACE=Helvetica><A HREF="ComTerp.html" >ComTerp</A>* 
     <A NAME="_comterp">
     <B>_comterp</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica><A HREF="Component.html" >Component</A>* 
+    <A NAME="_context">
+    <B>_context</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       

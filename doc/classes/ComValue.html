@@ -128,13 +128,13 @@ ComTerp/comvalue.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="ComValue(ComValue&#38;)">
-    <B>ComValue</B> (<A HREF="ComValue.html" >ComValue</A>&#38;) </FONT> 
+    <A NAME="ComValue(ComValue*)">
+    <B>ComValue</B> (<A HREF="ComValue.html" >ComValue</A>*) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        copy constructor.
+        deep copy constructor.
  <br> 
       <br>
       
@@ -146,13 +146,13 @@ ComTerp/comvalue.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="ComValue(ComValue*)">
-    <B>ComValue</B> (<A HREF="ComValue.html" >ComValue</A>*) </FONT> 
+    <A NAME="ComValue(ComponentView*view&#38;&#38;COMMintcompid)">
+    <B>ComValue</B> (<A HREF="ComponentView.html" >ComponentView</A>* view, int compid) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        deep copy constructor.
+        <A HREF="ComponentView.html" >ComponentView</A> constructor.
  <br> 
       <br>
       
@@ -206,7 +206,27 @@ ComTerp/comvalue.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        StringType constructor.
+        deep copy constructor.
+ StringType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(constchar*val)">
+    <B>ComValue</B> (const char* val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        deep copy constructor.
+ StringType constructor.
  <br> 
       <br>
       
@@ -344,13 +364,55 @@ ComTerp/comvalue.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="ComValue(unsignedcharval)">
-    <B>ComValue</B> (unsigned char val) </FONT> 
+    <A NAME="ComValue(unsignedlongval)">
+    <B>ComValue</B> (unsigned long val) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
         UCharType constructor.
+ UShortType constructor.
+ ULongType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(unsignedlongval)">
+    <B>ComValue</B> (unsigned long val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        UCharType constructor.
+ UShortType constructor.
+ ULongType constructor.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
+    <A NAME="ComValue(unsignedlongval)">
+    <B>ComValue</B> (unsigned long val) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        UCharType constructor.
+ UShortType constructor.
+ ULongType constructor.
  <br> 
       <br>
       
@@ -398,42 +460,6 @@ ComTerp/comvalue.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="ComValue(unsignedlongval)">
-    <B>ComValue</B> (unsigned long val) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        ULongType constructor.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
-    <A NAME="ComValue(unsignedshortval)">
-    <B>ComValue</B> (unsigned short val) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-        UShortType constructor.
- <br> 
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>
     <A NAME="ComValue(void*funcptr&#38;&#38;COMMAttributeValueList*listptr)">
     <B>ComValue</B> (void* funcptr, <A HREF="AttributeValueList.html" >AttributeValueList</A>* listptr) </FONT> 
     
@@ -442,6 +468,230 @@ ComTerp/comvalue.h
       
         StreamType constructor.
  <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_blankval">
+    <B>_blankval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_bquote">
+    <B>_bquote</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static const <A HREF="ComTerp.html" >ComTerp</A>* 
+    <A NAME="_comterp">
+    <B>_comterp</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_falseval">
+    <B>_falseval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_minusoneval">
+    <B>_minusoneval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_narg">
+    <B>_narg</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nids">
+    <B>_nids</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_nkey">
+    <B>_nkey</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_nullval">
+    <B>_nullval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_oneval">
+    <B>_oneval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>int 
+    <A NAME="_pedepth">
+    <B>_pedepth</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_trueval">
+    <B>_trueval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_unkval">
+    <B>_unkval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
+    <A NAME="_zeroval">
+    <B>_zeroval</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
       <br>
       
       
@@ -924,251 +1174,6 @@ ComTerp/comvalue.h
 
 
 
-
-<FONT FACE=Times SIZE=4><B>Protected:</B></FONT><br><br><UL>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_blankval">
-    <B>_blankval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>int 
-    <A NAME="_bquote">
-    <B>_bquote</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static const <A HREF="ComTerp.html" >ComTerp</A>* 
-    <A NAME="_comterp">
-    <B>_comterp</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_falseval">
-    <B>_falseval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_minusoneval">
-    <B>_minusoneval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>int 
-    <A NAME="_narg">
-    <B>_narg</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>int 
-    <A NAME="_nids">
-    <B>_nids</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>int 
-    <A NAME="_nkey">
-    <B>_nkey</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_nullval">
-    <B>_nullval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_oneval">
-    <B>_oneval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>int 
-    <A NAME="_pedepth">
-    <B>_pedepth</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_trueval">
-    <B>_trueval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_unkval">
-    <B>_unkval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>static <A HREF="ComValue.html" >ComValue</A> 
-    <A NAME="_zeroval">
-    <B>_zeroval</B>
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>void 
-    <A NAME="zero_vals()">
-    <B>zero_vals</B> () </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-      
-      
-      </UL></FONT><br>
-
-</UL><br><br>
 
 
 

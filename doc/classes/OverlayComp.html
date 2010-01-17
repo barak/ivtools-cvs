@@ -44,7 +44,7 @@ OverlayUnidraw/ovcomps.h
 
 
  <B>Description:</B><P>  derived <A HREF="GraphicComp.html" >GraphicComp</A>  with extensions for property lists of arbitrary 
- <A HREF="AttributeValue.html" >AttributeValue</A> objects, event propogation inherited from <A HREF="Observer.html" >Observer</A> and 
+ <A HREF="AttributeValue.html" >AttributeValue</A> objects, event propagation inherited from <A HREF="Observer.html" >Observer</A> and 
  <A HREF="Observable.html" >Observable</A>, and new persistence mechanisms (serialization) derived from 
  <A HREF="ExternView.html" >ExternView</A> (<A HREF="OverlayScript.html" >OverlayScript</A>).
   <br><br>
@@ -82,6 +82,60 @@ OverlayUnidraw/ovcomps.h
       
         to be filled in by derived class. Useful for initializing a component
  after the <A HREF="Editor.html" >Editor</A> has been constructed.	
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="DeferredNotify()">
+    <B>DeferredNotify</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        do all deferred Notify's
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="DepthNext(OverlayComp*)">
+    <B>DepthNext</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return next node in depth first traversal of tree
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="OverlayComp.html" >OverlayComp</A>* 
+    <A NAME="DepthPrev(OverlayComp*)">
+    <B>DepthPrev</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        return previous node in depth first traversal of tree
  <br> 
       <br>
       
@@ -404,6 +458,78 @@ OverlayUnidraw/ovcomps.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsChild(OverlayComp*)">
+    <B>IsChild</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if child
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsNext(OverlayComp*)">
+    <B>IsNext</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if next sibling
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsParent(OverlayComp*)">
+    <B>IsParent</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if parent
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual boolean 
+    <A NAME="IsPrev(OverlayComp*)">
+    <B>IsPrev</B> (<A HREF="OverlayComp.html" >OverlayComp</A>*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        true if previous sibling
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="Notify()">
     <B>Notify</B> () </FONT> 
@@ -413,6 +539,24 @@ OverlayUnidraw/ovcomps.h
       
         method specialized from <A HREF="Component.html" >Component</A> that incorporates the <A HREF="Observer.html" >Observer</A>/<A HREF="Observable.html" >Observable</A>
  notification with the original <A HREF="Unidraw.html" >Unidraw</A> notification.
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual void 
+    <A NAME="NotifyLater()">
+    <B>NotifyLater</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        defers notifications when enabled
  <br> 
       <br>
       
@@ -606,6 +750,22 @@ OverlayUnidraw/ovcomps.h
       
       </UL></FONT><br>
 
+    <DT><FONT FACE=Helvetica>static LeakChecker* 
+    <A NAME="_leakchecker">
+    <B>_leakchecker</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
     <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
     <A NAME="attrlist()">
     <B>attrlist</B> () </FONT> 
@@ -705,6 +865,42 @@ OverlayUnidraw/ovcomps.h
       
         for checking if istream constructor was successfull (if de-serialization
  was successful).	
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="visited()">
+    <B>visited</B> () </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reuse of valid flag as visited flag
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="visited(intflag)">
+    <B>visited</B> (int flag) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        reuse of valid flag as visited flag
  <br> 
       <br>
       
@@ -817,6 +1013,22 @@ OverlayUnidraw/ovcomps.h
     <DT><FONT FACE=Helvetica><A HREF="AttributeList.html" >AttributeList</A>* 
     <A NAME="_attrlist">
     <B>_attrlist</B>
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+      
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="_notify_deferred">
+    <B>_notify_deferred</B>
     
     <DD><FONT FACE=Times SIZE=3><UL>
       

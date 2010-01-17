@@ -109,6 +109,24 @@ GraphUnidraw/edgecomp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
+    <A NAME="EdgeComp(OverlayComp*parent=nil)">
+    <B>EdgeComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        construct edge component but defer anything graphical
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>
     <A NAME="EdgeComp(istream&#38;&#38;&#38;COMMOverlayComp*parent=nil)">
     <B>EdgeComp</B> (istream&#38;, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
     
@@ -134,7 +152,25 @@ GraphUnidraw/edgecomp.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        index of connected edge in sub-graph of end node
+        get index of connected edge in sub-graph of end node
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="EndSubEdge(intindex)">
+    <B>EndSubEdge</B> (int index) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set index of connected edge in sub-graph of end node
  <br> 
       <br>
       
@@ -198,7 +234,7 @@ GraphUnidraw/edgecomp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>int 
+    <DT><FONT FACE=Helvetica>virtual int 
     <A NAME="GetEndNode()">
     <B>GetEndNode</B> () </FONT> 
     
@@ -268,7 +304,61 @@ GraphUnidraw/edgecomp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="NodeComp.html" >NodeComp</A>* 
+    <DT><FONT FACE=Helvetica>virtual <A HREF="EdgeComp.html" >EdgeComp</A>* 
+    <A NAME="NewEdgeComp(ArrowLine*al&#38;&#38;COMMOverlayComp*parent=nil&#38;&#38;COMMintstart_subedge=-1&#38;&#38;COMMintend_subedge=-1)">
+    <B>NewEdgeComp</B> (<A HREF="ArrowLine.html" >ArrowLine</A>* al, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil, int start_subedge = -1, int end_subedge = -1) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="EdgeComp.html" >EdgeComp</A>* 
+    <A NAME="NewEdgeComp(OverlayComp*parent=nil)">
+    <B>NewEdgeComp</B> (<A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="EdgeComp.html" >EdgeComp</A>* 
+    <A NAME="NewEdgeComp(istream&#38;strm&#38;&#38;COMMOverlayComp*parent=nil)">
+    <B>NewEdgeComp</B> (istream&#38; strm, <A HREF="OverlayComp.html" >OverlayComp</A>* parent = nil) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        virtual constructor for use of derived classes
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
     <A NAME="NodeEnd()">
     <B>NodeEnd</B> () const</FONT> 
     
@@ -286,7 +376,7 @@ GraphUnidraw/edgecomp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica><A HREF="NodeComp.html" >NodeComp</A>* 
+    <DT><FONT FACE=Helvetica>virtual <A HREF="NodeComp.html" >NodeComp</A>* 
     <A NAME="NodeStart()">
     <B>NodeStart</B> () const</FONT> 
     
@@ -304,7 +394,7 @@ GraphUnidraw/edgecomp.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>void 
+    <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="SetEndNode(intn)">
     <B>SetEndNode</B> (int n) </FONT> 
     
@@ -347,7 +437,25 @@ GraphUnidraw/edgecomp.h
     
     <DD><FONT FACE=Times SIZE=3><UL>
       
-        index of connected edge in sub-graph of start node
+        get index of connected edge in sub-graph of start node
+ <br> 
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="StartSubEdge(intindex)">
+    <B>StartSubEdge</B> (int index) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+        set index of connected edge in sub-graph of start node
  <br> 
       <br>
       
@@ -376,8 +484,8 @@ GraphUnidraw/edgecomp.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>static boolean 
-    <A NAME="clipline(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMEllipse*&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;)">
-    <B>clipline</B> (Coord, Coord, Coord, Coord, <A HREF="Ellipse.html" >Ellipse</A>*, Coord&#38;, Coord&#38;) </FONT> 
+    <A NAME="clipline(Coord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMCoord&#38;&#38;COMMEllipse*&#38;&#38;COMMboolean&#38;&#38;COMMCoord&#38;&#38;&#38;COMMCoord&#38;)">
+    <B>clipline</B> (Coord, Coord, Coord, Coord, <A HREF="Ellipse.html" >Ellipse</A>*, boolean, Coord&#38;, Coord&#38;) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>

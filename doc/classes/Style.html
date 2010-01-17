@@ -103,8 +103,8 @@ InterViews/style.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>
-    <A NAME="Style(constString&#38;name)">
-    <B>Style</B> (const <A HREF="String.html" >String</A>&#38; name) </FONT> 
+    <A NAME="Style(constStyle&#38;)">
+    <B>Style</B> (const <A HREF="Style.html" >Style</A>&#38;) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -153,9 +153,9 @@ InterViews/style.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="add_trigger(constString&#38;name&#38;&#38;COMMAction*)">
-    <B>add_trigger</B> (const <A HREF="String.html" >String</A>&#38; name, <A HREF="Action.html" >Action</A>*) </FONT> 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="add_trigger(constchar*&#38;&#38;COMMAction*)">
+    <B>add_trigger</B> (const char*, <A HREF="Action.html" >Action</A>*) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -272,9 +272,9 @@ InterViews/style.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="attribute(constString&#38;name&#38;&#38;COMMconstString&#38;value&#38;&#38;COMMint=0)">
-    <B>attribute</B> (const <A HREF="String.html" >String</A>&#38; name, const <A HREF="String.html" >String</A>&#38; value, int = 0) </FONT> 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="attribute(constchar*name&#38;&#38;COMMconstchar*value&#38;&#38;COMMint=0)">
+    <B>attribute</B> (const char* name, const char* value, int = 0) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -375,91 +375,6 @@ InterViews/style.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="find_attribute(constString&#38;name&#38;&#38;COMMCoord&#38;)">
-    <B>find_attribute</B> (const <A HREF="String.html" >String</A>&#38; name, Coord&#38;) const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="find_attribute(constString&#38;name&#38;&#38;COMMCoord&#38;)">
-    <B>find_attribute</B> (const <A HREF="String.html" >String</A>&#38; name, Coord&#38;) const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="find_attribute(constString&#38;name&#38;&#38;COMMCoord&#38;)">
-    <B>find_attribute</B> (const <A HREF="String.html" >String</A>&#38; name, Coord&#38;) const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual boolean 
-    <A NAME="find_attribute(constString&#38;name&#38;&#38;COMMString&#38;value)">
-    <B>find_attribute</B> (const <A HREF="String.html" >String</A>&#38; name, <A HREF="String.html" >String</A>&#38; value) const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="find_attribute(constchar*name&#38;&#38;COMMCoord&#38;)">
-    <B>find_attribute</B> (const char* name, Coord&#38;) const</FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>boolean 
     <A NAME="find_attribute(constchar*name&#38;&#38;COMMCoord&#38;)">
     <B>find_attribute</B> (const char* name, Coord&#38;) const</FONT> 
     
@@ -496,6 +411,91 @@ InterViews/style.h
     <DT><FONT FACE=Helvetica>boolean 
     <A NAME="find_attribute(constchar*name&#38;&#38;COMMString&#38;value)">
     <B>find_attribute</B> (const char* name, <A HREF="String.html" >String</A>&#38; value) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="find_attribute(constchar*name&#38;&#38;COMMString&#38;value)">
+    <B>find_attribute</B> (const char* name, <A HREF="String.html" >String</A>&#38; value) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="find_attribute(constchar*name&#38;&#38;COMMdouble&#38;)">
+    <B>find_attribute</B> (const char* name, double&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="find_attribute(constchar*name&#38;&#38;COMMdouble&#38;)">
+    <B>find_attribute</B> (const char* name, double&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="find_attribute(constchar*name&#38;&#38;COMMlong&#38;)">
+    <B>find_attribute</B> (const char* name, long&#38;) const</FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>boolean 
+    <A NAME="find_attribute(constchar*name&#38;&#38;COMMlong&#38;)">
+    <B>find_attribute</B> (const char* name, long&#38;) const</FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -663,9 +663,26 @@ InterViews/style.h
       
       </UL></FONT><br>
 
-    <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="remove_attribute(constString&#38;name)">
-    <B>remove_attribute</B> (const <A HREF="String.html" >String</A>&#38; name) </FONT> 
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="remove_attribute(constchar*)">
+    <B>remove_attribute</B> (const char*) </FONT> 
+    
+    
+    <DD><FONT FACE=Times SIZE=3><UL>
+      
+      
+      <br>
+      
+      
+      
+      
+	  
+      
+      </UL></FONT><br>
+
+    <DT><FONT FACE=Helvetica>void 
+    <A NAME="remove_trigger(constchar*&#38;&#38;COMMAction*=nil)">
+    <B>remove_trigger</B> (const char*, <A HREF="Action.html" >Action</A>* = nil) </FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
@@ -698,23 +715,6 @@ InterViews/style.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>virtual void 
-    <A NAME="remove_trigger(constString&#38;name&#38;&#38;COMMAction*=nil)">
-    <B>remove_trigger</B> (const <A HREF="String.html" >String</A>&#38; name, <A HREF="Action.html" >Action</A>* = nil) </FONT> 
-    
-    
-    <DD><FONT FACE=Times SIZE=3><UL>
-      
-      
-      <br>
-      
-      
-      
-      
-	  
-      
-      </UL></FONT><br>
-
-    <DT><FONT FACE=Helvetica>virtual void 
     <A NAME="remove_trigger_any(Action*)">
     <B>remove_trigger_any</B> (<A HREF="Action.html" >Action</A>*) </FONT> 
     
@@ -732,8 +732,8 @@ InterViews/style.h
       </UL></FONT><br>
 
     <DT><FONT FACE=Helvetica>boolean 
-    <A NAME="value_is_on(constString&#38;name)">
-    <B>value_is_on</B> (const <A HREF="String.html" >String</A>&#38; name) const</FONT> 
+    <A NAME="value_is_on(constchar*name)">
+    <B>value_is_on</B> (const char* name) const</FONT> 
     
     
     <DD><FONT FACE=Times SIZE=3><UL>
