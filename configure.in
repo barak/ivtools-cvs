@@ -391,6 +391,12 @@ if test ! -f src/Unidraw-common/ulist.c ; then
 	ln -s ../Unidraw/ulist.c;
 	cd ../..;
 fi
+if test ! -f src/Unidraw-common/umap.c ; then
+	echo "establishing symbolic link for src/Unidraw-common/umap.c"
+	cd src/Unidraw-common;
+	ln -s ../Unidraw/umap.c;
+	cd ../..;
+fi
 
 #output other stuff to config.mk
 echo

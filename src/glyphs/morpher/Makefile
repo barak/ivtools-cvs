@@ -5,7 +5,7 @@
 # Edit <arch.def> to add support for a new platform.
 # Edit <InterViews/iv-linux.cf> to change platform-specific parameters.
 # Edit <local.def> to change site-specific parameters.
-# Edit <comterp_/Imakefile> to change actions that make should perform.
+# Edit <morpher/Imakefile> to change actions that make should perform.
 
 # architecture:  LINUX
 
@@ -93,7 +93,7 @@ DEPDRAWSERV = $(IVTOOLSSRC)/DrawServ/$(CPU)/libDrawServ.so.$(VERSION)
            CCSUFFIX = c
             CDRIVER = gcc
             CSUFFIX = c
-                SRC = /home/johnston/src/ivtools-0.9/src/comterp_/.
+                SRC = /home/johnston/src/ivtools-0.9/src/glyphs/morpher/.
               SLASH = /
                SRCS = $(SRC)$(SLASH)*.$(CCSUFFIX)
                OBJS = *.o
@@ -203,8 +203,8 @@ NONSHARED_CCLDFLAGS =
               TROFF = groff
 
                 TOP = /home/johnston/src/ivtools-0.9
-             RELTOP = ../../.
-        CURRENT_DIR = /home/johnston/src/ivtools-0.9/src/comterp_
+             RELTOP = ../../../.
+        CURRENT_DIR = /home/johnston/src/ivtools-0.9/src/glyphs/morpher
 
               IVSRC = /home/johnston/src/ivtools-0.9/src
              BINSRC = $(IVSRC)/bin
@@ -270,10 +270,10 @@ clean::
 # -------------------------------------------------------------------------
 
 #
-# comterp - simple command interpreter
+# morpher: morph between two idraw drawings
 #
 
-PACKAGE = comterp
+PACKAGE = glyph_morpher
 
 Makefiles::
 	@echo "Making Makefiles" \

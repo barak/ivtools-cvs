@@ -26,9 +26,6 @@
 
 #ifdef HAVE_ACE
 
-#include <stdio.h>
-#define __USE_GNU
-#include <sys/msg.h>
 #include <signal.h>
 #include <ace/Event_Handler.h>
 #include <Dispatch/iohandler.h>
