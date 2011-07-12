@@ -33,7 +33,6 @@
 #include <string.h>
 #if __GNUG__>=3
 #include <fstream.h>
-static char newline;
 #endif
 
 #if BUFSIZ>1024
@@ -154,10 +153,10 @@ char* ComTerpServ::fd_fgets(char* s, int n, void* serv) {
     in.gets(&instr);
 #else
     char instr[BUFSIZ];
-    filebuf fbuf(server->_fptr, ios_base::in);
+    FILE* ifptr = fdopen(fd, "r");
+    filebuf fbuf(ifptr, ios_base::in);
     istream in (&fbuf);
-    in.get(instr, BUFSIZ);  // needs to be generalized with <vector.h>
-    in.get(newline);
+    in.get(instr, BUFSIZ, '\n');  // needs to be generalized with <vector.h>
 #endif
     server->_instat = in.good(); 
   
@@ -180,6 +179,10 @@ char* ComTerpServ::fd_fgets(char* s, int n, void* serv) {
     /* append a null byte */
     outstr[outpos] = '\0';
 
+#if __GNUG__>=3
+    if (ifptr) fclose(ifptr);
+#endif
+
     return s;
 }
 
@@ -194,13 +197,17 @@ int ComTerpServ::fd_fputs(const char* s, void* serv) {
     filebuf fbuf;
     fbuf.attach(fd);
 #else
-    filebuf fbuf(server->_fptr, ios_base::out);
+    FILE* ofptr = fdopen(fd, "w");
+    filebuf fbuf(ofptr, ios_base::out);
 #endif
     ostream out(&fbuf);
     for (; outpos < bufsize-1 && s[outpos]; outpos++)
 	out.put(s[outpos]);
     out.flush();
     outpos = 0;
+#if __GNUG__>=3
+    if (ofptr) fclose(ofptr);
+#endif
     return 1;
 }
 
@@ -306,12 +313,14 @@ int ComTerpServ::runfile(const char* filename) {
 #if __GNUG__<3
 	        filebuf obuf(handler() ? handler()->get_handle() : 1);
 #else
-	        filebuf obuf(handler() && handler()->wrfptr() 
-			     ? handler()->wrfptr() : stdout, 
-			     ios_base::out);
+                FILE* ofptr = fdopen(handler() ? handler()->get_handle() : 1, "w"); 
+	        filebuf obuf(ofptr, ios_base::out);
 #endif
 		ostream ostr(&obuf);
 		ostr.flush();
+#if __GNUG__>=3
+                if (ofptr) fclose(ofptr);
+#endif
 		status = -1;
 	    } else if (quitflag()) {
 	        status = 1;
@@ -325,12 +334,14 @@ int ComTerpServ::runfile(const char* filename) {
 #if __GNUG__<3
 	  filebuf obuf(handler() ? handler()->get_handle() : 1);
 #else
-	  filebuf obuf(handler() && handler()->wrfptr() 
-		       ? handler()->wrfptr() : stdout, 
-		       ios_base::out);
+          FILE* ofptr = fdopen(handler() ? handler()->get_handle() : 1, "w"); 
+	  filebuf obuf(ofptr, ios_base::out);
 #endif
 	  ostream ostr(&obuf);
 	  ostr.flush();
+#if __GNUG__>=3
+          if (ofptr) fclose(ofptr);
+#endif
 	  status = -1;
 	}
     }
