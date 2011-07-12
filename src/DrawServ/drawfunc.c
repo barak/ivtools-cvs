@@ -274,6 +274,7 @@ void ChangeIdFunc::execute() {
     unsigned int id = idv.uint_val();
     link->sid_change(id);
     ComValue result(id, ComValue::UIntType);
+    result.state(AttributeValue::HexState);
     push_stack(result);
   }
 }
