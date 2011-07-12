@@ -1,6 +1,6 @@
 #ifndef _iv_iosfwd_
 #define _iv_iosfwd_
-#if __GNUG__>=3
+#if __GNUC__>=3
 #include_next <iosfwd>
 using std::ios_base;
 using std::filebuf;

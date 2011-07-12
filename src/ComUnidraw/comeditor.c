@@ -58,7 +58,7 @@
 
 #include <Attribute/attrlist.h>
 
-#include <strstream.h>
+#include <strstream>
 #include <string.h>
 
 /*****************************************************************************/
@@ -229,9 +229,14 @@ void ComEditor::AddCommands(ComTerp* comterp) {
 
 /* virtual */ void ComEditor::ExecuteCmd(Command* cmd) {
   if(!whiteboard()) 
+
+    /* normal Unidraw command execution */
     OverlayEditor::ExecuteCmd(cmd);
+
   else {
-    ostrstream sbuf;
+
+    /* indirect command execution, all by script */
+    std::ostrstream sbuf;
     boolean oldflag = OverlayScript::ptlist_parens();
     OverlayScript::ptlist_parens(false);
     switch (cmd->GetClassId()) {
@@ -262,7 +267,8 @@ void ComEditor::AddCommands(ComTerp* comterp) {
       if (!scripted)
 	sbuf << "print(\"Failed attempt to generate script for a PASTE_CMD\\n\" :err)";
       sbuf.put('\0');
-      cerr << sbuf.str() << "\n";
+      cout << sbuf.str() << "\n";
+      cout.flush();
       GetComTerp()->run(sbuf.str());
       delete cmd;
       }
